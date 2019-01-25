@@ -1,0 +1,580 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- ad model -->
+	<bean id="AdProduct" class="com.pchome.akbadm.factory.ad.AdProduct" scope="prototype" />
+	
+	<bean id="AdTemplate" class="com.pchome.akbadm.factory.ad.AdTemplate" scope="prototype" />
+	
+    <bean id="AdFactory" class="com.pchome.akbadm.factory.ad.AdFactory" scope="prototype" >
+    	<property name="adProduct" ref="AdProduct" />
+    	<property name="adTemplate" ref="AdTemplate" />  
+    	<property name="pfpAdDetailService" ref="PfpAdDetailService" />   
+    	<property name="folderPath" value="${adm.addata}" />
+    	<property name="adModelUtil" ref="AdModelUtil" /> 	
+    </bean>
+    
+    <!-- store -->
+    <bean id="AllLog" class="com.pchome.akbadm.factory.store.StoreLog">
+        <property name="fsDefaultName" value="${hpn1.fs.default.name}" />
+        <property name="hadoopJobUgi" value="${hpn1.hadoop.job.ugi}" />
+        <property name="savePath" value="${save.path.alllog}" />
+    </bean>
+    
+    <bean id="StoreFactory" class="com.pchome.akbadm.factory.store.StoreFactory">
+        <property name="allLog" ref="AllLog" />
+    </bean>
+    
+    <!-- control price -->
+    <bean id="ControlPriceEveryDay" class="com.pchome.akbadm.factory.controlPrice.ControlPriceEveryDay" scope="prototype">
+    	<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="adActionService" ref="PfpAdActionService" />
+		<property name="adPvclkService" ref="PfpAdPvclkService" />
+		<property name="controlPriceAPI" ref="ControlPriceAPI" />
+		<property name="adInvalidService" ref="PfpAdInvalidService" />
+    	<property name="definePrice" value="${ad.sysprice}" />
+    </bean>
+	
+	<bean id="ControlPriceFactory" class="com.pchome.akbadm.factory.controlPrice.ControlPriceFactory" scope="prototype">
+		<property name="controlPriceEveryDay" ref="ControlPriceEveryDay" />
+	</bean>
+	
+	<!-- Activity -->
+	<bean id="NewCustomerActivity" class="com.pchome.akbadm.factory.activity.NewCustomerActivity" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="freeRecordService" ref="AdmFreeRecordService" />
+		<property name="freeActionService" ref="AdmFreeActionService" />
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="boardProvider" ref="BoardProvider" />
+    </bean>
+
+	<bean id="ActivityFactory" class="com.pchome.akbadm.factory.activity.ActivityFactory" scope="prototype">
+		<property name="newCustomerActivity" ref="NewCustomerActivity" />
+	</bean>
+	
+	<!-- settlement -->		
+	<bean id="SettlementFactory" class="com.pchome.akbadm.factory.settlement.SettlementFactory" scope="prototype">
+		<property name="settlementSaveMoney" ref="SettlementSaveMoney" />
+		<property name="settlementInvalidCost" ref="SettlementInvalidCost" />
+		<property name="settlementSpendCost" ref="SettlementSpendCost" />
+		<property name="settlementFeedbackMoney" ref="SettlementFeedbackMoney" />
+		<property name="setlementGiftSnoMoney" ref="SetlementGiftSnoMoney" />
+		<property name="settlementLaterSave" ref="SettlementLaterSave" />
+		<property name="setlementLaterInvalid" ref="SetlementLaterInvalid" />
+		<property name="settlementLaterSpend" ref="SettlementLaterSpend" />
+		<property name="settlementLaterRefund" ref="SettlementLaterRefund" />
+		<property name="settlementAdvanceRefund" ref="SettlementAdvanceRefund" />
+		<!-- 
+		<property name="settlementRetrieve" ref="SettlementRetrieve" />	
+		 -->	
+	</bean>
+	
+	<bean id="SettlementProcess" class="com.pchome.akbadm.factory.settlement.SettlementProcess" scope="prototype">
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />	
+		<property name="transLossService" ref="AdmTransLossService" /> 
+		<property name="settlementFactory" ref="SettlementFactory" />
+		<property name="pfdBoardService" ref="PfdBoardService" />	
+	</bean>
+	
+	<bean id="SettlementSaveMoney" class="com.pchome.akbadm.factory.settlement.SettlementSaveMoney" scope="prototype">
+		<property name="transDetailService" ref="PfpTransDetailService" />	
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />						
+		<property name="orderService" ref="PfpOrderService" />
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+	</bean>
+
+	<bean id="SettlementInvalidCost" class="com.pchome.akbadm.factory.settlement.SettlementInvalidCost" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />					
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+	</bean>
+
+	<bean id="SettlementSpendCost" class="com.pchome.akbadm.factory.settlement.SettlementSpendCost" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />					
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+		<property name="transLossService" ref="AdmTransLossService" />		
+	</bean>
+	
+	<bean id="SettlementFeedbackMoney" class="com.pchome.akbadm.factory.settlement.SettlementFeedbackMoney" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />	
+		<property name="feedbackRecordService" ref="AdmFeedbackRecordService" /> 
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="pfdBoardService" ref="PfdBoardService" />		
+	</bean>
+	
+	<bean id="SettlementLaterSave" class="com.pchome.akbadm.factory.settlement.SettlementLaterSave" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />		
+		<property name="pfdVirtualRecordService" ref="PfdVirtualRecordService" />
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+	</bean>
+	
+	<bean id="SetlementLaterInvalid" class="com.pchome.akbadm.factory.settlement.SetlementLaterInvalid" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />					
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+	</bean>
+	
+	<bean id="SettlementLaterSpend" class="com.pchome.akbadm.factory.settlement.SettlementLaterSpend" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />					
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+		<property name="transLossService" ref="AdmTransLossService" />		
+	</bean>
+	
+	<bean id="SetlementGiftSnoMoney" class="com.pchome.akbadm.factory.settlement.SetlementGiftSnoMoney" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />					
+		<property name="admFreeRecordService" ref="AdmFreeRecordService" />		
+	</bean>
+
+	<bean id="SettlementLaterRefund" class="com.pchome.akbadm.factory.settlement.SettlementLaterRefund" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />		
+		<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+		<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+	</bean>
+	
+	<!-- 預付退款 -->
+	<bean id="SettlementAdvanceRefund" class="com.pchome.akbadm.factory.settlement.SettlementAdvanceRefund" scope="prototype">
+		<property name="customerInfoService" ref="PfpCustomerInfoService" />
+		<property name="transDetailService" ref="PfpTransDetailService" />		
+		<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+		<property name="boardProvider" ref="BoardProvider" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+		<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+	</bean>
+	
+	<!-- recognize -->	
+	<bean id="RecognizeProcess" class="com.pchome.akbadm.factory.recognize.RecognizeProcess" scope="prototype">
+		<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+		<property name="recognizeAdvance" ref="RecognizeAdvance" />
+		<property name="recognizeLater" ref="RecognizeLater" />		
+	</bean>
+	
+	<bean id="RecognizeAdvance" class="com.pchome.akbadm.factory.recognize.RecognizeAdvance" scope="prototype">
+		<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+		<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+		<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+		<property name="recordFactory" ref="RecordFactory" />
+	</bean>
+	
+	<bean id="RecognizeLater" class="com.pchome.akbadm.factory.recognize.RecognizeLater" scope="prototype">
+		<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+		<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="adActionReportService" ref="PfpAdActionReportService" />
+		<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+		<property name="recordFactory" ref="RecordFactory" />
+	</bean>
+	
+	<bean id="RecordFactory" class="com.pchome.akbadm.factory.recognize.RecordFactory" scope="prototype">
+		<property name="recordSave" ref="RecordSave" />
+		<property name="recordFeedback" ref="RecordFeedback" />
+		<property name="recordGift" ref="RecordGift" />
+		<property name="recordVirtual" ref="RecordVirtual" />
+	</bean>
+	
+	<bean id="RecordSave" class="com.pchome.akbadm.factory.recognize.RecordSave" scope="prototype">
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="orderService" ref="PfpOrderService" />
+	</bean>
+	
+	<bean id="RecordFeedback" class="com.pchome.akbadm.factory.recognize.RecordFeedback" scope="prototype">
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="feedbackRecordService" ref="AdmFeedbackRecordService" />
+	</bean>
+	
+	<bean id="RecordGift" class="com.pchome.akbadm.factory.recognize.RecordGift" scope="prototype">
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="admFreeRecordService" ref="AdmFreeRecordService" />	
+		<property name="admFreeGiftService" ref="AdmFreeGiftService" />
+	</bean>
+	
+	<bean id="RecordVirtual" class="com.pchome.akbadm.factory.recognize.RecordVirtual" scope="prototype">
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="pfdVirtualRecordService" ref="PfdVirtualRecordService" />
+	</bean>
+	
+	<!-- notice -->
+    <bean id="NoticeFactory" class="com.pchome.akbadm.factory.notice.NoticeFactory" scope="prototype">
+        <property name="noticeAccountClosed" ref="NoticeAccountClosed" />
+        <property name="noticeEnableReminded" ref="NoticeEnableReminded" />
+        <property name="noticeInvalidDown" ref="NoticeInvalidDown" />
+        <property name="noticeMoneyEntered" ref="NoticeMoneyEntered" />
+        <property name="noticeRemainNotEnough" ref="NoticeRemainNotEnough" />
+        <property name="noticeRemainTooLow" ref="NoticeRemainTooLow" />
+        <property name="noticeVerifyDenied" ref="NoticeVerifyDenied" />
+    </bean>
+    
+    <bean id="NoticeAccountClosed" class="com.pchome.akbadm.factory.notice.NoticeAccountClosed" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+    </bean>
+    
+    <bean id="NoticeEnableReminded" class="com.pchome.akbadm.factory.notice.NoticeEnableReminded" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+    </bean>
+    
+    <bean id="NoticeInvalidDown" class="com.pchome.akbadm.factory.notice.NoticeInvalidDown" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+    </bean>
+    
+    <bean id="NoticeMoneyEntered" class="com.pchome.akbadm.factory.notice.NoticeMoneyEntered" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+    </bean>
+    
+    <bean id="NoticeRemainNotEnough" class="com.pchome.akbadm.factory.notice.NoticeRemainNotEnough" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    </bean>
+    
+    <bean id="NoticeRemainTooLow" class="com.pchome.akbadm.factory.notice.NoticeRemainTooLow" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    </bean>
+    
+    <bean id="NoticeVerifyDenied" class="com.pchome.akbadm.factory.notice.NoticeVerifyDenied" scope="prototype">
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="mailboxProvider" ref="MailboxProvider" />
+    </bean>
+    
+   
+    
+  
+    
+   
+    
+   
+     
+    <!-- parse -->    
+    <bean id="ParseFactory" class="com.pchome.akbadm.factory.parse.ParseFactory" >
+    	<property name="parseGroupXML" ref="ParseGroupXML" />
+    	<property name="parseMonthBonusXML" ref="ParseMonthBonusXML" />
+    	<property name="parseAllXML" ref="ParseAllXML" />
+    </bean>
+    
+    <bean id="ParseGroupXML" class="com.pchome.akbadm.factory.parse.ParseGroupXML" />
+    
+    <bean id="ParseMonthBonusXML" class="com.pchome.akbadm.factory.parse.ParseMonthBonusXML" />
+    
+    <bean id="ParseAllXML" class="com.pchome.akbadm.factory.parse.ParseAllXML" />
+    
+    <!-- 讀取Xml檔案 -->
+    <bean id="PfdParseFactory" class="com.pchome.akbadm.factory.pfd.parse.PfdParseFactory" >
+    	<property name="pfdParseGroupXML" ref="PfdParseGroupXML" />
+    	<property name="pfdParseMonthBonusXML" ref="PfdParseMonthBonusXML" />
+    	<property name="pfdParseAllXML" ref="PfdParseAllXML" />
+    </bean>
+    
+    <bean id="PfdParseGroupXML" class="com.pchome.akbadm.factory.pfd.parse.PfdParseGroupXML" />
+    
+    <bean id="PfdParseMonthBonusXML" class="com.pchome.akbadm.factory.pfd.parse.PfdParseMonthBonusXML" />
+    
+    <bean id="PfdParseAllXML" class="com.pchome.akbadm.factory.pfd.parse.PfdParseAllXML" />
+    
+    <!-- 經銷商獎金計算 -->
+    <bean id="PfdBonusItemFactory" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusItemFactory" scope="prototype">
+    	<property name="pfdMonthBonus" ref="PfdMonthBonus" />
+    	<property name="pfdQuarterBonus" ref="PfdQuarterBonus" />
+    	<property name="pfdYearBonus" ref="PfdYearBonus" />
+    	<property name="pfdMonthDevelopBonus" ref="PfdMonthDevelopBonus" />
+    	<property name="pfdQuarterDevelopBonus" ref="PfdQuarterDevelopBonus" />
+    	<property name="pfdYearDevelopBonus" ref="PfdYearDevelopBonus" />
+    	<property name="pfdBonusYearEndSaleA" ref="PfdBonusYearEndSaleA" />
+    	<property name="pfdBonusYearEndSaleB" ref="PfdBonusYearEndSaleB" />
+    	<property name="pfdBonusYearEndSaleC" ref="PfdBonusYearEndSaleC" />
+    	<property name="pfdBonusYearEndSaleD" ref="PfdBonusYearEndSaleD" />
+    	<property name="pfdBonusYearEndSaleE" ref="PfdBonusYearEndSaleE" />
+    	<property name="pfdBonusYearEndSaleF" ref="PfdBonusYearEndSaleF" />
+    </bean>
+    
+    <bean id="PfdMonthBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdMonthBonus" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdQuarterBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdQuarterBonus" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdYearBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdYearBonus" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdMonthDevelopBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdMonthDevelopBonus" scope="prototype">
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdQuarterDevelopBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdQuarterDevelopBonus" scope="prototype">
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdYearDevelopBonus" class="com.pchome.akbadm.factory.pfd.bonus.PfdYearDevelopBonus" scope="prototype">
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleA" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleA" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleB" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleB" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleC" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleC" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleD" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleD" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleE" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleE" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="PfdBonusYearEndSaleF" class="com.pchome.akbadm.factory.pfd.bonus.PfdBonusYearEndSaleF" scope="prototype">
+    	<property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+    	<property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />    	
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+   
+    
+    <bean id="DeletePfbBonus" class="com.pchome.akbadm.factory.pfbx.bonus.DeletePfbBonus" scope="prototype">
+    	<property name="admBonusBillReportService" ref="AdmBonusBillReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	
+    </bean>
+    
+    <bean id="EveryDayPfdBonus" class="com.pchome.akbadm.factory.pfd.bonus.EveryDayPfdBonus" scope="prototype">
+    	<property name="pfdContractService" ref="PfdContractService" />
+    	<property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    	<property name="pfdParseFactory" ref="PfdParseFactory" />
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+     <!-- Pfb 獎金計算 -->
+    <bean id="EveryDayPfbBonus" class="com.pchome.akbadm.factory.pfbx.bonus.EveryDayPfbBonus" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    	<property name="pfbxBonusSetService" ref="PfbxBonusSetService" />
+    	<property name="pfbxBonusSetSpecialService" ref="PfbxBonusSetSpecialService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="admBonusFactory" ref="AdmBonusFactory" />
+    	<property name="admBonusBillReportService" ref="AdmBonusBillReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+              
+    <bean id="EveryMonthPfbBonus" class="com.pchome.akbadm.factory.pfbx.bonus.EveryMonthPfbBonus" scope="prototype">
+    	<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+    	<property name="bonusTransDetailProcess" ref="BonusTransDetailProcess" />
+    </bean>
+    
+    <bean id="BonusTransDetailProcess" class="com.pchome.akbadm.factory.pfbx.bonus.BonusTransDetailProcess" scope="prototype">
+    	<property name="pfbxBonusTransDetailService" ref="PfbxBonusTransDetailService" />
+    	<property name="PfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+    	<property name="pfbxBoardService" ref="PfbxBoardService" />
+    	<property name="pfbxInvalidTrafficService" ref="PfbxInvalidTrafficService" />
+    </bean>
+    
+    <bean id="ApplyOrderProcess" class="com.pchome.akbadm.factory.pfbx.bonus.ApplyOrderProcess" scope="prototype">
+    	<property name="pfbxBonusApplyService" ref="PfbxBonusApplyService" />
+    	<property name="sequenceService" ref="SequenceService" />
+    	<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+    	<property name="accesslogService" ref="AdmAccesslogService" />
+    	<property name="pfbxBoardService" ref="PfbxBoardService" />
+    	<property name="bonusTransDetailProcess" ref="BonusTransDetailProcess" />
+    	<property name="pfbxBankService" ref="PfbxBankService" />
+    	<property name="pfbxPersonalService" ref="PfbxPersonalService" />
+    	<property name="pfbxBonusTransDetailService" ref="PfbxBonusTransDetailService" />
+    </bean>
+    
+    <bean id="AdmBonusFactory" class="com.pchome.akbadm.factory.pfbx.bonus.AdmBonusFactory" scope="prototype">
+    	<property name="incomePfb" ref="IncomePfb" />
+    	<property name="incomePfd" ref="IncomePfd" />
+    	<property name="incomePfp" ref="IncomePfp" />
+    	<property name="expensePfd" ref="ExpensePfd" />
+    	<property name="expensePfb" ref="ExpensePfb" />    	
+    </bean>
+    
+    <bean id="IncomePfb" class="com.pchome.akbadm.factory.pfbx.bonus.IncomePfb" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+    
+    <bean id="IncomePfd" class="com.pchome.akbadm.factory.pfbx.bonus.IncomePfd" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+    
+    <bean id="IncomePfp" class="com.pchome.akbadm.factory.pfbx.bonus.IncomePfp" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+    
+    <bean id="ExpensePfd" class="com.pchome.akbadm.factory.pfbx.bonus.ExpensePfd" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+    
+    <bean id="ExpensePfb" class="com.pchome.akbadm.factory.pfbx.bonus.ExpensePfb" scope="prototype">
+    	<property name="admBonusSetService" ref="AdmBonusSetService" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+    	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    	<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    </bean>
+    
+    <bean id="CheckStatusFactory" class="com.pchome.akbadm.factory.pfbx.bonus.CheckStatusFactory" scope="prototype">
+    </bean>
+    
+    <!-- malice -->
+    <bean id="MaliceFactory" class="com.pchome.akbadm.factory.malice.MaliceFactory" scope="prototype">
+    	<property name="malice5" ref="Malice5" />
+    	<property name="malice6" ref="Malice6" />
+    	<property name="malice7" ref="Malice7" />
+    	<property name="malice8" ref="Malice8" />    	
+    </bean>
+    
+    <bean id="Malice5" class="com.pchome.akbadm.factory.malice.Malice5" scope="prototype">
+    	<property name="maliceService" ref="MaliceService" />
+    </bean>
+    
+    <bean id="Malice6" class="com.pchome.akbadm.factory.malice.Malice6" scope="prototype">
+    	<property name="maliceService" ref="MaliceService" />
+    </bean>
+    
+    <bean id="Malice7" class="com.pchome.akbadm.factory.malice.Malice7" scope="prototype">
+    	<property name="maliceService" ref="MaliceService" />
+    </bean>
+    
+    <bean id="Malice8" class="com.pchome.akbadm.factory.malice.Malice8" scope="prototype">
+    	<property name="maliceService" ref="MaliceService" />
+    </bean>
+    
+    <bean id="AdModelUtil" class="com.pchome.akbadm.factory.ad.AdModelUtil" scope="prototype" > 
+		 <property name="pfpAdVideoSourceService" ref="PfpAdVideoSourceService" />
+    </bean>
+</beans>

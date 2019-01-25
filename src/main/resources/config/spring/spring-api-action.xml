@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    
+	<!-- AdModel API -->
+	<bean id="AdModelAPIAction" class="com.pchome.akbadm.struts2.action.api.AdModelAPIAction" scope="prototype">
+    	<property name="adFactory" ref="AdFactory" />
+    </bean>
+    
+	<bean id="AdPvclkAction" class="com.pchome.akbadm.struts2.action.api.AdPvclkAction" scope="prototype">
+		<property name="springECcoderUtil" ref="SpringECcoderUtil" />
+    	<property name="pfpAdActionService" ref="PfpAdActionService" />
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="pfpAdService" ref="PfpAdService" />
+    	<property name="kdclOfflineUrl" value="${kdcl.offline.url}" />
+    </bean>
+    
+	<bean id="CostAction" class="com.pchome.akbadm.struts2.action.api.CostAction" scope="prototype">
+    	<property name="pfpAdActionService" ref="PfpAdActionService" />
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    </bean>
+    
+    <!-- Recognize API -->
+    <bean id="RecognizeAPIAction" class="com.pchome.akbadm.struts2.action.api.RecognizeAPIAction" scope="prototype">
+    	<property name="springECcoderUtil" ref="SpringECcoderUtil" />
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    	<property name="accesslogService" ref="AdmAccesslogService" />
+    	<property name="channelId" value="${billing.channel.id}" />
+    	<property name="password" value="${billing.password}" />
+    </bean>
+</beans>

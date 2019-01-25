@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".board.modify" extends="default.layout">
+		<put-attribute name="title" value=".board.edit.title" />
+    	<put-attribute name="body" value="/ftl/board/boardModifyBody.ftl" />
+    </definition>
+    
+	<definition name=".board.add" extends="default.layout">
+		<put-attribute name="title" value=".board.add.title" />
+    	<put-attribute name="body" value="/ftl/board/boardAddBody.ftl" />
+    </definition>
+    
+    <definition name=".board.list" extends="default.layout">
+    	<put-attribute name="title" value=".board.title" />
+    	<put-attribute name="body" value="/ftl/board/boardListBody.ftl" />
+    </definition>
+
+    
+	<definition name=".board.title" extends="default.title" >
+       <put-attribute name="jsName" value="board/board.js"/>
+    </definition>
+    
+    <definition name=".board.add.title" extends="default.title" >
+       <put-attribute name="jsName" value="board/addboard.js"/>
+    </definition>
+    
+    <definition name=".board.edit.title" extends="default.title" >
+       <put-attribute name="jsName" value="board/editboard.js"/>
+    </definition>
+    
+</tiles-definitions>

@@ -1,0 +1,22 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-accesslog" extends="struts-base">
+             
+        <action name="accountAccesslog" class="AccesslogAction" method="accountAccesslogAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">account.accesslog</result>
+        </action>
+
+		<action name="accountUserAccesslog" class="AccesslogAction" method="accountUserAccesslogAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">user.accesslog</result>
+        </action>
+
+        <action name="admAccesslog" class="AccesslogAction" method="admAccesslogAction">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">adm.accesslog</result>
+        </action>
+    </package>
+</struts>

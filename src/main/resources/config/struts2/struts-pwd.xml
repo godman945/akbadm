@@ -1,0 +1,19 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-pwd" namespace="/" extends="struts-base">
+
+        <action name="pwdUpdate" class="PwdAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pwd.update</result>
+        </action>
+
+        <action name="doPwdUpdate" class="PwdAction" method="doUpdatePwd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pwd.update</result>
+            <result type="tiles" name="input">.pwd.update</result>
+        </action>
+
+    </package>
+</struts>

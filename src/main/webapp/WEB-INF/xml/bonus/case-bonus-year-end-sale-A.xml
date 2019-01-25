@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<case-bonus-annual-sale-A>
+	<group id="1">
+		<level id="1">
+			<title>第一段</title>
+			<min>0</min>
+			<max>800</max>
+			<discount>0.02</discount>
+		</level>
+		<level id="2">
+			<title>第二段</title>
+			<min>801</min>
+			<max>1200</max>
+			<discount>0.03</discount>
+		</level>
+		<level id="3">
+			<title>第三段</title>
+			<min>1201</min>
+			<max>3000</max>
+			<discount>0.04</discount>
+		</level>
+		<level id="4">
+			<title>第四段</title>
+			<min>3001</min>
+			<max>5000</max>
+			<discount>0.05</discount>
+		</level>
+		<level id="5">
+			<title>第五段</title>
+			<min>5001</min>
+			<max>9999999999</max>
+			<discount>0.06</discount>
+		</level>
+	</group>
+</case-bonus-annual-sale-A>

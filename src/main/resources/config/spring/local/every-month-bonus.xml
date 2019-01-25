@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<every-month-bonus>
+
+	<group id="1">
+		<level id="1">
+			<title>方案1</title>
+			<discount>0.1</discount>
+		</level>		
+	</group>
+	
+	<group id="2">
+		<level id="1">
+			<title>方案2</title>
+			<discount>0.11</discount>
+		</level>		
+	</group>
+	
+	<group id="3">
+		<level id="1">
+			<title>方案3</title>
+			<discount>0.12</discount>
+		</level>		
+	</group>
+	
+	<group id="4">
+		<level id="1">
+			<title>方案4</title>
+			<discount>0.13</discount>
+		</level>		
+	</group>
+	
+	<group id="5">
+		<level id="1">
+			<title>方案5</title>
+			<discount>0.25</discount>
+		</level>		
+	</group>
+	
+	<group id="6">
+		<level id="1">
+			<title>方案6</title>
+			<discount>0.15</discount>
+		</level>		
+	</group>
+	
+	<group id="7">
+		<level id="1">
+			<title>方案7</title>
+			<discount>0.14</discount>
+		</level>		
+	</group>
+	
+	<group id="8">
+		<level id="1">
+			<title>方案8</title>
+			<discount>0.18</discount>
+		</level>		
+	</group>
+</every-month-bonus>

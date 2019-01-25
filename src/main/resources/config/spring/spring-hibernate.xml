@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" destroy-method="destroy">
+        <property name="dataSource" ref="mySqlDataSource" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.connection.characterEncoding">utf-8</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+                
+                <!-- 2 lever save
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>-->
+            </props>
+        </property>
+		 <!--
+		<property name= "packagesToScan" value="com.pchome.akbadm.db.pojo.*"/>
+			-->
+     
+		<property name="annotatedClasses">
+            <list>
+            	<!-- Adm -->
+            	<value>com.pchome.akbadm.db.pojo.AdmAccesslog</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmAdPool</value>            	
+            	<value>com.pchome.akbadm.db.pojo.AdmArwValue</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusBillReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusDetailReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusSet</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBrandCorrespond</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmChannelAccount</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmClientCountReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDefineAd</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDefineAdType</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDepartment</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFeedbackRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeAction</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeGift</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmManagerDetail</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmMenu</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPortalBonusReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPrivilegeModel</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPrivilegeModelMenuRef</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRecognizeDetail</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRecognizeRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRelateTadDad</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRelateTproTad</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRetrieveRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmShowRule</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTemplateAd</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTemplateProduct</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTransLoss</value>
+                <value>com.pchome.akbadm.db.pojo.AdmUniqData</value>
+                <value>com.pchome.akbadm.db.pojo.AdmUser</value>
+                <value>com.pchome.akbadm.db.pojo.Bank</value>
+                <value>com.pchome.akbadm.db.pojo.DmpAdclassReport</value>
+                <value>com.pchome.akbadm.db.pojo.DmpHitReport</value>
+                <value>com.pchome.akbadm.db.pojo.AdmPfbxBlockUrl</value>
+                <value>com.pchome.akbadm.db.pojo.AdmPfpdAdPvclkReport</value>
+                <value>com.pchome.akbadm.db.pojo.AdmPfbxBlockUrl</value>
+                <!-- Pfbx -->
+                <value>com.pchome.akbadm.db.pojo.PfbxAdCustomerReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdDeviceReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdGroupReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdSizeReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdStyleReport</value>			    
+                <value>com.pchome.akbadm.db.pojo.PfbxAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdUnitReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdUrlReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowCusurl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowIndustry</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAssignBuyer</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAssignPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBank</value>          
+                <value>com.pchome.akbadm.db.pojo.PfbxBlockCusurl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBlockIndustry</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBoard</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusApply</value>   
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusBill</value>  
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusDayReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusSet</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusSetSpecial</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusTransDetail</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupSize</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionArea</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPermission</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPersonal</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPosition</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleArea</value>                         
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleCode</value>                       
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserGroup</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserOption</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserSample</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPositionMenu</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxCustomerInfoRefXType</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxInvalidTraffic</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxInvalidTrafficDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxWebsiteCategory</value>
+                <!-- Pfd -->
+                <value>com.pchome.akbadm.db.pojo.PfdAdActionReport</value>                            
+                <value>com.pchome.akbadm.db.pojo.PfdAdGroupReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdTemplateReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdApplyForBusiness</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBoard</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusDayReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusInvoice</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusItem</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusItemSet</value>  
+                <value>com.pchome.akbadm.db.pojo.PfdBonusRecord</value>
+                <value>com.pchome.akbadm.db.pojo.PfdContract</value>              
+                <value>com.pchome.akbadm.db.pojo.PfdCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfdUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfdUserAdAccountRef</value> 
+                <value>com.pchome.akbadm.db.pojo.PfdUserMemberRef</value>
+                <value>com.pchome.akbadm.db.pojo.PfdVirtualRecord</value>
+                <value>com.pchome.akbadm.db.pojo.PfdKeywordReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdAgeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdWebsiteReport</value>
+                <!-- Pfb -->  
+                <value>com.pchome.akbadm.db.pojo.PfbStyleInfo</value>               
+                <value>com.pchome.akbadm.db.pojo.PfbWebInfo</value>               
+         		<!-- Pfp -->                       
+                <value>com.pchome.akbadm.db.pojo.PfpAd</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdAction</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdActionReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategory</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategoryNew</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategoryMapping</value>                
+                <value>com.pchome.akbadm.db.pojo.PfpAdClick</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGift</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGroup</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGroupReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdInvalid</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordInvalid</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordPvclk</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdOsReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdPvclk</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdPvclkReferer</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdRank</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdRate</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSysprice</value>
+				<value>com.pchome.akbadm.db.pojo.PfpBoard</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfpEnterprise</value>
+                <value>com.pchome.akbadm.db.pojo.PfpIllegalKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpKeywordSysprice</value>
+                <value>com.pchome.akbadm.db.pojo.PfpMailbox</value>
+                <value>com.pchome.akbadm.db.pojo.PfpMenu</value>
+                <value>com.pchome.akbadm.db.pojo.PfpOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpOrderDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpTransDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfpUserMemberRef</value>
+                <value>com.pchome.akbadm.db.pojo.Sequence</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdAgeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdWebsiteReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideo</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideoReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideoSource</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdVideoReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrderRelease</value>
+                
+               
+		    </list>
+        </property>
+    </bean>
+
+    <bean id="sessionFactory_report" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" destroy-method="destroy">
+        <property name="dataSource" ref="mySqlDataSource_report" />
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="hibernate.connection.characterEncoding">utf-8</prop>
+                <prop key="hibernate.show_sql">false</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.use_sql_comments">true</prop>
+                
+                <!-- 2 lever save
+                <prop key="hibernate.cache.provider_class">org.hibernate.cache.EhCacheProvider</prop>
+                <prop key="hibernate.cache.use_second_level_cache">true</prop>
+                <prop key="hibernate.cache.use_query_cache">true</prop>-->
+            </props>
+        </property>
+		 <!--
+		<property name= "packagesToScan" value="com.pchome.akbadm.db.pojo.*"/>
+			-->
+     
+		<property name="annotatedClasses">
+            <list>
+            	<!-- Adm -->
+            	<value>com.pchome.akbadm.db.pojo.AdmAccesslog</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmAdPool</value>            	
+            	<value>com.pchome.akbadm.db.pojo.AdmArwValue</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusBillReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusDetailReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmBonusSet</value>
+				<value>com.pchome.akbadm.db.pojo.AdmBrandCorrespond</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmChannelAccount</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmClientCountReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDefineAd</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDefineAdType</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmDepartment</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFeedbackRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeAction</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeGift</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmFreeRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmManagerDetail</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmMenu</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPortalBonusReport</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPrivilegeModel</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmPrivilegeModelMenuRef</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRecognizeDetail</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRecognizeRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRelateTadDad</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRelateTproTad</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmRetrieveRecord</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmShowRule</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTemplateAd</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTemplateProduct</value>
+            	<value>com.pchome.akbadm.db.pojo.AdmTransLoss</value>
+                <value>com.pchome.akbadm.db.pojo.AdmUser</value>
+                <value>com.pchome.akbadm.db.pojo.Bank</value>
+                <value>com.pchome.akbadm.db.pojo.DmpAdclassReport</value>
+                <value>com.pchome.akbadm.db.pojo.DmpHitReport</value>
+                <value>com.pchome.akbadm.db.pojo.AdmPfbxBlockUrl</value>
+                <value>com.pchome.akbadm.db.pojo.AdmPfpdAdPvclkReport</value>
+                <!-- Pfbx -->
+                <value>com.pchome.akbadm.db.pojo.PfbxAdCustomerReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdDeviceReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdGroupReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdSizeReport</value>
+			    <value>com.pchome.akbadm.db.pojo.PfbxAdStyleReport</value>			    
+                <value>com.pchome.akbadm.db.pojo.PfbxAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdUnitReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAdUrlReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowCusurl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowIndustry</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAllowUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAssignBuyer</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxAssignPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBank</value>          
+                <value>com.pchome.akbadm.db.pojo.PfbxBlockCusurl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBlockIndustry</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBoard</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusApply</value>   
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusBill</value>  
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusDayReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusSet</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusSetSpecial</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxBonusTransDetail</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupSize</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxGroupUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionArea</value>                
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxOptionUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPermission</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPersonal</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPosition</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceArea</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPriceUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleArea</value>                         
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleCode</value>                       
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSampleUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxSize</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUrl</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserGroup</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserOption</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserPrice</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxUserSample</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxPositionMenu</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxCustomerInfoRefXType</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxInvalidTraffic</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxInvalidTrafficDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfbxWebsiteCategory</value>
+                <!-- Pfd -->
+                <value>com.pchome.akbadm.db.pojo.PfdAdActionReport</value>                            
+                <value>com.pchome.akbadm.db.pojo.PfdAdGroupReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdTemplateReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdApplyForBusiness</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBoard</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusDayReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusInvoice</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusItem</value>
+                <value>com.pchome.akbadm.db.pojo.PfdBonusItemSet</value>  
+                <value>com.pchome.akbadm.db.pojo.PfdBonusRecord</value>
+                <value>com.pchome.akbadm.db.pojo.PfdContract</value>              
+                <value>com.pchome.akbadm.db.pojo.PfdCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfdUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfdUserAdAccountRef</value>
+                <value>com.pchome.akbadm.db.pojo.PfdUserMemberRef</value>
+                <value>com.pchome.akbadm.db.pojo.PfdVirtualRecord</value>
+                <value>com.pchome.akbadm.db.pojo.PfdKeywordReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdAgeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfdAdWebsiteReport</value>
+                <!-- Pfb -->
+                <value>com.pchome.akbadm.db.pojo.PfbStyleInfo</value>               
+                <value>com.pchome.akbadm.db.pojo.PfbWebInfo</value>
+         		<!-- Pfp -->                       
+                <value>com.pchome.akbadm.db.pojo.PfpAd</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdAction</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdActionReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategory</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategoryNew</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdCategoryMapping</value>                
+                <value>com.pchome.akbadm.db.pojo.PfpAdClick</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGift</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGroup</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdGroupReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdInvalid</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordInvalid</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordPvclk</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdKeywordReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdOsReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdPvclk</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdPvclkReferer</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdRank</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdRate</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSysprice</value>
+				<value>com.pchome.akbadm.db.pojo.PfpBoard</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCustomerInfo</value>
+                <value>com.pchome.akbadm.db.pojo.PfpEnterprise</value>
+                <value>com.pchome.akbadm.db.pojo.PfpIllegalKeyword</value>
+                <value>com.pchome.akbadm.db.pojo.PfpKeywordSysprice</value>
+                <value>com.pchome.akbadm.db.pojo.PfpMailbox</value>
+                <value>com.pchome.akbadm.db.pojo.PfpMenu</value>
+                <value>com.pchome.akbadm.db.pojo.PfpOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpOrderDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpTransDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpUser</value>
+                <value>com.pchome.akbadm.db.pojo.PfpUserMemberRef</value>
+                <value>com.pchome.akbadm.db.pojo.Sequence</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdTimeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdAgeReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdWebsiteReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrder</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideo</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideoReport</value>
+                <value>com.pchome.akbadm.db.pojo.PfpAdVideoSource</value>
+                <value>com.pchome.akbadm.db.pojo.PfpRefundOrderRelease</value>
+
+		    </list>
+        </property>
+    </bean>
+
+    <!-- spring transcation setting -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- annotationtransation  method add @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+</beans>

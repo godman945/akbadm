@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="bonus.set.title" extends="default.title" >
+       <put-attribute name="jsName" value="bonus/bonus.set.js"/>
+    </definition>
+    
+    <definition name="bonus.set.list" extends="default.layout">
+    	<put-attribute name="title" value="bonus.set.title" />
+        <put-attribute name="body" value="/ftl/bonus/bonus.set.list.body.ftl" />
+    </definition>
+
+    <definition name="bonus.fixed.set.title" extends="default.title" >
+       <put-attribute name="jsName" value="bonus/bonus.fixed.set.js"/>
+    </definition>
+    
+    <definition name="bonus.fixed.set.view" extends="default.layout">
+    	<put-attribute name="title" value="bonus.fixed.set.title" />
+        <put-attribute name="body" value="/ftl/bonus/bonus.fixed.set.body.ftl" />
+    </definition>
+    
+    <definition name="bonus.case.set.title" extends="default.title" >
+       <put-attribute name="jsName" value="bonus/bonus.case.set.js"/>
+    </definition>
+    
+    <definition name="bonus.case.set.view" extends="default.layout">
+    	<put-attribute name="title" value="bonus.case.set.title" />
+        <put-attribute name="body" value="/ftl/bonus/bonus.case.set.body.ftl" />
+    </definition>
+     
+    <definition name="bonus.invoice.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="bonus/bonus.invoice.list.js"/>
+    </definition>
+    
+    <definition name="bonus.invoice.list" extends="default.layout">
+    	<put-attribute name="title" value="bonus.invoice.list.title" />
+        <put-attribute name="body" value="/ftl/bonus/bonus.invoice.list.body.ftl" />
+    </definition>   
+     
+    <definition name="bonus.invoice.table" template="/ftl/bonus/bonus.invoice.table.body.ftl" />   
+    
+    <definition name="bonus.invoice.modify.view" extends="default.bonus.invoice.layout">
+    	<put-attribute name="jsName" value="bonus/bonus.invoice.modify.js"/>
+        <put-attribute name="body" value="/ftl/bonus/bonus.invoice.modify.body.ftl" />
+    </definition>
+    
+    <definition name="balance.invoice.report.view" extends="default.layout2">
+    	<put-attribute name="title" value="balance.invoice.report.title" />
+        <put-attribute name="body" value="/ftl/bonus/balance.invoice.report.body.ftl" />
+    </definition>
+    
+     <definition name="balance.invoice.report.title" extends="default.title" >
+       <put-attribute name="jsName" value="bonus/balance.invoice.report.js"/>
+    </definition>
+	 
+</tiles-definitions>

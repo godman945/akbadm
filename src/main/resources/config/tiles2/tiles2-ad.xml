@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<!-- default page tile -->
+	<definition name="ad.layout" extends="default.layout4" >
+    	<put-attribute name="head" value="ad.head" />
+    </definition>
+
+   	<definition name="ad.head" extends="default.head" >
+    	<put-attribute name="cssName" value="empty.css" />
+    	<put-attribute name="css" value="/ftl/ad/css.ftl" />
+    	<put-attribute name="js" value="ad.defalut.js" />
+    </definition>
+
+    <definition name="ad.js" template="/ftl/ad/js.ftl" />
+
+    <definition name="ad.defalut.js" extends="ad.js">
+    	<put-attribute name="jsName" value="empty.js" />
+    	<put-attribute name="dateJsName" value="ad/dateRangeSelect.js" />
+    </definition>
+
+    <definition name="ad.dateRangeSelect" template="/ftl/ad/date/dateRangeSelect.ftl" />
+	<!-- default page tile -->
+    
+    
+    <!-- adActionView -->
+    <definition name="ad.action.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.action.view.head" />
+        <put-attribute name="body" value="ad.action.view.body" />
+    </definition> 
+    
+   	<definition name="ad.action.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.action.view.js" />
+    </definition>
+    
+    <definition name="ad.action.view.js" template="/ftl/ad/viewAd/ad.action.js.ftl">
+    	<put-attribute name="jsMsg" value="ad.action.msg.zh.js" />
+    	<put-attribute name="jsName" value="ad.action.view.js" />
+    </definition>
+    
+    <definition name="ad.action.view.body" template="/ftl/ad/viewAd/ad.action.view.body.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />    	 	
+    </definition>
+    
+    <definition name="ad.action.table" template="/ftl/ad/viewAd/ad.action.table.list.ftl" >  
+    	<put-attribute name="page" value="default.page" />  	
+    </definition>
+    
+    <!-- adGroupView -->
+    <definition name="ad.group.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.group.view.head" />
+        <put-attribute name="body" value="ad.group.view.body" />
+    </definition> 
+    
+    <definition name="ad.group.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.group.view.js" />
+    </definition>
+    
+    <definition name="ad.group.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.group.view.js" />
+    </definition>
+    
+    <definition name="ad.group.view.body" template="/ftl/ad/viewAd/ad.group.view.body.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+    
+    <definition name="ad.group.table" template="/ftl/ad/viewAd/ad.group.table.list.ftl" >
+    	<put-attribute name="page" value="default.page" />
+    </definition>
+    
+    <!-- adKeywordView -->
+    <definition name="ad.keyword.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.keyword.view.head" />
+        <put-attribute name="body" value="ad.keyword.view.body" />
+    </definition> 
+    
+    <definition name="ad.keyword.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.keyword.view.js" />
+    </definition>
+    
+    <definition name="ad.keyword.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsMsg" value="ad.keyword.msg.zh.js" />
+    	<put-attribute name="jsName" value="ad.keyword.view.js" />
+    </definition>
+    
+    <definition name="ad.keyword.view.body" template="/ftl/ad/viewAd/ad.keyword.view.body.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />      	
+    </definition>
+    
+    <definition name="ad.keyword.table" template="/ftl/ad/viewAd/ad.keyword.table.list.ftl" >
+    	<put-attribute name="page" value="default.page" />
+    </definition>
+    <!-- 
+    <definition name="ad.exclude.keyword.view" extends="default.layout2">
+    	<put-attribute name="head" value="ad.exclude.keyword.head" />
+        <put-attribute name="body" value="ad.exclude.keyword.body" />
+    </definition>
+    
+    <definition name="ad.exclude.keyword.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.exclude.keyword.js" />
+    </definition>
+    
+    <definition name="ad.exclude.keyword.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.exclude.keyword.js" />
+    </definition>
+    
+    <definition name="ad.exclude.keyword.body" template="/ftl/ad/viewAd/ad.exclude.keyword.body.ftl" >
+    	<put-attribute name="message" value="ad.exclude.keyword.message" />
+    </definition>
+    	
+    <definition name="ad.exclude.keyword.message" template="/ftl/ad/viewAd/ad.exclude.keyword.message.ftl" />
+     -->
+	<!-- adAdView -->
+	<definition name="ad.ad.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.ad.view.head" />
+        <put-attribute name="body" value="ad.ad.view.body" />
+    </definition> 
+    
+    <definition name="ad.ad.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.ad.view.js" />
+    </definition>
+    
+    <definition name="ad.ad.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.ad.view.js" />
+    </definition>
+    
+    <definition name="ad.ad.view.body" template="/ftl/ad/viewAd/ad.ad.view.body.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+    
+    <definition name="ad.ad.table" template="/ftl/ad/viewAd/ad.ad.table.list.ftl" >
+    	<put-attribute name="page" value="default.page" />
+    </definition>
+    
+    <!-- adGiftView -->
+    <definition name="ad.gift.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.gift.view.head" />
+        <put-attribute name="body" value="ad.gift.view.body" />
+    </definition> 
+    
+    <definition name="ad.gift.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.gift.view.js" />
+    </definition>
+    
+    <definition name="ad.gift.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.gift.view.js" />
+    </definition>
+    
+    <definition name="ad.gift.view.body" template="/ftl/ad/viewAd/ad.gift.view.body.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+    
+    <definition name="ad.gift.table" template="/ftl/ad/viewAd/ad.gift.table.list.ftl" >
+    	<put-attribute name="page" value="default.page2" />
+    </definition>
+
+    <definition name="ad.gift.sub" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/ad/viewAd/ad.gift.sub.list.ftl" />
+    </definition>
+
+	<definition name="ad.gift.add" extends="ad.layout">
+    	<put-attribute name="head" value="ad.gift.add.head" />
+        <put-attribute name="body" value="ad.gift.add.body" />
+    </definition> 
+    
+    <definition name="ad.gift.add.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.gift.add.js" />
+    </definition>
+    
+    <definition name="ad.gift.add.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.gift.add.js" />
+    </definition>
+    
+    <definition name="ad.gift.add.body" template="/ftl/ad/viewAd/ad.gift.add.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+
+	<definition name="ad.gift.update" extends="ad.layout">
+    	<put-attribute name="head" value="ad.gift.update.head" />
+        <put-attribute name="body" value="ad.gift.update.body" />
+    </definition> 
+    
+    <definition name="ad.gift.update.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.gift.update.js" />
+    </definition>
+    
+    <definition name="ad.gift.update.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.gift.add.js" />
+    </definition>
+    
+    <definition name="ad.gift.update.body" template="/ftl/ad/viewAd/ad.gift.update.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+
+	<definition name="ad.gift.detal.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.gift.detal.view.head" />
+        <put-attribute name="body" value="ad.gift.detal.view.body" />
+    </definition> 
+    
+    <definition name="ad.gift.detal.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.gift.detal.view.js" />
+    </definition>
+    
+    <definition name="ad.gift.detal.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.gift.detal.view.js" />
+    </definition>
+
+	<definition name="ad.gift.detal.view.body" template="/ftl/ad/viewAd/ad.gift.detal.list.ftl">
+    	<put-attribute name="dateRangeSelect" value="ad.dateRangeSelect" />   	
+    </definition>
+
+	<definition name="ad.gift.record.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.gift.record.view.head" />
+        <put-attribute name="body" value="/ftl/ad/viewAd/ad.gift.record.list.ftl" />
+    </definition> 
+    
+    <definition name="ad.gift.record.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.gift.record.view.js" />
+    </definition>
+    
+    <definition name="ad.gift.record.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.gift.record.view.js" />
+    </definition>
+
+    <definition name="ad.illegalize" template="/ftl/ad/viewAd/ifmAdIllegalize.ftl" />
+    
+    <!-- adCategoryView -->
+    <definition name="ad.category.view" extends="ad.layout">
+    	<put-attribute name="head" value="ad.category.view.head" />
+        <put-attribute name="body" value="ad.category.view.body" />
+    </definition> 
+    
+   	<definition name="ad.category.view.head" extends="ad.head" >
+    	<put-attribute name="js" value="ad.category.view.js" />
+    </definition>
+    
+    <definition name="ad.category.view.js" extends="ad.action.view.js">
+    	<put-attribute name="jsName" value="ad.category.view.js" />
+    </definition>
+    
+    <definition name="ad.category.view.body" template="/ftl/ad/viewAd/ad.category.view.body.ftl">  	 	
+    </definition>
+    
+    <definition name="ad.category.table" template="/ftl/ad/viewAd/ad.category.table.list.ftl" >  	
+    </definition>
+    
+	<!-- ARW 權重管理 -->
+	<definition name=".arwManagementList" extends="default.layout">
+    	<put-attribute name="title" value=".arwManagement.title" />
+    	<put-attribute name="body" value="/ftl/ad/viewAd/arwManagementList.ftl" />
+    </definition>
+	
+	<definition name=".arwManagementAdd" extends="default.layout">
+		<put-attribute name="title" value=".arwManagement.title" />
+    	<put-attribute name="body" value="/ftl/ad/viewAd/arwManagementAdd.ftl" />
+    </definition>
+	
+	<definition name=".arwManagementModify" extends="default.layout">
+		<put-attribute name="title" value=".arwManagement.title" />
+    	<put-attribute name="body" value="/ftl/ad/viewAd/arwManagementModify.ftl" />
+    </definition>
+    
+	<definition name=".arwManagement.title" extends="default.title" >
+       <put-attribute name="jsName" value="ad/arwManagement.js"/>
+    </definition>
+	<!-- ARW 權重管理 end -->
+    
+    <!-- 品牌對應關鍵字管理 -->
+    <definition name=".admBrandCorrespondList" extends="default.layout">
+    	<put-attribute name="title" value=".admBrandCorrespond.title" />
+        <put-attribute name="body" value="/ftl/ad/viewAd/admBrandCorrespondList.ftl" />
+    </definition>
+    
+	<definition name=".admBrandCorrespond.title" extends="default.title" >
+       <put-attribute name="jsName" value="ad/admBrandCorrespond.js"/>
+    </definition>
+    
+	<definition name=".admBrandCorrespondAdd" extends="default.layout">
+		<put-attribute name="title" value=".admBrandCorrespondAddModify.title" />
+    	<put-attribute name="body" value="/ftl/ad/viewAd/admBrandCorrespondAdd.ftl" />
+    </definition>
+
+	<definition name=".admBrandCorrespondModify" extends="default.layout">
+		<put-attribute name="title" value=".admBrandCorrespondAddModify.title" />
+    	<put-attribute name="body" value="/ftl/ad/viewAd/admBrandCorrespondModify.ftl" />
+    </definition>
+    
+    <!-- 新增、修改共用同一個js -->
+	<definition name=".admBrandCorrespondAddModify.title" extends="default.title" >
+       <put-attribute name="jsName" value="ad/admBrandCorrespondAddModify.js"/>
+    </definition>
+    <!-- 品牌對應關鍵字管理 end -->
+</tiles-definitions>

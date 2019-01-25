@@ -1,0 +1,516 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- error handler -->
+	<bean id="PageNotFoundAction" class="com.pchome.akbadm.struts2.action.error.PageNotFoundAction" scope="prototype"/>
+
+    <!-- index -->
+    <bean id="IndexAction" class="com.pchome.akbadm.struts2.action.index.IndexAction" scope="prototype" />
+    
+    
+    <!-- PrivilegeModel -->
+    <bean id="PrivilegeModelAction" class="com.pchome.akbadm.struts2.action.privilege.PrivilegeModelAction" scope="prototype">
+         <property name="privilegeModelService" ref="PrivilegeModelService" />
+         <property name="menuService" ref="MenuService" />
+    </bean>
+
+    <!-- User -->
+    <bean id="UserAction" class="com.pchome.akbadm.struts2.action.user.UserAction" scope="prototype">
+    	 <property name="userService" ref="UserService" />
+         <property name="privilegeModelService" ref="PrivilegeModelService" />
+         <property name="menuService" ref="MenuService" />
+         <property name="departmentService" ref="DepartmentService" />
+    </bean>
+
+    <!-- Login -->
+    <bean id="LoginAction" class="com.pchome.akbadm.struts2.action.login.LoginAction" scope="prototype">
+    	 <property name="userService" ref="UserService" />
+    	 <property name="privilegeModelService" ref="PrivilegeModelService" />
+    </bean>
+
+    <!-- Logout -->
+    <bean id="LogoutAction" class="com.pchome.akbadm.struts2.action.logout.LogoutAction" scope="prototype" />
+
+    <!-- Department -->
+    <bean id="DepartmentAction" class="com.pchome.akbadm.struts2.action.department.DepartmentAction" scope="prototype">
+         <property name="departmentService" ref="DepartmentService" />
+    </bean>
+	
+    <!-- User -->
+    <bean id="PwdAction" class="com.pchome.akbadm.struts2.action.pwd.PwdAction" scope="prototype">
+    	 <property name="userService" ref="UserService" />
+    </bean>
+
+    <!-- Template -->
+    <bean id="TemplateProductAction" class="com.pchome.akbadm.struts2.action.template.TemplateProductAction" scope="prototype">
+		<property name="sequenceProvider" ref="SequenceProvider" />
+    	<property name="templateProductService" ref="TemplateProductService" />
+    	<property name="templateAdService" ref="TemplateAdService" />
+    	<property name="defineAdTypeService" ref="DefineAdTypeService" />
+    	<property name="relateTproTadService" ref="RelateTproTadService" />
+    	<property name="pfbSizeService" ref="PfbSizeService" />
+    	<property name="adPoolService" ref="AdPoolService" />
+    	<property name="pfbxPositionMenuService" ref="PfbxPositionMenuService" />
+        <property name="admAddata" value="${adm.addata}" />
+    </bean>
+    <bean id="TemplateAdAction" class="com.pchome.akbadm.struts2.action.template.TemplateAdAction" scope="prototype">
+		<property name="sequenceProvider" ref="SequenceProvider" />
+		<property name="templateProductService" ref="TemplateProductService" />
+		<property name="relateTproTadService" ref="RelateTproTadService" />
+    	<property name="templateAdService" ref="TemplateAdService" />
+    	<property name="defineAdTypeService" ref="DefineAdTypeService" />
+    	<property name="defineAdService" ref="DefineAdService" />
+    	<property name="relateTadDadService" ref="RelateTadDadService" />
+    	<property name="pfbSizeService" ref="PfbSizeService" />
+    	<property name="adPoolService" ref="AdPoolService" />
+    	<property name="pfbxPositionMenuService" ref="PfbxPositionMenuService" />
+        <property name="admAddata" value="${adm.addata}" />
+    </bean>
+    <bean id="DefineAdAction" class="com.pchome.akbadm.struts2.action.template.DefineAdAction" scope="prototype">
+		<property name="sequenceProvider" ref="SequenceProvider" />
+    	<property name="defineAdService" ref="DefineAdService" />
+		<property name="defineAdTypeService" ref="DefineAdTypeService" />
+    	<property name="adPoolService" ref="AdPoolService" />
+        <property name="admAddata" value="${adm.addata}" />
+        <property name="pfbSizeService" ref="PfbSizeService" />
+    </bean>
+    <bean id="AdPoolAction" class="com.pchome.akbadm.struts2.action.template.AdPoolAction" scope="prototype">
+		<property name="sequenceProvider" ref="SequenceProvider" />
+    	<property name="defineAdService" ref="DefineAdService" />
+    	<property name="adPoolService" ref="AdPoolService" />
+    </bean>
+    
+    <!-- 廣告產品樣版測試頁 -->
+     <bean id="TemplateProductDemoAction" class="com.pchome.akbadm.struts2.action.template.TemplateProductDemoAction" scope="prototype">
+		<property name="templateProductService" ref="TemplateProductService" />
+		<property name="templateAdService" ref="TemplateAdService" />
+		<property name="relateTproTadService" ref="RelateTproTadService" />
+		<property name="pfbSizeService" ref="PfbSizeService" />
+		<!-- 
+		<property name="sequenceProvider" ref="SequenceProvider" />
+    	<property name="templateProductService" ref="TemplateProductService" />
+    	<property name="templateAdService" ref="TemplateAdService" />
+    	<property name="defineAdTypeService" ref="DefineAdTypeService" />
+    	<property name="relateTproTadService" ref="RelateTproTadService" />
+    	<property name="pfbSizeService" ref="PfbSizeService" />
+    	<property name="adPoolService" ref="AdPoolService" />
+    	 -->
+    </bean>
+    <!-- 廣告產品樣版測試頁 end-->
+
+  <!-- 廣告核心測試頁 -->
+     <bean id="adKdclDemoAction" class="com.pchome.akbadm.struts2.action.template.AdKdclDemoAction" scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+    	<property name="pfbxPositionService" ref="PfbxPositionService" />
+    	<property name="pfbSizeService" ref="PfbSizeService" />
+    	<property name="jsSource" value="${play.js.source}" />
+    </bean>
+    <!-- 廣告核心測試頁 end-->
+
+
+    <!-- board -->
+    <bean id="BoardAction" class="com.pchome.akbadm.struts2.action.board.BoardAction" scope="prototype">
+    	 <property name="pfpBoardService" ref="PfpBoardService" />
+    </bean>
+    
+    <!-- order -->
+    <bean id="OrderAction" class="com.pchome.akbadm.struts2.action.order.OrderAction" scope="prototype">
+    	<property name="billingServer" value="${billing.server}" />
+    </bean>
+       	 
+    <!-- account -->
+    <bean id="AccountAction" class="com.pchome.akbadm.struts2.action.account.AccountAction" scope="prototype" >
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="pfpUserService" ref="PfpUserService" />
+    	<property name="pfpUserMemberRefService" ref="PfpUserMemberRefService" />
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    </bean>
+    
+    <!-- Accesslog -->
+    <bean id="AccesslogAction" class="com.pchome.akbadm.struts2.action.accesslog.AccesslogAction" scope="prototype" >
+    	<property name="admAccesslogService" ref="AdmAccesslogService" />    	
+    </bean>
+
+    <!-- illegal keyword -->
+    <bean id="IllegalKeywordAction" class="com.pchome.akbadm.struts2.action.check.IllegalKeywordAction" scope="prototype">
+         <property name="pfpIllegalKeywordService" ref="PfpIllegalKeywordService" />
+    </bean>
+
+    <!-- check pvclk -->
+    <bean id="CheckPvclkAction" class="com.pchome.akbadm.struts2.action.check.CheckPvclkAction" scope="prototype">
+         <property name="checkPvclkJob" ref="CheckPvclkJob" />
+    </bean>
+        
+    <!-- life check -->
+    <bean id="LifeCheckAction" class="com.pchome.akbadm.struts2.action.check.LifeCheckAction" scope="prototype">
+    	<property name="pfbxAdCustomerReportService" ref="PfbxAdCustomerReportService" />
+    </bean>
+
+    <!-- ad check -->
+    <bean id="AdCheckAction" class="com.pchome.akbadm.struts2.action.check.AdCheckAction" scope="prototype">
+        <property name="pfpAdService" ref="PfpAdService" />
+        <property name="pfpAdCategoryService" ref="PfpAdCategoryService" />
+        <property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+        <property name="pfpAdVideoSourceService" ref="PfpAdVideoSourceService" />
+        <property name="adFactory" ref="AdFactory" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="emailUtils" ref="EmailUtils" />
+        <property name="mailFrom" value="${mail.from}" />
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="akbPfpServer" value="${akbpfp.server}" />
+        <property name="mailUserName" value="${adm.mail.user.name}" />
+    </bean>
+
+    <!-- report -->
+    <bean id="AdKeywordReportAction" class="com.pchome.akbadm.struts2.action.report.AdKeywordReportAction" scope="prototype">
+        <property name="keywordReportService" ref="AdKeywordReportService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdReportAction" class="com.pchome.akbadm.struts2.action.report.AdReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpAdService" ref="PfpAdService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="templateProductService" ref="TemplateProductService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+    
+    <bean id="AdReport2Action" class="com.pchome.akbadm.struts2.action.report.AdReport2Action" scope="prototype">
+        <property name="adReport2Service" ref="AdReport2Service" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+        <property name="akbPfpServer" value="${akbpfp.server}" />
+    </bean>
+
+    <bean id="AdActionReportAction" class="com.pchome.akbadm.struts2.action.report.AdActionReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+        <property name="admTransLossService" ref="AdmTransLossService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    	
+    	<!-- dalilyReport測試 alex -->
+    	<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+    </bean>
+    
+    <bean id="CheckBillReportAction" class="com.pchome.akbadm.struts2.action.report.CheckBillReportAction" scope="prototype">
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    </bean>
+
+    <bean id="UnReachBudgetReportAction" class="com.pchome.akbadm.struts2.action.report.UnReachBudgetReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdTemplateReportAction" class="com.pchome.akbadm.struts2.action.report.AdTemplateReportAction" scope="prototype">
+        <property name="pfdAdTemplateReportService" ref="PfdAdTemplateReportService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="templateProductService" ref="TemplateProductService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+	<bean id="CustomerInfoReportAction" class="com.pchome.akbadm.struts2.action.report.CustomerInfoReportAction" scope="prototype">
+        <property name="pfdAccountService" ref="PfdAccountService" />
+	</bean>
+	
+	<bean id="OrderReportAction" class="com.pchome.akbadm.struts2.action.report.OrderReportAction" scope="prototype">
+        <property name="pfdAccountService" ref="PfdAccountService" />
+	</bean>
+	
+	<bean id="TransReportAction" class="com.pchome.akbadm.struts2.action.report.TransReportAction" scope="prototype">
+        <property name="pfdAccountService" ref="PfdAccountService" />
+	</bean>
+	
+	<bean id="AdClientReportAction" class="com.pchome.akbadm.struts2.action.report.AdClientReportAction" scope="prototype">
+        <property name="adClientReportService" ref="AdClientReportService" />
+        <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+	</bean>
+	
+	<bean id="AdVideoReportAction" class="com.pchome.akbadm.struts2.action.report.AdVideoReportAction" scope="prototype">
+        <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+        <property name="pfpAdVideoReportService" ref="PfpAdVideoReportService" />
+        <property name="pfpAdService" ref="PfpAdService" />
+        <property name="akbPfpServer" value="${akbpfp.server}" />
+	</bean>
+	
+	<bean id="AdSourceReportAction" class="com.pchome.akbadm.struts2.action.report.AdSourceReportAction" scope="prototype">
+        <property name="adSourceReportService" ref="AdSourceReportService" />
+	</bean>
+	
+	<bean id="AdmClientCountDayReportAction" class="com.pchome.akbadm.struts2.action.report.AdmClientCountDayReportAction" scope="prototype">
+        <property name="admClientCountReportService" ref="AdmClientCountReportService" />
+	</bean>
+	
+	<bean id="AdmAdSourceDayReportAction" class="com.pchome.akbadm.struts2.action.report.AdmAdSourceDayReportAction" scope="prototype">
+        <property name="adSourceReportService" ref="AdSourceReportService" />
+	</bean>
+	
+	<bean id="AdmClientCountForNext30DayReportAction" class="com.pchome.akbadm.struts2.action.report.AdmClientCountForNext30DayReportAction" scope="prototype">
+        <property name="admClientCountReportService" ref="AdmClientCountReportService" />
+	</bean>
+	
+	<bean id="AdmPortalBonusReportAction" class="com.pchome.akbadm.struts2.action.report.AdmPortalBonusReportAction" scope="prototype">
+        <property name="admPortalBonusReportService" ref="AdmPortalBonusReportService" />
+	</bean>
+	
+	<bean id="AdAgesexReportAction" class="com.pchome.akbadm.struts2.action.report.AdAgesexReportAction" scope="prototype">
+        <property name="adAgesexReportService" ref="AdAgesexReportService" />
+	</bean>
+	
+	<bean id="PfpAdWeektimeReportAction" class="com.pchome.akbadm.struts2.action.report.PfpAdWeektimeReportAction" scope="prototype">
+        <property name="pfpAdWeektimeReportService" ref="PfpAdWeektimeReportService" />
+	</bean>
+	
+	<bean id="AdWebsiteReportAction" class="com.pchome.akbadm.struts2.action.report.AdWebsiteReportAction" scope="prototype">
+        <property name="adWebsiteReportService" ref="AdWebsiteReportService" />
+        <property name="pfbxWebsiteCategoryService" ref="PfbxWebsiteCategoryService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+	</bean>
+	
+	<bean id="CostRankReportAction" class="com.pchome.akbadm.struts2.action.report.CostRankReportAction" scope="prototype" />
+
+	<bean id="CostShortRankReportAction" class="com.pchome.akbadm.struts2.action.report.CostShortRankReportAction" scope="prototype" />
+
+    <bean id="TotalTransReportAction" class="com.pchome.akbadm.struts2.action.report.TotalTransReportAction" scope="prototype">
+        <property name="pfpTransDetailService" ref="PfpTransDetailService" />
+        <property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdOfflineReportAction" class="com.pchome.akbadm.struts2.action.report.AdOfflineReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdSpendReportAction" class="com.pchome.akbadm.struts2.action.report.AdSpendReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdKeywordOfferPriceReportAction" class="com.pchome.akbadm.struts2.action.report.AdKeywordOfferPriceReportAction" scope="prototype">
+        <property name="keywordReportService" ref="AdKeywordReportService" />
+        <property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <bean id="AdMobileOSReportAction" class="com.pchome.akbadm.struts2.action.report.AdMobileOSReportAction" scope="prototype">
+        <property name="adReportService" ref="AdReportService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>
+
+    <!-- AdBaseSet -->
+    <bean id="AdActionViewAction" class="com.pchome.akbadm.struts2.action.ad.AdActionViewAction" scope="prototype" />
+
+	<bean id="AdGroupViewAction" class="com.pchome.akbadm.struts2.action.ad.AdGroupViewAction" scope="prototype" />
+
+    <bean id="AdKeywordViewAction" class="com.pchome.akbadm.struts2.action.ad.AdKeywordViewAction" scope="prototype" />
+    
+    <bean id="AdAdViewAction" class="com.pchome.akbadm.struts2.action.ad.AdAdViewAction" scope="prototype" >
+    	<property name="pfpAdGroupService" ref="PfpAdGroupService" />
+    	<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="pfpAdService" ref="PfpAdService" />
+    	<property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="emailUtils" ref="EmailUtils" />
+        <property name="mailFrom" value="${mail.from}" />
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="akbPfpServer" value="${akbpfp.server}" />
+        <property name="mailUserName" value="${pfp.mail.user.name}" />
+    </bean>
+
+    <bean id="AdGiftViewAction" class="com.pchome.akbadm.struts2.action.ad.AdGiftViewAction" scope="prototype" >
+    </bean>
+    
+    <bean id="AdGiftAddAction" class="com.pchome.akbadm.struts2.action.ad.AdGiftAddAction" scope="prototype" >
+    	<property name="sequenceService" ref="SequenceService" /> 
+    	<property name="admFreeActionService" ref="AdmFreeActionService" />
+    	<property name="admFreeGiftService" ref="AdmFreeGiftService" />  
+    </bean>
+    
+    <bean id="PfpAdCategoryNewAction" class="com.pchome.akbadm.struts2.action.ad.PfpAdCategoryNewAction" scope="prototype" >
+    	<property name="pfpAdCategoryNewService" ref="PfpAdCategoryNewService" /> 
+    </bean>
+    
+    <!-- Recognize Report -->
+    <bean id="RecognizeReportAction" class="com.pchome.akbadm.struts2.action.recognize.RecognizeReportAction" scope="prototype" >
+    	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" /> 
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />  
+    </bean>
+    
+    <!-- Feedback Record -->
+    <bean id="FeedbackRecordAction" class="com.pchome.akbadm.struts2.action.feedback.FeedbackRecordAction" scope="prototype" >
+    	<property name="customerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="feedbackRecordService" ref="AdmFeedbackRecordService" /> 
+    	<property name="sequenceService" ref="SequenceService" />
+    	<property name="transDetailService" ref="PfpTransDetailService" />
+    	<property name="boardProvider" ref="BoardProvider" />
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+    	<property name="pfdBoardService" ref="PfdBoardService" />
+    </bean>
+
+    <!-- PFD account -->
+    <bean id="PfdAccountAction" class="com.pchome.akbadm.struts2.action.pfd.account.PfdAccountAction" scope="prototype" >
+    	<property name="pfdAccountService" ref="PfdAccountService" />
+    	<property name="pfdUserService" ref="PfdUserService" />
+    	<property name="sequenceService" ref="SequenceService" />
+    	<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="akbPfdServer" value="${akbpfd.server}" />
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="mailServer" value="${mail.server}" />
+        <property name="mailSubject" value="${pfd.invite.mail.subject}" />
+        <property name="mailFrom" value="${mail.from}" />
+    </bean>
+
+	<!-- PFD bonus set-->	
+	<bean id="BonusSetAction" class="com.pchome.akbadm.struts2.action.bonus.BonusSetAction" scope="prototype" > 
+		<property name="pfdContractService" ref="PfdContractService" />   	
+    </bean>
+    
+   
+    
+	<bean id="BonusInvoiceAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.BonusInvoiceAction" scope="prototype" > 
+		<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />		
+    </bean>
+
+    <bean id="ApplyForBusinessCheckAction" class="com.pchome.akbadm.struts2.action.check.ApplyForBusinessCheckAction" scope="prototype" > 
+		<property name="applyForBusinessService" ref="PfdApplyForBusinessService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+    </bean>
+    
+    <!-- 沒在用
+    <bean id="DownloadBonusBillAction" class="com.pchome.akbadm.struts2.action.bonus.DownloadBonusBillAction" scope="prototype" >
+	    <property name="bonusProvider" ref="BonusProvider" />
+	    <property name="pdfUtil" ref="PdfUtil" />
+	    <property name="ftlPath" value="${ftl.path}" />	
+	    <property name="commandPath" value="${command.path}" />
+	    <property name="tempPath" value="${temp.path}" />
+    </bean>
+	-->
+	
+    <bean id="ContractAction" class="com.pchome.akbadm.struts2.action.contract.ContractAction" scope="prototype" >
+	    <property name="pfdAccountService" ref="PfdAccountService" />
+	    <property name="pfdContractService" ref="PfdContractService" />
+	    <property name="admAccesslogService" ref="AdmAccesslogService" />
+    </bean>
+
+    <bean id="EnterpriseAction" class="com.pchome.akbadm.struts2.action.enterprise.EnterpriseAction" scope="prototype" >
+        <property name="applyForBusinessService" ref="PfdApplyForBusinessService" />
+        <property name="enterpriseService" ref="PfpEnterpriseService" />
+   		<property name="admAccesslogService" ref="AdmAccesslogService" />
+    </bean>
+
+    <bean id="PfdBoardAction" class="com.pchome.akbadm.struts2.action.pfd.board.PfdBoardAction" scope="prototype" >
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfdAccountService" ref="PfdAccountService" />
+   		<property name="pfdUserService" ref="PfdUserService" />
+    </bean>
+
+	<!-- 刪掉測試帳號 -->
+    <bean id="DeleteTestAccountAction" class="com.pchome.akbadm.struts2.action.addition.DeleteTestAccountAction" scope="prototype" >
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+		<property name="pfpUserMemberRefService" ref="PfpUserMemberRefService" />
+		<property name="pfpOrderDetailService" ref="PfpOrderDetailService" />
+		<property name="pfpOrderService" ref="PfpOrderService" />
+		<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+		<property name="pfpUserService" ref="PfpUserService" />		
+		<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />	
+    </bean>
+    
+    <!-- SQL 語法處理 -->
+    <bean id="SqlAction" class="com.pchome.akbadm.struts2.action.addition.SqlAction" scope="prototype" >
+    	<property name="pfpAdGroupService" ref="PfpAdGroupService" />
+    </bean>
+    
+    <!-- 沖帳 -->
+    <bean id="BalanceInvoiceAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.BalanceInvoiceAction" scope="prototype" >
+    	<property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+    </bean>
+    
+    <!-- 帳戶管理 -->
+    <bean id="ManagerAction" class="com.pchome.akbadm.struts2.action.manager.ManagerAction" scope="prototype" >
+    	<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    	<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+    	<property name="pfbCustomerInfoService" ref="PfbCustomerInfoService" />
+    	<property name="admChannelAccountService" ref="AdmChannelAccountService" />
+    	<property name="admManagerDetailService" ref="AdmManagerDetailService" />
+    </bean>
+    
+    <bean id="BonusItemSetAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.BonusItemSetAction" scope="prototype" >
+    	<property name="pfdContractService" ref="PfdContractService" />		
+    </bean>
+    
+    <bean id="FixedBonusItemSetAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.FixedBonusItemSetAction" scope="prototype" >
+    	<property name="pfdContractService" ref="PfdContractService" />    
+		<property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />     
+		<property name="pfdParseFactory" ref="PfdParseFactory" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+    
+    <bean id="CaseBonusItemSetAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.CaseBonusItemSetAction" scope="prototype" >
+    	<property name="pfdContractService" ref="PfdContractService" />    
+		<property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />     
+		<property name="pfdParseFactory" ref="PfdParseFactory" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+    	<property name="parsePath" value="${pfd.parse.path}" />
+    </bean>
+
+	<bean id="BonusBillAction" class="com.pchome.akbadm.struts2.action.pfd.bonus.BonusBillAction" scope="prototype" >
+		<property name="pfdBonusProvider" ref="PfdBonusProvider" />  
+		<property name="pdfUtil" ref="PdfUtil" />  
+	    <property name="ftlPath" value="${pfd.ftl.path}" />	
+	    <property name="commandPath" value="${command.path}" />
+	    <property name="tempPath" value="${temp.path}" />
+    </bean>
+    
+	<!-- 銀行管理 -->
+    <bean id="BankAction" class="com.pchome.akbadm.struts2.action.bank.BankAction" scope="prototype" >
+    	<property name="bankService" ref="BankService" />
+    </bean>
+    
+    <bean id="AdvanceOrderRefundReleaseAction" class="com.pchome.akbadm.struts2.action.order.AdvanceOrderRefundReleaseAction" scope="prototype" > 
+		<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+		<property name="pfpRefundOrderReleaseService" ref="PfpRefundOrderReleaseService" />
+		<property name="pfpOrderService" ref="PfpOrderService" />
+		<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+		<property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="springEmailUtil" ref="SpringEmailUtil" />
+		<property name="pfdBoardService" ref="PfdBoardService" />
+		<property name="pfpBoardService" ref="PfpBoardService" />
+		<property name="pfpUserService" ref="PfpUserService" />
+    	<property name="pfdUserService" ref="PfdUserService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+		<property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    </bean>
+
+	<!-- ARW 權重管理 -->
+	<bean id="ARWManagementAction" class="com.pchome.akbadm.struts2.action.ad.ARWManagementAction" scope="prototype" >
+		<property name="admARWManagementService" ref="AdmARWManagementService" />
+    </bean>
+    
+    <!-- 品牌對應關鍵字管理 -->
+	<bean id="AdmBrandCorrespondApi" class="com.pchome.akbadm.struts2.action.api.AdmBrandCorrespondApi" scope="prototype" >
+		<property name="admBrandCorrespondService" ref="AdmBrandCorrespondService" />
+    </bean>
+    
+</beans>

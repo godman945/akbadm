@@ -1,0 +1,49 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-manager" extends="struts-base">
+
+		<!-- 管理者列表 -->
+		<action name="managerList" class="ManagerAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+	    	<result type="tiles" name="success">manager.list.view</result>
+		</action>
+					
+		<action name="searchManager" class="ManagerAjax" method="searchManagerAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">manager.list.table</result>
+        </action>
+        	
+        <!-- 新增管理者 -->			
+		<action name="addManager" class="ManagerAction" method="addManagerAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">manager.add.view</result>
+        </action>	
+        
+        <action name="saveManager" class="ManagerAction" method="saveManagerAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">managerList</result>
+        </action>
+        
+        <action name="modifyManager" class="ManagerAction" method="modifyManagerAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">manager.modify.view</result>
+        </action>
+        	
+        <action name="updateManager" class="ManagerAction" method="updateManagerAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">managerList</result>
+        </action>	
+
+        <!-- 驗證管理者 -->			
+		<action name="checkManager" class="ManagerAjax" method="checkManagerAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+        </action>	
+                	
+    </package>
+</struts>

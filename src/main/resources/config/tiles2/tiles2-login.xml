@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".login.title" extends="default.title" >
+       <put-attribute name="jsName" value="login/login.js"/>
+    </definition>
+
+    <definition name=".login" extends="default.layout3">
+    	<put-attribute name="title" value=".login.title" />
+        <put-attribute name="body" value="/ftl/login/login.ftl" />
+    </definition>
+
+</tiles-definitions>

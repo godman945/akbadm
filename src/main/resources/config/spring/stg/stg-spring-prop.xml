@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+            	<value>classpath:config/prop/admin.properties</value>
+            	<value>classpath:config/prop/akbadmSystem.properties</value>
+            	<value>classpath:config/prop/hdfs.properties</value>
+            	<value>classpath:config/prop/path.properties</value>
+            	<value>classpath:config/prop/solr.properties</value>
+            	<value>classpath:config/prop/ssh.process.util.properties</value>
+            	<value>classpath:config/prop/stg/stg.bonus.properties</value>
+            	<value>classpath:config/prop/stg/stg.pfb.bonus.properties</value>
+            	<value>classpath:config/prop/stg/stg.jdbc.properties</value>
+            	<value>classpath:config/prop/stg/stg.mail.properties</value>
+                <value>classpath:config/prop/stg/stg.rmi.properties</value>
+                <value>classpath:config/prop/stg/stg.server.properties</value>
+                <value>classpath:config/prop/stg/stg.redis.properties</value>           
+            </list>
+        </property>
+    </bean>
+</beans>

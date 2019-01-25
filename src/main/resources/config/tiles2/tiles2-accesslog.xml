@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="account.accesslog" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/accesslog/account.log.ftl" />
+    </definition>
+    
+    <definition name="user.accesslog" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/accesslog/user.log.ftl" />
+    </definition>
+    
+    <definition name="adm.accesslog" extends="default.layout">
+        <put-attribute name="body" value="/ftl/accesslog/adm.log.ftl" />
+    </definition>
+</tiles-definitions>

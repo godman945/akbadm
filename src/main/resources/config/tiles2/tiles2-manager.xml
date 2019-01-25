@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<!-- 管理者列表 -->
+	<!-- test angularJS -->
+	<!-- 
+	<definition name="manager.list.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="manager.list.title" />
+        <put-attribute name="body" value="/ftl/manager/manager.list.body.ftl" />
+    </definition>
+    
+    <definition name="manager.list.title" extends="default.angularJs.title" >
+       <put-attribute name="jsName" value="manager/manager.list.js"/>
+    </definition>
+    
+    <definition name="manager.list.table" template="/ftl/manager/manager.list.table.ftl" />
+     -->
+     
+	<!-- 管理者列表 -->
+	<definition name="manager.list.view" extends="default.layout">
+		<put-attribute name="title" value="manager.list.title" />
+        <put-attribute name="body" value="/ftl/manager/manager.list.body.ftl" />
+    </definition>
+    
+    <definition name="manager.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="manager/manager.list.js"/>
+    </definition>
+    
+    <definition name="manager.list.table" template="/ftl/manager/manager.list.table.ftl" />
+    
+    <!-- 新增管理者 -->
+    <definition name="manager.add.view" extends="default.layout">
+		<put-attribute name="title" value="manager.add.title" />
+        <put-attribute name="body" value="/ftl/manager/manager.add.body.ftl" />
+    </definition>
+    
+    <definition name="manager.add.title" extends="default.title" >
+       <put-attribute name="jsName" value="manager/manager.add.js"/>
+    </definition>
+    
+    <!-- 修改管理者和管理頻道 -->
+    <definition name="manager.modify.view" extends="default.layout">
+		<put-attribute name="title" value="manager.modify.title" />
+        <put-attribute name="body" value="/ftl/manager/manager.modify.body.ftl" />
+    </definition>
+    
+    <definition name="manager.modify.title" extends="default.title" >
+       <put-attribute name="jsName" value="manager/manager.modify.js"/>
+    </definition>
+    
+</tiles-definitions>

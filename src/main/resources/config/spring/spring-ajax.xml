@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+    
+    <!-- order -->
+    <bean id="OrderAjax" class="com.pchome.akbadm.struts2.ajax.order.OrderAjax" scope="prototype" >
+    	<property name="pfpOrderService" ref="PfpOrderService" />
+    </bean>
+    
+	<!-- account -->
+    <bean id="AccountAjax" class="com.pchome.akbadm.struts2.ajax.account.AccountAjax" scope="prototype" >
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="pfpAdActionService" ref="PfpAdActionService" />
+    </bean> 
+    
+    <!-- report -->
+    <bean id="CustomerInfoReportAjax" class="com.pchome.akbadm.struts2.ajax.report.CustomerInfoReportAjax" scope="prototype">
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="customerInfoQueryReport" ref="CustomerInfoQueryReport" />
+    </bean>
+    	
+    <bean id="OrderReportAjax" class="com.pchome.akbadm.struts2.ajax.report.OrderReportAjax" scope="prototype">
+    	<property name="orderQueryReport" ref="OrderQueryReport" />
+    	<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+    </bean> 
+    
+    <bean id="TransReportAjax" class="com.pchome.akbadm.struts2.ajax.report.TransReportAjax" scope="prototype">
+    	<property name="pfpTransDetailService" ref="PfpTransDetailService" />
+    	<property name="fontPath" value="${fontPath}" />
+    </bean>  
+    
+    <bean id="CostRankReportAjax" class="com.pchome.akbadm.struts2.ajax.report.CostRankReportAjax" scope="prototype">
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    	<property name="costRankQueryReport" ref="CostRankQueryReport" />
+    </bean>
+    
+    <bean id="CostShortRankReportAjax" class="com.pchome.akbadm.struts2.ajax.report.CostShortRankReportAjax" scope="prototype">
+		<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+		<property name="costShortRankQueryReport" ref="CostShortRankQueryReport" />
+    </bean>    
+
+    <!-- adAction ajax -->
+    <bean id="AdActionViewAjax" class="com.pchome.akbadm.struts2.ajax.ad.AdActionViewAjax" scope="prototype" >
+    	<property name="pfpAdActionService" ref="PfpAdActionService" /> 
+    </bean>
+
+    <bean id="AdGroupViewAjax" class="com.pchome.akbadm.struts2.ajax.ad.AdGroupViewAjax" scope="prototype" >
+	    <property name="pfpAdGroupService" ref="PfpAdGroupService" /> 
+    </bean> 
+    
+    <!-- adCategoryNew select Ajax -->
+  	<bean id="AdCategoryNewAjax" class="com.pchome.akbadm.struts2.ajax.ad.PfpAdCategoryNewAjaxAction" scope="prototype" >
+	    <property name="pfpAdCategoryNewService" ref="PfpAdCategoryNewService" /> 
+    </bean> 
+    
+    
+	<bean id="AdKeywordViewAjax" class="com.pchome.akbadm.struts2.ajax.ad.AdKeywordViewAjax" scope="prototype" >
+	    <property name="pfpAdKeywordService" ref="PfpAdKeywordService" /> 
+    </bean>  
+    
+    <bean id="AdAdViewAjax" class="com.pchome.akbadm.struts2.ajax.ad.AdAdViewAjax" scope="prototype" >
+	    <property name="pfpAdService" ref="PfpAdService" /> 
+	    <property name="pfpAdDetailService" ref="PfpAdDetailService" />
+	    <property name="pfpAdCategoryMappingService" ref="PfpAdCategoryMappingService" />
+	    <property name="pfpAdCategoryNewService" ref="PfpAdCategoryNewService" />  
+    </bean> 
+
+    <bean id="AdGiftViewAjax" class="com.pchome.akbadm.struts2.ajax.ad.AdGiftViewAjax" scope="prototype" >
+	    <property name="admFreeActionService" ref="AdmFreeActionService" /> 
+    </bean> 
+
+    <bean id="FeedbackRecordAjax" class="com.pchome.akbadm.struts2.ajax.feedback.FeedbackRecordAjax" scope="prototype" >
+	    <property name="feedbackRecordService" ref="AdmFeedbackRecordService" />
+    </bean>
+    
+    <bean id="BonusInvoiceAjax" class="com.pchome.akbadm.struts2.ajax.pfd.bonus.BonusInvoiceAjax" scope="prototype" >
+	    <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+	    <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+	    <property name="pfdBoardService" ref="PfdBoardService" />
+	    <property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+	    <property name="pfdUserService" ref="PfdUserService" />
+	    <property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    </bean>    
+    
+    <bean id="ManagerAjax" class="com.pchome.akbadm.struts2.ajax.manager.ManagerAjax" scope="prototype" >
+	    <property name="admManagerDetailService" ref="AdmManagerDetailService" />
+    </bean>
+    
+    <!-- checkContract -->
+    <bean id="checkContractActionAjax" class="com.pchome.akbadm.struts2.ajax.contract.ContractCheckActionAjax" scope="prototype" >
+	    <property name="pfdContractService" ref="PfdContractService" />
+    </bean>
+    
+    <!-- ARW 權重管理 pfd連動pfp下拉選單 -->
+    <bean id="ARWManagementAjaxAction" class="com.pchome.akbadm.struts2.ajax.ad.ARWManagementAjaxAction" scope="prototype" >
+		<property name="admARWManagementService" ref="AdmARWManagementService" />
+    </bean>
+    
+</beans>

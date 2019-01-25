@@ -1,0 +1,119 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-check" namespace="/" extends="struts-base">
+
+        <action name="illegalKeywordList" class="IllegalKeywordAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.illegal.keyword.list</result>
+        </action>
+
+        <action name="doIllegalKeywordAdd" class="IllegalKeywordAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.illegal.keyword.list</result>
+        </action>
+
+        <action name="doIllegalKeywordUpdate" class="IllegalKeywordAction" method="doUpdate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.illegal.keyword.list</result>
+        </action>
+
+        <action name="doIllegalKeywordDelete" class="IllegalKeywordAction" method="doDelete">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.illegal.keyword.list</result>
+        </action>
+
+        <action name="adCheck" class="AdCheckAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.check.list</result>
+        </action>
+
+        <action name="doAdCheckQuery" class="AdCheckAction" method="doQuery">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.check.list</result>
+        </action>
+
+        <action name="doAdCheckApprove" class="AdCheckAction" method="doApprove">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doAdCheckQuery</param>
+                <param name="style">${style}</param>
+                <param name="sendVerifyStartTime">${sendVerifyStartTime}</param>
+                <param name="sendVerifyEndTime">${sendVerifyEndTime}</param>
+            </result>
+            <result type="tiles" name="input">.ad.check.list</result>
+        </action>
+
+        <action name="doAdCheckApproveAndPause" class="AdCheckAction" method="doApproveAndPause">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doAdCheckQuery</param>
+                <param name="style">${style}</param>
+                <param name="sendVerifyStartTime">${sendVerifyStartTime}</param>
+                <param name="sendVerifyEndTime">${sendVerifyEndTime}</param>
+            </result>
+            <result type="tiles" name="input">.ad.check.list</result>
+        </action>
+
+        <action name="doAdCheckReject" class="AdCheckAction" method="doReject">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doAdCheckQuery</param>
+                <param name="style">${style}</param>
+                <param name="sendVerifyStartTime">${sendVerifyStartTime}</param>
+                <param name="sendVerifyEndTime">${sendVerifyEndTime}</param>
+            </result>
+            <result type="tiles" name="input">.ad.check.list</result>
+        </action>
+
+        <action name="checkPvclk" class="CheckPvclkAction">
+            <result type="stream" name="success">
+                <param name="contentType">text/plain</param>
+                <param name="inputName">result</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+        
+        <action name="lifeCheck" class="LifeCheckAction" method="execute">
+            <result name="success" type="stream">
+                <param name="contentType">text/html</param>
+                <param name="inputName">inputStream</param>
+                <param name="bufferSize">1024</param>
+            </result>
+        </action>
+
+        <action name="applyForBusinessCheck" class="ApplyForBusinessCheckAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.apply.for.business.check.list</result>
+        </action>
+
+        <action name="doApplyForBusinessQuery" class="ApplyForBusinessCheckAction" method="doQuery">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.apply.for.business.check.list</result>
+        </action>
+
+        <action name="doApplyForBusinessApprove" class="ApplyForBusinessCheckAction" method="doApprove">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doApplyForBusinessQuery</param>
+                <param name="taxId">${taxId}</param>
+                <param name="startDate">${startDate}</param>
+                <param name="endDate">${endDate}</param>
+            </result>
+            <result type="tiles" name="input">.apply.for.business.check.list</result>
+        </action>
+
+        <action name="doApplyForBusinessReject" class="ApplyForBusinessCheckAction" method="doReject">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doApplyForBusinessQuery</param>
+                <param name="taxId">${taxId}</param>
+                <param name="startDate">${startDate}</param>
+                <param name="endDate">${endDate}</param>
+            </result>
+            <result type="tiles" name="input">.apply.for.business.check.list</result>
+        </action>
+
+    </package>
+</struts>

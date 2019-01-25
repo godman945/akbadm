@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+    	
+<struts>
+	<package name="struts-base" extends="json-default">
+        <result-types>
+            <result-type name="tiles" class="org.apache.struts2.views.tiles.TilesResult" />
+        </result-types>
+        
+		<interceptors>
+
+		    <!-- 檢查IP -->
+		    <interceptor name="ipInterceptor" class="IpInterceptor" />
+
+		    <!-- 檢查是否登入 -->
+		    <interceptor name="loginCheckInterceptor" class="LoginCheckInterceptor" />
+
+            <!-- 檢查是否有cookie -->
+			<interceptor name="cookieInterceptor" class="org.apache.struts2.interceptor.CookieInterceptor" />
+
+			<interceptor-stack name="akbadmCookieStack">
+				<interceptor-ref name="cookieInterceptor">
+					<param name="cookiesName">pchome_adm_cookie</param>
+					<param name="cookiesValue">*</param>
+				</interceptor-ref>
+				<interceptor-ref name="ipInterceptor" /> 
+				<interceptor-ref name="loginCheckInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+			<interceptor-stack name="checkIpStack">
+				<interceptor-ref name="cookieInterceptor">
+					<param name="cookiesName">pchome_adm_cookie</param>
+					<param name="cookiesValue">*</param>
+				</interceptor-ref>
+				<interceptor-ref name="ipInterceptor" /> 
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+			
+		</interceptors>
+        
+		<!-- define global error -->
+		<global-results>
+			<result name="Exception" type="tiles">.error.global</result>
+			<result name="pageNotFound" type="tiles">.error.pageNotFound</result>
+			<result name="login" type="redirectAction">login</result>
+            <result name="message" type="redirectAction">
+                <param name="actionName">message</param>
+                <param name="code">${code}</param>
+            </result>
+		</global-results>
+
+        <action name="message" class="MessageAction" method="execute">
+            <result type="tiles" name="success">.default.message</result>
+        </action>
+
+		<!-- 404 not found -->
+		<action name="pageNotFound" class="PageNotFoundAction" method="execute">
+			<result type="tiles" name="success">.error.pageNotFound</result>
+		</action>
+
+	</package>
+</struts>

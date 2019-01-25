@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- pfbx -->
+    <bean id="PfbxAllowUrlDAO" class="com.pchome.akbadm.db.dao.pfbx.play.PfbxAllowUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxAllowUrlDAO2" class="com.pchome.akbadm.db.dao.pfbx.play.PfbxAllowUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxAreaDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxAreaDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxAreaDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxAreaDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxPositionDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxPositionDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxPositionDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxPositionDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxSizeDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxSizeDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxSizeDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxSizeDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxUrlDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUrlDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxUserGroupDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserGroupDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUserGroupDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserGroupDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxUserOptionDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserOptionDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUserOptionDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserOptionDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxUserPriceDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserPriceDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUserSampleDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserSampleDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUserSampleDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxUserSampleDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="AdmShowRuleDAO2" class="com.pchome.akbadm.db.dao.ad.AdmShowRuleDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <bean id="PfbxUserDAO" class="com.pchome.akbadm.db.dao.pfbx.user.PfbxUserDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- Pfb 獎金計算 -->
+    <bean id="PfbxBonusSetDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusSetDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+                                                                                 
+    <bean id="PfbxBonusSetSpecialDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusSetSpecialDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="PfbxBankDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBankDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>        
+        
+    <bean id="PfbxPersonalDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxPersonalDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>  
+    
+    <bean id="AdmBonusSetDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.AdmBonusSetDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="AdmBonusBillReportDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.AdmBonusBillReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="AdmBonusDetailReportDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.AdmBonusDetailReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxBonusApplyDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusApplyDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxBonusBillDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusBillDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxBonusDayReportDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusDayReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxBonusTransDetailDAO" class="com.pchome.akbadm.db.dao.pfbx.bonus.PfbxBonusTransDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- 撥放權限 -->
+    <bean id="PfbxPermissionDAO" class="com.pchome.akbadm.db.dao.pfbx.play.PfbxPermissionDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 撥放權限 end -->
+    
+    <!-- 廣告封鎖客戶網址 -->
+    <bean id="PfbxBlockCusurlDAO" class="com.pchome.akbadm.db.dao.pfbx.play.PfbxBlockCusurlDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 廣告封鎖客戶網址 end -->  
+    
+     <!-- report -->
+    <bean id="PfbxCustomerReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxCustomerReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxTimeReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxTimeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUnitReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxUnitReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxSizeReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxSizeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxStyleReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxStyleReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxUrlReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxUrlReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxSizeGetAdClickDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbxSizeGetAdClickDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- quartz -->
+    
+    <bean id="PfbAdTimeReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdTimeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdCustomerReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdCustomerReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdUrlReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdUrlReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdDeviceReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdDeviceReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdUnitReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdUnitReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdSizeReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdSizeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdStyleReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdStyleReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbAdGroupReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.quartz.PfbAdGroupReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxInvalidClickDAO" class="com.pchome.akbadm.db.dao.pfbx.invalidclick.PfbxInvalidClickDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxInvalidTrafficDAO" class="com.pchome.akbadm.db.dao.pfbx.invalidclick.PfbxInvalidTrafficDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxInvalidTrafficDetailDAO" class="com.pchome.akbadm.db.dao.pfbx.invalidclick.PfbxInvalidTrafficDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- 網站類別 -->
+    <bean id="PfbxWebsiteCategoryDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxWebsiteCategoryDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="PfbxWebsiteCategoryDAO2" class="com.pchome.akbadm.db.dao.pfbx.PfbxWebsiteCategoryDAO">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    <!-- 網站類別 end -->
+    
+    <!-- 版位定價查詢 -->
+    <bean id="PfbPositionPriceReportDAO" class="com.pchome.akbadm.db.dao.pfbx.report.PfbPositionPriceReportDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    <!-- 版位定價查詢 end -->
+    
+</beans>

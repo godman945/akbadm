@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <!-- keyword report -->
+	<definition name=".report.keyword.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/keyword_report.js"/>
+    </definition>
+
+    <definition name=".report.keyword" extends="default.layout">
+    	<put-attribute name="title" value=".report.keyword.title" />
+        <put-attribute name="body" value="/ftl/report/keywordReport.ftl" />
+    </definition>
+
+    <definition name=".report.keyword.detail" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/keywordReportDetail.ftl" />
+    </definition>
+
+    <!-- ad report -->
+    <definition name=".report.ad.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_report.js"/>
+    </definition>
+    
+    <definition name=".report.ad" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.title" />
+        <put-attribute name="body" value=".report.ad.body" />
+    </definition>
+    
+    <definition name=".report.ad.body" template="/ftl/report/adReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".report.ad.detail" template="/ftl/report/adDetailReport.ftl" >
+    </definition> 
+    
+
+    <!-- ad action report -->
+	<definition name=".report.ad.action.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_action_report.js"/>
+    </definition>
+
+    <definition name=".report.ad.action" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.action.title" />
+        <put-attribute name="body" value="/ftl/report/adActionReport.ftl" />
+    </definition>
+
+    <definition name=".report.ad.action.detail" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/adActionReportDetail.ftl" />
+    </definition>
+
+   <!-- total trans report -->
+	<definition name=".report.total.trans.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/total_trans_report.js"/>
+    </definition>
+
+    <definition name=".report.total.trans" extends="default.layout">
+    	<put-attribute name="title" value=".report.total.trans.title" />
+        <put-attribute name="body" value="/ftl/report/totalTransReport.ftl" />
+    </definition>
+
+    <definition name=".report.total.trans.detail" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/totalTransReportDetail.ftl" />
+    </definition>
+
+    <!-- ad template report -->
+	<definition name=".report.ad.template.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_template_report.js"/>
+    </definition>
+
+    <definition name=".report.ad.template" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.template.title" />
+        <put-attribute name="body" value="/ftl/report/adTemplateReport.ftl" />
+    </definition>
+
+    <!-- ad offline report -->
+	<definition name=".report.ad.offline.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_offline_report.js"/>
+    </definition>
+
+    <definition name=".report.ad.offline" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.offline.title" />
+        <put-attribute name="body" value="/ftl/report/adOfflineReport.ftl" />
+    </definition>
+
+    <!-- ad spend report -->
+	<definition name=".report.ad.spend.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_spend_report.js"/>
+    </definition>
+
+    <definition name=".report.ad.spend" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.spend.title" />
+        <put-attribute name="body" value=".report.ad.spend.body" />
+    </definition>
+    
+    <definition name=".report.ad.spend.body" template="/ftl/report/adSpendReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+
+	<!-- customerInfo report -->
+	<definition name=".report.customerInfo.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/customerInfoReport.js"/>
+    </definition>
+    
+    <definition name=".report.customerInfo" extends="default.layout">
+    	<put-attribute name="title" value=".report.customerInfo.title" />
+        <put-attribute name="body" value="/ftl/report/customerInfoReport.ftl" />
+    </definition>
+    
+    <definition name=".report.customerInfo.table" template="/ftl/report/customerInfoTable.ftl" />
+
+	<!-- order report -->
+	<definition name=".report.order.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/orderReport.js"/>
+    </definition>
+    
+    <definition name=".report.order" extends="default.layout">
+    	<put-attribute name="title" value=".report.order.title" />
+        <put-attribute name="body" value="/ftl/report/orderReport.ftl" />
+    </definition>
+    
+    <definition name=".report.order.table" template="/ftl/report/orderTable.ftl" />    
+    
+    <!-- trans report -->
+	<definition name=".report.trans.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/transReport.js"/>
+    </definition>
+    
+    <definition name=".report.trans" extends="default.layout">
+    	<put-attribute name="title" value=".report.trans.title" />
+        <put-attribute name="body" value="/ftl/report/transReport.ftl" />
+    </definition>
+    
+    <definition name=".report.trans.table" template="/ftl/report/transTable.ftl" />    
+    
+    <!-- costRank report -->
+	<definition name=".report.costRank.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/costRankReport.js"/>
+    </definition>
+    
+    <definition name=".report.costRank" extends="default.layout">
+    	<put-attribute name="title" value=".report.costRank.title" />
+        <put-attribute name="body" value="/ftl/report/costRankReport.ftl" />
+    </definition>
+    
+    <definition name=".report.costRank.table" template="/ftl/report/costRankTable.ftl" />  
+    
+    <!-- costShortRank report -->
+	<definition name=".report.costShortRank.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/costShortRankReport.js"/>
+    </definition>
+    
+    <definition name=".report.costShortRank" extends="default.layout">
+    	<put-attribute name="title" value=".report.costShortRank.title" />
+        <put-attribute name="body" value="/ftl/report/costShortRankReport.ftl" />
+    </definition>
+    
+    <definition name=".report.costShortRank.table" template="/ftl/report/costShortRankTable.ftl" />  
+
+    <!-- keyword offer price report -->
+	<definition name=".report.keyword.offer.price.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/keyword_offer_price_report.js"/>
+    </definition>
+
+    <definition name=".report.keyword.offer.price" extends="default.layout">
+    	<put-attribute name="title" value=".report.keyword.offer.price.title" />
+        <put-attribute name="body" value="/ftl/report/keywordOfferPriceReport.ftl" />
+    </definition>
+
+    <!-- unreach budget report -->
+	<definition name=".report.unreach.budget.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/unreach_budget_report.js"/>
+    </definition>
+
+    <definition name=".report.unreach.budget" extends="default.layout">
+    	<put-attribute name="title" value=".report.unreach.budget.title" />
+        <put-attribute name="body" value=".report.unreach.budget.body" />
+    </definition>
+
+	<definition name=".report.unreach.budget.body" template="/ftl/report/unReachBudgetReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+
+    <!-- ad mobile os report -->
+	<definition name=".report.ad.os.title" extends="default.title" >
+       <put-attribute name="jsName" value="report/ad_os_report.js"/>
+    </definition>
+
+    <definition name=".report.ad.os" extends="default.layout">
+    	<put-attribute name="title" value=".report.ad.os.title" />
+        <put-attribute name="body" value="/ftl/report/adMobileOSReport.ftl" />
+    </definition>
+
+    <definition name=".report.ad.os.detail" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/adMobileOSDetailReport.ftl" />
+    </definition>
+    
+    <!-- check bill report -->
+    <definition name="check.bill.report" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/checkBillReport.ftl" />
+    </definition>
+
+	<!-- ad client report -->
+	<definition name=".ad.client.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_client_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.client.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.client.report.title" />
+        <put-attribute name="body" value=".ad.client.report.body" />
+    </definition>
+    
+    <definition name=".ad.client.report.body" template="/ftl/report/adClientReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+
+	<definition name=".ad.client.detal.report" template="/ftl/report/adClientDetalReport.ftl" >
+    </definition>
+    
+    <!-- video -->
+	<definition name=".ad.video.report.title" extends="default.title">		
+       	<put-attribute name="jsName" value="report/ad_video_report.js" />       
+    </definition>
+    
+    <definition name=".ad.video.report.body" template="/ftl/report/adVideoReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".ad.video.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.video.report.title" />
+        <put-attribute name="body" value=".ad.video.report.body" />
+    </definition>
+
+	<definition name=".ad.video.report.detail" template="/ftl/report/adVideoReportDetail.ftl">
+	</definition>
+
+	<!-- ad source report -->
+	<definition name=".ad.source.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_source_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.source.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.source.report.title" />
+        <put-attribute name="body" value=".ad.source.report.body" />
+    </definition>
+    
+    <definition name=".ad.source.report.body" template="/ftl/report/adSourceReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+
+	<definition name=".ad.source.detal.report" template="/ftl/report/adSourceDetalReport.ftl" >
+    </definition>
+
+	<!-- ad client count day report -->
+	<definition name=".ad.client.count.day.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_client_count_day_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.client.count.day.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.client.count.day.report.title" />
+        <put-attribute name="body" value=".ad.client.count.day.report.body" />
+    </definition>
+    
+    <definition name=".ad.client.count.day.report.body" template="/ftl/report/admClientCountDayReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+
+	<!-- ad source day report -->
+	<definition name=".ad.source.day.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_source_day_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.source.day.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.source.day.report.title" />
+        <put-attribute name="body" value=".ad.source.day.report.body" />
+    </definition>
+    
+    <definition name=".ad.source.day.report.body" template="/ftl/report/admAdSourceDayReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <!-- ad client count next day report -->
+	<definition name=".ad.client.count.next.day.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_client_count_next_30day_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.client.count.next.day.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.client.count.next.day.report.title" />
+        <put-attribute name="body" value="/ftl/report/admClientCountForNex30DayReport.ftl" />
+    </definition>
+    
+    <!-- ad portal bonus report -->
+	<definition name=".ad.portal.bonus.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_portal_bonus_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.portal.bonus.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.portal.bonus.report.title" />
+        <put-attribute name="body" value=".ad.portal.bonus.report.body" />
+    </definition>
+    
+    <definition name=".ad.portal.bonus.report.body" template="/ftl/report/admPortalBonusReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <!-- ad agesex report -->
+	<definition name=".ad.agesex.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_agesex_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.agesex.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.agesex.report.title" />
+        <put-attribute name="body" value=".ad.agesex.report.body" />
+    </definition>
+    
+    <definition name=".ad.agesex.report.body" template="/ftl/report/adAgesexReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <!-- pfp ad weektime report -->
+	<definition name=".ad.weektime.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/pfp_ad_weektime_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.weektime.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.weektime.report.title" />
+        <put-attribute name="body" value=".ad.weektime.report.body" />
+    </definition>
+    
+    <definition name=".ad.weektime.report.body" template="/ftl/report/pfpAdWeektimeReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <!-- ad website report -->
+	<definition name=".ad.website.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/ad_website_report.js"/>       
+    </definition>
+    
+    <definition name=".ad.website.report" extends="default.layout">
+    	<put-attribute name="title" value=".ad.website.report.title" />
+        <put-attribute name="body" value=".ad.website.report.body" />
+    </definition>
+    
+    <definition name=".ad.website.report.body" template="/ftl/report/adWebsiteReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".ad.website.detal.report" template="/ftl/report/adWebsiteDetalReport.ftl" >
+    </definition>
+</tiles-definitions>

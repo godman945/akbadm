@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 盈虧查詢 -->
+	<bean id="PfbInComeReportAjax"
+		class="com.pchome.akbadm.struts2.ajax.pfbx.report.pfbInComeReportAjax"
+		scope="prototype">
+		<property name="admBonusBillReportService" ref="AdmBonusBillReportService" />
+		<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+		<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+	</bean>
+
+
+	<!-- 分潤查詢 -->
+	<bean id="PfbBonusSetMaintainAjax"
+		class="com.pchome.akbadm.struts2.ajax.pfbx.bonus.PfbBonusSetMaintainAjax"
+		scope="prototype">
+		<property name="gson" ref="Gson" />
+		<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+		<property name="pfbxBonusSetSpecialService" ref="PfbxBonusSetSpecialService" />
+	</bean>
+
+
+	<!-- 累計收益 -->
+	<bean id="PfbBonusDetailMaintainAjax"
+		class="com.pchome.akbadm.struts2.ajax.pfbx.bonus.PfbBonusDetailMaintainAjax"
+		scope="prototype">
+		<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+	</bean>
+
+
+	<!-- 客戶請款單 -->
+	<bean id="PfbApplyBonusMaintainAjax"
+		class="com.pchome.akbadm.struts2.ajax.pfbx.bonus.PfbApplyBonusMaintainAjax"
+		scope="prototype">
+		<property name="pfbxBonusApplyService" ref="PfbxBonusApplyService" />
+		<property name="checkStatusFactory" ref="CheckStatusFactory" />
+		<property name="applyOrderProcess" ref="ApplyOrderProcess" />
+		<property name="pfbBonusApplyOrderProcessJob" ref="PfbBonusApplyOrderProcessJob" />
+	</bean>
+	
+	<!-- 版位定價查詢 -->
+	<bean id="PfbPositionPriceReportAjax"
+		class="com.pchome.akbadm.struts2.ajax.pfbx.report.PfbPositionPriceReportAjax"
+		scope="prototype">
+		<property name="pfbPositionPriceReportService" ref="PfbPositionPriceReportService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+	</bean>
+</beans>

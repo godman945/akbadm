@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+    <!-- default layout template -->
+    <definition name="default.layout" template="/ftl/default/layout.ftl">
+        <put-attribute name="title" value="default.title" />
+        <put-attribute name="header" value="default.header" />
+        <put-attribute name="left" value="default.left" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+
+    <definition name="default.layout2" template="/ftl/default/layout2.ftl">
+        <put-attribute name="title" value="default.title" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+
+    <definition name="default.layout3" template="/ftl/default/layout3.ftl">
+        <put-attribute name="title" value="default.title" />
+        <put-attribute name="header" value="default.header" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+
+    <definition name="default.layout4" template="/ftl/default/layout4.ftl">
+    	<put-attribute name="head" value="default.head" />
+        <put-attribute name="header" value="default.header" />
+        <put-attribute name="left" value="default.left" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+
+	<!-- 原本 default.layout5 , 改名給 bonus.invoice 使用 -->
+    <definition name="default.bonus.invoice.layout" template="/ftl/default/layout.bonus.invoice.ftl">
+    	<put-attribute name="head" value="default.head" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+
+    <definition name="default.title" template="/ftl/default/title.ftl">
+        <put-attribute name="cssName" value="empty.css"/>
+        <put-attribute name="jsName" value="empty.js"/>
+    </definition>
+
+    <definition name="default.header" template="/ftl/default/header.ftl"/>
+    <definition name="default.left" template="/ftl/default/left.ftl"/>
+    <definition name="default.body" template="/ftl/default/body.ftl"/>
+
+    <definition name="default.head" template="/ftl/default/head.ftl" >
+    	<put-attribute name="css" value="" />
+        <put-attribute name="js" value="" />
+    </definition>  
+
+    <definition name=".default.message" extends="default.layout">
+        <put-attribute name="body" value="default.message" />
+    </definition>
+    <definition name="default.message" template="/ftl/default/message.ftl"/>
+    
+    <definition name="default.page" template="/ftl/default/page.ftl" />
+    
+    <definition name="default.page2" template="/ftl/default/page2.ftl" />   
+    
+    <!-- ALL errors -->
+    <definition name=".error.global" extends="default.layout">
+        <put-attribute name="body" value="/ftl/error/error.ftl" />
+    </definition>
+
+    <definition name=".error.pageNotFound" extends="default.layout3">
+        <put-attribute name="body" value="/ftl/error/pageNotFound.ftl" />
+    </definition>
+
+</tiles-definitions>

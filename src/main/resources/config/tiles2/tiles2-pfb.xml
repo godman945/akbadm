@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- 網址篩選 -->
+	<definition name="pfbAdUrl.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/adurl/adurl.js"/>       
+    </definition>
+    <definition name=".pfbAdUrlList" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfbAdUrl.title" />
+    	<put-attribute name="body" value="/ftl/pfb/adurl/adUrlList.ftl" />
+    </definition>
+    <definition name=".pfbErrUrlDetail" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfbAdUrl.title" />
+    	<put-attribute name="body" value="/ftl/pfb/adurl/errUrlDetail.ftl" />
+    </definition>
+    <definition name=".pfbBlockUrlDetail" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfbAdUrl.title" />
+    	<put-attribute name="body" value="/ftl/pfb/adurl/blockUrlDetail.ftl" />
+    </definition>
+	<!-- 網址篩選 end -->
+
+	<!-- 盈虧查詢 -->
+	<definition name="pfb.income.report.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.income.report.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/report/income.view.body.body.ftl" />
+    </definition>
+    <definition name="pfb.income.report.view.detail" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.income.report.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/report/income.view.body.detail.ftl" />
+    </definition>
+    <definition name="pfb.income.report.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/report/income.view.js"/>
+    </definition>
+    <definition name="pfb.income.report.view.table" template="/ftl/pfb/report/income.view.body.table.ftl" />
+    <definition name="pfb.income.report.view.table.pfpdetail" template="/ftl/pfb/report/income.view.body.table.PFPDetail.ftl" />
+    <definition name="pfb.income.report.view.table.pfddetail" template="/ftl/pfb/report/income.view.body.table.PFDDetail.ftl" />
+    <definition name="pfb.income.report.view.table.pfbdetail" template="/ftl/pfb/report/income.view.body.table.PFBDetail.ftl" />
+    <!-- 盈虧查詢 end -->
+
+	<!-- 分潤設定 -->
+	<definition name="pfb.bonus.set.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.set.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/set.view.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.bonus.set.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/set.view.js"/>       
+    </definition>
+    
+    <definition name="pfb.bonus.set.table" template="/ftl/pfb/bonus/set.table.body.ftl" />
+	
+	<definition name="pfb.bonus.set.edit" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.set.edit.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/set.edit.body.ftl" />
+    </definition>
+    
+    <definition name="pfb.bonus.set.edit.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/set.edit.js"/>       
+    </definition>
+    
+    <!-- 累計收益 -->
+	<definition name="pfb.bonus.detail.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.detail.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/detail.view.body.ftl" />
+    </definition>
+    
+    <definition name="pfb.bonus.detail.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/detail.view.js"/>       
+    </definition>
+    
+    <definition name="pfb.bonus.detail.table" template="/ftl/pfb/bonus/detail.table.body.ftl" /> 
+    
+    <definition name="pfb.bonus.trans.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.trans.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/trans.view.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.bonus.trans.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/trans.view.js"/>       
+    </definition>
+    
+    <!-- 結帳單 -->
+    <definition name="pfb.bonus.bill.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.bill.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/bill.view.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.bonus.bill.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/bill.view.js"/>       
+    </definition>
+  	
+  	<!-- 請款單 -->
+    <definition name="pfb.apply.bonus.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.apply.bonus.view.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/apply.view.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.apply.bonus.view.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/apply.view.js"/>       
+    </definition>
+    
+    <definition name="pfb.apply.bonus.table" template="/ftl/pfb/bonus/apply.table.body.ftl" />
+    
+    <definition name="pfb.apply.check.view" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.apply.check.title" />
+   		<put-attribute name="body" value="/ftl/pfb/bonus/check.view.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.apply.check.title" extends="default.angularJs.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/check.view.js"/>       
+    </definition>
+    <!-- 聯播網公告管理 -->
+   	<definition name=".pfb.board.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/board/board.js"/>
+    </definition>
+    
+    <definition name=".pfb.board.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.board.title" />
+        <put-attribute name="body" value="/ftl/pfb/board/boardList.ftl" />
+    </definition>
+
+    <definition name=".pfb.board.add" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.board.title" />
+        <put-attribute name="body" value="/ftl/pfb/board/boardAdd.ftl" />
+    </definition>
+
+    <definition name=".pfb.board.update" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.board.title" />
+        <put-attribute name="body" value="/ftl/pfb/board/boardModify.ftl" />
+    </definition>
+    
+   
+
+	<definition name=".pfb.account.title" extends="default.title" >
+       <put-attribute name="jsName" value="pfb/account/account.js"/>
+    </definition>
+
+    <definition name=".pfb.account.list" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.account.title" />
+        <put-attribute name="body" value="/ftl/pfb/account/accountList.ftl" />
+    </definition>
+
+    <definition name=".pfb.account.update" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.account.title" />
+        <put-attribute name="body" value="/ftl/pfb/account/accountUpdate.ftl" />
+    </definition>
+    
+    <!-- 撥放權限     -->
+    <definition name="blacklistManager" extends="default.layout">
+       <put-attribute name="title" value="/ftl/pfb/play/blacklistManagerTitle.ftl" />
+       <put-attribute name="body" value="/ftl/pfb/play/blacklistManagerBody.ftl" />
+    </definition>
+    <!-- 撥放權限 end -->  
+    
+     <!-- report -->
+    <definition name=".pfb.customer.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/url_customer_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.customer.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.customer.report.title" />
+        <put-attribute name="body" value="/ftl/pfb/report/pfbCustomerReport.ftl" />
+    </definition>
+    
+    <definition name=".pfb.time.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_time_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.time.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.time.report.title" />
+        <put-attribute name="body" value=".pfb.time.report.body" />
+    </definition>
+    
+    <definition name=".pfb.time.report.body" template="/ftl/pfb/report/adTimeReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".pfb.unit.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_unit_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.unit.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.unit.report.title" />
+        <put-attribute name="body" value="/ftl/pfb/report/adUnitReport.ftl" />
+    </definition>
+    
+    <definition name=".pfb.size.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_size_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.size.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.size.report.title" />
+        <put-attribute name="body" value=".pfb.size.report.body" />
+    </definition>
+    
+    <definition name=".pfb.size.report.body" template="/ftl/pfb/report/adSizeReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".pfb.size.report.chart" template="/ftl/pfb/report/adSizeReportClickChart.ftl" >
+    </definition>
+    
+    <definition name=".pfb.style.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_style_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.style.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.style.report.title" />
+        <put-attribute name="body" value=".pfb.style.report.body" />
+    </definition>
+    
+    <definition name=".pfb.style.report.body" template="/ftl/pfb/report/adStyleReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".pfb.url.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_url_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.url.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.url.report.title" />
+        <put-attribute name="body" value=".pfb.url.report.body" />
+    </definition>
+    
+    <definition name=".pfb.url.report.body" template="/ftl/pfb/report/adUrlReport.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".pfb.url.detal.report" template="/ftl/pfb/report/adUrlDetalReport.ftl" >
+    </definition>
+    
+    
+    <definition name=".pfb.adCustomer.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/ad_customer_report.js"/>       
+    </definition>
+    
+    <definition name=".pfb.adCustomer.report" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.adCustomer.report.title" />
+        <put-attribute name="body" value="/ftl/pfb/report/adCustomerReport.ftl" />
+    </definition>
+
+	<!-- 優惠方案 -->
+	<definition name="pfb.bonus.set.special.add" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.set.special.add.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/special.add.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.bonus.set.special.add.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/special.add.js"/>       
+    </definition>
+    
+    <definition name="pfb.bonus.set.special.edit" extends="default.angularJs.layout">
+		<put-attribute name="title" value="pfb.bonus.set.special.edit.title" />
+    	<put-attribute name="body" value="/ftl/pfb/bonus/special.edit.body.ftl" />
+    </definition>
+        
+	<definition name="pfb.bonus.set.special.edit.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/bonus/special.edit.js"/>       
+    </definition>
+    
+	<!-- 優惠方案 end --> 
+	
+	<!-- PFB 流量檢測 -->
+	<definition name=".pfb.invalid.click.query.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/invalidclick/pfb_invalid_click_query.js"/>       
+    </definition>
+    
+    <definition name=".pfb.invalid.click.query" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.invalid.click.query.title" />
+        <put-attribute name="body" value=".pfb.invalid.click.query.body" />
+    </definition>
+    
+    <definition name=".pfb.invalid.click.query.body" template="/ftl/pfb/invalidclick/invalid.click.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+	<!-- PFB 流量檢測 end --> 
+	
+	<!-- PFB 無效流量 -->
+	<definition name=".pfb.invalid.traffic.query.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/invalidclick/pfb_invalid_traffic.js"/>       
+    </definition>
+    
+    <definition name=".pfb.invalid.traffic.query" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.invalid.traffic.query.title" />
+        <put-attribute name="body" value=".pfb.invalid.traffic.query.body" />
+    </definition>
+    
+    <definition name=".pfb.invalid.traffic.query.body" template="/ftl/pfb/invalidclick/invalid.traffic.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+    
+    <definition name=".pfb.invalid.traffic.detail" template="/ftl/pfb/invalidclick/invalid.traffic.detail.ftl" >
+    </definition>
+	<!-- PFB 無效檢測 end -->
+	
+	<!-- PFB 惡意點擊查詢 -->
+	<definition name=".pfb.malice.check.query.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/invalidclick/pfb_malice_check_query.js"/>       
+    </definition>
+    
+    <definition name=".pfb.malice.check.query" extends="default.layout">
+    	<put-attribute name="title" value=".pfb.malice.check.query.title" />
+        <put-attribute name="body" value=".pfb.malice.check.query.body" />
+    </definition>
+    
+    <definition name=".pfb.malice.check.query.body" template="/ftl/pfb/invalidclick/malice.check.ftl">
+        <put-attribute name="page" value="default.page2" />
+    </definition>
+	<!-- PFB 惡意點擊查詢 end --> 
+	
+	<!-- PFB 網站分類設定 -->
+	<definition name="pfb.website.category.view.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/website/website.category.view.js"/>       
+    </definition>
+    
+    <definition name=".pfb.website.category.view" extends="default.layout">
+    	<put-attribute name="title" value="pfb.website.category.view.title" />
+        <put-attribute name="body" value="pfb.website.category.view.body" />
+    </definition>
+    
+    <definition name="pfb.website.category.view.body" template="/ftl/pfb/website/website.category.view.body.ftl">  	 	
+    </definition>
+    
+    <definition name=".pfb.website.category.table" template="/ftl/pfb/website/website.category.table.list.ftl" >  	
+    </definition>
+    <!-- PFB 網站分類設定 end -->
+    
+    <!-- PFB 版位定價查詢修改功能 -->
+    <definition name=".pfb.Position.Price.Query" extends="default.layout">
+    	<put-attribute name="title" value="pfb.Position.Price.Query.title"/>
+        <put-attribute name="body" value="/ftl/pfb/report/pfbPositionPriceReport.ftl"/>
+    </definition>
+    
+    <definition name="pfb.Position.Price.Query.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="pfb/report/position_price_report.js?t=20171016001"/>       
+    </definition>
+    <!-- PFB 版位定價查詢修改功能 end -->
+</tiles-definitions>

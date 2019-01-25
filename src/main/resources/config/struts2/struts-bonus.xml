@@ -1,0 +1,95 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-bonus" extends="struts-base">
+    
+    	<action name="bonusSetList" class="BonusItemSetAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.set.list</result>
+        </action>
+        
+        
+        
+        <action name="fixedBonusSet" class="FixedBonusItemSetAction" method="fixedBonusSetAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.fixed.set.view</result>
+        </action>
+        
+        <action name="updateFixedBonusSet" class="FixedBonusItemSetAction" method="updateFixedBonusSetAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">bonusSetList</result>
+        </action>
+        
+        <action name="caseBonusSet" class="CaseBonusItemSetAction" method="caseBonusSetAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.case.set.view</result>
+        </action>
+        
+        <action name="updateCaseBonusSet" class="CaseBonusItemSetAction" method="updateCaseBonusSetAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">bonusSetList</result>
+        </action>
+        
+        <action name="bonusInvoiceList" class="BonusInvoiceAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.invoice.list</result>
+        </action>
+        
+        <action name="searchBonusInvoice" class="BonusInvoiceAjax" method="searchBonusInvoiceAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.invoice.table</result>
+        </action>
+        
+        <action name="modifyBonusInvoice" class="BonusInvoiceAjax" method="modifyBonusInvoiceAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bonus.invoice.modify.view</result>
+        </action>
+        
+        <action name="updateBonusInvoice" class="BonusInvoiceAjax" method="updateBonusInvoiceAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <!-- <result type="redirectAction" name="success">bonusInvoiceList</result> -->
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>  
+        </action>
+        
+        <action name="updateBalanceInvoice" class="BonusInvoiceAjax" method="updateBalanceInvoiceAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>  
+        </action> 
+        
+        <!-- 請款明細表下載 -->
+        <action name="downloadBonusBill" class="BonusBillAction" method="downloadBonusBillAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+     		<result name="success" type="stream">   
+             	<param name="contentType">application/octet-stream</param>   
+             	<param name="contentDisposition">   
+                    attachment;filename="${downloadFileName}"  
+                </param>   
+                <param name="inputName">downloadFileStream</param> 
+            </result>
+        </action>
+       
+       <action name="balanceInvoiceReport" class="BalanceInvoiceAction" method="balanceInvoiceReportAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">balance.invoice.report.view</result>  
+        </action>
+        
+       	<!-- 沖帳報表下載 -->
+        <action name="donwnloadBalanceReport" class="BalanceInvoiceAction" method="donwnloadBalanceReportAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+     		<result name="success" type="stream">   
+             	<param name="contentType">application/octet-stream</param>   
+             	<param name="contentDisposition">   
+                    attachment;filename="${downloadFileName}"  
+                </param>   
+                <param name="inputName">downloadFileStream</param> 
+            </result>
+        </action>
+    </package>
+</struts>

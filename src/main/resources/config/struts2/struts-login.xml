@@ -1,0 +1,17 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-login" namespace="/" extends="struts-base">
+
+        <action name="login" class="LoginAction" method="execute">
+            <result type="tiles" name="success">.login</result>
+        </action>
+
+        <action name="loginCheck" class="LoginAction" method="loginCheck">
+        	<result type="tiles" name="input">.login</result>
+            <result type="redirectAction" name="success">index</result>
+        </action>
+
+    </package>
+</struts>

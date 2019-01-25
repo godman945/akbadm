@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<!-- SSHProcess -->
+	<bean id="Kwstg1SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kwstg1.host}" />
+        <property name="port" value="${kwstg1.port}" />
+        <property name="username" value="${kwstg1.username}" />
+        <property name="password" value="${kwstg1.password}" />
+    </bean>
+	
+    <bean id="Kdcl1SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl1.host}" />
+        <property name="port" value="${kdcl1.port}" />
+        <property name="username" value="${kdcl1.username}" />
+        <property name="password" value="${kdcl1.password}" />
+    </bean>
+    
+    <bean id="Kdcl2SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl2.host}" />
+        <property name="port" value="${kdcl2.port}" />
+        <property name="username" value="${kdcl2.username}" />
+        <property name="password" value="${kdcl2.password}" />
+    </bean>
+    
+    <bean id="Kdcl3SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl3.host}" />
+        <property name="port" value="${kdcl3.port}" />
+        <property name="username" value="${kdcl3.username}" />
+        <property name="password" value="${kdcl3.password}" />
+    </bean>
+    
+    <bean id="Kdcl4SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl4.host}" />
+        <property name="port" value="${kdcl4.port}" />
+        <property name="username" value="${kdcl4.username}" />
+        <property name="password" value="${kdcl4.password}" />
+    </bean>
+    
+    <bean id="Kdcl5SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl5.host}" />
+        <property name="port" value="${kdcl5.port}" />
+        <property name="username" value="${kdcl5.username}" />
+        <property name="password" value="${kdcl5.password}" />
+    </bean>
+    
+    <bean id="Kdcl6SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl6.host}" />
+        <property name="port" value="${kdcl6.port}" />
+        <property name="username" value="${kdcl6.username}" />
+        <property name="password" value="${kdcl6.password}" />
+    </bean>
+    
+    <bean id="Kdcl7SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl7.host}" />
+        <property name="port" value="${kdcl7.port}" />
+        <property name="username" value="${kdcl7.username}" />
+        <property name="password" value="${kdcl7.password}" />
+    </bean>
+    
+    <bean id="SpringECcoderUtil" class="com.pchome.soft.util.SpringECcoderUtil" />
+    
+    <bean id="PdfUtil" class="com.pchome.soft.depot.utils.PdfUtil" />
+
+    <bean id="PfbxBoardUtils" class="com.pchome.akbadm.utils.PfbxBoardUtils" >
+        <property name="pfbxBoardService" ref="PfbxBoardService" />
+    </bean>
+
+	<bean id="Gson" class="com.google.gson.Gson" />
+	
+</beans>

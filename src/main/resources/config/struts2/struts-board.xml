@@ -1,0 +1,37 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-board" extends="struts-base">
+        <action name="board" class="BoardAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.board.list</result>
+        </action>
+        
+        <action name="boardAdd" class="BoardAction" method="boardAddAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.board.add</result>
+        </action>
+        
+        <action name="boardSave" class="BoardAction" method="boardSaveAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">board</result>
+        </action>
+        
+        <action name="boardModify" class="BoardAction" method="boardModifyAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.board.modify</result>
+        </action>
+        
+        <action name="boardUpdate" class="BoardAction" method="boardUpdateAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">board</result>
+        </action>
+        
+        <action name="boardDelete" class="BoardAction" method="boardDeleteAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">board</result>
+        </action>
+        
+    </package>
+</struts>

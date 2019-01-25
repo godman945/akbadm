@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+<!-- ========== illegal key word ========== -->
+    <definition name=".illegal.keyword.list" extends="default.layout">
+    	<put-attribute name="title" value=".illegal.keyword.list.title" />
+        <put-attribute name="body" value=".illegal.keyword.list.body" />
+    </definition>
+
+	<definition name=".illegal.keyword.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="check/illegal_keyword.js"/>
+    </definition>
+
+    <definition name=".illegal.keyword.list.body" template="/ftl/check/illegalKeyword.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+<!-- ========== ad check ========== -->
+    <definition name=".ad.check.list" extends="default.layout">
+    	<put-attribute name="title" value=".ad.check.list.title" />
+        <put-attribute name="body" value=".ad.check.list.body" />
+    </definition>
+
+	<definition name=".ad.check.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="check/ad_check.js"/>
+    </definition>
+
+    <definition name=".ad.check.list.body" template="/ftl/check/adCheck.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+<!-- ========== apply for business check ========== -->
+    <definition name=".apply.for.business.check.list" extends="default.layout">
+    	<put-attribute name="title" value=".apply.for.business.check.list.title" />
+        <put-attribute name="body" value=".apply.for.business.check.list.body" />
+    </definition>
+
+	<definition name=".apply.for.business.check.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="check/apply_for_business_check.js"/>
+    </definition>
+
+    <definition name=".apply.for.business.check.list.body" template="/ftl/check/applyForBusinessCheck.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+</tiles-definitions>

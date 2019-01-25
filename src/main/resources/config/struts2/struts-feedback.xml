@@ -1,0 +1,34 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-feedback" extends="struts-base">
+             
+        <action name="feedbackRecord" class="FeedbackRecordAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">feedback.record.view</result>
+        </action>
+
+		<action name="searchFeedbackRecord" class="FeedbackRecordAjax" method="searchFeedbackRecordAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">feedback.record.table</result>
+        </action>
+
+		<action name="feedbackRecordAdd" class="FeedbackRecordAction" method="feedbackRecordAddAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">feedback.record.add</result>
+        </action>
+        
+        <action name="feedbackRecordCreate" class="FeedbackRecordAction" method="feedbackRecordCreateAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">feedbackRecord</result>
+            <result type="tiles" name="input">feedback.record.add</result>
+        </action>
+        
+        <action name="feedbackRecordDelete" class="FeedbackRecordAjax" method="feedbackRecordDeleteAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">feedback.record.table</result>
+        </action>
+        
+    </package>
+</struts>

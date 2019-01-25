@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+          
+    <!-- API -->
+    <bean id="APIProvider" class="com.pchome.rmi.api.APIProviderImp">
+       <property name="adFactory" ref="AdFactory" />
+    </bean>
+          
+    <!-- board -->
+    <bean id="BoardProvider" class="com.pchome.rmi.board.BoardProviderImp">
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfbBoardService" ref="PfbxBoardService" />
+    </bean>
+       
+    <!-- mailbox -->
+    <bean id="MailboxProvider" class="com.pchome.rmi.mailbox.MailboxProviderImp">
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+    </bean>
+       
+    <!-- Accesslog -->
+    <bean id="AccesslogProvider" class="com.pchome.rmi.accesslog.AccesslogProviderImp">
+        <property name="admAccesslogService" ref="AdmAccesslogService" />
+    </bean>
+
+    <!-- sequence -->
+    <bean id="SequenceProvider" class="com.pchome.rmi.sequence.SequenceProviderImp">
+        <property name="sequenceService" ref="SequenceService" />
+    </bean>
+    
+    <!-- pfp account list -->
+    <bean id="PfpProvider" class="com.pchome.rmi.manager.PfpProviderImp">
+        <property name="admManagerDetailService" ref="AdmManagerDetailService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" /> 
+        <property name="portalIp" value="${portal.ip}}" />        
+    </bean>
+    
+    <!-- pfd account list -->
+    <bean id="PfdProvider" class="com.pchome.rmi.manager.PfdProviderImp">
+        <property name="admManagerDetailService" ref="AdmManagerDetailService" />
+        <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />  
+        <property name="portalIp" value="${portal.ip}}" />     
+        <property name="pfdAdActionReportService" ref="PfdAdActionReportService" />  
+    </bean>
+
+    <!-- pfb account list -->
+    <bean id="PfbProvider" class="com.pchome.rmi.manager.PfbProviderImp">
+        <property name="admManagerDetailService" ref="AdmManagerDetailService" />
+        <property name="pfbCustomerInfoService" ref="PfbCustomerInfoService" />
+        <property name="portalIp" value="${portal.ip}}" />        
+    </bean>
+    
+    <!-- pfb bonus -->
+    <bean id="PfbBonusProvider" class="com.pchome.rmi.bonus.PfbBonusProviderImp">
+        <property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />      
+        <property name="pfbxBonusSetService" ref="PfbxBonusSetService" />          
+    </bean>
+
+	<!-- pfd bonus -->
+    <bean id="PfdBonusProvider" class="com.pchome.rmi.bonus.PfdBonusProvider">
+        <property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+        <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+        <property name="pfdAccountService" ref="PfdAccountService" />
+    </bean>
+    
+    
+    <!-- pfd apply order process-->
+    <bean id="PfbBonusApplyOrderProcessProviderImp" class="com.pchome.rmi.bonus.PfbBonusApplyOrderProcessProviderImp">
+        <property name="applyOrderProcess" ref="ApplyOrderProcess" />
+        <property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+        <property name="accesslogService" ref="AdmAccesslogService" />
+    </bean>
+    
+    
+</beans>
+

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".department.title" extends="default.title" >
+       <put-attribute name="jsName" value="department/department.js"/>
+    </definition>
+
+    <definition name=".department.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".department.title" />
+        <put-attribute name="body" value="/ftl/department/departmentMaintain.ftl" />
+    </definition>
+
+    <definition name=".department.add" extends="default.layout">
+    	<put-attribute name="title" value=".department.title" />
+        <put-attribute name="body" value="/ftl/department/departmentAdd.ftl" />
+    </definition>
+
+    <definition name=".department.update" extends="default.layout">
+    	<put-attribute name="title" value=".department.title" />
+        <put-attribute name="body" value="/ftl/department/departmentUpdate.ftl" />
+    </definition>
+
+</tiles-definitions>

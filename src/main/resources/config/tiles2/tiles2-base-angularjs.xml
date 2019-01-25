@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<!-- default layout template for angularJs -->
+    <definition name="default.angularJs.layout" template="/ftl/default/angularJs/layout.ftl">
+        <put-attribute name="title" value="default.angularJs.title" />
+        <put-attribute name="header" value="default.angularJs.header" />
+        <put-attribute name="left" value="default.angularJs.left" />
+        <put-attribute name="body" value="default.angularJs.body" />
+    </definition>
+    
+    <definition name="default.angularJs.layout2" template="/ftl/default/angularJs/layout2.ftl">
+        <put-attribute name="title" value="default.angularJs.title" />
+        <put-attribute name="body" value="default.angularJs.body" />
+    </definition>
+    
+    <definition name="default.angularJs.title" template="/ftl/default/angularJs/title.ftl">
+        <put-attribute name="cssName" value="empty.css"/>
+        <put-attribute name="jsName" value="empty.js"/>
+    </definition>
+
+    <definition name="default.angularJs.header" template="/ftl/default/angularJs/header.ftl"/>
+    <definition name="default.angularJs.left" template="/ftl/default/angularJs/left.ftl"/>
+    <definition name="default.angularJs.body" template="/ftl/default/angularJs/body.ftl"/>
+        
+</tiles-definitions>

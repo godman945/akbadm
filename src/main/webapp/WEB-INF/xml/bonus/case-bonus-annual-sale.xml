@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<case-bonus-annual-sale>
+
+	<group id="1">
+		<level id="1">
+			<title>第一段</title>
+			<min>0</min>
+			<max>100000</max>
+			<discount>0.1</discount>
+		</level>
+		<level id="2">
+			<title>第二段</title>
+			<min>100001</min>
+			<max>200000</max>
+			<discount>0.12</discount>
+		</level>
+		<level id="3">
+			<title>第三段</title>
+			<min>200001</min>
+			<max>300000</max>
+			<discount>0.14</discount>
+		</level>
+		<level id="4">
+			<title>第四段</title>
+			<min>300001</min>
+			<max>400000</max>
+			<discount>0.16</discount>
+		</level>
+		<level id="5">
+			<title>第五段</title>
+			<min>400001</min>
+			<max>500000</max>
+			<discount>0.18</discount>
+		</level>
+		<level id="6">
+			<title>第六段</title>
+			<min>500001</min>
+			<max>99999999</max>
+			<discount>0.2</discount>
+		</level>
+	</group>
+	
+	<group id="2">
+		<level id="1">
+			<title>測試第一段</title>
+			<min>0</min>
+			<max>200000</max>
+			<discount>0.14</discount>
+		</level>
+		<level id="2">
+			<title>測試第二段</title>
+			<min>200001</min>
+			<max>400000</max>
+			<discount>0.16</discount>
+		</level>
+		<level id="3">
+			<title>測試第三段</title>
+			<min>400001</min>
+			<max>600000</max>
+			<discount>0.18</discount>
+		</level>
+		<level id="4">
+			<title>測試第四段</title>
+			<min>600001</min>
+			<max>99999999</max>
+			<discount>0.2</discount>
+		</level>
+		
+	</group>
+</case-bonus-annual-sale>

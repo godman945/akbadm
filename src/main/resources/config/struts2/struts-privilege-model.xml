@@ -1,0 +1,44 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-privilege-model" namespace="/" extends="struts-base">
+
+        <action name="privilegeModelMaintain" class="PrivilegeModelAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.privilege.maintain</result>
+        </action>
+
+        <action name="privilegeModelDetail" class="PrivilegeModelAction" method="detail">
+            <result type="tiles" name="success">.privilege.detail</result>
+        </action>
+
+        <action name="privilegeModelAdd" class="PrivilegeModelAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.privilege.add</result>
+        </action>
+
+        <action name="doPrivilegeModelAdd" class="PrivilegeModelAction" method="doAdd">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">privilegeModelMaintain</result>
+            <result type="tiles" name="input">.privilege.add</result>
+        </action>
+
+        <action name="privilegeModelUpdate" class="PrivilegeModelAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.privilege.update</result>
+        </action>
+
+        <action name="doPrivilegeModelUpdate" class="PrivilegeModelAction" method="doUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">privilegeModelMaintain</result>
+            <result type="tiles" name="input">.privilege.update</result>
+        </action>
+
+        <action name="doPrivileModelgeDelete" class="PrivilegeModelAction" method="doDelete">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">privilegeModelMaintain</result>
+        </action>
+
+    </package>
+</struts>

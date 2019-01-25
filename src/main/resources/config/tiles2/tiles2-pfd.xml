@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".pfd.account.title" extends="default.title" >
+       <put-attribute name="jsName" value="pfd/account/account.js"/>
+    </definition>
+
+    <definition name=".pfd.account.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.account.title" />
+        <put-attribute name="body" value="/ftl/pfd/account/accountMaintain.ftl" />
+    </definition>
+
+    <definition name=".pfd.account.add" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.account.title" />
+        <put-attribute name="body" value="/ftl/pfd/account/accountAdd.ftl" />
+    </definition>
+
+    <definition name=".pfd.account.update" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.account.title" />
+        <put-attribute name="body" value="/ftl/pfd/account/accountUpdate.ftl" />
+    </definition>
+
+    <definition name=".enterprise" extends="default.layout">
+        <put-attribute name="body" value="/ftl/enterprise/enterprise.ftl" />
+    </definition>
+
+	<definition name=".pfd.board.title" extends="default.title" >
+       <put-attribute name="jsName" value="pfd/board/board.js"/>
+    </definition>
+
+    <definition name=".pfd.board.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.board.title" />
+        <put-attribute name="body" value="/ftl/pfd/board/boardList.ftl" />
+    </definition>
+
+    <definition name=".pfd.board.add" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.board.title" />
+        <put-attribute name="body" value="/ftl/pfd/board/boardAdd.ftl" />
+    </definition>
+
+    <definition name=".pfd.board.update" extends="default.layout">
+    	<put-attribute name="title" value=".pfd.board.title" />
+        <put-attribute name="body" value="/ftl/pfd/board/boardModify.ftl" />
+    </definition>
+
+
+
+</tiles-definitions>

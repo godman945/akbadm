@@ -1,0 +1,92 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-pfd" namespace="/" extends="struts-base">
+
+        <action name="pfdAccountMaintain" class="PfdAccountAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.account.maintain</result>
+        </action>
+
+        <action name="pfdAccountAdd" class="PfdAccountAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.account.add</result>
+        </action>
+
+        <action name="doPfdAccountAdd" class="PfdAccountAction" method="doAdd">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">pfdAccountMaintain</result>
+            <result type="tiles" name="input">.pfd.account.add</result>
+        </action>
+
+        <action name="pfdAccountUpdate" class="PfdAccountAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.account.update</result>
+        </action>
+
+        <action name="doPfdAccountUpdate" class="PfdAccountAction" method="doUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">pfdAccountMaintain</result>
+            <result type="tiles" name="input">.pfd.account.update</result>
+        </action>
+
+		<action name="reSendPfdAccountEmail" class="PfdAccountAction" method="reSend">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+		</action>
+
+        <action name="enterprise" class="EnterpriseAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.enterprise</result>
+        </action>
+
+        <action name="uploadEnterprise" class="EnterpriseAction" method="upload">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.enterprise</result>
+            <result type="tiles" name="input">.enterprise</result>
+        </action>
+
+        <action name="pfdBoardMaintain" class="PfdBoardAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.board.maintain</result>
+        </action>
+
+        <action name="pfdBoardAdd" class="PfdBoardAction" method="add">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.board.add</result>
+        </action>
+
+        <action name="doPfdBoardAdd" class="PfdBoardAction" method="doAdd">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">pfdBoardMaintain</result>
+            <result type="tiles" name="input">.pfd.board.add</result>
+        </action>
+
+        <action name="pfdBoardUpdate" class="PfdBoardAction" method="update">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.pfd.board.update</result>
+        </action>
+
+        <action name="doPfdBoardUpdate" class="PfdBoardAction" method="doUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">pfdBoardMaintain</result>
+            <result type="tiles" name="input">.pfd.board.update</result>
+        </action>
+
+        <action name="doPfdBoardDelete" class="PfdBoardAction" method="doDelete">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">pfdBoardMaintain</result>
+        </action>
+
+        <action name="findPfdUserIdAjax" class="PfdBoardAction" method="findPfdUserIdAjax">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+
+    </package>
+</struts>

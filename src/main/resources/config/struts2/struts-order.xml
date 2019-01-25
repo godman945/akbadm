@@ -1,0 +1,51 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-order" extends="struts-base">
+        <action name="orderList" class="OrderAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.order.list</result>
+        </action>
+        
+        <action name="orderQuery" class="OrderAjax" method="orderQueryAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.order.trans.table</result>
+        </action>
+        
+        
+        <!-- ========== AdvanceOrderRefundRelease ========== -->
+        <action name="advanceOrderRefundRelease" class="AdvanceOrderRefundReleaseAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="tiles" name="success">.advance.order.refund.release.list</result>
+        </action>
+        
+        <action name="doAdvanceOrderRefundQuery" class="AdvanceOrderRefundReleaseAction" method="doQuery">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.advance.order.refund.release.list</result>
+        </action>
+        
+        <action name="doAdvanceOrderRefundApprove" class="AdvanceOrderRefundReleaseAction" method="doApprove">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doAdvanceOrderRefundQuery</param>
+                <param name="taxId">${taxId}</param>
+                <param name="startDate">${startDate}</param>
+                <param name="endDate">${endDate}</param>
+            </result>
+            <result type="tiles" name="input">.advance.order.refund.release.list</result>
+        </action>
+        
+        <action name="doAdvanceOrderRefundReject" class="AdvanceOrderRefundReleaseAction" method="doReject">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">doAdvanceOrderRefundQuery</param>
+                <param name="taxId">${taxId}</param>
+                <param name="startDate">${startDate}</param>
+                <param name="endDate">${endDate}</param>
+            </result>
+            <result type="tiles" name="input">.advance.order.refund.release.list</result>
+        </action>
+        
+    </package>
+</struts>

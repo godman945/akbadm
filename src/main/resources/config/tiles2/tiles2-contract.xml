@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+<!-- ========== contract list ========== -->
+    <definition name=".contract.list" extends="default.layout">
+    	<put-attribute name="title" value=".contract.list.title" />
+        <put-attribute name="body" value=".contract.list.body" />
+    </definition>
+
+	<definition name=".contract.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="contract/contract_list.js"/>
+    </definition>
+
+    <definition name=".contract.list.body" template="/ftl/contract/contractList.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+<!-- ========== contract add ========== -->
+    <definition name=".contract.add" extends="default.layout">
+    	<put-attribute name="title" value=".contract.add.title" />
+        <put-attribute name="body" value=".contract.add.body" />
+    </definition>
+
+	<definition name=".contract.add.title" extends="default.title" >
+       <put-attribute name="jsName" value="contract/contract_add.js"/>
+    </definition>
+
+    <definition name=".contract.add.body" template="/ftl/contract/contractAdd.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+<!-- ========== contract update ========== -->
+    <definition name=".contract.update" extends="default.layout">
+    	<put-attribute name="title" value=".contract.update.title" />
+        <put-attribute name="body" value=".contract.update.body" />
+    </definition>
+
+	<definition name=".contract.update.title" extends="default.title" >
+       <put-attribute name="jsName" value="contract/contract_update.js"/>
+    </definition>
+
+    <definition name=".contract.update.body" template="/ftl/contract/contractUpdate.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+
+</tiles-definitions>

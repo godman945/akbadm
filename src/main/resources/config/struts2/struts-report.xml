@@ -1,0 +1,630 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-report" namespace="/" extends="struts-base">
+
+        <!-- keyword report -->
+        <action name="keywordReport" class="AdKeywordReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.keyword</result>
+        </action>
+
+        <action name="keywordReportDetail" class="AdKeywordReportAction" method="detail">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.keyword.detail</result>
+        </action>
+
+        <action name="downloadKeyword" class="AdKeywordReportAction" method="downloadKeyword">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.keyword</result>
+        </action>
+
+        <action name="downloadKeywordDetail" class="AdKeywordReportAction" method="downloadKeywordDetail">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.keyword.detail</result>
+        </action>
+
+        <!-- ad report -->
+        <action name="adReport" class="AdReport2Action" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad</result>
+        </action>
+
+		 <action name="adDetailReport" class="AdReport2Action" method="findDetailData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.report.ad.detail</result>
+		</action>
+
+        <action name="downloadAd" class="AdReport2Action" method="downloadAd">
+            <result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+        </action>
+
+        <!-- ad action report -->
+        <action name="adActionReport" class="AdActionReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.action</result>
+        </action>
+        
+        <!--  Daily Report報表測試 start alex-->
+        <action name="dailyReportDownload" class="AdActionReportAction" method="dailyReportDownload">
+            <result name="SUCCESS" type="stream">
+            <!--  
+                <param name="contentType">application/octet-stream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <param name="inputName">downloadFileStream</param>
+              -->   
+                <param name="contentType">    
+                    application/vnd.ms-excel    
+                </param>    
+                <param name="inputName">downloadFileStream</param> 
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param> 
+                <param name="bufferSize">1024</param>    
+            </result>
+        </action>
+        <!--  Daily Report報表測試 end -->
+        
+        <!--
+        <action name="downloadAdAction" class="AdActionReportAction" method="downloadAdAction">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">
+                    attachment;filename="${fileName}"
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.ad.action</result>
+        </action>
+        -->
+        
+        <action name="downloadAdAction" class="AdActionReportAction" method="downloadAdActionExcel">
+            <result type="stream" name="success">
+                <param name="contentType">application/vnd.ms-excel</param>
+                <param name="inputName">downloadFileStream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <param name="bufferSize">1024</param>
+            </result>
+            <result type="tiles" name="input">.report.ad.action</result>
+        </action>
+
+        <action name="adActionReportDetail" class="AdActionReportAction" method="adActionReportDetail">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.action.detail</result>
+        </action>
+
+        <action name="downloadAdActionDetail" class="AdActionReportAction" method="downloadAdActionDetail">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.ad.action.detail</result>
+        </action>
+
+        <!-- total trans report -->
+        <action name="totalTransReport" class="TotalTransReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.total.trans</result>
+        </action>
+
+        <action name="downloadTotalTrans" class="TotalTransReportAction" method="downloadTotalTrans">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.total.trans</result>
+        </action>
+
+        <action name="totalTransReportDetail" class="TotalTransReportAction" method="totalTransReportDetail">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.total.trans.detail</result>
+        </action>
+
+        <action name="downloadTotalTransDetail" class="TotalTransReportAction" method="downloadTotalTransDetail">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.total.trans.detail</result>
+        </action>
+
+        <!-- customerInfo report -->
+        <action name="customerInfoReport" class="CustomerInfoReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.customerInfo</result>
+        </action>
+
+		<action name="searchCustomerInfoReport" class="CustomerInfoReportAjax" method="searchCustomerInfoReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.customerInfo.table</result>
+        </action>
+        
+        <action name="downloadCustomerInfoReport" class="CustomerInfoReportAjax" method="downloadCustomerInfoReportAjax">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.customerInfo</result>
+        </action>
+        
+        <!-- order report -->
+        <action name="orderReport" class="OrderReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.order</result>
+        </action>
+
+		<action name="searchOrderReport" class="OrderReportAjax" method="searchOrderReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.order.table</result>
+        </action>
+        
+        <action name="downloadOrderReport" class="OrderReportAjax" method="downloadOrderReportAjax">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.order</result>
+        </action>
+        
+        <!-- trans report -->
+        <action name="transReport" class="TransReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.trans</result>
+        </action>
+
+		<action name="searchTransReport" class="TransReportAjax" method="searchTransReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.trans.table</result>
+        </action>
+        
+        <action name="downloadTransReport" class="TransReportAjax" method="downloadTransReportAjax">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.trans</result>
+        </action>
+        
+        <!-- costRank report -->
+        <action name="costRankReport" class="CostRankReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.costRank</result>
+        </action>
+
+		<action name="searchCostRankReport" class="CostRankReportAjax" method="searchCostRankReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.costRank.table</result>
+        </action>
+        
+        <action name="downloadCostRankReport" class="CostRankReportAjax" method="downloadCostRankReportAjax">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.costRank</result>
+        </action>  
+
+        <!-- costShortRank report -->
+        <action name="costShortRankReport" class="CostShortRankReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.costShortRank</result>
+        </action>
+
+		<action name="searchCostShortRankReport" class="CostShortRankReportAjax" method="searchCostShortRankReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.costShortRank.table</result>
+        </action>
+        
+        <action name="downloadCostShortRankReport" class="CostShortRankReportAjax" method="downloadCostShortRankReportAjax">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.costShortRank</result>
+        </action>       
+
+        <!-- ad template report -->
+        <action name="adTemplateReport" class="AdTemplateReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.template</result>
+        </action>
+
+        <action name="downloadAdTemplate" class="AdTemplateReportAction" method="downloadAdTemplate">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.ad.template</result>
+        </action>
+
+        <!-- ad offline report -->
+        <action name="adOfflineReport" class="AdOfflineReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.offline</result>
+        </action>
+
+        <action name="downloadAdOffline" class="AdOfflineReportAction" method="downloadAdOffline">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.ad.offline</result>
+        </action>
+
+        <!-- ad spend report -->
+        <action name="adSpendReport" class="AdSpendReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.spend</result>
+        </action>
+
+        <action name="downloadAdSpend" class="AdSpendReportAction" method="downloadAdSpend">
+            <result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${fileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+			</result>
+            <result type="tiles" name="input">.report.ad.spend</result>
+        </action>
+
+        <!-- keyword offer price report -->
+        <action name="keywordOfferPriceReport" class="AdKeywordOfferPriceReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.keyword.offer.price</result>
+        </action>
+
+        <action name="downloadKeywordOfferPrice" class="AdKeywordOfferPriceReportAction" method="downloadKeywordOfferPrice">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.keyword.offer.price</result>
+        </action>
+
+        <!-- unreach budget report -->
+        <action name="unReachBudgetReport" class="UnReachBudgetReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.unreach.budget</result>
+        </action>
+
+        <action name="downloadUnReachBudget" class="UnReachBudgetReportAction" method="downloadUnReachBudget">
+            <result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${fileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+			</result>
+            <result type="tiles" name="input">.report.unreach.budget</result>
+        </action>
+
+        <!-- ad os report -->
+        <action name="adMobileOsReport" class="AdMobileOSReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.os</result>
+        </action>
+
+        <action name="downloadAdMobileOs" class="AdMobileOSReportAction" method="downloadAdOs">
+            <result name="success" type="stream">
+				<param name="contentType">application/pdf</param>
+				<param name="inputName">pdfStream</param>
+				<param name="bufferSize">1024</param>
+                <param name="contentDisposition">   
+                    attachment;filename="${fileName}"  
+                </param>
+			</result>
+            <result type="tiles" name="input">.report.ad.os</result>
+        </action>
+
+        <action name="adMobileOsReportDetail" class="AdMobileOSReportAction" method="adMobileOsReportDetail">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.ad.os.detail</result>
+        </action>
+	
+		<!-- 對帳表 -->
+		<action name="checkBillReport" class="CheckBillReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">check.bill.report</result>
+        </action>
+        
+        <!-- 廣告客戶成效 -->
+        <action name="adClientReport" class="AdClientReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.client.report</result>
+		</action>
+        
+        <action name="adClientSearch" class="AdClientReportAction" method="getAdClientReport">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.client.report</result>
+        </action>
+        
+        <action name="adClientDetalReport" class="AdClientReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.client.detal.report</result>
+		</action>
+        
+        <action name="adClientReportDownload" class="AdClientReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+		
+		<!-- video -->
+        <action name="adVideoReport" class="AdVideoReportAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.video.report</result>
+		</action>
+        
+        <action name="adVideoReportDetail" class="AdVideoReportAction" method="adVideoReportDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.video.report.detail</result>
+		</action>
+        
+        <action name="adVideoReportDownload" class="AdVideoReportAction" method="adVideoReportDownload">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/vnd.ms-excel</param>
+             	<param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 廣告來源成效 -->
+        <action name="adSourceReport" class="AdSourceReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.source.report</result>
+		</action>
+        
+        <action name="adSourceSearch" class="AdSourceReportAction" method="getAdSourceReport">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.source.report</result>
+        </action>
+        
+        <action name="adSourceDetalReport" class="AdSourceReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.source.detal.report</result>
+		</action>
+        
+        <action name="adSourceReportDownload" class="AdSourceReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 聯播網客戶-統計日報表 -->
+        <action name="admClientCountDayRepor" class="AdmClientCountDayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.client.count.day.report</result>
+		</action>
+        
+        <action name="admClientCountDayReporDownload" class="AdmClientCountDayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 聯播網網站-統計日報表 -->
+        <action name="admAdSourceDayReport" class="AdmAdSourceDayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.source.day.report</result>
+		</action>
+        
+        <action name="admAdSourceDayReportDownload" class="AdmAdSourceDayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 關鍵字廣告-未來30天統計日報表 -->
+        <action name="admClientCountForNext30DayReport" class="AdmClientCountForNext30DayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.client.count.next.day.report</result>
+		</action>
+        
+        <action name="admClientCountForNext30DayReportDownload" class="AdmClientCountForNext30DayReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- PORTAL收益報表 -->
+        <action name="admPortalBonusReport" class="AdmPortalBonusReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.portal.bonus.report</result>
+		</action>
+        
+        <action name="admPortalBonusReportDownload" class="AdmPortalBonusReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 廣告族群成效 -->
+        <action name="adAgesexReport" class="AdAgesexReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.agesex.report</result>
+		</action>
+        
+        <action name="adAgesexSearch" class="AdAgesexReportAction" method="getAdAgesexReport">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.agesex.report</result>
+        </action>
+        
+        <action name="adAgesexReportDownload" class="AdAgesexReportAction"
+			method="getAdAgesexReport">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 廣告播放時段成效 -->
+        <action name="pfpAdWeektimeReport" class="PfpAdWeektimeReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.weektime.report</result>
+		</action>
+        
+        <action name="pfpAdWeektimeSearch" class="PfpAdWeektimeReportAction" method="getPfpAdWeektimeReport">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.weektime.report</result>
+        </action>
+        
+        <action name="pfpAdWeektimeReportDownload" class="PfpAdWeektimeReportAction"
+			method="getPfpAdWeektimeReport">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+        
+        <!-- 網站類型成效 -->
+        <action name="adWebsiteReport" class="AdWebsiteReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.website.report</result>
+		</action>
+        
+        <action name="adWebsiteSearch" class="AdWebsiteReportAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.ad.website.report</result>
+        </action>
+        
+        <action name="adWebsiteDetalReport" class="AdWebsiteReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.ad.website.detal.report</result>
+		</action>
+        
+        <action name="adWebsiteReportDownload" class="AdWebsiteReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+		
+    </package>
+</struts>

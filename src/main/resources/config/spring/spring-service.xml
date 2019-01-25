@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <bean id="PfpCustomerInfoService" class="com.pchome.akbadm.db.service.customerInfo.PfpCustomerInfoService">
+        <property name="dao" ref="PfpCustomerInfoDAO" />
+        <property name="pfpAdPvclkDAO" ref="PfpAdPvclkDAO" />
+        <property name="pfpAdKeywordPvclkDAO" ref="PfpAdKeywordPvclkDAO" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO" />
+        <property name="admRecognizeRecordDAO" ref="AdmRecognizeRecordDAO" />
+        <property name="pfpAdActionReportDAO" ref="PfpAdActionReportDAO" />
+        <property name="remain" value="${remain}" />
+        <property name="keywordSysprice" value="${keyword.sysprice}" />
+    </bean>
+
+    <bean id="PfpCustomerInfoService2" class="com.pchome.akbadm.db.service.customerInfo.PfpCustomerInfoService">
+        <property name="dao" ref="PfpCustomerInfoDAO2" />
+        <property name="pfpAdPvclkDAO" ref="PfpAdPvclkDAO2" />
+        <property name="pfpAdKeywordPvclkDAO" ref="PfpAdKeywordPvclkDAO2" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO2" />
+        <property name="admRecognizeRecordDAO" ref="AdmRecognizeRecordDAO2" />
+        <property name="pfpAdActionReportDAO" ref="PfpAdActionReportDAO2" />
+        <property name="remain" value="${remain}" />
+        <property name="keywordSysprice" value="${keyword.sysprice}" />
+    </bean>
+    
+     <bean id="PfbxCustomerInfoRefXTypeService" class="com.pchome.akbadm.db.service.customerInfoRefXtype.PfbxCustomerInfoRefXTypeService">
+        <property name="dao" ref="PfbxCustomerInfoRefXTypeDAO" />
+    </bean>
+    
+    <bean id="AdmAccesslogService" class="com.pchome.akbadm.db.service.accesslog.AdmAccesslogService">
+        <property name="dao" ref="AdmAccesslogDAO" />
+    </bean>
+
+    <bean id="DepartmentService" class="com.pchome.akbadm.db.service.department.DepartmentService">
+        <property name="departmentDAO" ref="DepartmentDAO" />
+        <property name="admuserDAO" ref="AdmUserDAO" />
+    </bean>
+
+    <bean id="MenuService" class="com.pchome.akbadm.db.service.menu.MenuService">
+        <property name="menuDAO" ref="MenuDAO" />
+    </bean>
+
+    <bean id="PrivilegeModelService" class="com.pchome.akbadm.db.service.privilege.PrivilegeModelService">
+        <property name="privilegeModelDAO" ref="PrivilegeModelDAO" />
+        <property name="privilegeModelMenuRefDAO" ref="PrivilegeModelMenuRefDAO" />
+        <property name="admuserDAO" ref="AdmUserDAO" />
+    </bean>
+
+	<bean id="SequenceService" class="com.pchome.akbadm.db.service.sequence.SequenceService">
+        <property name="dao" ref="SequenceDAO" />
+		<property name="orderDayNum"><value>${order.num.day.length}</value></property>
+    </bean>
+
+    <bean id="AdPoolService" class="com.pchome.akbadm.db.service.template.AdPoolService">
+        <property name="dao" ref="AdmAdPoolDAO" />
+    </bean>
+
+    <bean id="AdmArwValueService" class="com.pchome.akbadm.db.service.ad.AdmArwValueService">
+        <property name="dao" ref="AdmArwValueDAO" />
+    </bean>
+
+    <bean id="AdmArwValueService2" class="com.pchome.akbadm.db.service.ad.AdmArwValueService">
+        <property name="dao" ref="AdmArwValueDAO2" />
+    </bean>
+
+	<bean id="AdmFreeActionService" class="com.pchome.akbadm.db.service.free.AdmFreeActionService">
+        <property name="dao" ref="AdmFreeActionDAO" />
+    </bean>
+    
+	<bean id="AdmFreeRecordService" class="com.pchome.akbadm.db.service.free.AdmFreeRecordService">
+        <property name="dao" ref="AdmFreeRecordDAO" />
+    </bean>
+    
+    <bean id="DefineAdService" class="com.pchome.akbadm.db.service.template.DefineAdService">
+        <property name="dao" ref="AdmDefineAdDAO" />
+    </bean>
+
+    <bean id="DefineAdTypeService" class="com.pchome.akbadm.db.service.template.DefineAdTypeService">
+        <property name="dao" ref="AdmDefineAdTypeDAO" />
+    </bean>
+
+    <bean id="RelateTadDadService" class="com.pchome.akbadm.db.service.template.RelateTadDadService">
+        <property name="admRelateTadDadDAO" ref="AdmRelateTadDadDAO" />
+    </bean>
+
+    <bean id="TemplateAdService" class="com.pchome.akbadm.db.service.template.TemplateAdService">
+        <property name="admTemplateAdDAO" ref="AdmTemplateAdDAO" />
+    </bean>
+
+    <bean id="RelateTproTadService" class="com.pchome.akbadm.db.service.template.RelateTproTadService">
+        <property name="admRelateTproTadDAO" ref="AdmRelateTproTadDAO" />
+    </bean>
+
+    <bean id="AdmShowRuleService" class="com.pchome.akbadm.db.service.ad.AdmShowRuleService">
+        <property name="dao" ref="AdmShowRuleDAO" />
+    </bean>
+
+    <bean id="TemplateProductService" class="com.pchome.akbadm.db.service.template.TemplateProductService">
+        <property name="admTemplateProductDAO" ref="AdmTemplateProductDAO" />
+        <property name="dao" ref="AdmTemplateProductDAO" />
+    </bean>
+    
+    <bean id="UserService" class="com.pchome.akbadm.db.service.user.UserService">
+        <property name="admuserDAO" ref="AdmUserDAO" />
+    </bean>
+    
+    <bean id="PfbStyleInfoService" class="com.pchome.akbadm.db.service.ad.PfbStyleInfoService">
+        <property name="dao" ref="PfbStyleInfoDAO" />
+    </bean>
+    
+    <bean id="PfbStyleInfoService2" class="com.pchome.akbadm.db.service.ad.PfbStyleInfoService">
+        <property name="dao" ref="PfbStyleInfoDAO2" />
+    </bean>
+    
+    <bean id="PfpAdActionService" class="com.pchome.akbadm.db.service.ad.PfpAdActionService">
+        <property name="dao" ref="PfpAdActionDAO" />
+        <property name="pfpAdPvclkDAO" ref="PfpAdPvclkDAO" />
+    </bean>
+    
+    <bean id="PfpAdGroupService" class="com.pchome.akbadm.db.service.ad.PfpAdGroupService">
+        <property name="dao" ref="PfpAdGroupDAO" />
+    </bean>
+    
+    <bean id="PfpAdDetailService" class="com.pchome.akbadm.db.service.ad.PfpAdDetailService">
+        <property name="dao" ref="PfpAdDetailDAO" />
+        <property name="definePrice" value="${ad.sysprice}" />
+    </bean>
+
+    <bean id="PfpAdService" class="com.pchome.akbadm.db.service.ad.PfpAdService">
+        <property name="dao" ref="PfpAdDAO" />
+    </bean>
+
+    <bean id="PfpAdClickService" class="com.pchome.akbadm.db.service.ad.PfpAdClickService">
+        <property name="dao" ref="PfpAdClickDAO" />
+    </bean>
+
+    <bean id="PfpAdCategoryMappingService" class="com.pchome.akbadm.db.service.ad.PfpAdCategoryMappingService">
+        <property name="dao" ref="PfpAdCategoryMappingDAO" />
+    </bean>
+
+    <bean id="PfpAdCategoryMappingService2" class="com.pchome.akbadm.db.service.ad.PfpAdCategoryMappingService">
+        <property name="dao" ref="PfpAdCategoryMappingDAO2" />
+    </bean>
+    
+    
+    <!-- adCategoryNew service -->
+    <bean id="PfpAdCategoryNewService" class="com.pchome.akbadm.db.service.ad.PfpAdCategoryNewService">
+        <property name="dao" ref="PfpAdCategoryNewDAO" />
+    </bean>
+    
+
+    <bean id="PfpAdExcludeKeywordService" class="com.pchome.akbadm.db.service.ad.PfpAdExcludeKeywordService">
+        <property name="dao" ref="PfpAdExcludeKeywordDAO" />   
+    </bean>
+    
+    <bean id="PfpAdExcludeKeywordService2" class="com.pchome.akbadm.db.service.ad.PfpAdExcludeKeywordService">
+        <property name="dao" ref="PfpAdExcludeKeywordDAO2" />   
+    </bean>
+    
+    <bean id="PfpAdGiftService" class="com.pchome.akbadm.db.service.ad.PfpAdGiftService">
+        <property name="dao" ref="PfpAdGiftDAO" />  
+    </bean>
+
+    <bean id="PfpAdInvalidService" class="com.pchome.akbadm.db.service.ad.PfpAdInvalidService">
+        <property name="dao" ref="PfpAdInvalidDAO" />
+    </bean>
+    
+    <bean id="PfpBoardService" class="com.pchome.akbadm.db.service.board.PfpBoardService">
+        <property name="dao" ref="PfpBoardDAO" />
+    </bean>
+    
+    <bean id="PfpMailboxService" class="com.pchome.akbadm.db.service.mailbox.PfpMailboxService">
+        <property name="dao" ref="PfpMailboxDAO" />
+    </bean>
+    
+    <bean id="PfpOrderService" class="com.pchome.akbadm.db.service.order.PfpOrderService">
+        <property name="dao" ref="PfpOrderDAO" />
+    </bean>
+    
+    <bean id="PfpOrderDetailService" class="com.pchome.akbadm.db.service.order.PfpOrderDetailService">
+        <property name="dao" ref="PfpOrderDetailDAO" />
+    </bean>
+    
+    <bean id="PfpIllegalKeywordService" class="com.pchome.akbadm.db.service.check.PfpIllegalKeywordService">
+        <property name="dao" ref="PfpIllegalKeywordDAO" />
+    </bean>
+    
+    <bean id="PfpUserService" class="com.pchome.akbadm.db.service.user.PfpUserService">
+        <property name="dao" ref="PfpUserDAO" />
+    </bean>
+
+    <bean id="PfpUserMemberRefService" class="com.pchome.akbadm.db.service.user.PfpUserMemberRefService">
+        <property name="dao" ref="PfpUserMemberRefDAO" />
+    </bean>
+        
+    <!-- trans -->
+    <bean id="PfpTransDetailService" class="com.pchome.akbadm.db.service.trans.PfpTransDetailService">
+        <property name="dao" ref="PfpTransDetailDAO" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO" />
+    </bean>
+
+	<bean id="AdmTransLossService" class="com.pchome.akbadm.db.service.trans.AdmTransLossService">
+        <property name="dao" ref="AdmTransLossDAO" />
+    </bean>
+    
+    <!-- report -->
+    <bean id="AdKeywordReportService" class="com.pchome.akbadm.db.service.report.AdKeywordReportService">
+        <property name="adKeywordReportDAO" ref="AdKeywordReportDAO" />
+        <property name="pfpAdKeywordDAO" ref="PfpAdKeywordDAO" />
+    </bean>
+
+    <bean id="AdReportService" class="com.pchome.akbadm.db.service.report.AdReportService">
+        <property name="adReportDAO" ref="AdReportDAO" />
+        <property name="pfpAdDAO" ref="PfpAdDAO" />
+        <property name="pfpAdActionDAO" ref="PfpAdActionDAO" />
+    	<property name="pfpAdGroupDAO" ref="PfpAdGroupDAO" />
+        <property name="pfpCustomerInfoDAO" ref="PfpCustomerInfoDAO" />
+        <property name="pfdCustomerInfoDAO" ref="PfdCustomerInfoDAO" />
+        <property name="pfdUserDAO" ref="PfdUserDAO" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO" />
+        <property name="adFactory" ref="AdFactory" />
+    </bean>
+    
+    <bean id="AdReport2Service" class="com.pchome.akbadm.db.service.report.AdReport2Service">
+        <property name="dao" ref="AdReport2DAO" />
+        <property name="pfpAdDAO" ref="PfpAdDAO" />
+        <property name="adFactory" ref="AdFactory" />
+    </bean>
+	
+	<!-- AdKeyword -->
+    <bean id="PfpAdKeywordService" class="com.pchome.akbadm.db.service.ad.PfpAdKeywordService">
+        <property name="dao" ref="PfpAdKeywordDAO" />
+        <property name="definePrice" value="${ad.sysprice}" />
+    </bean>
+	
+	<!-- pvclk -->
+    <bean id="PfpAdPvclkService" class="com.pchome.akbadm.db.service.ad.PfpAdPvclkService">
+        <property name="dao" ref="PfpAdPvclkDAO" />
+        <property name="admTransLossDAO" ref="AdmTransLossDAO" />
+        <property name="pfpTransDetailDAO" ref="PfpTransDetailDAO" />
+        <property name="admRecognizeDetailDAO" ref="AdmRecognizeDetailDAO" />
+        <property name="admRecognizeRecordDAO" ref="AdmRecognizeRecordDAO" />
+    </bean>
+    
+    <bean id="PfpAdPvclkService2" class="com.pchome.akbadm.db.service.ad.PfpAdPvclkService">
+        <property name="dao" ref="PfpAdPvclkDAO2" />
+        <property name="admTransLossDAO" ref="AdmTransLossDAO2" />
+        <property name="pfpTransDetailDAO" ref="PfpTransDetailDAO2" />
+        <property name="admRecognizeDetailDAO" ref="AdmRecognizeDetailDAO2" />
+        <property name="admRecognizeRecordDAO" ref="AdmRecognizeRecordDAO2" />
+    </bean>
+    
+    <bean id="PfpAdPvclkRefererService" class="com.pchome.akbadm.db.service.ad.PfpAdPvclkRefererService">
+        <property name="dao" ref="PfpAdPvclkRefererDAO" />
+    </bean>
+    
+    <bean id="PfpAdPvclkUserGroupService" class="com.pchome.akbadm.db.service.ad.PfpAdPvclkUserGroupService">
+        <property name="dao" ref="PfpAdPvclkUserGroupDAO" />
+    </bean>
+    
+    <bean id="PfpAdSpecificWebsiteService" class="com.pchome.akbadm.db.service.ad.PfpAdSpecificWebsiteService">
+        <property name="dao" ref="PfpAdSpecificWebsiteDAO" />
+    </bean>
+    
+    <bean id="PfpAdSpecificWebsiteService2" class="com.pchome.akbadm.db.service.ad.PfpAdSpecificWebsiteService">
+        <property name="dao" ref="PfpAdSpecificWebsiteDAO2" />
+    </bean>
+    
+    <bean id="PfpAdKeywordInvalidService" class="com.pchome.akbadm.db.service.ad.PfpAdKeywordInvalidService">
+        <property name="dao" ref="PfpAdKeywordInvalidDAO" />
+    </bean>
+    
+    <bean id="PfpAdKeywordPvclkService" class="com.pchome.akbadm.db.service.ad.PfpAdKeywordPvclkService">
+        <property name="dao" ref="PfpAdKeywordPvclkDAO" />
+    </bean>
+    
+    <bean id="PfpAdKeywordPvclkService2" class="com.pchome.akbadm.db.service.ad.PfpAdKeywordPvclkService">
+        <property name="dao" ref="PfpAdKeywordPvclkDAO2" />
+    </bean>
+    
+    <!-- sysprice -->
+    <bean id="PfpAdSyspriceService" class="com.pchome.akbadm.db.service.sysprice.PfpAdSyspriceService">
+        <property name="dao" ref="PfpAdSyspriceDAO" />
+        <property name="definePrice" value="${ad.sysprice}" />
+    </bean>
+    
+    <bean id="PfpAdSyspriceService2" class="com.pchome.akbadm.db.service.sysprice.PfpAdSyspriceService">
+        <property name="dao" ref="PfpAdSyspriceDAO2" />
+        <property name="definePrice" value="${ad.sysprice}" />
+    </bean>
+    
+    <bean id="PfpKeywordSyspriceService" class="com.pchome.akbadm.db.service.sysprice.PfpKeywordSyspriceService">
+        <property name="dao" ref="PfpKeywordSyspriceDAO" />
+        <property name="definePrice" value="${keyword.sysprice}" />
+    </bean>
+    
+    <bean id="PfpKeywordSyspriceService2" class="com.pchome.akbadm.db.service.sysprice.PfpKeywordSyspriceService">
+        <property name="dao" ref="PfpKeywordSyspriceDAO2" />
+        <property name="definePrice" value="${keyword.sysprice}" />
+    </bean>
+
+    <!-- ad service -->
+    <bean id="PfpAdCategoryService" class="com.pchome.akbadm.db.service.ad.PfpAdCategoryService">
+        <property name="dao" ref="PfpAdCategoryDAO" />
+    </bean>
+
+	<bean id="AdmRecognizeRecordService" class="com.pchome.akbadm.db.service.recognize.AdmRecognizeRecordService">
+        <property name="dao" ref="AdmRecognizeRecordDAO" />
+        <property name="customerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO" />
+    </bean>
+    
+    <bean id="PfpAdVideoSourceService" class="com.pchome.akbadm.db.service.advideo.PfpAdVideoSourceService">
+        <property name="dao" ref="PfpAdVideoSourceDAO" />     
+    </bean>
+    
+    <bean id="AdmRecognizeDetailService" class="com.pchome.akbadm.db.service.recognize.AdmRecognizeDetailService">
+        <property name="dao" ref="AdmRecognizeDetailDAO" />
+    </bean>
+    
+    <bean id="PfpReportService" class="com.pchome.akbadm.db.service.report.PfpReportService">
+        <property name="dao" ref="PfpReportDAO" />
+    </bean>
+    
+    <!-- Feedback Record -->
+    <bean id="AdmFeedbackRecordService" class="com.pchome.akbadm.db.service.feedback.AdmFeedbackRecordService">
+        <property name="dao" ref="AdmFeedbackRecordDAO" />
+    </bean>
+
+    <bean id="PfdAccountService" class="com.pchome.akbadm.db.service.pfd.account.PfdAccountService">
+        <property name="dao" ref="PfdAccountDAO" />
+    </bean>
+
+    <bean id="PfdUserService" class="com.pchome.akbadm.db.service.pfd.user.PfdUserService">
+        <property name="dao" ref="PfdUserDAO" />        
+    </bean>
+
+	<!-- quartz service start -->
+    <bean id="PfpAdActionReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdActionReportService">
+        <property name="dao" ref="PfpAdActionReportDAO" />
+    </bean>
+
+    <bean id="PfpAdGroupReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdGroupReportService">
+        <property name="dao" ref="PfpAdGroupReportDAO" />
+    </bean>
+
+    <bean id="PfpAdReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdReportService">
+        <property name="dao" ref="PfpAdReportDAO" />
+    </bean>
+
+    <bean id="PfpAdKeywordReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdKeywordReportService">
+        <property name="dao" ref="PfpAdKeywordReportDAO" />
+    </bean>
+
+	<bean id="PfpAdTimeReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdTimeReportService">
+        <property name="dao" ref="PfpAdTimeReportDAO" />
+    </bean>
+
+	<bean id="PfpAdAgeReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdAgeReportService">
+        <property name="dao" ref="PfpAdAgeReportDAO" />
+    </bean>
+    
+    <bean id="PfpAdWebsiteReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdWebsiteReportService">
+        <property name="dao" ref="PfpAdWebsiteReportDAO" />
+    </bean>
+
+	<bean id="AdmPfbxBlockUrlService" class="com.pchome.akbadm.db.service.pfbx.play.AdmPfbxBlockUrlService">
+        <property name="dao" ref="AdmPfbxBlockUrlDAO" />
+    </bean>
+
+	<bean id="AdmPfbxBlockUrlService2" class="com.pchome.akbadm.db.service.pfbx.play.AdmPfbxBlockUrlService">
+        <property name="dao" ref="AdmPfbxBlockUrlDAO2" />
+    </bean>
+
+	<bean id="AdmPfpdAdPvclkReportService" class="com.pchome.akbadm.db.service.report.quartzs.AdmPfpdAdPvclkReportService">
+        <property name="dao" ref="AdmPfpdAdPvclkReportDAO" />
+    </bean>
+
+    <bean id="PfdAdTemplateReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdTemplateReportService">
+        <property name="dao" ref="PfdAdTemplateReportDAO" />
+    </bean>
+
+    <bean id="PfpAdOsReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfpAdOsReportService">
+        <property name="dao" ref="PfpAdOsReportDAO" />
+    </bean>
+
+    <bean id="PfdAdActionReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdActionReportService">
+        <property name="dao" ref="PfdAdActionReportDAO" />
+    </bean>
+
+    <bean id="PfdAdGroupReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdGroupReportService">
+        <property name="dao" ref="PfdAdGroupReportDAO" />
+    </bean>
+
+    <bean id="PfdAdReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdReportService">
+        <property name="dao" ref="PfdAdReportDAO" />
+    </bean>
+
+    <bean id="PfdKeywordReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdKeywordReportService">
+        <property name="dao" ref="PfdKeywordReportDAO" />
+    </bean>
+
+	<bean id="PfdAdTimeReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdTimeReportService">
+        <property name="dao" ref="PfdAdTimeReportDAO" />
+    </bean>
+
+	<bean id="PfdAdAgeReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdAgeReportService">
+        <property name="dao" ref="PfdAdAgeReportDAO" />
+    </bean>
+    
+    <bean id="AdmPfpAdVideoReportService" class="com.pchome.akbadm.db.service.report.quartzs.AdmPfpAdVideoReportService">
+         <property name="dao" ref="AdmPfpAdVideoReportDAO" />
+    </bean>
+    
+    <bean id="PfdAdVideoReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdVideoReportService">
+         <property name="dao" ref="PfdAdVideoReportDAO" />
+    </bean>
+	<!-- quartz service end -->
+    
+
+	<bean id="PfdAdWebsiteReportService" class="com.pchome.akbadm.db.service.report.quartzs.PfdAdWebsiteReportService">
+        <property name="dao" ref="PfdAdWebsiteReportDAO" />
+    </bean>
+
+	<bean id="PfdBonusItemService" class="com.pchome.akbadm.db.service.pfd.bonus.PfdBonusItemService">
+        <property name="dao" ref="PfdBonusItemDAO" />
+    </bean>
+    
+   
+    
+    <bean id="PfdCustomerInfoService" class="com.pchome.akbadm.db.service.customerInfo.PfdCustomerInfoService">
+        <property name="dao" ref="PfdCustomerInfoDAO" />
+        <property name="pfdUserAdAccountRefDAO" ref="PfdUserAdAccountRefDAO" />
+    </bean>
+    
+   
+  
+    <bean id="PfdUserAdAccountRefService" class="com.pchome.akbadm.db.service.customerInfo.PfdUserAdAccountRefService">
+        <property name="dao" ref="PfdUserAdAccountRefDAO" />
+        <property name="pfdCustomerInfoDAO" ref="PfdCustomerInfoDAO" />
+    </bean>
+    
+    <bean id="PfdUserAdAccountRefService2" class="com.pchome.akbadm.db.service.customerInfo.PfdUserAdAccountRefService">
+        <property name="dao" ref="PfdUserAdAccountRefDAO2" />
+        <property name="pfdCustomerInfoDAO" ref="PfdCustomerInfoDAO" />
+    </bean>
+    
+   
+    
+    <bean id="PfdContractService" class="com.pchome.akbadm.db.service.contract.PfdContractService">
+        <property name="dao" ref="PfdContractDAO" />
+    </bean>
+
+    <bean id="PfdApplyForBusinessService" class="com.pchome.akbadm.db.service.applyFor.PfdApplyForBusinessService">
+        <property name="dao" ref="PfdApplyForBusinessDAO" />
+        <property name="pfdAccountDAO" ref="PfdAccountDAO" />
+    </bean>
+
+  
+   
+
+    <bean id="PfpEnterpriseService" class="com.pchome.akbadm.db.service.enterprise.PfpEnterpriseService">
+        <property name="dao" ref="PfpEnterpriseDAO" />
+    </bean>
+
+    <bean id="PfdBoardService" class="com.pchome.akbadm.db.service.pfd.board.PfdBoardService">
+        <property name="dao" ref="PfdBoardDAO" />
+    </bean>
+
+	<bean id="AdmManagerDetailService" class="com.pchome.akbadm.db.service.manager.AdmManagerDetailService">
+        <property name="dao" ref="AdmManagerDetailDAO" />
+        <property name="admChannelAccountDAO" ref="AdmChannelAccountDAO" />
+    </bean>
+    
+    <bean id="AdmChannelAccountService" class="com.pchome.akbadm.db.service.manager.AdmChannelAccountService">
+        <property name="dao" ref="AdmChannelAccountDAO" />
+    </bean>
+    
+    <bean id="PfdVirtualRecordService" class="com.pchome.akbadm.db.service.customerInfo.PfdVirtualRecordService">
+        <property name="dao" ref="PfdVirtualRecordDAO" />
+    </bean>
+
+	<bean id="AdmFreeGiftService" class="com.pchome.akbadm.db.service.free.AdmFreeGiftService">
+        <property name="dao" ref="AdmFreeGiftDAO" />
+    </bean>
+    
+    <bean id="PfdBonusRecordService" class="com.pchome.akbadm.db.service.pfd.bonus.PfdBonusRecordService">
+        <property name="dao" ref="PfdBonusRecordDAO" />
+    </bean>
+    
+    <bean id="PfdBonusInvoiceService" class="com.pchome.akbadm.db.service.pfd.bonus.PfdBonusInvoiceService">
+        <property name="dao" ref="PfdBonusInvoiceDAO" />
+    </bean>
+    
+    <bean id="PfdBonusItemSetService" class="com.pchome.akbadm.db.service.pfd.bonus.PfdBonusItemSetService">
+        <property name="dao" ref="PfdBonusItemSetDAO" />
+    </bean>
+
+	<bean id="AdmRetrieveRecordService" class="com.pchome.akbadm.db.service.retrieve.AdmRetrieveRecordService">
+        <property name="dao" ref="AdmRetrieveRecordDAO" />
+    </bean>
+
+    <bean id="PfbCustomerInfoService" class="com.pchome.akbadm.db.service.customerInfo.PfbCustomerInfoService">
+        <property name="dao" ref="PfbCustomerInfoDAO" />
+    </bean>
+
+	<bean id="BankService" class="com.pchome.akbadm.db.service.bank.BankService">
+        <property name="dao" ref="BankDAO" />
+    </bean>
+
+    
+   
+    
+    
+    
+    <bean id="PfdBonusDayReportService" class="com.pchome.akbadm.db.service.pfd.bonus.PfdBonusDayReportService">
+        <property name="dao" ref="PfdBonusDayReportDAO" />
+    </bean>
+    
+    <bean id="AdClientReportService" class="com.pchome.akbadm.db.service.report.AdClientReportService">
+        <property name="dao" ref="AdClientReportDAO" />
+    </bean>
+    
+    <bean id="PfpAdVideoReportService" class="com.pchome.akbadm.db.service.report.PfpAdVideoReportService">
+        <property name="dao" ref="PfpAdVideoReportDAO" />
+        <property name="admUniqDataDAO" ref="AdmUniqDataDAO" />
+    </bean>
+    
+    <bean id="AdSourceReportService" class="com.pchome.akbadm.db.service.report.AdSourceReportService">
+        <property name="dao" ref="AdSourceReportDAO" />
+    </bean>
+    
+    <bean id="AdmClientCountReportService" class="com.pchome.akbadm.db.service.report.AdmClientCountReportService">
+        <property name="dao" ref="AdmClientCountReportDAO" />
+    </bean>
+    
+    <bean id="AdmPortalBonusReportService" class="com.pchome.akbadm.db.service.report.AdmPortalBonusReportService">
+        <property name="dao" ref="AdmPortalBonusReportDAO" />
+    </bean>
+    
+    <bean id="AdAgesexReportService" class="com.pchome.akbadm.db.service.report.AdAgesexReportService">
+        <property name="dao" ref="AdAgesexReportDAO" />
+    </bean>
+    
+    <bean id="PfpAdWeektimeReportService" class="com.pchome.akbadm.db.service.report.PfpAdWeektimeReportService">
+        <property name="dao" ref="PfpAdWeektimeReportDAO" />
+    </bean>
+    
+    <bean id="AdWebsiteReportService" class="com.pchome.akbadm.db.service.report.AdWebsiteReportService">
+        <property name="dao" ref="AdWebsiteReportDAO" />
+    </bean>
+    
+    <bean id="PfpRefundOrderService" class="com.pchome.akbadm.db.service.order.PfpRefundOrderService">
+        <property name="dao" ref="PfpRefundOrderDAO" />
+    </bean>
+    
+    <!-- malice -->
+    <bean id="MaliceService" class="com.pchome.akbadm.db.service.ad.MaliceService">
+    	<property name="pfpAdClickService" ref="PfpAdClickService" />
+    	<property name="pfpAdService" ref="PfpAdService" />
+    	<property name="pfpAdInvalidService" ref="PfpAdInvalidService" />
+    	<property name="pfpAdKeywordService" ref="PfpAdKeywordService" />
+    	<property name="pfpAdKeywordInvalidService" ref="PfpAdKeywordInvalidService" />
+    	<property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService" />
+    	<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+    </bean>
+    
+    <bean id="DmpAdclassReportService" class="com.pchome.akbadm.db.service.dmp.DmpAdclassReportService">
+        <property name="dao" ref="DmpAdclassReportDAO" />
+    </bean>
+    
+    <bean id="DmpHitReportService" class="com.pchome.akbadm.db.service.dmp.DmpHitReportService">
+        <property name="dao" ref="DmpHitReportDAO" />
+    </bean>
+    
+    <!-- ARW 權重管理 -->
+    <bean id="AdmARWManagementService" class="com.pchome.akbadm.db.service.arwManagement.AdmARWManagementService">
+        <property name="dao" ref="ARWManagementDAO" />
+	</bean>
+	
+    <bean id="PfpRefundOrderReleaseService" class="com.pchome.akbadm.db.service.order.PfpRefundOrderReleaseService">
+        <property name="dao" ref="PfpRefundOrderReleaseDAO" />
+    </bean>
+    
+    <!-- 品牌對應關鍵字管理 -->
+    <bean id="AdmBrandCorrespondService" class="com.pchome.akbadm.db.service.admBrandCorrespond.AdmBrandCorrespondService">
+    	<property name="dao" ref="AdmBrandCorrespondDAO" />
+	</bean>
+	
+</beans>

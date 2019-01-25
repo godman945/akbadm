@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- 網址篩選 -->
+	<bean id="PfbAdUrlAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.pfbadurl.PfbAdUrlAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxAdUrlReportService" ref="PfbxAdUrlReportService" />
+		<property name="pfbxUserOptionService" ref="PfbxUserOptionService" />
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="pfbxBlockCusurlService" ref="PfbxBlockCusurlService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+		<property name="admPfbxBlockUrlService" ref="AdmPfbxBlockUrlService" />
+	</bean>
+
+	<!-- 盈虧查詢 -->
+	<bean id="pfbInComeReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.pfbInComeReportAction"
+		scope="prototype">
+		<property name="admBonusDetailReportService" ref="AdmBonusDetailReportService" />
+	</bean>
+
+	<!-- 分潤設定 -->
+	<bean id="PfbBonusSetMaintainAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.bonus.PfbBonusSetMaintainAction"
+		scope="prototype">
+		<property name="pfbxBonusSetService" ref="PfbxBonusSetService" />
+		<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+		<property name="pfbxBonusSetSpecialService" ref="PfbxBonusSetSpecialService" />
+	</bean>
+
+	<!-- 累計收益 -->
+	<bean id="PfbBonusDetailMaintainAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.bonus.PfbBonusDetailMaintainAction"
+		scope="prototype">
+		<property name="pfbxBonusBillService" ref="PfbxBonusBillService" />
+		<property name="pfbxBonusTransDetailService" ref="PfbxBonusTransDetailService" />
+	</bean>
+	
+	
+	<!-- 客戶請款單 -->
+	<bean id="PfbApplyBonusMaintainAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.bonus.PfbApplyBonusMaintainAction"
+		scope="prototype">
+		<property name="pfbxBankService" ref="PfbxBankService" />
+		<property name="pfbxPersonalService" ref="PfbxPersonalService" />
+	</bean>
+	
+
+	<!-- report -->
+	<bean id="PfbCustomerReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbCustomerReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxCustomerReportService" ref="PfbxCustomerReportService" />
+	</bean>
+
+	<bean id="PfbTimeReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbTimeReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxTimeReportService" ref="PfbxTimeReportService" />
+	</bean>
+
+	<bean id="PfbUnitReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbUnitReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxUnitReportService" ref="PfbxUnitReportService" />
+	</bean>
+
+	<bean id="PfbSizeReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbSizeReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxSizeReportService" ref="PfbxSizeReportService" />
+		<property name="pfbxSizeService" ref="PfbxSizeService" />
+		<property name="pfbxSizeGetAdClickService" ref="PfbxSizeGetAdClickService" />
+	</bean>
+
+	<bean id="PfbStyleReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbStyleReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxStyleReportService" ref="PfbxStyleReportService" />
+	</bean>
+	
+	<bean id="PfbUrlReportAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.report.PfbUrlReportAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxUrlReportService" ref="PfbxUrlReportService" />
+	</bean>
+
+	<!-- 撥放權限 -->
+	<bean id="blacklistManagerAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.play.BlacklistManagerAction"
+		scope="prototype">
+		<property name="pfbxPermissionService" ref="PfbxPermissionService" />
+		<property name="pfbxBoardService" ref="PfbxBoardService" />
+		<property name="accesslogService" ref="AdmAccesslogService" />
+	</bean>
+	<!-- 撥放權限 end -->
+
+	
+	<bean id="PfbBoardAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.board.PfbBoardAction"
+		scope="prototype">
+		<property name="pfbxBoardService" ref="PfbxBoardService" />
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+	</bean>
+
+
+	<!-- 帳戶管理 kylelee -->
+	<bean id="PfbAccountAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.account.PfbAccountAction"
+		scope="prototype">
+		<property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+		<property name="pfbxBoardService" ref="PfbxBoardService" />
+		<property name="pfbxBankService" ref="PfbxBankService" />
+		<property name="pfbxPersonalService" ref="PfbxPersonalService" />
+		<property name="pfbxPositionMenuService" ref="PfbxPositionMenuService" />
+        <property name="pfbxCustomerInfoRefXTypeService" ref="PfbxCustomerInfoRefXTypeService" />
+		<property name="checkStatusFactory" ref="CheckStatusFactory" />
+		<property name="accesslogService" ref="AdmAccesslogService" />
+		<property name="pfbxAllowUrlService" ref="PfbxAllowUrlService" />
+		<property name="pfbxWebsiteCategoryService" ref="PfbxWebsiteCategoryService" />
+		<property name="mailDir" value="${mail.dir}" />
+		<property name="mailServer" value="${mail.server}" />
+		<property name="mailFrom" value="${mail.from}" />
+		<property name="mailFromAlias" value="${pfb.mail.user.name}" />
+		<property name="auditSuccessSubject" value="${pfb.auditSuccess.mail.subject}" />
+		<property name="auditRefuseSubject" value="${pfb.auditRefuse.mail.subject}" />
+	</bean>
+	<!-- 帳戶管理 end -->
+
+	<!-- 優惠方案 -->
+	<bean id="pfbxBonusSetSpecialAction"
+		class="com.pchome.akbadm.struts2.action.pfbx.bonus.pfbxBonusSetSpecialAction"
+		scope="prototype">
+		<property name="pfbxBonusSetSpecialService" ref="PfbxBonusSetSpecialService" />
+	</bean>
+	
+	<!-- 流量檢測 -->
+	<bean id="PfbxInvalidClickAction" class="com.pchome.akbadm.struts2.action.pfbx.invalidclick.PfbxInvalidClickAction" scope="prototype">
+		<property name="pfbxInvalidClickService" ref="PfbxInvalidClickService" />
+		<property name="pfbxInvalidTrafficService" ref="PfbxInvalidTrafficService" />
+		<property name="pfbxInvalidTrafficDetailService" ref="PfbxInvalidTrafficDetailService" />
+		<property name="sequenceService" ref="SequenceService" />
+		<property name="pfbxBonusDayReportService" ref="PfbxBonusDayReportService" />
+		<property name="pfpAdClickService" ref="PfpAdClickService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+		<property name="pfbxPositionService" ref="PfbxPositionService" />
+	</bean>
+	
+	<!-- 無效流量 -->
+	<bean id="PfbxInvalidTrafficAction" class="com.pchome.akbadm.struts2.action.pfbx.invalidclick.PfbxInvalidTrafficAction" scope="prototype">
+		<property name="pfbxInvalidTrafficService" ref="PfbxInvalidTrafficService" />
+		<property name="pfbxInvalidTrafficDetailService" ref="PfbxInvalidTrafficDetailService" />
+		<property name="pfpAdClickService" ref="PfpAdClickService" />
+		<property name="admAccesslogService" ref="AdmAccesslogService" />
+	</bean>
+	
+	<!-- 惡意點擊查詢 -->
+	<bean id="PfbxMaliceClickAction" class="com.pchome.akbadm.struts2.action.pfbx.invalidclick.PfbxMaliceClickAction" scope="prototype">
+		<property name="pfpAdClickService" ref="PfpAdClickService" />
+	</bean>
+	
+	<!-- 網站類別設定 -->
+	<bean id="PfbxWebsiteCategoryAction" class="com.pchome.akbadm.struts2.action.pfbx.website.PfbxWebsiteCategoryAction" scope="prototype">
+		<property name="pfbxWebsiteCategoryService" ref="PfbxWebsiteCategoryService" />
+	</bean>
+	
+	<!-- 版位定價查詢 -->
+	<bean id="PfbPositionPriceReportAction" class="com.pchome.akbadm.struts2.action.pfbx.report.PfbPositionPriceReportAction" scope="prototype">
+		<property name="pfbPositionPriceReportService" ref="PfbPositionPriceReportService" />
+	</bean>
+</beans>

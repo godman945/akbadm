@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+
+    <bean id="PfpCustomerInfoDAO" class="com.pchome.akbadm.db.dao.customerInfo.PfpCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpCustomerInfoDAO2" class="com.pchome.akbadm.db.dao.customerInfo.PfpCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="AdmAccesslogDAO" class="com.pchome.akbadm.db.dao.accesslog.AdmAccesslogDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbxCustomerInfoRefXTypeDAO"
+          class="com.pchome.akbadm.db.dao.customerInfoRefXtype.PfbxCustomerInfoRefXTypeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmAdPoolDAO" class="com.pchome.akbadm.db.dao.template.AdmAdPoolDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmArwValueDAO" class="com.pchome.akbadm.db.dao.ad.AdmArwValueDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmArwValueDAO2" class="com.pchome.akbadm.db.dao.ad.AdmArwValueDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="AdmFreeActionDAO" class="com.pchome.akbadm.db.dao.free.AdmFreeActionDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmFreeRecordDAO" class="com.pchome.akbadm.db.dao.free.AdmFreeRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmDefineAdDAO" class="com.pchome.akbadm.db.dao.template.AdmDefineAdDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmDefineAdTypeDAO" class="com.pchome.akbadm.db.dao.template.AdmDefineAdTypeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="DepartmentDAO" class="com.pchome.akbadm.db.dao.department.DepartmentDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="MenuDAO" class="com.pchome.akbadm.db.dao.menu.MenuDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PrivilegeModelDAO" class="com.pchome.akbadm.db.dao.privilege.PrivilegeModelDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PrivilegeModelMenuRefDAO" class="com.pchome.akbadm.db.dao.privilege.PrivilegeModelMenuRefDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRelateTadDadDAO" class="com.pchome.akbadm.db.dao.template.AdmRelateTadDadDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRelateTproTadDAO" class="com.pchome.akbadm.db.dao.template.AdmRelateTproTadDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmShowRuleDAO" class="com.pchome.akbadm.db.dao.ad.AdmShowRuleDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmTemplateAdDAO" class="com.pchome.akbadm.db.dao.template.AdmTemplateAdDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmTemplateProductDAO" class="com.pchome.akbadm.db.dao.template.AdmTemplateProductDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmUserDAO" class="com.pchome.akbadm.db.dao.user.AdmUserDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="SequenceDAO" class="com.pchome.akbadm.db.dao.sequence.SequenceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbStyleInfoDAO" class="com.pchome.akbadm.db.dao.ad.PfbStyleInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbStyleInfoDAO2" class="com.pchome.akbadm.db.dao.ad.PfbStyleInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpAdActionDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdActionDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdGroupDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdGroupDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdDetailDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdClickDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdClickDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdCategoryMappingDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdCategoryMappingDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdCategoryMappingDAO2" class="com.pchome.akbadm.db.dao.ad.PfpAdCategoryMappingDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+
+    <!-- adCategoryNew dao -->
+    <bean id="PfpAdCategoryNewDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdCategoryNewDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+
+    <bean id="PfpAdGiftDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdGiftDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdExcludeKeywordDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdExcludeKeywordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdExcludeKeywordDAO2" class="com.pchome.akbadm.db.dao.ad.PfpAdExcludeKeywordDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpAdInvalidDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdInvalidDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpBoardDAO" class="com.pchome.akbadm.db.dao.board.PfpBoardDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpMailboxDAO" class="com.pchome.akbadm.db.dao.mailbox.PfpMailboxDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpOrderDAO" class="com.pchome.akbadm.db.dao.order.PfpOrderDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpOrderDetailDAO" class="com.pchome.akbadm.db.dao.order.PfpOrderDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpUserDAO" class="com.pchome.akbadm.db.dao.user.PfpUserDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpUserMemberRefDAO" class="com.pchome.akbadm.db.dao.user.PfpUserMemberRefDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpIllegalKeywordDAO" class="com.pchome.akbadm.db.dao.check.PfpIllegalKeywordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- trans -->
+    <bean id="PfpTransDetailDAO" class="com.pchome.akbadm.db.dao.trans.PfpTransDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpTransDetailDAO2" class="com.pchome.akbadm.db.dao.trans.PfpTransDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="AdmTransLossDAO" class="com.pchome.akbadm.db.dao.trans.AdmTransLossDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmTransLossDAO2" class="com.pchome.akbadm.db.dao.trans.AdmTransLossDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <!-- report -->
+    <bean id="AdKeywordReportDAO" class="com.pchome.akbadm.db.dao.report.AdKeywordReportDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="AdReportDAO" class="com.pchome.akbadm.db.dao.report.AdReportDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+	<bean id="AdReport2DAO" class="com.pchome.akbadm.db.dao.report.AdReport2DAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <!-- AdKeyword -->
+    <bean id="PfpAdKeywordDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdKeywordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- pvclk -->
+    <bean id="PfpAdPvclkDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdPvclkDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdPvclkDAO2" class="com.pchome.akbadm.db.dao.ad.PfpAdPvclkDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+    
+    <bean id="PfpAdPvclkRefererDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdPvclkRefererDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdPvclkUserGroupDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdPvclkUserGroupDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdSpecificWebsiteDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdSpecificWebsiteDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdSpecificWebsiteDAO2" class="com.pchome.akbadm.db.dao.ad.PfpAdSpecificWebsiteDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpAdKeywordInvalidDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdKeywordInvalidDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdKeywordPvclkDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdKeywordPvclkDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdKeywordPvclkDAO2" class="com.pchome.akbadm.db.dao.ad.PfpAdKeywordPvclkDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <!-- sysprice -->
+    <bean id="PfpAdSyspriceDAO" class="com.pchome.akbadm.db.dao.sysprice.PfpAdSyspriceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdSyspriceDAO2" class="com.pchome.akbadm.db.dao.sysprice.PfpAdSyspriceDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpKeywordSyspriceDAO" class="com.pchome.akbadm.db.dao.sysprice.PfpKeywordSyspriceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpKeywordSyspriceDAO2" class="com.pchome.akbadm.db.dao.sysprice.PfpKeywordSyspriceDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <!-- ad category -->
+    <bean id="PfpAdCategoryDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdCategoryDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRecognizeRecordDAO" class="com.pchome.akbadm.db.dao.recognize.AdmRecognizeRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRecognizeRecordDAO2" class="com.pchome.akbadm.db.dao.recognize.AdmRecognizeRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="AdmRecognizeDetailDAO" class="com.pchome.akbadm.db.dao.recognize.AdmRecognizeDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRecognizeDetailDAO2" class="com.pchome.akbadm.db.dao.recognize.AdmRecognizeDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpReportDAO" class="com.pchome.akbadm.db.dao.report.PfpReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <!-- Feedback Record -->
+    <bean id="AdmFeedbackRecordDAO" class="com.pchome.akbadm.db.dao.feedback.AdmFeedbackRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdAccountDAO" class="com.pchome.akbadm.db.dao.pfd.account.PfdAccountDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdUserDAO" class="com.pchome.akbadm.db.dao.pfd.user.PfdUserDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+	<!-- quartz dao start -->
+    <bean id="PfpAdActionReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdActionReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdActionReportDAO2" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdActionReportDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpAdGroupReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdGroupReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdKeywordReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdKeywordReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpAdOsReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdOsReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+	<bean id="PfpAdTimeReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdTimeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+	<bean id="PfpAdAgeReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdAgeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdWebsiteReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfpAdWebsiteReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdmPfpAdVideoReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.AdmPfpAdVideoReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfdAdVideoReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdVideoReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+	<!-- quartz dao end -->
+
+	<bean id="AdmPfbxBlockUrlDAO" class="com.pchome.akbadm.db.dao.pfbx.play.AdmPfbxBlockUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+	<bean id="AdmPfbxBlockUrlDAO2" class="com.pchome.akbadm.db.dao.pfbx.play.AdmPfbxBlockUrlDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+	<bean id="AdmPfpdAdPvclkReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.AdmPfpdAdPvclkReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdAdActionReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdActionReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdAdGroupReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdGroupReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdAdReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdKeywordReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdKeywordReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+	<bean id="PfdAdTimeReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdTimeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+	<bean id="PfdAdAgeReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdAgeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+	<bean id="PfdAdWebsiteReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdWebsiteReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdAdTemplateReportDAO" class="com.pchome.akbadm.db.dao.report.quartzs.PfdAdTemplateReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBonusItemDAO" class="com.pchome.akbadm.db.dao.pfd.bonus.PfdBonusItemDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdCustomerInfoDAO" class="com.pchome.akbadm.db.dao.customerInfo.PfdCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdCustomerInfoDAO2" class="com.pchome.akbadm.db.dao.customerInfo.PfdCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfdUserAdAccountRefDAO" class="com.pchome.akbadm.db.dao.customerInfo.PfdUserAdAccountRefDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdUserAdAccountRefDAO2" class="com.pchome.akbadm.db.dao.customerInfo.PfdUserAdAccountRefDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfdContractDAO" class="com.pchome.akbadm.db.dao.contract.PfdContractDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdApplyForBusinessDAO" class="com.pchome.akbadm.db.dao.applyFor.PfdApplyForBusinessDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpEnterpriseDAO" class="com.pchome.akbadm.db.dao.enterprise.PfpEnterpriseDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBoardDAO" class="com.pchome.akbadm.db.dao.pfd.board.PfdBoardDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmManagerDetailDAO" class="com.pchome.akbadm.db.dao.manager.AdmManagerDetailDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmChannelAccountDAO" class="com.pchome.akbadm.db.dao.manager.AdmChannelAccountDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdVirtualRecordDAO" class="com.pchome.akbadm.db.dao.customerInfo.PfdVirtualRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmFreeGiftDAO" class="com.pchome.akbadm.db.dao.free.AdmFreeGiftDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBonusRecordDAO" class="com.pchome.akbadm.db.dao.pfd.bonus.PfdBonusRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBonusInvoiceDAO" class="com.pchome.akbadm.db.dao.pfd.bonus.PfdBonusInvoiceDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBonusItemSetDAO" class="com.pchome.akbadm.db.dao.pfd.bonus.PfdBonusItemSetDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="AdmRetrieveRecordDAO" class="com.pchome.akbadm.db.dao.retrieve.AdmRetrieveRecordDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbCustomerInfoDAO" class="com.pchome.akbadm.db.dao.customerInfo.PfbCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbxBoardDAO" class="com.pchome.akbadm.db.dao.pfbx.board.PfbxBoardDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbxCustomerInfoDAO" class="com.pchome.akbadm.db.dao.pfbx.account.PfbxCustomerInfoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbSizeDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbSizeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfbxPositionMenuDAO" class="com.pchome.akbadm.db.dao.pfbx.PfbxPositionMenuDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="BankDAO" class="com.pchome.akbadm.db.dao.bank.BankDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfdBonusDayReportDAO" class="com.pchome.akbadm.db.dao.pfd.bonus.PfdBonusDayReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdClientReportDAO" class="com.pchome.akbadm.db.dao.report.AdClientReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdVideoReportDAO" class="com.pchome.akbadm.db.dao.report.PfpAdVideoReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdSourceReportDAO" class="com.pchome.akbadm.db.dao.report.AdSourceReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdmClientCountReportDAO" class="com.pchome.akbadm.db.dao.report.AdmClientCountReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdmPortalBonusReportDAO" class="com.pchome.akbadm.db.dao.report.AdmPortalBonusReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="DmpAdclassReportDAO" class="com.pchome.akbadm.db.dao.dmp.DmpAdclassReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="DmpHitReportDAO" class="com.pchome.akbadm.db.dao.dmp.DmpHitReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdAgesexReportDAO" class="com.pchome.akbadm.db.dao.report.AdAgesexReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdWeektimeReportDAO" class="com.pchome.akbadm.db.dao.report.PfpAdWeektimeReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="AdWebsiteReportDAO" class="com.pchome.akbadm.db.dao.report.AdWebsiteReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpRefundOrderDAO" class="com.pchome.akbadm.db.dao.order.PfpRefundOrderDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpAdVideoSourceDAO" class="com.pchome.akbadm.db.dao.advideo.PfpAdVideoSourceDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <bean id="AdmUniqDataDAO" class="com.pchome.akbadm.db.dao.report.AdmUniqDataDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+    <!-- ARW 權重管理 -->
+ 	<bean id="ARWManagementDAO" class="com.pchome.akbadm.db.dao.arwManagement.AdmARWManagementDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+ 	</bean>
+    
+    <bean id="PfpRefundOrderReleaseDAO" class="com.pchome.akbadm.db.dao.order.PfpRefundOrderReleaseDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- 品牌對應關鍵字管理 -->
+ 	<bean id="AdmBrandCorrespondDAO" class="com.pchome.akbadm.db.dao.admBrandCorrespond.AdmBrandCorrespondDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+ 	</bean>
+ 	
+</beans>

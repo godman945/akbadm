@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	<!-- ad msg -->
+	<definition name="ad.exclude.keyword.table.msg" extends="msg.layout">
+		<put-attribute name="jsName" value="msg/ad.exclude.keyword.table.msg.js" />
+        <put-attribute name="body" value="/ftl/msg/ad/ad.exclude.keyword.table.msg.ftl" />
+    </definition>
+
+	<definition name="close.ad.exclude.keyword.status.msg" extends="msg.layout">
+		<put-attribute name="jsName" value="msg/ad.exclude.keyword.msg.js" />
+        <put-attribute name="body" value="/ftl/msg/ad/ad.exclude.keyword.close.status.msg.ftl" />
+    </definition>
+
+    <definition name="msg.layout" template="/ftl/default/layout5.ftl">
+    	<put-attribute name="jsName" value="" />
+        <put-attribute name="body" value="default.body" />
+    </definition>
+    
+    <definition name="default.body" template="/ftl/default/body.ftl" />
+    
+</tiles-definitions>

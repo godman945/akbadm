@@ -1,0 +1,59 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-user" namespace="/" extends="struts-base">
+
+        <action name="userMaintain" class="UserAction" method="execute">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.user.maintain</result>
+        </action>
+
+        <action name="userQuery" class="UserAction" method="query">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.user.maintain</result>
+        </action>
+
+        <action name="userAdd" class="UserAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.user.add</result>
+        </action>
+
+        <action name="doUserAdd" class="UserAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">userMaintain</result>
+            <result type="tiles" name="input">.user.add</result>
+        </action>
+
+        <action name="userUpdate" class="UserAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.user.update</result>
+        </action>
+
+        <action name="doUserUpdate" class="UserAction" method="doUpdate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">userMaintain</result>
+            <result type="tiles" name="input">.user.update</result>
+        </action>
+
+        <action name="doUserDelete" class="UserAction" method="doDelete">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">userMaintain</result>
+        </action>
+
+		<action name="showPrivilegeAJAX" class="UserAction" method="showPrivilegeAJAX">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+		</action>
+
+		<action name="changeChildDeptAJAX" class="UserAction" method="changeChildDeptAJAX">
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+		</action>
+
+    </package>
+</struts>

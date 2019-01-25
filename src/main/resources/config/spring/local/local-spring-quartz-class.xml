@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="BIG5"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+	<!-- Accesslog / 每隔 30 分鐘執行  -->
+    <bean id="AccesslogJob" class="com.pchome.akbadm.quartzs.AccesslogJob" >
+        <property name="accesslogService" ref="AdmAccesslogService" />
+        <property name="mailDir" value="${mail.dir}" />
+        <property name="mailService" value="${mail.server}" />
+        <property name="mailSubject" value="${check.accesslog.mail.subject}" />
+        <property name="mailFrom" value="${check.accesslog.mail.from}" />
+        <property name="mailTo" value="${check.accesslog.mail.to}" />
+    </bean>
+    	
+	<!-- 結算帳戶餘額  / 每日 AM 03:30 執行  -->
+    <bean id="AdjustAccountJob" class="com.pchome.akbadm.quartzs.AdjustAccountJob" >
+    	<property name="customerInfoService" ref="PfpCustomerInfoService" />
+    	<property name="settlementProcess" ref="SettlementProcess" />
+        <property name="recognizeProcess" ref="RecognizeProcess" />
+        <property name="controlPriceFactory" ref="ControlPriceFactory" />
+        <property name="accesslogService" ref="AdmAccesslogService" />
+    </bean>
+	
+    <!-- 更新系統價格  / 每小時執行  --> 
+    <bean id="SyspriceJob" class="com.pchome.akbadm.quartzs.SyspriceJob" >
+    	<property name="adDetailService" ref="PfpAdDetailService" />
+    	<property name="adKeywordService" ref="PfpAdKeywordService" />
+    	<property name="adSyspriceService" ref="PfpAdSyspriceService" />
+    	<property name="keywordSyspriceService" ref="PfpKeywordSyspriceService" />
+    	<property name="sysPriceAdPoolSeq" value="${ad.sysprice.adPoolSeq}" />
+    </bean>
+
+    <bean id="VerifyAdIllegalKeyWordJob" class="com.pchome.akbadm.quartzs.VerifyAdIllegalKeyWordJob">
+        <property name="pfpAdService" ref="PfpAdService" />
+        <property name="pfpAdDetailService" ref="PfpAdDetailService" />
+        <property name="pfpIllegalKeywordService" ref="PfpIllegalKeywordService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+    
+    <!-- kernel -->
+    <bean id="HdfsJob" class="com.pchome.akbadm.quartzs.HdfsJob">
+        <property name="storeFactory" ref="StoreFactory" />
+    </bean>
+
+    <bean id="KernelJob" class="com.pchome.akbadm.quartzs.KernelJob">
+        <property name="pfbStyleInfoService" ref="PfbStyleInfoService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService" />
+        <property name="pfpAdSyspriceService" ref="PfpAdSyspriceService" />
+        <property name="pfpKeywordSyspriceService" ref="PfpKeywordSyspriceService" />
+        <property name="pfpAdExcludeKeywordService" ref="PfpAdExcludeKeywordService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+        <property name="pfpAdCategoryMappingService" ref="PfpAdCategoryMappingService" />
+        <property name="pfpAdSpecificWebsiteService" ref="PfpAdSpecificWebsiteService" />
+        <property name="pfbxAreaService" ref="PfbxAreaService" />
+        <property name="pfbxPositionService" ref="PfbxPositionService" />
+        <property name="pfbxSizeService" ref="PfbxSizeService" />
+        <property name="pfbxUrlService" ref="PfbxUrlService" />
+        <property name="pfbxUserGroupService" ref="PfbxUserGroupService" />
+        <property name="pfbxUserOptionService" ref="PfbxUserOptionService" />
+        <property name="pfbxUserSampleService" ref="PfbxUserSampleService" />
+        <property name="admShowRuleService" ref="AdmShowRuleService" />
+        <property name="admArwValueService" ref="AdmArwValueService" />
+        <property name="admPfbxBlockUrlService" ref="AdmPfbxBlockUrlService" />
+        <property name="pfbxAllowUrlService" ref="PfbxAllowUrlService" />
+        <property name="admAddata" value="${adm.addata}" />
+        <property name="kernelAddata" value="${kernel.addata}" />
+        <property name="multicorePath" value="${multicore.path}" />
+        <property name="adSysprice" value="${ad.sysprice}" />
+        <property name="keywordSysprice" value="${keyword.sysprice}" />
+        <property name="makeNumber" value="${make.number}" />
+        <property name="serverNumber" value="${server.number}" />
+        <property name="solrFlag" value="${solr.flag}" />
+        <property name="scpProcessList">
+            <list>
+                <ref bean="Kwstg1SSHProcess" />
+            </list>
+        </property>
+    </bean>
+
+    <bean id="MovePvclkJob" class="com.pchome.akbadm.quartzs.MovePvclkJob">
+        <property name="mailSubject" value="${move.pvclk.mail.subject}" />
+        <property name="mailFrom" value="${move.pvclk.mail.from}" />
+        <property name="mailTo" value="${move.pvclk.mail.to}" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="pfpAdPvclkRefererService" ref="PfpAdPvclkRefererService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+
+    <!-- board & mailbox notice -->
+    <bean id="NoticeJob" class="com.pchome.akbadm.quartzs.NoticeJob" >
+        <property name="mailFrom" value="${mail.from}" />
+        <property name="pfpBoardService" ref="PfpBoardService" />
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfpMailboxService" ref="PfpMailboxService" />
+        <property name="noticeFactory" ref="NoticeFactory" />
+		<property name="emailUtils" ref="EmailUtils" />
+		<property name="mailUserName" value="${pfp.mail.user.name}" />
+    </bean>
+
+    <bean id="PfdNoticeJob" class="com.pchome.akbadm.quartzs.PfdNoticeJob" >
+        <property name="akbPfdServer" value="${akbpfd.server}" />
+        <property name="pfdBoardService" ref="PfdBoardService" />
+        <property name="pfpAdActionService" ref="PfpAdActionService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+        <property name="boardProvider" ref="BoardProvider" />
+        <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+    </bean>
+
+    <!-- check pvclk -->
+    <bean id="CheckPvclkJob" class="com.pchome.akbadm.quartzs.CheckPvclkJob" >
+        <property name="mailSubject" value="${check.pvclk.mail.subject}" />
+        <property name="mailFrom" value="${check.pvclk.mail.from}" />
+        <property name="mailTo" value="${check.pvclk.mail.to}" />
+        <property name="checkAdPriceFile" value="${check.ad.price}" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+        <property name="adReportService" ref="AdReportService" />
+    </bean>
+
+    <!-- check pvclk -->
+    <bean id="CheckKernelJob" class="com.pchome.akbadm.quartzs.CheckKernelJob" >
+        <property name="kernelAddata" value="${kernel.addata}" />
+        <property name="mailSubject" value="${check.kernel.mail.subject}" />
+        <property name="mailFrom" value="${check.kernel.mail.from}" />
+        <property name="mailTo" value="${check.kernel.mail.to}" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+
+    <!-- report -->
+    <bean id="ReportJob" class="com.pchome.akbadm.quartzs.ReportJob" >
+        <property name="rmiserviceServer" value="${rmiservice.server}" />
+        <property name="charset" value="${charset}" />
+        <property name="timeout" value="${timeout}" />
+        <property name="proxyHost" value="${proxy.host}" />
+        <property name="proxyPort" value="${proxy.port}" />
+        <property name="admTransLossService" ref="AdmTransLossService" />
+        <property name="pfpAdService" ref="PfpAdService" />
+        <property name="pfpAdActionService" ref="PfpAdActionService" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpTransDetailService" ref="PfpTransDetailService" />
+        <property name="pfpReportService" ref="PfpReportService" />
+    </bean>
+
+    <bean id="PfpAdActionReportJob" class="com.pchome.akbadm.quartzs.PfpAdActionReportJob" >
+        <property name="pfpAdActionReportService" ref="PfpAdActionReportService" />
+        <property name="pfpAdGroupReportService" ref="PfpAdGroupReportService" />
+        <property name="pfpAdReportService" ref="PfpAdReportService" />
+        <property name="pfpAdKeywordReportService" ref="PfpAdKeywordReportService" />
+        <property name="pfpAdOsReportService" ref="PfpAdOsReportService" />
+        <property name="admPfpdAdPvclkReportService" ref="AdmPfpdAdPvclkReportService" />
+        <property name="pfpAdTimeReportService" ref="PfpAdTimeReportService" />
+        <property name="pfpAdAgeReportService" ref="PfpAdAgeReportService" />
+        <property name="pfpAdWebsiteReportService" ref="PfpAdWebsiteReportService" />
+        <property name="admPfpAdVideoReportService" ref="AdmPfpAdVideoReportService" />
+        <property name="checkPvclkJob" ref="CheckPvclkJob" />
+    </bean>
+
+    <bean id="PfdReportJob" class="com.pchome.akbadm.quartzs.PfdReportJob" >
+        <property name="pfdAdActionReportService" ref="PfdAdActionReportService" />
+        <property name="pfdAdGroupReportService" ref="PfdAdGroupReportService" />
+        <property name="pfdAdReportService" ref="PfdAdReportService" />
+        <property name="pfdKeywordReportService" ref="PfdKeywordReportService" />
+        <property name="pfdAdTemplateReportService" ref="PfdAdTemplateReportService" />
+        <property name="pfdAdTimeReportService" ref="PfdAdTimeReportService" />
+        <property name="pfdAdAgeReportService" ref="PfdAdAgeReportService" />
+        <property name="pfdAdWebsiteReportService" ref="PfdAdWebsiteReportService" />
+        <property name="pfdAdVideoReportService" ref="PfdAdVideoReportService" />
+    </bean>
+
+    <bean id="PfdContractJob" class="com.pchome.akbadm.quartzs.PfdContractJob">
+        <property name="pfdContractService" ref="PfdContractService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+	
+	<!-- 
+	<bean id="BonusJob" class="com.pchome.akbadm.quartzs.BonusJob">
+        <property name="pfdContractService" ref="PfdContractService" />
+        <property name="pfdMonthTotalBonusService" ref="PfdMonthTotalBonusService" />
+        <property name="pfdBonusDetailService" ref="PfdBonusDetailService" />
+        <property name="bonusFactory" ref="BonusFactory" />
+    </bean>
+     -->
+     
+    <!-- 經銷商獎金計算2 -->
+    <bean id="PfdBonusJob" class="com.pchome.akbadm.quartzs.PfdBonusJob">
+        <property name="pfdContractService" ref="PfdContractService" />
+        <property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />
+        <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+        <property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+        <property name="pfdBonusItemFactory" ref="PfdBonusItemFactory" />
+        <property name="everyDayPfdBonus" ref="EveryDayPfdBonus" />
+        <property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
+    </bean>
+    
+    <bean id="RetrieveJob" class="com.pchome.akbadm.quartzs.RetrieveJob">
+        <property name="admFreeActionService" ref="AdmFreeActionService" />
+        <property name="feedbackRecordService" ref="AdmFeedbackRecordService" />
+        <property name="admRecognizeRecordService" ref="AdmRecognizeRecordService" />
+        <property name="admRetrieveRecordService" ref="AdmRetrieveRecordService" />
+    </bean>
+    
+    <!-- Pfb bonus Job -->
+    <bean id="PfbBonusJob" class="com.pchome.akbadm.quartzs.PfbBonusJob">
+    	<property name="deletePfbBonus" ref="DeletePfbBonus" /> 
+    	<property name="everyDayPfbBonus" ref="EveryDayPfbBonus" /> 
+    </bean>
+    
+    <!-- Pfb bonus Month Job -->
+    <bean id="PfbBonusMonthJob" class="com.pchome.akbadm.quartzs.PfbBonusMonthJob">
+        <property name="everyMonthPfbBonus" ref="EveryMonthPfbBonus" /> 
+    </bean>
+
+    <!-- pfb 報表 -->
+ 	<bean id="PfbxReportJob" class="com.pchome.akbadm.quartzs.PfbxReportJob">
+        <property name="pfbxAdTimeReportService" ref="PfbxAdTimeReportService" />
+        <property name="pfbxAdCustomerReportService" ref="PfbxAdCustomerReportService" />
+        <property name="pfbxAdUrlReportService" ref="PfbxAdUrlReportService" />
+        <property name="pfbxAdDeviceReportService" ref="PfbxAdDeviceReportService" />
+        <property name="pfbxAdUnitReportService" ref="PfbxAdUnitReportService" />
+        <property name="pfbxAdSizeReportService" ref="PfbxAdSizeReportService" />
+        <property name="pfbxAdGroupReportService" ref="PfbxAdGroupReportService" />
+        <property name="pfbxPositionService" ref="PfbxPositionService" />
+        <property name="pfbSizeService" ref="PfbSizeService" />
+        <property name="templateProductService" ref="TemplateProductService" />
+        <property name="pfbxUserGroupService" ref="PfbxUserGroupService" />
+        <property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+        <property name="pfbxAdStyleReportService" ref="PfbxAdStyleReportService" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="templateAdService" ref="TemplateAdService" />
+        <property name="pfbxEmptyCustomerInfoId" value="${pfbxempty.customer_info_id}" />
+        <property name="pfbxEmptyPositionId" value="${pfbxempty.position_id}" />
+    </bean>
+    
+     <!-- pfb 申請單自動排程 20號收據未收到 5號 申請成功 -->
+ 	<bean id="PfbBonusApplyOrderProcessJob" class="com.pchome.akbadm.quartzs.PfbBonusApplyOrderProcessJob">
+        <property name="applyOrderProcess" ref="ApplyOrderProcess" />
+        <property name="pfbxBonusApplyService" ref="PfbxBonusApplyService" />
+    </bean>    
+    
+    <!--pfb 每日檢查帳戶狀態是否超過關閉時間-->
+    <bean id="PfbAccountStatusChangeJob" class="com.pchome.akbadm.quartzs.PfbAccountStatusChangeJob">
+        <property name="pfbxCustomerInfoService" ref="PfbxCustomerInfoService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+
+	<!--adm 每日AM06:00 執行AdmClientCountReport報表寫入-->
+    <bean id="AdmClientCountReportJob" class="com.pchome.akbadm.quartzs.AdmClientCountReportJob">
+        <property name="admClientCountReportService" ref="AdmClientCountReportService" />
+        <property name="admPortalBonusReportService" ref="AdmPortalBonusReportService" />
+        <property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
+    </bean>
+    
+    <!--adm 每日AM08:30 執行admReport 報表 E-mail  -->
+    <bean id="AdmReportMailJob" class="com.pchome.akbadm.quartzs.AdmReportMailJob">
+        <property name="admClientCountReportService" ref="AdmClientCountReportService" />
+        <property name="adSourceReportService" ref="AdSourceReportService" />
+        <property name="emailUtils" ref="EmailUtils" />
+        <property name="mailDir" value="${mail.dir}" />
+    </bean>
+
+    <bean id="MaliceJob" class="com.pchome.akbadm.quartzs.MaliceJob">
+        <property name="maliceFactory" ref="MaliceFactory" />
+        <property name="maliceService" ref="MaliceService" />
+    </bean>
+
+    <bean id="DmpHitReportJob" class="com.pchome.akbadm.quartzs.DmpHitReportJob">
+        <property name="dmpAdclassReportService" ref="DmpAdclassReportService" />
+        <property name="dmpHitReportService" ref="DmpHitReportService" />
+        <property name="pfpAdCategoryNewService" ref="PfpAdCategoryNewService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+        <property name="subject" value="${dmp.mail.subject}" />
+        <property name="mailTestFrom" value="${dmp.mail.test.from}" />
+        <property name="mailTestTo" value="${dmp.mail.test.to}" />
+        <property name="savePath" value="${save.path.dmplog}" />
+    </bean>
+    
+    <!--pfd 每小時檢查是否有要審核的申請開發-->
+    <bean id="PfdApplyForBusinessJob" class="com.pchome.akbadm.quartzs.PfdApplyForBusinessJob">
+        <property name="pfdApplyForBusinessService" ref="PfdApplyForBusinessService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+    
+    <!-- 比對前一天PFP花費與驗證花費是否相等  / 每日 AM 10:00 執行  -->
+    <bean id="CheckPFPCostAndVerifyTheCostJob" class="com.pchome.akbadm.quartzs.CheckPFPCostAndVerifyTheCostJob">
+        <property name="admBonusBillReportService" ref="AdmBonusBillReportService" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+</beans>

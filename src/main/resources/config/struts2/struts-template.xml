@@ -1,0 +1,265 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-template" extends="struts-base">
+		<!-- 商品樣板 -->
+        <action name="templateProductMaintain" class="TemplateProductAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.maintain</result>
+        </action>
+
+        <action name="templateProductQuery" class="TemplateProductAction" method="query">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.maintain</result>
+        </action>
+        
+        <action name="templateProductSizeQuery" class="TemplateProductAction" method="changeTemplateProductSizeView">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.maintain</result>
+        </action>
+        
+
+        <action name="templateProductAdd" class="TemplateProductAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.add</result>
+        </action>
+
+        <action name="doTemplateProductAdd" class="TemplateProductAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.relate</result>
+            <result type="tiles" name="input">.templateproduct.add</result>
+        </action>
+
+        <action name="templateProductRelate" class="TemplateProductAction" method="goRelatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.relate</result>
+        </action>
+
+        <action name="doTemplateProductRelate" class="TemplateProductAction" method="doRelate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.maintain</result>
+            <result type="tiles" name="input">.templateproduct.relate</result>
+        </action>
+
+        <action name="templateProductUpdate" class="TemplateProductAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateproduct.update</result>
+        </action>
+
+        <action name="doTemplateProductUpdate" class="TemplateProductAction" method="doUpdate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">templateProductMaintain</result>
+            <result type="tiles" name="input">.templateproduct.update</result>
+        </action>
+
+        <action name="doTemplateProductDelete" class="TemplateProductAction" method="doDelete">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">templateProductMaintain</result>
+        </action>
+
+		<!-- 廣告樣板 -->
+        <action name="templateAdMaintain" class="TemplateAdAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.maintain</result>
+        </action>
+
+        <action name="templateAdQuery" class="TemplateAdAction" method="query">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.maintain</result>
+        </action>
+
+        <action name="templateAdAdd" class="TemplateAdAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.add</result>
+        </action>
+
+        <action name="doTemplateAdAdd" class="TemplateAdAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.relate</result>
+            <result type="tiles" name="input">.templatead.add</result>
+        </action>
+
+        <action name="templateAdRelate" class="TemplateAdAction" method="goRelatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.relate</result>
+        </action>
+
+        <action name="doTemplateAdRelate" class="TemplateAdAction" method="doRelate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">templateAdMaintain</result>
+            <result type="tiles" name="input">.templatead.add</result>
+        </action>
+
+        <action name="templateAdUpdate" class="TemplateAdAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templatead.update</result>
+        </action>
+
+        <action name="doTemplateAdUpdate" class="TemplateAdAction" method="doUpdate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">templateAdMaintain</result>
+            <result type="tiles" name="input">.templatead.update</result>
+        </action>
+
+        <action name="doTemplateAdDelete" class="TemplateAdAction" method="doDelete">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">templateAdMaintain</result>
+        </action>
+
+		<!-- 廣告定義 -->
+        <action name="defineAdMaintain" class="DefineAdAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">definead.maintain</result>
+        </action>
+
+        <action name="defineAdQuery" class="DefineAdAction" method="query">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">definead.maintain</result>
+        </action>
+
+        <action name="defineAdList" class="DefineAdAction" method="defineAdList">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">definead.list</result>
+        </action>
+
+        <action name="defineAdAdd" class="DefineAdAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.definead.add</result>
+        </action>
+
+        <action name="defineAdUpdate" class="DefineAdAction" method="goUpdatePage">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="input">.definead.update</result>
+            <result type="tiles" name="none">.definead.update</result>
+            <result type="tiles" name="success">.definead.update</result>
+        </action>
+
+        <action name="doDefineAdAddAJAX" class="DefineAdAction" method="doAdd">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="input">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="none">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+		</action>
+
+        <action name="doDefineAdUpdateAJAX" class="DefineAdAction" method="doUpdate">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="input">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="none">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+
+        <action name="doDefineAdDeleteAJAX" class="DefineAdAction" method="doDelete">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="input">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="none">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+            <result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>
+        </action>
+
+		<!-- 商品、資料群組  -->
+        <action name="adPoolMaintain" class="AdPoolAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adpool.maintain</result>
+        </action>
+
+        <action name="adPoolQuery" class="AdPoolAction" method="query">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adpool.maintain</result>
+        </action>
+
+        <action name="adPoolAdd" class="AdPoolAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adpool.add</result>
+        </action>
+
+        <action name="adPoolUpdate" class="AdPoolAction" method="goUpdatePage">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="none">.adpool.update</result>
+            <result type="tiles" name="success">.adpool.update</result>
+        </action>
+
+        <action name="doAdPoolAdd" class="AdPoolAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="input">.adpool.add</result>
+            <result type="tiles" name="success">.adpool.detail</result>
+        </action>
+
+        <action name="doAdPoolUpdate" class="AdPoolAction" method="doUpdate">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="input">.adpool.update</result>
+            <result type="tiles" name="none">.adpool.update</result>
+            <result type="tiles" name="success">.adpool.detail</result>
+        </action>
+
+        <action name="doAdPoolDelete" class="AdPoolAction" method="doDelete">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="none">adPoolMaintain</result>
+            <result type="redirectAction" name="success">adPoolMaintain</result>
+        </action>
+
+        <action name="adPoolDetail" class="AdPoolAction" method="detailPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adpool.detail</result>
+        </action>
+        
+        <!-- 廣告商品測試頁面 -->
+        <action name="templateProductDemo" class="TemplateProductDemoAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateProductDemo</result>
+        </action>
+        
+         <action name="templateProductSearch" class="TemplateProductDemoAction" method="templateProductFilter">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.templateProductDemo</result>
+        </action>
+         <!-- 廣告商品測試頁面 end-->
+         
+         
+         <!-- 廣告核心測試頁面 -->
+        <action name="adKdclDemo" class="adKdclDemoAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adKdclDemo</result>
+        </action>
+        <action name="adKdclPosition" class="adKdclDemoAction" method="getPositionInfo">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="success">
+                <param name="root">result</param>
+            </result>
+        </action>
+        
+        <action name="kdclAd" class="adKdclDemoAction" method="getKdclAd">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.adKdclDemo</result>
+        </action>
+        
+         <!-- 廣告商品核心頁面 end-->
+         
+    </package>
+</struts>

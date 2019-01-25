@@ -1,0 +1,7 @@
+<<<<<<< HEAD
+cd /home/webuser/akb/webapps/ROOT/WEB-INF/classes
+java -cp .:../lib/*:/usr/share/tomcat-6/lib/* com.pchome.akbadm.quartzs.CheckPvclkJob
+=======
+cd /home/webuser/akb/webapps/adm/WEB-INF/classes
+java -cp .:../lib/*:/usr/share/tomcat-7/lib/* com.pchome.akbadm.quartzs.CheckPvclkJob $*
+>>>>>>> eeecbb69fd89b489a1e6dc5c5b9488201cdbfcef

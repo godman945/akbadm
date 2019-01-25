@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+	
+   	<definition name="delete.test.account.view" extends="default.layout">
+		<put-attribute name="title" value="delete.test.account.title" />
+    	<put-attribute name="body" value="/ftl/addition/delete.account.view.body.ftl" />
+    </definition>
+    
+    <definition name="delete.test.account.title" extends="default.title" >
+       <put-attribute name="jsName" value="addition/delete.test.account.js"/>
+    </definition>
+    
+    <definition name="sql.action.view" extends="default.layout">
+		<put-attribute name="title" value="sql.action.title" />
+    	<put-attribute name="body" value="/ftl/addition/sql.action.view.body.ftl" />
+    </definition>
+    
+    <definition name="sql.action.title" extends="default.title" >
+       <put-attribute name="jsName" value="addition/sql.action.js"/>
+    </definition>
+    
+</tiles-definitions>

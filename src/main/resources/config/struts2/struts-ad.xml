@@ -1,0 +1,322 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-ad" extends="struts-base">
+
+    	<!-- 檢視廣告第一頁 - 廣告管理 -->
+	    <action name="adActionView" class="AdActionViewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.action.view</result>
+	    </action>
+	    
+	    <action name="adActionViewTable" class="AdActionViewAjax" method="adActionViewTableAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.action.table</result>
+	    </action>
+	
+		<!-- 檢視廣告第二頁 - 分類管理 -->
+		<action name="adGroupView" class="AdGroupViewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.group.view</result>
+    	</action>
+    	
+    	<action name="adGroupViewTable" class="AdGroupViewAjax" method="adGroupViewTableAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.group.table</result>
+	    </action>
+    	
+    	<!-- 檢視廣告第三頁 - 關鍵字管理 -->
+    	<action name="adKeywordView" class="AdKeywordViewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.keyword.view</result>
+    	</action>
+    
+    	<action name="adKeywordViewTable" class="AdKeywordViewAjax" method="adKeywordViewTableAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.keyword.table</result>
+	    </action>
+	    
+	    <action name="updAdKeywordStatus" class="AdKeywordViewAction" method="updateAdKeywordStatusAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">adKeywordView</param>
+				<param name="adGroupSeq">${adGroupSeq}</param>
+			</result>
+    	</action>
+    	
+    	<action name="updAdKeywordPrice" class="AdKeywordViewAction" method="updateAdKeywordPriceAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+	    </action>
+	    
+		<action name="updAdExcludeKeywordStatus" class="AdExcludeKeywordAction" method="updateAdExcludeKeywordStatusAction">
+			<interceptor-ref name="akbadmCookieStack" />
+    	</action>
+
+    	<!-- 檢視廣告第四頁 - 播放明細管理 -->
+    	<action name="adAdView" class="AdAdViewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.ad.view</result>
+    	</action>
+    	
+    	<action name="adAdViewTable" class="AdAdViewAjax" method="adAdViewTableAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.ad.table</result>
+	    </action>
+	    
+	    <action name="adDownload" class="AdAdViewAjax" method="adDownloadAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+	    
+	    <!-- adCategoryNew search -->
+	    <action name="AdCategoryNew" class="AdCategoryNewAjax" method="getPfpAdCategoryNewAll">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+	    </action>
+	    
+    	
+    	<action name="updAdAdStatus" class="AdAdViewAction" method="updateAdAdStatusAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">adAdView</param>
+				<param name="adGroupSeq">${adGroupSeq}</param>
+			</result>
+    	</action>
+    	
+    	
+    	<action name="illegalizeAd" class="AdAdViewAction" method="illegalizeAdAction">
+            <interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="success"/>
+            <param name="root">result</param>
+        </action>
+    	<!-- 
+    	<action name="illegalizeAd" class="AdAdViewAction" method="illegalizeAdAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.illegalize</result>
+    	</action>
+		-->
+ 
+ 
+    	<!-- 檢視廣告第五頁 - 廣告禮金管理 -->
+    	<action name="adGiftView" class="AdGiftViewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.view</result>
+    	</action>
+    	
+    	<action name="adGiftViewTable" class="AdGiftViewAjax" method="adGiftViewTableAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.table</result>
+	    </action>
+
+		<action name="adGiftAdd" class="AdGiftAddAction" method="addView">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.add</result>
+	    </action>
+    	
+    	<action name="addFreeAction" class="AdGiftAddAction" method="addGiftAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.view</result>
+	    </action>
+    	
+    	<action name="adGiftUpdate" class="AdGiftAddAction" method="updateView">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.update</result>
+	    </action>
+    	
+    	<action name="updateFreeAction" class="AdGiftAddAction" method="updateGiftAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.view</result>
+	    </action>
+	    
+	    <action name="adGiftDetalView" class="AdGiftAddAction" method="giftDetalView">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.detal.view</result>
+	    </action>
+	    
+	    <action name="addFreeGift" class="AdGiftAddAction" method="giftDetalViewAdd">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">adGiftDetalView</param>
+				<param name="actionId">${actionId}</param>
+				<param name="actionEndDate">${actionEndDate}</param>
+			</result>
+	    </action>
+	    
+	    <action name="adGiftDetalDownload" class="AdGiftAddAction" method="giftDetalView">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+	    
+	    <action name="adGiftRecordView" class="AdGiftAddAction" method="giftRecord">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.gift.record.view</result>
+	    </action>
+	    
+	    <action name="adGiftRecordDownload" class="AdGiftAddAction" method="giftRecord">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+	    
+	    <!-- 廣告分類明細 - 廣告管理 -->
+	    <action name="adCategoryView" class="PfpAdCategoryNewAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.category.view</result>
+	    </action>
+	    
+	    <action name="adCategoryViewTable" class="PfpAdCategoryNewAction" method="getAdCategoryList">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">ad.category.table</result>
+	    </action>
+	    
+	    <action name="addAdCategory" class="PfpAdCategoryNewAction" method="addAdCategory">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success"/>
+	    </action>
+	    
+	    <action name="updateAdCategory" class="PfpAdCategoryNewAction" method="updateAdCategory">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success"/>
+	    </action>
+	    
+	    
+		<!-- 影音預覽 RMI -->
+		<action name="adVideoModel" class="AdModelAPIAction" method="adModelVideoAction">
+			<result type="stream" name="success">
+				<param name="contentType">text/html</param>
+				<param name="inputName">inputAdModel</param>
+				<param name="noCache">true</param>
+			</result>
+		</action>
+	    
+	    
+		<!-- ARW 權重管理 -->
+		<!-- 點選menu選項後進入點 -->
+	    <action name="arwManagement" class="ARWManagementAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.arwManagementList</result>
+        </action>
+        
+        <!-- 點選新增後到新增頁 -->
+        <action name="arwManagementAdd" class="ARWManagementAction" method="arwManagementAddAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.arwManagementAdd</result>
+        </action>
+        
+        <!-- 新增頁點選新增按鈕 -->
+        <action name="arwManagementSave" class="ARWManagementAction" method="arwManagementSave">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">arwManagement</result>
+        </action>
+        
+        <!-- 點選修改後到修改頁 -->
+        <action name="arwManagementModify" class="ARWManagementAction" method="arwManagementModifyAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.arwManagementModify</result>
+        </action>
+        
+        <!-- 修改頁點選儲存按鈕 -->
+        <action name="arwManagementUpdate" class="ARWManagementAction" method="arwManagementUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">arwManagement</result>
+        </action>
+        
+        <!-- 點選刪除 -->
+        <action name="arwManagementDelete" class="ARWManagementAction" method="arwManagementDelete">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">arwManagement</result>
+        </action>
+        
+        <!-- pfd連動pfp下拉選單資料 -->
+        <action name="selectPfpCustomerListAjax" class="ARWManagementAjaxAction" method="selectPfpCustomerListAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="json" name="success">
+				<param name="root">dataMap</param>
+        	</result>
+        </action>
+	    <!-- ARW 權重管理 end -->
+	    
+	    
+	    <!-- 品牌對應關鍵字管理 -->
+	    <!-- 點選menu選項後進入點 -->
+	    <action name="admBrandCorrespond" class="AdmBrandCorrespondApi" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.admBrandCorrespondList</result>
+        </action>
+        
+        <!-- 點選新增後到新增頁 -->
+        <action name="admBrandCorrespondAdd" class="AdmBrandCorrespondApi" method="admBrandCorrespondAddAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.admBrandCorrespondAdd</result>
+        </action>
+        
+        <!-- 新增頁點選新增按鈕 -->
+        <action name="admBrandCorrespondSave" class="AdmBrandCorrespondApi" method="admBrandCorrespondSave">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="json" name="success">
+				<param name="root">dataMap</param>
+	       	</result>
+        </action>
+        
+        <!-- 點選修改後到修改頁 -->
+        <action name="admBrandCorrespondModify" class="AdmBrandCorrespondApi" method="admBrandCorrespondModifyAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.admBrandCorrespondModify</result>
+        </action>
+        
+        <!-- 修改頁點選儲存按鈕 -->
+        <action name="admBrandCorrespondUpdate" class="AdmBrandCorrespondApi" method="admBrandCorrespondUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="root">dataMap</param>
+	       	</result>
+        </action>
+        
+        <!-- 點選刪除 -->
+        <action name="admBrandCorrespondDelete" class="AdmBrandCorrespondApi" method="admBrandCorrespondDelete">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">admBrandCorrespond</result>
+        </action>
+        
+        <!-- 下載報表 -->
+        <action name="admBrandCorrespondDownload" class="AdmBrandCorrespondApi" method="makeDownloadReportData">
+        	<interceptor-ref name="akbadmCookieStack" />
+      		<result name="success" type="stream">   
+             	<param name="contentType">application/octet-stream</param>   
+             	<param name="contentDisposition">   
+                    attachment;filename="${downloadFileName}"  
+                </param>   
+                <param name="inputName">downloadFileStream</param> 
+            </result>  
+      	</action>
+      	
+      	<!-- 提供給別人打的api -->
+      	<action name="getBrandCorrespond" class="AdmBrandCorrespondApi" method="getBrandCorrespond">
+			<result type="json" name="success">
+				<param name="root">dataMap</param>
+	       	</result>
+        </action>
+	    <!-- 品牌對應關鍵字管理 end -->
+	    
+	</package>
+</struts>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".privilege.title" extends="default.title" >
+       <put-attribute name="jsName" value="privilege/privilegeModel.js"/>
+    </definition>
+
+    <definition name=".privilege.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".privilege.title" />
+        <put-attribute name="body" value="/ftl/privilege/privilegeMaintain.ftl" />
+    </definition>
+
+    <definition name=".privilege.detail" extends="default.layout2">
+    	<put-attribute name="title" value=".privilege.title" />
+        <put-attribute name="body" value="/ftl/privilege/privilegeDetail.ftl" />
+    </definition>
+
+    <definition name=".privilege.add" extends="default.layout">
+    	<put-attribute name="title" value=".privilege.title" />
+        <put-attribute name="body" value="/ftl/privilege/privilegeAdd.ftl" />
+    </definition>
+
+    <definition name=".privilege.update" extends="default.layout">
+    	<put-attribute name="title" value=".privilege.title" />
+        <put-attribute name="body" value="/ftl/privilege/privilegeUpdate.ftl" />
+    </definition>
+
+</tiles-definitions>

@@ -1,0 +1,65 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-contract" namespace="/" extends="struts-base">
+
+        <action name="contractList" class="ContractAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.contract.list</result>
+        </action>
+
+        <action name="contractAdd" class="ContractAction" method="add">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.contract.add</result>
+        </action>
+
+        <action name="doContractAdd" class="ContractAction" method="doAdd">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">
+            	<param name="actionName">contractList</param>
+                <param name="paramPfdCustomerInfoId">${paramPfdCustomerInfoId}</param>
+                <param name="paramContractStatus">${paramContractStatus}</param>
+                <param name="paramContractId">${paramContractId}</param>
+            </result>
+            <result type="tiles" name="input">.contract.add</result> 			
+        </action>
+        
+         <action name="checkContractAddAjax" class="checkContractActionAjax" method="checkAddContract">
+         	<interceptor-ref name="akbadmCookieStack" />
+ 			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="contentType">text/html</param>
+            </result>  
+        </action>
+        
+        <action name="contractUpdate" class="ContractAction" method="update">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.contract.update</result>
+            <result type="tiles" name="input">.contract.list</result>
+        </action>
+
+        <action name="doContractUpdate" class="ContractAction" method="doUpdate">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">
+            	<param name="actionName">contractList</param>
+                <param name="paramPfdCustomerInfoId">${paramPfdCustomerInfoId}</param>
+                <param name="paramContractStatus">${paramContractStatus}</param>
+                <param name="paramContractId">${paramContractId}</param>
+            </result>
+            <result type="tiles" name="input">.contract.update</result>
+        </action>
+
+        <action name="doContractClose" class="ContractAction" method="doClose">
+		    <interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">
+            	<param name="actionName">contractList</param>
+                <param name="paramPfdCustomerInfoId">${paramPfdCustomerInfoId}</param>
+                <param name="paramContractStatus">${paramContractStatus}</param>
+                <param name="paramContractId">${paramContractId}</param>
+            </result>
+            <result type="tiles" name="input">.contract.update</result>
+        </action>
+
+    </package>
+</struts>

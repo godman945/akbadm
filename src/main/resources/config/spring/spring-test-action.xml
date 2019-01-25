@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+    <!-- test Action -->
+    <bean id="TestAppsAction" class="com.pchome.akbadm.struts2.action.test.TestAppsAction" scope="prototype">
+    	<property name="pfdContractService" ref="PfdContractService" />
+        <property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />
+        <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+        <property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+        <property name="pfdBonusItemFactory" ref="PfdBonusItemFactory" />
+        
+        <property name="pfpUserService" ref="PfpUserService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfdUserService" ref="PfdUserService" />
+        <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+        
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    </bean>
+
+</beans>

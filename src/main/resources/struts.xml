@@ -1,0 +1,41 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="strutsxml" extends="struts-default"/>
+    <constant name="struts.objectFactory" value="org.apache.struts2.spring.StrutsSpringObjectFactory" />
+    <constant name="struts.objectFactory.spring.autoWire" value="type" />
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.objectFactory" value="spring" />
+    <constant name="struts.action.extension" value="html" />
+    
+    <include file="config/struts2/struts-accesslog.xml" />
+    <include file="config/struts2/struts-account.xml" />
+    <include file="config/struts2/struts-ad.xml" />
+    <include file="config/struts2/struts-addition.xml" />
+	<include file="config/struts2/struts-api.xml" />
+    <include file="config/struts2/struts-base.xml" />
+    <include file="config/struts2/struts-bonus.xml" />
+    <include file="config/struts2/struts-board.xml" />
+    <include file="config/struts2/struts-check.xml" />
+    <include file="config/struts2/struts-department.xml" />
+    <include file="config/struts2/struts-index.xml" />
+	<include file="config/struts2/struts-login.xml" />
+	<include file="config/struts2/struts-logout.xml" />
+	<include file="config/struts2/struts-msg.xml" />
+    <include file="config/struts2/struts-order.xml" />
+    <include file="config/struts2/struts-pfb.xml" />
+    <include file="config/struts2/struts-privilege-model.xml" />
+    <include file="config/struts2/struts-pwd.xml" />
+    <include file="config/struts2/struts-recognize.xml" />
+    <include file="config/struts2/struts-report.xml" />
+    <include file="config/struts2/struts-template.xml" />
+    <include file="config/struts2/struts-user.xml" />
+    <include file="config/struts2/struts-pfd.xml" />
+	<include file="config/struts2/struts-feedback.xml" />
+	<include file="config/struts2/struts-commission.xml" />
+	<include file="config/struts2/struts-contract.xml" />
+	<include file="config/struts2/struts-manager.xml" />
+	<include file="config/struts2/struts-bank.xml" />
+	<include file="config/struts2/struts-test.xml" />
+</struts>

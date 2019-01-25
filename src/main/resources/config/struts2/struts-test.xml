@@ -1,0 +1,21 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="struts-test" namespace="/" extends="struts-base">
+
+		<action name="testApps" class="TestAppsAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.test.maintain</result>
+		</action>
+
+		<action name="testpfp2pfd" class="TestAppsAction" method="pfp2pfd">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="noCache">true</param>
+				<param name="root">returnMsg</param>
+			</result>
+		</action>
+
+	</package>
+</struts>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<every-quarter-bonus>
+
+	<group id="1">
+		<level id="1">
+			<title>第一段</title>
+			<min>0</min>
+			<max>200000</max>
+			<discount>0</discount>
+		</level>
+		<level id="2">
+			<title>第二段</title>
+			<min>200001</min>
+			<max>300000</max>
+			<discount>0.02</discount>
+		</level>
+		<level id="3">
+			<title>第三段</title>
+			<min>300001</min>
+			<max>10000000</max>
+			<discount>0.025</discount>
+		</level>
+	</group>
+	
+	<group id="2">
+		<level id="1">
+			<title>測試第一段</title>
+			<min>0</min>
+			<max>5000</max>
+			<discount>0</discount>
+		</level>
+		<level id="2">
+			<title>測試第二段</title>
+			<min>5001</min>
+			<max>10000</max>
+			<discount>0.02</discount>
+		</level>
+		<level id="3">
+			<title>測試第三段</title>
+			<min>10001</min>
+			<max>10000000</max>
+			<discount>0.025</discount>
+		</level>
+	</group>
+	
+</every-quarter-bonus>

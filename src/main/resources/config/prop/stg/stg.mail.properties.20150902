@@ -1,0 +1,23 @@
+#============== stg setup ====================
+mail.server = spool.pchome.com.tw
+mail.from = showadm@msx.pchome.com.tw
+mail.dir = /home/webuser/akb/webapps/admDevelop/WEB-INF/email/
+
+
+#============== check pvclk ====================
+check.pvclk.mail.subject = check pvclk error
+check.pvclk.mail.from = showadm@msx.pchome.com.tw
+check.pvclk.mail.to = nico<nicolee@staff.pchome.com.tw>,weich<weich@staff.pchome.com.tw>
+
+#============== check kernel ====================
+check.kernel.mail.subject = check kernel error
+check.kernel.mail.from = showadm@msx.pchome.com.tw
+check.kernel.mail.to = nico<nicolee@staff.pchome.com.tw>,weich<weich@staff.pchome.com.tw>
+
+#============== important accesslog ====================
+check.accesslog.mail.subject = important accesslog
+check.accesslog.mail.from = showadm@msx.pchome.com.tw
+check.accesslog.mail.to = nico<nicolee@staff.pchome.com.tw>,rean<rean@staff.pchome.com.tw>,nico<nico19732001@gmail.com>,rean<reantoilpc@gmail.com>
+
+#============== pfd invite ====================
+pfd.invite.mail.subject = PChome \u7d93\u92b7\u5546\u8a3b\u518a\u9080\u8acb\u4fe1

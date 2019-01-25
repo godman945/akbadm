@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- pfbx -->
+    <bean id="PfbxAllowUrlService" class="com.pchome.akbadm.db.service.pfbx.play.PfbxAllowUrlService">
+        <property name="dao" ref="PfbxAllowUrlDAO" />
+    </bean>
+    
+    <bean id="PfbxAllowUrlService2" class="com.pchome.akbadm.db.service.pfbx.play.PfbxAllowUrlService">
+        <property name="dao" ref="PfbxAllowUrlDAO2" />
+    </bean>
+    
+    <bean id="PfbxAreaService" class="com.pchome.akbadm.db.service.pfbx.PfbxAreaService">
+        <property name="dao" ref="PfbxAreaDAO" />
+    </bean>
+    
+    <bean id="PfbxAreaService2" class="com.pchome.akbadm.db.service.pfbx.PfbxAreaService">
+        <property name="dao" ref="PfbxAreaDAO2" />
+    </bean>
+    
+    <bean id="PfbxPositionService" class="com.pchome.akbadm.db.service.pfbx.PfbxPositionService">
+        <property name="dao" ref="PfbxPositionDAO" />
+    </bean>
+    
+    <bean id="PfbxPositionService2" class="com.pchome.akbadm.db.service.pfbx.PfbxPositionService">
+        <property name="dao" ref="PfbxPositionDAO2" />
+    </bean>
+    
+    <bean id="PfbxSizeService" class="com.pchome.akbadm.db.service.pfbx.PfbxSizeService">
+        <property name="dao" ref="PfbxSizeDAO" />
+    </bean>
+    
+    <bean id="PfbxSizeService2" class="com.pchome.akbadm.db.service.pfbx.PfbxSizeService">
+        <property name="dao" ref="PfbxSizeDAO2" />
+    </bean>
+    
+    <bean id="PfbxUrlService" class="com.pchome.akbadm.db.service.pfbx.PfbxUrlService">
+        <property name="dao" ref="PfbxUrlDAO" />
+    </bean>
+    
+    <bean id="PfbxUrlService2" class="com.pchome.akbadm.db.service.pfbx.PfbxUrlService">
+        <property name="dao" ref="PfbxUrlDAO2" />
+    </bean>
+    
+    <bean id="PfbxUserGroupService" class="com.pchome.akbadm.db.service.pfbx.PfbxUserGroupService">
+        <property name="dao" ref="PfbxUserGroupDAO" />
+    </bean>
+    
+    <bean id="PfbxUserGroupService2" class="com.pchome.akbadm.db.service.pfbx.PfbxUserGroupService">
+        <property name="dao" ref="PfbxUserGroupDAO2" />
+    </bean>
+    
+    <bean id="PfbxUserOptionService" class="com.pchome.akbadm.db.service.pfbx.PfbxUserOptionService">
+        <property name="dao" ref="PfbxUserOptionDAO" />
+    </bean>
+    
+    <bean id="PfbxUserOptionService2" class="com.pchome.akbadm.db.service.pfbx.PfbxUserOptionService">
+        <property name="dao" ref="PfbxUserOptionDAO2" />
+    </bean>
+    
+    <bean id="PfbxUserPriceService" class="com.pchome.akbadm.db.service.pfbx.PfbxUserPriceService">
+        <property name="dao" ref="PfbxUserPriceDAO" />
+    </bean>
+    
+    <bean id="PfbxUserSampleService" class="com.pchome.akbadm.db.service.pfbx.PfbxUserSampleService">
+        <property name="dao" ref="PfbxUserSampleDAO" />
+    </bean>
+    
+    <bean id="PfbxUserSampleService2" class="com.pchome.akbadm.db.service.pfbx.PfbxUserSampleService">
+        <property name="dao" ref="PfbxUserSampleDAO2" />
+    </bean>
+    
+    <bean id="AdmShowRuleService2" class="com.pchome.akbadm.db.service.ad.AdmShowRuleService">
+        <property name="dao" ref="AdmShowRuleDAO2" />
+    </bean>
+    
+    <bean id="PfbxUserService" class="com.pchome.akbadm.db.service.pfbx.user.PfbxUserService">
+        <property name="dao" ref="PfbxUserDAO" />
+    </bean>
+
+	<!-- Pfb 獎金計算 -->
+    <bean id="PfbxBonusSetService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusSetService">
+        <property name="dao" ref="PfbxBonusSetDAO" />
+    </bean>
+    
+    <bean id="PfbxBonusSetSpecialService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusSetSpecialService">
+        <property name="dao" ref="PfbxBonusSetSpecialDAO" />
+    </bean>
+    
+    <bean id="PfbxBankService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBankService">
+        <property name="dao" ref="PfbxBankDAO" />
+    </bean>
+    
+    <bean id="PfbxPersonalService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxPersonalService">
+        <property name="dao" ref="PfbxPersonalDAO" />
+    </bean>
+    
+    <bean id="AdmBonusSetService" class="com.pchome.akbadm.db.service.pfbx.bonus.AdmBonusSetService">
+        <property name="dao" ref="AdmBonusSetDAO" />
+    </bean>
+    
+    <bean id="AdmBonusBillReportService" class="com.pchome.akbadm.db.service.pfbx.bonus.AdmBonusBillReportService">
+        <property name="dao" ref="AdmBonusBillReportDAO" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="admTransLossService" ref="AdmTransLossService" />
+    </bean>
+    
+    <bean id="AdmBonusDetailReportService" class="com.pchome.akbadm.db.service.pfbx.bonus.AdmBonusDetailReportService">
+        <property name="dao" ref="AdmBonusDetailReportDAO" />
+    </bean>
+    
+    <bean id="PfbxBonusApplyService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusApplyService">
+        <property name="dao" ref="PfbxBonusApplyDAO" />
+        <property name="checkStatusFactory" ref="CheckStatusFactory" />
+    </bean>
+    
+    <bean id="PfbxBonusBillService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusBillService">
+        <property name="dao" ref="PfbxBonusBillDAO" />
+        <property name="PfbxBonusSetDAO" ref="PfbxBonusSetDAO" />
+        <property name="pfbxCustomerInfoDAO" ref="PfbxCustomerInfoDAO" />
+    </bean>
+    
+    <bean id="PfbxBonusDayReportService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusDayReportService">
+        <property name="dao" ref="PfbxBonusDayReportDAO" />
+    </bean>
+    
+    <bean id="PfbxBonusTransDetailService" class="com.pchome.akbadm.db.service.pfbx.bonus.PfbxBonusTransDetailService">
+        <property name="dao" ref="PfbxBonusTransDetailDAO" />
+    </bean>
+
+    <!-- 撥放權限 -->
+    <bean id="PfbxPermissionService"
+        class="com.pchome.akbadm.db.service.pfbx.play.PfbxPermissionService">
+        <property name="dao" ref="PfbxPermissionDAO" />
+    </bean>
+    <!-- 撥放權限 end -->
+    
+    <!-- 廣告封鎖客戶網址 -->
+    <bean id="PfbxBlockCusurlService" class="com.pchome.akbadm.db.service.pfbx.play.PfbxBlockCusurlService">
+        <property name="dao" ref="PfbxBlockCusurlDAO" />
+    </bean>
+    <!-- 廣告封鎖客戶網址 end -->
+	
+	<!-- report -->
+    <bean id="PfbxCustomerReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxCustomerReportService">
+        <property name="dao" ref="PfbxCustomerReportDAO" />
+    </bean>
+    
+    <bean id="PfbxTimeReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxTimeReportService">
+        <property name="dao" ref="PfbxTimeReportDAO" />
+    </bean>
+    
+    <bean id="PfbxUnitReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxUnitReportService">
+        <property name="dao" ref="PfbxUnitReportDAO" />
+    </bean>
+    
+    <bean id="PfbxSizeReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxSizeReportService">
+        <property name="dao" ref="PfbxSizeReportDAO" />
+    </bean>
+    
+    <bean id="PfbxStyleReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxStyleReportService">
+        <property name="dao" ref="PfbxStyleReportDAO" />
+    </bean>
+    
+    <bean id="PfbxUrlReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxUrlReportService">
+        <property name="dao" ref="PfbxUrlReportDAO" />
+    </bean>
+
+	<bean id="PfbxSizeGetAdClickService" class="com.pchome.akbadm.db.service.pfbx.report.PfbxSizeGetAdClickService">
+        <property name="dao" ref="PfbxSizeGetAdClickDAO" />
+    </bean>
+	<!-- report quartz -->
+    <bean id="PfbxAdTimeReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdTimeReportService">
+        <property name="dao" ref="PfbAdTimeReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdCustomerReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdCustomerReportService">
+        <property name="dao" ref="PfbAdCustomerReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdUrlReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdUrlReportService">
+        <property name="dao" ref="PfbAdUrlReportDAO" />
+        <property name="pfbxUserOptionDAO" ref="PfbxUserOptionDAO" />
+    </bean>
+    
+    <bean id="PfbxCustomerInfoService" class="com.pchome.akbadm.db.service.pfbx.account.PfbxCustomerInfoService">
+        <property name="dao" ref="PfbxCustomerInfoDAO" />
+        <property name="pfbAdUrlReportDAO" ref="PfbAdUrlReportDAO" />
+        <property name="pfbxBlockCusurlDAO" ref="PfbxBlockCusurlDAO" />
+    </bean>
+    
+    <bean id="PfbxBoardService" class="com.pchome.akbadm.db.service.pfbx.board.PfbxBoardService">
+        <property name="dao" ref="PfbxBoardDAO" />
+    </bean>
+
+    
+    <bean id="PfbSizeService" class="com.pchome.akbadm.db.service.pfbx.PfbSizeService">
+        <property name="dao" ref="PfbSizeDAO" />
+    </bean>
+    
+	<bean id="PfbxPositionMenuService" class="com.pchome.akbadm.db.service.pfbx.PfbxPositionMenuService">
+        <property name="dao" ref="PfbxPositionMenuDAO" />
+    </bean>
+    
+    <bean id="PfbxAdDeviceReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdDeviceReportService">
+        <property name="dao" ref="PfbAdDeviceReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdUnitReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdUnitReportService">
+        <property name="dao" ref="PfbAdUnitReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdSizeReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdSizeReportService">
+        <property name="dao" ref="PfbAdSizeReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdStyleReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdStyleReportService">
+        <property name="dao" ref="PfbAdStyleReportDAO" />
+    </bean>
+    
+    <bean id="PfbxAdGroupReportService" class="com.pchome.akbadm.db.service.pfbx.quartzs.PfbxAdGroupReportService">
+        <property name="dao" ref="PfbAdGroupReportDAO" />
+    </bean>
+    
+    <bean id="PfbxInvalidClickService" class="com.pchome.akbadm.db.service.pfbx.invalidclick.PfbxInvalidClickService">
+        <property name="dao" ref="PfbxInvalidClickDAO" />
+    </bean>
+    
+    <bean id="PfbxInvalidTrafficService" class="com.pchome.akbadm.db.service.pfbx.invalidclick.PfbxInvalidTrafficService">
+        <property name="dao" ref="PfbxInvalidTrafficDAO" />
+    </bean>
+    
+    <bean id="PfbxInvalidTrafficDetailService" class="com.pchome.akbadm.db.service.pfbx.invalidclick.PfbxInvalidTrafficDetailService">
+        <property name="dao" ref="PfbxInvalidTrafficDetailDAO" />
+    </bean>
+    
+    <!-- 網站類別 -->
+    <bean id="PfbxWebsiteCategoryService" class="com.pchome.akbadm.db.service.pfbx.PfbxWebsiteCategoryService">
+        <property name="dao" ref="PfbxWebsiteCategoryDAO" />
+    </bean>
+    
+    <bean id="PfbxWebsiteCategoryService2" class="com.pchome.akbadm.db.service.pfbx.PfbxWebsiteCategoryService">
+        <property name="dao" ref="PfbxWebsiteCategoryDAO2" />
+    </bean>
+    <!-- 網站類別 end -->
+    
+    <!-- 版位定價查詢 -->
+    <bean id="PfbPositionPriceReportService" class="com.pchome.akbadm.db.service.pfbx.report.PfbPositionPriceReportService">
+        <property name="dao" ref="PfbPositionPriceReportDAO" />
+    </bean>
+    <!-- 版位定價查詢 end -->
+    
+</beans>

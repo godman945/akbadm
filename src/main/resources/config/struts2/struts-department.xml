@@ -1,0 +1,40 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-department" namespace="/" extends="struts-base">
+
+        <action name="departmentMaintain" class="DepartmentAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.department.maintain</result>
+        </action>
+
+        <action name="departmentAdd" class="DepartmentAction" method="goAddPage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.department.add</result>
+        </action>
+
+        <action name="doDepartmentAdd" class="DepartmentAction" method="doAdd">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">departmentMaintain</result>
+            <result type="tiles" name="input">.department.add</result>
+        </action>
+
+        <action name="departmentUpdate" class="DepartmentAction" method="goUpdatePage">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.department.update</result>
+        </action>
+
+        <action name="doDepartmentUpdate" class="DepartmentAction" method="doUpdate">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">departmentMaintain</result>
+            <result type="tiles" name="input">.department.update</result>
+        </action>
+
+        <action name="doDepartmentDelete" class="DepartmentAction" method="doDelete">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="redirectAction" name="success">departmentMaintain</result>
+        </action>
+
+    </package>
+</struts>

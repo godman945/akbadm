@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".user.title" extends="default.title" >
+       <!-- <put-attribute name="jsName" value="user/user.js"/> -->
+    </definition>
+
+    <definition name=".test.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".user.title" />
+        <put-attribute name="body" value="/ftl/test/userMaintain.ftl" />
+    </definition>
+
+    <definition name=".user.add" extends="default.layout">
+    	<put-attribute name="title" value=".user.title" />
+        <put-attribute name="body" value="/ftl/user/userAdd.ftl" />
+    </definition>
+
+    <definition name=".user.update" extends="default.layout">
+    	<put-attribute name="title" value=".user.title" />
+        <put-attribute name="body" value="/ftl/user/userUpdate.ftl" />
+    </definition>
+
+</tiles-definitions>

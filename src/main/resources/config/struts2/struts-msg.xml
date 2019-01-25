@@ -1,0 +1,18 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-msg" extends="struts-base">
+		<!-- ad msg -->
+		<action name="adExcludeKeyword" class="AdExcludeKeywordAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+	    	<result type="tiles" name="success">ad.exclude.keyword.table.msg</result>
+		</action>
+		
+		<action name="closeExcludeKeywordMsg" class="AdExcludeKeywordAction" method="closeAdExcludeKeywordAction">
+			<interceptor-ref name="akbadmCookieStack" />
+	    	<result type="tiles" name="success">close.ad.exclude.keyword.status.msg</result>
+		</action>
+								
+    </package>
+</struts>

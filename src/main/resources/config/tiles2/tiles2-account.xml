@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="account.view" extends="default.layout">
+		<put-attribute name="title" value="account.title" />
+    	<put-attribute name="body" value="/ftl/account/account.view.body.ftl" />
+    </definition>
+    
+    <definition name="account.title" extends="default.title" >
+       <put-attribute name="jsName" value="account/account.list.js"/>
+    </definition>
+    
+    <definition name="account.list.table" template="/ftl/account/account.list.table.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+    
+    <definition name="account.modify" extends="default.layout">
+		<put-attribute name="title" value="account.modify.title" />
+    	<put-attribute name="body" value="/ftl/account/account.modify.body.ftl" />
+    </definition>
+    
+    <definition name="account.modify.title" extends="default.title" >
+       <put-attribute name="jsName" value="account/account.modify.js"/>
+    </definition>
+    
+    <definition name="account.user.modify" extends="default.layout">
+    	<put-attribute name="title" value="account.user.title" />
+    	<put-attribute name="body" value="/ftl/account/user/account.user.modify.body.ftl" />
+    </definition>    
+    
+    <definition name="account.user.title" extends="default.title" >
+       <put-attribute name="jsName" value="account/account.user.js"/>
+    </definition>
+    
+</tiles-definitions>

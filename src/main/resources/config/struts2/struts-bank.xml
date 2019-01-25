@@ -1,0 +1,19 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="struts-bank" extends="struts-base"> 
+                 
+		<!-- 新增銀行 -->
+    	<action name="bankMaintain" class="BankAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bank.view</result>
+        </action>
+    	
+    	<action name="addBank" class="BankAction" method="addBankAction">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">bank.table</result> 
+        </action>
+  		
+    </package>
+</struts>

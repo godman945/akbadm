@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name=".order.list" extends="default.layout">
+		<put-attribute name="title" value=".order.title" />
+    	<put-attribute name="body" value="/ftl/order/orderListBody.ftl" />
+    </definition>
+    
+   	<definition name=".order.title" extends="default.title" >
+       <put-attribute name="jsName" value="order/order.js"/>
+    </definition>
+    
+    <definition name=".order.trans.table" template="/ftl/order/transTable.ftl"/>
+    
+    
+    <!-- ========== AdvanceOrderRefundRelease ========== -->
+    <definition name=".advance.order.refund.release.list" extends="default.layout">
+    	<put-attribute name="title" value=".advance.order.refund.release.list.title" />
+        <put-attribute name="body" value=".advance.order.refund.release.list.body" />
+    </definition>
+
+	<definition name=".advance.order.refund.release.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="order/advance_order_refund_release.js"/>
+    </definition>
+
+    <definition name=".advance.order.refund.release.list.body" template="/ftl/order/advanceOrderRefundRelease.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+    
+</tiles-definitions>

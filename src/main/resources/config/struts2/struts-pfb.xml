@@ -1,0 +1,596 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN"
+    "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<package name="struts-pfb" extends="struts-base">
+	
+		<!-- 網址篩選 -->
+		<action name="pfbAdUrlList" class="PfbAdUrlAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfbAdUrlList</result>
+		</action>
+		<action name="searchAdUrlList" class="PfbAdUrlAction" method="searchAdUrlList">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfbAdUrlList</result>
+		</action>
+		<action name="pfbErrUrlDetail" class="PfbAdUrlAction" method="pfbErrUrlDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfbErrUrlDetail</result>
+		</action>
+		<action name="pfbBlockUrlDetail" class="PfbAdUrlAction" method="pfbBlockUrlDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfbBlockUrlDetail</result>
+		</action>
+		<action name="pfbBlockurl" class="PfbAdUrlAction" method="pfbBlockurl">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">pfbErrUrlDetail</param>
+				<param name="id">${id}</param>
+				<param name="startDate">${startDate}</param>
+				<param name="endDate">${endDate}</param>
+			</result>
+		</action>
+		<action name="pfbUnBlockurl" class="PfbAdUrlAction" method="pfbUnBlockurl">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">pfbBlockUrlDetail</param>
+				<param name="id">${id}</param>
+				<param name="searchUrl">${searchUrl}</param>
+			</result>
+		</action>
+		<action name="pfbFastBlockurl" class="PfbAdUrlAction" method="pfbFastBlockurl">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">pfbBlockUrlDetail</param>
+				<param name="id">${id}</param>
+			</result>
+		</action>
+		<!-- 網址篩選 end-->
+
+		<!-- 盈虧查詢 -->
+		<action name="pfbInComeReport" class="pfbInComeReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view</result>
+		</action>
+		<action name="pfbInComeDetail" class="pfbInComeReportAction"
+			method="showInComeDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view.detail
+			</result>
+		</action>
+		<action name="pfbInComeReportSearch" class="PfbInComeReportAjax"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view.table
+			</result>
+		</action>
+		<action name="pfbInComePFPDetailAjax" class="PfbInComeReportAjax"
+			method="pfbInComePFPDetailAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view.table.pfpdetail
+			</result>
+		</action>
+		<action name="pfbInComePFBDetailAjax" class="PfbInComeReportAjax"
+			method="pfbInComePFBDetailAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view.table.pfbdetail
+			</result>
+		</action>
+		<action name="pfbInComePFDDetailAjax" class="PfbInComeReportAjax"
+			method="pfbInComePFDDetailAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.income.report.view.table.pfddetail
+			</result>
+		</action>
+		<!-- 盈虧查詢 end-->
+
+
+		<!-- 分潤設定 -->
+		<action name="pfbBonusSetMaintain" class="PfbBonusSetMaintainAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.set.view</result>
+		</action>
+		<action name="editPfbBonusSet" class="PfbBonusSetMaintainAction"
+			method="editPfbBonusSetAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.set.edit</result>
+		</action>
+		<action name="updatePfbBonusSet" class="PfbBonusSetMaintainAction"
+			method="updatePfbBonusSetAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">pfbBonusSetMaintain
+			</result>
+		</action>
+		<action name="searchPfbBonusSet" class="PfbBonusSetMaintainAjax"
+			method="searchPfbBonusSetAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<!-- <result type="json" name="success"> <param name="noCache">true</param> 
+				<param name="contentType">text/html</param> </result> -->
+			<result type="tiles" name="success">pfb.bonus.set.table</result>
+		</action>
+
+		<!-- 累計收益 -->
+		<action name="pfbBonusDetailMaintain" class="PfbBonusDetailMaintainAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.detail.view</result>
+		</action>
+		<action name="pfbBonusTransDetail" class="PfbBonusDetailMaintainAction"
+			method="pfbBonusTransDetailAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.trans.view</result>
+		</action>
+		<action name="searchPfbBonusDetail" class="PfbBonusDetailMaintainAjax"
+			method="searchPfbBonusDetailAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.detail.table</result>
+		</action>
+		<action name="downloadPfbBonusDetail" class="PfbBonusDetailMaintainAjax"
+			method="searchPfbBonusDetailAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+
+
+		<action name="pfbBonusBill" class="PfbBonusBillMaintainAction"
+			method="pfbBonusBillAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.bill.view</result>
+		</action>
+
+		<action name="downloadPfbBonusBill" class="PfbBonusBillMaintainAction"
+			method="downloadPfbBonusBillAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="contentDisposition">
+					attachment;filename="${downloadFileName}"
+				</param>
+				<param name="inputName">downloadFileStream</param>
+			</result>
+		</action>
+
+
+		<!-- 客戶請款單 -->
+		<action name="pfbApplyBonusMaintain" class="PfbApplyBonusMaintainAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.apply.bonus.view</result>
+		</action>
+		<action name="pfbApplyBonusCheck" class="PfbApplyBonusMaintainAction" method="pfbApplyBonusCheckAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.apply.check.view</result>
+		</action>
+		<action name="updateCheckStatus" class="PfbApplyBonusMaintainAction" method="updateCheckStatusAction">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">pfbApplyBonusMaintain</result>
+		</action>
+		<action name="searchPfbApplyBonus" class="PfbApplyBonusMaintainAjax" method="searchPfbApplyBonusAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.apply.bonus.table</result>
+		</action>
+		<!-- 重跑16號排程，將請款狀態為申請失敗的資料，調整回申請中重新執行 -->
+		<action name="renewRunPaymentRequest" class="PfbApplyBonusMaintainAjax" method="renewRunPaymentRequestAjax">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="root">dataMap</param>
+	       	</result>
+		</action>
+
+
+		<!-- 聯播網公告管理 -->
+		<action name="pfbBoardMaintain" class="PfbBoardAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.board.maintain</result>
+		</action>
+
+		<action name="pfbBoardAdd" class="PfbBoardAction" method="add">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.board.add</result>
+		</action>
+
+		<action name="doPfbBoardAdd" class="PfbBoardAction" method="doAdd">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">pfbBoardMaintain</result>
+			<result type="tiles" name="input">.pfb.board.add</result>
+		</action>
+
+		<action name="pfbBoardUpdate" class="PfbBoardAction" method="update">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.board.update</result>
+		</action>
+
+		<action name="doPfbBoardUpdate" class="PfbBoardAction" method="doUpdate">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">pfbBoardMaintain</result>
+			<result type="tiles" name="input">.pfb.board.update</result>
+		</action>
+
+		<action name="doPfbBoardDelete" class="PfbBoardAction" method="doDelete">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">pfbBoardMaintain</result>
+		</action>
+
+
+		<!-- 帳戶管理 kylelee -->
+		<action name="pfbAccountList" class="PfbAccountAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.account.list</result>
+		</action>
+		<action name="pfbAccountUpdate" class="PfbAccountAction"
+			method="goUpdatePage">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.account.update</result>
+		</action>
+		<action name="doPfbAccountUpdate" class="PfbAccountAction"	method="doUpdate">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+        		<param name="root">strResult</param>
+        	</result>
+			<!-- 
+			<result type="redirectAction" name="success">pfbAccountList</result>
+			<result type="tiles" name="input">.pfb.account.update</result> 
+			-->
+		</action>
+		<action name="doUpdateBankStatus" class="PfbAccountAction"
+			method="doUpdateBankStatus">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="root">strResult</param>
+            </result>
+		</action>
+		<action name="doUpdatePersonalStatus" class="PfbAccountAction"
+			method="doUpdatePersonalStatus">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="root">strResult</param>
+            </result>
+		</action>
+		<action name="doUpdateAllowUrlStatus" class="PfbAccountAction"
+			method="doUpdAllowUrlStatus">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="root">strResult</param>
+            </result>
+		</action>
+		<action name="doUpdAllowUrlRootDomain" class="PfbAccountAction"
+			method="doUpdAllowUrlRootDomain">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="root">strResult</param>
+            </result>
+		</action>
+		<action name="doUpdAllowUrlCategoryCode" class="PfbAccountAction"
+			method="doUpdAllowUrlCategoryCode">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+                <param name="noCache">true</param>
+                <param name="root">strResult</param>
+            </result>
+		</action>
+		<!-- 帳戶管理 End -->
+
+
+		<!-- 撥放權限==>黑名單管理 -->
+		<action name="blacklistManager" class="blacklistManagerAction"
+			method="excute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">blacklistManager</result>
+		</action>
+		<action name="blacklistManagerUrlSearch" class="blacklistManagerAction"
+			method="searchUrl">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">blacklistManager</result>
+		</action>
+		<action name="blacklistManagerAjax" class="blacklistManagerAction"
+			method="blacklistManagerReject">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<action name="blacklistManagerCancelAjax" class="blacklistManagerAction"
+			method="blacklistManagerCancel">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+				<param name="root">result</param>
+			</result>
+		</action>
+		<!-- 撥放權限==>黑名單管理 end -->
+
+		<!-- report -->
+		<action name="pfbCustomerReport" class="PfbCustomerReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.customer.report</result>
+		</action>
+
+		<action name="pfbAdCustomerReport" class="PfbCustomerReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.adCustomer.report</result>
+		</action>
+
+		<action name="pfbAdCustomerReport" class="PfbCustomerReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.adCustomer.report</result>
+		</action>
+
+		<action name="pfbTimeReport" class="PfbTimeReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.time.report</result>
+		</action>
+
+		<action name="pfbTimeReportDownload" class="PfbTimeReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+
+		<action name="pfbUnitReport" class="PfbUnitReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.unit.report</result>
+		</action>
+
+		<action name="pfbSizeReport" class="PfbSizeReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.size.report</result>
+		</action>
+
+		<action name="pfbSizeSearch" class="PfbSizeReportAction"
+			method="sizeSearch">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.size.report</result>
+		</action>
+
+		<action name="pfbSizeReportDownload" class="PfbSizeReportAction"
+			method="sizeSearch">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+
+		<action name="pfbSizeReportChart" class="PfbSizeReportAction"
+			method="getClick">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.size.report.chart</result>
+		</action>
+
+		<action name="pfbSizeReportImg" class="PfbSizeReportAction"
+			method="getClickImg">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">  
+            <param name="contentType">image/jpeg</param>  
+            <param name="inputName">imageStream</param>  
+            <param name="bufferSize">1024</param>  
+        </result>
+		</action>
+
+		<action name="pfbStyleReport" class="PfbStyleReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.style.report</result>
+		</action>
+		
+		<action name="pfbStyleReportDownload" class="PfbStyleReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+
+		<action name="pfbUrlReport" class="PfbUrlReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.url.report</result>
+		</action>
+
+		<action name="pfbUrlDetalReport" class="PfbUrlReportAction"
+			method="detalReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.url.detal.report</result>
+		</action>
+
+		<action name="pfbUrlReportDownload" class="PfbUrlReportAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+
+		<!-- 優惠方案 -->
+		<action name="pfbxBonusSetSpecial" class="pfbxBonusSetSpecialAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.set.special.add</result>
+		</action>
+		
+		<action name="addSpecial" class="pfbxBonusSetSpecialAction"
+			method="addSpecial">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+			<param name="actionName">editPfbBonusSet</param>  
+			<param name="pfbId">${pfbId}</param>
+		</result>
+		</action>
+		
+		<action name="editPfbxBonusSetSpecial" class="pfbxBonusSetSpecialAction"
+			method="updSpecialView">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">pfb.bonus.set.special.edit</result>
+		</action>
+		
+		<action name="updSpecial" class="pfbxBonusSetSpecialAction"
+			method="updSpecial">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">editPfbBonusSet</param>  
+				<param name="pfbId">${pfbId}</param>
+			</result>
+		</action>
+		
+		<action name="delSpecial" class="pfbxBonusSetSpecialAction"
+			method="delSpecial">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="redirectAction" name="success">
+				<param name="actionName">editPfbBonusSet</param>  
+				<param name="pfbId">${pfbId}</param>
+			</result>
+		</action>
+		
+		<action name="chkSpecialDateAjax" class="pfbxBonusSetSpecialAction"
+			method="chkSpecialDate">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success">
+        		<param name="root">result</param>
+        	</result>
+		</action>
+		
+		<!-- 優惠方案 end -->
+		
+		<!-- PFB 流量檢測 -->
+		
+		<action name="pfbxInvalidClickQuery" class="PfbxInvalidClickAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.invalid.click.query</result>
+		</action>
+		
+		<action name="addInvalidTraffic" class="PfbxInvalidClickAction" method="addInvalidTraffic">
+      		<interceptor-ref name="akbadmCookieStack" />
+       		<result type="json" name="success">
+        		<param name="root">result</param>
+        	</result>
+     	</action>
+		
+		<!-- PFB 流量檢測 end --> 
+		
+		<!-- PFB 無效流量 -->
+		
+		<action name="pfbxInvalidTrafficQuery" class="PfbxInvalidTrafficAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.invalid.traffic.query</result>
+		</action>
+		
+		<action name="pfbxInvalidTrafficDetailQuery" class="PfbxInvalidTrafficAction"
+			method="getDetailData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.invalid.traffic.detail</result>
+		</action>
+		
+		<action name="deleteInvalidTraffic" class="PfbxInvalidTrafficAction" method="deleteInvalidTraffic">
+      		<interceptor-ref name="akbadmCookieStack" />
+       		<result type="json" name="success">
+        		<param name="root">result</param>
+        	</result>
+     	</action>
+     	
+     	<action name="pfbxInvalidTrafficDownload" class="PfbxInvalidTrafficAction"
+			method="makeDownloadReportData">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+		<!-- PFB 無效流量 end --> 
+		
+		<!-- PFB 惡意點擊查詢 -->
+		
+		<action name="pfbxMaliceCheckQuery" class="PfbxMaliceClickAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.malice.check.query</result>
+		</action>
+		
+		<action name="pfbxMaliceCheckDownload" class="PfbxMaliceClickAction"
+			method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result name="success" type="stream">
+             	<param name="contentType">application/octet-stream</param>
+             	<param name="contentDisposition">
+                    attachment;filename="${downloadFileName}"
+                </param>
+                <param name="inputName">downloadFileStream</param>
+            </result>
+		</action>
+		
+		<!-- PFB 惡意點擊查詢 end --> 
+		
+		<!-- PFB 網站分類設定 -->
+	    <action name="websiteCategoryView" class="PfbxWebsiteCategoryAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.website.category.view</result>
+	    </action>
+	    
+	    <action name="websiteCategoryViewTable" class="PfbxWebsiteCategoryAction" method="getWebsiteCategoryList">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.website.category.table</result>
+	    </action>
+	    
+	    <action name="addWebsiteCategory" class="PfbxWebsiteCategoryAction" method="addWebsiteCategory">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success"/>
+	    </action>
+	    
+	    <action name="updateWebsiteCategory" class="PfbxWebsiteCategoryAction" method="updateWebsiteCategory">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="json" name="success"/>
+	    </action>
+	    <!-- PFB 網站分類設定 end -->
+	    
+	    <!-- PFB 版位定價查詢修改功能 -->
+	    <action name="pfbPositionPriceQuery" class="PfbPositionPriceReportAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.pfb.Position.Price.Query</result>
+	    </action>
+	    
+	    <action name="updatePriceReportAjax" class="PfbPositionPriceReportAjax" method="updatePriceReportAjax">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="json" name="success">
+				<param name="root">dataMap</param>
+        	</result>
+        </action>
+	    <!-- PFB 版位定價查詢修改功能 end -->
+	</package>
+</struts>

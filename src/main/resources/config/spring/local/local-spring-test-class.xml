@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="BIG5"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+
+    <!-- 測試用 -->
+    <bean id="ktest" class="com.pchome.akbadm.ktest">
+        <property name="pfdContractService" ref="PfdContractService" />
+        <property name="pfdBonusItemSetService" ref="PfdBonusItemSetService" />
+        <property name="pfdBonusInvoiceService" ref="PfdBonusInvoiceService" />
+        <property name="pfdBonusRecordService" ref="PfdBonusRecordService" />
+        <property name="pfdBonusItemFactory" ref="PfdBonusItemFactory" />
+        
+        <property name="pfpUserService" ref="PfpUserService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfdUserService" ref="PfdUserService" />
+        <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+        
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+    </bean>
+    
+</beans>

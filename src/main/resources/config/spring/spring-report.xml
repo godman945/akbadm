@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	
+	<!-- customerInfo Report -->    
+	<bean id="CustomerInfoQueryReport" class="com.pchome.akbadm.report.pdf.customerInfo.CustomerInfoQueryReport">
+		<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+		<property name="pfdAccountService" ref="PfdAccountService" />
+		<property name="fontPath" value="${fontPath}" />
+	</bean>
+	
+	<!-- order Report --> 
+	<bean id="OrderQueryReport" class="com.pchome.akbadm.report.pdf.order.OrderQueryReport">
+		<property name="recognizeRecordService" ref="AdmRecognizeRecordService" />
+		<property name="pfdAccountService" ref="PfdAccountService" />
+		<property name="fontPath" value="${fontPath}" />
+	</bean>
+	
+	<!-- trans Report --> 
+	<bean id="TransQueryReport" class="com.pchome.akbadm.report.pdf.trans.TransQueryReport">
+		<property name="pfpTransDetailService" ref="PfpTransDetailService" />
+		<property name="fontPath" value="${fontPath}" />
+	</bean>
+
+	<!-- costRank Report --> 
+	<bean id="CostRankQueryReport" class="com.pchome.akbadm.report.pdf.costRank.CostRankQueryReport">
+		<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+		<property name="fontPath" value="${fontPath}" />
+	</bean>	
+	
+	<!-- costShortRank Report --> 
+	<bean id="CostShortRankQueryReport" class="com.pchome.akbadm.report.pdf.costShortRank.CostShortRankQueryReport">
+		<property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+		<property name="fontPath" value="${fontPath}" />
+	</bean>		
+</beans>

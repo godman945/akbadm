@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+<tiles-definitions>
+
+	<!-- 商品樣板 -->
+	<definition name=".template.title" extends="default.title" >
+       <put-attribute name="jsName" value="template/template.js?t=20150212"/>
+    </definition>
+
+    <definition name=".templateproduct.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateproductMaintain.ftl" />
+    </definition>
+
+    <definition name=".templateproduct.add" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateproductAdd.ftl" />
+    </definition>
+
+    <definition name=".templateproduct.relate" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateproductRelate.ftl" />
+    </definition>
+
+    <definition name=".templateproduct.update" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateproductUpdate.ftl" />
+    </definition>
+
+
+	<!-- 廣告樣板 -->
+    <definition name=".templatead.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateadMaintain.ftl" />
+    </definition>
+
+    <definition name=".templatead.add" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateadAdd.ftl" />
+    </definition>
+
+    <definition name=".templatead.relate" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateadRelate.ftl" />
+    </definition>
+
+    <definition name=".templatead.update" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/templateadUpdate.ftl" />
+    </definition>
+
+    <definition name=".templatead.list" extends="default.layout">
+        <put-attribute name="body" value="/ftl/template/templateadList.ftl" />
+    </definition>
+
+
+	<!-- 廣告定義 -->
+    <definition name=".definead.list" template="/ftl/template/defineadList.ftl" />
+    <definition name="definead.list" extends="default.layout2">
+        <put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value=".definead.list" />
+    </definition>
+    
+	<definition name=".definead.maintain" template="/ftl/template/defineadMaintain.ftl">
+	   <put-attribute name="list" value=".definead.list" />
+	</definition>
+    <definition name="definead.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value=".definead.maintain" />
+    </definition>
+
+    <definition name=".definead.add" extends="default.layout2">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/defineadAdd.ftl" />
+    </definition>
+
+    <definition name=".definead.update" extends="default.layout2">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/defineadUpdate.ftl" />
+    </definition>
+
+	<!-- 廣告來源關聯 -->
+    <definition name=".adpool.maintain" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/adPoolMaintain.ftl" />
+    </definition>
+
+    <definition name=".adpool.add" extends="default.layout">
+    	<put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/adPoolAdd.ftl" />
+    </definition>
+
+    <definition name=".adpool.update" extends="default.layout">
+        <put-attribute name="title" value=".template.title" />
+        <put-attribute name="body" value="/ftl/template/adPoolUpdate.ftl" />
+    </definition>
+
+    <definition name=".adpool.detail" extends="default.layout">
+        <put-attribute name="body" value="/ftl/template/adPoolDetail.ftl" />
+    </definition>
+
+    <definition name=".close" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/template/closePage.ftl" />
+    </definition>
+    <!-- 商品廣告樣版測試頁 -->
+    <definition name=".templateProductDemo" extends="default.layout">
+       <put-attribute name="title" value="/ftl/template/preview/templateProductDemoTitle.ftl" />
+       <put-attribute name="body" value="/ftl/template/preview/templateProductDemoBody.ftl" />
+    </definition>
+    <!-- 商品廣告樣版測試頁 end-->
+    
+    
+     <!-- 商品核心測試頁 -->
+    <definition name=".adKdclDemo" extends="default.layout">
+		<put-attribute name="title" value="/ftl/kdcl/kdclDemoTitle.ftl" />
+		<put-attribute name="body" value="/ftl/kdcl/kdclDemoBody.ftl" />
+    </definition>
+    <!-- 商品核心測試頁 end-->
+</tiles-definitions>
+       

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.1//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_1.dtd">
+
+<tiles-definitions>
+
+	<definition name="feedback.record.view" extends="default.layout">
+		<put-attribute name="title" value="feedback.record.title" />
+        <put-attribute name="body" value="/ftl/feedback/feedback.record.body.ftl" />
+    </definition>
+    
+    <definition name="feedback.record.title" extends="default.title" >
+       <put-attribute name="jsName" value="feedback/feedback.js"/>
+    </definition>
+    
+    <definition name="feedback.record.table" template="/ftl/feedback/feedback.record.table.ftl" />
+
+    
+    <definition name="feedback.record.add" extends="default.layout">
+		<put-attribute name="title" value="feedback.record.add.title" />
+        <put-attribute name="body" value="/ftl/feedback/feedback.record.add.ftl" />
+    </definition>
+    
+    <definition name="feedback.record.add.title" extends="default.title" >
+       <put-attribute name="jsName" value="feedback/feedback.add.js"/>
+    </definition>
+</tiles-definitions>

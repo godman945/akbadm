@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id="tilesConfigurer" class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+        <property name="definitions">
+            <list>
+            	<value>classpath:config/tiles2/tiles2-accesslog.xml</value>
+            	<value>classpath:config/tiles2/tiles2-account.xml</value>
+            	<value>classpath:config/tiles2/tiles2-ad.xml</value>
+            	<value>classpath:config/tiles2/tiles2-addition.xml</value>
+                <value>classpath:config/tiles2/tiles2-base-angularjs.xml</value>
+                <value>classpath:config/tiles2/tiles2-base.xml</value>
+                <value>classpath:config/tiles2/tiles2-board.xml</value>
+                <value>classpath:config/tiles2/tiles2-bonus.xml</value>
+                <value>classpath:config/tiles2/tiles2-check.xml</value>
+                <value>classpath:config/tiles2/tiles2-contract.xml</value>
+                <value>classpath:config/tiles2/tiles2-department.xml</value>
+                <value>classpath:config/tiles2/tiles2-feedback.xml</value>
+                <value>classpath:config/tiles2/tiles2-index.xml</value>
+                <value>classpath:config/tiles2/tiles2-login.xml</value>
+                <value>classpath:config/tiles2/tiles2-manager.xml</value>
+                <value>classpath:config/tiles2/tiles2-msg.xml</value>
+                <value>classpath:config/tiles2/tiles2-order.xml</value>
+                <value>classpath:config/tiles2/tiles2-pfb.xml</value>
+                <value>classpath:config/tiles2/tiles2-pfd.xml</value>
+                <value>classpath:config/tiles2/tiles2-privilege-model.xml</value>
+                <value>classpath:config/tiles2/tiles2-pwd.xml</value>
+                <value>classpath:config/tiles2/tiles2-recognize.xml</value>
+				<value>classpath:config/tiles2/tiles2-report.xml</value>
+				<value>classpath:config/tiles2/tiles2-template.xml</value>	
+                <value>classpath:config/tiles2/tiles2-user.xml</value>		
+                <value>classpath:config/tiles2/tiles2-bank.xml</value>
+                <value>classpath:config/tiles2/tiles2-test.xml</value>		
+            </list>
+        </property>
+    </bean>
+</beans>
