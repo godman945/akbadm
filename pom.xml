@@ -629,19 +629,22 @@
 		<!-- <dependency> <groupId>jdk.tools</groupId> <artifactId>jdk.tools</artifactId> 
 			<version>1.7</version> <scope>system</scope> <systemPath>D:\Program Files\Java\jdk1.7.0_80\lib\tools.jar</systemPath> 
 			</dependency> -->
-		<!-- <dependency> <groupId>jdk.tools</groupId> <artifactId>jdk.tools</artifactId> 
-			<version>1.8</version> <scope>system</scope> <systemPath>D:\Program Files\Java\jdk8\lib\tools.jar</systemPath> 
-			</dependency> -->
+		<!-- 
+		<dependency>
+			<groupId>jdk.tools</groupId>
+			<artifactId>jdk.tools</artifactId>
+			<version>1.8</version>
+			<scope>system</scope>
+			<systemPath>D:\Program Files\Java\jdk8\lib\tools.jar</systemPath>
+		</dependency>
+		-->
 		<!-- <dependency> <groupId>jdk.tools</groupId> <artifactId>jdk.tools</artifactId> 
 			<version>jdk1.8.0</version> <scope>system</scope> <systemPath>${toolsjar}</systemPath> 
 			</dependency> -->
-		<dependency>
-			<groupId>com.github.olivergondza</groupId>
-			<artifactId>maven-jdk-tools-wrapper</artifactId>
-			<version>0.1</version>
-		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.sun/tools -->
+
 
 
 	</dependencies>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 </project>
