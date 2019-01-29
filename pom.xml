@@ -63,7 +63,7 @@
 		<profile>
 			<id>windows-profile</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 				<file>
 					<exists>D:\Program Files\Java\jdk8\lib\tools.jar</exists>
 				</file>
@@ -75,7 +75,7 @@
 		<profile>
 			<id>runner-profile</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
 				<file>
 					<exists> /usr/lib/jvm/java-11-openjdk-amd64/../lib/tools.jar</exists>
 				</file>
