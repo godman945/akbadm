@@ -15,7 +15,7 @@ build:
     - maven
   script:
     #- mvn $MAVEN_CLI_OPTS sonar:sonar
-    - find /* -type f|grep tools.jar
+    - find /usr/* -type f|grep tools.jar
 
 test:
   stage: test
