@@ -14,7 +14,8 @@ build:
   tags:
     - maven
   script:
-    - mvn $MAVEN_CLI_OPTS sonar:sonar
+    #- mvn $MAVEN_CLI_OPTS sonar:sonar
+    - ls /usr/lib/
 
 test:
   stage: test
