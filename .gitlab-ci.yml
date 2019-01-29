@@ -15,7 +15,7 @@ build:
     - maven
   script:
     #- mvn $MAVEN_CLI_OPTS sonar:sonar
-    - ls /usr/lib/
+    - ls /usr/lib/jvm/
 
 test:
   stage: test
