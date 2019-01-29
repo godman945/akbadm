@@ -15,7 +15,7 @@ build:
     - maven
   script:
     #- mvn $MAVEN_CLI_OPTS sonar:sonar
-    - find /usr/lib/jvm/java-1.11.0-openjdk-amd64/* -type f|grep tool
+    - find /* -type f|grep tool
 
 test:
   stage: test
