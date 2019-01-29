@@ -15,15 +15,15 @@ build:
   tags:
     - maven
   script:
-    - mvn $MAVEN_CLI_OPTS install
+    - mvn $MAVEN_CLI_OPTS sonar:sonar
     #- find /usr/* -type f|grep tools.jar
 
-test:
-  stage: test
-  tags:
-    - maven
-  script:
-    - mvn $MAVEN_CLI_OPTS test
+#test:
+#  stage: test
+#  tags:
+#    - maven
+#  script:
+#    - mvn $MAVEN_CLI_OPTS test
 
 #deploy:
 #  stage: deploy
