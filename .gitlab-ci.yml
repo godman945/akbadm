@@ -15,7 +15,7 @@ build:
     - maven
   script:
     #- mvn $MAVEN_CLI_OPTS sonar:sonar
-    - ls /usr/lib/jvm/java-1.11.0-openjdk-amd64/
+    - ls /usr/lib/jvm/java-1.11.0-openjdk-amd64/lib/
 
 test:
   stage: test
