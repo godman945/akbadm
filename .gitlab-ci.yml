@@ -1,5 +1,5 @@
 #image: maven:latest
-image: openjdk:8-jre-alpine
+image: maven:3-jdk-8
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
