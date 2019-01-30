@@ -1,4 +1,5 @@
-image: maven:latest
+#image: maven:latest
+image: maven:3-jdk-8
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
@@ -14,15 +15,20 @@ build:
   tags:
     - maven
   script:
-    - mvn $MAVEN_CLI_OPTS install
+    - ls
+    - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.sourceEncoding=UTF-8 -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
+      
+      #-Dsonar.login=admin \
+      #-Dsonar.password=admin \
+
     #- find /usr/* -type f|grep tools.jar
 
-test:
-  stage: test
-  tags:
-    - maven
-  script:
-    - mvn $MAVEN_CLI_OPTS test
+#test:
+#  stage: test
+#  tags:
+#    - maven
+#  script:
+#    - mvn $MAVEN_CLI_OPTS test
 
 #deploy:
 #  stage: deploy
