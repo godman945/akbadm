@@ -17,12 +17,14 @@ build:
   script:
     - ls
     - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar \
-      -Dsonar.login=admin \
-      -Dsonar.password=admin \
+      -Dsonar.sourceEncoding=UTF-8 \
       -Dsonar.analysis.mode=preview \
       -Dsonar.gitlab.project_id=$CI_PROJECT_ID \
       -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA \
       -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
+      
+      #-Dsonar.login=admin \
+      #-Dsonar.password=admin \
 
     #- find /usr/* -type f|grep tools.jar
 
