@@ -15,6 +15,7 @@ build:
   tags:
     - maven
   script:
+    - ls
     - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar
     #- find /usr/* -type f|grep tools.jar
 
