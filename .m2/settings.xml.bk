@@ -1,0 +1,34 @@
+<settings>
+    <pluginGroups>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
+    <profiles>
+        <profile>
+            <id>sonar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <!-- 配置 Sonar Host地址，默认：http://localhost:9000 -->
+                <sonar.host.url>
+                  http://gitrun.mypchome.com.tw:9000
+                </sonar.host.url>
+            </properties>
+        </profile>
+        
+         <profile>
+            <id>downloadSources</id>
+            <properties>
+                <downloadSources>false</downloadSources>
+                <downloadJavadocs>false</downloadJavadocs>
+            </properties>
+        </profile>
+     </profiles>
+     
+     
+
+    <activeProfiles>
+        <activeProfile>downloadSources</activeProfile>
+    </activeProfiles>
+     
+</settings>
