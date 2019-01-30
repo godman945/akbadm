@@ -11,8 +11,7 @@ public class ConfigUtil {
 
 	private static Log log = LogFactory.getLog(ConfigUtil.class);
 	
-	private int test=0;
-	private int test2=0;
+
 	
 	private ConfigUtil(){}
 
