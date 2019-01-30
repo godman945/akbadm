@@ -17,9 +17,8 @@ build:
   script:
     - ls
     - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar \
-      -Dsonar.host.url=http://gitrun.mypchome.com.tw:9000 \
-      -Dsonar.login=wanyang3 \
-      -Dsonar.password=****** \
+      -Dsonar.login=admin \
+      -Dsonar.password=admin \
       -Dsonar.analysis.mode=preview \
       -Dsonar.gitlab.project_id=$CI_PROJECT_ID \
       -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA \
