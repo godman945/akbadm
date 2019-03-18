@@ -101,9 +101,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.pchome</groupId>
-			<artifactId>softdepot</artifactId>
-			<version>1.0.18</version>
+		  <groupId>com.pchome</groupId>
+		  <artifactId>softdepot</artifactId>
+		  <version>1.0.18</version>
 		</dependency>
 
 		<dependency>
@@ -607,13 +607,6 @@
 		  <version>2.4.1</version>
 		</dependency>
 		
- 		<dependency>
-		    <groupId>IKAnalyzer</groupId>
-		    <artifactId>IKAnalyzer</artifactId>
-		    <version>3.2.3</version>
-		</dependency>
- 		
- 		
 		<dependency>
 		    <groupId>com.mortennobel</groupId>
 		    <artifactId>java-image-scaling</artifactId>
