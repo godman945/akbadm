@@ -12,7 +12,7 @@
     <!-- 整理 PFP 前台商品廣告轉換資料  / 每天 AM 5:15 執行 / 更新資料  -->
     <bean id="PfpAdProdConvertUpdateReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfpAdProdConvertUpdateReportJobDetail" />
-        <property name="cronExpression" value="*/5 * * * * ?" />
+        <property name="cronExpression" value="* 0/5 * * * ?" />
     </bean>
     
     <bean id="PfpAdProdConvertUpdateReportJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
