@@ -211,7 +211,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		
+		 
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
 		    <artifactId>tiles-extras</artifactId>
@@ -709,9 +709,10 @@
 		</dependency>
 		
 		<dependency>
-		    <groupId>javax.servlet</groupId>
-		    <artifactId>jstl</artifactId>
-		    <version>1.2</version>
+		  <groupId>jstl</groupId>
+		  <artifactId>jstl</artifactId>
+		  <version>1.2</version>
+		  <classifier>jstl</classifier>
 		</dependency>
 
 		<dependency>
