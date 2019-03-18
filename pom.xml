@@ -602,9 +602,9 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>oscache</groupId>
-		    <artifactId>oscache</artifactId>
-		    <version>2.4.1</version>
+		  <groupId>oscache</groupId>
+		  <artifactId>oscache</artifactId>
+		  <version>2.4.1</version>
 		</dependency>
 		
  		<dependency>
@@ -650,11 +650,19 @@
 		    <artifactId>json</artifactId>
 		    <version>20180813</version>
 		</dependency>
- <!-- 
+		
+		<dependency>
+		  <groupId>IKAnalyzer</groupId>
+		  <artifactId>IKAnalyzer</artifactId>
+		  <version>3.2.3</version>
+		  <classifier>IKAnalyzer</classifier>
+		</dependency>
+		
  		<dependency>
-		    <groupId>jofc2</groupId>
-		    <artifactId>jofc2</artifactId>
-		    <version>1.0</version>
+		  <groupId>jofc2</groupId>
+		  <artifactId>jofc2</artifactId>
+		  <version>1.0</version>
+		  <classifier>0v2</classifier>
 		</dependency>
 		
 		<dependency>
@@ -662,12 +670,7 @@
 			 <artifactId>oscache</artifactId>
 			 <version>2.4.1</version>
 		</dependency>
-		<dependency>
-			 <groupId>IKAnalyzer</groupId>
-			 <artifactId>IKAnalyzer</artifactId>
-			 <version>3.2.3</version>
-		</dependency>
- 	-->	
+		
  		
 		<dependency>
 		    <groupId>commons-configuration</groupId>
@@ -718,9 +721,9 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>juniversalchardet</groupId>
-		    <artifactId>juniversalchardet</artifactId>
-		    <version>2.3.0</version>
+		  <groupId>juniversalchardet</groupId>
+		  <artifactId>juniversalchardet</artifactId>
+		  <version>2.3.0</version>
 		</dependency>
 
 		<dependency>
@@ -729,4 +732,6 @@
 		    <version>2.2.1</version>
 		</dependency>		
 	</dependencies>
+	
+	
 </project>
