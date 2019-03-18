@@ -101,7 +101,7 @@
 
 	<dependencies>
 		<dependency>
-		  <groupId>com.pchome</groupId>
+		  <groupId>softdepot</groupId>
 		  <artifactId>softdepot</artifactId>
 		  <version>1.0.18</version>
 		</dependency>
