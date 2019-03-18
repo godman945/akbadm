@@ -14,20 +14,20 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-	<bean id="AccesslogJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="AccesslogJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AccesslogJobDetail" />
         <property name="cronExpression" value="0 0/10 * * * ?" />
     </bean>
     
-   	<!-- 結算帳戶餘額  / 每日 AM 03:30 執行  -->
+   	<!-- 結算帳戶餘額  / 每日 AM 04:00 執行  -->
     <bean id="AdjustAccountJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="AdjustAccountJob" />
         <property name="targetMethod" value="process" />
     </bean>
     
-    <bean id="AdjustAccountJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="AdjustAccountJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AdjustAccountJobDetail" />
-        <property name="cronExpression" value="0 35 03 * * ?" />
+        <property name="cronExpression" value="0 0 04 * * ?" />
     </bean>
          
    	<!-- 更新系統價格  / 每日 AM 04:05 執行  -->
@@ -36,9 +36,9 @@
         <property name="targetMethod" value="newSyspriceProcess" />
     </bean>
     
-	<bean id="NewSyspriceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="NewSyspriceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="NewSyspriceJobDetail" />
-       <property name="cronExpression" value="0 05 04 * * ?" />
+       <property name="cronExpression" value="0 35 04 * * ?" />
     </bean>
     
     <!-- 更新系統價格  / 每小時執行  -->
@@ -48,7 +48,7 @@
         <property name="targetMethod" value="syspriceProcess" />
     </bean>
     
-	<bean id="SyspriceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="SyspriceJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="SyspriceJobDetail" />
         <property name="cronExpression" value="0 00 * * * ?" />
     </bean>
@@ -59,7 +59,7 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-	<bean id="VerifyAdIllegalKeyWordJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="VerifyAdIllegalKeyWordJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="VerifyAdIllegalKeyWordJobDetail" />
         <property name="cronExpression" value="0 0/10 * * * ?" />
     </bean>
@@ -70,7 +70,7 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-    <bean id="NoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="NoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="NoticeJobDetail" />
         <property name="cronExpression" value="0 30 04 * * ?" />
     </bean>
@@ -81,7 +81,7 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-    <bean id="KernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="KernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="KernelJobDetail" />
         <property name="cronExpression" value="0 0/15 * * * ?" />
     </bean>
@@ -92,7 +92,7 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-    <bean id="CheckKernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="CheckKernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="CheckKernelJobDetail" />
         <property name="cronExpression" value="0 14/15 * * * ?" />
     </bean>
@@ -103,7 +103,7 @@
         <property name="targetMethod" value="processPerHour" />
     </bean>
     
-	<bean id="PfpAdActionReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfpAdActionReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfpAdActionReportJobDetail" />
         <property name="cronExpression" value="0 35 * * * ?" />
     </bean>
@@ -114,18 +114,29 @@
         <property name="targetMethod" value="processPerDay" />
     </bean>
     
-	<bean id="PfpAdActionReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfpAdActionReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfpAdActionReportJobDetail2" />
         <property name="cronExpression" value="0 15 03 * * ?" />
     </bean>
 
+	<!-- 整理 PFP 前台商品廣告轉換資料  / 每天 AM 5:15 執行 / 更新資料  -->
+    <bean id="PfpAdProdConvertUpdateReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="PfpAdProdConvertUpdateReportJobDetail" />
+        <property name="cronExpression" value="0 15 05 * * ?" />
+    </bean>
+    
+    <bean id="PfpAdProdConvertUpdateReportJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="PfpAdActionReportJob" />
+        <property name="targetMethod" value="processConvertToPfpReportByDay" />
+    </bean>
+    
    	<!-- 整理 PFD 前台報表資料  / 每小時的45 分執行 / 更新當天資料  -->
     <bean id="PfdReportJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="PfdReportJob" />
         <property name="targetMethod" value="processPerHour" />
     </bean>
     
-	<bean id="PfdReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfdReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdReportJobDetail" />
         <property name="cronExpression" value="0 45 * * * ?" />
     </bean>
@@ -136,7 +147,7 @@
         <property name="targetMethod" value="processPerDay" />
     </bean>
     
-	<bean id="PfdReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfdReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdReportJobDetail2" />
         <property name="cronExpression" value="0 20 03 * * ?" />
     </bean>
@@ -148,7 +159,7 @@
         <property name="targetMethod" value="processPerHour" />
     </bean>
     
-	<bean id="PfbReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfbReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbReportJobDetail" />
         <property name="cronExpression" value="0 40 * * * ?" />
     </bean>
@@ -159,7 +170,7 @@
         <property name="targetMethod" value="processPerDay" />
     </bean>
     
-	<bean id="PfbReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfbReportJobTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbReportJobDetail2" />
         <property name="cronExpression" value="0 25 03 * * ?" />
     </bean>
@@ -169,19 +180,19 @@
         <property name="targetObject" ref="PfdContractJob" />
         <property name="targetMethod" value="process" />
     </bean>
-	<bean id="PfdContractJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfdContractJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdContractJobDetail" />
         <property name="cronExpression" value="0 10 00 * * ?" />
     </bean>
 
-   	<!-- Pfd 計算佣金 / 每天 AM 04:00 執行  -->
+   	<!-- Pfd 計算佣金 / 每天 AM 04:30 執行  -->
     <bean id="PfdBonusJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="PfdBonusJob" />
         <property name="targetMethod" value="auto" />
     </bean>
-	<bean id="PfdBonusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="PfdBonusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdBonusJobDetail" />
-        <property name="cronExpression" value="0 0 04 * * ?" />
+        <property name="cronExpression" value="0 30 04 * * ?" />
     </bean>
 
    	<!-- 經銷商每月 1 日開放請款公告通知 / 每月1日上午10點執行  -->
@@ -189,7 +200,7 @@
         <property name="targetObject" ref="PfdNoticeJob" />
         <property name="targetMethod" value="invoiceNotice" />
     </bean>
-	<bean id="InvoiceNoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="InvoiceNoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="InvoiceNoticeJobDetail" />
         <property name="cronExpression" value="0 0 10 01 * ?" />
     </bean>
@@ -200,7 +211,7 @@
         <property name="targetMethod" value="adOvertimeNotice" />
     </bean>
 
-	<bean id="AdOvertimeNoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="AdOvertimeNoticeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AdOvertimeNoticeJobDetail" />
         <property name="cronExpression" value="0 30 1 ? * *" />
     </bean>
@@ -212,21 +223,21 @@
         <property name="targetMethod" value="autoEstimated" />
     </bean>
     
-    <bean id="PfbBonusEstimatedJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusEstimatedJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusEstimatedJobDetail" />
         <property name="cronExpression" value="0 40 * * * ?" />
     </bean>
     
     
-    <!-- Pfb 每日分潤獎金計算 / 每天 AM 04:30 執行-->
+    <!-- Pfb 每日分潤獎金計算 / 每天 AM 05:00 執行-->
     <bean id="PfbBonusJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="PfbBonusJob" />
         <property name="targetMethod" value="auto" />
     </bean>
     
-    <bean id="PfbBonusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusJobDetail" />
-        <property name="cronExpression" value="0 30 04 * * ?" />
+        <property name="cronExpression" value="0 0 05 * * ?" />
     </bean>
     
     <!-- Pfb 每月分潤計算 / 每月 1 號 AM 05:00 執行-->
@@ -235,9 +246,9 @@
         <property name="targetMethod" value="monthAuto" />
     </bean>
     
-    <bean id="PfbBonusMonthJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusMonthJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusMonthJobDetail" />
-        <property name="cronExpression" value="0 0 05 01 * ?" />
+        <property name="cronExpression" value="0 30 05 01 * ?" />
         <!-- <property name="cronExpression" value="0 0 05 1/2 * ?" /> -->
     </bean>
     
@@ -247,9 +258,9 @@
         <property name="targetMethod" value="autoMonthDay20ChangeInvoiceFail" />
     </bean>
     
-    <bean id="PfbBonusApplyOrderProcessJobInvoiceFailTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusApplyOrderProcessJobInvoiceFailTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusApplyOrderProcessJobInvoiceFailDetail" />
-        <property name="cronExpression" value="0 10 06 16 * ?" />
+        <property name="cronExpression" value="0 40 06 16 * ?" />
     </bean>
 
     <!-- Pfb 每月申請單付款中的改已完成 / 每月 1 號 AM 05:20 執行-->
@@ -258,9 +269,9 @@
         <property name="targetMethod" value="autoMonthDay5ChangeApplyOrderPaySuccess" />
     </bean>
     
-    <bean id="PfbBonusApplyOrderProcessJobPaySuccessTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusApplyOrderProcessJobPaySuccessTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusApplyOrderProcessJobPaySuccessDetail" />
-        <property name="cronExpression" value="0 20 05 01 * ?" />
+        <property name="cronExpression" value="0 50 05 01 * ?" />
     </bean>
 
     <!-- Pfb 每月申請單申請中改付款中 / 每月 16 號 AM 05:10 執行-->
@@ -269,9 +280,9 @@
         <property name="targetMethod" value="autoMonthDay16ChangeInvoiceWaitPay" />
     </bean>
 
-    <bean id="PfbBonusApplyOrderProcessJobInvoiceWaitPayTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbBonusApplyOrderProcessJobInvoiceWaitPayTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbBonusApplyOrderProcessJobInvoiceWaitPayDetail" />
-        <property name="cronExpression" value="0 10 05 16 * ?" />
+        <property name="cronExpression" value="0 40 05 16 * ?" />
     </bean>
 
     <!-- Pfb 每日檢查帳戶狀態/ 每日 AM 00:03 執行-->
@@ -280,9 +291,9 @@
         <property name="targetMethod" value="process" />
     </bean>
 
-    <bean id="PfbAccountStatusChangeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbAccountStatusChangeJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbAccountStatusChangeJobDetail" />
-        <property name="cronExpression" value="0 03 00 * * ?" />
+        <property name="cronExpression" value="0 33 00 * * ?" />
     </bean>
     
     <!-- Pfb 申請中帳戶審核通知/ 每小時的 30 分執行 -->
@@ -291,7 +302,7 @@
         <property name="targetMethod" value="pfbxCustomerInfoApplyNotifyProcess" />
     </bean>
 
-    <bean id="PfbAccountApplyNotifyJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfbAccountApplyNotifyJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfbAccountApplyNotifyJobDetail" />
         <property name="cronExpression" value="0 30 * * * ?" />
     </bean> -->
@@ -302,7 +313,7 @@
         <property name="targetMethod" value="checkReportProcess" />
     </bean>
 
-    <bean id="CheckReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="CheckReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="CheckReportJobDetail" />
         <property name="cronExpression" value="0 22 * * * ?" />
     </bean> -->
@@ -313,9 +324,9 @@
         <property name="targetMethod" value="processPerDay" />
     </bean>
 
-    <bean id="AdmClientCountReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="AdmClientCountReportJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AdmClientCountReportJobDetail" />
-        <property name="cronExpression" value="0 00 06 * * ?" />
+        <property name="cronExpression" value="0 30 06 * * ?" />
     </bean>
     
     <!-- adm E-mail報表發送/ 每日 AM 08:30 執行 -->
@@ -324,9 +335,9 @@
         <property name="targetMethod" value="process" />
     </bean>
 
-    <bean id="AdmReportMailJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="AdmReportMailJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AdmReportMailJobDetail" />
-        <property name="cronExpression" value="0 30 08 * * ?" />
+        <property name="cronExpression" value="0 0 09 * * ?" />
     </bean>
 	
 	<!-- Pfd 申請中帳戶審核通知/ 每小時的 37 分執行 -->
@@ -335,7 +346,7 @@
         <property name="targetMethod" value="process" />
     </bean>
 
-    <bean id="PfdApplyForBusinessJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="PfdApplyForBusinessJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdApplyForBusinessJobDetail" />
         <property name="cronExpression" value="0 37 * * * ?" />
     </bean> -->
@@ -346,9 +357,9 @@
         <property name="targetMethod" value="checkPfpRemainProcess" />
     </bean>
 
-    <bean id="CheckPfpRemainJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+    <bean id="CheckPfpRemainJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="CheckPfpRemainJobDetail" />
-        <property name="cronExpression" value="0 15 09 * * ?" />
+        <property name="cronExpression" value="0 45 09 * * ?" />
     </bean>
 	
 	<!-- 比對前一天PFP花費與驗證花費是否相等  / 每日 AM 10:00 執行  -->
@@ -357,9 +368,31 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-	<bean id="CheckPFPCostAndVerifyTheCostJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+	<bean id="CheckPFPCostAndVerifyTheCostJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="CheckPFPCostAndVerifyTheCostJobDetail" />
 		<property name="cronExpression" value="0 0 10 * * ?" />
+    </bean>
+	    
+    <!-- 自動排程上傳，執行商品目錄更新  / 每日 AM 1:00 執行  -->
+   	<bean id="PfpCatalogUploadJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="PfpCatalogUploadJobDetail" />
+ 		<property name="cronExpression" value="0 0 1 * * ?" />
+    </bean>
+    
+   	<bean id="PfpCatalogUploadJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="PfpCatalogUploadJob" />
+        <property name="targetMethod" value="autoJobCreateUrlTxt" />
+    </bean>
+    
+    <!-- PChome賣場網址上傳，建立賣場網址清單  / 每日 AM 10:00 執行  -->
+   	<bean id="PfpCatalogUploadStoreURLJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="PfpCatalogUploadStoreURLJobDetail" />
+ 		<property name="cronExpression" value="0 0 10 * * ?" />
+    </bean>
+    
+   	<bean id="PfpCatalogUploadStoreURLJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="PfpCatalogUploadJob" />
+        <property name="targetMethod" value="pchomeStoreURLCreateTxt" />
     </bean>
 	
 	<!-- join cron to scheduler factory -->
@@ -370,7 +403,7 @@
 				<!-- accesslog 每10分 -->                             
 				<ref bean="AccesslogJobTrigger" />      
 				         
-				<!-- 結算帳戶餘額攤提  / 每日 AM 03:30 執行  -->          
+				<!-- 結算帳戶餘額攤提  / 每日 AM 04:00 執行  -->          
 				<ref bean="AdjustAccountJobTrigger" />		
 				
 				<!-- 廣告禁用字審核  / 每隔 10 分鐘執行 -->
@@ -410,29 +443,29 @@
 				<!-- Pfd 公告 / 每月25號 上午 10:00 執行  -->
 				<ref bean="InvoiceNoticeJobTrigger" />                
 								
-				<!-- Pfd 每日佣金獎金計算 / 每天 AM 04:00 執行-->
+				<!-- Pfd 每日佣金獎金計算 / 每天 AM 04:30 執行-->
 				<ref bean="PfdBonusJobTrigger" />
 							
 				
 				<!-- Pfb 每日佣金預估值計算 / 每小時 40 分執行 佣金預估值-->
 				<ref bean="PfbBonusEstimatedJobTrigger" />
 				
-				<!-- Pfb 每日分潤獎金計算 / 每天 AM 04:30 執行-->
+				<!-- Pfb 每日分潤獎金計算 / 每天 AM 05:00 執行-->
 				<ref bean="PfbBonusJobTrigger" />
 				
-				<!-- Pfb 每月分潤計算 / 每月 26 號 AM 05:00 執行-->
+				<!-- Pfb 每月分潤計算 / 每月 26 號 AM 05:30 執行-->
 				<ref bean="PfbBonusMonthJobTrigger" />
 				
-				<!-- Pfb 申請單收據未收到作廢 / 每月 20  號 AM 05:10 執行-->
+				<!-- Pfb 申請單收據未收到作廢 / 每月 16  號 AM 06:40 執行-->
 				<ref bean="PfbBonusApplyOrderProcessJobInvoiceFailTrigger" />
 				
-				<!-- Pfb 申請單付款中改付款完成 / 每月 5  號 AM 05:20 執行-->
+				<!-- Pfb 申請單付款中改付款完成 / 每月 1  號 AM 05:50 執行-->
 				<ref bean="PfbBonusApplyOrderProcessJobPaySuccessTrigger" />
 
-                <!-- Pfb 申請單申請中改付款中 / 每月 16  號 AM 05:10 執行-->
+                <!-- Pfb 申請單申請中改付款中 / 每月 16  號 AM 05:40 執行-->
                 <ref bean="PfbBonusApplyOrderProcessJobInvoiceWaitPayTrigger" />
 
-                <!-- Pfb 每日檢查帳戶狀態/ 每日 AM 00:03 執行-->
+                <!-- Pfb 每日檢查帳戶狀態/ 每日 AM 00:33 執行-->
                 <ref bean="PfbAccountStatusChangeJobTrigger"/>
                 
                 <!-- Pfb 申請中帳戶審核通知/ 每小時的 30 分執行-->
@@ -441,28 +474,37 @@
                 <!-- 檢查pfp pfb pfd 報表曝光數與點擊數是否正確/ 每小時的 22 分執行，先暫時關掉 -->
                 <!-- <ref bean="CheckReportJobTrigger"/> -->
                 
-                <!-- adm email報表資料寫入/ 每日 AM 06:00 執行 -->
+                <!-- adm email報表資料寫入/ 每日 AM 06:30 執行 -->
                 <ref bean="AdmClientCountReportJobTrigger"/>
                 
-                <!-- adm E-mail報表發送/ 每日 AM 08:30 執行 -->
+                <!-- adm E-mail報表發送/ 每日 AM 09:00 執行 -->
                 <ref bean="AdmReportMailJobTrigger"/>
                 
                 <!-- Pfd 申請中帳戶審核通知/ 每小時的 37 分執行-->
                 <!-- <ref bean="PfdApplyForBusinessJobTrigger"/> -->
                 
-                <!-- 檢查pfp攤提餘額是否正確/ 每日 AM 09:15 執行-->
+                <!-- 檢查pfp攤提餘額是否正確/ 每日 AM 09:45 執行-->
                 <ref bean="CheckPfpRemainJobTrigger"/>
                 
                <!-- 有問題排程，暫時註解掉
                 <ref bean="AdOvertimeNoticeJobTrigger" />
                  -->
 
-				<!-- 更新系統價格  / 每日 AM 04:05 執行  -->
+				<!-- 更新系統價格  / 每日 AM 04:35 執行  -->
 				<ref bean="NewSyspriceJobTrigger"/>
 				
 				<!-- 比對前一天PFP花費與驗證花費是否相等  / 每日 AM 10:00 執行  -->
 				<ref bean="CheckPFPCostAndVerifyTheCostJobTrigger"/>
 				
+				<!-- 自動排程上傳，執行商品目錄更新  / 每日 AM 1:00 執行  -->
+				<ref bean="PfpCatalogUploadJobTrigger"/>
+				
+				<!-- PChome賣場網址上傳，建立賣場網址清單  / 每日 AM 10:00 執行  -->
+				<ref bean="PfpCatalogUploadStoreURLJobTrigger"/>
+				
+				<!-- 商品廣告轉換欄位更新  / 每日 AM 05:00 執行  -->
+				<ref bean="PfpAdProdConvertUpdateReportJobTrigger"/>
+
             </list>
         </property>
     </bean>

@@ -13,7 +13,7 @@ public class PfpKeywordSyspriceDAO extends BaseDAO<PfpKeywordSysprice, String> i
         hql.append(" from PfpKeywordSysprice ");
         hql.append(" where keyword = '"+keyword+"' ");
 
-        List<PfpKeywordSysprice> list = super.getHibernateTemplate().find(hql.toString());
+        List<PfpKeywordSysprice> list = (List<PfpKeywordSysprice>) super.getHibernateTemplate().find(hql.toString());
 
         if(list != null && list.size() > 0){
             return list.get(0);
@@ -28,13 +28,13 @@ public class PfpKeywordSyspriceDAO extends BaseDAO<PfpKeywordSysprice, String> i
         StringBuffer hql = new StringBuffer();
         hql.append(" from PfpKeywordSysprice ");
 
-        return super.getHibernateTemplate().find(hql.toString());
+        return (List<PfpKeywordSysprice>) super.getHibernateTemplate().find(hql.toString());
     }
 
     @SuppressWarnings("unchecked")
     public List<PfpKeywordSysprice> selectKeywordSyspriceByKeyword(String keyword, int firstResult, int maxResults) {
         String hql = "from PfpKeywordSysprice where keyword = :keyword";
-        return getSession().createQuery(hql)
+        return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql)
             .setString("keyword", keyword)
             .setFirstResult(firstResult)
             .setMaxResults(maxResults)

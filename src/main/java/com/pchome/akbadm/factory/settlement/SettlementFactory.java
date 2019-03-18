@@ -1,7 +1,7 @@
 package com.pchome.akbadm.factory.settlement;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.enumerate.factory.EnumSettlementItem;
@@ -9,7 +9,7 @@ import com.pchome.enumerate.factory.EnumSettlementItem;
 @Transactional
 public class SettlementFactory {
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
 	private ASettlement settlementSaveMoney;
 	private ASettlement settlementInvalidCost;

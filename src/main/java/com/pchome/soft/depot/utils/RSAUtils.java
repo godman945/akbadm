@@ -13,14 +13,14 @@ import javax.crypto.Cipher;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.ArrayUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import org.apache.commons.codec.binary.Base64;
 
 public class RSAUtils {
 
-	private static final Log log = LogFactory.getLog(RSAUtils.class);
+	private static final Logger log = LogManager.getRootLogger();
 
 	private static final String PUBLIC_KEY = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgAkCremk6gUuWfnA/pphMNTWChmfm8oBZn8CoPYCjilRvpHCdcCGOWJM7faTWs1qYfuNmMtB5VfYsL+CjCubVt+2cEbUaWZ5wiu30Kmwl+BqcV7a9IRJK7k7pEVcuOB0CZbF/gM57qyCumffnSl9+p7eEi9HxNPaj762286673QIDAQAB";
 

@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
@@ -28,7 +28,7 @@ public class AdKeywordReportDAO extends BaseDAO<PfpAdKeywordPvclk, Integer> impl
 		List<KeywordReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<KeywordReportVO>>() {
 					@Override
-                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -120,7 +120,7 @@ public class AdKeywordReportDAO extends BaseDAO<PfpAdKeywordPvclk, Integer> impl
 		List<KeywordReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<KeywordReportVO>>() {
 					@Override
-                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -217,7 +217,7 @@ public class AdKeywordReportDAO extends BaseDAO<PfpAdKeywordPvclk, Integer> impl
 		List<KeywordReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<KeywordReportVO>>() {
 					@Override
-                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<KeywordReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");

@@ -16,4 +16,6 @@ public interface IAdmPfpdAdPvclkReportService {
 
 	public void insertReportData(List<AdmPfpdAdPvclkReport> dataList) throws Exception;
 	
+	public int updateConvertCountData(String convertDate, String convertRangeDate) throws Exception;
+	
 }

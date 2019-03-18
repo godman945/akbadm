@@ -21,7 +21,7 @@ public class PfbxUserOptionDAO extends BaseDAO<PfbxUserOption, String> implement
         con.add(pfbId);
         con.add("SYS");
         
-        return this.getHibernateTemplate().find(hql.toString(), con.toArray());
+        return (List<PfbxUserOption>) this.getHibernateTemplate().find(hql.toString(), con.toArray());
     }
 	
     @SuppressWarnings("unchecked")
@@ -30,6 +30,6 @@ public class PfbxUserOptionDAO extends BaseDAO<PfbxUserOption, String> implement
         hql.append("from PfbxUserOption ");
         hql.append("where pfbxCustomerInfo.status = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), status);
+        return (List<PfbxUserOption>) this.getHibernateTemplate().find(hql.toString(), status);
     }
 }

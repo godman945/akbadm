@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
@@ -42,7 +42,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdReportVO> result = (List<AdReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdReportVO>>() {
-//					public List<AdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -155,7 +155,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdReportVO>>() {
 					@Override
-                    public List<AdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -266,7 +266,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -365,7 +365,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 						try{
 //							log.info(">>> startDate = " + startDate);
 //							log.info(">>> endDate = " + endDate);
@@ -594,7 +594,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 	/*public List<AdActionReportVO> getAdActionReportList(final String startDate, final String endDate, final List<String> adSeqs, final String pfpCustomerInfoId, final String adType, final String pfdCustomerInfoId) throws Exception {
 		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
-					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
 						sb.append(" r.adPvclkDate,");
@@ -718,7 +718,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -833,7 +833,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -955,7 +955,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -1046,7 +1046,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //
@@ -1160,7 +1160,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //
@@ -1278,7 +1278,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 
 		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
-					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 						StringBuffer sb = new StringBuffer();
@@ -1403,7 +1403,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 						SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy/MM/dd");
@@ -1514,7 +1514,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdTemplateReportVO> result = (List<AdTemplateReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdTemplateReportVO>>() {
-//					public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -1595,7 +1595,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdTemplateReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdTemplateReportVO>>() {
 					@Override
-                    public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -1670,7 +1670,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -1767,7 +1767,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -1865,7 +1865,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 			new HibernateCallback<List<AdActionReportVO>>() {
 				@Override
-                public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 					HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 					StringBuffer sb = new StringBuffer();
@@ -2009,7 +2009,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 //
 //		List<AdActionReportVO> result = (List<AdActionReportVO>) getHibernateTemplate().execute(
 //				new HibernateCallback<List<AdActionReportVO>>() {
-//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+//					public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 //
 //						StringBuffer sb = new StringBuffer();
 //						sb.append("select");
@@ -2125,7 +2125,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
@@ -2267,7 +2267,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
@@ -2398,7 +2398,7 @@ public class AdReportDAO extends BaseDAO<PfpAdPvclk, Integer> implements IAdRepo
 		List<AdActionReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdActionReportVO>>() {
 					@Override
-                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdActionReportVO> doInHibernate(Session session) throws HibernateException {
 
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();

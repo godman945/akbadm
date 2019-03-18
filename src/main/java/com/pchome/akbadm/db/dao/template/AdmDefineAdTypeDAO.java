@@ -11,7 +11,7 @@ public class AdmDefineAdTypeDAO extends BaseDAO<AdmDefineAdType, String> impleme
 
     @SuppressWarnings("unchecked")
 	public List<AdmDefineAdType> getDefineAdType() throws Exception {
-		return super.getHibernateTemplate().find("from AdmDefineAdType where defineAdTypeId is not null order by defineAdTypeId");
+		return (List<AdmDefineAdType>) super.getHibernateTemplate().find("from AdmDefineAdType where defineAdTypeId is not null order by defineAdTypeId");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -24,12 +24,12 @@ public class AdmDefineAdTypeDAO extends BaseDAO<AdmDefineAdType, String> impleme
 		if (StringUtils.isNotEmpty(defineAdTypeName)) {
 			sql.append(" and defineAdTypeName like '%" + defineAdTypeName.trim() + "%'");
 		}
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmDefineAdType>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmDefineAdType 	getDefineAdTypeById(String defineAdTypeById) throws Exception {
-		List<AdmDefineAdType> list = super.getHibernateTemplate().find("from AdmDefineAdType where defineAdTypeId = '" + defineAdTypeById + "'");
+		List<AdmDefineAdType> list = (List<AdmDefineAdType>) super.getHibernateTemplate().find("from AdmDefineAdType where defineAdTypeId = '" + defineAdTypeById + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {

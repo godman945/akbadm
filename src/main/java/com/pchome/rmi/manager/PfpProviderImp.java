@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.AdmManagerDetail;
 import com.pchome.akbadm.db.service.customerInfo.IPfpCustomerInfoService;
@@ -17,7 +17,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class PfpProviderImp implements IPfpProvider{
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	 
 	private IAdmManagerDetailService admManagerDetailService;
 	private IPfpCustomerInfoService pfpCustomerInfoService;
@@ -29,7 +29,6 @@ public class PfpProviderImp implements IPfpProvider{
 	private String[] portalIp;
 	
 	public List<PfpAccountVO> findPfpAccount(String memberId, String ip) {
-		
 		this.dateRange();
 		
 		List<PfpAccountVO> vos = null;
@@ -71,6 +70,10 @@ public class PfpProviderImp implements IPfpProvider{
 		if(!isPChomeIP(ip)){
 			isManager = false;
 		}
+		log.info("memberId:"+memberId);
+		log.info("ip:"+ip);
+		log.info("isManager:"+isManager);
+		
 		
 		return isManager;
 	}
@@ -80,6 +83,9 @@ public class PfpProviderImp implements IPfpProvider{
 		boolean isPChomeIP = false;
 		
 		for(String adm:portalIp){
+			
+			log.info(adm+":"+ip);
+			
 			if(adm.equals(ip)){	
 				log.info("login success ip: "+ip );
 				isPChomeIP = true;

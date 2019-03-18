@@ -13,4 +13,6 @@ public interface IPfpAdTimeReportService {
 	public void insertReportData(List<PfpAdTimeReport> dataList) throws Exception;
 
 	public List<Object> getLastDate() throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

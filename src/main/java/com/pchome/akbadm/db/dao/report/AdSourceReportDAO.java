@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.report.PfpAdReportVO;
@@ -29,7 +29,7 @@ public class AdSourceReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 				new HibernateCallback<List<PfpAdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 						
 						hql.append(" SELECT a.ad_pv,  ");
@@ -299,7 +299,7 @@ public class AdSourceReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 				new HibernateCallback<List<PfpAdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");
 						hql.append(" sum(a.ad_pv), ");
@@ -490,7 +490,7 @@ public class AdSourceReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 				new HibernateCallback<List<PfpAdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 						
 						hql.append(" SELECT Sum(a.ad_pv),  ");

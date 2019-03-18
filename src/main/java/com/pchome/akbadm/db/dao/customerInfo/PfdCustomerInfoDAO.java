@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfdCustomerInfo;
@@ -35,7 +35,7 @@ public class PfdCustomerInfoDAO extends BaseDAO <PfdCustomerInfo, String> implem
 		list.add(EnumPfdAccountStatus.CLOSE.getStatus());
 		list.add(EnumPfdAccountStatus.STOP.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,7 +50,7 @@ public class PfdCustomerInfoDAO extends BaseDAO <PfdCustomerInfo, String> implem
 		
 		list.add(pfdCustomerInfoId);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	// 2014-04-24 
@@ -62,7 +62,7 @@ public class PfdCustomerInfoDAO extends BaseDAO <PfdCustomerInfo, String> implem
 			sql.append(" and customerInfoId in (:customerInfoId)");
 		}
 
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
 
 		if (customerInfoIdList != null && customerInfoIdList.size()>0) {
 			q.setParameterList("customerInfoId", customerInfoIdList);
@@ -86,7 +86,7 @@ public class PfdCustomerInfoDAO extends BaseDAO <PfdCustomerInfo, String> implem
 
 		        new HibernateCallback<List<Object> >() {
 		        	
-		        	public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+		        	public List<Object>  doInHibernate(Session session) throws HibernateException {
 		        		
 		        		StringBuffer sql = new StringBuffer();
 		        		Query q = null;

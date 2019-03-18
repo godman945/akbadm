@@ -22,7 +22,7 @@ public class AdmChannelAccountDAO extends BaseDAO<AdmChannelAccount, Integer> im
 		list.add(memberId);	
 		list.add(channelCategory);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmChannelAccount>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	public Integer deleteAdmChannelAccount(String memberId, String channelCategory) {

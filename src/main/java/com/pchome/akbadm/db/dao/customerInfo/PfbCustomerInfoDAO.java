@@ -12,7 +12,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;
@@ -36,7 +36,7 @@ public class PfbCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> implem
 		list.add(EnumPfdAccountStatus.CLOSE.getStatus());
 		list.add(EnumPfdAccountStatus.STOP.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -50,7 +50,7 @@ public class PfbCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> implem
 		
 		list.add(pfbCustomerInfoId);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -60,7 +60,7 @@ public class PfbCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> implem
 
 		        new HibernateCallback<List<Object> >() {
 		        	
-		        	public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+		        	public List<Object>  doInHibernate(Session session) throws HibernateException {
 		        		
 		        		Query q = null;
 

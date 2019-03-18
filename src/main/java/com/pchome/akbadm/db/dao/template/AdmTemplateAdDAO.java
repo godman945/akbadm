@@ -33,12 +33,12 @@ public class AdmTemplateAdDAO extends BaseDAO<AdmTemplateAd, String> implements 
 			sql.append(" and templateAdHeight = '" + templateAdHeight.trim() + "'");
 		}
 		
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmTemplateAd>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmTemplateAd getTemplateAdById(String templateAdId) throws Exception {
-		List<AdmTemplateAd> list = super.getHibernateTemplate().find("from AdmTemplateAd where templateAdId = '" + templateAdId + "'");
+		List<AdmTemplateAd> list = (List<AdmTemplateAd>) super.getHibernateTemplate().find("from AdmTemplateAd where templateAdId = '" + templateAdId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -48,7 +48,7 @@ public class AdmTemplateAdDAO extends BaseDAO<AdmTemplateAd, String> implements 
 
 	@SuppressWarnings("unchecked")
 	public AdmTemplateAd getTemplateAdBySeq(String templateAdSeq) throws Exception {
-		List<AdmTemplateAd> list = super.getHibernateTemplate().find("from AdmTemplateAd where templateAdSeq = '" + templateAdSeq + "'");
+		List<AdmTemplateAd> list = (List<AdmTemplateAd>) super.getHibernateTemplate().find("from AdmTemplateAd where templateAdSeq = '" + templateAdSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -66,7 +66,7 @@ public class AdmTemplateAdDAO extends BaseDAO<AdmTemplateAd, String> implements 
 
 	public void deleteTemplateAd(String templateAdSeq) throws Exception {
 	String sql = "delete from AdmTemplateAd where templateAdSeq = '" + templateAdSeq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
         session.clear();

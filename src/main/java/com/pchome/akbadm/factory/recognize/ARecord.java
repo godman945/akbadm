@@ -2,8 +2,8 @@ package com.pchome.akbadm.factory.recognize;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.service.recognize.IAdmRecognizeRecordService;
 import com.pchome.akbadm.db.service.sequence.ISequenceService;
@@ -13,7 +13,7 @@ import com.pchome.akbadm.db.service.sequence.ISequenceService;
  */
 public abstract class ARecord {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	protected ISequenceService sequenceService;
 	protected IAdmRecognizeRecordService recognizeRecordService;

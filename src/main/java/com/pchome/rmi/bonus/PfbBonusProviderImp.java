@@ -2,15 +2,15 @@ package com.pchome.rmi.bonus;
 
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.service.pfbx.account.IPfbxCustomerInfoService;
 import com.pchome.akbadm.db.service.pfbx.bonus.IPfbxBonusSetService;
 
 public class PfbBonusProviderImp implements IPfbBonusProvider{
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	
 	private IPfbxCustomerInfoService pfbxCustomerInfoService;
 	

@@ -22,7 +22,7 @@ public class PfbxBonusSetDAO extends BaseDAO<PfbxBonusSet, Integer> implements I
 		hql.append(" order by id desc ");
 
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId);
+		return (List<PfbxBonusSet>) super.getHibernateTemplate().find(hql.toString(), pfbId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -31,7 +31,7 @@ public class PfbxBonusSetDAO extends BaseDAO<PfbxBonusSet, Integer> implements I
 		StringBuffer hql = new StringBuffer();
 		hql.append(" from PfbxBonusSet order by startDate desc , createDate desc");
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfbxBonusSet>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -43,7 +43,7 @@ public class PfbxBonusSetDAO extends BaseDAO<PfbxBonusSet, Integer> implements I
 		hql.append(" from PfbxBonusSet where pfbId = ? order by startDate desc , createDate desc");
 		pos.add(pfbId);
 		
-		return super.getHibernateTemplate().find(hql.toString() , pos.toArray());
+		return (List<PfbxBonusSet>) super.getHibernateTemplate().find(hql.toString() , pos.toArray());
 
 	}
 

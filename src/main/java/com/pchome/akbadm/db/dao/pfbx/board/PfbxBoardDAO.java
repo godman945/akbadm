@@ -44,7 +44,7 @@ public class PfbxBoardDAO extends BaseDAO<PfbxBoard, Integer> implements IPfbxBo
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		Query q = session.createQuery(strHQL);
 
@@ -78,7 +78,7 @@ public class PfbxBoardDAO extends BaseDAO<PfbxBoard, Integer> implements IPfbxBo
 	public void deletePfbxBoardById(String boardId) throws Exception {
 
 		String hql = "delete from PfbxBoard where boardId = '" + boardId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}
@@ -92,7 +92,7 @@ public class PfbxBoardDAO extends BaseDAO<PfbxBoard, Integer> implements IPfbxBo
 			hql.append(" and pfbxCustomerInfoId = '" + pfbCustomerInfoId + "' ");
 			hql.append(" and deleteId = '" + deleteId + "'");
 
-			this.getSession().createQuery(hql.toString()).executeUpdate();
+			this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString()).executeUpdate();
 		}
 	}
 
@@ -108,7 +108,7 @@ public class PfbxBoardDAO extends BaseDAO<PfbxBoard, Integer> implements IPfbxBo
 		hql += " WHERE pfbx_customer_info_id = '" + pfbxCustomerInfo + "'";
 		hql += " AND delete_id = '" + deleteId + "'";
 		hql += " AND create_date >= '" + createDate + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}

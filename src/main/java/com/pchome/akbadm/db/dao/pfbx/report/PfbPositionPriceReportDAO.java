@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.pfbx.report.PfbPositionPriceReportVO;
@@ -31,7 +31,7 @@ public class PfbPositionPriceReportDAO extends BaseDAO<PfbPositionPriceReportVO,
 		List<PfbPositionPriceReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfbPositionPriceReportVO>>() {
 					@Override
-                    public List<PfbPositionPriceReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<PfbPositionPriceReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append(" select");
@@ -118,7 +118,7 @@ public class PfbPositionPriceReportDAO extends BaseDAO<PfbPositionPriceReportVO,
 		String hql = "update PfbxPosition ";
 		       hql +="set PPrice =:pprice, updateDate = CURRENT_TIMESTAMP() ";
 		       hql +="where PId = :pid ";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         query.setString("pid", pid);
         query.setInteger("pprice", pprice);

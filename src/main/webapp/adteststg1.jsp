@@ -62,10 +62,10 @@ stg<p>
 			2: 140x300<p>
 			
 	<script language="javascript">
-			pad_width=250;
-			pad_height=80;
+			pad_width=140;
+			pad_height=300;
 			pad_customerId="PFBC20150519001";
-			pad_positionId="PFBP201512170007C";
+			pad_positionId="PFBP201601210010C";
 			</script>
 			<script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/pcadshowstg.js"></script>
 			

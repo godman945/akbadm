@@ -30,6 +30,6 @@ public class PfbxUserDAO extends BaseDAO<PfbxUser, String> implements IPfbxUserD
 		
 		hql.append(" order by userId ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfbxUser>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

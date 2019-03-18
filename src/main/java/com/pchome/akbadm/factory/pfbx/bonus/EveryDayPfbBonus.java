@@ -3,8 +3,8 @@ package com.pchome.akbadm.factory.pfbx.bonus;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.AdmBonusBillReport;
 import com.pchome.akbadm.db.pojo.AdmBonusSet;
@@ -37,7 +37,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class EveryDayPfbBonus {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private IAdmBonusSetService admBonusSetService;
 	private IAdmRecognizeDetailService admRecognizeDetailService;

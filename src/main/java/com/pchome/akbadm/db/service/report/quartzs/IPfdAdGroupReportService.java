@@ -11,4 +11,6 @@ public interface IPfdAdGroupReportService {
 	public void deleteReportDataByReportDate(String reportDate) throws Exception;
 
 	public void insertReportData(List<PfdAdGroupReport> dataList) throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

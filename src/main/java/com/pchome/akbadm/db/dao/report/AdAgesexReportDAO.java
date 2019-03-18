@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.report.PfpAdAgesexReportVO;
@@ -29,7 +29,7 @@ public class AdAgesexReportDAO extends BaseDAO<PfpAdAgesexReportVO, String> impl
 				new HibernateCallback<List<PfpAdAgesexReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdAgesexReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdAgesexReportVO> doInHibernate(Session session) throws HibernateException {
 
 						String searchAgesex = "A";
 						if(StringUtils.isNotEmpty(conditionMap.get("searchAgesex"))){
@@ -183,7 +183,7 @@ public class AdAgesexReportDAO extends BaseDAO<PfpAdAgesexReportVO, String> impl
 				new HibernateCallback<List<PfpAdAgesexReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdAgesexReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdAgesexReportVO> doInHibernate(Session session) throws HibernateException {
 
 						String searchAgesex = "A";
 						if(StringUtils.isNotEmpty(conditionMap.get("searchAgesex"))){

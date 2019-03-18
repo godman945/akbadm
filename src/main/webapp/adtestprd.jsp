@@ -6,7 +6,7 @@
 <title>Insert title here</title>
 <link href="favicon.ico?v=1.0" rel="shortcut icon">
 </head>
-<%
+<% 
 String qv="";
 String qv1="";
 

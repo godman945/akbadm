@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.pchome.akbadm.db.dao.report.quartzs.IPfdAdActionReportDAO;
+import com.pchome.akbadm.db.dao.report.quartzs.IPfpAdActionReportDAO;
 import com.pchome.akbadm.db.dao.report.quartzs.PfdAdActionReportDAO;
 import com.pchome.akbadm.db.pojo.PfdAdActionReport;
 import com.pchome.akbadm.db.service.BaseService;
@@ -126,6 +127,10 @@ public class PfdAdActionReportService extends BaseService<PfdAdActionReport, Int
 		}
 		
 		return oneWeekAdCost;
+	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((IPfdAdActionReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
 	}
 
 }

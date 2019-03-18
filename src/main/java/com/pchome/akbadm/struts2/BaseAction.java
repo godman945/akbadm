@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.interceptor.ServletRequestAware;
 import org.apache.struts2.interceptor.ServletResponseAware;
 import org.apache.struts2.interceptor.SessionAware;
@@ -20,7 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
 public class BaseAction extends ActionSupport implements ServletContextAware, ServletRequestAware, ServletResponseAware, SessionAware {
     private static final long serialVersionUID = -8920422948462490447L;
 
-    protected Log log = LogFactory.getLog(getClass().getName());
+    protected Logger log = LogManager.getRootLogger();
 
     protected ServletContext servletContext;
     protected HttpServletRequest request;

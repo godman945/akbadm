@@ -43,6 +43,9 @@ function getBlobURL(url, mime, callback) {
 nico
 
 <video controls id="video-bg"></video>
-
+s c  
 </body>
 </html>
+
+
+

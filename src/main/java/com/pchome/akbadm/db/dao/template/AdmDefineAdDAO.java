@@ -23,12 +23,12 @@ public class AdmDefineAdDAO extends BaseDAO<AdmDefineAd, String> implements IAdm
 		if (StringUtils.isNotEmpty(adPoolSeq)) {
 			sql.append(" and adPoolSeq like '%" + adPoolSeq.trim() + "%'");
 		}
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmDefineAd>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmDefineAd getDefineAdById(String defineAdId) throws Exception {
-		List<AdmDefineAd> list = super.getHibernateTemplate().find("from AdmDefineAd where defineAdId = '" + defineAdId + "'");
+		List<AdmDefineAd> list = (List<AdmDefineAd>) super.getHibernateTemplate().find("from AdmDefineAd where defineAdId = '" + defineAdId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -38,7 +38,7 @@ public class AdmDefineAdDAO extends BaseDAO<AdmDefineAd, String> implements IAdm
 
 	@SuppressWarnings("unchecked")
 	public AdmDefineAd getDefineAdBySeq(String defineAdSeq) throws Exception {
-		List<AdmDefineAd> list = super.getHibernateTemplate().find("from AdmDefineAd where defineAdSeq = '" + defineAdSeq + "'");
+		List<AdmDefineAd> list = (List<AdmDefineAd>) super.getHibernateTemplate().find("from AdmDefineAd where defineAdSeq = '" + defineAdSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -48,7 +48,7 @@ public class AdmDefineAdDAO extends BaseDAO<AdmDefineAd, String> implements IAdm
 
 	@SuppressWarnings("unchecked")
 	public AdmDefineAd getDefineAdByPoolSeq(String adPoolSeq) throws Exception {
-		List<AdmDefineAd> list = super.getHibernateTemplate().find("from AdmDefineAd where adPoolSeq = '" + adPoolSeq + "'");
+		List<AdmDefineAd> list = (List<AdmDefineAd>) super.getHibernateTemplate().find("from AdmDefineAd where adPoolSeq = '" + adPoolSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -58,6 +58,6 @@ public class AdmDefineAdDAO extends BaseDAO<AdmDefineAd, String> implements IAdm
 
     public int deleteDefineAdByPoolSeq(String adPoolSeq) throws Exception {
         String hql = "delete from AdmDefineAd where adPoolSeq = :adPoolSeq";
-        return this.getSession().createQuery(hql).setString("adPoolSeq", adPoolSeq).executeUpdate();
+        return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql).setString("adPoolSeq", adPoolSeq).executeUpdate();
     }
 }

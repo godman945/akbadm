@@ -32,6 +32,6 @@ public class AdmRetrieveRecordDAO extends BaseDAO<AdmRetrieveRecord, Integer> im
 			hql.append(" desc");
 		}
 
-		return super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
+		return (List<AdmRetrieveRecord>) super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
 	}
 }

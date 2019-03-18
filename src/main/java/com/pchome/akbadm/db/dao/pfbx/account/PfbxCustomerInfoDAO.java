@@ -47,7 +47,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		//只抓帳戶狀態為 開通 關閉 封鎖
 		hql.append("and status in ('"+EnumPfbAccountStatus.START.getStatus()+"' , '"+EnumPfbAccountStatus.STOP.getStatus()+"' , '"+EnumPfbAccountStatus.CLOSE.getStatus()+"') ");
 		
-		List<PfbxCustomerInfo> list = this.getHibernateTemplate().find(hql.toString() , con.toArray());
+		List<PfbxCustomerInfo> list = (List<PfbxCustomerInfo>) this.getHibernateTemplate().find(hql.toString() , con.toArray());
 		
 		return list;
 	}
@@ -97,7 +97,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 			sql.append(" and memberId = '" + conditionMap.get("memberId") + "'");
 		}
 
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(sql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -112,7 +112,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		
 		list.add(pfbId);
 		
-		return super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -128,7 +128,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		list.add(EnumPfbAccountStatus.APPLY.getStatus());
 		list.add(EnumPfbAccountStatus.DELETE.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -143,6 +143,6 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		
 		list.add(EnumPfbAccountStatus.START.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 	}
 }

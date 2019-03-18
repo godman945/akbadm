@@ -19,4 +19,8 @@ public class PfdAdAgeReportService extends BaseService<PfdAdAgeReport, Integer> 
 	public void insertReportData(List<PfdAdAgeReport> dataList) throws Exception {
 		((PfdAdAgeReportDAO) dao).insertReportData(dataList);
 	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdAgeReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

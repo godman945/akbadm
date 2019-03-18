@@ -46,7 +46,7 @@ public class PfdBoardDAO extends BaseDAO<PfdBoard, Integer> implements IPfdBoard
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		Query q = session.createQuery(strHQL);
 
@@ -88,7 +88,7 @@ public class PfdBoardDAO extends BaseDAO<PfdBoard, Integer> implements IPfdBoard
 	public void deletePfdBoardById(String boardId) throws Exception {
 
 		String hql = "delete from PfdBoard where boardId = '" + boardId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}
@@ -96,7 +96,7 @@ public class PfdBoardDAO extends BaseDAO<PfdBoard, Integer> implements IPfdBoard
 	public void deletePfdBoardByDeleteId(String deleteId) throws Exception {
 
 		String hql = "delete from PfdBoard where deleteId = '" + deleteId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}

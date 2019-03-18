@@ -42,7 +42,7 @@ public class PfdApplyForBusinessDAO extends BaseDAO<PfdApplyForBusiness, String>
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Query q = super.getSession().createQuery(strHQL);
+		Query q = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(strHQL);
 
 		for (int i = 0; i < paramlist.size(); i++) {
             q.setParameter(i, paramlist.get(i));
@@ -84,7 +84,7 @@ public class PfdApplyForBusinessDAO extends BaseDAO<PfdApplyForBusiness, String>
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query q;
 		if (pageNo==-1) {
 			q = session.createQuery(strHQL);
@@ -119,7 +119,7 @@ public class PfdApplyForBusinessDAO extends BaseDAO<PfdApplyForBusiness, String>
 	public void updatePfdApplyForBusinessStatus(String status, String seq, String verifyUserId,
 			String rejectReason) throws Exception {
 		String hql = "update PfdApplyForBusiness set status=:status, checkUser=:verifyUserId, rejectReason=:rejectReason, checkTime=CURRENT_TIMESTAMP() where seq = :seq)";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         query.setString("status", status);
         query.setString("verifyUserId", verifyUserId);
@@ -140,7 +140,7 @@ public class PfdApplyForBusinessDAO extends BaseDAO<PfdApplyForBusiness, String>
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query q = session.createQuery(strHQL);
 		
 

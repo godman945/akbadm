@@ -7,12 +7,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 public class MemberAPIUtils {
 
-	Logger log = Logger.getLogger(this.getClass());
+	Logger log = LogManager.getRootLogger();
 
 	private static final String memberServer = "http://member1.pchome.com.tw/";
 	private static final String updateMember = "updateMemberInfo4ADAPI.html";	

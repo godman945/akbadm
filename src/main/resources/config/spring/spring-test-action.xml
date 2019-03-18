@@ -25,4 +25,7 @@
         <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
     </bean>
 
+
+	<bean id="ProdAdTrackDemo" class="com.pchome.akbadm.struts2.action.test.ProdAdTrackDemo" scope="prototype">
+	</bean>
 </beans>

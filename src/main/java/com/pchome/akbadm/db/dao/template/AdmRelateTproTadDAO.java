@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmRelateTproTad;
@@ -30,7 +30,7 @@ public class AdmRelateTproTadDAO extends BaseDAO<AdmRelateTproTad, String> imple
 	
 		return getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmRelateTproTad>>() {
-					public List<AdmRelateTproTad> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdmRelateTproTad> doInHibernate(Session session) throws HibernateException {
 						return session.createSQLQuery(sql.toString())
 						.addEntity(AdmRelateTproTad.class)
 						.list();
@@ -54,7 +54,7 @@ public class AdmRelateTproTadDAO extends BaseDAO<AdmRelateTproTad, String> imple
 
 	@SuppressWarnings("unchecked")
 	public AdmRelateTproTad getRelateTproTadById(String relateTproTadId) throws Exception {
-		List<AdmRelateTproTad> list = super.getHibernateTemplate().find("from AdmRelateTproTad where relateTproTadId = '" + relateTproTadId + "'");
+		List<AdmRelateTproTad> list = (List<AdmRelateTproTad>) super.getHibernateTemplate().find("from AdmRelateTproTad where relateTproTadId = '" + relateTproTadId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -64,7 +64,7 @@ public class AdmRelateTproTadDAO extends BaseDAO<AdmRelateTproTad, String> imple
 
 	@SuppressWarnings("unchecked")
 	public AdmRelateTproTad getRelateTproTadBySeq(String relateTproTadSeq) throws Exception {
-		List<AdmRelateTproTad> list = super.getHibernateTemplate().find("from AdmRelateTproTad where relateTproTadSeq = '" + relateTproTadSeq + "'");
+		List<AdmRelateTproTad> list = (List<AdmRelateTproTad>) super.getHibernateTemplate().find("from AdmRelateTproTad where relateTproTadSeq = '" + relateTproTadSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -82,7 +82,7 @@ public class AdmRelateTproTadDAO extends BaseDAO<AdmRelateTproTad, String> imple
 
 	public void deleteRelateTproTad(String relateTproTadSeq) throws Exception {
 		String sql = "delete from AdmRelateTproTad where relateTproTadSeq = '" + relateTproTadSeq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -105,7 +105,7 @@ public class AdmRelateTproTadDAO extends BaseDAO<AdmRelateTproTad, String> imple
 		.append(", " + tadSeq + ")");
 		System.out.println(sql);
 
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createSQLQuery(sql.toString()).executeUpdate();
         session.flush();
 	}

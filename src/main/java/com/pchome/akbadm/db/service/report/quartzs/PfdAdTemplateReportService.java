@@ -25,4 +25,8 @@ public class PfdAdTemplateReportService extends BaseService<PfdAdTemplateReport,
 			String pfdCustomerInfoId) throws Exception {
 		return ((PfdAdTemplateReportDAO) dao).findPfdAdTemplateReport(startDate, endDate, pfdCustomerInfoId);
 	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdTemplateReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

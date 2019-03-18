@@ -5,8 +5,8 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
@@ -14,7 +14,7 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 
 
 public class EmailUtils {
-	private static final Log log = LogFactory.getLog(EmailUtils.class);
+	private static final Logger log = LogManager.getRootLogger();
     private static EmailUtils instance = new EmailUtils();
     private JavaMailSender mailSender;
     private SimpleMailMessage templateMessage;

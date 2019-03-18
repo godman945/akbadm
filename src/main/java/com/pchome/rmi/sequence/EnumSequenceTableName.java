@@ -19,7 +19,8 @@ public enum EnumSequenceTableName {
 	PFBX_APPLY_ORDER("pfbx_apply_order","AO"),//PFBX 申請單 ID
 	PFBX_USER_OPTION("pfbx_user_option","uo"),//廣告版位條件
 	PFBX_BLOCK_CUSURL("pfbx_block_cusurl","bc"), //封鎖網址
-	PFBX_INVALID_TRAFFIC("pfbx_invalid_traffic","PIT"); //無效流量
+	PFBX_INVALID_TRAFFIC("pfbx_invalid_traffic","PIT"), //無效流量
+	PFP_CATALOG_UPLOAD_LOG("catalog_upload_log_seq", "PCUL"); // 商品目錄更新紀錄id
 
 	private String snoName;
 	private String charName;
@@ -32,9 +33,9 @@ public enum EnumSequenceTableName {
 		this.snoName = snoName;
 	}
 
-	private EnumSequenceTableName(String snoName,String charName) {
+	private EnumSequenceTableName(String snoName, String charName) {
 		this.snoName = snoName;
-		this.charName=charName;
+		this.charName = charName;
 	}
 
 	public String getCharName() {
@@ -44,6 +45,5 @@ public enum EnumSequenceTableName {
 	public void setCharName(String charName) {
 		this.charName = charName;
 	}
-
 
 }

@@ -16,7 +16,7 @@ public class BankDAO extends BaseDAO<Bank, Integer>implements IBankDAO{
 		hql.append(" from Bank ");
 		hql.append(" order by id asc ");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<Bank>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -31,6 +31,6 @@ public class BankDAO extends BaseDAO<Bank, Integer>implements IBankDAO{
 		
 		list.add(code);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<Bank>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

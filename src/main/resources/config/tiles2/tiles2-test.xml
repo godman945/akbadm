@@ -24,4 +24,9 @@
         <put-attribute name="body" value="/ftl/user/userUpdate.ftl" />
     </definition>
 
+
+	<definition name="prodAd.track.demo" extends="default.layout">
+        <put-attribute name="body" value="/ftl/test/prod/prod.trace.demo.ftl" />
+    </definition>
+
 </tiles-definitions>

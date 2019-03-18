@@ -13,5 +13,6 @@ public interface IPfpAdWebsiteReportService {
 	public void insertReportData(List<PfpAdWebsiteReport> dataList) throws Exception;
 
 	public List<Object> getLastDate() throws Exception;
-	
+
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

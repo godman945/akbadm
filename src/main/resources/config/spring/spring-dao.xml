@@ -563,5 +563,65 @@
  	<bean id="AdmBrandCorrespondDAO" class="com.pchome.akbadm.db.dao.admBrandCorrespond.AdmBrandCorrespondDAO">
 		<property name="sessionFactory" ref="sessionFactory" />
  	</bean>
- 	
+
+    <bean id="PfpCodeAdactionMergeDAO" class="com.pchome.akbadm.db.dao.code.PfpCodeAdactionMergeDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpCodeAdactionMergeDAO2" class="com.pchome.akbadm.db.dao.code.PfpCodeAdactionMergeDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpCodeTrackingDAO" class="com.pchome.akbadm.db.dao.code.PfpCodeTrackingDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpCodeTrackingDAO2" class="com.pchome.akbadm.db.dao.code.PfpCodeTrackingDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+	<!-- 商品廣告-目錄 -->
+    <bean id="PfpCatalogDAO" class="com.pchome.akbadm.db.dao.catalog.PfpCatalogDAO">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+    
+	<!-- 商品廣告-檔案上傳 -->
+	<bean id="PfpCatalogUploadListDAO"
+		class="com.pchome.akbadm.db.dao.catalog.uploadList.PfpCatalogUploadListDAO">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+    
+    <bean id="PfpCatalogLogoDAO" class="com.pchome.akbadm.db.dao.catalog.PfpCatalogLogoDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpCatalogLogoDAO2" class="com.pchome.akbadm.db.dao.catalog.PfpCatalogLogoDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+
+    <bean id="PfpCatalogProdEcDAO" class="com.pchome.akbadm.db.dao.catalog.PfpCatalogProdEcDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="PfpCatalogProdEcDAO2" class="com.pchome.akbadm.db.dao.catalog.PfpCatalogProdEcDAO">
+        <property name="sessionFactory" ref="sessionFactory_report"/>
+    </bean>
+    
+    <!-- 再行銷追蹤 -->
+    <bean id="TrackingReportDAO" class="com.pchome.akbadm.db.dao.report.TrackingReportDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <!-- pvclk prod-->
+    <bean id="PfpAdPvclkProdDAO" class="com.pchome.akbadm.db.dao.ad.PfpAdPvclkProdDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpCodeConvertDAO" class="com.pchome.akbadm.db.dao.report.PfpCodeConvertDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
+    <bean id="PfpCodeConvertRuleDAO" class="com.pchome.akbadm.db.dao.report.PfpCodeConvertRuleDAO">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
 </beans>

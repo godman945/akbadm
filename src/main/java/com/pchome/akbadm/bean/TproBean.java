@@ -5,8 +5,10 @@ import java.util.Map;
 
 public class TproBean {
     private String tproId;
+    private String backupTproId;
     private String prodId;
     private Map<String, TadMapBean> tadMap = new HashMap<String, TadMapBean>();
+    private String backupTadId;
     private boolean auto;
     private int pageSize;
     private int startNum;
@@ -18,6 +20,8 @@ public class TproBean {
     private int iframeWidth;
     private int positionHeight;
     private int positionWidth;
+    private int logoHeight;
+    private int logoWidth;
     private String html = "";
 
     public String getTproId() {
@@ -25,6 +29,12 @@ public class TproBean {
     }
     public void setTproId(String tproId) {
         this.tproId = tproId;
+    }
+    public String getBackupTproId() {
+        return backupTproId;
+    }
+    public void setBackupTproId(String backupTproId) {
+        this.backupTproId = backupTproId;
     }
     public String getProdId() {
         return prodId;
@@ -37,6 +47,12 @@ public class TproBean {
     }
     public void setTadMap(Map<String, TadMapBean> tadMap) {
         this.tadMap = tadMap;
+    }
+    public String getBackupTadId() {
+        return backupTadId;
+    }
+    public void setBackupTadId(String backupTadId) {
+        this.backupTadId = backupTadId;
     }
     public boolean isAuto() {
         return auto;
@@ -103,6 +119,18 @@ public class TproBean {
     }
     public void setPositionWidth(int positionWidth) {
         this.positionWidth = positionWidth;
+    }
+    public int getLogoHeight() {
+        return logoHeight;
+    }
+    public void setLogoHeight(int logoHeight) {
+        this.logoHeight = logoHeight;
+    }
+    public int getLogoWidth() {
+        return logoWidth;
+    }
+    public void setLogoWidth(int logoWidth) {
+        this.logoWidth = logoWidth;
     }
     public String getHtml() {
         return html;

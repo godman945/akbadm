@@ -8,7 +8,6 @@
   <table-filter match-name="adm_bonus_bill_report"/>
   <table-filter match-name="adm_bonus_detail_report"/>
   <table-filter match-name="adm_bonus_set"/>
-  <table-filter match-name="adm_brand_correspond"/>
   <table-filter match-name="adm_channel_account"/>
   <table-filter match-name="adm_client_count_report"/>
   <table-filter match-name="adm_define_ad"/>
@@ -193,6 +192,7 @@
   <table-filter match-name="pfp_ad_video_source"/>
   <table-filter match-name="pfd_ad_video_report"/>
   <table-filter match-name="pfp_refund_order_release" />
-  
+  <table-filter match-name="pfp_ad_pvclk_prod" />
+   
 </hibernate-reverse-engineering>
 

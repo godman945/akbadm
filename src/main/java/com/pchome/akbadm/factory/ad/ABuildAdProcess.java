@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public abstract class ABuildAdProcess {
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	public List<String> buildAdModel(String css, String html, String path, String tag) throws Exception{
 		

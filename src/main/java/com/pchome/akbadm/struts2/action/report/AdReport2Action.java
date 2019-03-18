@@ -13,9 +13,13 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.pchome.akbadm.db.pojo.PfdCustomerInfo;
+import com.pchome.akbadm.db.service.ad.IPfpAdDetailService;
+import com.pchome.akbadm.db.service.ad.IPfpAdPvclkProdService;
+import com.pchome.akbadm.db.service.customerInfo.IPfpCustomerInfoService;
 import com.pchome.akbadm.db.service.pfd.account.IPfdAccountService;
 import com.pchome.akbadm.db.service.report.IAdReport2Service;
 import com.pchome.akbadm.db.vo.AdReportVO;
+import com.pchome.akbadm.db.vo.ProdAdReportVO;
 import com.pchome.akbadm.struts2.BaseAction;
 import com.pchome.akbadm.utils.ComponentUtils;
 import com.pchome.enumerate.pfd.EnumPfdAccountStatus;
@@ -26,6 +30,7 @@ public class AdReport2Action extends BaseAction  {
 
 	private IAdReport2Service adReport2Service;
 	private IPfdAccountService pfdAccountService;
+	
 
     private String akbPfpServer;
 
@@ -38,6 +43,7 @@ public class AdReport2Action extends BaseAction  {
 	private String searchText;			//查詢文字
 	private String searchAdSeq;			//查詢序號
 	private String adTitle;				//廣告名稱
+	private String adSeq;				//廣告序號
 
 	private List<AdReportVO> voList = new ArrayList<AdReportVO>();
 	private AdReportVO totalVO = new AdReportVO();
@@ -53,7 +59,17 @@ public class AdReport2Action extends BaseAction  {
 	private String downloadFlag = "";//download report 旗標
 	private InputStream downloadFileStream;//下載報表的 input stream
 	private String downloadFileName;//下載顯示名
-
+	
+	//商品廣告
+	private IPfpAdPvclkProdService pfpAdPvclkProdService;
+	private IPfpAdDetailService pfpAdDetailService;
+	private IPfpCustomerInfoService pfpCustomerInfoService;
+	private String pfpCustomerInfoId;
+	private List<Object> prodAdVoList;
+	private ProdAdReportVO sumProdAdVo;
+	private String pfpCustomerName = "";
+	private String prodAdName = "";
+	
 	@Override
     public String execute() throws Exception {
 
@@ -241,7 +257,7 @@ public class AdReport2Action extends BaseAction  {
 
 	    	SimpleDateFormat dformat = new SimpleDateFormat("yyyyMMddhhmmss");
 	    	String filename="廣告明細成效報表_" + dformat.format(new Date()) + ".csv";
-	    	String[] tableHeadArray = {"日期","帳戶名稱","廣告title","廣告尺寸","廣告活動","廣告群組","廣告曝光數","互動數","互動率","平均互動出價","千次曝光出價","廣告費用"};
+	    	String[] tableHeadArray = {"日期","帳戶名稱","廣告title","廣告尺寸","廣告活動","廣告群組","廣告曝光數","互動數","互動率","平均互動出價","千次曝光出價","廣告費用","轉換次數","轉換率","總轉換價值","平均轉換成本","廣告投資報酬率"};
 
             String title = null;
             StringBuffer size = null;
@@ -301,6 +317,9 @@ public class AdReport2Action extends BaseAction  {
                 else if ("VIDEO".equals(vo.getAdStyle())) {
                     title = vo.getAdDetailContent();
                 }
+                else if ("PROD".equals(vo.getAdStyle())) {
+                    title = vo.getProdReportName();
+                }
 
 	            // size
 				size = new StringBuffer();
@@ -350,6 +369,27 @@ public class AdReport2Action extends BaseAction  {
 				content.append("\"$ ");
 				content.append(vo.getKwPriceSum());
 				content.append("\",");
+
+				content.append("\"");
+				content.append(vo.getConvertCountSum());
+				content.append("\",");
+				
+				content.append("\"");
+				content.append(vo.getConvertCVR());
+				content.append("\",");
+				
+				content.append("\"");
+				content.append(vo.getConvertPriceCountSum());
+				content.append("\",");
+				
+				content.append("\"");
+				content.append(vo.getConvertCost());
+				content.append("\",");
+				
+				content.append("\"");
+				content.append(vo.getConvertInvestmentCost());
+				content.append("\",");
+				
 				content.append("\n");
 			}
 
@@ -362,8 +402,8 @@ public class AdReport2Action extends BaseAction  {
 			content.append("\"\",");
 			content.append("\"\",");
 			content.append("\"\",");
-			content.append("\"");
-			content.append(totalVO.getKwPvSum());
+			content.append("\"\",");
+			content.append("\"" +totalVO.getKwPvSum());
 			content.append("\",");
 			content.append("\"");
 			content.append(totalVO.getKwClkSum());
@@ -380,6 +420,31 @@ public class AdReport2Action extends BaseAction  {
 			content.append("\"$ ");
 			content.append(totalVO.getKwPriceSum());
 			content.append("\",");
+			
+			
+			content.append("\"");
+			content.append(totalVO.getConvertCountSum());
+			content.append("\",");
+			
+			
+			content.append("\"");
+			content.append(totalVO.getConvertCVR());
+			content.append("\",");
+			
+			
+			content.append("\"");
+			content.append(totalVO.getConvertPriceCountSum());
+			content.append("\",");
+			
+			
+			content.append("\"");
+			content.append(totalVO.getConvertCost());
+			content.append("\",");
+			
+			content.append("\"");
+			content.append(totalVO.getConvertInvestmentCost());
+			content.append("\",");
+			
 			content.append("\n");
 
 
@@ -395,6 +460,48 @@ public class AdReport2Action extends BaseAction  {
 
 		return SUCCESS;
 	}
+	
+	
+	
+	public String prodAdDetailReport() throws Exception {
+
+		log.info(">>> adSeq = " + adSeq);
+		log.info(">>> pfpCustomerInfoId = " + pfpCustomerInfoId);
+		log.info(">>> startDate = " + startDate);
+		log.info(">>> endDate = " + endDate);
+		log.info(">>> pfpCustomerName = " + pfpCustomerName);
+		log.info(">>> prodAdName = " + prodAdName);
+		
+		Map<String, String> conditionMap = new HashMap<String, String>();
+
+		if (StringUtils.isEmpty(startDate) && StringUtils.isEmpty(endDate)) {
+
+			this.message = "請選擇日期開始查詢！";
+
+		} else {
+			conditionMap = new HashMap<String, String>();
+			conditionMap.put("adSeq", adSeq);
+			conditionMap.put("pfpCustomerInfoId", pfpCustomerInfoId);
+	    	conditionMap.put("startDate", startDate);
+	    	conditionMap.put("endDate", endDate);
+	    	
+	    	pfpCustomerName = pfpCustomerInfoService.get(pfpCustomerInfoId).getCustomerInfoTitle();
+	    	prodAdName = pfpAdDetailService.getProdAdName(adSeq);
+	    	
+	    	prodAdVoList = pfpAdPvclkProdService.getProdAdDetailReport(conditionMap);
+	    	if( (prodAdVoList.isEmpty()) || (prodAdVoList.size()<=0) ){
+	    		message = "查無資料。";
+	    		return SUCCESS;
+	    	}
+
+	    	//加總
+	    	sumProdAdVo =  pfpAdPvclkProdService.getSumProdAdDetailReport(conditionMap);
+	    	
+		}
+		return SUCCESS;
+	}
+	
+	
 
 	public Map<String, String> getAdTypeSelectOptionsMap() {
 		return ComponentUtils.getAdTypeSelectOptionsMap();
@@ -544,4 +651,77 @@ public class AdReport2Action extends BaseAction  {
 		this.adTitle = adTitle;
 	}
 
+	public String getAdSeq() {
+		return adSeq;
+	}
+
+	public void setAdSeq(String adSeq) {
+		this.adSeq = adSeq;
+	}
+
+	public String getPfpCustomerInfoId() {
+		return pfpCustomerInfoId;
+	}
+
+	public void setPfpCustomerInfoId(String pfpCustomerInfoId) {
+		this.pfpCustomerInfoId = pfpCustomerInfoId;
+	}
+
+	public IPfpAdPvclkProdService getPfpAdPvclkProdService() {
+		return pfpAdPvclkProdService;
+	}
+
+	public void setPfpAdPvclkProdService(IPfpAdPvclkProdService pfpAdPvclkProdService) {
+		this.pfpAdPvclkProdService = pfpAdPvclkProdService;
+	}
+
+	public List<Object> getProdAdVoList() {
+		return prodAdVoList;
+	}
+
+	public void setProdAdVoList(List<Object> prodAdVoList) {
+		this.prodAdVoList = prodAdVoList;
+	}
+
+	public ProdAdReportVO getSumProdAdVo() {
+		return sumProdAdVo;
+	}
+
+	public void setSumProdAdVo(ProdAdReportVO sumProdAdVo) {
+		this.sumProdAdVo = sumProdAdVo;
+	}
+
+	public String getPfpCustomerName() {
+		return pfpCustomerName;
+	}
+
+	public void setPfpCustomerName(String pfpCustomerName) {
+		this.pfpCustomerName = pfpCustomerName;
+	}
+
+	public String getProdAdName() {
+		return prodAdName;
+	}
+
+	public void setProdAdName(String prodAdName) {
+		this.prodAdName = prodAdName;
+	}
+
+	public IPfpAdDetailService getPfpAdDetailService() {
+		return pfpAdDetailService;
+	}
+
+	public void setPfpAdDetailService(IPfpAdDetailService pfpAdDetailService) {
+		this.pfpAdDetailService = pfpAdDetailService;
+	}
+
+	public IPfpCustomerInfoService getPfpCustomerInfoService() {
+		return pfpCustomerInfoService;
+	}
+
+	public void setPfpCustomerInfoService(IPfpCustomerInfoService pfpCustomerInfoService) {
+		this.pfpCustomerInfoService = pfpCustomerInfoService;
+	}
+
+	
 }

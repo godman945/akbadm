@@ -4,13 +4,13 @@ import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.dao.IBaseDAO;
 
 public abstract class BaseService<T, PK extends Serializable> implements IBaseService<T, PK> {
-    protected Log log = LogFactory.getLog(this.getClass());
+    protected Logger log = LogManager.getRootLogger();
 
     protected IBaseDAO<T, PK> dao;
 

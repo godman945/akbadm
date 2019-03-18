@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -121,7 +122,7 @@ public class PfpOrderService extends BaseService<PfpOrder,String> implements IPf
 
 		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
 
-		Logger log = Logger.getLogger(PfpOrderService.class);
+		Logger log = LogManager.getRootLogger();
 
 		PfpOrderService service = (PfpOrderService) context.getBean("PfpOrderService");
 		

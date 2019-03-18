@@ -1,26 +1,19 @@
 package com.pchome.akbadm.factory.ad;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
-import java.net.URLDecoder;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
-import com.pchome.akbadm.db.pojo.PfpAdVideoSource;
 import com.pchome.akbadm.db.service.ad.PfpAdDetailService;
-import com.pchome.akbadm.db.service.advideo.IPfpAdVideoSourceService;
-import com.pchome.soft.depot.utils.JredisUtil;
 
 public class AdFactory{
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	private ABuildAdProcess adProduct;
 	private ABuildAdProcess adTemplate;
 	private PfpAdDetailService pfpAdDetailService;

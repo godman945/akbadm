@@ -3,8 +3,8 @@ package com.pchome.akbadm.report.pdf;
 import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Font;
@@ -15,7 +15,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 
 public abstract class APDFReport {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
 	private String fontPath; //字型檔路徑
 	private BaseFont baseFont;

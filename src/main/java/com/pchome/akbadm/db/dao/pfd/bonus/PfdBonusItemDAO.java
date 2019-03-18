@@ -19,6 +19,6 @@ public class PfdBonusItemDAO extends BaseDAO<PfdBonusItem, Integer> implements I
 		
 		list.add(bonusItemId);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusItem>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

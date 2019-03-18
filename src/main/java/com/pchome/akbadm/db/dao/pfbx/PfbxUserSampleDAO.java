@@ -14,6 +14,6 @@ public class PfbxUserSampleDAO extends BaseDAO<PfbxUserSample, String> implement
         hql.append("where pfbxCustomerInfo.status = ? ");
         hql.append("order by sort desc ");
 
-        return this.getHibernateTemplate().find(hql.toString(), status);
+        return (List<PfbxUserSample>) this.getHibernateTemplate().find(hql.toString(), status);
     }
 }

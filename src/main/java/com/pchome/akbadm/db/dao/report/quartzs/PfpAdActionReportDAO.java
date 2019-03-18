@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdActionReport;
@@ -24,7 +24,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -43,7 +43,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
 						hql.append(" r.pay_type, ");
 						hql.append(" r.ad_price_type, ");
 						hql.append(" sum(r.ad_view), ");
-						hql.append(" (case when r.ad_price_type = 'CPC' then 'MEDIA'  else 'VIDEO' end ) ad_operating_rule, ");
+						hql.append(" (select ac.ad_operating_rule from pfp_ad_action ac where ac.ad_action_seq = r.ad_action_seq) ad_operating_rule, ");
 						hql.append(" sum(r.ad_vpv) ");
 						hql.append(" from pfp_ad_pvclk as r");
 						hql.append(" where 1 = 1 ");
@@ -77,7 +77,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 						String qryDate = reportDate;
 						if(StringUtils.isBlank(reportDate))	{
 							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -124,7 +124,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 						String qryDate = reportDate;
 						if(StringUtils.isBlank(reportDate))	{
 							SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -163,7 +163,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
 	@Override
     public void deleteReportDataByReportDate(String reportDate) throws Exception {
 		String sql = "delete from PfpAdActionReport where adPvclkDate = '" + reportDate + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -187,7 +187,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
     	hql.append(" and adPvclkDate >= :startDate");
     	hql.append(" and adPvclkDate <= :endDate");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("customerInfoId", customerInfoId)
         .setString("payType", payType)
     	.setDate("startDate", startDate)
@@ -217,7 +217,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
     	hql.append(" and adPvclkDate >= :startDate");
     	hql.append(" and adPvclkDate <= :endDate");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("customerInfoId", customerInfoId)
         .setString("payType", payType)
     	.setDate("startDate", startDate)
@@ -240,7 +240,7 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
     	hql.append(" and adPvclkDate >= :startDate");
     	hql.append(" and adPvclkDate <= :endDate");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("customerInfoId", customerInfoId)
         .setString("payType", payType)
     	.setDate("startDate", startDate)
@@ -266,6 +266,52 @@ public class PfpAdActionReportDAO extends BaseDAO<PfpAdActionReport, Integer> im
     	list.add(startDate);
     	list.add(endDate);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
+	}
+	
+	@Override
+	public int updateConvertCountData(String convertDate,String convertRangeDate) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" UPDATE pfp_ad_action_report r, ");
+		sql.append(" ( ");
+		sql.append(" SELECT ");
+		sql.append(" c.customer_info_id,  ");
+		sql.append(" convert_belong_date,  ");
+		sql.append(" Sum(convert_count)convert_count,  ");
+		sql.append(" Sum(convert_price)convert_price,  ");
+		sql.append(" c.ad_type,  ");
+		sql.append(" c.ad_action_seq,  ");
+		sql.append(" c.ad_pvclk_device,  ");
+		sql.append(" c.pay_type,  ");
+		sql.append(" c.convert_trigger_type  ");
+		sql.append(" FROM   pfp_code_convert_trans c  ");
+		sql.append(" WHERE  1 = 1  ");
+		sql.append(" AND c.convert_date >= :convertRangeDate ");
+		sql.append(" AND c.convert_date <= :convertDate ");
+		sql.append(" AND c.convert_trigger_type = 'CK'  ");
+		sql.append(" GROUP  BY c.customer_info_id,  ");
+		sql.append(" c.ad_type,  ");
+		sql.append(" c.ad_action_seq,  ");
+		sql.append(" c.ad_pvclk_device,  ");
+		sql.append(" c.pay_type,  ");
+		sql.append(" c.convert_trigger_type,  ");
+		sql.append(" c.convert_belong_date,  ");
+		sql.append(" c.convert_seq  ");
+		sql.append(" )a ");
+		sql.append(" SET r.convert_count = a.convert_count, ");
+		sql.append(" r.convert_price_count = a.convert_price, ");
+		sql.append(" r.update_date = now() ");
+		sql.append(" WHERE  1 = 1  ");
+		sql.append(" AND a.ad_action_seq = r.ad_action_seq ");
+		sql.append(" AND a.customer_info_id= r.customer_info_id ");
+		sql.append(" AND a.convert_belong_date = r.ad_pvclk_date ");
+		sql.append(" AND a.ad_pvclk_device = r.ad_pvclk_device ");
+		sql.append(" AND a.pay_type = r.pay_type ");
+		sql.append(" AND a.ad_type= r.ad_type ");
+		
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
+		query.setString("convertDate", convertDate);
+		query.setString("convertRangeDate", convertRangeDate);
+		return query.executeUpdate();
 	}
 }

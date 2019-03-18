@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -51,7 +51,7 @@ import com.pchome.enumerate.pfbx.report.EnumTemplateProduct;
 @Transactional
 public class PfbxReportJob {
 
-	private Log log = LogFactory.getLog(this.getClass());
+	private Logger log = LogManager.getRootLogger();
 
 	private IPfbxAdTimeReportService pfbxAdTimeReportService;
 	private IPfbxAdCustomerReportService pfbxAdCustomerReportService;
@@ -836,7 +836,7 @@ public class PfbxReportJob {
 		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
 		System.out.println(">>> start");
 
-		PfbxReportJob job = context.getBean( PfbxReportJob.class);
+		PfbxReportJob job = context.getBean(PfbxReportJob.class);
 
 		if (args.length == 2 || args.length == 3) {
 
@@ -864,10 +864,6 @@ public class PfbxReportJob {
 	public void setPfbxAdUnitReportService(
 			IPfbxAdUnitReportService pfbxAdUnitReportService) {
 		this.pfbxAdUnitReportService = pfbxAdUnitReportService;
-	}
-
-	public void setLog(Log log) {
-		this.log = log;
 	}
 
 	public void setPfbxAdSizeReportService(

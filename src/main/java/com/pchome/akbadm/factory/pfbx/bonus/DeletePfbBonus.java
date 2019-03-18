@@ -2,8 +2,8 @@ package com.pchome.akbadm.factory.pfbx.bonus;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.service.pfbx.bonus.IAdmBonusBillReportService;
 import com.pchome.akbadm.db.service.pfbx.bonus.IAdmBonusDetailReportService;
@@ -13,7 +13,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class DeletePfbBonus {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private IAdmBonusBillReportService admBonusBillReportService;
 	private IAdmBonusDetailReportService admBonusDetailReportService;

@@ -16,7 +16,7 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
         hql.append("from PfbxAllowUrl ");
         hql.append("where deleteFlag = ? ");
         hql.append("    and urlStatus = ? ");
-        return this.getHibernateTemplate().find(hql.toString(), deleteFlag, urlStatus);
+        return (List<PfbxAllowUrl>) this.getHibernateTemplate().find(hql.toString(), deleteFlag, urlStatus);
     }
 
     @Override
@@ -26,7 +26,7 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
         hql.append("where deleteFlag = ? ");
         hql.append("    and urlStatus = ? ");
         hql.append("    and pfbxCustomerInfo.playType = ? ");
-        return this.getHibernateTemplate().find(hql.toString(), deleteFlag, urlStatus, playType);
+        return (List<PfbxAllowUrl>) this.getHibernateTemplate().find(hql.toString(), deleteFlag, urlStatus, playType);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql);
+		return (List<PfbxAllowUrl>) super.getHibernateTemplate().find(hql);
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql);
+		return (List<PfbxAllowUrl>) super.getHibernateTemplate().find(hql);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql);
+		return (List<PfbxAllowUrl>) super.getHibernateTemplate().find(hql);
 	}
 
 	@Override
@@ -91,6 +91,6 @@ public class PfbxAllowUrlDAO extends BaseDAO<PfbxAllowUrl, String> implements IP
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql);
+		return (List<PfbxAllowUrl>) super.getHibernateTemplate().find(hql);
 	}
 }

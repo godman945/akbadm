@@ -14,7 +14,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAd;
@@ -36,7 +36,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 			sql.append(" and adSeq = '" + adSeq + "'");
 		}
 
-		List<PfpAd> list = super.getHibernateTemplate().find(sql.toString());
+		List<PfpAd> list = (List<PfpAd>) super.getHibernateTemplate().find(sql.toString());
 
 		if (list!=null && list.size()==1) {
 			return list.get(0);
@@ -56,7 +56,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 			sql.append(" and adSeq in (:adSeqList) ");
 			sqlParams.put("adSeqList",adSeqList);
 		}
-		Session session = getSession();
+		Session session = super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(sql.toString());
 		if(!adSeqList.isEmpty()){
         	query.setParameterList("adSeqList", adSeqList);
@@ -107,7 +107,8 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		if (StringUtils.isNotBlank(vo.getPfdCustomerInfoId())) {
 			sql.append(" and r.customer_info_id ='"+vo.getPfdCustomerInfoId()+"' ");
 		}
-		Query query = getSession().createSQLQuery(sql.toString());
+		
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 		return query.list().size();
 //		StringBuffer sb = new StringBuffer();
 //		sb.append("select count(*) from PfpAd where 1=1");
@@ -184,9 +185,9 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		
 		Query query = null;
 		if (pageNo==-1) {
-			query = getSession().createSQLQuery(sql.toString());
+			query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 		} else {
-			query = getSession().createSQLQuery(sql.toString());
+			query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 			query.setFirstResult((pageNo-1)*pageSize);
 			query.setMaxResults(pageSize);
 		}
@@ -240,7 +241,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 //		String hql = sb.toString();
 //		log.info(">>> hql = " + hql);
 //
-//		Session session = getSession();
+//		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 //		Query query;
 //		if (pageNo==-1) {
 //			query = session.createQuery(hql.toString());
@@ -258,7 +259,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 	 */
 	public void updateAdCheckStatus(String status, String[] seq, String verifyUserId) throws Exception {
 		String hql = "update PfpAd set adStatus=:status, adVerifyUser=:verifyUserId, adUserVerifyTime=CURRENT_TIMESTAMP() where adSeq in (:ids)";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         query.setString("status", status);
         query.setString("verifyUserId", verifyUserId);
@@ -274,7 +275,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 	public void updateAdCheckStatus(String adStatus, String adSeq, String adCategorySeq,
 		String verifyUserId, String rejectReason) throws Exception {
 		String hql = "update PfpAd set adStatus=:adStatus, adCategorySeq=:adCategorySeq, adVerifyUser=:verifyUserId, adVerifyRejectReason=:rejectReason, adUserVerifyTime=CURRENT_TIMESTAMP() where adSeq = :adSeq)";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         query.setString("adStatus", adStatus);
         query.setString("adCategorySeq", "");
@@ -299,7 +300,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 	public String getCategoryMappingCodeById(String pfpAdSeq)throws Exception{
 	    StringBuffer sql = new StringBuffer("from PfpAdCategoryMapping where 1=1");
 	    sql.append(" and adSeq = '" + pfpAdSeq + "'");
-	    List<PfpAdCategoryMapping> list =  super.getHibernateTemplate().find(sql.toString());
+	    List<PfpAdCategoryMapping> list =  (List<PfpAdCategoryMapping>) super.getHibernateTemplate().find(sql.toString());
 	    if(list.isEmpty()){
 		return "";
 	    }
@@ -308,8 +309,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 	
 
 	public void saveOrUpdateWithCommit(PfpAd adAd) throws Exception{
-		super.getSession().saveOrUpdate(adAd);
-		super.getSession().beginTransaction().commit();
+		super.getHibernateTemplate().getSessionFactory().getCurrentSession().saveOrUpdate(adAd);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -327,7 +327,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		sql.append(" and  status = '1' ");
 		sql.append(" group by template_product_seq ");
 
-		return super.getSession().createSQLQuery(sql.toString()).list();
+		return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString()).list();
 
 	}
 
@@ -336,7 +336,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 	public List<Object> getAdViewReport(final Map<String,String> adViewConditionMap) throws Exception{
 	    final List<Object> getAdVewObjList = getHibernateTemplate().execute(
 		    new HibernateCallback<List<Object>>() {
-			    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+			    public List<Object> doInHibernate(Session session) throws HibernateException {
 				String adStartDate = null;
 				String adEndDate = null;
 				if(adViewConditionMap.get("startDate")!= null && adViewConditionMap.get("startDate").trim().length()>0){
@@ -641,7 +641,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		    hql.append(" and  b.adPvclkDevice ='"+ adViewConditionMap.get("adPvclkDevice")+"'" );
 		    hql.append(" group by a.adSeq ,b.adPvclkDevice ");
 		}
-		Query query = super.getSession().createQuery(hql.toString());
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		List<Object> adViewObjList =  query.list();
 		
 		List<Object> adViewObjListData =  new ArrayList<Object>();
@@ -722,7 +722,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 				hql_.append(" and a.adSeq in ("+adViewConditionMap.get("adSeqListString").trim()+")");
 			}
 			
-			Query query_ = super.getSession().createQuery(hql_.toString());
+			Query query_ = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql_.toString());
 			List<Object> adObjListData =  new ArrayList<Object>();
 			adObjListData = query_.list();
 			List<Object> adObjList2 =  new ArrayList<Object>();
@@ -779,7 +779,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 
                 new HibernateCallback<List<Object> >() {
 
-					public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object>  doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -946,7 +946,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 
         Object[] values = new Object[]{customerInfoId, statusId, statusId, statusId, today, today};
 
-        return super.getHibernateTemplate().find(hql.toString(), values);
+        return (List<Object>) super.getHibernateTemplate().find(hql.toString(), values);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -957,7 +957,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		hql.append(" and adStatus != ? ");
 
 
-		return super.getHibernateTemplate().find(hql.toString(),adGroupSeq,EnumAdStatus.Close.getStatusId());
+		return (List<PfpAd>) super.getHibernateTemplate().find(hql.toString(),adGroupSeq,EnumAdStatus.Close.getStatusId());
 	}
 
 	public int selectAdNewByUserVerifyDate(String userVerifyDate) {
@@ -972,7 +972,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.status = :customerStatus ");
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.recognize = 'Y' ");
 
-        return ((Long) super.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("adStatus", EnumAdStatus.Open.getStatusId())
                 .setString("startDate", userVerifyDate + " 00:00:00")
@@ -996,7 +996,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.status = :customerStatus ");
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.recognize = 'Y' ");
 
-        return ((Long) super.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("adStatus", EnumAdStatus.Open.getStatusId())
                 .setInteger("groupStatus", EnumAdStatus.Open.getStatusId())
@@ -1019,7 +1019,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.status = :customerStatus ");
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.recognize = 'Y' ");
 
-        return ((Long) super.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("adStatus", EnumAdStatus.Open.getStatusId())
                 .setInteger("groupStatus", EnumAdStatus.Open.getStatusId())
@@ -1042,7 +1042,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.status = :customerStatus ");
         hql.append("    and pfpAdGroup.pfpAdAction.pfpCustomerInfo.recognize = 'Y' ");
 
-        return ((Long) super.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("adStatus", EnumAdStatus.Open.getStatusId())
                 .setInteger("groupStatus", EnumAdStatus.Open.getStatusId())
@@ -1063,14 +1063,14 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 
 		//sql.append("select distinct ad_keyword_seq from pfp_ad_keyword_pvclk ");
 
-		return super.getSession().createSQLQuery(sql.toString()).list();
+		return this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString()).list();
 	}
 
 	public void updatePfpAdPvclk(final String adSeq, final String adGroupSeq, final String adActionSeq) throws Exception{
 
 		getHibernateTemplate().execute(
 	            new HibernateCallback<List<Object>>() {
-	                public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+	                public List<Object> doInHibernate(Session session) throws HibernateException {
 
 	            		StringBuffer sql = new StringBuffer();
 
@@ -1142,7 +1142,7 @@ public class PfpAdDAO extends BaseDAO<PfpAd,String> implements IPfpAdDAO {
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			if(paramName.equals("adStyle")) {
 				q.setParameter("adStyle", sqlParams.get(paramName));

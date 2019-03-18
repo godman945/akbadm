@@ -154,6 +154,74 @@ public class AdReport2Service extends BaseService<AdReportVO, String> implements
                         vo.setAdDetailRealUrl(pfpAdDetail.getAdDetailContent());
                     }
                 }
+				else if ("PROD".equals(adStyle)) {	//商品廣告
+					vo.setAdbgType("hasposter");
+					vo.setPreviewTpro("c_x04_pad_tpro_0100");
+					
+					if ("prod_report_name".equals(pfpAdDetail.getAdDetailId())) {
+	                    vo.setProdReportName(pfpAdDetail.getAdDetailContent());
+	                }
+					else if ("prod_ad_url".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setRealUrl(pfpAdDetail.getAdDetailContent());
+						
+						//domain
+						String domainUrl = pfpAdDetail.getAdDetailContent();
+						domainUrl = domainUrl.replaceAll("http://", "");
+						domainUrl = domainUrl.replaceAll("https://", "");
+		            	if(domainUrl.indexOf("/") != -1){
+		            		domainUrl = domainUrl.substring(0, domainUrl.indexOf("/"));
+		            	}
+						vo.setProdAdUrl(domainUrl);
+	                }
+					//行銷圖
+					else if (pfpAdDetail.getAdDetailId().indexOf("logo_sale_img_") == 0) {
+						vo.getAdDetailLogoSaleImgList().add(pfpAdDetail.getAdDetailContent());
+                    }
+					//結尾行銷圖
+                    else if (pfpAdDetail.getAdDetailId().indexOf("sale_img_") == 0) {
+                    	vo.getAdDetailSaleImgList().add(pfpAdDetail.getAdDetailContent());
+                    }
+					//logo標題文字
+                    else if ("logo_txt".equals(pfpAdDetail.getAdDetailId())) {
+                    	vo.setAdDetailLogoTxt(pfpAdDetail.getAdDetailContent());
+                    }
+					
+                    else if ("buybtn_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailBuybtnBgColor(pfpAdDetail.getAdDetailContent());
+					} else if ("buybtn_font_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailBuybtnFontColor(pfpAdDetail.getAdDetailContent());
+					} else if ("buybtn_txt".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailBuybtnTxt(pfpAdDetail.getAdDetailContent());
+					} else if ("dis_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailDisBgColor(pfpAdDetail.getAdDetailContent());
+					} else if ("dis_font_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailDisFontColor(pfpAdDetail.getAdDetailContent());
+					} else if ("dis_txt_type".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailDisTxtType(pfpAdDetail.getAdDetailContent());
+					} else if ("logo_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailLogoBgColor(pfpAdDetail.getAdDetailContent());
+					} else if ("logo_font_color".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailLogoFontColor(pfpAdDetail.getAdDetailContent());
+					} else if ("logo_img_url".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailLogoImgUrl(pfpAdDetail.getAdDetailContent());
+					} else if ("logo_type".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailLogoType(pfpAdDetail.getAdDetailContent());
+					} else if ("prod_group".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailProdGroup(pfpAdDetail.getAdDetailContent());
+					} else if ("prod_img_show_type".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailProdImgShowType(pfpAdDetail.getAdDetailContent());
+					} else if ("sale_img_show_type".equals(pfpAdDetail.getAdDetailId())) {
+						vo.setAdDetailSaleImgShowType(pfpAdDetail.getAdDetailContent());
+					} else if (pfpAdDetail.getAdDetailId().indexOf("sale_end_img_") == 0) {
+						vo.getAdDetailSaleEndImgList().add(pfpAdDetail.getAdDetailContent());
+					} else if (pfpAdDetail.getAdDetailId().indexOf("sale_img_300x250") == 0) {
+						vo.setAdDetailSaleImg(pfpAdDetail.getAdDetailContent());
+					} else if (pfpAdDetail.getAdDetailId().indexOf("sale_end_img_300x250") == 0) {
+						vo.setAdDetailSaleEndImg(pfpAdDetail.getAdDetailContent());
+					}
+				}
+				
+				
 			}
 		}
 
@@ -293,6 +361,12 @@ public class AdReport2Service extends BaseService<AdReportVO, String> implements
                         vo.setAdDetailRealUrl(pfpAdDetail.getAdDetailContent());
                     }
                 }
+                else if ("PROD".equals(adStyle)) {//商品廣告
+                	if ("prod_report_name".equals(pfpAdDetail.getAdDetailId())) {
+	                    vo.setProdReportName(pfpAdDetail.getAdDetailContent());
+	                }
+                }
+				
 			}
 		}
 

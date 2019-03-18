@@ -3,8 +3,8 @@ package com.pchome.akbadm.factory.activity;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.AdmFreeAction;
 import com.pchome.akbadm.db.pojo.AdmFreeRecord;
@@ -25,7 +25,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class NewCustomerActivity implements IActivity{
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 
 	private final static String saveEndDate = "2014-02-28";

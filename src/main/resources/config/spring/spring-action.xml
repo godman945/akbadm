@@ -194,6 +194,9 @@
         <property name="adReport2Service" ref="AdReport2Service" />
     	<property name="pfdAccountService" ref="PfdAccountService" />
         <property name="akbPfpServer" value="${akbpfp.server}" />
+        <property name="pfpAdPvclkProdService" ref="PfpAdPvclkProdService" />
+        <property name="pfpAdDetailService" ref="PfpAdDetailService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
     </bean>
 
     <bean id="AdActionReportAction" class="com.pchome.akbadm.struts2.action.report.AdActionReportAction" scope="prototype">
@@ -511,6 +514,27 @@
     <!-- 品牌對應關鍵字管理 -->
 	<bean id="AdmBrandCorrespondApi" class="com.pchome.akbadm.struts2.action.api.AdmBrandCorrespondApi" scope="prototype" >
 		<property name="admBrandCorrespondService" ref="AdmBrandCorrespondService" />
+    </bean>
+    
+	<bean id="CatalogLogoAction" class="com.pchome.akbadm.struts2.action.check.CatalogLogoAction" scope="prototype" >
+		<property name="pfpCatalogLogoService" ref="PfpCatalogLogoService" />
+    	<property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+    </bean>
+    
+	<bean id="CatalogProdEcAction" class="com.pchome.akbadm.struts2.action.check.CatalogProdEcAction" scope="prototype" >
+		<property name="pfpCatalogProdEcService" ref="PfpCatalogProdEcService" />
+    </bean>
+    
+    <!-- 再行銷追蹤 -->
+    <bean id="TrackingReportAction" class="com.pchome.akbadm.struts2.action.report.TrackingReportAction" scope="prototype" >
+		<property name="trackingReportService" ref="TrackingReportService" />
+		<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
+    </bean>
+    
+    <!-- 轉換追蹤 -->
+    <bean id="ConvertReportAction" class="com.pchome.akbadm.struts2.action.report.ConvertReportAction" scope="prototype" >
+		<property name="pfpCodeConvertService" ref="PfpCodeConvertService" />
+		<property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />
     </bean>
     
 </beans>

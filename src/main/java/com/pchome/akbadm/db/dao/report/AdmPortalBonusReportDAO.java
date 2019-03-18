@@ -13,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmPortalBonusReport;
@@ -27,7 +27,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
 		Map<String,Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<Map<String,Object>>() {
 					@Override
-                    public Map<String,Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public Map<String,Object> doInHibernate(Session session) throws HibernateException {
 
 						Map<String,Object> resultMap = new HashMap<String,Object>();
 						
@@ -71,7 +71,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
 		Map<String,Integer> result = getHibernateTemplate().execute(
 				new HibernateCallback<Map<String,Integer>>() {
 					@Override
-                    public Map<String,Integer> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public Map<String,Integer> doInHibernate(Session session) throws HibernateException {
 
 						Map<String,Integer> resultMap = new HashMap<String,Integer>();
 						
@@ -121,7 +121,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
     	hql.append(" and reportDate = :reportDate ");
 
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("reportDate", reportDate);
 
     	Double result = (Double) query.uniqueResult();
@@ -140,7 +140,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
     	hql.append(" and reportDate = :reportDate ");
 
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("reportDate", reportDate);
 
     	Double result = (Double) query.uniqueResult();
@@ -159,7 +159,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
 		List<AdmPortalBonusReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmPortalBonusReportVO>>() {
 				@Override
-                public List<AdmPortalBonusReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                public List<AdmPortalBonusReportVO> doInHibernate(Session session) throws HibernateException {
 
 					List<AdmPortalBonusReportVO> resultData = new ArrayList<AdmPortalBonusReportVO>();
 					DecimalFormat df1 = new DecimalFormat("###,###,###,###");

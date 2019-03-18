@@ -1,12 +1,12 @@
 package com.pchome.akbadm.factory.notice;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.rmi.mailbox.EnumCategory;
 
 public class NoticeFactory {
-    private Log log = LogFactory.getLog(getClass().getName());
+    private Logger log = LogManager.getRootLogger();
 
     private ANotice noticeAccountClosed;
     private ANotice noticeEnableReminded;

@@ -23,7 +23,7 @@ public class PfbxPermissionDAO extends BaseDAO<PfbxPermission,String> implements
 	sb.append(" where a.content like '%"+pfbxApplyUrl+"%' and type =1");
 	String sql = sb.toString();
 	log.info(">>> sql = " + sql);
-	Query query = super.getSession().createSQLQuery(sql);
+	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 	return query.list();
     }
 }

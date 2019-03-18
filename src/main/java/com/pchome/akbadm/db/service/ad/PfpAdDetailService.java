@@ -1,6 +1,7 @@
 package com.pchome.akbadm.db.service.ad;
 
 import java.util.List;
+import java.util.Map;
 
 import com.pchome.akbadm.db.dao.ad.PfpAdDetailDAO;
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
@@ -38,6 +39,20 @@ public class PfpAdDetailService extends BaseService<PfpAdDetail, String> impleme
 
 	public List<PfpAdDetail> getPfpAdDetails(String adDetailSeq, String adSeq, String adPoolSeq, String defineAdSeq) throws Exception{
 		return ((PfpAdDetailDAO)dao).getPfpAdDetails(adDetailSeq, adSeq, adPoolSeq, defineAdSeq);
+	}
+	
+	public String getProdAdName(String adSeq) throws Exception{
+		List<Map<String,Object>> prodAdNameList = ((PfpAdDetailDAO)dao).getProdAdName(adSeq);
+		String prodAdName ="";
+		
+		if( (!prodAdNameList.isEmpty()) && (prodAdNameList.size()>0) ){
+			for (Object object : prodAdNameList) {
+				Map obj = (Map) object;
+				prodAdName = obj.get("ad_detail_content").toString();
+			}
+		}
+		
+		return prodAdName;
 	}
 
 }

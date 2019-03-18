@@ -1,7 +1,7 @@
 package com.pchome.service.portalcms;
 
-//import org.apache.commons.logging.Log;
-//import org.apache.commons.logging.LogFactory;
+//import org.apache.logging.log4j.Logger;
+//import org.apache.logging.log4j.LogManager;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -22,7 +22,7 @@ import com.pchome.soft.util.HttpConnectionClient;
  * @version 1.0
  */
 public class PortalcmsUtil {
-//    private static final Log log = LogFactory.getLog(PortalcmsUtil.class);
+//    private static final Logger log = LogFactory.getLog(PortalcmsUtil.class);
     private static PortalcmsUtil instance = new PortalcmsUtil();
 
     private PortalcmsUtil(){}

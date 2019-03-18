@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
@@ -30,7 +30,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
                 new HibernateCallback<List<Object> >() {
 
 					@Override
-                    public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object>  doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 						hql.append(" select c.customerInfoId, c.customerInfoTitle, c.category, ");
@@ -76,7 +76,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append(" where customerInfoId = ? ");
         hql.append(" and status != '"+EnumAccountStatus.DELETE.getStatus()+"' ");
 
-		List<PfpCustomerInfo> list = super.getHibernateTemplate().find(hql.toString(), customerInfoId);
+		List<PfpCustomerInfo> list = (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), customerInfoId);
 		if(list.size()>0 && list != null){
 			return list.get(0);
 		}else{
@@ -108,7 +108,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 
 		log.info(">>> hql = " + hql.toString());
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 		}
 		hql.append(" order by activateDate desc");
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
     		query.setParameter(paramName, sqlParams.get(paramName));
         }
@@ -155,7 +155,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append(" from PfpCustomerInfo ");
         hql.append(" where status != '"+EnumAccountStatus.DELETE.getStatus()+"' ");
 
-        return super.getHibernateTemplate().find(hql.toString());
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString());
     }
 
     @Override
@@ -166,7 +166,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
                 new HibernateCallback<List<Object> >() {
 
 					@Override
-                    public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object>  doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 //						hql.append(" select c.customerInfoId, c.customerInfoTitle, c.category, ");
@@ -243,7 +243,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append(" from PfpCustomerInfo ");
         hql.append(" where status != ? ");
 
-        return super.getHibernateTemplate().find(hql.toString(), EnumAccountStatus.DELETE.getStatus());
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), EnumAccountStatus.DELETE.getStatus());
     }
 
     @Override
@@ -261,7 +261,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
                                     EnumAccountStatus.START.getStatus(),
                                     EnumAccountStatus.STOP.getStatus()};
 
-         return super.getHibernateTemplate().find(hql.toString(), ob);
+         return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), ob);
     }
 
     @Override
@@ -282,7 +282,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 					                EnumAccountStatus.START.getStatus(),
 					                EnumAccountStatus.STOP.getStatus()};
 
-        return super.getHibernateTemplate().find(hql.toString(), ob);
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), ob);
     }
 
     @Override
@@ -293,7 +293,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append("where status = ? ");
         hql.append("    and later_remain >= ? ");
 
-        return super.getHibernateTemplate().find(hql.toString(), EnumAccountStatus.START.getStatus(), remain);
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), EnumAccountStatus.START.getStatus(), remain);
     }
 
     @Override
@@ -330,7 +330,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         sql.append("    and a.customer_info_id = c.customer_info_id ");
         sql.append("    and g.ad_action_seq = a.ad_action_seq ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setParameter("pvclk_date1", pvclkDate);
         query.setParameter("pvclk_date2", pvclkDate);
         query.setParameter("remain", remain);
@@ -390,7 +390,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         sql.append("    and k.ad_group_seq = g.ad_group_seq ");
         sql.append("    and ad.ad_group_seq = g.ad_group_seq ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setParameter("pvclk_date1", pvclkDate);
         query.setParameter("pvclk_date2", pvclkDate);
         query.setParameter("later_remain", remain);
@@ -408,7 +408,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append("from PfpCustomerInfo ");
         hql.append("where status = ? ");
 
-        return super.getHibernateTemplate().find(hql.toString(), enumAccountStatus.getStatus());
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), enumAccountStatus.getStatus());
     }
 
     @Override
@@ -418,7 +418,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append("from PfpCustomerInfo ");
         hql.append("where recognize = 'Y' ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .uniqueResult();
         return result != null ? result.floatValue() : 0f;
@@ -433,7 +433,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append("    and activateDate >= :startDate ");
         hql.append("    and activateDate <= :endDate ");
 
-        return ((Long) this.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("startDate", activateDate + " 00:00:00")
                 .setString("endDate", activateDate + " 23:59:59")
@@ -453,7 +453,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append("    and puaar.pfpPayType = :pfpPayType ");
         hql.append("    and pci.customerInfoId = puaar.pfpCustomerInfo.customerInfoId ");
 
-        return ((Long) this.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("startDate", activateDate + " 00:00:00")
                 .setString("endDate", activateDate + " 23:59:59")
@@ -480,7 +480,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 					                EnumAccountStatus.START.getStatus(),
 					                EnumAccountStatus.STOP.getStatus()};
 
-        return super.getHibernateTemplate().find(hql.toString(), ob);
+        return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), ob);
 
 
     }
@@ -498,7 +498,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			if(paramName.equals("customerInfoId")) {
 				q.setParameterList("customerInfoId", customerInfoIdList);
@@ -542,7 +542,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 		}
 		hql.append(" order by activateDate desc");
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
 
 			if(paramName.equals("pfpCustomerInfoIds") || paramName.equals("status")) {
@@ -577,7 +577,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 
 		list.add(pcId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpCustomerInfo>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -600,7 +600,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 		        new HibernateCallback<List<Object> >() {
 
 		        	@Override
-                    public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object>  doInHibernate(Session session) throws HibernateException {
 
 		        		StringBuffer sql = new StringBuffer();
 		        		Query q = null;
@@ -676,7 +676,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         sql.append("    and c.customer_info_id = p.customer_info_id ");
         sql.append("    and c.later_remain <= p.clk_price ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setParameter("pvclk_date", pvclkDate);
 
         return query.executeUpdate();
@@ -700,15 +700,14 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         sql.append("    and c.customer_info_id = p.customer_info_id ");
         sql.append("    and c.later_remain <= p.clk_price ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setParameter("pvclk_date", pvclkDate);
 
         return query.executeUpdate();
     }
     
 	public void saveOrUpdateWithCommit(PfpCustomerInfo pfpCustomerInfo) throws Exception{
-		super.getSession().saveOrUpdate(pfpCustomerInfo);
-		super.getSession().beginTransaction().commit();
+		this.getHibernateTemplate().getSessionFactory().getCurrentSession().saveOrUpdate(pfpCustomerInfo);
 	}
 	
     @Override
@@ -720,7 +719,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
         hql.append(" where 1=1 ");
         hql.append(" and customerInfoId in (:customerInfoList) ");
          
-     	Query q = this.getSession().createQuery(hql.toString());
+     	Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	q.setParameterList("customerInfoList", customerInfoList);
 
         return q.list();
@@ -735,7 +734,7 @@ public class PfpCustomerInfoDAO extends BaseDAO<PfpCustomerInfo,String> implemen
 		        new HibernateCallback<List<Object> >() {
 
 		        	@Override
-                    public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object>  doInHibernate(Session session) throws HibernateException {
 		        		
 		        		StringBuffer sql = new StringBuffer();
 		        		Query q = null;

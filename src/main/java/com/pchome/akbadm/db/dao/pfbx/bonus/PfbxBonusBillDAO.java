@@ -31,7 +31,7 @@ public class PfbxBonusBillDAO extends BaseDAO<PfbxBonusBill, Integer> implements
 			sql.append("and b.pfb_bonus_set_status  = :pfbBonusSetStatus ");
 		}
 		
-		Query query = super.getSession().createSQLQuery(sql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 		if (StringUtils.isNotBlank(category)){
 			query.setParameter("category", category);
 		}
@@ -99,7 +99,7 @@ public class PfbxBonusBillDAO extends BaseDAO<PfbxBonusBill, Integer> implements
 		hql.append("from PfbxBonusBill where pfbId = ? ");
 		pos.add(pfbId);
 
-		return super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		return (List<PfbxBonusBill>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -116,7 +116,7 @@ public class PfbxBonusBillDAO extends BaseDAO<PfbxBonusBill, Integer> implements
 			hql.append(" and pfbId = ? ");
 		}
 
-		return super.getHibernateTemplate().find(hql.toString(), pfbId);
+		return (List<PfbxBonusBill>) super.getHibernateTemplate().find(hql.toString(), pfbId);
 	}
 
 }

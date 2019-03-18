@@ -1,12 +1,12 @@
 package com.pchome.rmi.api;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.factory.ad.AdFactory;
 
 public class APIProviderImp implements IAPIProvider{
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	private AdFactory adFactory;
 	
 	public String getAdContent(String tproNo, String adNo) throws Exception{
@@ -18,6 +18,10 @@ public class APIProviderImp implements IAPIProvider{
 		log.info(">>>>>>>>>>>>>>>>>>>>adPreviewVideoBgImg:"+adPreviewVideoBgImg);
 		log.info(">>>>>>>>>>>>>>>>>>>>realUrl:"+realUrl);
 		return adFactory.getAdModelUtil().getAdVideoModel(adPreviewVideoURL,adPreviewVideoBgImg,realUrl);
+	}
+	
+	public String adProdContent(String pfpProdAdPreviewJson) throws Exception {
+		return adFactory.getAdModelUtil().adProdModelPreview(pfpProdAdPreviewJson);
 	}
 	
 	public String lifeCheck() {

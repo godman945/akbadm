@@ -8,13 +8,23 @@
         http://www.springframework.org/schema/tx
         http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
     
-    <bean id="log4jInitialization" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
-	    <property name="targetClass" value="org.springframework.util.Log4jConfigurer" />
-	    <property name="targetMethod" value="initLogging" />
-	    <property name="arguments">
-	        <list>
-	            <value>classpath:config/log4j/log4j.xml</value>
-	        </list>
-	    </property>
-    </bean>
+    <bean id="log4jConfigurer" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	  <property name="targetClass" value="org.apache.logging.log4j.LogManager"/>
+	  <property name="targetMethod" value="getContext"/>
+	  <property name="arguments">
+	    <list>
+	      <value>false</value>
+	    </list>
+	  </property>
+	</bean>
+	<bean id="log4jContext" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	  <property name="targetObject" ref="log4jConfigurer"/>
+	  <property name="targetMethod" value="setConfigLocation"/>
+	  <property name="arguments">
+	    <list>
+	      <value>classpath:config/log4j/log4j2.xml</value>  
+	    </list>
+	  </property>
+	</bean>
+    
 </beans>

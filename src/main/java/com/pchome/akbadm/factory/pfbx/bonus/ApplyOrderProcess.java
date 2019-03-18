@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -63,7 +63,7 @@ public class ApplyOrderProcess {
     private BonusTransDetailProcess bonusTransDetailProcess;
 
 
-    protected Log log = LogFactory.getLog(this.getClass().getName());
+    protected Logger log = LogManager.getRootLogger();
 
     /**
      * doInvoiceStatusProcess 呼叫狀態改變時，上面沒用到的參數傳 null

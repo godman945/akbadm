@@ -1,5 +1,5 @@
 package com.pchome.akbadm.db.pojo;
-// Generated 2018/7/30 �U�� 06:36:43 by Hibernate Tools 3.4.0.CR1
+// Generated 2018/12/4 �U�� 03:14:31 by Hibernate Tools 3.4.0.CR1
 
 import java.util.Date;
 import javax.persistence.Column;
@@ -35,6 +35,8 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 	private int adInvalidClk;
 	private float adClkPrice;
 	private float adInvalidClkPrice;
+	private Integer convertCount;
+	private Integer convertPriceCount;
 	private Date createDate;
 	private Date updateTime;
 
@@ -61,7 +63,8 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 	public AdmPfpdAdPvclkReport(String customerInfoId, String pfbxCustomerInfoId, String pfdCustomerInfoId,
 			Date adPvclkDate, String adClkPriceType, String adPvclkDevice, String timeCode, String adUrl,
 			String adUrlName, int adPv, int adVpv, int adClk, int adView, int adInvalidClk, float adClkPrice,
-			float adInvalidClkPrice, Date createDate, Date updateTime) {
+			float adInvalidClkPrice, Integer convertCount, Integer convertPriceCount, Date createDate,
+			Date updateTime) {
 		this.customerInfoId = customerInfoId;
 		this.pfbxCustomerInfoId = pfbxCustomerInfoId;
 		this.pfdCustomerInfoId = pfdCustomerInfoId;
@@ -78,6 +81,8 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 		this.adInvalidClk = adInvalidClk;
 		this.adClkPrice = adClkPrice;
 		this.adInvalidClkPrice = adInvalidClkPrice;
+		this.convertCount = convertCount;
+		this.convertPriceCount = convertPriceCount;
 		this.createDate = createDate;
 		this.updateTime = updateTime;
 	}
@@ -122,7 +127,7 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@Column(name = "ad_pvclk_date", nullable = false, length = 10)
+	@Column(name = "ad_pvclk_date", nullable = false, length = 0)
 	public Date getAdPvclkDate() {
 		return this.adPvclkDate;
 	}
@@ -239,8 +244,26 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 		this.adInvalidClkPrice = adInvalidClkPrice;
 	}
 
+	@Column(name = "convert_count")
+	public Integer getConvertCount() {
+		return this.convertCount;
+	}
+
+	public void setConvertCount(Integer convertCount) {
+		this.convertCount = convertCount;
+	}
+
+	@Column(name = "convert_price_count")
+	public Integer getConvertPriceCount() {
+		return this.convertPriceCount;
+	}
+
+	public void setConvertPriceCount(Integer convertPriceCount) {
+		this.convertPriceCount = convertPriceCount;
+	}
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "create_date", nullable = false, length = 19)
+	@Column(name = "create_date", nullable = false, length = 0)
 	public Date getCreateDate() {
 		return this.createDate;
 	}
@@ -250,7 +273,7 @@ public class AdmPfpdAdPvclkReport implements java.io.Serializable {
 	}
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "update_time", nullable = false, length = 19)
+	@Column(name = "update_time", nullable = false, length = 0)
 	public Date getUpdateTime() {
 		return this.updateTime;
 	}

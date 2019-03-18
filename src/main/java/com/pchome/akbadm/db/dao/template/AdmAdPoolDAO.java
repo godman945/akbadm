@@ -23,12 +23,12 @@ public class AdmAdPoolDAO extends BaseDAO<AdmAdPool, String> implements IAdmAdPo
 		if (StringUtils.isNotEmpty(diffComapny)) {
 			sql.append(" and diffCompany like '%" + diffComapny.trim() + "%'");
 		}
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmAdPool>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmAdPool getAdPoolBySeq(String adPoolSeq) throws Exception {
-		List<AdmAdPool> list = super.getHibernateTemplate().find("from AdmAdPool where adPoolSeq = '" + adPoolSeq + "'");
+		List<AdmAdPool> list = (List<AdmAdPool>) super.getHibernateTemplate().find("from AdmAdPool where adPoolSeq = '" + adPoolSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {

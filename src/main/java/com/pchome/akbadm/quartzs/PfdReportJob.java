@@ -9,8 +9,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,7 +38,7 @@ import com.pchome.config.TestConfig;
 @Transactional
 public class PfdReportJob {
 
-	private Log log = LogFactory.getLog(this.getClass());
+	private Logger log = LogManager.getRootLogger();
 
 	private IPfdAdActionReportService pfdAdActionReportService;
 	private IPfdAdGroupReportService pfdAdGroupReportService;
@@ -83,7 +83,7 @@ public class PfdReportJob {
 
 		String reportDate = dateFormate.format(now);
 
-		this.processAllPfdReport(reportDate);
+		this.processHourPfdReport(reportDate);
 
         log.info("====PfdReportJob.processPerHour() end====");
 	}
@@ -207,6 +207,8 @@ public class PfdReportJob {
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
 			pojo.setAdOperatingRule(adOperatingRule);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 			pojoList.add(pojo);
@@ -291,6 +293,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdVpv(adVpv);
 			pojo.setAdView(adView);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 			pojoList.add(pojo);
@@ -383,6 +387,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -558,6 +564,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 			pojoList.add(pojo);
@@ -649,6 +657,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -750,6 +760,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -842,6 +854,8 @@ public class PfdReportJob {
 			pojo.setAdOperatingRule(adOperatingRule);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(adVpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -893,10 +907,83 @@ public class PfdReportJob {
 		processPfdAdAgeReport(reportDate);
 		processPfdAdWebsiteReport(reportDate);
 		processPfdAdVideoReport(reportDate);
+		
+		//寫入轉換資料(Keyword、Video不需寫入)
+		processConvertToPfdReportByDay(reportDate);
 
         log.info("====PfdReportJob.processAllPfdReport() end====");
 	}
+	
+	/**
+	 * 每小時排程執行全部報表(不執行轉換相關方法processConvertToPfdReportByDay)
+	 * @param reportDate
+	 * @throws Exception
+	 */
+	public void processHourPfdReport(String reportDate) throws Exception {
+        log.info("====PfdReportJob.processHourPfdReport() start====");
 
+    	processPfdAdActionReport(reportDate);
+		processPfdAdGroupReport(reportDate);
+		processPfdAdDetailReport(reportDate);
+		processPfdAdKeywordReport(reportDate);
+		processPfdAdTemplateReport(reportDate);
+		processPfdAdTimeReport(reportDate);
+		processPfdAdAgeReport(reportDate);
+		processPfdAdWebsiteReport(reportDate);
+		processPfdAdVideoReport(reportDate);
+		
+        log.info("====PfdReportJob.processHourPfdReport() end====");
+	}
+	
+	/*
+	 * 1.日排程
+	 * 2.處理所有報表轉換欄位資料
+	 * */
+	@Transactional
+	public void processConvertToPfdReportByDay(String convertDate)  {
+		try{
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(sdf.parse(convertDate));
+			calendar.add(Calendar.DATE, -28);  
+			String convertRangeDate = sdf.format(calendar.getTime());
+			log.info("====PfdReportJob.processConvertToPfdReportByDay() start ====");
+			//1.整理pfd_ad_action_report
+			int result = pfdAdActionReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_action_report convert finish result: "+result);
+			
+			//2.整理pfd_ad_group_report
+			result = pfdAdGroupReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_group_report convert finish result: "+result);
+			
+			//3.整理pfd_ad_report
+			result = pfdAdReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_report convert finish result: "+result);
+			
+			//4.整理pfd_ad_template_report
+			result = pfdAdTemplateReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_template_report convert finish result: "+result);
+			
+			//5.整理pfd_ad_time_report
+			result = pfdAdTimeReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_time_report convert finish result: "+result);
+			
+			//6.整理pfd_ad_age_report
+			result = pfdAdAgeReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_age_report convert finish result: "+result);
+			
+			//7.整理pfd_ad_website_report
+			result = pfdAdWebsiteReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info(">>>pfd_ad_website_report convert finish result: "+result);
+			
+			log.info("====PfdReportJob.processConvertToPfdReportByDay() end ====");
+		}catch(Exception e){
+			log.error(">>>>>>"+e);
+			e.printStackTrace();
+		}
+	}
+	
+		
 	/**
 	 * 本機測試排程時使用
 	 * @param args

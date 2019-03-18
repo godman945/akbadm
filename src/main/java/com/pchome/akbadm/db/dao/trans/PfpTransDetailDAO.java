@@ -34,7 +34,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		}
 		hql.append(" order by transId");
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -57,7 +57,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 			hql.append(" and pfpCustomerInfo.customerInfoId in (" + pfpCustInfoId + ")");
 		}
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -94,7 +94,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		//log.info("endDate = " + endDate);
 		//log.info("pfpAdCustomerInfoIds = " + pfpAdCustomerInfoIds);
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
         	if(paramName.equals("pfpCustomerInfoIds") || paramName.equals("transTypes")) {
         		query.setParameterList(paramName, (ArrayList<String>)sqlParams.get(paramName));
@@ -135,7 +135,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 									date,
 									transType};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		hql.append("where pfpCustomerInfo.customerInfoId = ? ");
 		hql.append("order by updateDate desc, transId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(),customerInfoId);
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(),customerInfoId);
 	}
 
     @SuppressWarnings("unchecked")
@@ -156,7 +156,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("where pfpCustomerInfo.customerInfoId = :customerInfoId ");
         hql.append("order by updateDate desc, transId desc ");
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setString("customerInfoId", customerInfoId);
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResult);
@@ -210,7 +210,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		hql.append(" and transDate = ? ");
 		hql.append(" and transType = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, EnumTransType.SPEND_COST.getTypeId());
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, EnumTransType.SPEND_COST.getTypeId());
 	}
 
 	@Override
@@ -224,7 +224,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		hql.append(" and transDate = ? ");
 		hql.append(" and transType = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, EnumTransType.INVALID_COST.getTypeId());
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, EnumTransType.INVALID_COST.getTypeId());
 	}
 
     @Override
@@ -240,7 +240,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and pfpCustomerInfo.activateDate <= :endDate ");
         hql.append("order by transId desc ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                         .createQuery(hql.toString())
                         .setString("transType", enumTransType.getTypeId())
                         .setString("transDate", activateDate)
@@ -265,7 +265,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and ptd.pfpCustomerInfo.customerInfoId = puaar.pfpCustomerInfo.customerInfoId ");
         hql.append("order by ptd.transId desc ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                         .createQuery(hql.toString())
                         .setString("transType", enumTransType.getTypeId())
                         .setString("transDate", activateDate)
@@ -310,7 +310,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and transDate = :transDate ");
         hql.append("    and pfpCustomerInfo.recognize = 'Y' ");
 
-        return ((Long) this.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("transType", enumTransType.getTypeId())
                 .setString("transDate", transDate)
@@ -351,7 +351,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and puaar.pfpPayType = :pfpPayType ");
         hql.append("    and ptd.pfpCustomerInfo.customerInfoId = puaar.pfpCustomerInfo.customerInfoId ");
 
-        return ((Long) this.getSession()
+        return ((Long) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("transType", enumTransType.getTypeId())
                 .setString("transDate", transDate)
@@ -370,7 +370,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and transDate = :transDate ");
         hql.append("    and pfpCustomerInfo.recognize = 'Y' ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("transType", enumTransType.getTypeId())
                 .setString("transDate", transDate)
@@ -390,7 +390,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    and puaar.pfpPayType = :pfpPayType ");
         hql.append("    and ptd.pfpCustomerInfo.customerInfoId = puaar.pfpCustomerInfo.customerInfoId ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("transType", enumTransType.getTypeId())
                 .setString("transDate", transDate)
@@ -431,7 +431,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
         hql.append("    group by pfpCustomerInfo.customerInfoId ");
         hql.append(") ");
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setString("transDate", transDate);
 
         Object result = query.uniqueResult();
@@ -452,7 +452,7 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		hql.append(" and transDate >= ? ");
 		hql.append(" and transType >= ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, typeId);
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, typeId);
     }
 
     @Override
@@ -464,6 +464,6 @@ public class PfpTransDetailDAO extends BaseDAO <PfpTransDetail, String> implemen
 		hql.append(" where transDate = ? ");
 		hql.append(" order by transId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), date);
+		return (List<PfpTransDetail>) super.getHibernateTemplate().find(hql.toString(), date);
     }
 }

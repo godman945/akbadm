@@ -14,4 +14,6 @@ public interface IPfpAdWebsiteReportDAO {
 	
 	public List<Object> getLastDate() throws Exception;
 	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
+	
 }

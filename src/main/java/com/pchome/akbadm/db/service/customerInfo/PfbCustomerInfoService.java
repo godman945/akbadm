@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.lang.xwork.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 import com.pchome.akbadm.db.dao.customerInfo.IPfbCustomerInfoDAO;
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;

@@ -22,7 +22,7 @@ public class PfpUserDAO extends BaseDAO<PfpUser,String> implements IPfpUserDAO{
 		hql.append(" and status != '"+EnumUserStatus.DELETE.getStatus()+"' ");
 		hql.append(" order by createDate ");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpUser>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,7 +33,7 @@ public class PfpUserDAO extends BaseDAO<PfpUser,String> implements IPfpUserDAO{
 		hql.append(" from PfpUser  ");
 		hql.append(" where userId = '"+userId+"' ");
 		
-		List<PfpUser> list = super.getHibernateTemplate().find(hql.toString());
+		List<PfpUser> list = (List<PfpUser>) super.getHibernateTemplate().find(hql.toString());
 		
 		if(list != null && list.size() > 0){
 			return list.get(0);
@@ -53,7 +53,7 @@ public class PfpUserDAO extends BaseDAO<PfpUser,String> implements IPfpUserDAO{
 		
 		list.add(pfpCustomerInfoId);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpUser>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	public Integer deletePfpUser(String userId) {
@@ -80,6 +80,6 @@ public class PfpUserDAO extends BaseDAO<PfpUser,String> implements IPfpUserDAO{
 		list.add(pfpCustomerInfoId);
 		list.add(EnumUserPrivilege.ROOT_USER.getPrivilegeId());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpUser>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

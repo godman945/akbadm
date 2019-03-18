@@ -17,5 +17,12 @@
 			</result>
 		</action>
 
+
+
+
+		<action name="prodAdTrackDemo" class="ProdAdTrackDemo" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">prodAd.track.demo</result>
+		</action>
 	</package>
 </struts>

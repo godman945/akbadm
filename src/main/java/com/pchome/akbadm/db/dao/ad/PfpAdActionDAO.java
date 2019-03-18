@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdAction;
@@ -26,7 +26,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
     	StringBuffer hql = new StringBuffer();
         hql.append("from PfpAdAction ");
         hql.append("where adActionSeq = ?");
-        List<PfpAdAction> list = super.getHibernateTemplate().find(hql.toString(), adActionSeq);
+        List<PfpAdAction> list = (List<PfpAdAction>) super.getHibernateTemplate().find(hql.toString(), adActionSeq);
 
         if(list != null && list.size() > 0){
         	return list.get(0);
@@ -47,7 +47,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 
         Object[] ob = new Object[]{customerInfoId, EnumAdStatus.Close.getStatusId()};
 
-        return super.getHibernateTemplate().find(hql.toString(), ob);
+        return (List<PfpAdAction>) super.getHibernateTemplate().find(hql.toString(), ob);
     }
 
     //改善廣告報表效能
@@ -57,7 +57,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
     	final List<Object> getAdActionReportObjList =  getHibernateTemplate().execute(
     	new HibernateCallback<List<Object>>() {
 	    @Override
-        public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+        public List<Object> doInHibernate(Session session) throws HibernateException {
 		StringBuffer hql = new StringBuffer();
 		hql.append("SELECT ");
 		hql.append("a.adActionCreatTime, ");
@@ -210,7 +210,8 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 		    hql.append(" group by b.adActionSeq");
 		    hql.append(" order by a.adActionStartDate ");
 		}
-		Query query = super.getSession().createQuery(hql.toString());
+		
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		int totalSize = query.list().size() !=0 ? query.list().size() : 0;
     	return totalSize;
     }
@@ -223,7 +224,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 		List<Object> result = getHibernateTemplate().execute(
                 new HibernateCallback<List<Object> >() {
 					@Override
-                    public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object>  doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 						hql.append(" select pa.adActionSeq, ");
 						hql.append("		pa.adActionName, ");
@@ -362,7 +363,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 
         Object[] values = new Object[]{EnumAdStatus.Open.getStatusId(), EnumAccountStatus.START.getStatus()};
 
-        return super.getHibernateTemplate().find(hql.toString(), values);
+        return (List<PfpAdAction>) super.getHibernateTemplate().find(hql.toString(), values);
     }
 
     @Override
@@ -373,7 +374,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
         hql.append("where adActionStatus = :status ");
         hql.append("    and pfpCustomerInfo.recognize = 'Y' ");
 
-        return this.getSession()
+        return super.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("status", EnumAdStatus.Open.getStatusId())
                 .list();
@@ -387,7 +388,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
         hql.append("where adActionStatus = :status ");
         hql.append("    and pfpCustomerInfo.recognize = 'Y' ");
 
-        Double result = (Double) this.getSession()
+        Double result = (Double) super.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setInteger("status", EnumAdStatus.Open.getStatusId())
                 .uniqueResult();
@@ -411,7 +412,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
         	hql.append(" and adActionEndDate <= '" + conditionMap.get("adActionEndDate") + "'");
 		}
 
-        List<PfpAdAction> list = this.getSession().createQuery(hql.toString()).list();
+        List<PfpAdAction> list = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString()).list();
 
         return list;
     }
@@ -430,7 +431,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 
     	Object[] ob = new Object[]{EnumAdStatus.Open.getStatusId(), today, today, customerInfoId};
 
-    	return super.getHibernateTemplate().find(hql.toString(), ob);
+    	return (List<PfpAdAction>) super.getHibernateTemplate().find(hql.toString(), ob);
     }
 
 	// 2014-04-24
@@ -447,7 +448,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 		//List<PfpAd> list = super.getHibernateTemplate().find(sql.toString(), adActionSeqList);
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			if(paramName.equals("adActionSeq")) {
 				q.setParameterList("adActionSeq", adActionSeqList);
@@ -483,7 +484,7 @@ public class PfpAdActionDAO extends BaseDAO<PfpAdAction, String> implements IPfp
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			q.setParameter(paramName, sqlParams.get(paramName));
         }

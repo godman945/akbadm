@@ -81,7 +81,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 
 		Object[] ob = new Object[]{eDate, sDate, orderId, account, status+"%"};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -97,7 +97,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 		hql.append(" and createDate >= '" + startDate + " 00:00:00'");
 		hql.append(" and createDate <= '" + endDate + " 23:59:59'");
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 		hql.append(" and createDate >= '"+startDate+" 00:00:00' and createDate <= '"+endDate+" 23:59:59'");
 		hql.append(" order by updateDate desc ");
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -131,7 +131,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 			customerInfoId
 		};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 									date,
 									OrderBy};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -169,7 +169,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 									EnumBillingStatus.B301.toString(),
 									EnumBillingStatus.B302.toString()};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -188,7 +188,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 		list.add(EnumBillingStatus.R302.toString());
 		list.add(date);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -205,7 +205,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 		list.add(pfpCustomerInfoId);
 
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -227,7 +227,7 @@ public class PfpOrderDAO extends BaseDAO<PfpOrder,String> implements IPfpOrderDA
 		hql.append(" from PfpOrder ");
 		hql.append(" where orderId = ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), orderId);
+		return (List<PfpOrder>) super.getHibernateTemplate().find(hql.toString(), orderId);
 	}
 
 	public static void main(String arg[]) throws Exception{

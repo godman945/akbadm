@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxInvalidTraffic;
@@ -34,7 +34,7 @@ public class PfbxInvalidTrafficDAO extends BaseDAO<PfbxInvalidTraffic, String> i
 		hql.append(" where closeDate is null ");
 		hql.append(" and pfbId =?  ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId);
+		return (List<PfbxInvalidTraffic>) super.getHibernateTemplate().find(hql.toString(), pfbId);
 	}
 	
 	@Override
@@ -42,7 +42,7 @@ public class PfbxInvalidTrafficDAO extends BaseDAO<PfbxInvalidTraffic, String> i
 		List<PfbxInvalidTrafficVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfbxInvalidTrafficVO>>() {
 					@Override
-					public List<PfbxInvalidTrafficVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfbxInvalidTrafficVO> doInHibernate(Session session) throws HibernateException {
 						
 						StringBuffer hql = new StringBuffer();
 						hql.append("select ");
@@ -144,6 +144,6 @@ public class PfbxInvalidTrafficDAO extends BaseDAO<PfbxInvalidTraffic, String> i
 		hql.append(" from PfbxInvalidTraffic ");
 		hql.append(" where invId = ?  ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), invId);
+		return (List<PfbxInvalidTraffic>) super.getHibernateTemplate().find(hql.toString(), invId);
 	}
 }

@@ -87,7 +87,7 @@ public class AdCheckAction extends BaseAction {
 
 	//查詢結果
 	private List<AdCheckDisplayVO> adDataList = null;
-	
+
 	//廣告類別
 	private List<PfpAdCategoryMapping> pfpAdCategoryMappingList = new ArrayList<PfpAdCategoryMapping>();
 	//要審核的廣告序號
@@ -96,7 +96,7 @@ public class AdCheckAction extends BaseAction {
 	private String[] rejectReason;
 	private String[] adCategoryCode;
 	private String allRejectReason;		//批次退件原因;
-    
+
 	//訊息
 	private String message;
 
@@ -105,13 +105,14 @@ public class AdCheckAction extends BaseAction {
 
 	//經銷商名稱下拉選單
 	private Map<String, String> adPfdAllNameMap = new HashMap<>();
-	
+
 	//經銷商名稱
 	private Map<String, String> adPfdNameMap = new HashMap<>();
-	
+
 	public static final String MAIL_API_NO = "P144";
 
-	public String execute() throws Exception{
+	@Override
+    public String execute() throws Exception{
 		this.init();
 		return SUCCESS;
 	}
@@ -123,13 +124,13 @@ public class AdCheckAction extends BaseAction {
 		log.info(">>> pfdCustomerInfoId = " + pfdCustomerInfoId);
 		request.getSession(false);
 		System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+request.getSession().getId());
-		
+
 		try{
 			this.init();
 
 			AdQueryConditionVO queryVO = new AdQueryConditionVO();
 			String[] videoSize = null;
-			
+
 			if (StringUtils.isNotEmpty(status)) {
 				queryVO.setStatus(new String[]{status});
 			} else {
@@ -163,13 +164,13 @@ public class AdCheckAction extends BaseAction {
 				this.message = "查無資料！";
 
 			} else {
-			    this.adDataList = new ArrayList<AdCheckDisplayVO>(); 
+			    this.adDataList = new ArrayList<AdCheckDisplayVO>();
 				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 				//整理成頁面資訊
 				for (int i=0; i<pfpAdList.size(); i++) {
 					//違規項目
 					String illegalString = "";
-					
+
 					PfpAd pfpAd = pfpAdList.get(i);
 					Set<PfdUserAdAccountRef> set =  pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getPfdUserAdAccountRefs();
 					for (PfdUserAdAccountRef pfdUserAdAccountRef : set) {
@@ -184,13 +185,13 @@ public class AdCheckAction extends BaseAction {
 						data.setSendVerifyTime(dateFormat.format(pfpAd.getAdSendVerifyTime()));
 					}
 					data.setCustomerName(pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getCustomerInfoTitle());
-					
+
 					String html5Flag = "N";
 					if(StringUtils.equals("c_x05_po_tad_0059", pfpAd.getAdAssignTadSeq())){
 						html5Flag = "Y";
 					}
 					data.setHtml5Tag(html5Flag);
-					
+
 					if("TMG".equals(adStyle)){
 						data.setAdPreview(adFactory.getAdModel(pfpAd.getTemplateProductSeq(), pfpAd.getAdSeq()));
 					} else if("IMG".equals(adStyle)){
@@ -211,11 +212,11 @@ public class AdCheckAction extends BaseAction {
 									data.setImgWidth(imgmap.get("imgWidth"));
 									data.setImgHeight(imgmap.get("imgHeight"));
 								}
-								data.setOriginalImg(imgUrl);	
+								data.setOriginalImg(imgUrl);
 							}else if("real_url".equals(pfpAdDetail.getAdDetailId())){
 								data.setRealUrl(pfpAdDetail.getAdDetailContent());
 								String showUrl = pfpAdDetail.getAdDetailContent();
-				            	
+
 				            	showUrl = showUrl.replaceAll("http://", "");
 				            	showUrl = showUrl.replaceAll("https://", "");
 				            	if(showUrl.lastIndexOf(".com/") != -1){
@@ -277,17 +278,88 @@ public class AdCheckAction extends BaseAction {
 	                            data.setAdDetailRealUrl(pfpAdDetail.getAdDetailContent());
 	                        }
 	                    }
-	                    
+
 	                    //影片下載狀態:共用呈現在違規項目內容
 	                    PfpAdVideoSource pfpAdVideoSource = pfpAdVideoSourceService.getVideoUrl(videoUrl);
 	                    for (EnumDownloadStatus enumDownloadStatus : EnumDownloadStatus.values()) {
-	                    	if(pfpAdVideoSource.getAdVideoStatus() == enumDownloadStatus.getStatus() && enumDownloadStatus.getStatus() != enumDownloadStatus.DOWNLOAD_SUCCESS.getStatus()){
+	                    	if(pfpAdVideoSource.getAdVideoStatus() == enumDownloadStatus.getStatus() && enumDownloadStatus.getStatus() != EnumDownloadStatus.DOWNLOAD_SUCCESS.getStatus()){
 	                    		illegalString = illegalString + "影片下載狀態:"+enumDownloadStatus.getMessage()+"<br>";
 	                    		break;
 	                    	}
 						}
 	                }
-					
+					// TODO
+	                else if ("PROD".equals(adStyle)) {
+                        data.setAdbgType("hasposter");
+                        data.setPreviewTpro("c_x05_pad_tpro_0145");
+
+                        for(PfpAdDetail pfpAdDetail : pfpAd.getPfpAdDetails()){
+                            if ("buybtn_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailBuybtnBgColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("buybtn_font_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailBuybtnFontColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("buybtn_txt".equals(pfpAdDetail.getAdDetailId())) {
+                            	data.setAdDetailBuybtnTxt(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("dis_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailDisBgColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("dis_font_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailDisFontColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("dis_txt_type".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailDisTxtType(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("logo_bg_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailLogoBgColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("logo_font_color".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailLogoFontColor(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("logo_img_url".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailLogoImgUrl(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("logo_txt".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailLogoTxt(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("logo_type".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailLogoType(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("prod_ad_url".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailProdAdUrl(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("prod_group".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailProdGroup(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("prod_img_show_type".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailProdImgShowType(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("prod_report_name".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailProdReportName(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if ("sale_img_show_type".equals(pfpAdDetail.getAdDetailId())) {
+                                data.setAdDetailSaleImgShowType(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if (pfpAdDetail.getAdDetailId().indexOf("logo_sale_img_") == 0) {
+                                data.getAdDetailLogoSaleImgList().add(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if (pfpAdDetail.getAdDetailId().indexOf("sale_img_") == 0) {
+                                data.getAdDetailSaleImgList().add(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if (pfpAdDetail.getAdDetailId().indexOf("sale_end_img_") == 0) {
+                                data.getAdDetailSaleEndImgList().add(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if (pfpAdDetail.getAdDetailId().indexOf("sale_img_300x250") == 0) {
+                                data.setAdDetailSaleImg(pfpAdDetail.getAdDetailContent());
+                            }
+                            else if (pfpAdDetail.getAdDetailId().indexOf("sale_end_img_300x250") == 0) {
+                                data.setAdDetailSaleEndImg(pfpAdDetail.getAdDetailContent());
+                            }
+                        }
+	                }
+
 					data.setAdGroupName(pfpAd.getPfpAdGroup().getAdGroupName());
 					data.setAdActionName(pfpAd.getPfpAdGroup().getPfpAdAction().getAdActionName());
 					data.setStatus(pfpAd.getAdStatus());
@@ -295,7 +367,7 @@ public class AdCheckAction extends BaseAction {
 					if (StringUtils.isNotEmpty(pfpAd.getAdCategorySeq())) {
 						data.setAdCategory(pfpAd.getAdCategorySeq());
 					}
-					
+
 					Set<PfpAdDetail> detailSet = pfpAd.getPfpAdDetails();
 					Iterator<PfpAdDetail> it = detailSet.iterator();
 					while (it.hasNext()) {
@@ -303,7 +375,7 @@ public class AdCheckAction extends BaseAction {
 						if (adDetail.getVerifyFlag().equals("y") && adDetail.getVerifyStatus().equals("n")) {
 							String title = adDetail.getAdDetailId();
 							String keyword = adDetail.getAdDetailContent();
-							
+
 							// sales_price商品原價(銷售價)、商品促銷價(促銷價)非必填欄位，其他欄位為必填，則其他欄位需判斷是否為空
 							if ("sales_price".equals(title) || "promotional_price".equals(title)) {
 								if (!StringUtils.isNumeric(keyword)) { // 輸入非空值、數字，記錄違規項目。
@@ -317,7 +389,7 @@ public class AdCheckAction extends BaseAction {
 					data.setIllegalKeyWord(illegalString);
 					adDataList.add(data);
 				}
-				
+
 				String adCategoryCode="";
 				for (PfpAd pfpAd : pfpAdList) {
 				    adCategoryCode =  pfpAdService.getCategoryMappingCodeById(pfpAd.getAdSeq());
@@ -334,7 +406,7 @@ public class AdCheckAction extends BaseAction {
 	}
 
 	/**
-	 * 核准 
+	 * 核准
 	 */
 	public String doApprove() throws Exception{
 		adCategoryLength();
@@ -376,8 +448,8 @@ public class AdCheckAction extends BaseAction {
 		    }
 			//access log
 		    String logMsg = "廣告審核：廣告已核淮(" + title + " | " + now + ")";
-		    admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg, 
-			    super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null, 
+		    admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg,
+			    super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null,
 			    null, request.getRemoteAddr(), EnumAccesslogEmailStatus.NO);
 			//刪除全部退件公告
 			boardProvider.delete(pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getCustomerInfoId(), EnumCategory.VERIFY_DENIED, adSeqs[i]);
@@ -387,7 +459,7 @@ public class AdCheckAction extends BaseAction {
 	}
 
 	/**
-	 * 核准後暫停，待客戶自行確認 
+	 * 核准後暫停，待客戶自行確認
 	 */
 	public String doApproveAndPause() throws Exception{
 
@@ -438,8 +510,8 @@ public class AdCheckAction extends BaseAction {
 
 			//access log
 			String logMsg = "廣告審核：廣告已核淮/待客戶確認(" + title + " | " + now + ")";
-			admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg, 
-											super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null, 
+			admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg,
+											super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null,
 											null, request.getRemoteAddr(), EnumAccesslogEmailStatus.NO);
 
 
@@ -463,7 +535,7 @@ public class AdCheckAction extends BaseAction {
 		if (rejectReason==null || rejectReason.length==0) {
 			if(StringUtils.isEmpty(allRejectReason)){
 				this.message = "請填寫退件原因！";
-				return INPUT;	
+				return INPUT;
 			}
 		}
 		if ((adSeqs.length != rejectReason.length) && StringUtils.isEmpty(allRejectReason)) {
@@ -473,7 +545,7 @@ public class AdCheckAction extends BaseAction {
 		String userId = (String) getSession().get(SessionConstants.SESSION_USER_ID);
 		SimpleDateFormat dformat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String now = dformat.format(new Date());
-		
+
 		//發信內容
 		String mailContent = "";
 		File mailFile = new File(mailDir + EnumCategory.VERIFY_DENIED.getCategory() + ".html");
@@ -493,7 +565,7 @@ public class AdCheckAction extends BaseAction {
         Calendar c = Calendar.getInstance();
 		c.add(Calendar.MONTH, 6);
 		Date endDate = sdf.parse(sdf.format(c.getTime()));
-		
+
         //退回
         Date date= new Date();
         for (int i=0; i<adSeqs.length; i++) {
@@ -503,7 +575,7 @@ public class AdCheckAction extends BaseAction {
         		pfpAdService.updateAdCheckStatus(Integer.toString(EnumAdStatus.Reject.getStatusId()), adSeqs[i], adCategory[i], userId, allRejectReason);
         	} else {
         		System.out.println("rejectReason[A]>>>>>>>>>>>>>>>>>>>"+rejectReason[i]);
-        		pfpAdService.updateAdCheckStatus(Integer.toString(EnumAdStatus.Reject.getStatusId()), adSeqs[i], adCategory[i], userId, rejectReason[i]);	
+        		pfpAdService.updateAdCheckStatus(Integer.toString(EnumAdStatus.Reject.getStatusId()), adSeqs[i], adCategory[i], userId, rejectReason[i]);
         	}
             PfpAdCategoryMapping pfpAdCategoryMapping = new PfpAdCategoryMapping();
             pfpAdCategoryMapping.setAdSeq(adSeqs[i]);
@@ -523,8 +595,8 @@ public class AdCheckAction extends BaseAction {
             }
 		    //access log
             String logMsg = "廣告審核：廣告已拒絕(" + title + " | " + now + ")";
-            admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg, 
-        	    super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null, 
+            admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.AD_STATUS_MODIFY, logMsg,
+        	    super.getSession().get(SessionConstants.SESSION_USER_ID).toString(), null, null,
         	    null, request.getRemoteAddr(), EnumAccesslogEmailStatus.NO);
             String adStatusDesc = adTypeMap.get(Integer.toString(pfpAd.getAdStatus()));
             String rejectReason = pfpAd.getAdVerifyRejectReason();
@@ -567,12 +639,12 @@ public class AdCheckAction extends BaseAction {
 	        	    	html5Size = adDetail.getAdDetailContent();
 	        	    }
 	        	}
-	        	
+
 	        	if("IMG".equals(adStyle)){
 	        		if(adImgUrl.indexOf("original") == -1){
                     	if(adImgUrl.lastIndexOf("/") >= 0){
                     		String imgFilename = adImgUrl.substring(adImgUrl.lastIndexOf("/"));
-                    		adImgUrl = adImgUrl.replace(imgFilename, "/original" + imgFilename);	
+                    		adImgUrl = adImgUrl.replace(imgFilename, "/original" + imgFilename);
                     	}
                     }
 	        		//不是html5，才取圖片大小
@@ -592,7 +664,7 @@ public class AdCheckAction extends BaseAction {
         	if (PfdUserAdAccountRefList.size()>0) {
         		//刪除之前拒絕的公告
         		pfdBoardService.deletePfdBoardByDeleteId(adSeqs[i]);
-        		
+
         		String pfdCustomerInfoId = PfdUserAdAccountRefList.get(0).getPfdCustomerInfo().getCustomerInfoId();
         		String pfdUserId = PfdUserAdAccountRefList.get(0).getPfdUser().getUserId();
         		//PFD 公告
@@ -617,14 +689,14 @@ public class AdCheckAction extends BaseAction {
         		board.setHasUrl("n");
         		board.setUrlAddress(null);
         		board.setDeleteId(adSeqs[i]);
-        		
+
         		//觀看權限(總管理者/帳戶管理/行政管理)
     			String msgPrivilege = EnumPfdPrivilege.ROOT_USER.getPrivilege() + "||" + EnumPfdPrivilege.ACCOUNT_MANAGER.getPrivilege();
     			board.setMsgPrivilege(msgPrivilege);
-        		
+
         		board.setCreateDate(createDate);
         		pfdBoardService.save(board);
-        		
+
         		//給行政管理/業務管理看的公告
         		PfdBoard board2 = new PfdBoard();
         		board2.setBoardType(EnumPfdBoardType.AD.getType());
@@ -640,7 +712,7 @@ public class AdCheckAction extends BaseAction {
         		board2.setMsgPrivilege(EnumPfdPrivilege.REPORT_MANAGER.getPrivilege() + "||" + EnumPfdPrivilege.SALES_MANAGER.getPrivilege());
         		board2.setCreateDate(createDate);
         		pfdBoardService.save(board2);
-        		
+
         	}
         	//公告內容
         	String boardContent = EnumCategory.VERIFY_DENIED.getBoardContent();
@@ -657,7 +729,7 @@ public class AdCheckAction extends BaseAction {
         	boardProvider.delete(pfpCustomerInfoId, EnumCategory.VERIFY_DENIED, adSeqs[i]);
         	//新增退件公告
         	boardProvider.add(pfpCustomerInfoId, boardContent, EnumBoardType.VERIFY, EnumCategory.VERIFY_DENIED, adSeqs[i]);
-            
+
             Iterator<PfpUser> itUser = pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getPfpUsers().iterator();
             log.info(">>> pfpCustomerInfoId = " + pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getCustomerInfoId());
             List<String> mailList = new ArrayList<String>();
@@ -674,14 +746,14 @@ public class AdCheckAction extends BaseAction {
             String tmp = mailContent;
             log.info(">>>>>>>>>>>>>>>>>>>>request.getContextPath()=" + request.getContextPath());
             tmp = tmp.replaceAll("@logoImg", "<img src=\"http://show.pchome.com.tw/html/img/logo_pchome.png\" />");
-            
+
             if("IMG".equals(adStyle) && isHtml5){
             	tmp = tmp.replaceAll("@adStyle","【圖像廣告】");
             	tmp = tmp.replaceAll("@img", html5Zip); //放圖片位置改放zip名稱
             }else if("IMG".equals(adStyle)){
             	int imgWidth = Integer.parseInt(adImgWidth);
             	int imgHeight = Integer.parseInt(adImgHeight);
-            	
+
             	if(imgWidth > imgHeight){
             		imgHeight = imgHeight*90/imgWidth;
             		imgWidth = 90;
@@ -689,7 +761,7 @@ public class AdCheckAction extends BaseAction {
             		imgWidth = imgWidth*90/imgHeight;
             		imgHeight = 90;
             	}
-            	
+
             	tmp = tmp.replaceAll("@adStyle","【圖像廣告】");
             	tmp = tmp.replaceAll("@img","<img src=\"" + akbPfpServer + adImgUrl + "\"  />");
             } else if("TMG".equals(adStyle)){
@@ -699,13 +771,13 @@ public class AdCheckAction extends BaseAction {
             	tmp = tmp.replaceAll("@adStyle","");
             	tmp = tmp.replaceAll("@img","");
             }
-            
+
             tmp = tmp.replaceAll("@adName", replaceAllSpecialSymbolHandling(pfpAd.getPfpAdGroup().getPfpAdAction().getAdActionName())); //廣告
             tmp = tmp.replaceAll("@adCategoryName", replaceAllSpecialSymbolHandling(pfpAd.getPfpAdGroup().getAdGroupName())); //分類
 
             adTitle = replaceAllSpecialSymbolHandling(adTitle);
             adContent = replaceAllSpecialSymbolHandling(adContent);
-            
+
             if("IMG".equals(adStyle) && isHtml5){
             	String width = "";
             	String height = "";
@@ -719,11 +791,11 @@ public class AdCheckAction extends BaseAction {
             } else {
             	tmp = tmp.replaceAll("@content","標題：" +adTitle + "<br />內容：" + adContent);
             }
-            
+
             tmp = tmp.replaceAll("@readUrl", realUrl); //連結網址
             if("IMG".equals(adStyle)){
             	showUrl = realUrl;
-            	
+
             	showUrl = showUrl.replaceAll("http://", "");
             	showUrl = showUrl.replaceAll("https://", "");
             	if(showUrl.lastIndexOf(".com/") != -1){
@@ -738,8 +810,8 @@ public class AdCheckAction extends BaseAction {
             }
             tmp = tmp.replaceAll("@statusDesc", adStatusDesc); //廣告狀態
             tmp = tmp.replaceAll("@question", rejectReason); //廣告問題
-            
-            
+
+
             Mail mail = null;
             //發信
             try {
@@ -757,7 +829,7 @@ public class AdCheckAction extends BaseAction {
             }
             //mail.setMailTo(mailArray);
             mail.setMailTo(mailArray);
-            
+
             String[] test123 = mail.getMailTo();
             for (int k=0; k<test123.length; k++) {
             	log.info(">>> test123[" + k + "] = " + test123[k]);
@@ -768,7 +840,7 @@ public class AdCheckAction extends BaseAction {
         }
         return SUCCESS;
 	}
-	
+
 	private void init() throws Exception {
 
 		List<PfpAdCategory> adCategoryList = pfpAdCategoryService.getAllPfpAdCategory();
@@ -779,14 +851,14 @@ public class AdCheckAction extends BaseAction {
 			PfpAdCategory pfpAdCategory = adCategoryList.get(i);
 			adCategorySelectOptionsMap.put(pfpAdCategory.getSeq().toString(), pfpAdCategory.getName());
 		}
-		
+
 		List<PfdUserAdAccountRef> pfdUserAdAccountRefList = pfdUserAdAccountRefService.loadAll();
 		for (PfdUserAdAccountRef pfdUserAdAccountRef : pfdUserAdAccountRefList) {
 			this.adPfdAllNameMap.put(pfdUserAdAccountRef.getPfdCustomerInfo().getCustomerInfoId(), pfdUserAdAccountRef.getPfdCustomerInfo().getCompanyName());
 		}
 	}
-	
-	
+
+
 	private void adCategoryLength(){
 		for (int i =this.adCategory.length; i>0; i--) {
 			if(adCategory[i-1].length() == 0){
@@ -795,7 +867,7 @@ public class AdCheckAction extends BaseAction {
 			}
 		}
 	}
-	
+
 	//取得圖像廣告圖片的尺寸
 	public Map<String,String> getImgSize(String originalImg) throws Exception {
 		Map<String,String> imgmap = new HashMap<String,String>();
@@ -808,7 +880,7 @@ public class AdCheckAction extends BaseAction {
 		}
 		return imgmap;
 	}
-	
+
 	/**
 	 * 全部取代前特殊符號處理
 	 * @param name
@@ -821,7 +893,7 @@ public class AdCheckAction extends BaseAction {
 			return name.replace("$", "\\$");
 		}
 	}
-	
+
 	public void setPfpAdService(IPfpAdService pfpAdService) {
 		this.pfpAdService = pfpAdService;
 	}
@@ -1030,6 +1102,4 @@ public class AdCheckAction extends BaseAction {
 	public void setPfdCustomerInfoId(String pfdCustomerInfoId) {
 		this.pfdCustomerInfoId = pfdCustomerInfoId;
 	}
-	
-	
 }

@@ -20,8 +20,8 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.soft.util.DateValueUtil;
 
@@ -30,7 +30,7 @@ public class FileProcessUtil {
 
 	private  static final FileProcessUtil fileProcessUtil=new FileProcessUtil();
 	
-	private static Log log = LogFactory.getLog(FileProcessUtil.class);
+	private static Logger log = LogManager.getRootLogger();
 
 	private FileProcessUtil(){};
 

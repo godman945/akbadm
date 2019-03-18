@@ -1,6 +1,7 @@
 package com.pchome.akbadm.db.dao.sequence;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -16,7 +17,7 @@ public class SequenceDAO extends BaseDAO<Sequence, String> implements ISequenceD
 
 		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
 
-		Logger log = Logger.getLogger(SequenceDAO.class);
+		Logger log = LogManager.getRootLogger();
 
 		SequenceDAO sequenceDAO = (SequenceDAO) context.getBean("SequenceDAO");
 		//Product po=productDAO.get("P0010001");

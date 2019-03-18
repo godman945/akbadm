@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdClick;
@@ -28,7 +28,7 @@ public class PfbxInvalidClickDAO extends BaseDAO<PfbxInvalidClickVO, String> imp
 		List<PfbxInvalidClickVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfbxInvalidClickVO>>() {
 					@Override
-					public List<PfbxInvalidClickVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfbxInvalidClickVO> doInHibernate(Session session) throws HibernateException {
 						
 						resultData = new ArrayList<PfbxInvalidClickVO>();
 						Integer selectType = Integer.parseInt(conditionMap.get("selectType"));
@@ -769,7 +769,7 @@ public class PfbxInvalidClickDAO extends BaseDAO<PfbxInvalidClickVO, String> imp
 		List<PfpAdClick> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfpAdClick>>() {
 					@Override
-					public List<PfpAdClick> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdClick> doInHibernate(Session session) throws HibernateException {
 						
 						List<PfpAdClick> dataList = new ArrayList<PfpAdClick>();
 						Integer selectType = Integer.parseInt(conditionMap.get("invSelectType"));

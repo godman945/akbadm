@@ -13,4 +13,6 @@ public interface IPfpAdGroupReportService {
 	public void insertReportData(List<PfpAdGroupReport> dataList) throws Exception;
 
 	public List<Object> getLastDate() throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

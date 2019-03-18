@@ -3,24 +3,34 @@ package com.pchome.akbadm.quartzs;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.akbadm.db.pojo.PfpAd;
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
+import com.pchome.akbadm.db.pojo.PfpCatalogLogo;
+import com.pchome.akbadm.db.pojo.PfpCatalogProdEc;
 import com.pchome.akbadm.db.pojo.PfpIllegalKeyword;
 import com.pchome.akbadm.db.service.ad.IPfpAdDetailService;
 import com.pchome.akbadm.db.service.ad.IPfpAdService;
+import com.pchome.akbadm.db.service.catalog.IPfpCatalogLogoService;
+import com.pchome.akbadm.db.service.catalog.IPfpCatalogProdEcService;
 import com.pchome.akbadm.db.service.check.IPfpIllegalKeywordService;
 import com.pchome.akbadm.db.vo.AdQueryConditionVO;
 import com.pchome.config.TestConfig;
 import com.pchome.enumerate.ad.EnumAdStatus;
+import com.pchome.enumerate.catalog.EnumCatalogDeleteStatus;
+import com.pchome.enumerate.catalog.EnumCatalogLogoStatus;
+import com.pchome.enumerate.catalog.EnumCatalogProdEcCheckStatus;
+import com.pchome.enumerate.catalog.EnumCatalogProdEcStatus;
+import com.pchome.enumerate.catalog.EnumCatalogUploadStatus;
 import com.pchome.service.portalcms.PortalcmsUtil;
 import com.pchome.service.portalcms.bean.Mail;
 import com.pchome.soft.util.SpringEmailUtil;
@@ -33,12 +43,17 @@ import com.pchome.soft.util.SpringEmailUtil;
 @Transactional
 public class VerifyAdIllegalKeyWordJob{
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
 	private IPfpAdService pfpAdService;
 	private IPfpAdDetailService pfpAdDetailService;
+    private IPfpCatalogLogoService pfpCatalogLogoService;
+    private IPfpCatalogProdEcService pfpCatalogProdEcService;
 	private IPfpIllegalKeywordService pfpIllegalKeywordService;
 	private SpringEmailUtil springEmailUtil;
+
+    private int pageNo = 1;
+    private int pageSize = 100000;
 
 	//要檢核的屬性
 	private String[] verifyAttributes = {"title", "content"};
@@ -218,6 +233,52 @@ public class VerifyAdIllegalKeyWordJob{
 			}
 		}
 
+        // prod
+		List<Map<String, Object>> catalogProdEcList = pfpCatalogProdEcService.selectPfpCatalogProdEc(null, null, EnumCatalogUploadStatus.COMPLETE.getStatus(), EnumCatalogDeleteStatus.UNDELETE.getStatus(), EnumCatalogProdEcStatus.OPEN.getStatus(), EnumCatalogProdEcCheckStatus.VERIFY.getStatus(), pageNo, pageSize);
+		log.info("catalogProdEcList.size() = " + catalogProdEcList.size());
+        if (!catalogProdEcList.isEmpty()) {
+            try {
+                Mail mail = PortalcmsUtil.getInstance().getMail(MAIL_API_NO);
+                if (mail != null) {
+                    mail.setMsg("<html><body>您有 " + catalogProdEcList.size() + " 件新商品待審</body></html>");
+                    springEmailUtil.sendHtmlEmail(mail.getRname(), mail.getMailFrom(), mail.getMailTo(), mail.getMailBcc(), mail.getMsg());
+                }
+
+                PfpCatalogProdEc pfpCatalogProdEc = null;
+                for (Map<String, Object> map: catalogProdEcList) {
+                    pfpCatalogProdEc = pfpCatalogProdEcService.get((Integer) map.get("id"));
+                    pfpCatalogProdEc.setEcCheckStatus(EnumCatalogLogoStatus.VERIFYING.getStatus());
+                    pfpCatalogProdEc.setUpdateDate(now);
+                    pfpCatalogProdEcService.update(pfpCatalogProdEc);
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
+        // logo
+        List<Map<String, Object>> catalogLogoList = pfpCatalogLogoService.selectCatalogLogo(null, EnumCatalogLogoStatus.VERIFY.getStatus(), pageNo, pageSize);
+        log.info("catalogLogoList.size() = " + catalogLogoList.size());
+        if (!catalogLogoList.isEmpty()) {
+            try {
+                Mail mail = PortalcmsUtil.getInstance().getMail(MAIL_API_NO);
+                if (mail != null) {
+                    mail.setMsg("<html><body>您有 " + catalogLogoList.size() + " 件新LOGO待審</body></html>");
+                    springEmailUtil.sendHtmlEmail(mail.getRname(), mail.getMailFrom(), mail.getMailTo(), mail.getMailBcc(), mail.getMsg());
+                }
+
+                PfpCatalogLogo pfpCatalogLogo = null;
+                for (Map<String, Object> map: catalogLogoList) {
+                    pfpCatalogLogo = pfpCatalogLogoService.get((String) map.get("catalog_logo_seq"));
+                    pfpCatalogLogo.setStatus(EnumCatalogLogoStatus.VERIFYING.getStatus());
+                    pfpCatalogLogo.setUpdateDate(now);
+                    pfpCatalogLogoService.update(pfpCatalogLogo);
+                }
+            } catch (Exception e) {
+                log.error(e.getMessage(), e);
+            }
+        }
+
         log.info("====VerifyAdIllegalKeyWordJob.process() end====");
 	}
 
@@ -228,6 +289,14 @@ public class VerifyAdIllegalKeyWordJob{
 	public void setPfpAdDetailService(IPfpAdDetailService pfpAdDetailService) {
 		this.pfpAdDetailService = pfpAdDetailService;
 	}
+
+    public void setPfpCatalogLogoService(IPfpCatalogLogoService pfpCatalogLogoService) {
+        this.pfpCatalogLogoService = pfpCatalogLogoService;
+    }
+
+    public void setPfpCatalogProdEcService(IPfpCatalogProdEcService pfpCatalogProdEcService) {
+        this.pfpCatalogProdEcService = pfpCatalogProdEcService;
+    }
 
 	public void setPfpIllegalKeywordService(IPfpIllegalKeywordService pfpIllegalKeywordService) {
 		this.pfpIllegalKeywordService = pfpIllegalKeywordService;

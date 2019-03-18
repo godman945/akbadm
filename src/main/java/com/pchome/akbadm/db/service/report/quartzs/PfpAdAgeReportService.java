@@ -3,6 +3,7 @@ package com.pchome.akbadm.db.service.report.quartzs;
 import java.util.List;
 
 import com.pchome.akbadm.db.dao.report.quartzs.PfpAdAgeReportDAO;
+import com.pchome.akbadm.db.dao.report.quartzs.PfpAdOsReportDAO;
 import com.pchome.akbadm.db.pojo.PfpAdAgeReport;
 import com.pchome.akbadm.db.service.BaseService;
 
@@ -22,5 +23,9 @@ public class PfpAdAgeReportService extends BaseService<PfpAdAgeReport, Integer> 
 
 	public List<Object> getLastDate() throws Exception {
 		return ((PfpAdAgeReportDAO) dao).getLastDate();
+	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfpAdAgeReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
 	}
 }

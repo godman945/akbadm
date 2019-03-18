@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.bean.bonus.BonusBean;
 import com.pchome.akbadm.db.pojo.PfdBonusDayReport;
@@ -30,7 +30,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class EveryDayPfdBonus {
 	
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private IPfdContractService pfdContractService;
 	private IPfdBonusItemSetService pfdBonusItemSetService;

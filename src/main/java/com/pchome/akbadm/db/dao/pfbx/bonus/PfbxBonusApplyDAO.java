@@ -19,8 +19,6 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Object> getListByKeyWords(Date startDate, Date endDate, String keyword, String category, String status) {
-		super.getSession().beginTransaction().commit();
-
 		StringBuffer sql = new StringBuffer();
 
 		sql.append(" select apply.apply_date, apply.apply_id, apply.pfb_id, ");
@@ -58,7 +56,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 
 		sql.append(" order by apply.apply_date desc, cus.customer_info_id desc ");
 		
-		Query q = super.getSession().createSQLQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 		
 		if (startDate != null) {
 			q.setDate("startDate", startDate);
@@ -80,7 +78,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" and  pfbxCustomerInfo.customerInfoId = ? ");
 		hql.append(" and ( applyStatus = ?  or  applyStatus = ? )");
 
-		return super.getHibernateTemplate().find(hql.toString(), pfbId, EnumPfbApplyStatus.APPLY.getStatus(), EnumPfbApplyStatus.WAIT_PAY.getStatus());
+		return (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), pfbId, EnumPfbApplyStatus.APPLY.getStatus(), EnumPfbApplyStatus.WAIT_PAY.getStatus());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -100,7 +98,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" and applyStatus = ?");
 		hql.append(" order by applyDate desc");
 
-		return super.getHibernateTemplate().find(hql.toString(), pfbId, EnumPfbApplyStatus.SUCCESS.getStatus());
+		return (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), pfbId, EnumPfbApplyStatus.SUCCESS.getStatus());
 	}
 
 	@Override
@@ -111,7 +109,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" and  pfbxCustomerInfo.customerInfoId = ? ");
 		hql.append(" and  applyId = ? ");
 		@SuppressWarnings("unchecked")
-		List<PfbxBonusApply> list = super.getHibernateTemplate().find(hql.toString(), pfbId, applyId);
+		List<PfbxBonusApply> list = (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), pfbId, applyId);
 
 		PfbxBonusApply pfbxBonusApply = null;
 
@@ -124,7 +122,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 
 	@Override
 	public List<PfbxBonusApply> findApplyByInvoiceCheckStatus(String customerInfoId, String status,String orderApplyId) {
-		Criteria criteria = super.getSession().createCriteria(PfbxBonusApply.class);
+		Criteria criteria = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(PfbxBonusApply.class);
 		if(StringUtils.isNotBlank(customerInfoId)) {
 			criteria.add(Restrictions.eq("pfbxCustomerInfo.customerInfoId", customerInfoId));
 		}
@@ -137,7 +135,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 
 	@Override
     public List<PfbxBonusApply> findOldDetalByInvoiceCheckStatus(String customerInfoId, String invoiceCheckStatus, Integer bankId, Integer personalId) {
-        Criteria criteria = super.getSession().createCriteria(PfbxBonusApply.class);
+        Criteria criteria = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(PfbxBonusApply.class);
         criteria.add(Restrictions.eq("pfbxCustomerInfo.customerInfoId", customerInfoId));
         criteria.add(Restrictions.eq("invoiceCheckStatus", invoiceCheckStatus));
         criteria.add(Restrictions.eq("pfbxBank.id", bankId));
@@ -148,7 +146,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 	
 	@Override
 	public List<PfbxBonusApply> findApplyOrderByFailStatus() {
-		Criteria criteria = super.getSession().createCriteria(PfbxBonusApply.class);
+		Criteria criteria = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createCriteria(PfbxBonusApply.class);
 		Disjunction orCriteria = Restrictions.disjunction();
 		/*orCriteria.add(Restrictions.or(Restrictions.eq("invoiceStatus", EnumPfbApplyInvoiceStatus.FAIL.getStatus()),
 				Restrictions.eq("invoiceStatus", EnumPfbApplyInvoiceStatus.VERIFY.getStatus())));
@@ -166,7 +164,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" and  invoiceStatus = ? ");
 		hql.append(" and  applyStatus = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), enumPfbApplyInvoiceStatus.getStatus(), EnumPfbApplyStatus.APPLY.getStatus());
+		return (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), enumPfbApplyInvoiceStatus.getStatus(), EnumPfbApplyStatus.APPLY.getStatus());
 	}
 	
     @SuppressWarnings("unchecked")
@@ -177,7 +175,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" where 1 = 1 ");
 		hql.append(" and  applyStatus = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), enumPfbApplyStatus.getStatus());
+		return (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), enumPfbApplyStatus.getStatus());
 	}
 
     /**
@@ -198,6 +196,6 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		hql.append(" and update_date <= ? ");
 		hql.append(" and create_date >= ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), enumPfbApplyStatus.getStatus(), startDate, endDate, createDate);
+		return (List<PfbxBonusApply>) super.getHibernateTemplate().find(hql.toString(), enumPfbApplyStatus.getStatus(), startDate, endDate, createDate);
 	}
 }

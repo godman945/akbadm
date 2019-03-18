@@ -18,4 +18,7 @@ public interface IPfpAdActionReportService {
 	public float findAdInvalidClkPrice(String customerInfoId, Date startDate, Date endDate, String payType);
 	
 	public float findAdClkAndInvalidClkPrice(String customerInfoId, Date startDate, Date endDate, String payType);
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate);
+	
 }

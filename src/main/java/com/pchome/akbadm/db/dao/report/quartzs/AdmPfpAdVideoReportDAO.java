@@ -7,7 +7,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdVideoReport;
@@ -20,7 +20,7 @@ public class AdmPfpAdVideoReportDAO extends BaseDAO<PfpAdVideoReport, Integer> i
 		@SuppressWarnings("unchecked")
 		List<Object> result = (List<Object>) getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
-					public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object> doInHibernate(Session session) throws HibernateException {
 						StringBuffer sql = new StringBuffer();
 						sql.append(" SELECT  ");
 						sql.append(" k.customer_info_id, ");
@@ -102,7 +102,7 @@ public class AdmPfpAdVideoReportDAO extends BaseDAO<PfpAdVideoReport, Integer> i
 		StringBuffer sql = new StringBuffer();
 		sql.append("delete from PfpAdVideoReport where adVideoDate = :adVideoDate ");
 		System.out.println(sql.toString());
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		int stasus = session.createQuery(sql.toString()).setString("adVideoDate", date).executeUpdate();
 		session.flush();
 		return stasus;
@@ -137,8 +137,8 @@ public class AdmPfpAdVideoReportDAO extends BaseDAO<PfpAdVideoReport, Integer> i
 			pfpAdVideoReport.setTemplateProductSeq(pfpAdVideoReportVO.getTemplateProductSeq());
 			save(pfpAdVideoReport);
 			if(list.indexOf(pfpAdVideoReportVO) % 2 == 0 ){
-				getSession().flush();
-				getSession().clear();
+				this.getHibernateTemplate().getSessionFactory().getCurrentSession().flush();
+				this.getHibernateTemplate().getSessionFactory().getCurrentSession().clear();
 			}
 			
 		}

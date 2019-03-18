@@ -14,7 +14,7 @@ public class PfpAdVideoSourceDAO extends BaseDAO<PfpAdVideoSource, String> imple
 		hql.append(" from PfpAdVideoSource ");
 		hql.append(" where adVideoUrl = ? ");
 		Object[] conditionArray = new Object[] { videoUrl };
-		List<PfpAdVideoSource> list = super.getHibernateTemplate().find(hql.toString(), conditionArray);
+		List<PfpAdVideoSource> list = (List<PfpAdVideoSource>) super.getHibernateTemplate().find(hql.toString(), conditionArray);
 		if (list != null && list.size() > 0) {
 			return list.get(0);
 		} else {

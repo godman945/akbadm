@@ -39,14 +39,14 @@
     <bean id="PfpProvider" class="com.pchome.rmi.manager.PfpProviderImp">
         <property name="admManagerDetailService" ref="AdmManagerDetailService" />
         <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" /> 
-        <property name="portalIp" value="${portal.ip}}" />        
+        <property name="portalIp" value="${portal.ip}" />        
     </bean>
     
     <!-- pfd account list -->
     <bean id="PfdProvider" class="com.pchome.rmi.manager.PfdProviderImp">
         <property name="admManagerDetailService" ref="AdmManagerDetailService" />
         <property name="pfdCustomerInfoService" ref="PfdCustomerInfoService" />  
-        <property name="portalIp" value="${portal.ip}}" />     
+        <property name="portalIp" value="${portal.ip}" />     
         <property name="pfdAdActionReportService" ref="PfdAdActionReportService" />  
     </bean>
 
@@ -54,7 +54,7 @@
     <bean id="PfbProvider" class="com.pchome.rmi.manager.PfbProviderImp">
         <property name="admManagerDetailService" ref="AdmManagerDetailService" />
         <property name="pfbCustomerInfoService" ref="PfbCustomerInfoService" />
-        <property name="portalIp" value="${portal.ip}}" />        
+        <property name="portalIp" value="${portal.ip}" />        
     </bean>
     
     <!-- pfb bonus -->

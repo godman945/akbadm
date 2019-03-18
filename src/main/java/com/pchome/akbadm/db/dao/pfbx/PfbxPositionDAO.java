@@ -11,7 +11,7 @@ public class PfbxPositionDAO extends BaseDAO<PfbxPosition,String> implements IPf
     @SuppressWarnings("unchecked")
     public List<PfbxPosition> selectPfbxPositionByDeleteFlag(int deleteFlag) {
         String hql = "from PfbxPosition where deleteFlag = ?";
-        return this.getHibernateTemplate().find(hql, deleteFlag);
+        return (List<PfbxPosition>) this.getHibernateTemplate().find(hql, deleteFlag);
     }
     
     @Override
@@ -27,6 +27,6 @@ public class PfbxPositionDAO extends BaseDAO<PfbxPosition,String> implements IPf
 		list.add(position);
         list.add(pfbCustomerId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfbxPosition>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
     }
 }

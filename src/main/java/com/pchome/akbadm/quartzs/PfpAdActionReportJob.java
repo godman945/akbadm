@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,7 +43,8 @@ import com.pchome.config.TestConfig;
 
 @Transactional
 public class PfpAdActionReportJob {
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	protected Logger log = LogManager.getRootLogger();
 	private IPfpAdActionReportService pfpAdActionReportService;
 	private IPfpAdGroupReportService pfpAdGroupReportService;
 	private IPfpAdReportService pfpAdReportService;
@@ -74,13 +75,14 @@ public class PfpAdActionReportJob {
 		processPfpAdAgeReport(reportDate);
 		processPfpAdWebsiteReport(reportDate);
 		processVideoToVideoReportByDay(reportDate);
+		processConvertToPfpReport(reportDate);
         log.info("====PfpAdActionReportJob.processAllPfpReport() end====");
 	}
 	
 	
 	
 	/**
-	 * 每天AM 1:00 執行，更新前一天資料
+	 * 每天 AM 4:15 執行 執行，更新前一天資料
 	 */
 	public void processPerDay() throws Exception {
         log.info("====PfpAdActionReportJob.processPerDay() start====");
@@ -105,12 +107,11 @@ public class PfpAdActionReportJob {
 		this.processPfpAdAgeReport(reportDate);
 		this.processPfpAdWebsiteReport(reportDate);
 		this.processVideoToVideoReportByDay(reportDate);
-		
         log.info("====PfpAdActionReportJob.processPerDay() end====");
 	}
 
 	/**
-	 * 每小時執行一次，更新當天資料
+	 * 每小時35分執行一次，更新當天資料
 	 */
 	public void processPerHour() throws Exception {
 		try{
@@ -143,23 +144,23 @@ public class PfpAdActionReportJob {
 
 		SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 
-		Date startDate = dateFormate.parse("2017-10-01");
+		Date startDate = dateFormate.parse("2018-11-01");
 
 		Date now = new Date();
 
 		Date reportDate = startDate;
 		while (reportDate.getTime() <= now.getTime()) {
 
-//			this.processPfpAdActionReport(dateFormate.format(reportDate));
-//			this.processPfpAdGroupReport(dateFormate.format(reportDate));
-//			this.processPfpAdReport(dateFormate.format(reportDate));
-//			this.processPfpAdKeywordReport(dateFormate.format(reportDate));
+			this.processPfpAdActionReport(dateFormate.format(reportDate));
+			this.processPfpAdGroupReport(dateFormate.format(reportDate));
+			this.processPfpAdReport(dateFormate.format(reportDate));
+			this.processPfpAdKeywordReport(dateFormate.format(reportDate));
 			this.processPfpAdOsReport(dateFormate.format(reportDate));
-//			this.processAdmPfpdAdPvclkReport(dateFormate.format(reportDate));
-//			this.processPfpAdTimeReport(dateFormate.format(reportDate));
-//			this.processPfpAdAgeReport(dateFormate.format(reportDate));
-//			this.processPfpAdWebsiteReport(dateFormate.format(reportDate));
-
+			this.processAdmPfpdAdPvclkReport(dateFormate.format(reportDate));
+			this.processPfpAdTimeReport(dateFormate.format(reportDate));
+			this.processPfpAdAgeReport(dateFormate.format(reportDate));
+			this.processPfpAdWebsiteReport(dateFormate.format(reportDate));
+			this.processConvertToPfpReport(dateFormate.format(reportDate));
 			Calendar c = Calendar.getInstance();
 			c.setTime(reportDate);
 			c.add(Calendar.DATE, 1);
@@ -241,6 +242,8 @@ public class PfpAdActionReportJob {
 			pojo.setPayType("" + payType);
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdOperatingRule(adOperatingRule);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 			pojo.setAdVpv(vpv);
@@ -315,6 +318,8 @@ public class PfpAdActionReportJob {
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -400,6 +405,8 @@ public class PfpAdActionReportJob {
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 			pojoList.add(pojo);
@@ -591,6 +598,8 @@ public class PfpAdActionReportJob {
 			pojo.setTemplateProductSeq(templateProductSeq);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
@@ -707,6 +716,8 @@ public class PfpAdActionReportJob {
 			pojo.setUpdateTime(now);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojoList.add(pojo);
 		}
 		
@@ -784,6 +795,8 @@ public class PfpAdActionReportJob {
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
 
@@ -876,6 +889,8 @@ public class PfpAdActionReportJob {
 			pojo.setAdClkPriceType(adClkPriceType);
 			pojo.setAdView(adView);
 			pojo.setAdVpv(vpv);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojoList.add(pojo);
 		}
 
@@ -961,6 +976,8 @@ public class PfpAdActionReportJob {
 			pojo.setAdVpv(vpv);
 			pojo.setCreateDate(now);
 			pojo.setUpdateDate(now);
+			pojo.setConvertCount(0);
+			pojo.setConvertPriceCount(0);
 			pojoList.add(pojo);
 		}
 
@@ -1015,19 +1032,53 @@ public class PfpAdActionReportJob {
 		}
 	}
 	
-	public void alexTest() throws Exception{
-		System.out.println("AAAAAAAAAA");
-		
-		
-//		System.out.println(jredisUtil.getJedisTemplate() == null);
-//		Jedis jedis = (Jedis) jredisUtil.getJedisTemplate();
-//		System.out.println(jedis.get("CCCCC"));
-		
-//		System.out.println(jredisUtil.getKey("ALEX"));
-		
-//		jredisUtil.setKeyAndExpire("ALEX", "CCCCCAAAA", 80);
-		
-		
+	
+	/*
+	 * 1.日排程
+	 * 2.處理所有報表商品廣告轉換欄位資料
+	 * */
+	@Transactional
+	public void processConvertToPfpReportByDay()  {
+		try{
+			log.info("====PfpAdActionReportJob.processConvertToPfpReportByDay() start ====");
+			String convertDate = sdf.format(new Date());
+			processConvertToPfpReport(convertDate);
+			log.info("====PfpAdActionReportJob.processConvertToPfpReportByDay() end ====");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	@Transactional
+	public void processConvertToPfpReport(String convertDate)  {
+		try{
+			log.info("====PfpAdActionReportJob.processConvertToPfpReport() start ====");
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(sdf.parse(convertDate));
+			calendar.add(Calendar.DATE, -28);  
+			String convertRangeDate = sdf.format(calendar.getTime());
+			log.info("convertDate:"+convertDate);
+			log.info("convertRangeDate:"+convertRangeDate);
+			//1.整理pfp_ad_action_report
+			int result = pfpAdActionReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//2.整理pfp_ad_group_report
+			result = pfpAdGroupReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//3.整理pfp_ad_report
+			result = pfpAdReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//4.整理pfp_ad_os_report
+			result = pfpAdOsReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//5.整理pfp_ad_time_report
+			result = pfpAdTimeReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//6.整理pfp_ad_age_report
+			result = pfpAdAgeReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//7.整理pfp_ad_website_report
+			result = pfpAdWebsiteReportService.updateConvertCountData(convertDate,convertRangeDate);
+			//8.整理adm_pfpd_ad_pvclk_report
+			result = admPfpdAdPvclkReportService.updateConvertCountData(convertDate,convertRangeDate);
+			log.info("====PfpAdActionReportJob.processConvertToPfpReport() end ====");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	public void setPfpAdActionReportService(IPfpAdActionReportService pfpAdActionReportService) {
@@ -1114,6 +1165,11 @@ public class PfpAdActionReportJob {
 		this.checkPvclkJob = checkPvclkJob;
 	}
 
+	public void alexTest() {
+		log.info(">>>>>>>>>>>>>quartz TEST");
+	}
+	
+	
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
 		System.out.println(">>> start");
@@ -1137,34 +1193,4 @@ public class PfpAdActionReportJob {
 
 		System.out.println(">>> end");
 	}
-		
-//		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
-//		PfpAdActionReportJob job = context.getBean(PfpAdActionReportJob.class);
-//		job.processVideoToVideoReportByDay();
-//		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
-//
-//		System.out.println(">>> start");
-//
-//		PfpAdActionReportJob job = context.getBean(PfpAdActionReportJob.class);
-//
-//		if (args.length == 2 || args.length == 3) {
-//			if (args[1].equals("day")) { //補指定日期
-//				if (args.length == 3) {
-//					job.processAllPfpReport(args[2]);
-//				} else {
-//					System.out.println("Plz input args[1]: date(yyyy-MM-dd)");
-//				}
-//			} else if (args[1].equals("all")) { //補全部日期
-//				job.processOldData();
-//			} else {
-//				System.out.println("args[1]: must be day or all");
-//			}
-//
-//		} else {
-//			System.out.println("Plz input parameters, args[0]: stg/prd, args[1]: day/all, args[2]: yyyy-MM-dd");
-//		}
-//
-//		System.out.println(">>> end");
-//	}
-	
 }

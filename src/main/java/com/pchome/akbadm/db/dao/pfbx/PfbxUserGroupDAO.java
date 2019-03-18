@@ -12,7 +12,7 @@ public class PfbxUserGroupDAO extends BaseDAO<PfbxUserGroup, String> implements 
         hql.append("from PfbxUserGroup ");
         hql.append("where pfbxCustomerInfo.status = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), status);
+        return (List<PfbxUserGroup>) this.getHibernateTemplate().find(hql.toString(), status);
     }
     
     @SuppressWarnings("unchecked")

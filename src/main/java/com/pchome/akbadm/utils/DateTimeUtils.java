@@ -1,7 +1,5 @@
 package com.pchome.akbadm.utils;
 
-import org.apache.log4j.Logger;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,9 +7,12 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 public class DateTimeUtils {
 
-    private static Logger logger = Logger.getLogger(DateTimeUtils.class);
+    private static Logger logger = LogManager.getRootLogger();
 
 
     private static final String LOG_NAME = DateTimeUtils.class.getName();

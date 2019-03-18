@@ -20,4 +20,6 @@ public interface IPfdAdActionReportDAO {
 	public List<Object> findPfdAdActionReportToVo(final String pfdId, final Date startDate, final Date endDate, final String payType);
 	
 	public List<PfdAdActionReport> findPfpAdClickByPfd(String pfdCustomerInfoId,Date startDate, Date endDate);
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception ;
 }

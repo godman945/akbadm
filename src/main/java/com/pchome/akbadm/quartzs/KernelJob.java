@@ -10,24 +10,28 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.store.FSDirectory;
 import org.apache.lucene.util.Version;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -94,6 +98,8 @@ import com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdGroup;
 import com.pchome.akbadm.db.pojo.PfpAdKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdSysprice;
+import com.pchome.akbadm.db.pojo.PfpCodeAdactionMerge;
+import com.pchome.akbadm.db.pojo.PfpCodeTracking;
 import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
 import com.pchome.akbadm.db.pojo.PfpKeywordSysprice;
 import com.pchome.akbadm.db.service.ad.IAdmArwValueService;
@@ -104,6 +110,8 @@ import com.pchome.akbadm.db.service.ad.IPfpAdExcludeKeywordService;
 import com.pchome.akbadm.db.service.ad.IPfpAdKeywordPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdSpecificWebsiteService;
+import com.pchome.akbadm.db.service.code.IPfpCodeAdactionMergeService;
+import com.pchome.akbadm.db.service.code.IPfpCodeTrackingService;
 import com.pchome.akbadm.db.service.customerInfo.IPfdUserAdAccountRefService;
 import com.pchome.akbadm.db.service.customerInfo.IPfpCustomerInfoService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxAreaService;
@@ -123,6 +131,7 @@ import com.pchome.enumerate.ad.EnumExcludeKeywordStatus;
 import com.pchome.enumerate.ad.EnumIndexField;
 import com.pchome.enumerate.ad.EnumPriceType;
 import com.pchome.rmi.sequence.EnumSequenceTableName;
+import com.pchome.soft.util.HttpConnectionClient;
 import com.pchome.soft.util.SpringSSHProcessUtil2;
 import com.thoughtworks.xstream.XStream;
 
@@ -130,8 +139,8 @@ import com.thoughtworks.xstream.XStream;
 public class KernelJob {
     private static String CHARSET = "UTF-8";
     private static String[] extensions = new String[]{"def"};
-
-    private Log log = LogFactory.getLog(getClass());
+    
+    private Logger log = LogManager.getRootLogger();
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
@@ -157,10 +166,14 @@ public class KernelJob {
     private IAdmPfbxBlockUrlService admPfbxBlockUrlService;
     private IPfbxAllowUrlService pfbxAllowUrlService;
 
+    private IPfpCodeAdactionMergeService pfpCodeAdactionMergeService;
+    private IPfpCodeTrackingService pfpCodeTrackingService;
+
     private String admAddata;
     private String kernelAddata;
     private String kernelAddataDir;
     private String multicorePath;
+    private String pfpProdGroupListApiUrl;
     private float adSysprice;
     private float keywordSysprice;
     private int makeNumber;
@@ -168,9 +181,11 @@ public class KernelJob {
     private boolean solrFlag;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
+    private Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
+
     public void process() throws Exception {
         log.info("====KernelJob.process() start====");
-
+        
         File lockFile = new File(kernelAddata + File.separator + "lock.txt");
         if (!lockFile.exists()) {
             try {
@@ -186,6 +201,7 @@ public class KernelJob {
                 tad();
                 pool();
                 keyword();
+                prod();
 
                 // pfb
                 area();
@@ -276,8 +292,10 @@ public class KernelJob {
         TproBean tproBean = null;
         TadMapBean tadMapBean = null;
         String tproId = null;
+        String backupTproId = null;
         String prodId = null;
         String tadId = null;
+        String backupTadId = null;
 
         Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, false);
         File file = null;
@@ -304,7 +322,14 @@ public class KernelJob {
                         continue;
                     }
 
-                    if (line.indexOf("ProdSeq:") == 0) {
+                    if (line.indexOf("backupTpro:") == 0) {
+                        backupTproId = line.replace("backupTpro:", "");
+                        if (StringUtils.isBlank(backupTproId)) {
+                            continue;
+                        }
+                        tproBean.setBackupTproId(backupTproId);
+                    }
+                    else if (line.indexOf("ProdSeq:") == 0) {
                         prodId = line.replace("ProdSeq:", "");
                         if (StringUtils.isBlank(prodId)) {
                             continue;
@@ -320,6 +345,25 @@ public class KernelJob {
                         tadMapBean.setTadId(tadId);
                         tproBean.getTadMap().put(tadId, tadMapBean);
                     }
+                    else if (line.indexOf("backupTad:") == 0) {
+                        backupTadId = line.replace("backupTad:", "");
+                        if (StringUtils.isBlank(backupTadId)) {
+                            continue;
+                        }
+                        tproBean.setBackupTadId(backupTadId);
+                    }
+                    else if (line.indexOf("ProdTemplateAdSeq:") == 0) {
+                        if (StringUtils.isBlank(tadId)) {
+                            continue;
+                        }
+
+                        tadMapBean = tproBean.getTadMap().get(tadId);
+                        if (tadMapBean == null) {
+                            tadMapBean = new TadMapBean();
+                        }
+                        tadMapBean.setProdTadId(line.replace("ProdTemplateAdSeq:", ""));
+                        tproBean.getTadMap().put(tadId, tadMapBean);
+                    }
                     else if (line.indexOf("AdNum:") == 0) {
                         if (StringUtils.isBlank(tadId)) {
                             continue;
@@ -330,6 +374,19 @@ public class KernelJob {
                             tadMapBean = new TadMapBean();
                         }
                         tadMapBean.setAdNum(Integer.valueOf(line.replace("AdNum:", "")));
+                        tproBean.getTadMap().put(tadId, tadMapBean);
+                    }
+                    // TODO move to TadBean
+                    else if (line.indexOf("ProdNum:") == 0) {
+                        if (StringUtils.isBlank(tadId)) {
+                            continue;
+                        }
+
+                        tadMapBean = tproBean.getTadMap().get(tadId);
+                        if (tadMapBean == null) {
+                            tadMapBean = new TadMapBean();
+                        }
+                        tadMapBean.setProdNum(Integer.valueOf(line.replace("ProdNum:", "")));
                         tproBean.getTadMap().put(tadId, tadMapBean);
                     }
                     else if (line.indexOf("Auto:") == 0) {
@@ -379,6 +436,18 @@ public class KernelJob {
                         value = line.replace("PositionWidth:", "");
                         if (StringUtils.isNotBlank(value) && StringUtils.isNumeric(value)) {
                             tproBean.setPositionWidth(Integer.valueOf(value));
+                        }
+                    }
+                    else if (line.indexOf("LogoHeight:") == 0) {
+                        value = line.replace("LogoHeight:", "");
+                        if (StringUtils.isNotBlank(value) && StringUtils.isNumeric(value)) {
+                            tproBean.setLogoHeight(Integer.valueOf(value));
+                        }
+                    }
+                    else if (line.indexOf("LogoWeight:") == 0) {
+                        value = line.replace("LogoWeight:", "");
+                        if (StringUtils.isNotBlank(value) && StringUtils.isNumeric(value)) {
+                            tproBean.setLogoWidth(Integer.valueOf(value));
                         }
                     }
                     else if (line.indexOf("html:") == 0) {
@@ -498,7 +567,7 @@ public class KernelJob {
     private void pool() throws Exception {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
-        Map<String, Map<String, AdBean>> map = new HashMap<String, Map<String, AdBean>>();
+        Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
         Map<String, AdBean> adMap = null;
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
@@ -506,6 +575,8 @@ public class KernelJob {
         PfpAdGroup pfpAdGroup = null;
         PfpAdAction pfpAdAction = null;
         PfpCustomerInfo pfpCustomerInfo = null;
+        PfpCodeAdactionMerge pfpCodeAdactionMerge = null;
+        PfpCodeTracking pfpCodeTracking = null;
         String adPoolId = null;
         String adId = null;
         String actionId = null;
@@ -527,6 +598,8 @@ public class KernelJob {
         String adPvLimitPeriod = "0";
         int adPvLimitAmount = 0;
         Integer admArw = 1;
+        String trackingSeq = null;
+        int trackingRangeDate = 0;
 
         // get ad detail
         List<PfpAdDetail> pfpAdDetailList = pfpCustomerInfoService.selectValidAdDetail();
@@ -610,6 +683,14 @@ public class KernelJob {
         Map<String, PfdUserAdAccountRef> pfpToPfdMap = pfdUserAdAccountRefService.selectPfdUserAdAccountRefMaps();
         log.info("pfdUserAdAccountRefService.findPfdUserAdAccountRefMaps " + pfpToPfdMap.size());
 
+        // pfpCodeAdactionMerge
+        Map<String, PfpCodeAdactionMerge> pfpCodeAdactionMergeMap = pfpCodeAdactionMergeService.selectPfpCodeAdactionMergeMap();
+        log.info("pfpCodeAdactionMergeService.selectPfpCodeAdactionMergeMap " + pfpCodeAdactionMergeMap.size());
+
+        // pfpCodeTracking
+        Map<String, PfpCodeTracking> pfpCodeTrackingMap = pfpCodeTrackingService.selectPfpCodeTrackingMap();
+        log.info("pfpCodeTrackingService.selectPfpCodeTrackingMap " + pfpCodeTrackingMap.size());
+
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             try {
@@ -624,7 +705,7 @@ public class KernelJob {
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
                 // get ad map
-                adMap = map.get(adPoolId);
+                adMap = poolMap.get(adPoolId);
                 if (adMap == null) {
                     adMap = new HashMap<String, AdBean>();
                 }
@@ -819,6 +900,19 @@ public class KernelJob {
                         admArwCache.put(pfpCustomerInfoId, admArw);
                     }
 
+                    // code tracking
+                    trackingSeq = "";
+                    trackingRangeDate = 0;
+                    pfpCodeAdactionMerge = pfpCodeAdactionMergeMap.get(actionId);
+                    pfpCodeTracking = null;
+                    if (pfpCodeAdactionMerge != null) {
+                        pfpCodeTracking = pfpCodeTrackingMap.get(pfpCodeAdactionMerge.getCodeId());
+                        if (pfpCodeTracking != null) {
+                            trackingSeq = pfpCodeTracking.getTrackingSeq();
+                            trackingRangeDate = pfpCodeTracking.getTrackingRangeDate();
+                        }
+                    }
+
                     adBean.setCustomerInfoId(pfpCustomerInfoId);
                     if (pfpToPfdMap.containsKey(pfpCustomerInfoId)) {
                     	ref = pfpToPfdMap.get(pfpCustomerInfoId);
@@ -830,7 +924,7 @@ public class KernelJob {
                     	adBean.setPfdUserId("");
                     	adBean.setPayType(1); //預付
                     }
-                    adBean.setAdActionId(pfpAdAction.getAdActionSeq());
+                    adBean.setAdActionId(actionId);
                     adBean.setAdGroupId(pfpAdGroup.getAdGroupSeq());
                     adBean.setAdId(adId);
                     adBean.setAdClass(adClass.toString());
@@ -865,6 +959,10 @@ public class KernelJob {
                     adBean.setAdBidCount(adBidPrice.intValue());
                     adBean.setAdPv(pvclkSums[0]);
                     adBean.setAdClk(pvclkSums[1]);
+                    adBean.setTrackingSeq(trackingSeq);
+                    adBean.setTrackingRangeDate(trackingRangeDate);
+                    adBean.setAdActionCity(StringUtils.defaultString(pfpAdAction.getAdActionCity(), ""));
+                    adBean.setAdActionCountry(StringUtils.defaultString(pfpAdAction.getAdActionCountry(), ""));
                 }
 
                 adDetailBean = adBean.getAdDetailMap().get(adId);
@@ -893,6 +991,18 @@ public class KernelJob {
                 	}
                     adDetailBean.setAdDetailContent(youtubeWebmUrl);
                 }
+                // refactor data structure
+                else if ("prod_list".equals(pfpAdDetail.getAdDetailId())) {
+                    String prodListId = pfpAdDetail.getAdDetailContent().trim();
+                    adBean.setProdListId(prodListId);
+                    adDetailBean.setAdDetailContent(prodListId);
+                }
+                // refactor data structure
+                else if ("prod_group".equals(pfpAdDetail.getAdDetailId())) {
+                    String prodGroupId = pfpAdDetail.getAdDetailContent().trim();
+                    adBean.setProdGroupId(prodGroupId);
+                    adDetailBean.setAdDetailContent(prodGroupId);
+                }
                 else {
                     adDetailBean.setAdDetailContent(pfpAdDetail.getAdDetailContent().trim());
                 }
@@ -900,20 +1010,20 @@ public class KernelJob {
 
                 adBean.getAdDetailMap().put(pfpAdDetail.getAdDetailSeq(), adDetailBean);
                 adMap.put(adId, adBean);
-                map.put(adPoolId, adMap);
+                poolMap.put(adPoolId, adMap);
 
 //                log.info(adPoolSeq + " " + adSeq + " " + adMap.get(adSeq));
             } catch (Exception e) {
                 log.error("adDetailId=" + pfpAdDetail.getAdDetailSeq(), e);
             }
         }
-        log.info("pool: " + map.size());
+        log.info("pool: " + poolMap.size());
 
         // to xml
         XStream xstream = new XStream();
         xstream.alias("adBean", AdBean.class);
         xstream.alias("adDetailBean", AdDetailBean.class);
-        String xml = xstream.toXML(map);
+        String xml = xstream.toXML(poolMap);
 
 //        log.info(xml);
 
@@ -921,6 +1031,9 @@ public class KernelJob {
         File file = new File(kernelAddataDir + "pool.xml");
         log.info("write file = " + file.getPath());
         FileUtils.writeStringToFile(file, xml, CHARSET);
+
+        // for prod
+        this.poolMap = poolMap;
 
         long endTime = Calendar.getInstance().getTimeInMillis();
         log.info("time: " + (endTime - startTime) / 1000 + "s");
@@ -937,6 +1050,7 @@ public class KernelJob {
     }
 
     @Deprecated
+    @SuppressWarnings("unused")
     private void keywordLucene() throws Exception {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
@@ -1761,6 +1875,79 @@ public class KernelJob {
         log.info("pfbxWhiteUrl: " + pfbxWhiteUrlMap.size());
     }
 
+    @SuppressWarnings("unchecked")
+    private void prod() throws Exception {
+        Map<String, AdBean> adMap = null;
+        AdBean adBean = null;
+        Set<String> prodGroupSet = new HashSet<>();
+
+        StringBuffer url = null;
+        Map<String, List<Map<String, String>>> prodMap = new HashMap<>();
+        List<Map<String, String>> prodList = null;
+        Map<String, String> prodItemMap = null;
+        String result = null;
+        JSONObject jsonObject = null;
+        JSONArray prodGroupArray = null;
+        JSONObject prodGroupObject = null;
+        Iterator<String> prodGroupIterator = null;
+        String key = null;
+        String value = null;
+
+        for (String poolId: poolMap.keySet()) {
+            adMap = poolMap.get(poolId);
+            for (String adId: adMap.keySet()) {
+                adBean = adMap.get(adId);
+                if (StringUtils.isNotBlank(adBean.getProdGroupId())) {
+                    prodGroupSet.add(adBean.getProdGroupId());
+                }
+            }
+        }
+
+        for (String prodGroupId: prodGroupSet) {
+            url = new StringBuffer();
+            url.append(pfpProdGroupListApiUrl);
+            url.append("?groupId=").append(prodGroupId);
+            url.append("&prodNum=50");
+
+            result = HttpConnectionClient.getInstance().doGet(url.toString());
+            jsonObject = new JSONObject(result);
+            if (jsonObject.has("prodGroupList")) {
+                prodList = new ArrayList<>();
+
+                prodGroupArray = jsonObject.getJSONArray("prodGroupList");
+                for (int i = 0; i < prodGroupArray.length(); i++) {
+                    prodItemMap = new HashMap<>();
+
+                    prodGroupObject = prodGroupArray.getJSONObject(i);
+                    prodGroupIterator = prodGroupObject.keys();
+                    while(prodGroupIterator.hasNext()) {
+                        key = prodGroupIterator.next();
+                        value = prodGroupObject.getString(key);
+
+                        prodItemMap.put(key, value);
+                    }
+
+                    prodList.add(prodItemMap);
+                }
+
+                prodMap.put(prodGroupId, prodList);
+            }
+        }
+
+        // to xml
+        XStream xstream = new XStream();
+        String xml = xstream.toXML(prodMap);
+
+        // write file
+        File file = new File(kernelAddataDir + "prod.xml");
+
+        log.info("write file = " + file.getPath());
+
+        FileUtils.writeStringToFile(file, xml, CHARSET);
+
+        log.info("prodMap: " + prodMap.size());
+    }
+
     private void scp() throws Exception {
         for (SpringSSHProcessUtil2 scpProcess: scpProcessList) {
             scpProcess.sshExec("rm -rf " + kernelAddata);
@@ -1922,6 +2109,14 @@ public class KernelJob {
         this.pfbxAllowUrlService = pfbxAllowUrlService;
     }
 
+    public void setPfpCodeAdactionMergeService(IPfpCodeAdactionMergeService pfpCodeAdactionMergeService) {
+        this.pfpCodeAdactionMergeService = pfpCodeAdactionMergeService;
+    }
+
+    public void setPfpCodeTrackingService(IPfpCodeTrackingService pfpCodeTrackingService) {
+        this.pfpCodeTrackingService = pfpCodeTrackingService;
+    }
+
     public void setAdmAddata(String admAddata) {
         this.admAddata = admAddata;
     }
@@ -1932,6 +2127,10 @@ public class KernelJob {
 
     public void setMulticorePath(String multicorePath) {
         this.multicorePath = multicorePath;
+    }
+
+    public void setPfpProdGroupListApiUrl(String pfpProdGroupListApiUrl) {
+        this.pfpProdGroupListApiUrl = pfpProdGroupListApiUrl;
     }
 
     public void setAdSysprice(float adSysprice) {
@@ -1962,5 +2161,6 @@ public class KernelJob {
         ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
         KernelJob job = context.getBean(KernelJob.class);
         job.process();
+        ((FileSystemXmlApplicationContext) context).close();
     }
 }

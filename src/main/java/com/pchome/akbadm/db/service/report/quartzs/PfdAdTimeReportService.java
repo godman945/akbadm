@@ -22,5 +22,9 @@ public class PfdAdTimeReportService extends BaseService<PfdAdTimeReport, Integer
 	public void insertReportData(List<PfdAdTimeReport> dataList) throws Exception {
 		((PfdAdTimeReportDAO) dao).insertReportData(dataList);
 	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdTimeReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 
 }

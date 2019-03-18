@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdKeywordReport;
@@ -20,7 +20,7 @@ public class PfpAdKeywordReportDAO extends BaseDAO<PfpAdKeywordReport, Integer> 
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -85,7 +85,7 @@ public class PfpAdKeywordReportDAO extends BaseDAO<PfpAdKeywordReport, Integer> 
 	@Override
     public void deleteReportDataByReportDate(String reportDate) throws Exception {
 		String sql = "delete from PfpAdKeywordReport where adKeywordPvclkDate = '" + reportDate + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -104,7 +104,7 @@ public class PfpAdKeywordReportDAO extends BaseDAO<PfpAdKeywordReport, Integer> 
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 

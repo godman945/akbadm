@@ -39,5 +39,18 @@
 				<param name="inputName">inputAdModel</param> 
 			</result>
 	    </action>
+	    
+	    <!-- RMI查詢商品成效報表資料 -->
+	    <action name="adDataRMIAction" class="AdReport2Action" method="prodAdDetailReport">
+            <result type="tiles" name="success">pfp.report.prod.ad.detail</result>
+  		</action> 
+	    
+	    <!-- 廣告商品資料手動上傳api -->
+	    <action name="catalogProdManualInputApi" class="PfpCatalogUploadListAction" method="processCatalogProdJsonDataApi">
+			<result type="json" name="success">
+				<param name="root">dataMap</param>
+			</result>
+		</action>
+		
     </package>
 </struts>

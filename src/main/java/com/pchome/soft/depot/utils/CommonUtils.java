@@ -10,12 +10,12 @@ import javax.imageio.ImageReader;
 import javax.imageio.stream.FileImageInputStream;
 import javax.imageio.stream.ImageInputStream;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class CommonUtils {
 
-	protected static final Log log = LogFactory.getLog(CommonUtils.class);
+	protected static final Logger log = LogManager.getRootLogger();
 	
 	private static CommonUtils instance = new CommonUtils();
 	
@@ -97,5 +97,56 @@ public class CommonUtils {
 			totalPage += 1;
 		}
 		return totalPage;
+	}
+	
+	/**
+	 * 取得取代掉特殊符號的字串
+	 * @param str
+	 * @return
+	 */
+	public static String getReplaceSpecialSymbolsStr(String str) {
+		return str.replaceAll("[^A-Za-z0-9]+$", "");
+	}
+	
+	/**
+	 * 取得取代掉檔案名稱不允許輸入的9個特殊符號
+	 * @param fileName
+	 * @return
+	 */
+	public static String getReplaceSpecialSymbolsThatAreNotAllowedByFileName(String fileName) {
+		return fileName.replaceAll("[(/) | (\\\\) | (:) | (\\*) | (\\?) | (\") | (<) | (>)]", "");
+	}
+	
+	/**
+	 * 檢查字串是否有 Emoji圖片 字串
+	 * @param checkStr
+	 * @return
+	 */
+	public static boolean isHaveEmojiString(String str) {
+		int strLength = str.length();
+		int strReplaceEmojiLength = str.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", "").length();
+		if (strLength != strReplaceEmojiLength) { // 將Emoji字串取代完後，長度不同表示字串內有Emoji
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	 * 包含檔名不能使用的特殊符號
+	 * @param str
+	 * @return true:有 false:沒有
+	 */
+	public static boolean containsSpecialSymbolsThatAreNotAllowedByFileName(String str) {
+		return str.matches("^.*[(/) | (\\\\) | (:) | (\\*) | (\\?) | (\") | (<) | (>)].*$");
+	}
+	
+	/**
+	 * 包含中文
+	 * @param str
+	 * @return true:有 false:沒有
+	 */
+	public static boolean containsChineseStr(String str) {
+		return str.matches("^.*[\u4e00-\u9fa5].*$");
 	}
 }

@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmRecognizeDetail;
@@ -33,7 +33,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 
 		Object[] ob = new Object[]{date, EnumOrderType.SAVE.getTypeTag()};
 
-		return super.getHibernateTemplate().find(hql.toString(), ob);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), ob);
 	}
 
 //	@SuppressWarnings("unchecked")
@@ -69,7 +69,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		list.add(EnumOrderType.FEEDBACK.getTypeTag());
         list.add(startDate);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -88,7 +88,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		list.add(EnumOrderType.VIRTUAL.getTypeTag());
         list.add(startDate);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -112,7 +112,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" where costDate = ? ");
 		hql.append(" order by recordDetailId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(),date);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(),date);
 	}
 
 	/**
@@ -138,7 +138,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 			val = new Object[]{date, pfpCustomerInfoIds};
 		}
 
-		return super.getHibernateTemplate().findByNamedParam(hql.toString(),key, val);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().findByNamedParam(hql.toString(),key, val);
 	}
 
 	@Override
@@ -152,7 +152,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and orderType = ? ");
 		hql.append(" order by recordDetailId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, orderType);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, date, orderType);
 	}
 
 	@Override
@@ -166,7 +166,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and orderType = ? ");
 		hql.append(" order by recordDetailId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), recordId, customerInfoId, orderType);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), recordId, customerInfoId, orderType);
 	}
 
 	@Override
@@ -181,7 +181,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
     	hql.append(" and costDate >= :startDate");
     	hql.append(" and costDate <= :endDate");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("pfdCustomerInfoId", pfdCustomerInfoId)
     	.setString("orderType", orderType)
     	.setDate("startDate", startDate)
@@ -208,7 +208,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
     	hql.append(" and costDate >= :startDate");
     	hql.append(" and costDate <= :endDate");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("pfdCustomerInfoId", pfdCustomerInfoId)
     	.setString("pfpCustomerInfoId", pfpCustomerInfoId)
     	.setString("orderType", orderType)
@@ -234,7 +234,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and costDate = ? ");
 		hql.append(" order by recordDetailId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), spendDate);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), spendDate);
 	}
 
 	@Override
@@ -249,7 +249,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and costDate = ? ");
 		hql.append(" group by customerInfoId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), spendDate);
+		return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), spendDate);
 	}
 
 	@Override
@@ -264,7 +264,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and costDate <= ? ");
 		hql.append(" group by customerInfoId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), spendDate);
+		return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), spendDate);
 	}
 
 	@Override
@@ -287,7 +287,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 			hql.append(" and customerInfoId = :pfpId ");
 		}
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		if(StringUtils.isNotBlank(orderType)){
 			query.setString("orderType", orderType);
@@ -323,7 +323,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 			hql.append(" and customerInfoId = :pfpId ");
 		}
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		// 儲值金
 		query.setString("SAVE", EnumOrderType.SAVE.getTypeTag());
@@ -367,7 +367,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and costDate between :startDate and :endDate ");
 
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		if(StringUtils.isNotBlank(pfdId)){
 			query.setString("pfdId", pfdId);
@@ -406,7 +406,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and costDate between :startDate and :endDate ");
 
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		if(StringUtils.isNotBlank(pfdId)){
 			query.setString("pfdId", pfdId);
@@ -452,7 +452,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 			hql.append(" and customerInfoId = :pfpId ");
 		}
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		if(StringUtils.isNotBlank(orderType)){
 			query.setString("orderType", orderType);
@@ -488,7 +488,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 			hql.append(" and customerInfoId = :pfpId ");
 		}
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		// 儲值金
 		query.setString("SAVE", EnumOrderType.SAVE.getTypeTag());
@@ -522,7 +522,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 		hql.append(" and orderType = ? ");
 		hql.append(" order by recordDetailId desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), pfpCustomerInfoId, recognizeRecordId, costDate, orderType);
+		return (List<AdmRecognizeDetail>) super.getHibernateTemplate().find(hql.toString(), pfpCustomerInfoId, recognizeRecordId, costDate, orderType);
    }
    
    
@@ -533,7 +533,7 @@ public class AdmRecognizeDetailDAO extends BaseDAO <AdmRecognizeDetail, String> 
 				 
                new HibernateCallback<List<Object> >() {
                	
-					public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object>  doInHibernate(Session session) throws HibernateException {
 						
 						StringBuffer sql = new StringBuffer();
 						

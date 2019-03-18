@@ -13,7 +13,7 @@ public class PfpMailboxDAO extends BaseDAO<PfpMailbox, Integer> implements IPfpM
         hql.append("where customerInfoId = ? ");
         hql.append("    and category = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), customerInfoId, category);
+        return (List<PfpMailbox>) this.getHibernateTemplate().find(hql.toString(), customerInfoId, category);
     }
 
     @SuppressWarnings("unchecked")
@@ -22,7 +22,7 @@ public class PfpMailboxDAO extends BaseDAO<PfpMailbox, Integer> implements IPfpM
         hql.append("from PfpMailbox ");
         hql.append("where send = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), send);
+        return (List<PfpMailbox>) this.getHibernateTemplate().find(hql.toString(), send);
     }
 
     public int deletePfpMailbox(String customerInfoId, String category) {

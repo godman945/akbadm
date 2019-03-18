@@ -12,6 +12,6 @@ public class PfbxUserPriceDAO extends BaseDAO<PfbxUserPrice, String> implements 
         hql.append("from PfbxUserPrice ");
         hql.append("where pfbxCustomerInfo.status = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), status);
+        return (List<PfbxUserPrice>) this.getHibernateTemplate().find(hql.toString(), status);
     }
 }

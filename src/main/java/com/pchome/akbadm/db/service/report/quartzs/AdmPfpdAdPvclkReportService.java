@@ -31,4 +31,7 @@ public class AdmPfpdAdPvclkReportService extends BaseService<AdmPfpdAdPvclkRepor
 		((IAdmPfpdAdPvclkReportDAO) dao).insertReportData(dataList);
 	}
 	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((IAdmPfpdAdPvclkReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

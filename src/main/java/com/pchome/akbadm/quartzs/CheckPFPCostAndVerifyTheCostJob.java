@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -19,14 +19,14 @@ import com.pchome.soft.util.SpringEmailUtil;
 
 public class CheckPFPCostAndVerifyTheCostJob {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private List<PfbxInComeReportVo> PfbxInComeReportVo;
 	//Service
 	private IAdmBonusBillReportService admBonusBillReportService;
 	
     private SpringEmailUtil springEmailUtil;
-    public static final String MAIL_API_NO = "P098";
+    public static final String MAIL_API_NO = "P159";
     
 	/**
 	 * 本機測試排程用

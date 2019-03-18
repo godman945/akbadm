@@ -187,7 +187,17 @@
 		$("#pfdCustomerInfoId").val($("#adPfdAllNameMapSelect").val());
 	});
 	
-	
+	$("#dialogDiv").dialog({
+		autoOpen : false,
+		show : "blind",
+		hide : "explode",
+		width : 950,
+		resizable : false,
+		modal : true,
+		closeOnEscape : true,
+		draggable : false,
+		title : ""
+	});
 });
 
 function doQuery() {
@@ -685,4 +695,25 @@ function preview(img) {
         'overlayColor':'#fff',
         'scrolling':'no'
     });
+}
+
+function showImage(imageArray) {
+	var html = "<img src='" + imageArray[0] + "' />";
+	$("#adProdDetailDiv").html(html);
+	$("#adProdDiv").dialog({
+		autoOpen : false,
+		show : "blind",
+		hide : "explode",
+		width : 950,
+		resizable : false,
+		modal : true,
+		closeOnEscape : true,
+		draggable : false,
+		title : "",
+		open : function(event, ui) {
+			// 隱藏「x」關閉按鈕
+//			$(this).parent().children().children('.ui-dialog-titlebar-close').hide();
+		}
+	});
+	$("#adProdDiv").dialog("open");
 }

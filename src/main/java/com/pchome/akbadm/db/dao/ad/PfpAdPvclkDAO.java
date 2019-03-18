@@ -63,7 +63,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append(" ad_pvclk_date, ");
 		hql.append(" pfbx_customer_info_id) a ");
 		hql.append(" GROUP BY a.ad_pvclk_date, a.pfbx_customer_info_id ");
-		Query q = this.getSession().createSQLQuery(hql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		q.setDate("reportDate", reportDate);
 		List<Object[]> list = q.list();
 
@@ -84,7 +84,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append("(FLOOR(SUM(ad_clk_price)) - SUM(ad_invalid_clk_price)) ");
 		hql.append("from pfp_ad_pvclk b where ad_pvclk_date = :reportDate group by customer_info_id desc");
 
-		Query q = this.getSession().createSQLQuery(hql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		q.setDate("reportDate", reportDate);
 		List<Object[]> list = q.list();
 
@@ -102,7 +102,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		pos.add(startDate);
 		pos.add(endDate);
 
-		List<Object[]> list = super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		List<Object[]> list = (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 		return list;
 	}
 
@@ -117,7 +117,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		pos.add(startDate);
 		pos.add(endDate);
 
-		List<Object[]> list = super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		List<Object[]> list = (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 		return list;
 	}
 
@@ -136,7 +136,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append("where ad_pvclk_date ");
 		hql.append("between :startDate and :endDate ");
 
-		Query q = super.getSession().createSQLQuery(hql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		q.setDate("startDate", startDate).setDate("endDate", endDate);
 
 		maps = q.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
@@ -156,7 +156,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		pos.add(startDate);
 		pos.add(endDate);
 
-		List<PfpAdPvclk> list = super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		List<PfpAdPvclk> list = (List<PfpAdPvclk>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 
 		return list;
 	}
@@ -179,7 +179,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 
 		// log.info(" hql = "+hql.toString());
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -200,7 +200,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 
 		// log.info(" hql = "+hql.toString());
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@Override
@@ -219,7 +219,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		Object[] ob = new Object[]
 		{ customerInfoId, date };
 
-		return super.getHibernateTemplate().find(hql.toString(), ob);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(), ob);
 	}
 
 	@Override
@@ -242,7 +242,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		Object[] ob = new Object[]
 		{ date, customerInfoId };
 
-		return super.getHibernateTemplate().find(hql.toString(), ob);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(), ob);
 	}
 
     @Override
@@ -253,7 +253,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         hql.append("where adPvclkDate = :pvclkDate ");
         hql.append("and customerInfoId = :pfpCustomerId ");
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setDate("pvclkDate", pvclkDate);
         query.setString("pfpCustomerId", pfpCustomerId);
 
@@ -269,7 +269,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         hql.append("where adPvclkDate = :pvclkDate ");
         hql.append("and adActionSeq = :actionId ");
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setDate("pvclkDate", pvclkDate);
         query.setString("actionId", actionId);
 
@@ -320,7 +320,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 			list.add(customerInfoId);
 		}
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		for (int i = 0; i < list.size(); i++)
 		{
 			query.setString(i, list.get(i));
@@ -343,7 +343,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 //		hql.append("    and pfpAd.pfpAdGroup.pfpAdAction.pfpCustomerInfo.recognize = 'Y' ");
 		hql.append("group by pfpAd.adSeq");
 
-		return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+		return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
 	}
 
 	@Override
@@ -351,7 +351,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 	public List<PfpAdPvclk> selectPfpAdPvclk(int firstResult, int maxResults)
 	{
 		String hql = "from PfpAdPvclk order by adPvclkDate desc, adPvclkTime desc";
-		return super.getSession()
+		return this.getHibernateTemplate().getSessionFactory().getCurrentSession()
 				.createQuery(hql)
 				.setFirstResult(firstResult)
 				.setMaxResults(maxResults)
@@ -372,7 +372,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 	// hql.append("and pfpAd.pfpAdGroup.pfpAdAction.pfpCustomerInfo.customerInfoId = :customerInfoId ");
 	// }
 	//
-	// Query query = this.getSession().createQuery(hql.toString());
+	// Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 	// query.setString("pvclkDate", pvclkDate);
 	// if (StringUtils.isNotBlank(actionId)) {
 	// query.setString("actionId", actionId);
@@ -395,7 +395,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append("where adPvclkDate = ? ");
 		hql.append("group by customerInfoId");
 
-		return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+		return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
 	}
 
 	@Override
@@ -422,7 +422,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append("where adPvclkDate = ? ");
 		hql.append("group by adActionSeq");
 
-		return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+		return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
 	}
 
 	@Override
@@ -450,7 +450,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append(" where 1 = 1 ");
 		hql.append(" and adPvclkDate between :startDate and :endDate ");
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		query.setDate("startDate", startDate)
 				.setDate("endDate", endDate);
@@ -476,7 +476,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		}
 		hql.append(" and adPvclkDate between :startDate and :endDate ");
 		hql.append(" GROUP BY  customerInfoId  ");
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		if (StringUtils.isNotBlank(pfbId))
 		{
@@ -499,7 +499,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 //			}
 //			hql2.append(" and adPvclkDate between :startDate and :endDate ");
 //			hql2.append(" GROUP BY  customerInfoId  ");
-//			Query query2 = this.getSession().createQuery(hql2.toString());
+//			Query query2 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql2.toString());
 //
 //			if (StringUtils.isNotBlank(pfbId))
 //			{
@@ -542,7 +542,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append(" where adPvclkDate = ? ");
 		hql.append(" group by customerInfoId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), date);
+		return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), date);
 	}
 
 	@Override
@@ -557,7 +557,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append(" where adPvclkDate = :processDate ");
 		hql.append(" and (pfbxPositionId = '' or pfbxPositionId is null)");
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		query.setString("coustomerId", pfbxCustomerID).setString("postionId", pfbxPostionID).setDate("processDate", date);
 
@@ -574,7 +574,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
 		hql.append(" where adPvclkDate = :processDate ");
 		hql.append(" and (adUrl = '' or adUrl is null)");
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		query.setDate("processDate", date);
 
@@ -584,7 +584,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
     @Override
     public List<PfpAdPvclk> findLastPfpAdPvclk() {
         String hql = "from PfpAdPvclk order by adPvclkDate desc, adPvclkTime desc";
-        Query query = this.getSession().createQuery(hql)
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql)
                                         .setFirstResult(0)
                                         .setMaxResults(1);
         return query.list();
@@ -606,7 +606,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
     		sql1.append("and ad_pvclk_date = '" + date + "'");
     	}
 
-    	Query query1 = this.getSession().createSQLQuery(sql1.toString());
+    	Query query1 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql1.toString());
 
     	List<Object> dataList1 = query1.list();
     	Object[] objArray1 = (Object[]) dataList1.get(0);
@@ -628,7 +628,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
     		sql2.append("and ad_pvclk_date = '" + date + "'");
     	}
 
-    	Query query2 = this.getSession().createSQLQuery(sql2.toString());
+    	Query query2 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql2.toString());
 
     	List<Object> dataList2 = query2.list();
     	Object[] objArray2 = (Object[]) dataList2.get(0);
@@ -661,7 +661,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
     		sql3.append("and ad_pvclk_date = '" + date + "'");
     	}
 
-    	Query query3 = this.getSession().createSQLQuery(sql3.toString());
+    	Query query3 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql3.toString());
 
     	List<Object> dataList3 = query3.list();
     	Object[] objArray3 = (Object[]) dataList3.get(0);
@@ -694,7 +694,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
     		sql4.append("and ad_pvclk_date = '" + date + "'");
     	}
 
-    	Query query4 = this.getSession().createSQLQuery(sql4.toString());
+    	Query query4 = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql4.toString());
 
     	List<Object> dataList4 = query4.list();
     	Object[] objArray4 = (Object[]) dataList4.get(0);
@@ -730,7 +730,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclk.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -754,7 +754,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclk.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -782,7 +782,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclk.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -801,7 +801,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("from pfp_ad_pvclk ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         BigInteger result = (BigInteger) query.uniqueResult();
         return result.intValue();
@@ -820,7 +820,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("from pfp_ad_pvclk ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         return query.executeUpdate();
     }
@@ -832,7 +832,7 @@ public class PfpAdPvclkDAO extends BaseDAO<PfpAdPvclk, String> implements IPfpAd
         sql.append("from pfp_ad_pvclk ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         return query.executeUpdate();
     }

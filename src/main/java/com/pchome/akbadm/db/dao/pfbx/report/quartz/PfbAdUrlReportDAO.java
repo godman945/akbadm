@@ -1,16 +1,15 @@
 package com.pchome.akbadm.db.dao.pfbx.report.quartz;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.hibernate.type.StandardBasicTypes;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxAdUrlReport;
@@ -42,7 +41,7 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 		}
 		sql.append("order by ad_pvclk_date desc ");
 		
-		Query q = this.getSession().createSQLQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 		log.info("" + q.getQueryString());
 		
 		listRS = q.list();
@@ -75,10 +74,10 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 		hql.append("group by ad_pvclk_date , ad_pvclk_url ");
 		hql.append("order by ad_pvclk_date desc ");
 		
-		Query q = this.getSession().createSQLQuery(hql.toString())
-				.addScalar("detaildate", Hibernate.DATE)
-				.addScalar("detailurl", Hibernate.STRING)
-				.addScalar("detailcount", Hibernate.INTEGER)
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString())
+				.addScalar("detaildate", StandardBasicTypes.DATE)
+				.addScalar("detailurl", StandardBasicTypes.STRING)
+				.addScalar("detailcount", StandardBasicTypes.INTEGER)
 				.setString("pfbid", pfbId)
 				.setResultTransformer(Transformers.aliasToBean(PfbAdUrlListVO.class));
 		if(StringUtils.isNotBlank(startDate))
@@ -113,7 +112,7 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 		
 		sql += "select distinct ad_pvclk_url from pfbx_ad_url_report where customer_info_id = '"+pfbcId+"' and ad_pvclk_url not like '%"+domain+"%' ";
 		
-		Query q = this.getSession().createSQLQuery(sql);
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
 		log.info("" + q.getQueryString());
 		
 		list = q.list();
@@ -131,7 +130,7 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 		hql.append("from PfbxAdUrlReport where customerInfoId = ?");
 		con.add(pfbId);
 
-		list = this.getHibernateTemplate().find(hql.toString(), con.toArray());
+		list = (List<PfbxAdUrlReport>) this.getHibernateTemplate().find(hql.toString(), con.toArray());
 
 		return list;
 	}
@@ -143,7 +142,7 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 		List<Object> result = (List<Object>) getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>()
 				{
-					public List<Object> doInHibernate(Session session) throws HibernateException, SQLException
+					public List<Object> doInHibernate(Session session) throws HibernateException
 					{
 
 						StringBuffer hql = new StringBuffer();
@@ -181,7 +180,7 @@ public class PfbAdUrlReportDAO extends BaseDAO<PfbxAdUrlReport, Integer> impleme
 	public void deleteReportDataByReportDate(String reportDate) throws Exception
 	{
 		String sql = "delete from PfbxAdUrlReport where adPvclkDate = '" + reportDate + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(sql).executeUpdate();
 		session.flush();
 	}

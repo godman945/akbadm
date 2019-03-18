@@ -20,4 +20,6 @@ public interface IPfpAdActionReportDAO {
 	public float findAdClkAndInvalidClkPrice(String customerInfoId, Date startDate, Date endDate, String payType);
 	
 	public List<Object> findPfpAdActionReport(Date startDate, Date endDate);
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate);
 }

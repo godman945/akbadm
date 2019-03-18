@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfdBonusRecord;
@@ -38,7 +38,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		list.add(year);
 		list.add(month);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -62,7 +62,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		list.add(year);
 		list.add(month);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 //	@SuppressWarnings("unchecked")
@@ -122,7 +122,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		hql.append(" and closeMonth = :closeMonth ");
 		hql.append(" order by id desc ");
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("pfdId", pfdId)
                 .setString("payType", payType)
@@ -146,7 +146,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		hql.append(" and year = :year and month = :month ");	
 		hql.append(" order by id desc ");		
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("pfdId", pfdId)
                 .setString("payType", payType)
@@ -170,7 +170,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		hql.append(" and year = :year and quarter = :quarter ");	
 		hql.append(" order by id desc ");
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("pfdId", pfdId)
                 .setString("payType", payType)
@@ -224,7 +224,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 			list.add(month);
 		}
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -232,7 +232,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {
 				//前期未結佣(獎)金
 				StringBuffer hql = new StringBuffer();
 				
@@ -339,7 +339,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		hql.append(" and closeMonth = :closeMonth ");
 		hql.append(" order by id desc ");
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("contractId", contractId)
                 .setString("pfdId", pfdId)
@@ -365,7 +365,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		hql.append(" and year = :year and month = :month ");	
 		hql.append(" order by id desc ");		
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("contractId", contractId)
                 .setString("pfdId", pfdId)
@@ -383,7 +383,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 		
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {
 				//本期+前期未結明細
 				StringBuffer hql = new StringBuffer();
 				
@@ -478,7 +478,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 	public List<PfdBonusRecord> findPfdTotalAdClick(final String pfdId, final int year, final int month)throws Exception {
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {		
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {		
 				
 				//本期廣告費用(只算後付花費)
 				StringBuffer hql = new StringBuffer();
@@ -532,7 +532,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 	public List<PfdBonusRecord> findPfdInvoiceTotalAdClick(final String pfdId, final int year, final int month)throws Exception {
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {		
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {		
 				
 				//本期廣告費用(只算後付花費)
 				StringBuffer hql = new StringBuffer();
@@ -585,7 +585,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 	public List<PfdBonusRecord> findPfdNonCloseTotalAdClick(final String pfdId, final int year, final int month)throws Exception {
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {
 				//前期未結廣告費用
 				StringBuffer hql = new StringBuffer();
 				
@@ -637,7 +637,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 	public List<PfdBonusRecord> findPfdBonusRecordsByPayment(final String pfdId, final int year, final int month) throws Exception{
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {
 				//本期佣金與本期應付獎金
 				StringBuffer hql = new StringBuffer();
 				
@@ -734,7 +734,7 @@ public class PfdBonusRecordDAO extends BaseDAO<PfdBonusRecord, Integer> implemen
 	public List<PfdBonusRecord> findPfdInvoiceBonusRecords(final String pfdId, final int year, final int month) throws Exception{
 		List<PfdBonusRecord> result = getHibernateTemplate().execute(new HibernateCallback<List<PfdBonusRecord>>() {
 			@Override
-            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException, SQLException {
+            public List<PfdBonusRecord> doInHibernate(Session session) throws HibernateException {
 				//本期佣金與本期應付獎金
 				StringBuffer hql = new StringBuffer();
 				

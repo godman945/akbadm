@@ -3,8 +3,8 @@ package com.pchome.akbadm.api;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -13,7 +13,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class RemoveTempFileAPI {
 	
-	protected Log log = LogFactory.getLog(getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private String tempPath;
 	

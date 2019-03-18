@@ -24,7 +24,7 @@ public class PfdBonusDayReportDAO extends BaseDAO<PfdBonusDayReport, Integer> im
 		hql.append("postpaid_clk_price ");
 		hql.append("from pfd_bonus_day_report where report_date = :reportDate order by pfd_id");
 
-		Query q = this.getSession().createSQLQuery(hql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		q.setDate("reportDate", reportDate);
 		
 		List<Object[]> list = q.list();
@@ -39,7 +39,7 @@ public class PfdBonusDayReportDAO extends BaseDAO<PfdBonusDayReport, Integer> im
         hql.append(" from PfdBonusDayReport ");
         hql.append(" where reportDate = :reportDate ");
         
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setDate("reportDate", reportDate)
                 .uniqueResult();
@@ -53,7 +53,7 @@ public class PfdBonusDayReportDAO extends BaseDAO<PfdBonusDayReport, Integer> im
         hql.append(" from PfdBonusDayReport ");
         hql.append(" where reportDate = :reportDate ");
         
-        Double result = (Double) this.getSession()
+        Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setDate("reportDate", reportDate)
                 .uniqueResult();
@@ -77,7 +77,7 @@ public class PfdBonusDayReportDAO extends BaseDAO<PfdBonusDayReport, Integer> im
 		hql.append(" WHERE pfdCustomerInfo.customerInfoId = :pfdId and  ");
 		hql.append(" reportDate between :startDate and :endDate ");
 		
-		 Double result = (Double) this.getSession()
+		 Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
 	                .createQuery(hql.toString())
 	                .setString("pfdId", pfdId)
 	                .setString("startDate", startDate)
@@ -94,7 +94,7 @@ public class PfdBonusDayReportDAO extends BaseDAO<PfdBonusDayReport, Integer> im
 		hql.append(" WHERE pfdCustomerInfo.customerInfoId = :pfdId and  ");
 		hql.append(" reportDate between :startDate and :endDate ");
 		
-		 Double result = (Double) this.getSession()
+		 Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
 	                .createQuery(hql.toString())
 	                .setString("pfdId", pfdId)
 	                .setString("startDate", startDate)

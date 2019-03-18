@@ -10,7 +10,7 @@ public class DmpHitReportDAO extends BaseDAO<DmpHitReport, String> implements ID
     @Override
     public List<DmpHitReport> getByRecordDate(String startDate, String endDate) {
         String hql = "from DmpHitReport where recordDate >= ? and recordDate <= ?";
-        return this.getHibernateTemplate().find(hql, startDate, endDate);
+        return (List<DmpHitReport>) this.getHibernateTemplate().find(hql, startDate, endDate);
     }
 
     @Override

@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,7 +49,7 @@ import com.pchome.soft.util.DateValueUtil;
 @Transactional
 public class PfdBonusJob {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 
 	private IPfdContractService pfdContractService;
 	private IPfdBonusItemSetService pfdBonusItemSetService;

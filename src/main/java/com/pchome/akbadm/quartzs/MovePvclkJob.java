@@ -5,8 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -16,7 +16,7 @@ import com.pchome.config.TestConfig;
 import com.pchome.soft.util.SpringEmailUtil;
 
 public class MovePvclkJob {
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LogManager.getRootLogger();
 
     private String mailSubject;
     private String mailFrom;

@@ -14,4 +14,6 @@ public interface IPfpAdReportDAO {
 	public void insertReportData(List<PfpAdReport> dataList) throws Exception;
 
 	public List<Object> getLastDate() throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

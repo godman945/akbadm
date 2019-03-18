@@ -23,4 +23,8 @@ public class PfpAdTimeReportService extends BaseService<PfpAdTimeReport, Integer
 	public List<Object> getLastDate() throws Exception {
 		return ((PfpAdTimeReportDAO) dao).getLastDate();
 	}
+
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfpAdTimeReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

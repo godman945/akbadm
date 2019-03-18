@@ -15,11 +15,11 @@ import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class AESAlgorithm {
-    private static final Log log = LogFactory.getLog(AESAlgorithm.class);
+    private static final Logger log = LogManager.getRootLogger();
 
     private String pchomeConstantKey = "uOY7HEXaH8SylKMSOwZ43g==";
     private Cipher cipherE;

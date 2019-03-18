@@ -7,15 +7,15 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.HibernateCallback;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class BaseDAO<T, PK extends Serializable> extends HibernateDaoSupport implements IBaseDAO<T, PK> {
-    protected Log log = LogFactory.getLog(this.getClass());
+    protected Logger log = LogManager.getRootLogger();
 
     private Class<T> clazz;
 
@@ -67,7 +67,7 @@ public abstract class BaseDAO<T, PK extends Serializable> extends HibernateDaoSu
 
     @Override
     public void saveOrUpdateAll(Collection<T> entities) {
-        getHibernateTemplate().saveOrUpdateAll(entities);
+        getHibernateTemplate().saveOrUpdate(entities);
     }
 
     @Override
@@ -79,7 +79,7 @@ public abstract class BaseDAO<T, PK extends Serializable> extends HibernateDaoSu
         BigInteger nextval = getHibernateTemplate().execute(
             new HibernateCallback<BigInteger>() {
                 @Override
-                public BigInteger doInHibernate(Session session) throws HibernateException, SQLException {
+                public BigInteger doInHibernate(Session session) throws HibernateException {
                     return (BigInteger) session.createSQLQuery(sql).uniqueResult();
                 }
             });

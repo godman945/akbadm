@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxInvalidTrafficDetail;
@@ -31,7 +31,7 @@ public class PfbxInvalidTrafficDetailDAO extends BaseDAO<PfbxInvalidTrafficDetai
 		List<PfbxInvalidTrafficDetailVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfbxInvalidTrafficDetailVO>>() {
 					@Override
-					public List<PfbxInvalidTrafficDetailVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfbxInvalidTrafficDetailVO> doInHibernate(Session session) throws HibernateException {
 						
 						StringBuffer hql = new StringBuffer();
 						hql.append("select ");
@@ -94,7 +94,7 @@ public class PfbxInvalidTrafficDetailDAO extends BaseDAO<PfbxInvalidTrafficDetai
 		List<PfbxInvalidTrafficDetailVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<PfbxInvalidTrafficDetailVO>>() {
 					@Override
-					public List<PfbxInvalidTrafficDetailVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfbxInvalidTrafficDetailVO> doInHibernate(Session session) throws HibernateException {
 						
 						StringBuffer hql = new StringBuffer();
 						hql.append("select ");

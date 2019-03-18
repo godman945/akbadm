@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.report.PfpAdTimeReportVO;
@@ -29,7 +29,7 @@ public class PfpAdWeektimeReportDAO extends BaseDAO<PfpAdTimeReportVO, String> i
 				new HibernateCallback<List<PfpAdTimeReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdTimeReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdTimeReportVO> doInHibernate(Session session) throws HibernateException {
 
 						String searchTime = "W";
 						if(StringUtils.isNotEmpty(conditionMap.get("searchTime"))){
@@ -175,7 +175,7 @@ public class PfpAdWeektimeReportDAO extends BaseDAO<PfpAdTimeReportVO, String> i
 				new HibernateCallback<List<PfpAdTimeReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdTimeReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdTimeReportVO> doInHibernate(Session session) throws HibernateException {
 
 						String searchTime = "W";
 						if(StringUtils.isNotEmpty(conditionMap.get("searchTime"))){

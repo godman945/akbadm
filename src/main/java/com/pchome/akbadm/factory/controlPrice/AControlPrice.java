@@ -4,8 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.akbadm.api.ControlPriceAPI;
@@ -17,7 +17,7 @@ import com.pchome.akbadm.db.vo.ControlPriceVO;
 
 public abstract class AControlPrice {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
 	protected IPfpCustomerInfoService customerInfoService;
 	protected IPfpAdActionService adActionService;

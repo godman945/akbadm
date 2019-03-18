@@ -59,7 +59,7 @@ public class PfpRefundOrderReleaseDAO extends BaseDAO<PfpRefundOrderRelease, Str
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 		
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 		
 		//塞where條件
@@ -94,7 +94,7 @@ public class PfpRefundOrderReleaseDAO extends BaseDAO<PfpRefundOrderRelease, Str
 		String hql = " update PfpRefundOrderRelease set status=:status, checkUser=:verifyUserId, rejectReason=:rejectReason, checkTime=CURRENT_TIMESTAMP(), updateDate=CURRENT_TIMESTAMP() where seq = :seq) ";
 		log.info(">>> hqlStr = " + hql);
 		
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         Query query = session.createQuery(hql);
         query.setString("status", status);
         query.setString("verifyUserId", verifyUserId);

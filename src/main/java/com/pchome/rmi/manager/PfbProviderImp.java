@@ -6,8 +6,8 @@ import java.util.Date;
 import java.util.List;
 
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.AdmManagerDetail;
 import com.pchome.akbadm.db.service.customerInfo.IPfbCustomerInfoService;
@@ -18,7 +18,7 @@ import com.pchome.soft.util.DateValueUtil;
 
 public class PfbProviderImp implements IPfbProvider{
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	
 	private IAdmManagerDetailService admManagerDetailService;
 	private IPfbCustomerInfoService pfbCustomerInfoService;

@@ -56,7 +56,7 @@ public class AdmBrandCorrespondDAO extends BaseDAO<AdmBrandCorrespond, Integer> 
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 
 		// 塞入where參數值
@@ -108,7 +108,7 @@ public class AdmBrandCorrespondDAO extends BaseDAO<AdmBrandCorrespond, Integer> 
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 
 		// 塞入where參數值
@@ -151,7 +151,7 @@ public class AdmBrandCorrespondDAO extends BaseDAO<AdmBrandCorrespond, Integer> 
 			   hql += "update_date = CURRENT_TIMESTAMP() ";
 			   hql += "WHERE id = :id ";
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
 		
 		query.setString("brand_eng", admBrandCorrespond.getBrandEng());
@@ -168,7 +168,7 @@ public class AdmBrandCorrespondDAO extends BaseDAO<AdmBrandCorrespond, Integer> 
 	@Override
 	public void deleteBrandCorrespondData(AdmBrandCorrespond admBrandCorrespond) {
 		String hql = "DELETE FROM AdmBrandCorrespond WHERE id = :id";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).setInteger("id", admBrandCorrespond.getId()).executeUpdate();
 		session.flush();
 	}

@@ -61,6 +61,11 @@ public class AdClientReportAction extends BaseAction {
 	private float totalAdPvRate = 0;			//千次曝光收益
 	private float totalAdClkPriceSum = 0;		//總廣告花費
 	private BigDecimal totalBonus = new BigDecimal(0);				//預估收益
+	private double totalConvertCountSum =0;				//轉換次數總計
+	private double totalConvertPriceCountSum =0;		//總轉換價值總計	
+	private double totalConvertCVR = 0;					//轉換率總計	
+	private double totalConvertCost = 0;				//平均轉換成本總計
+	private double totalConvertInvestmentCost = 0;		//廣告投資報酬率總計
 
 	private String downloadFlag = "";//download report 旗標
 	private InputStream downloadFileStream;//下載報表的 input stream
@@ -129,7 +134,9 @@ public class AdClientReportAction extends BaseAction {
     		totalCount = voList.size();
     		pageCount = (int) Math.ceil(((float)totalCount / pageSize));
     		totalSize = totalCount;
-
+    		
+    		
+    		
     		for (int i=0; i<voList.size(); i++) {
     			PfpAdReportVO vo = new PfpAdReportVO();
     			vo = voList.get(i);
@@ -166,7 +173,31 @@ public class AdClientReportAction extends BaseAction {
                 } else {
                     totalAdPvRate = totalAdClkPriceSum*1000/totalPv;
                 }
+                
+                
+                //總轉換數
+                BigDecimal convertCountBigDecimal =  new BigDecimal(vo.getConvertCountSum());
+                totalConvertCountSum += convertCountBigDecimal.doubleValue();
+                
+                //總轉換價值
+                BigDecimal convertPriceCountBigDecimal =  new BigDecimal(vo.getConvertPriceCountSum());
+                totalConvertPriceCountSum += convertPriceCountBigDecimal.doubleValue();
 			}
+    		
+    		//轉換率=轉換次數/互動數*100%
+            if(totalConvertCountSum > 0 && totalClk > 0){
+            	totalConvertCVR  = (totalConvertCountSum / totalClk) * 100;
+			}
+            //平均轉換成本=費用/轉換次數
+            if(totalAdClkPriceSum > 0 && totalConvertCountSum > 0){
+            	totalConvertCost = totalAdClkPriceSum / totalConvertCountSum;
+			}
+            //廣告投資報酬率=總轉換價值/費用*100%
+			if(totalConvertPriceCountSum > 0 && totalAdClkPriceSum > 0){
+				totalConvertInvestmentCost = (totalConvertPriceCountSum / totalAdClkPriceSum) * 100;
+			}
+			
+			
 
 	    	voList = viewList;
     	}
@@ -274,8 +305,29 @@ public class AdClientReportAction extends BaseAction {
 				} else {
 					totalAdPvRate = (float) doubleTotalBonus*1000/totalPv;
 				}
-
+				
+				//總轉換數
+	            BigDecimal convertCountBigDecimal =  new BigDecimal(vo.getConvertCountSum());
+	            totalConvertCountSum += convertCountBigDecimal.doubleValue();
+	            
+	            //總轉換價值
+	            BigDecimal convertPriceCountBigDecimal =  new BigDecimal(vo.getConvertPriceCountSum());
+	            totalConvertPriceCountSum += convertPriceCountBigDecimal.doubleValue();
 			}
+		
+			//轉換率=轉換次數/互動數*100%
+	        if(totalConvertCountSum > 0 && totalClk > 0){
+	        	totalConvertCVR  = (totalConvertCountSum / totalClk) * 100;
+			}
+	        //平均轉換成本=費用/轉換次數
+	        if(doubleTotalBonus > 0 && totalConvertCountSum > 0){
+	        	totalConvertCost = doubleTotalBonus / totalConvertCountSum;
+			}
+	        //廣告投資報酬率=總轉換價值/費用*100%
+			if(totalConvertPriceCountSum > 0 && doubleTotalBonus > 0){
+				totalConvertInvestmentCost = (totalConvertPriceCountSum / doubleTotalBonus) * 100;
+			}
+    		
     	}
 
 
@@ -303,7 +355,7 @@ public class AdClientReportAction extends BaseAction {
     	DecimalFormat df = new DecimalFormat("0.00");
     	DecimalFormat df2 = new DecimalFormat("###,###,###,###");
     	DecimalFormat df3 = new DecimalFormat("###,###,###,##0.00");
-    	String[] tableHeadArray = {"期間","帳戶編號","經銷商","廣告客戶","帳戶名稱","主網站名稱","網站名稱","時段區間","廣告曝光數","廣告點擊數","廣告點擊率","單次點擊收益","千次曝光收益","預估收益"};
+    	String[] tableHeadArray = {"期間","帳戶編號","經銷商","廣告客戶","帳戶名稱","主網站名稱","網站名稱","時段區間","廣告曝光數","廣告點擊數","廣告點擊率","單次點擊收益","千次曝光收益","預估收益","轉換次數","轉換率","總轉換價值","平均轉換成本","廣告投資報酬率"};
 
     	StringBuffer content=new StringBuffer();
 
@@ -373,7 +425,12 @@ public class AdClientReportAction extends BaseAction {
 			content.append("\"" + vo.getAdClkRate() + "\",");
 			content.append("\"$ " + vo.getAdClkAvgPrice() + "\",");
 			content.append("\"$ " + vo.getAdPvRate() + "\",");
-			content.append("\"$ " + vo.getTotalBonus() + "\"");
+			content.append("\"$ " + vo.getTotalBonus() + "\",");
+			content.append("\"" + vo.getConvertCountSum() + "\",");//轉換次數
+			content.append("\"" + vo.getConvertCVR() + "\",");//轉換率
+			content.append("\"" + vo.getConvertPriceCountSum() + "\",");//總轉換價值
+			content.append("\"" + vo.getConvertCost() + "\","); //平均轉換成本
+			content.append("\"" + vo.getConvertInvestmentCost() + "\"");//廣告投資報酬率
 			content.append("\n");
 		}
 
@@ -385,12 +442,19 @@ public class AdClientReportAction extends BaseAction {
 		content.append("\"" +  "\",");
 		content.append("\"" +  "\",");
 		content.append("\"" +  "\",");
+		content.append("\"" +  "\",");
 		content.append("\"" + df2.format(totalPv) + "\",");
 		content.append("\"" + df2.format(totalClk) + "\",");
 		content.append("\"" + df.format(totalClkRate) + "%\",");
 		content.append("\"$ " + df3.format(totalAdClkAvgPrice) + "\",");
 		content.append("\"$ " + df3.format(totalAdPvRate) + "\",");
-		content.append("\"$ " + df3.format(totalBonus) + "\"");
+		content.append("\"$ " + df3.format(totalBonus) + "\",");
+		
+		content.append("\"" + df2.format(totalConvertCountSum) + "\",");		//轉換次數總計
+		content.append("\"" + df.format(totalConvertCVR) + "%\",");				//轉換率總計	
+		content.append("\"" + df2.format(totalConvertPriceCountSum) + "\",");	//總轉換價值總計
+		content.append("\"" + df.format(totalConvertCost) + "\",");				//平均轉換成本總計
+		content.append("\"" + df.format(totalConvertInvestmentCost) + "%\"");	//廣告投資報酬率總計
 
 
 		if (request.getHeader("User-Agent").toLowerCase().indexOf("firefox") > 0) {
@@ -597,6 +661,46 @@ public class AdClientReportAction extends BaseAction {
 
 	public void setSearchAdDevice(String searchAdDevice) {
 		this.searchAdDevice = searchAdDevice;
+	}
+
+	public double getTotalConvertCountSum() {
+		return totalConvertCountSum;
+	}
+
+	public void setTotalConvertCountSum(double totalConvertCountSum) {
+		this.totalConvertCountSum = totalConvertCountSum;
+	}
+
+	public double getTotalConvertPriceCountSum() {
+		return totalConvertPriceCountSum;
+	}
+
+	public void setTotalConvertPriceCountSum(double totalConvertPriceCountSum) {
+		this.totalConvertPriceCountSum = totalConvertPriceCountSum;
+	}
+
+	public double getTotalConvertCVR() {
+		return totalConvertCVR;
+	}
+
+	public void setTotalConvertCVR(double totalConvertCVR) {
+		this.totalConvertCVR = totalConvertCVR;
+	}
+
+	public double getTotalConvertCost() {
+		return totalConvertCost;
+	}
+
+	public void setTotalConvertCost(double totalConvertCost) {
+		this.totalConvertCost = totalConvertCost;
+	}
+
+	public double getTotalConvertInvestmentCost() {
+		return totalConvertInvestmentCost;
+	}
+
+	public void setTotalConvertInvestmentCost(double totalConvertInvestmentCost) {
+		this.totalConvertInvestmentCost = totalConvertInvestmentCost;
 	}
 
 }

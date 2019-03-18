@@ -2,8 +2,8 @@ package com.pchome.akbadm.quartzs;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -17,7 +17,7 @@ import com.pchome.soft.util.SpringEmailUtil;
 
 public class PfdApplyForBusinessJob {
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	private IPfdApplyForBusinessService pfdApplyForBusinessService;
 	
 	public static final String MAIL_API_NO = "P159";

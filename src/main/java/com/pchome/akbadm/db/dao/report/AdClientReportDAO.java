@@ -1,5 +1,6 @@
 package com.pchome.akbadm.db.dao.report;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.report.PfpAdReportVO;
@@ -29,7 +30,7 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 				new HibernateCallback<List<PfpAdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");
 						hql.append(" sum(a.ad_pv), ");
@@ -40,7 +41,9 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 						hql.append(" b.customer_info_title, ");
 						hql.append(" a.pfd_customer_info_id, ");
 						hql.append(" c.company_name, ");
-						hql.append(" count(distinct a.pfbx_customer_info_id) ");
+						hql.append(" count(distinct a.pfbx_customer_info_id), ");
+						hql.append(" ifnull(sum(a.convert_count),0), ");
+						hql.append(" ifnull(sum(a.convert_price_count),0) ");
 						hql.append(" from adm_pfpd_ad_pvclk_report a ");
 						hql.append(" join pfp_customer_info b ");
 						hql.append(" on a.customer_info_id = b.customer_info_id ");
@@ -159,6 +162,40 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 							if(objArray[8] != null){
 								vo.setPfbCustomerInfoId(df2.format(new Long((objArray[8]).toString())));
 							}
+							
+							
+							double convertCount =  ((BigDecimal)objArray[9]).doubleValue();		//總轉換數
+							double convertPriceCount =  ((BigDecimal)objArray[10]).doubleValue();	//總轉換價值
+							double convertCVR = 0;	//轉換率
+							double convertCost = 0;	//平均轉換成本
+							double convertInvestmentCost = 0;	//廣告投資報酬率
+							
+							//商品廣告轉換
+	                        //轉換次數
+							vo.setConvertCountSum(df.format(convertCount));
+	                        
+	                        //總轉換價值
+							vo.setConvertPriceCountSum(df.format(convertPriceCount));
+	                        
+	                        //轉換率=轉換次數/互動數*100%
+	                        if(convertCount > 0 && clkSum > 0){
+	            				convertCVR  = (convertCount / clkSum) * 100;
+	            			}
+	                        vo.setConvertCVR(df.format(convertCVR)+ "%");
+	                        
+	                        //平均轉換成本=費用/轉換次數
+	                        if(price > 0 && convertCount > 0){
+	            				convertCost = price / convertCount;
+	            			}
+	                        vo.setConvertCost(df.format(convertCost));
+	                        
+	                        //廣告投資報酬率=總轉換價值/費用*100%
+	            			if(convertPriceCount > 0 && price > 0){
+	            				convertInvestmentCost = (convertPriceCount / price) * 100;
+	            			}
+	            			vo.setConvertInvestmentCost(df.format(convertInvestmentCost)+ "%");
+							
+							
 
 							resultData.add(vo);
 //							log.info("resultData: "+resultData.size());
@@ -176,7 +213,7 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 				new HibernateCallback<List<PfpAdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdReportVO> doInHibernate(Session session) throws HibernateException {
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");
 						hql.append(" sum(a.ad_pv), ");
@@ -195,7 +232,9 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 						hql.append(" a.ad_url, ");
 						hql.append(" a.time_code, ");
 						hql.append(" case when d.category = '1' then d.contact_name else d.company_name end, ");
-						hql.append(" d.website_chinese_name ");
+						hql.append(" d.website_chinese_name, ");
+						hql.append(" Ifnull(Sum(a.convert_count), 0), ");
+						hql.append(" Ifnull(Sum(a.convert_price_count), 0) "); 
 						hql.append(" from adm_pfpd_ad_pvclk_report a ");
 						hql.append(" join pfp_customer_info b ");
 						hql.append(" on a.customer_info_id = b.customer_info_id ");
@@ -353,7 +392,38 @@ public class AdClientReportDAO extends BaseDAO<PfpAdReportVO, String> implements
 							if(objArray[13] != null){
 								vo.setPfbDefaultWebsiteChineseName((objArray[13]).toString());
 							}
-
+							
+							//商品廣告轉換
+							double convertCount =  ((BigDecimal)objArray[14]).doubleValue();		//總轉換數
+							double convertPriceCount =  ((BigDecimal)objArray[15]).doubleValue();	//總轉換價值
+							double convertCVR = 0;	//轉換率
+							double convertCost = 0;	//平均轉換成本
+							double convertInvestmentCost = 0;	//廣告投資報酬率
+	                        //轉換次數
+							vo.setConvertCountSum(df.format(convertCount));
+	                        
+	                        //總轉換價值
+							vo.setConvertPriceCountSum(df.format(convertPriceCount));
+	                        
+	                        //轉換率=轉換次數/互動數*100%
+	                        if(convertCount > 0 && clkSum > 0){
+	            				convertCVR  = (convertCount / clkSum) * 100;
+	            			}
+	                        vo.setConvertCVR(df.format(convertCVR)+ "%");
+	                        
+	                        //平均轉換成本=費用/轉換次數
+	                        if(price > 0 && convertCount > 0){
+	            				convertCost = price / convertCount;
+	            			}
+	                        vo.setConvertCost(df.format(convertCost));
+	                        
+	                        //廣告投資報酬率=總轉換價值/費用*100%
+	            			if(convertPriceCount > 0 && price > 0){
+	            				convertInvestmentCost = (convertPriceCount / price) * 100;
+	            			}
+	            			vo.setConvertInvestmentCost(df.format(convertInvestmentCost)+ "%");
+							
+	            			
 							resultData.add(vo);
 //							log.info("resultData: "+resultData.size());
 						}
