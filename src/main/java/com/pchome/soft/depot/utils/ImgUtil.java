@@ -23,14 +23,14 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.pchome.akbadm.db.vo.catalog.uploadList.ShoppingProdVO;
 import com.pchome.akbadm.utils.HttpUtil;
 
 public class ImgUtil {
-	private static final Logger log = LogManager.getRootLogger();
+	private static final Log log = LogFactory.getLog(ImgUtil.class);
 	
 	private static ImgUtil instance = new ImgUtil();
 	
@@ -73,11 +73,33 @@ public class ImgUtil {
 			System.setProperty("https.protocols", "TLSv1.2,TLSv1.1,TLSv1,SSLv3");
 			HttpUtil.disableCertificateValidation();
 			
-	        URL url = new URL(imgURL);
-	        // 增加User-Agent，避免被發現是機器人被阻擋掉
-			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-			urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
-			urlConnection.setRequestMethod("GET");
+//			舊code如果處理跳轉及中文部分的新code可正常運作，此段舊code舊可拔除
+//	        URL url = new URL(imgURL);
+//	        // 增加User-Agent，避免被發現是機器人被阻擋掉
+//			HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//			urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+//			urlConnection.setRequestMethod("GET");
+			
+			URL url = null;
+			HttpURLConnection urlConnection = null;
+			int whileRunCount = 10; // 設定最多跳轉10次
+			do { // 處理網址跳轉
+				imgURL = com.pchome.soft.depot.utils.HttpUtil.getInstance().enCode(imgURL); // 將網址後面的中文檔名編碼
+				url = new URL(imgURL);
+				urlConnection = (HttpURLConnection) url.openConnection();
+				urlConnection.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)");
+				urlConnection.setInstanceFollowRedirects(false); // 設定關閉自動轉址
+
+				String locationURL = urlConnection.getHeaderField("Location");
+				if (locationURL != null) {
+					imgURL = new String(locationURL.getBytes("iso-8859-1"), "UTF-8"); // 處理網址中文，避免亂碼
+					System.out.println("redirects URL: " + imgURL); // 接下來要跳轉到的圖片url
+				} else {
+					imgURL = null;
+				}
+
+				whileRunCount--;
+			} while (imgURL != null && whileRunCount >= 0);
 
 			// Header內容取得副檔名，避免輸入的網址沒有副檔名無法判斷的問題
 			String contentType = urlConnection.getHeaderField("Content-Type");

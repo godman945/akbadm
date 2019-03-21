@@ -212,19 +212,25 @@ public abstract class APfpCatalogUploadListData {
 				String completePath = imgTempPath.substring(0, imgTempPath.indexOf("img/user/")) + imgPath;
 				String resizeImgCompletePath = imgTempPath + "/resize_" + itemSeq + "." + FilenameUtils.getExtension(imgPath);
 
+				// 有些可能圖片不擋解析度，會有未滿長寬320，避免暫存圖片被刪除設立flag
+				boolean resizeFlag = false;
 				// 長寬都大於320限制，做短邊圖片調整
 				if (imageWidth > imgWidthHeightLimit && imageHeight > imgWidthHeightLimit) {
 					ImgUtil.getInstance().imgMinSizeProportionResize(completePath, resizeImgCompletePath, 320);
+					resizeFlag = true;
 				} else if (imageWidth > imgWidthHeightLimit || imageHeight > imgWidthHeightLimit) {
 					// 其中一邊大於320限制，做長邊圖片調整
 					ImgUtil.getInstance().imgMaxSizeProportionResize(completePath, resizeImgCompletePath, 320);
+					resizeFlag = true;
 				}
 				
-				// 將resize的圖檔檔名，改回舊的檔名
-				File oldFile = new File(completePath);
-				oldFile.delete();
-				File newFile = new File(resizeImgCompletePath);
-				newFile.renameTo(oldFile);
+				if (resizeFlag) {
+					// 將resize的圖檔檔名，改回舊的檔名
+					File oldFile = new File(completePath);
+					oldFile.delete();
+					File newFile = new File(resizeImgCompletePath);
+					newFile.renameTo(oldFile);
+				}
 			}
 		}
 		return errorPrdItemArray;

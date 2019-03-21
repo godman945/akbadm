@@ -26,13 +26,13 @@ qv1=new String( qv.getBytes("ISO-8859-1"),"UTF-8");
 	        window.dataLayer = window.dataLayer || []; 
 	        function ptag(){dataLayer.push(arguments);}
 	        ptag({"paid":"1543389867659"});
-	        ptag("event","convert",{"convert_id":"CAC_TEST9","convert_price":"40","pa_em_value":"WEFWE","user_link_url":"","user_link_blank":true},'click');
+	        ptag("event","convert",{"convert_id":"CAC_TEST9","convert_price":"40","pa_em_value":"WEFWE","user_link_url":"","user_link_blank":true});
         </script>
 
 
 
 
-		<input type="button" value="TEST" onclick="pchome_click('http://yahoo.com.tw',true);"/>
+		<input type="button" value="TEST" onclick="alex();"/>
 
 		<a href="http://alex.pchome.com.tw:8080/akbadm/ptag.jsp" target= onclick="pchome_click();">點我轉址</a>
 </body>
