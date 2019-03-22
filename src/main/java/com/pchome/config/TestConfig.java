@@ -68,24 +68,50 @@ public class TestConfig {
     };
 
 	private static String[] pathStg = {
-			webContent	+"config/spring/spring-action.xml",
-			webContent	+"config/spring/spring-api.xml",
-			webContent	+"config/spring/spring-dao.xml",
-			webContent	+"config/spring/spring-pfb-dao.xml",
-			webContent	+"config/spring/spring-datasource.xml",
-			webContent	+"config/spring/spring-factory.xml",
-			webContent	+"config/spring/spring-hibernate.xml",
-			webContent	+"config/spring/spring-log4j.xml",
-			webContent	+"config/spring/spring-mail-config.xml",
-			webContent	+"config/spring/spring-report.xml",
-			webContent	+"config/spring/spring-rmi-class.xml",
-			webContent	+"config/spring/spring-service.xml",
-			webContent	+"config/spring/spring-utils.xml",
-			webContent	+"config/spring/spring-pfb-service.xml",
-			webContent	+"config/spring/stg/stg-spring-prop.xml",
-			webContent	+"config/spring/stg/stg-spring-quartz-class.xml"
+//			webContent	+"config/spring/spring-action.xml",
+//			webContent	+"config/spring/spring-api.xml",
+//			webContent	+"config/spring/spring-dao.xml",
+//			webContent	+"config/spring/spring-pfb-dao.xml",
+//			webContent	+"config/spring/spring-datasource.xml",
+//			webContent	+"config/spring/spring-factory.xml",
+//			webContent	+"config/spring/spring-hibernate.xml",
+//			webContent	+"config/spring/spring-log4j.xml",
+//			webContent	+"config/spring/spring-mail-config.xml",
+//			webContent	+"config/spring/spring-report.xml",
+//			webContent	+"config/spring/spring-rmi-class.xml",
+//			webContent	+"config/spring/spring-service.xml",
+//			webContent	+"config/spring/spring-utils.xml",
+//			webContent	+"config/spring/spring-pfb-service.xml",
+//			webContent	+"config/spring/stg/stg-spring-prop.xml",
+//			webContent	+"config/spring/stg/stg-spring-quartz-class.xml"
 			
 
+			
+			"config/spring/spring-action.xml",
+			"config/spring/spring-api.xml",
+			"config/spring/spring-dao.xml",
+			"config/spring/spring-pfb-dao.xml",
+			"config/spring/spring-datasource.xml",
+			"config/spring/spring-factory.xml",
+			"config/spring/spring-hibernate.xml",
+			"config/spring/spring-log4j.xml",
+			"config/spring/spring-mail-config.xml",
+			"config/spring/spring-report.xml",
+			"config/spring/spring-rmi-class.xml",
+			"config/spring/spring-service.xml",
+			"config/spring/spring-utils.xml",
+			"config/spring/spring-pfb-service.xml",
+			"config/spring/stg/stg-spring-prop.xml",
+			"config/spring/stg/stg-spring-quartz-class.xml"
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 //			localWebContent	+"config/spring/spring-action.xml",
 //			localWebContent	+"config/spring/spring-api.xml",
