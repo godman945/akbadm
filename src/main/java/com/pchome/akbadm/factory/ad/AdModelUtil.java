@@ -249,9 +249,6 @@ public class AdModelUtil {
 				//備用mp4影片
 				if(sCurrentLine.indexOf("<#dad_201303070017>") >= 0){
 					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", mp4Path);
-//					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", "http://showstg.pchome.com.tw/pfp/img/video/2017_11_04/adv_201711040001.mp4");
-//					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", "http://showstg.pchome.com.tw/pfp/img/video/2018_01_30/adv_201801300001.mp4");
-					
 				}
 				//備用webm影片
 				if(sCurrentLine.indexOf("<#dad_201303070018>") >= 0){
@@ -275,6 +272,8 @@ public class AdModelUtil {
 						str = str.append("<script language=\"JavaScript\" src=\"http://alex.pchome.com.tw:8080/akbadm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}else if(System.getProperties().containsKey("akb.pfp.stg")){
 						str = str.append("<script language=\"JavaScript\" src=\"http://showstg.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
+					}else if(System.getProperties().containsKey("akb.pfp.stg")){
+						str = str.append("<script language=\"JavaScript\" src=\"http://showstg2.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}else{
 						str = str.append("<script language=\"JavaScript\" src=\"http://kdadm.pchome.com.tw/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}
