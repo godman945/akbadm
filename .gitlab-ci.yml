@@ -11,8 +11,8 @@ cache:
     - target/
     
 
-build:
-  stage: build-stg
+build-stg:
+  stage: build
   tags:
     - maven
   script:
