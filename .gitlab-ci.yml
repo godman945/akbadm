@@ -18,7 +18,8 @@ build:
   script:
    
     - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
-      
+  only:
+    - stg
    
 #test:
 #  stage: test
