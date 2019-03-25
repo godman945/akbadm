@@ -31,8 +31,8 @@ build-stg:
 
 deploy-stg:
    stage: deploy
-   #tags:
-     #- maven
+   tags:
+     - maven
    script:
      - ls
      - ansible showstg -m ping
