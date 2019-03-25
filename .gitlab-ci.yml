@@ -1,6 +1,6 @@
 #image: maven:latest
 image: maven:3.6.0-jdk-11
-entrypoint: ["/bin/bash"]
+  entrypoint: ["/bin/bash"]
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
