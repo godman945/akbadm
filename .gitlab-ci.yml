@@ -36,7 +36,7 @@ deploy-stg:
    tags:
      - maven
    script:
-     - ls
+     - rsync
     # - ansible showstg -m ping
    only:
      - stg
