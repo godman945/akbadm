@@ -12,7 +12,7 @@ cache:
     
 
 build:
-  stage: build
+  stage: build-stg
   tags:
     - maven
   script:
