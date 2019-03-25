@@ -2,7 +2,8 @@
 <configuration status="OFF">
     <appenders>
         <Console name="stdout" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%-5level] [%class{36}]%M(%L) %msg%xEx%n"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}{GMT+8}] [%-5level] [%class{36}]%M(%L) %msg%xEx%n"/>
+           
         </Console>
         
         <RollingRandomAccessFile name="akbAdmAppender"	immediateFlush="true" fileName="/home/webuser/akb/log/adm/adm.log"
