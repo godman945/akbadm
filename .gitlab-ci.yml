@@ -1,7 +1,7 @@
 #image: maven:latest
 image: 
-  #name: maven:3.6.0-jdk-11
-  name: csanchez/ansible-maven
+  name: maven:3.6.0-jdk-11
+  #name: csanchez/ansible-maven
   #entrypoint: ["/bin/bash"]
 
 variables:
