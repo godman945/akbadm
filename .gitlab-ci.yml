@@ -1,7 +1,7 @@
 #image: maven:latest
 image: 
-  name: maven:3.6.0-jdk-11
-  #name: csanchez/ansible-maven
+  #name: maven:3.6.0-jdk-11
+  name: mvn-jdk11-ansible
   #entrypoint: ["/bin/bash"]
 
 variables:
@@ -20,8 +20,9 @@ build-stg:
   tags:
     - maven
   script:
-    - ls target/
-    - scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
+    - cd target
+    - pwd
+    #- scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
     
     
     #- ansible showstg -m ping
