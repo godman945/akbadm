@@ -1,8 +1,6 @@
 #image: maven:latest
-image: 
-  #name: maven:3.6.0-jdk-11
-  name: mvn-jdk11-ansible:latest
-  #entrypoint: ["/bin/bash"]
+image: mvn-jdk11-ansible:latest
+ 
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
