@@ -25,9 +25,6 @@
 				<artifactId>maven-war-plugin</artifactId>
 				<configuration>
 					<failOnMissingWebXml>false</failOnMissingWebXml>
-					<packagingExcludes>  
-			            /*
-			        </packagingExcludes>  
 				</configuration>
 			</plugin>
 			<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <version>3.6.2</version> 
