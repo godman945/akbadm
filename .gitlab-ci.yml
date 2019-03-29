@@ -1,8 +1,6 @@
 #image: maven:latest
-image: 
-  name: maven:3.6.0-jdk-11
-  #name: csanchez/ansible-maven
-  #entrypoint: ["/bin/bash"]
+image: nico19732001/mvn-jdk11-ansible
+ 
 
 variables:
   MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
@@ -20,11 +18,12 @@ build-stg:
   tags:
     - maven
   script:
-    - ls target/
-    - scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
+    - cd target
+    - pwd
+    #- scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
     
     
-    #- ansible showstg -m ping
+    - ansible --version
     #- mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
   only:
     - stg
