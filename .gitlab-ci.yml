@@ -12,7 +12,7 @@ cache:
   paths:
     - .m2/repository/
     - target/
-    - ansible-config/
+    
  
     
 
@@ -23,22 +23,8 @@ build-stg:
     - maven
   script:
     
-    #- scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
-    
-    - cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
-    - cp ansible-config/hosts /etc/ansible/hosts
-    
-    #- cat .ansible.cfg
-    #- cat /builds/akb/akbadm/ansible-config/hosts
-    #- cd ansible-config
-    #- pwd
-    #- cd
-    #- cat ansible-config/hosts
-    #- ansible --version
-    - cd ansible-config
-    - cat playbook.yml
-    - ansible-playbook playbook.yml -f 10 
-    #- mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
+   
+    - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
   only:
     - stg
    
@@ -49,12 +35,17 @@ build-stg:
 #  script:
 #    - mvn $MAVEN_CLI_OPTS test
 
-#deploy-stg:
-#   stage: deploy
-#   tags:
-#     - maven
-#   script:
-#     - rsync
-#    # - ansible showstg -m ping
-#   only:
-#     - stg
+deploy-stg:
+   stage: deploy
+   tags:
+     - maven
+   script:
+     - cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
+     - cp ansible-config/hosts /etc/ansible/hosts
+    
+   
+     - cd ansible-config
+     - cat playbook.yml
+     - ansible-playbook playbook.yml -f 10 
+   only:
+     - stg
