@@ -1,0 +1,9 @@
+- hosts: stg
+  tasks:
+    - name: test ping
+      ping:
+      register: message
+
+    - name: pring message
+      debug:
+        msg: "{{ message }}"

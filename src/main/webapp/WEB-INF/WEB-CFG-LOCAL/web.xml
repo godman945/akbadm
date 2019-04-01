@@ -19,41 +19,71 @@
     <url-pattern>/*</url-pattern>
   </filter-mapping>
     
-    <!-- hibernate filter -->
-  <filter>
-    <filter-name>OpenSessionInViewFilter</filter-name>
-    <filter-class>com.pchome.spring.hibernate.filter.MyOpenSessionInViewFilter</filter-class>
-    <init-param>
-      <param-name>singleSession</param-name>
-      <param-value>true</param-value>
-    </init-param>
-  </filter>
-  <filter-mapping>
-    <filter-name>OpenSessionInViewFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
-  <filter>
-    <filter-name>struts2-cleanup</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
-  </filter>
+   <!-- hibernate filter -->
+    <filter>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+       <!--   <filter-class>com.pchome.spring.hibernate.filter.MyOpenSessionInViewFilter</filter-class>-->
+       <!-- -->  <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class> 
+       
+        <!-- singleSession預設為true,若設為false則等於沒用OpenSessionInView -->
+        <init-param>
+            <param-name>singleSession</param-name>
+            <param-value>true</param-value>
+        </init-param>
+        
+         <init-param>
+            <param-name>flushMode</param-name>
+            <param-value>AUTO</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>OpenSessionInViewFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     
-    <!-- Struts2 filter -->
-  <filter-mapping>
-    <filter-name>struts2-cleanup</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
+  <!-- Struts2 filter -->
+    <!-- 舊的寫法，更新元件後會有問題 -->
+    <!--
+    <filter>
+        <filter-name>struts2-cleanup</filter-name>
+        <filter-class>org.apache.struts2.dispatcher.ActionContextCleanUp</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>struts2-cleanup</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    -->
+	<filter>
+		<filter-name>struts-prepare</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsPrepareFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts-prepare</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>struts-execute</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.filter.StrutsExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts-execute</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
     
     <!-- define Struts2 -->
-  <filter>
-    <filter-name>struts2</filter-name>
-    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>struts2</filter-name>
-    <url-pattern>/*</url-pattern>
-    <dispatcher>REQUEST</dispatcher>
-    <dispatcher>FORWARD</dispatcher>
-  </filter-mapping>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.filter.StrutsPrepareAndExecuteFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.html</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>ERROR</dispatcher>
+	</filter-mapping>
     
     <!-- FreeMarker -->
   <servlet>
@@ -94,7 +124,7 @@
     <url-pattern>*.ftl</url-pattern>
   </servlet-mapping>
     
-    <!-- define log4j -->
+    <!-- define log4j 
   <context-param>
     <param-name>webAppRootKey</param-name>
     <param-value>akb.adm.local</param-value>
@@ -110,7 +140,7 @@
   <listener>
     <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
   </listener>
-       
+       -->
     <!-- define Spring -->
   <context-param>
     <param-name>contextConfigLocation</param-name>
@@ -122,6 +152,15 @@
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener>
+   <context-param>
+        <param-name>log4jContextName</param-name>
+        <param-value>star</param-value>
+    </context-param>
+    <context-param>
+        <param-name>log4jConfiguration</param-name>
+        <param-value>classpath:profiles/log4j2.xml</param-value>
+    </context-param>
+  
   <error-page>
     <error-code>404</error-code>
     <location>/pageNotFound.html</location>

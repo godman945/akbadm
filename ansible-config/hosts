@@ -1,0 +1,2 @@
+[stg]
+showstg2.mypchome.com.tw ansible_ssh_user=webuser ansible_ssh_pass=7e5nL0H

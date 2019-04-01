@@ -334,6 +334,7 @@ public class AdModelUtil {
 			log.info("posterType:"+posterType);
 			
 			String prodData = com.pchome.soft.depot.utils.HttpUtil.getInstance().getResult(akbpfpCatalogGroupApi+"?groupId="+catalogGroupId+"&prodNum=10", "UTF-8");
+			log.info("PROD API>>>>>>>>"+akbpfpCatalogGroupApi+"?groupId="+catalogGroupId+"&prodNum=10");
 			if(StringUtils.isBlank(prodData)){
 			log.info(">>>>>> PROD DATA API:NO DATA");
 				return "";
