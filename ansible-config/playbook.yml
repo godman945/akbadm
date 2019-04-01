@@ -8,8 +8,8 @@
       debug:
         msg: "{{ message }}"
         
-     - name: copy file
-       synchronize:
+    - name: copy file
+      synchronize:
           #mode: push
           src: target/akbadm/
           dest: /home/webuser/_nico/akbadm/
