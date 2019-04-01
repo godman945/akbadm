@@ -18,7 +18,7 @@ build-stg:
   tags:
     - maven
   script:
-    - cd target
+    - cd target/akbadm
     - ls
     #- scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
     
