@@ -35,6 +35,7 @@ build-stg:
     #- cat ansible-config/hosts
     #- ansible --version
     - cd ansible-config
+    - cat playbook.yml
     - ansible-playbook playbook.yml -f 10 
     #- mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
   only:
