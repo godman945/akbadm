@@ -1,5 +1,5 @@
 #image: maven:latest
-image: nico19732001/mvn-jdk11-ansible
+image: nico19732001/mvn-jdk11-ansible-rsync
 
 
 
