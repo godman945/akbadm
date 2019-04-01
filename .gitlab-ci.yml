@@ -23,6 +23,8 @@ build-stg:
     
     - cp ansible-config/ansible.cfg .ansible.cfg
     - ls -all
+    - cat .ansible.cfg
+    - cat /build/akb/akbadm/ansible-config/hosts
     #- cd ansible-config
     #- pwd
     #- cd
