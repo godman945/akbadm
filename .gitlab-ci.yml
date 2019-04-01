@@ -21,9 +21,9 @@ build-stg:
     
     #- scp -r target/akbadm webuser@showstg2.mypchome.com.tw:/home/webuser/_nico/akbadm
     
-    
+    - cp ansible-config/ansible.cfg .ansible.cfg
     - ansible --version
-    - cd ansible-config|ansible-playbook playbook.yml -f 10 
+    - ansible-playbook ansible-config/playbook.yml -f 10 
     #- mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
   only:
     - stg
