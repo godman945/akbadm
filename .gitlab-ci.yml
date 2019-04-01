@@ -3,16 +3,11 @@ image: nico19732001/mvn-jdk11-ansible
 
 
 before_script:
-  ##
-  ## Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the
-  ## following two lines.
-  ##
-
-  - echo "$SSH_KNOWN_HOSTS" 
-  - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-  - chmod 644 ~/.ssh/known_hosts
-  - cat ~/.ssh/known_hosts
-
+   - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+   - eval $(ssh-agent -s)
+   - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+   - mkdir -p ~/.ssh
+   - chmod 700 ~/.ssh
  
 
 variables:
