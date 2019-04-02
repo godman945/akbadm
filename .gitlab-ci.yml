@@ -44,17 +44,17 @@ build-stg:
 #  script:
 #    - mvn $MAVEN_CLI_OPTS test
 
-deploy-stg:
-   stage: deploy
-   tags:
-     - maven
-   script:
-     - cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
-     - cp ansible-config/hosts /etc/ansible/hosts
+#deploy-stg:
+#   stage: deploy
+#   tags:
+#     - maven
+#   script:
+#     - cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
+#     - cp ansible-config/hosts /etc/ansible/hosts
     
    
-     - cd ansible-config
-     - cat playbook.yml
-     - ansible-playbook playbook.yml -f 10 
-   only:
-     - stg
+#     - cd ansible-config
+#     - cat playbook.yml
+#     - ansible-playbook playbook.yml -f 10 
+#   only:
+#     - stg
