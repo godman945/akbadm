@@ -10,9 +10,16 @@ variables:
 
 #cache:
 artifacts:
-  paths:
-    - maven-config/repository/
-    - target/
+   name: "vendor"
+   untracked: true
+   expire_in: 60 mins
+   paths:
+      - maven-config/repository/
+      - target/
+#artifacts:
+#  paths:
+#    - maven-config/repository/
+#    - target/
     
  
     
