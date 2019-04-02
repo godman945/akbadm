@@ -8,7 +8,8 @@ variables:
   MAVEN_CLI_OPTS: "-s maven-config/settings.xml --batch-mode"
   MAVEN_OPTS: "-Dmaven.repo.local=maven-config/repository"
 
-cache:
+#cache:
+artifacts:
   paths:
     - maven-config/repository/
     - target/
