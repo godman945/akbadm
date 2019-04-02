@@ -5,12 +5,12 @@ image: nico19732001/mvn-jdk11-ansible-rsync
 
 
 variables:
-  MAVEN_CLI_OPTS: "-s .m2/settings.xml --batch-mode"
-  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+  MAVEN_CLI_OPTS: "-s maven-config/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=maven-config/repository"
 
 cache:
   paths:
-    - .m2/repository/
+    - maven-config/repository/
     - target/
     
  
