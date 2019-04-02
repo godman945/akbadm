@@ -14,6 +14,10 @@
           dest: /home/webuser/_nico/akbadm/
           
     - name: restart tomcat
-      command: sudo systemstl restart tomcat
+      become: yes
+      become_user: webuser
+      become_method: sudo
+      command: sudo systemctl restart tomcat
+
         
 
