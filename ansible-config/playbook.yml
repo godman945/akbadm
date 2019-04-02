@@ -12,5 +12,8 @@
       synchronize:
           src: /builds/akb/akbadm/target/akbadm/
           dest: /home/webuser/_nico/akbadm/
+          
+    - name: restart tomcat
+      command: sudo systemstl restart tomcat
         
 
