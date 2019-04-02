@@ -9,13 +9,7 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=maven-config/repository"
 
 #cache:
-artifacts:
-   name: "vendor"
-   untracked: true
-   expire_in: 60 mins
-   paths:
-      - maven-config/repository/
-      - target/
+
 #artifacts:
 #  paths:
 #    - maven-config/repository/
@@ -31,6 +25,13 @@ build-stg:
     - maven
   script:
     - mvn $MAVEN_CLI_OPTS clean package
+  artifacts:
+    name: "vendor"
+    untracked: true
+    expire_in: 60 mins
+    paths:
+      - maven-config/repository/
+      - target/
     #- ls
     #- mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
     #- cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
