@@ -10,7 +10,7 @@
         
     - name: copy file
       synchronize:
-          src: target/akbadm/
+          src: /builds/akb/akbadm/target/akbadm/
           dest: /home/webuser/_nico/akbadm/
         
 
