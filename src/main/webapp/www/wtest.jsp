@@ -1839,16 +1839,16 @@
     </div>
     
  <script language="javascript">
-pad_width=336;
-pad_height=280;
+pad_width=1400;
+pad_height=160;
 pad_customerId="PFBC20150519001";
 pad_positionId="PFBP201904100001S";
 </script>
 <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/pcadshowstg.js"></script>
    
  <script language="javascript">
-pad_width=350;
-pad_height=292;
+pad_width=1400;
+pad_height=60;
 pad_customerId="PFBC20150519001";
 pad_positionId="PFBP201904100002S";
 </script>
