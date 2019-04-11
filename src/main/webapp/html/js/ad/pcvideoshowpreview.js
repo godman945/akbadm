@@ -69,15 +69,16 @@ function() {
                     }
                 }
                 var css = document.createElement("style");
-               
-//                console.log(document.getElementById('verticalAd'));
                 
                 css.type = "text/css";
+                if((this.width == 1400)){
+                	this.width = 970;
+                	this.height = 250;
+                }
+                
                 var adratio = this.height / this.width;
                 var adw = null;
                
-                console.log(resizeFlag);
-                
                 if (resizeFlag == 'true') {
                     adw = 250;
                     var adh = adw * adratio;
@@ -92,9 +93,10 @@ function() {
                     var imgWidth;
                     var imgHeight;
                     var specialTemplate = false;
-                    if ((this.width == 970 && this.height == 250) || this.width == 950 && this.height == 390) {
+                    if ((this.width == 970 && this.height == 250) || (this.width == 950 && this.height == 390)) {
                         specialTemplate = true;
                     }
+                    
                     var previewRatio = adw / this.width;
                     var previewHeight = previewRatio * this.height;
                     var barhRatio = barh / this.height;

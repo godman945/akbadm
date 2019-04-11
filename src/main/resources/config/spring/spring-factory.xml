@@ -579,6 +579,7 @@
 		 <property name="akbpfpCatalogGroupApi" value="${akbpfp.catalog.group.api}" />
 		 <property name="pfpPhotoPath" value="${server.pfp.photo.path}" />
 		 <property name="pfpServer" value="${akbpfp.server}" />
+		 <property name="active" value="${spring.profiles.active}" />
     </bean>
     
     <!-- 商品廣告-檔案上傳(一般購物類) -->

@@ -8,7 +8,6 @@ import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,15 +17,16 @@ import javax.imageio.ImageIO;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.pchome.akbadm.db.pojo.PfpAdVideoSource;
 import com.pchome.akbadm.db.service.advideo.IPfpAdVideoSourceService;
-import com.pchome.enumerate.ad.EnumProdAdBtnText;
 import com.pchome.soft.depot.utils.JredisUtil;
+
 
 public class AdModelUtil {
 	
@@ -37,6 +37,8 @@ public class AdModelUtil {
 	private String akbpfpCatalogGroupApi;
 	private String pfpPhotoPath;
 	private String pfpServer;
+	
+	private String active;
 	
 	public static AdModelUtil getInstance(){
 		return adModelUtil;
@@ -268,13 +270,11 @@ public class AdModelUtil {
 				
 				//取代js
 				if(sCurrentLine.indexOf("pcadscript") >=0){
-					if(System.getProperties().containsKey("akb.pfp.local")){
+					if(active.equals("local")) {
 						str = str.append("<script language=\"JavaScript\" src=\"http://alex.pchome.com.tw:8080/akbadm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
-					}else if(System.getProperties().containsKey("akb.pfp.stg")){
-						str = str.append("<script language=\"JavaScript\" src=\"http://showstg.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
-					}else if(System.getProperties().containsKey("akb.pfp.stg")){
+					}else if(active.equals("stg")) {
 						str = str.append("<script language=\"JavaScript\" src=\"http://showstg2.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
-					}else{
+					}else {
 						str = str.append("<script language=\"JavaScript\" src=\"http://kdadm.pchome.com.tw/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}
 					continue;
@@ -698,6 +698,14 @@ public class AdModelUtil {
 
 	public void setPfpServer(String pfpServer) {
 		this.pfpServer = pfpServer;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
 	}
 
 	
