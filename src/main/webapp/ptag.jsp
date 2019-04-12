@@ -57,7 +57,7 @@ ga("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_valu
 
 
 
-<!-- -->
+<!-- 
 <script id =""  type="text/javascript">
 (function(window, document, script, g, h, a, m) {
 	window.dataLayer = window.dataLayer || []; 
@@ -79,7 +79,7 @@ ga("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_valu
     ptag("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_value":"WEFWE","user_link_url":""});
 })(window,document,'script','html/js/ptag/ptag.js','ptag');
 </script>
-        
+     -->   
         
 
 
