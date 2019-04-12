@@ -5,6 +5,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link href="favicon.ico?v=1.0" rel="shortcut icon">
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PR7VQ9H');</script>
+<!-- End Google Tag Manager -->
 </head>
 <%
 String qv="";
@@ -19,13 +27,7 @@ qv1=new String( qv.getBytes("ISO-8859-1"),"UTF-8");
 //String qv2=java.net.URLEncoder.encode(qv1);
 }
 %>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PR7VQ9H');</script>
-<!-- End Google Tag Manager -->
+
 
 <body>
 <!-- Google Tag Manager (noscript) -->
@@ -57,7 +59,7 @@ ga("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_valu
 
 
 
-<!-- 
+<!--   
 <script id =""  type="text/javascript">
 (function(window, document, script, g, h, a, m) {
 	window.dataLayer = window.dataLayer || []; 
@@ -71,15 +73,13 @@ ga("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_valu
     a.async = 1;
     a.src = g;
     m.parentNode.insertBefore(a, m);
-    
-    
-    ptag({"paid":"1543389867659"});
-    ptag("event","convert",{"convert_id":"CAC_TEST9","convert_price":"40","pa_em_value":"WEFWE","user_link_url":""},'click');
-    ptag({"paid":"99999999999"});
-    ptag("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_value":"WEFWE","user_link_url":""});
 })(window,document,'script','html/js/ptag/ptag.js','ptag');
+ptag({"paid":"1543389867659"});
+ptag("event","convert",{"convert_id":"CAC_TEST9","convert_price":"40","pa_em_value":"WEFWE","user_link_url":""},'click');
+ptag({"paid":"99999999999"});
+ptag("event","convert",{"convert_id":"CAC_TEST10","convert_price":"40","pa_em_value":"WEFWE","user_link_url":""});
 </script>
-     -->   
+      -->
         
 
 
