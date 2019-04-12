@@ -1,5 +1,14 @@
-window.onload = function() {
-    (function(name, context, definition) {
+	var xhr = new XMLHttpRequest();
+    xhr.open("POST", "http://pacl.pchome.com.tw/api/collect2", true);
+    xhr.withCredentials = true;
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {}
+    };
+    xhr.send();
+    
+    
+	(function(name, context, definition) {
         'use strict';
         if (typeof window.define === 'function' && window.define.amd) {
             window.define(definition)
@@ -27,6 +36,9 @@ window.onload = function() {
             this.nativeForEach = Array.prototype.forEach;
             this.nativeMap = Array.prototype.map
         };
+        
+        
+        
         PCHOMEFingerprint.prototype = {
             extend: function(source, target) {
                 if (source == null) {
@@ -301,6 +313,116 @@ window.onload = function() {
                 h = this.x64Xor(h, [0, h[0] >>> 1]);
                 return h
             },
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            jsFontsKey : function() {
+            	var options = {
+                		fonts: {extendedJsFonts: true}, 
+                    	excludes: {userAgent: true,language: true}
+                }
+            	
+                var baseFonts = ['monospace', 'sans-serif', 'serif'];
+                var fontList = [
+                    'Andale Mono', 'Arial', 'Arial Black', 'Arial Hebrew', 'Arial MT', 'Arial Narrow', 'Arial Rounded MT Bold', 'Arial Unicode MS',
+                    'Bitstream Vera Sans Mono', 'Book Antiqua', 'Bookman Old Style',
+                    'Calibri', 'Cambria', 'Cambria Math', 'Century', 'Century Gothic', 'Century Schoolbook', 'Comic Sans', 'Comic Sans MS', 'Consolas', 'Courier', 'Courier New',
+                    'Geneva', 'Georgia',
+                    'Helvetica', 'Helvetica Neue',
+                    'Impact',
+                    'Lucida Bright', 'Lucida Calligraphy', 'Lucida Console', 'Lucida Fax', 'LUCIDA GRANDE', 'Lucida Handwriting', 'Lucida Sans', 'Lucida Sans Typewriter', 'Lucida Sans Unicode',
+                    'Microsoft Sans Serif', 'Monaco', 'Monotype Corsiva', 'MS Gothic', 'MS Outlook', 'MS PGothic', 'MS Reference Sans Serif', 'MS Sans Serif', 'MS Serif', 'MYRIAD', 'MYRIAD PRO',
+                    'Palatino', 'Palatino Linotype',
+                    'Segoe Print', 'Segoe Script', 'Segoe UI', 'Segoe UI Light', 'Segoe UI Semibold', 'Segoe UI Symbol',
+                    'Tahoma', 'Times', 'Times New Roman', 'Times New Roman PS', 'Trebuchet MS',
+                    'Verdana', 'Wingdings', 'Wingdings 2', 'Wingdings 3'
+                ];
+
+                if (options.fonts.extendedJsFonts) {
+                    var extendedFontList = [
+                        'Abadi MT Condensed Light', 'Academy Engraved LET', 'ADOBE CASLON PRO', 'Adobe Garamond', 'ADOBE GARAMOND PRO', 'Agency FB', 'Aharoni', 'Albertus Extra Bold', 'Albertus Medium', 'Algerian', 'Amazone BT', 'American Typewriter',
+                        'American Typewriter Condensed', 'AmerType Md BT', 'Andalus', 'Angsana New', 'AngsanaUPC', 'Antique Olive', 'Aparajita', 'Apple Chancery', 'Apple Color Emoji', 'Apple SD Gothic Neo', 'Arabic Typesetting', 'ARCHER',
+                        'ARNO PRO', 'Arrus BT', 'Aurora Cn BT', 'AvantGarde Bk BT', 'AvantGarde Md BT', 'AVENIR', 'Ayuthaya', 'Bandy', 'Bangla Sangam MN', 'Bank Gothic', 'BankGothic Md BT', 'Baskerville',
+                        'Baskerville Old Face', 'Batang', 'BatangChe', 'Bauer Bodoni', 'Bauhaus 93', 'Bazooka', 'Bell MT', 'Bembo', 'Benguiat Bk BT', 'Berlin Sans FB', 'Berlin Sans FB Demi', 'Bernard MT Condensed', 'BernhardFashion BT', 'BernhardMod BT', 'Big Caslon', 'BinnerD',
+                        'Blackadder ITC', 'BlairMdITC TT', 'Bodoni 72', 'Bodoni 72 Oldstyle', 'Bodoni 72 Smallcaps', 'Bodoni MT', 'Bodoni MT Black', 'Bodoni MT Condensed', 'Bodoni MT Poster Compressed',
+                        'Bookshelf Symbol 7', 'Boulder', 'Bradley Hand', 'Bradley Hand ITC', 'Bremen Bd BT', 'Britannic Bold', 'Broadway', 'Browallia New', 'BrowalliaUPC', 'Brush Script MT', 'Californian FB', 'Calisto MT', 'Calligrapher', 'Candara',
+                        'CaslonOpnface BT', 'Castellar', 'Centaur', 'Cezanne', 'CG Omega', 'CG Times', 'Chalkboard', 'Chalkboard SE', 'Chalkduster', 'Charlesworth', 'Charter Bd BT', 'Charter BT', 'Chaucer',
+                        'ChelthmITC Bk BT', 'Chiller', 'Clarendon', 'Clarendon Condensed', 'CloisterBlack BT', 'Cochin', 'Colonna MT', 'Constantia', 'Cooper Black', 'Copperplate', 'Copperplate Gothic', 'Copperplate Gothic Bold',
+                        'Copperplate Gothic Light', 'CopperplGoth Bd BT', 'Corbel', 'Cordia New', 'CordiaUPC', 'Cornerstone', 'Coronet', 'Cuckoo', 'Curlz MT', 'DaunPenh', 'Dauphin', 'David', 'DB LCD Temp', 'DELICIOUS', 'Denmark',
+                        'DFKai-SB', 'Didot', 'DilleniaUPC', 'DIN', 'DokChampa', 'Dotum', 'DotumChe', 'Ebrima', 'Edwardian Script ITC', 'Elephant', 'English 111 Vivace BT', 'Engravers MT', 'EngraversGothic BT', 'Eras Bold ITC', 'Eras Demi ITC', 'Eras Light ITC', 'Eras Medium ITC',
+                        'EucrosiaUPC', 'Euphemia', 'Euphemia UCAS', 'EUROSTILE', 'Exotc350 Bd BT', 'FangSong', 'Felix Titling', 'Fixedsys', 'FONTIN', 'Footlight MT Light', 'Forte',
+                        'FrankRuehl', 'Fransiscan', 'Freefrm721 Blk BT', 'FreesiaUPC', 'Freestyle Script', 'French Script MT', 'FrnkGothITC Bk BT', 'Fruitger', 'FRUTIGER',
+                        'Futura', 'Futura Bk BT', 'Futura Lt BT', 'Futura Md BT', 'Futura ZBlk BT', 'FuturaBlack BT', 'Gabriola', 'Galliard BT', 'Gautami', 'Geeza Pro', 'Geometr231 BT', 'Geometr231 Hv BT', 'Geometr231 Lt BT', 'GeoSlab 703 Lt BT',
+                        'GeoSlab 703 XBd BT', 'Gigi', 'Gill Sans', 'Gill Sans MT', 'Gill Sans MT Condensed', 'Gill Sans MT Ext Condensed Bold', 'Gill Sans Ultra Bold', 'Gill Sans Ultra Bold Condensed', 'Gisha', 'Gloucester MT Extra Condensed', 'GOTHAM', 'GOTHAM BOLD',
+                        'Goudy Old Style', 'Goudy Stout', 'GoudyHandtooled BT', 'GoudyOLSt BT', 'Gujarati Sangam MN', 'Gulim', 'GulimChe', 'Gungsuh', 'GungsuhChe', 'Gurmukhi MN', 'Haettenschweiler', 'Harlow Solid Italic', 'Harrington', 'Heather', 'Heiti SC', 'Heiti TC', 'HELV',
+                        'Herald', 'High Tower Text', 'Hiragino Kaku Gothic ProN', 'Hiragino Mincho ProN', 'Hoefler Text', 'Humanst 521 Cn BT', 'Humanst521 BT', 'Humanst521 Lt BT', 'Imprint MT Shadow', 'Incised901 Bd BT', 'Incised901 BT',
+                        'Incised901 Lt BT', 'INCONSOLATA', 'Informal Roman', 'Informal011 BT', 'INTERSTATE', 'IrisUPC', 'Iskoola Pota', 'JasmineUPC', 'Jazz LET', 'Jenson', 'Jester', 'Jokerman', 'Juice ITC', 'Kabel Bk BT', 'Kabel Ult BT', 'Kailasa', 'KaiTi', 'Kalinga', 'Kannada Sangam MN',
+                        'Kartika', 'Kaufmann Bd BT', 'Kaufmann BT', 'Khmer UI', 'KodchiangUPC', 'Kokila', 'Korinna BT', 'Kristen ITC', 'Krungthep', 'Kunstler Script', 'Lao UI', 'Latha', 'Leelawadee', 'Letter Gothic', 'Levenim MT', 'LilyUPC', 'Lithograph', 'Lithograph Light', 'Long Island',
+                        'Lydian BT', 'Magneto', 'Maiandra GD', 'Malayalam Sangam MN', 'Malgun Gothic',
+                        'Mangal', 'Marigold', 'Marion', 'Marker Felt', 'Market', 'Marlett', 'Matisse ITC', 'Matura MT Script Capitals', 'Meiryo', 'Meiryo UI', 'Microsoft Himalaya', 'Microsoft JhengHei', 'Microsoft New Tai Lue', 'Microsoft PhagsPa', 'Microsoft Tai Le',
+                        'Microsoft Uighur', 'Microsoft YaHei', 'Microsoft Yi Baiti', 'MingLiU', 'MingLiU_HKSCS', 'MingLiU_HKSCS-ExtB', 'MingLiU-ExtB', 'Minion', 'Minion Pro', 'Miriam', 'Miriam Fixed', 'Mistral', 'Modern', 'Modern No. 20', 'Mona Lisa Solid ITC TT', 'Mongolian Baiti',
+                        'MONO', 'MoolBoran', 'Mrs Eaves', 'MS LineDraw', 'MS Mincho', 'MS PMincho', 'MS Reference Specialty', 'MS UI Gothic', 'MT Extra', 'MUSEO', 'MV Boli',
+                        'Nadeem', 'Narkisim', 'NEVIS', 'News Gothic', 'News GothicMT', 'NewsGoth BT', 'Niagara Engraved', 'Niagara Solid', 'Noteworthy', 'NSimSun', 'Nyala', 'OCR A Extended', 'Old Century', 'Old English Text MT', 'Onyx', 'Onyx BT', 'OPTIMA', 'Oriya Sangam MN',
+                        'OSAKA', 'OzHandicraft BT', 'Palace Script MT', 'Papyrus', 'Parchment', 'Party LET', 'Pegasus', 'Perpetua', 'Perpetua Titling MT', 'PetitaBold', 'Pickwick', 'Plantagenet Cherokee', 'Playbill', 'PMingLiU', 'PMingLiU-ExtB',
+                        'Poor Richard', 'Poster', 'PosterBodoni BT', 'PRINCETOWN LET', 'Pristina', 'PTBarnum BT', 'Pythagoras', 'Raavi', 'Rage Italic', 'Ravie', 'Ribbon131 Bd BT', 'Rockwell', 'Rockwell Condensed', 'Rockwell Extra Bold', 'Rod', 'Roman', 'Sakkal Majalla',
+                        'Santa Fe LET', 'Savoye LET', 'Sceptre', 'Script', 'Script MT Bold', 'SCRIPTINA', 'Serifa', 'Serifa BT', 'Serifa Th BT', 'ShelleyVolante BT', 'Sherwood',
+                        'Shonar Bangla', 'Showcard Gothic', 'Shruti', 'Signboard', 'SILKSCREEN', 'SimHei', 'Simplified Arabic', 'Simplified Arabic Fixed', 'SimSun', 'SimSun-ExtB', 'Sinhala Sangam MN', 'Sketch Rockwell', 'Skia', 'Small Fonts', 'Snap ITC', 'Snell Roundhand', 'Socket',
+                        'Souvenir Lt BT', 'Staccato222 BT', 'Steamer', 'Stencil', 'Storybook', 'Styllo', 'Subway', 'Swis721 BlkEx BT', 'Swiss911 XCm BT', 'Sylfaen', 'Synchro LET', 'System', 'Tamil Sangam MN', 'Technical', 'Teletype', 'Telugu Sangam MN', 'Tempus Sans ITC',
+                        'Terminal', 'Thonburi', 'Traditional Arabic', 'Trajan', 'TRAJAN PRO', 'Tristan', 'Tubular', 'Tunga', 'Tw Cen MT', 'Tw Cen MT Condensed', 'Tw Cen MT Condensed Extra Bold',
+                        'TypoUpright BT', 'Unicorn', 'Univers', 'Univers CE 55 Medium', 'Univers Condensed', 'Utsaah', 'Vagabond', 'Vani', 'Vijaya', 'Viner Hand ITC', 'VisualUI', 'Vivaldi', 'Vladimir Script', 'Vrinda', 'Westminster', 'WHITNEY', 'Wide Latin',
+                        'ZapfEllipt BT', 'ZapfHumnst BT', 'ZapfHumnst Dm BT', 'Zapfino', 'Zurich BlkEx BT', 'Zurich Ex BT', 'ZWAdobeF'
+                    ];
+                    fontList = fontList.concat(extendedFontList);
+                };
+
+                fontList = fontList.concat(options.fonts.userDefinedFonts);
+
+                fontList = fontList.filter(function(font, position) {
+                    return fontList.indexOf(font) === position;
+                });
+
+                var testString = 'mmmmmmmmmmlli';
+
+                var testSize = '72px';
+
+                var h = document.getElementsByTagName('body')[0];
+
+                var baseFontsDiv = document.createElement('div');
+
+                var fontsDiv = document.createElement('div');
+
+                var defaultWidth = {};
+                var defaultHeight = {};
+
+                var createSpan = function() {
+                    var s = document.createElement('span');
+                    s.style.position = 'absolute';
+                    s.style.left = '-9999px';
+                    s.style.fontSize = testSize;
+                    s.style.fontStyle = 'normal';
+                    s.style.fontWeight = 'normal';
+                    s.style.letterSpacing = 'normal';
+                    s.style.lineBreak = 'auto';
+                    s.style.lineHeight = 'normal';
+                    s.style.textTransform = 'none';
+                    s.style.textAlign = 'left';
+                    s.style.textDecoration = 'none';
+                    s.style.textShadow = 'none';
+                    s.style.whiteSpace = 'normal';
+                    s.style.wordBreak = 'normal';
+                    s.style.wordSpacing = 'normal';
+                    s.innerHTML = testString;
+                    return s;
+                }
+            },
+            
+            
             x64hash128: function(key, seed) {
                 key = key || '';
                 seed = seed || 0;
@@ -401,6 +523,14 @@ window.onload = function() {
     var ec_stock_status = "";
     var pa_em_value = "";
     var pa_id = "";
+    
+    
+    
+    
+    
+    
+    
+    
     (function() {
         var click = null;
         var keys = [];
@@ -426,40 +556,66 @@ window.onload = function() {
         keys.push(language);
         keys.push(resolution);
         keys.push(cpu);
+        
+        
+//        var x64Add = PCHOMEFingerprint().x64Add;
+//        keys.push(getCanvasFp);
+//        keys.push(getWebglFp);
+//        keys.push(windowScreenColorDepth);
+//        keys.push(devicePixelRatio);
+//        keys.push(userAgent);
+//        keys.push(language);
+//        keys.push(resolution);
+//        keys.push(cpu);
+//        keys.push(x64Add);
         fig = PCHOMEFingerprint().x64hash128(keys.join('~~~'), 32);
-        doInitData();
-        doSendPaclData()
-    })()
-};
-var url = "http://pacl.pchome.com.tw/api/collect";
-var referer = document.referrer;
-var screen_x = screen.availWidth;
-var screen_y = screen.availHeight;
-var webUrl = location.href;
+        referer = encodeURIComponent(document.referrer);
+        screen_x = screen.availWidth;
+        screen_y = screen.availHeight;
+        webUrl = encodeURIComponent(location.href);
+        convert_click_flag = false;
+        
+        do_a(function(){
+        	doInitData();
+        	doSendPaclData();
+        });
+    })();
+var referer = "";
+var screen_x = "";
+var screen_y = "";
+var webUrl = "";
 var fig = "";
-var convert_click_flag = false;
+var convert_click_flag = null;
 var paclCodeObject = new Object();
-paclCodeObject["data"] = {};
+var ptagParamater = window.dataLayer;
+var paclCodeJson = null;
+
+
+var paclCodeObject = null;
+var ptagParamater = null;
+function do_a(callback){
+	paclCodeObject = new Object();
+	paclCodeObject["data"] = {};
+	ptagParamater = window.dataLayer;
+	if( typeof callback === 'function' ){
+		callback();
+	}
+}
 
 function doInitData() {
-	var source = document.getElementsByTagName("script");
-    for (var i=0, max = source.length; i < max; i++) {
-    	if(source[i].src.indexOf("http://") == 0 && source[i].src.indexOf("/ptag.js")){
-    		url = 'http://pacl.pchome.com.tw/api/collect';
-    	}else if(source[i].src.indexOf("https://") == 0 && source[i].src.indexOf("/ptag.js")){
-    		url = 'https://pacl.pchome.com.tw/api/collect';
-    	}
-    };
-	console.log(url);
-    var ptagParamater = window.dataLayer;
     var pa_id = "";
     ptagParamater.forEach(function(element) {
         var ptagType = element[0];
-        if (ptagType != 'event') {
-            if (ptagType == 'js') {} else {
-                pa_id = ptagType.paid
-            }
-        } else {
+        if ((element.length == 1 && element[0].paid == undefined) || (element.length == undefined)) {
+            return
+        }
+        if (element.length == 1 && element[0].paid != undefined) {
+            pa_id = ptagType.paid
+        }
+        if (element[0] == undefined) {
+            return
+        }
+        if (element[1] == 'convert' || element[1] == 'page_view' || element[1] == 'tracking') {
             var eventType = element[1];
             if (eventType == "page_view") {
                 page_view_opt1 = element[2].hasOwnProperty('op1') ? element[2].op1 : '';
@@ -524,7 +680,7 @@ function doSendPaclData() {
             pa_em_value = paclCodeObject.data[key].pa_em_value;
             pa_id = paclCodeObject.data[key].pa_id;
             if (!paclCodeObject.data[key].convert_click_flag) {
-                doConvert()
+            	doConvert()
             }
         }
         if (key.includes('tracking')) {
@@ -550,8 +706,12 @@ function doSendPaclData() {
 };
 
 function doConvert() {
+	var paclUrl = "https://pacl.pchome.com.tw/api/collect";
+	if(location.href.indexOf("http://")){
+		paclUrl = "http://pacl.pchome.com.tw/api/collect";
+	}
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    xhr.open("POST", paclUrl, true);
     xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
@@ -561,8 +721,12 @@ function doConvert() {
 };
 
 function doPageView() {
+	var paclUrl = "https://pacl.pchome.com.tw/api/collect";
+	if(location.href.indexOf("http://")){
+		paclUrl = "http://pacl.pchome.com.tw/api/collect";
+	}
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    xhr.open("POST", paclUrl, true);
     xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
@@ -572,8 +736,12 @@ function doPageView() {
 };
 
 function doTracking() {
+	var paclUrl = "https://pacl.pchome.com.tw/api/collect";
+	if(location.href.indexOf("http://")){
+		paclUrl = "http://pacl.pchome.com.tw/api/collect";
+	}
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", url, true);
+    xhr.open("POST", paclUrl, true);
     xhr.withCredentials = true;
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xhr.onreadystatechange = function() {
@@ -600,15 +768,32 @@ function pchome_click(link_url, blank_flag) {
             pa_em_value = paclCodeObject.data[key].pa_em_value;
             pa_id = paclCodeObject.data[key].pa_id;
             if (paclCodeObject.data[key].convert_click_flag) {
-                doConvert();
+                doConvert()
             }
         }
     }
-    
-    alert('SSSS');
     if (blank) {
-        window.open(link_url, '_blank')
+        window.open(link_url, '_0')
     } else {
         location.href = link_url
+    }
+}
+
+function pchome_click() {
+	do_a(function(){
+		doInitData();
+	});
+    for (var key in paclCodeObject.data) {
+        if (key.includes('convert')) {
+            convert_id = paclCodeObject.data[key].convert_id;
+            convert_price = paclCodeObject.data[key].convert_price;
+            convert_opt1 = paclCodeObject.data[key].convert_opt1;
+            convert_opt2 = paclCodeObject.data[key].convert_opt2;
+            pa_em_value = paclCodeObject.data[key].pa_em_value;
+            pa_id = paclCodeObject.data[key].pa_id;
+            if (paclCodeObject.data[key].convert_click_flag) {
+                doConvert()
+            }
+        }
     }
 }
