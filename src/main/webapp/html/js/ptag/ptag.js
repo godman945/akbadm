@@ -1,8 +1,9 @@
-console.log("---------");
-console.log(document);
-//document.addEventListener('load', function(event) {
-window.onload{
-	console.log(event);
+console.log('99999999');
+ var img = new Image();
+ img.src = 'http://pacl.pchome.com.tw/api/collect2';
+
+
+//window.onload = function() {
 	var ptagParamater = window.dataLayer;
 	var page_view_opt1 = "";
 	var page_view_opt2 = "";
@@ -121,7 +122,7 @@ window.onload{
 	        }
 	    })
 	    
-	    console.log(paclCodeObject);
+	    ;console.log(paclCodeObject);
 	};
 
 	function doSendPaclData() {
@@ -233,6 +234,6 @@ window.onload{
 	        }
 	    }
 	}
-}
+
 
 
