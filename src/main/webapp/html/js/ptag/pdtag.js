@@ -1,4 +1,3 @@
-var ptagParamater = window.dataLayer;
 var page_view_opt1 = "";
 var page_view_opt2 = "";
 var convert_opt1 = "";
@@ -17,14 +16,14 @@ var pa_id = "";
 var paclUrl = location.protocol+"//pacl.pchome.com.tw/api/collect";
 (function() {
     var click = null;
-    referer = document.referrer;
+    referer = encodeURIComponent(document.referrer);
     screen_x = screen.availWidth;
     screen_y = screen.availHeight;
-    webUrl = location.href;
+    webUrl = encodeURIComponent(location.href);
     convert_click_flag = false;
     do_a(function() {
         doInitData();
-        doSendPaclData()
+        doSendPaclData();
     })
 })();
 var referer = "";
@@ -34,17 +33,15 @@ var webUrl = "";
 var fig = "";
 var convert_click_flag = null;
 var paclCodeObject = new Object();
-var ptagParamater = window.dataLayer;
-var paclCodeJson = null;
+var ptagParamater = null
 var paclCodeObject = null;
-var ptagParamater = null;
 
 function do_a(callback) {
     paclCodeObject = new Object();
     paclCodeObject["data"] = {};
-    ptagParamater = window.dataLayer;
+    ptagParamater = window.ptag.q;
     if (typeof callback === 'function') {
-        callback()
+        callback();
     }
 }
 
