@@ -981,7 +981,7 @@ public class KernelJob {
                 	if(StringUtils.isBlank(youtubeMp4Url)){
                 		youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
                 	}
-                    adDetailBean.setAdDetailContent(youtubeMp4Url);
+                    adDetailBean.setAdDetailContent(youtubeMp4Url.trim());
                 }
                 // special rule
                 else if ("webm_url".equals(pfpAdDetail.getAdDetailId())) {
@@ -989,7 +989,7 @@ public class KernelJob {
                 	if(StringUtils.isBlank(youtubeWebmUrl)){
                 		youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
                 	}
-                    adDetailBean.setAdDetailContent(youtubeWebmUrl);
+                    adDetailBean.setAdDetailContent(youtubeWebmUrl.trim());
                 }
                 // refactor data structure
                 else if ("prod_list".equals(pfpAdDetail.getAdDetailId())) {
