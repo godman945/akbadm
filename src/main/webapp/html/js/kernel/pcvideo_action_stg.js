@@ -368,7 +368,7 @@
 			if(event != undefined){
 				video = document.getElementsByTagName("video")[0];
 				var adInfo = (JSON.parse(event.data)).adInfo;
-				console.log(adInfo);
+				console.log(JSON.stringify(adInfo));
 				
 				/*滾輪移動距離*/
 				var scrollTop = adInfo.scrollTop;
