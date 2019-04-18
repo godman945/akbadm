@@ -27,7 +27,7 @@ public class AdmFreeGiftDAO extends BaseDAO<AdmFreeGift, Integer> implements IAd
         list.add(openDate);
         list.add(EnumGiftSnoUsed.YES.getStatus());
 
-        return this.getHibernateTemplate().find(hql.toString(), list.toArray());
+        return (List<AdmFreeGift>) this.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class AdmFreeGiftDAO extends BaseDAO<AdmFreeGift, Integer> implements IAd
 
         list.add(actionId);
 
-        return this.getHibernateTemplate().find(hql.toString(), list.toArray());
+        return (List<AdmFreeGift>) this.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -58,6 +58,6 @@ public class AdmFreeGiftDAO extends BaseDAO<AdmFreeGift, Integer> implements IAd
 
         list.add(actionId);
 
-        return this.getHibernateTemplate().find(hql.toString(), list.toArray());
+        return (List<AdmFreeGift>) this.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

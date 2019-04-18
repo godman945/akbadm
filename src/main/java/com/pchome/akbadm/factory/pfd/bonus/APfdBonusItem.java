@@ -8,8 +8,8 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfdBonusRecord;
 import com.pchome.akbadm.db.pojo.PfdContract;
@@ -29,7 +29,7 @@ import com.pchome.soft.util.DateValueUtil;
  */
 public abstract class APfdBonusItem {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	// 獎金計算項目
 	public abstract EnumPfdBonusItem getEnumPfdBonusItem();

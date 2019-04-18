@@ -23,7 +23,7 @@ public class PfbxBankDAO extends BaseDAO <PfbxBank, Integer> implements IPfbxBan
 		Condition.add(customerId);
 		Condition.add("0");
 		
-		return super.getHibernateTemplate().find(hql.toString() , Condition.toArray());
+		return (List<PfbxBank>) super.getHibernateTemplate().find(hql.toString() , Condition.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -42,7 +42,7 @@ public class PfbxBankDAO extends BaseDAO <PfbxBank, Integer> implements IPfbxBan
 		
 		List<PfbxBank> bankList=null;
 		PfbxBank pfbxBank=null;
-		bankList=super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		bankList=(List<PfbxBank>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 		
 		if(bankList.size()>0){
 			pfbxBank=bankList.get(0);

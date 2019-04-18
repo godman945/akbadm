@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmClientCountReport;
@@ -26,7 +26,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sql = new StringBuffer();
 
@@ -103,7 +103,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
     	hql.append(" where transDate = :transDate ");
 
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("transDate", reportDate);
 
     	 Double result = (Double) query.uniqueResult();
@@ -116,7 +116,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sql = new StringBuffer();
 
@@ -163,7 +163,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
 		List<AdmClientCountReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmClientCountReportVO>>() {
 				@Override
-                public List<AdmClientCountReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                public List<AdmClientCountReportVO> doInHibernate(Session session) throws HibernateException {
 
 					List<AdmClientCountReportVO> resultData = new ArrayList<AdmClientCountReportVO>();
 					DecimalFormat df1 = new DecimalFormat("###,###,###,###");
@@ -373,7 +373,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
 		List<AdmClientCountForNext30DayReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmClientCountForNext30DayReportVO>>() {
 				@Override
-                public List<AdmClientCountForNext30DayReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                public List<AdmClientCountForNext30DayReportVO> doInHibernate(Session session) throws HibernateException {
 
 					List<AdmClientCountForNext30DayReportVO> resultData = new ArrayList<AdmClientCountForNext30DayReportVO>();
 					DecimalFormat df1 = new DecimalFormat("###,###,###,###");
@@ -462,7 +462,7 @@ public class AdmClientCountReportDAO extends BaseDAO<AdmClientCountReport, Integ
 		List<AdmCountReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmCountReportVO>>() {
 				@Override
-                public List<AdmCountReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                public List<AdmCountReportVO> doInHibernate(Session session) throws HibernateException {
 
 					List<AdmCountReportVO> resultData = new ArrayList<AdmCountReportVO>();
 					DecimalFormat df1 = new DecimalFormat("###,###,###,###");

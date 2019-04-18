@@ -1,13 +1,12 @@
 package com.pchome.akbadm.db.dao.board;
 
-import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpBoard;
@@ -20,7 +19,7 @@ public class PfpBoardDAO extends BaseDAO<PfpBoard, Integer> implements IPfpBoard
 
                 new HibernateCallback<List<Object> >() {
 
-					public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object>  doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 						hql.append(" select b.boardId ");
@@ -52,12 +51,12 @@ public class PfpBoardDAO extends BaseDAO<PfpBoard, Integer> implements IPfpBoard
 
 	@SuppressWarnings("unchecked")
 	public List<PfpBoard> findSystemBoards() throws Exception{
-		return super.getHibernateTemplate().find("from PfpBoard where customerInfoId = 'ALL' ");
+		return (List<PfpBoard>) super.getHibernateTemplate().find("from PfpBoard where customerInfoId = 'ALL' ");
 	}
 
 	@SuppressWarnings("unchecked")
 	public PfpBoard findPfpBoard(String boardId) throws Exception{
-		List<PfpBoard> list = super.getHibernateTemplate().find("from PfpBoard where boardId = '" + boardId + "' ");
+		List<PfpBoard> list = (List<PfpBoard>) super.getHibernateTemplate().find("from PfpBoard where boardId = '" + boardId + "' ");
 		if(list != null && list.size() > 0){
 			return list.get(0);
 		}else{
@@ -73,7 +72,7 @@ public class PfpBoardDAO extends BaseDAO<PfpBoard, Integer> implements IPfpBoard
         hql.append("    and category = ? ");
         hql.append("    and display = ? ");
 
-        return this.getHibernateTemplate().find(hql.toString(), customerInfoId, category, display);
+        return (List<PfpBoard>) this.getHibernateTemplate().find(hql.toString(), customerInfoId, category, display);
     }
 
     public Integer displayPfpBoard(String customerInfoId, String category, String display) {
@@ -117,7 +116,7 @@ public class PfpBoardDAO extends BaseDAO<PfpBoard, Integer> implements IPfpBoard
 	public void deletePfpBoard(String boardId) throws Exception{
 
 		String hql = "delete from PfpBoard where boardId = '" + boardId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}

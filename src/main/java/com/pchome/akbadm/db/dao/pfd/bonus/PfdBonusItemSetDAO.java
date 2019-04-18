@@ -20,7 +20,7 @@ public class PfdBonusItemSetDAO extends BaseDAO <PfdBonusItemSet, Integer> imple
 		
 		list.add(contractId);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusItemSet>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -38,7 +38,7 @@ public class PfdBonusItemSetDAO extends BaseDAO <PfdBonusItemSet, Integer> imple
 		list.add(pfdBonusType);
 		
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusItemSet>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	public Integer deletePfdBonusItemSet(String contractId, String pfdBonusType) {

@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdKeyword;
@@ -36,7 +36,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		
 		log.info(" hql  = "+hql);
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpAdKeyword>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -45,7 +45,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		StringBuffer hql = new StringBuffer();
 		hql.append(" from PfpAdKeyword where adKeywordSeq = '"+adKeywordSeq+"' ");
 		
-		List<PfpAdKeyword> list = super.getHibernateTemplate().find(hql.toString());
+		List<PfpAdKeyword> list = (List<PfpAdKeyword>) super.getHibernateTemplate().find(hql.toString());
 		
 		if(list != null && list.size() > 0){
 			return list.get(0);
@@ -71,7 +71,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		hql.append(" and adKeywordSearchPrice < "+sysprice+" ");
 		hql.append(" group by adKeywordSearchPrice ");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -92,7 +92,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		hql.append(" group by pak.adKeywordSeq ");
 		hql.append(" order by pak.adKeywordCreateTime desc ");
 		
-		Query q = super.getSession().createQuery(hql.toString())
+		Query q = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString())
 							.setDate("startDate", startDate)
 							.setDate("endDate", endDate)
 							.setInteger("adRankType", EnumAdType.AD_SEARCH.getType())									
@@ -108,7 +108,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 	public List<Object> getAdKeywordReport(final Map<String,String> adKeywordViewConditionMap) throws Exception{
 	    final List<Object> getAdKeywordReportObjList = getHibernateTemplate().execute(
 		    new HibernateCallback<List<Object>>() {
-			    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+			    public List<Object> doInHibernate(Session session) throws HibernateException {
 			    
 			    StringBuffer hql = new StringBuffer();
 			    	
@@ -217,7 +217,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		}
 		
 		hql.append(" group by adKeywordSeq");
-		Query query = super.getSession().createQuery(hql.toString());
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		List<Object> list = query.list();
 		if(!list.isEmpty()){
 			for(int i = 0; i < list.size(); i++){
@@ -233,7 +233,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 	public List<Object> getAdKeywordReportSeq(final Map<String,String> adKeywordViewConditionMap) throws Exception{
 	    final List<Object> getAdKeywordReportObjList = getHibernateTemplate().execute(
 		    new HibernateCallback<List<Object>>() {
-			    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+			    public List<Object> doInHibernate(Session session) throws HibernateException {
 			    
 			    StringBuffer hql = new StringBuffer();
 			    	
@@ -336,7 +336,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		}else if(Boolean.valueOf(adKeywordViewConditionMap.get("changeSelect"))){
 		    hql.append(" group by b.adKeywordPvclkDate, b.adKeywordPvclkDevice");
 		}
-		Query query = super.getSession().createQuery(hql.toString());
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 		return query.list().size();
 	}
 	
@@ -349,7 +349,7 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 				 
                 new HibernateCallback<List<Object> >() {
                 	
-					public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object>  doInHibernate(Session session) throws HibernateException {
 						
 						StringBuffer hql = new StringBuffer();
 						
@@ -488,6 +488,6 @@ public class PfpAdKeywordDAO extends BaseDAO<PfpAdKeyword, String> implements IP
 		hql.append(" where pfpAdGroup.adGroupSeq = ? ");
 		hql.append(" and adKeywordStatus != ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(),adGroupSeq,EnumAdStatus.Close.getStatusId());
+		return (List<PfpAdKeyword>) super.getHibernateTemplate().find(hql.toString(),adGroupSeq,EnumAdStatus.Close.getStatusId());
 	}
 }

@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.pfbx.report.PfbxReportVO;
@@ -24,7 +24,7 @@ public class PfbxUrlReportDAO extends BaseDAO<PfbxReportVO, String> implements I
 	List<PfbxReportVO> result = (List<PfbxReportVO>) getHibernateTemplate().execute(
 			new HibernateCallback<List<PfbxReportVO>>() {
 		@SuppressWarnings("unchecked")
-		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException {
 	    	
 	        StringBuffer hql = new StringBuffer();
 	        hql.append("select ");
@@ -176,7 +176,7 @@ public class PfbxUrlReportDAO extends BaseDAO<PfbxReportVO, String> implements I
     	List<PfbxReportVO> result = (List<PfbxReportVO>) getHibernateTemplate().execute(
     			new HibernateCallback<List<PfbxReportVO>>() {
     		@SuppressWarnings("unchecked")
-    		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+    		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException {
     	    	
     	        StringBuffer hql = new StringBuffer();
     	        hql.append("select ");

@@ -8,7 +8,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.jdbc.Work;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.dao.department.IDepartmentDAO;
@@ -18,17 +18,17 @@ public class DepartmentDAO extends BaseDAO<AdmDepartment, String> implements IDe
 
 	@SuppressWarnings("unchecked")
 	public List<AdmDepartment> getParentDepartment() throws Exception {
-		return super.getHibernateTemplate().find("from AdmDepartment where parentDepId is null or parentDepId = '' order by sort");
+		return (List<AdmDepartment>) super.getHibernateTemplate().find("from AdmDepartment where parentDepId is null or parentDepId = '' order by sort");
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<AdmDepartment> getChildDepartment(String parentId) throws Exception {
-		return super.getHibernateTemplate().find("from AdmDepartment where parentDepId = '" + parentId + "' order by sort");
+		return (List<AdmDepartment>) super.getHibernateTemplate().find("from AdmDepartment where parentDepId = '" + parentId + "' order by sort");
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmDepartment getDeptById(String deptId) throws Exception {
-		List<AdmDepartment> list = this.getHibernateTemplate().find("from AdmDepartment where depId = '" + deptId + "' order by sort");
+		List<AdmDepartment> list = (List<AdmDepartment>) this.getHibernateTemplate().find("from AdmDepartment where depId = '" + deptId + "' order by sort");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -38,7 +38,7 @@ public class DepartmentDAO extends BaseDAO<AdmDepartment, String> implements IDe
 
 	@SuppressWarnings("unchecked")
 	public AdmDepartment findParentDeptById(String deptId) throws Exception {
-		List<AdmDepartment> list = this.getHibernateTemplate().find("from AdmDepartment where depId = '" + deptId + "'");
+		List<AdmDepartment> list = (List<AdmDepartment>) this.getHibernateTemplate().find("from AdmDepartment where depId = '" + deptId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -65,7 +65,7 @@ public class DepartmentDAO extends BaseDAO<AdmDepartment, String> implements IDe
 
 			@Override
 			public Object doInHibernate(Session session)
-			throws HibernateException, SQLException {
+			throws HibernateException {
 				try{
 
 					session.doWork(
@@ -127,7 +127,7 @@ public class DepartmentDAO extends BaseDAO<AdmDepartment, String> implements IDe
 
 
 	public void deleteParentDept(String deptId) throws Exception {
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		String sql = "delete from AdmDepartment where depId = '" + deptId + "'";
 		session.createQuery(sql).executeUpdate();
@@ -140,7 +140,7 @@ public class DepartmentDAO extends BaseDAO<AdmDepartment, String> implements IDe
 
 	public void deleteChildDept(String deptId) throws Exception {
 		String sql = "delete from AdmDepartment where depId = '" + deptId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(sql).executeUpdate();
 		session.flush();
 	}

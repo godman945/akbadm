@@ -8,8 +8,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +33,7 @@ import com.pchome.rmi.mailbox.EnumCategory;
 @Transactional
 public class PfdNoticeJob {
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 
     private IPfdBoardService pfdBoardService;
     private IPfdUserAdAccountRefService pfdUserAdAccountRefService;

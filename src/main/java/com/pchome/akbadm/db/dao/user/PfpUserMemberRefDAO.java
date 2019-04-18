@@ -15,7 +15,7 @@ public class PfpUserMemberRefDAO extends BaseDAO<PfpUserMemberRef,String> implem
 		hql.append(" from PfpUserMemberRef  ");
 		hql.append(" where id.userId = '"+userId+"' ");
 		
-		List<PfpUserMemberRef> list = super.getHibernateTemplate().find(hql.toString());
+		List<PfpUserMemberRef> list = (List<PfpUserMemberRef>) super.getHibernateTemplate().find(hql.toString());
 		
 		if(list != null && list.size() > 0){
 			return list.get(0);

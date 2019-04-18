@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.config.cookie.CookieConstants;
 
 public class CookieUtil {
 
-	private static final Log logger = LogFactory.getLog(CookieUtil.class);
+	private static final Logger logger = LogManager.getRootLogger();
 
 	/**
 	 * 取得 cookie, 有必要的話加以解碼

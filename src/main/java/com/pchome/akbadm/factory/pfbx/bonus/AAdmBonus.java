@@ -2,8 +2,8 @@ package com.pchome.akbadm.factory.pfbx.bonus;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.AdmBonusDetailReport;
 import com.pchome.akbadm.db.pojo.AdmBonusSet;
@@ -17,7 +17,7 @@ import com.pchome.enumerate.pfbx.bonus.EnumAdmBonusDetailItem;
 
 public abstract class AAdmBonus {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	protected IAdmBonusSetService admBonusSetService;
 	protected IAdmRecognizeDetailService admRecognizeDetailService;

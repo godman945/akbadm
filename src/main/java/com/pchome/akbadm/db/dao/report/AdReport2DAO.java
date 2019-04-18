@@ -1,7 +1,9 @@
 package com.pchome.akbadm.db.dao.report;
 
+import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +13,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.AdReportVO;
@@ -30,8 +32,7 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 				new HibernateCallback<List<AdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<AdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
-
+					public List<AdReportVO> doInHibernate(Session session) throws HibernateException {
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 						StringBuffer sb = new StringBuffer();
 
@@ -43,7 +44,9 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 						sb.append(" sum(case when kr.ad_clk_price_type = 'CPC' then kr.ad_clk else kr.ad_view end),");
 						sb.append(" sum(kr.ad_clk_price),");
 						sb.append(" pci.customer_info_title, ");
-						sb.append(" kr.pfd_customer_info_id ");
+						sb.append(" kr.pfd_customer_info_id, ");
+						sb.append(" sum(kr.convert_count), ");
+						sb.append(" sum(kr.convert_price_count) ");
 						sb.append(" from pfd_ad_report as kr ");
 						sb.append(" left join pfp_customer_info pci ");
 						sb.append(" on kr.pfp_customer_info_id = pci.customer_info_id ");
@@ -116,6 +119,11 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 							Long pvSum = new Long(objArray[3].toString());
 							Long clkSum = new Long(objArray[4].toString());
 							Double price = (Double) objArray[5];
+							double convertCount =  ((BigDecimal)objArray[8]).doubleValue();		//總轉換數
+							double convertPriceCount =  ((BigDecimal)objArray[9]).doubleValue();	//總轉換價值
+							double convertCVR = 0;	//轉換率
+							double convertCost = 0;	//平均轉換成本
+							double convertInvestmentCost = 0;	//廣告投資報酬率
 							String pfpCustomerInfoTitle = "";
 							if(objArray[6] != null){
 								pfpCustomerInfoTitle = objArray[6].toString();
@@ -147,6 +155,34 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 	                        } else {
 	                            adReportVO.setPvPriceAvg(df.format(price.doubleValue()*1000 / pvSum));
 	                        }
+	                        
+	                        
+	                        
+	                        //商品廣告轉換
+	                        //轉換次數
+	                        adReportVO.setConvertCountSum(objArray[8].toString());
+	                        
+	                        //總轉換價值
+	                        adReportVO.setConvertPriceCountSum(objArray[9].toString());
+	                        
+	                        //轉換率=轉換次數/互動數*100%
+	                        if(convertCount > 0 && clkSum > 0){
+	            				convertCVR  = (convertCount / clkSum) * 100;
+	            			}
+	                        adReportVO.setConvertCVR(df.format(convertCVR)+ "%");
+	                        
+	                        //平均轉換成本=費用/轉換次數
+	                        if(price > 0 && convertCount > 0){
+	            				convertCost = price / convertCount;
+	            			}
+	                        adReportVO.setConvertCost(df.format(convertCost));
+	                        
+	                        //廣告投資報酬率=總轉換價值/費用*100%
+	            			if(convertPriceCount > 0 && price > 0){
+	            				convertInvestmentCost = (convertPriceCount / price) * 100;
+	            			}
+	            			adReportVO.setConvertInvestmentCost(df.format(convertInvestmentCost)+ "%");
+	                        
 							resultData.add(adReportVO);
 						}
 
@@ -162,15 +198,16 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 				new HibernateCallback<List<AdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<AdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
-
+					public List<AdReportVO> doInHibernate(Session session) throws HibernateException {
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 						StringBuffer sb = new StringBuffer();
 
 						sb.append("select");
 						sb.append(" ifnull(sum(kr.ad_pv),0),");
 						sb.append(" ifnull(sum(case when kr.ad_clk_price_type = 'CPC' then kr.ad_clk else kr.ad_view end),0),");
-						sb.append(" ifnull(sum(kr.ad_clk_price),0)");
+						sb.append(" ifnull(sum(kr.ad_clk_price),0),");
+						sb.append(" ifnull(sum(kr.convert_count),0), ");
+						sb.append(" ifnull(sum(kr.convert_price_count),0) ");
 						sb.append(" from pfd_ad_report as kr ");
 						sb.append(" left join pfp_customer_info pci ");
 						sb.append(" on kr.pfp_customer_info_id = pci.customer_info_id ");
@@ -237,7 +274,13 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 							Long pvSum = new Long(objArray[0].toString());
 							Long clkSum = new Long(objArray[1].toString());
 							Double price = (Double) objArray[2];
-
+							
+							double convertCount = ((BigDecimal)objArray[3]).doubleValue();		//總轉換數
+							double convertPriceCount = ((BigDecimal)objArray[4]).doubleValue();	//總轉換價值
+							double convertCVR = 0;	//轉換率
+							double convertCost = 0;	//平均轉換成本
+							double convertInvestmentCost = 0;	//廣告投資報酬率
+							
 							AdReportVO adReportVO = new AdReportVO();
 
 							adReportVO.setKwPvSum(df2.format(pvSum));
@@ -260,6 +303,34 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
                             } else {
                                 adReportVO.setPvPriceAvg(df.format(price.doubleValue()*1000 / pvSum));
                             }
+                            
+                            
+                            //商品廣告轉換
+	                        //轉換次數
+                            adReportVO.setConvertCountSum(objArray[3].toString());
+	                        
+	                        //總轉換價值
+                            adReportVO.setConvertPriceCountSum(objArray[4].toString());
+	                        
+	                        //轉換率=轉換次數/互動數*100%
+	                        if(convertCount > 0 && clkSum > 0){
+	            				convertCVR  = (convertCount / clkSum) * 100;
+	            			}
+	                        adReportVO.setConvertCVR(df.format(convertCVR)+ "%");
+	                        
+	                        //平均轉換成本=費用/轉換次數
+	                        if(price > 0 && convertCount > 0){
+	            				convertCost = price / convertCount;
+	            			}
+	                        adReportVO.setConvertCost(df.format(convertCost));
+	                        
+	                        //廣告投資報酬率=總轉換價值/費用*100%
+	            			if(convertPriceCount > 0 && price > 0){
+	            				convertInvestmentCost = convertPriceCount / price * 100;
+	            			}
+	            			adReportVO.setConvertInvestmentCost(df.format(convertInvestmentCost)+ "%");
+                            
+                            
 							resultData.add(adReportVO);
 						}
 
@@ -275,7 +346,7 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 				new HibernateCallback<List<AdReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<AdReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdReportVO> doInHibernate(Session session) throws HibernateException {
 
 						HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 						StringBuffer sb = new StringBuffer();
@@ -289,7 +360,9 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 						sb.append(" sum(kr.ad_clk_price),");
 						sb.append(" pci.customer_info_title, ");
 						sb.append(" kr.pfd_customer_info_id, ");
-						sb.append(" kr.ad_pvclk_date ");
+						sb.append(" kr.ad_pvclk_date, ");
+						sb.append(" sum(kr.convert_count),");
+						sb.append(" sum(kr.convert_price_count)");
 						sb.append(" from pfd_ad_report as kr ");
 						sb.append(" left join pfp_customer_info pci ");
 						sb.append(" on kr.pfp_customer_info_id = pci.customer_info_id ");
@@ -367,6 +440,11 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
 							}
 							String pfdCustomerInfoId = objArray[7].toString();
 							String adPvclkDate = objArray[8].toString();
+							double convertCount =  ((BigDecimal)objArray[9]).doubleValue();		//總轉換數
+							double convertPriceCount =  ((BigDecimal)objArray[10]).doubleValue();	//總轉換價值
+							double convertCVR = 0;	//轉換率
+							double convertCost = 0;	//平均轉換成本
+							double convertInvestmentCost = 0;	//廣告投資報酬率
 
 							AdReportVO adReportVO = new AdReportVO();
 							adReportVO.setAdSeq(adSeq);
@@ -394,6 +472,34 @@ public class AdReport2DAO extends BaseDAO<AdReportVO, String> implements IAdRepo
                             } else {
                                 adReportVO.setPvPriceAvg(df.format(price.doubleValue()*1000 / pvSum));
                             }
+
+                            
+                            //商品廣告轉換
+	                        //轉換次數
+	                        adReportVO.setConvertCountSum(df2.format(convertCount));
+	                        
+	                        //總轉換價值
+	                        adReportVO.setConvertPriceCountSum(df2.format(convertPriceCount));
+	                        
+	                        //轉換率=轉換次數/互動數*100%
+	                        if(convertCount > 0 && clkSum > 0){
+	            				convertCVR  = (convertCount / clkSum) * 100;
+	            			}
+	                        adReportVO.setConvertCVR(df.format(convertCVR)+ "%");
+	                        
+	                        //平均轉換成本=費用/轉換次數
+	                        if(price > 0 && convertCount > 0){
+	            				convertCost = price / convertCount;
+	            			}
+	                        adReportVO.setConvertCost(df.format(convertCost));
+	                        
+	                        //廣告投資報酬率=總轉換價值/費用*100%
+	            			if(convertPriceCount > 0 && price > 0){
+	            				convertInvestmentCost = (convertPriceCount / price) * 100;
+	            			}
+	            			adReportVO.setConvertInvestmentCost(df.format(convertInvestmentCost)+ "%");
+
+	            			
 							resultData.add(adReportVO);
 						}
 

@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmFreeAction;
@@ -27,7 +27,7 @@ public class AdmFreeActionDAO extends BaseDAO<AdmFreeAction, String> implements 
 		
 		hql.append(" from AdmFreeAction where actionId = ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), actionId);
+		return (List<AdmFreeAction>) super.getHibernateTemplate().find(hql.toString(), actionId);
 	}
 
 	@SuppressWarnings("unchecked")
@@ -53,7 +53,7 @@ public class AdmFreeActionDAO extends BaseDAO<AdmFreeAction, String> implements 
 			hql.append(" desc");
 		}
 
-		return super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
+		return (List<AdmFreeAction>) super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
 	}
 	
 	@Override
@@ -61,7 +61,7 @@ public class AdmFreeActionDAO extends BaseDAO<AdmFreeAction, String> implements 
 		List<AdmFreeActionVO> result = (List<AdmFreeActionVO>) getHibernateTemplate().execute(
 				new HibernateCallback<List<AdmFreeActionVO>>() {
 					@SuppressWarnings("unchecked")
-					public List<AdmFreeActionVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdmFreeActionVO> doInHibernate(Session session) throws HibernateException {
 						
 						List<AdmFreeActionVO> list = new ArrayList<AdmFreeActionVO>();
 						DecimalFormat df = new DecimalFormat("###,###,###,###");

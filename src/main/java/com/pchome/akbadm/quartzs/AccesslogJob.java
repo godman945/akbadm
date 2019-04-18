@@ -7,8 +7,8 @@ import javax.mail.MessagingException;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -20,7 +20,7 @@ import com.pchome.soft.util.SpringEmailUtil;
 
 public class AccesslogJob {
 	protected final static String CHARSET = "UTF-8";
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
 	private IAdmAccesslogService accesslogService;
 

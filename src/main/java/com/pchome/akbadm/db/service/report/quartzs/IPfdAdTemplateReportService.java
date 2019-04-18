@@ -15,4 +15,6 @@ public interface IPfdAdTemplateReportService {
 
 	public List<AdTemplateReportVO> findPfdAdTemplateReport(String startDate, String endDate,
 			String pfdCustomerInfoId) throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

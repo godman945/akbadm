@@ -9,13 +9,13 @@ public class PfpAdCategoryMappingDAO extends BaseDAO<PfpAdCategoryMapping,String
     @SuppressWarnings("unchecked")
     public List<PfpAdCategoryMapping> selectPfpAdCategoryMappingByAdSeq(String adSeq) {
         String hql = "from PfpAdCategoryMapping where ad_seq = ? order by code";
-        return this.getHibernateTemplate().find(hql, adSeq);
+        return (List<PfpAdCategoryMapping>) this.getHibernateTemplate().find(hql, adSeq);
     }
     
     @SuppressWarnings("unchecked")
     public List<PfpAdCategoryMapping> selectPfpAdCategoryMappingByCode(String code) {
         String hql = "from PfpAdCategoryMapping where code like ? ";
         code ="%" + code + "%";
-        return this.getHibernateTemplate().find(hql, code);
+        return (List<PfpAdCategoryMapping>) this.getHibernateTemplate().find(hql, code);
     }
 }

@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.pchome.soft.util.DateValueUtil;
@@ -26,7 +26,7 @@ import freemarker.template.Template;
  */
 public class PdfUtil {
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	
 	public ByteArrayInputStream htmlConvertPdf(Map<String,Object> map, String ftlPath, String ftlName, String commandPath, String tempPath){
 		

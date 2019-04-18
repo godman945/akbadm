@@ -23,4 +23,6 @@ public interface IPfdAdActionReportService {
 	public List<BonusDetailVo> findPfdAdActionReportToVo(String pfdId, String startDate, String endDate, String payType);
 	
 	public Map<String,String> findPfpAdClickByPfd(String pfdCustomerInfoId,Date startDate, Date endDate) throws Exception ;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

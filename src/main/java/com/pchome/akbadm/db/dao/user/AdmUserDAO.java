@@ -13,7 +13,7 @@ public class AdmUserDAO extends BaseDAO<AdmUser, String> implements IAdmUserDAO 
 
 	@SuppressWarnings("unchecked")
 	public List<AdmUser> getUserByPrivilegeModelId(String privilegeModelId) throws Exception {
-		return super.getHibernateTemplate().find("from AdmUser where modelId = '" + privilegeModelId + "'");
+		return (List<AdmUser>) super.getHibernateTemplate().find("from AdmUser where modelId = '" + privilegeModelId + "'");
 	}
 
 	@SuppressWarnings("unchecked")
@@ -26,12 +26,12 @@ public class AdmUserDAO extends BaseDAO<AdmUser, String> implements IAdmUserDAO 
 		if (StringUtils.isNotEmpty(userName)) {
 			sql.append(" and userName like '%" + userName.trim() + "%'");
 		}
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmUser>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmUser getUserById(String userEmail) throws Exception {
-		List<AdmUser> list = super.getHibernateTemplate().find("from AdmUser where userEmail = '" + userEmail + "'");
+		List<AdmUser> list = (List<AdmUser>) super.getHibernateTemplate().find("from AdmUser where userEmail = '" + userEmail + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -49,18 +49,18 @@ public class AdmUserDAO extends BaseDAO<AdmUser, String> implements IAdmUserDAO 
 
 	public void deleteUser(String userEmail) throws Exception {
 		String sql = "delete from AdmUser where userEmail = '" + userEmail + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<AdmUser> getUserByDeptId(String deptId) throws Exception {
-		return super.getHibernateTemplate().find("from AdmUser where depId = '" + deptId + "'");
+		return (List<AdmUser>) super.getHibernateTemplate().find("from AdmUser where depId = '" + deptId + "'");
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<AdmUser> getUserByDeptId2(String deptId) throws Exception {
-		return super.getHibernateTemplate().find("from AdmUser where depId2 = '" + deptId + "'");
+		return (List<AdmUser>) super.getHibernateTemplate().find("from AdmUser where depId2 = '" + deptId + "'");
 	}
 }

@@ -25,12 +25,12 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 			sql.append(" and adExcludeKeyword like '%" + adExcludeKeyword.trim() + "%'");
 		}
 
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public PfpAdExcludeKeyword getPfpAdExcludeKeywordBySeq(String adExcludeKeywordSeq) throws Exception {
-		List<PfpAdExcludeKeyword> list = super.getHibernateTemplate().find("from PfpAdExcludeKeyword where adExcludeKeywordSeq = '" + adExcludeKeywordSeq + "'");
+		List<PfpAdExcludeKeyword> list = (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find("from PfpAdExcludeKeyword where adExcludeKeywordSeq = '" + adExcludeKeywordSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -52,7 +52,7 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 
 	public void deletePfpAdExcludeKeyword(String adExcludeKeywordSeq) throws Exception{
 		String userSql = "delete from PfpAdExcludeKeyword where adExcludeKeywordSeq = '" + adExcludeKeywordSeq + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(userSql).executeUpdate();
 		session.flush();
 	}
@@ -66,13 +66,13 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 		hql.append(" and pfpAdGroup.pfpAdAction.pfpCustomerInfo.customerInfoId = '"+customerInfoId+"' ");
 		//hql.append(" and adExcludeKeywordStatus != "+EnumExcludeKeywordStatus.CLOSE.getStatusId()+"  ");
 
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(hql.toString());
 	}
 
     @SuppressWarnings("unchecked")
     public List<PfpAdExcludeKeyword> selectPfpAdExcludeKeywords(String adGroupSeq, int status) throws Exception {
         String hql = "from PfpAdExcludeKeyword where pfpAdGroup.adGroupSeq = ? and adExcludeKeywordStatus = ?";
-        return super.getHibernateTemplate().find(hql, adGroupSeq, status);
+        return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(hql, adGroupSeq, status);
     }
 
 }

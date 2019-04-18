@@ -47,4 +47,29 @@
     	<put-attribute name="page" value="/ftl/default/page.ftl" />
     </definition>
 
+    <definition name=".catalog.logo.list" extends="default.layout">
+    	<put-attribute name="title" value=".catalog.logo.list.title" />
+        <put-attribute name="body" value=".catalog.logo.list.body" />
+    </definition>
+
+	<definition name=".catalog.logo.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="check/catalog_logo.js"/>
+    </definition>
+
+    <definition name=".catalog.logo.list.body" template="/ftl/check/catalogLogo.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
+    
+    <definition name=".catalog.prod.ec.list" extends="default.layout">
+    	<put-attribute name="title" value=".catalog.prod.ec.list.title" />
+        <put-attribute name="body" value=".catalog.prod.ec.list.body" />
+    </definition>
+
+	<definition name=".catalog.prod.ec.list.title" extends="default.title" >
+       <put-attribute name="jsName" value="check/catalog_prod_ec.js"/>
+    </definition>
+
+    <definition name=".catalog.prod.ec.list.body" template="/ftl/check/catalogProdEc.ftl" >
+    	<put-attribute name="page" value="/ftl/default/page.ftl" />
+    </definition>
 </tiles-definitions>

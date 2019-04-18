@@ -3,12 +3,12 @@ package com.pchome.akbadm.utils;
 import java.io.ByteArrayInputStream;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class HtmlConvertPdfUtil {
 
-	private static final Log log = LogFactory.getLog(PdfUtil.class);
+	private static final Logger log = LogManager.getRootLogger();
 	
 	/**
 	 * 生成 html 檔案後, 再轉換成 Pdf 格式

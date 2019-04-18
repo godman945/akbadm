@@ -22,6 +22,6 @@ public class PfdVirtualRecordDAO extends BaseDAO<PfdVirtualRecord, Integer> impl
         list.add(addDate);
 		list.add(pfpCustomerInfoId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdVirtualRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

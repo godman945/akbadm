@@ -1,14 +1,23 @@
 package com.pchome.soft.depot.utils;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
+import java.lang.Character.UnicodeBlock;
+import java.net.IDN;
+import java.net.URI;
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -41,7 +50,7 @@ import org.apache.http.util.EntityUtils;
 public class HttpUtil {
 	private static HttpUtil http = new HttpUtil();
 	private DefaultHttpClient client;
-	private static final Log log = LogFactory.getLog(HttpUtil.class);
+	private static final Logger log = LogManager.getRootLogger();
 
 	public synchronized DefaultHttpClient getClient() {
 		return client;
@@ -188,7 +197,142 @@ public class HttpUtil {
 		result = StringUtils.defaultIfEmpty(result, "");
 		return result;
 	}
+	
+	/**
+     * @author weich
+     * @param String
+     *            url
+     * @return int statusCode
+     * @throws Exception 
+     */
+	public synchronized int getStatusCode(String url) throws Exception {
+		log.info(">>>>>>>>>>>>>>url=" + url);
+		int statusCode = HttpStatus.SC_NOT_FOUND;
+		url = getRealUrl(url);
+		if (StringUtils.isNotEmpty(url)) {
+			HttpGet httpget = null;
+			try {
+				URL thisUrl = new URL(url);
+				URI uri = new URI(thisUrl.getProtocol(), thisUrl.getHost(), thisUrl.getPath(), thisUrl.getQuery(), null);
+				httpget = new HttpGet(uri);
 
+				// 禁止get自動處理重新定向
+				/*
+				 * HttpParams params = client.getParams();
+				 * params.setParameter(ClientPNames.HANDLE_REDIRECTS, false);
+				 */
+
+				statusCode = client.execute(httpget).getStatusLine().getStatusCode();
+
+				if (statusCode == HttpStatus.SC_FORBIDDEN) {
+					statusCode = getURLConnectionStatus(url);
+				}
+				if(statusCode == 404){
+					statusCode = getURLConnectionStatus(url);
+				}
+			} catch (Exception e) {
+				log.error(e.getMessage(), e);
+				statusCode = getURLConnectionStatus(url);
+			} finally {
+				httpget.abort();
+				closeExpiredConns();
+				closeIdleConns();
+			}
+		}
+
+		return statusCode;
+	}
+	
+	private int getURLConnectionStatus(String url) {
+
+		int statusCode = HttpStatus.SC_NOT_FOUND;
+
+		try {
+			String httpUrl = "http://";
+
+			if (url.indexOf("https://") == 0) {
+				httpUrl += url.substring(8);
+			} else if (url.indexOf("http://") == 0) {
+				httpUrl = url;
+			} else {
+				httpUrl += url;
+			}
+
+			URLConnection connection = new URL(httpUrl).openConnection();
+			connection.setRequestProperty("User-Agent",
+					"Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.11 (KHTML, like Gecko) Chrome/23.0.1271.95 Safari/537.11");
+			connection.connect();
+			BufferedReader r = new BufferedReader(
+					new InputStreamReader(connection.getInputStream(), Charset.forName("UTF-8")));
+			StringBuilder sb = new StringBuilder();
+			String line;
+			while ((line = r.readLine()) != null) {
+				sb.append(line);
+			}
+			if (sb != null) {
+				statusCode = 200;
+			}
+		} catch (Exception a) {
+			statusCode = HttpStatus.SC_NOT_FOUND;
+		}
+
+		return statusCode;
+	}
+	
+	// Add URL RealUrl code 2014/10/15 alex
+	public synchronized String getRealUrl(String urlPath) throws Exception {
+		log.info("getRealUrl start>>>" + urlPath);
+
+		String returnUrl = "";
+
+		if (StringUtils.isEmpty(urlPath) || urlPath.length() < 1) {
+			// return null;
+		}
+		// urlPath ="http://收購老酒.tw/";
+		URL url = new URL(urlPath);
+		String urlDomain = getASCII(url.getHost());
+		String path = "";
+		if (url.getQuery() != null) {
+			path = enCode(url.getPath() + "?" + url.getQuery());
+		} else if (url.getRef() != null) { // 2016-12-02 增加
+			path = enCode(url.getPath() + "#" + url.getRef());
+		} else {
+			path = enCode(url.getPath());
+		}
+
+		if (urlPath.indexOf("https://") == 0) {
+			returnUrl = "https://";
+		} else {
+			returnUrl = "http://";
+		}
+
+		return returnUrl + urlDomain + path;
+	}
+	
+	// Add URL RealUrl code 2014/10/15 編譯 alex
+	public synchronized String getASCII(String domain) throws Exception {
+		log.info("getUrlASCII start");
+		if (StringUtils.isEmpty(domain) || domain.length() < 1) {
+			return null;
+		}
+		return IDN.toASCII(domain);
+	}
+
+	// Add URL Encode 2014/10/15 alex
+	public synchronized String enCode(String url) throws Exception {
+		log.info("enCode start");
+		String enCodeUrl = "";
+		for (int i = 0; i <= url.trim().length() - 1; i++) {
+			if (UnicodeBlock.of(url.charAt(i)).toString().equals("CJK_UNIFIED_IDEOGRAPHS")) {
+				enCodeUrl = enCodeUrl + URLEncoder.encode(String.valueOf(url.charAt(i)), "UTF-8");
+			} else {
+				enCodeUrl = enCodeUrl + url.charAt(i);
+			}
+		}
+		log.info("enCode end" + enCodeUrl);
+		return enCodeUrl;
+	}
+	
 	private void configureClient() {
 		// Create and initialize scheme registry
 		SchemeRegistry schemeRegistry = new SchemeRegistry();

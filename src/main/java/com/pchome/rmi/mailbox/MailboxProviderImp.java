@@ -2,15 +2,15 @@ package com.pchome.rmi.mailbox;
 
 import java.util.Calendar;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfpMailbox;
 import com.pchome.akbadm.db.service.mailbox.IPfpMailboxService;
 import com.pchome.rmi.mailbox.EnumCategory;
 
 public class MailboxProviderImp implements IMailboxProvider {
-    private Log log = LogFactory.getLog(getClass().getName());
+    private Logger log = LogManager.getRootLogger();
 
 	private IPfpMailboxService pfpMailboxService;
 

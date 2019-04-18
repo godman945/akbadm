@@ -1,7 +1,9 @@
 <#assign s=JspTaglibs["/struts-tags"]>
 <#assign t=JspTaglibs["http://tiles.apache.org/tags-tiles"]>
+<#setting url_escaping_charset="UTF-8">
 <script language="JavaScript" src="${request.contextPath}/html/js/jquery/jquery.tablesorter.js"></script>
 <script language="JavaScript" src="${request.contextPath}/html/js/common/reportCommon.js" ></script>
+<script language="JavaScript" src="${request.contextPath}/html/js/prod/ad_prod.js" ></script>
 <style type="text/css">
   .adreportdv {overflow: hidden; text-overflow: ellipsis;word-break: break-all;min-width: 350px;min-height:40px;max-height:150px;font: 400 13px/16px Verdana,微軟正黑體;overflow:hidden;display:table; display:block\9;}
   .adreportdv .adboxdvimg{max-height:150px;width:150px;display:table-cell;display:block\9;float:left\9;vertical-align:middle;text-align:center;}
@@ -12,8 +14,69 @@
   .adreportdv b{font-weight:400}
   .adboxdvinf>span>i:first-child+b{font-weight:bold}
   #fancybox-close,.fancybox-close{ background: transparent url(<@s.url value="/" />html/img/pop-close.png) left top no-repeat!important; right:-30px!important; top:0px!important; width:30px!important; height: 30px!important;}
-  
+  .prodAdDialog {text-align: center;}
 </style>
+
+<script type="text/javascript">
+var currentImageArray = new Array();
+var logoSaleImgArray = new Array();
+var saleImgArray = new Array();
+<#list voList as adData>
+	logoSaleImgArray["${adData.adSeq!}"] = new Array();
+	saleImgArray["${adData.adSeq!}"] = new Array();
+
+    <#assign i = 0>
+	<#list adData.adDetailLogoSaleImgList as logoSaleImg>
+		logoSaleImgArray["${adData.adSeq!}"][${i}] = "${logoSaleImg}";
+    	<#assign i = i+1>
+	</#list>
+
+    <#assign i = 0>
+	<#list adData.adDetailSaleImgList as saleImg>
+		saleImgArray["${adData.adSeq!}"][${i}] = "${saleImg}";
+    	<#assign i = i+1>
+	</#list>
+</#list>
+
+function openDialog(imageArray) {
+console.log('00000000000000000000000000000')
+	currentImageArray = imageArray;
+	showImage(0);
+	$('#dialogDiv').dialog('open');
+}
+
+function showImage(index) {
+	var total = currentImageArray.length;
+	var previousIndex = 0;
+	var nextIndex = 0;
+	var dialogHtml = "";
+	var imageSizeHtml = "";
+
+	if (total == 0) {
+		imageSizeHtml = "0 / 0";
+
+		$('#dialogDiv').html(dialogHtml);
+		$('#dialogDiv').dialog({title:imageSizeHtml});
+
+		return;
+	}
+	
+	previousIndex = index == 0 ? total - 1 : (index - 1)  % total;
+	nextIndex = (index + 1) % total;
+
+	dialogHtml = "<div>";
+	dialogHtml += "<a href='#' onclick='showImage(" + previousIndex + ")'>上一張</a>&nbsp;";
+	dialogHtml += "<a href='#' onclick='showImage(" + nextIndex + ")'>下一張</a>";
+	dialogHtml += "</div>";
+	dialogHtml += "<div>";
+	dialogHtml += "<img src='" + currentImageArray[index] + "' />";
+	dialogHtml += "</div>";
+	imageSizeHtml = (index + 1) + " / " + total;
+
+	$('#dialogDiv').html(dialogHtml);
+	$('#dialogDiv').dialog({title:imageSizeHtml});
+}
+</script>
 
 <h2><img src="<@s.url value="/" />html/img/iconcr.gif" hspace="2" vspace="12" align="absmiddle" />廣告明細成效</h2>
 
@@ -91,6 +154,14 @@
 	        <th class="td09" style="min-width:90px;">平均互動出價</td>
 	        <th class="td09" style="min-width:90px;">千次曝光出價</td>
 	        <th class="td09" style="min-width:80px;">費用</td>
+	        <th class="td09" style="min-width:60px;">轉換次數</td>
+	        <th class="td09" style="min-width:50px;">轉換率</td>
+	        <th class="td09" style="min-width:90px;">總轉換價值</td>
+	        <th class="td09" style="min-width:90px;">平均轉換成本</td>
+	        <th class="td09" style="min-width:80px;">廣告投資報酬率</td>
+	        
+	        
+	        
 	        <th class="td09" style="min-width:70px;">每日成效</td>
 	    </tr>
     </thead>
@@ -137,17 +208,47 @@
 						    </span>
 					    </span>
 				     </div>
+				     
+				<#elseif "PROD" == data.adStyle>
+					<div class="adreportdv">
+						<div>
+							<span class="adboxdvimg"><iframe width="300" height="250" src="adProdModel.html?posterType=${data.adbgType!}&previewTpro=${data.previewTpro!}&btnBgColor=${data.adDetailBuybtnBgColor?url}&btnFontColor=${data.adDetailBuybtnFontColor?url}&btnTxt=${data.adDetailBuybtnTxt?url?url}&disBgColor=${data.adDetailDisBgColor?url}&disFontColor=${data.adDetailDisFontColor?url}&disTxtType=${data.adDetailDisTxtType!}&logoBgColor=${data.adDetailLogoBgColor?url}&logoFontColor=${data.adDetailLogoFontColor?url}&userLogoPath=${data.adDetailLogoImgUrl!}&logoText=${data.adDetailLogoTxt!}&prodLogoType=${data.adDetailLogoType!}&realUrl=${data.adDetailProdAdUrl!}&catalogGroupId=${data.adDetailProdGroup!}&imgProportiona=${data.adDetailProdImgShowType!}&imgShowType=${data.adDetailSaleImgShowType!}&saleImg=${data.adDetailSaleImg!}&saleEndImg=${data.adDetailSaleEndImg!}"></iframe></span>
+						    <span class="adboxdvinf">
+							    <div>${data.prodReportName!}</div>
+								<div>${data.prodAdUrl!}</div>
+						    </span>
+					    </div>
+					    <div>
+					    	<div style="text-align:left;">
+						    	<a href="#" onclick="previewProdAdDetail('${data.customerId!}','${startDate!}','${endDate!}','${data.adSeq!}')">查看商品成效</a>
+						    	<a onclick="openDialog(logoSaleImgArray['${data.adSeq!}'])">行銷圖像</a>
+						    	<a onclick="openDialog(saleImgArray['${data.adSeq!}'])">結尾行銷圖像</a>
+						    	${data.adDetailLogoTxt!}
+					    	</div>
+					    </div>
+				    	
+				    </div> 
+				     
 	        	</#if>
 	        </td>
 	        <td class="td09">${data.adAction!}</td>
 	        <td class="td09">${data.adGroup!}</td>
 	        <td class="td08">${data.realUrl!}</td>
+	        
 	        <td class="td10">${data.kwPvSum!}</td>
 	        <td class="td10">${data.kwClkSum!}</td>
 	        <td class="td10">${data.kwClkRate!}</td>
 	        <td class="td10">$ ${data.clkPriceAvg!}</td>
 	        <td class="td10">$ ${data.pvPriceAvg!}</td>
 	        <td class="td10">$ ${data.kwPriceSum!}</td>
+	        
+	        <td class="td10">${data.convertCountSum!}</td>
+	        <td class="td10">${data.convertCVR!}</td>
+	        <td class="td10">${data.convertPriceCountSum!}</td>
+	        <td class="td10">${data.convertCost!}</td>
+	        <td class="td10">${data.convertInvestmentCost!}</td>
+	        
+	        
 	        <td class="td09">
 	        	<a style="cursor:pointer;" onclick="fundDetalView('${startDate!}','${endDate!}','${data.adSeq!}','${data.title!}')" >查看</a>
 	        </td>
@@ -162,6 +263,15 @@
     	<td class="td10" style="background-color:#99FFFF;height:30px;" >$ ${totalVO.clkPriceAvg!}</td>
     	<td class="td10" style="background-color:#99FFFF;height:30px;" >$ ${totalVO.pvPriceAvg!}</td>
     	<td class="td10" style="background-color:#99FFFF;height:30px;" >$ ${totalVO.kwPriceSum!}</td>
+
+    	
+    	<td class="td10" style="background-color:#99FFFF;height:30px;" >${totalVO.convertCountSum!}</td>
+    	<td class="td10" style="background-color:#99FFFF;height:30px;" >${totalVO.convertCVR!}</td>
+    	<td class="td10" style="background-color:#99FFFF;height:30px;" >${totalVO.convertPriceCountSum!}</td>
+    	<td class="td10" style="background-color:#99FFFF;height:30px;" >${totalVO.convertCost!}</td>
+    	<td class="td10" style="background-color:#99FFFF;height:30px;" >${totalVO.convertInvestmentCost!}</td>
+    	
+    	
     	<td class="td10" style="background-color:#99FFFF;height:30px;" ></td>
     </tr>
 
@@ -183,3 +293,4 @@ ${message!}
 	
 	</div>
 </div>
+<div id="dialogDiv" class="prodAdDialog display:none"></div>

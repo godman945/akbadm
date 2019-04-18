@@ -17,7 +17,7 @@ public class AdmFreeRecordDAO extends BaseDAO<AdmFreeRecord, String> implements 
 		hql.append(" where customerInfoId = ? ");
 		hql.append(" and admFreeAction.actionId = ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, freeActionId);
+		return (List<AdmFreeRecord>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, freeActionId);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -29,7 +29,7 @@ public class AdmFreeRecordDAO extends BaseDAO<AdmFreeRecord, String> implements 
 		hql.append(" where customerInfoId = ? ");
 		hql.append(" and recordDate = ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, date);
+		return (List<AdmFreeRecord>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, date);
 	}
 	
 	public Integer deleteRecordAfterDate(Date date) {

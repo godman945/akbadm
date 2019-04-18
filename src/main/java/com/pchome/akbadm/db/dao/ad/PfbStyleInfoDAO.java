@@ -13,6 +13,6 @@ public class PfbStyleInfoDAO extends BaseDAO<PfbStyleInfo, String> implements IP
         hql.append("where status = 1 ");
         hql.append("    and pfbWebInfo.status = 1");
 
-        return super.getHibernateTemplate().find(hql.toString());
+        return (List<PfbStyleInfo>) super.getHibernateTemplate().find(hql.toString());
     }
 }

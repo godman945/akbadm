@@ -1,7 +1,7 @@
 package com.pchome.akbadm.factory.recognize;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.enumerate.recognize.EnumOrderType;
 
@@ -14,7 +14,7 @@ import com.pchome.enumerate.recognize.EnumOrderType;
  */
 public class RecordFactory {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private ARecord recordSave;	
 	private ARecord recordGift;

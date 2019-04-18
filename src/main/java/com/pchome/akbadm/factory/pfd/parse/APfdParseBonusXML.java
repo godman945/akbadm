@@ -2,14 +2,14 @@ package com.pchome.akbadm.factory.pfd.parse;
 
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.bean.bonus.BonusBean;
 
 public abstract class APfdParseBonusXML {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	protected final String GROUP_START_TAG = "group";
 	protected final String LEVEL_START_TAG = "level";

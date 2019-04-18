@@ -6,14 +6,14 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 
 public abstract class AbstractStore {
-    protected Log log = LogFactory.getLog(this.getClass());
+    protected Logger log = LogManager.getRootLogger();
 
     protected String fsDefaultName;
     protected String hadoopJobUgi;

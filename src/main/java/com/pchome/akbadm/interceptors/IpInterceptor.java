@@ -2,8 +2,8 @@ package com.pchome.akbadm.interceptors;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -11,7 +11,7 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
 public class IpInterceptor extends AbstractInterceptor{
 	
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 
 	private String[] adminIp;
 

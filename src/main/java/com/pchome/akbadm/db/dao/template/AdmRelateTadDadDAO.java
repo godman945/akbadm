@@ -20,12 +20,12 @@ public class AdmRelateTadDadDAO extends BaseDAO<AdmRelateTadDad, String> impleme
 		if (StringUtils.isNotEmpty(defineAdSeq)) {
 			sql.append(" and defineAdSeq like '%" + defineAdSeq.trim() + "%'");
 		}
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmRelateTadDad>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmRelateTadDad getRelateTadDadById(String relateTadDadId) throws Exception {
-		List<AdmRelateTadDad> list = super.getHibernateTemplate().find("from AdmRelateTadDad where relateTadDadId = '" + relateTadDadId + "'");
+		List<AdmRelateTadDad> list = (List<AdmRelateTadDad>) super.getHibernateTemplate().find("from AdmRelateTadDad where relateTadDadId = '" + relateTadDadId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -35,7 +35,7 @@ public class AdmRelateTadDadDAO extends BaseDAO<AdmRelateTadDad, String> impleme
 
 	@SuppressWarnings("unchecked")
 	public AdmRelateTadDad getRelateTadDadBySeq(String relateTadDadSeq) throws Exception {
-		List<AdmRelateTadDad> list = super.getHibernateTemplate().find("from AdmRelateTadDad where relateTadDadSeq = '" + relateTadDadSeq + "'");
+		List<AdmRelateTadDad> list = (List<AdmRelateTadDad>) super.getHibernateTemplate().find("from AdmRelateTadDad where relateTadDadSeq = '" + relateTadDadSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -53,7 +53,7 @@ public class AdmRelateTadDadDAO extends BaseDAO<AdmRelateTadDad, String> impleme
 
 	public void deleteRelateTadDad(String relateTadDadSeq) throws Exception {
 		String sql = "delete from AdmRelateTadDad where relateTadDadSeq = '" + relateTadDadSeq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -68,7 +68,7 @@ public class AdmRelateTadDadDAO extends BaseDAO<AdmRelateTadDad, String> impleme
 		.append(", \'" + admRelateTadDadVO.getAdPoolSeq() + "\')");
 		System.out.println(sql);
 
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createSQLQuery(sql.toString()).executeUpdate();
         session.flush();
 	}

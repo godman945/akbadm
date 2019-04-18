@@ -37,7 +37,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		list.add(EnumOrderType.FEEDBACK.getTypeTag());
         list.add(customerInfoId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		list.add(EnumOrderType.VIRTUAL.getTypeTag());
         list.add(customerInfoId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" where pfpCustomerInfo.customerInfoId = ? ");
 		hql.append(" order by recognizeRecordId  desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId);
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), customerInfoId);
 	}
 
 	@Override
@@ -92,7 +92,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
         list.add(startDate);
         list.add(customerInfoId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -113,7 +113,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
         list.add(startDate);
         list.add(customerInfoId);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -126,7 +126,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" where pfpCustomerInfo.customerInfoId = ? ");
 		hql.append(" order by createDate asc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId);
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), customerInfoId);
 	}
 
 	@Override
@@ -140,7 +140,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" and recognizeOrderId = ? ");
 		hql.append(" and orderType = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), customerInfoId, recognizeOrderId, orderType);
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), customerInfoId, recognizeOrderId, orderType);
 	}
 
 	@Override
@@ -175,7 +175,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" order by recognizeRecordId ");
 		//System.out.println("hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql.toString(), params.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), params.toArray());
 	}
 
 	@Override
@@ -189,7 +189,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" and saveDate = ? ");
 		hql.append(" order by recognizeRecordId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), saveDate);
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), saveDate);
 	}
 
 	@Override
@@ -204,7 +204,7 @@ public class AdmRecognizeRecordDAO extends BaseDAO <AdmRecognizeRecord, String> 
 		hql.append(" and saveDate <= ? ");
 		hql.append(" group by pfpCustomerInfo.customerInfoId ");
 
-		return super.getHibernateTemplate().find(hql.toString(), saveDate);
+		return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), saveDate);
 	}
 	
 	@Override
@@ -229,7 +229,7 @@ group by `customer_info_id`
 
 		
 		
-		return super.getHibernateTemplate().find(hql.toString(), saveDate);
+		return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), saveDate);
 	}
 
 	@Override
@@ -250,7 +250,7 @@ group by `customer_info_id`
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql, sDate, eDate);
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql, sDate, eDate);
 	}
 
 	/**
@@ -280,7 +280,7 @@ group by `customer_info_id`
 	 */
 	@Override
     public Integer deleteRecognizeRecordForG6000() throws Exception {
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		StringBuffer hql = new StringBuffer();
 		hql.append(" delete from adm_recognize_record ");
@@ -304,7 +304,7 @@ group by `customer_info_id`
 	 */
 	@Override
     public Integer deleteRecognizeRecordForG6000(Date saveDate) throws Exception {
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		StringBuffer hql = new StringBuffer();
 		hql.append(" delete from adm_recognize_record ");
@@ -331,7 +331,7 @@ group by `customer_info_id`
 	 */
 	@Override
     public Integer deleteRecognizeRecordForG6000(Date saveDate, String customerInfoId) throws Exception {
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		StringBuffer hql = new StringBuffer();
 		hql.append(" delete from adm_recognize_record ");
@@ -397,7 +397,7 @@ group by `customer_info_id`
 		log.info("orderTypes = " + orderTypes);
 		log.info("pfpAdCustomerInfoIds = " + pfpAdCustomerInfoIds);
 
-		Query query = this.getSession().createQuery(hql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
         	if(paramName.equals("pfpCustomerInfoIds") || paramName.equals("orderTypes")) {
         		query.setParameterList(paramName, (ArrayList<String>)sqlParams.get(paramName));
@@ -450,7 +450,7 @@ group by `customer_info_id`
 		list.add(sDate);
 		list.add(eDate);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -500,7 +500,7 @@ group by `customer_info_id`
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql, list.toArray());
+		return (List<AdmRecognizeRecord>) super.getHibernateTemplate().find(hql, list.toArray());
 	}
 
 	@Override
@@ -550,7 +550,7 @@ group by `customer_info_id`
 //	    sql.append(" select a.customerInfoId from PfpCustomerInfo a ");
 //	    dataList = super.getHibernateTemplate().find(sql.toString());
 
-	    Query query = super.getSession().createSQLQuery(sql.toString());
+	    Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
 	    List<Object> dataList = null;
 	    dataList =  query.list();
 

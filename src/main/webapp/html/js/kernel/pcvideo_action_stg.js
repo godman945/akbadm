@@ -17,7 +17,7 @@
 	var iframeInfoMap = new Object();
 	var video = null;
 	document.addEventListener('DOMContentLoaded', function () {
-		video = document.getElementsByTagName("video")[0];		
+		video = document.getElementsByTagName("video")[0];
 		iframeInfoMap["iframe"] = {adView:false,vpv:false,timer:null,percent25:false,percent50:false,percent75:false,percent100:false,clickPause:false};
 		var adSize = document.querySelector("#adSize");
 		if(video != null && video != undefined){
@@ -360,7 +360,7 @@
 		adlinkbtn2.style.display='block';
 		video.pause();
 	}
-
+ 
 	/*提供父階層呼叫傳遞參數*/
 	window.addEventListener("message", playController, false);
 	function playController(event){
@@ -368,6 +368,8 @@
 			if(event != undefined){
 				video = document.getElementsByTagName("video")[0];
 				var adInfo = (JSON.parse(event.data)).adInfo;
+				console.log(adInfo);
+				
 				/*滾輪移動距離*/
 				var scrollTop = adInfo.scrollTop;
 				/*視窗可視大小*/

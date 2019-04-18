@@ -16,4 +16,5 @@ public interface IAdmPfpdAdPvclkReportDAO {
 	
 	public List<Object> prepareReportData3(final String reportDate) throws Exception;
 	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

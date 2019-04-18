@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:tx="http://www.springframework.org/schema/tx"
-    xsi:schemaLocation="
-        http://www.springframework.org/schema/beans 
-        http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-        http://www.springframework.org/schema/tx
-        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
+<beans 
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.0.xsd
+    http://www.springframework.org/schema/tx 
+    http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+ ">
 
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" destroy-method="destroy">
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" destroy-method="destroy">
         <property name="dataSource" ref="mySqlDataSource" />
         <property name="hibernateProperties">
             <props>
+            	<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.connection.characterEncoding">utf-8</prop>
                 <prop key="hibernate.show_sql">false</prop>
@@ -179,6 +187,14 @@
                 <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
                 <value>com.pchome.akbadm.db.pojo.PfpAdSysprice</value>
 				<value>com.pchome.akbadm.db.pojo.PfpBoard</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogo</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogoDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeAdactionMerge</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvert</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvertRule</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvertTrans</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeTracking</value>
                 <value>com.pchome.akbadm.db.pojo.PfpCustomerInfo</value>
                 <value>com.pchome.akbadm.db.pojo.PfpEnterprise</value>
                 <value>com.pchome.akbadm.db.pojo.PfpIllegalKeyword</value>
@@ -203,16 +219,26 @@
                 <value>com.pchome.akbadm.db.pojo.PfpAdVideoSource</value>
                 <value>com.pchome.akbadm.db.pojo.PfdAdVideoReport</value>
                 <value>com.pchome.akbadm.db.pojo.PfpRefundOrderRelease</value>
-                
-               
+				<value>com.pchome.akbadm.db.pojo.PfpCatalog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogGroup</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogGroupItem</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogProdEc</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogProdEcError</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogUploadErrLog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogUploadLog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogo</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogoDetail</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogSetup</value>
+				<value>com.pchome.akbadm.db.pojo.PfpAdPvclkProd</value>
 		    </list>
         </property>
     </bean>
 
-    <bean id="sessionFactory_report" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean" destroy-method="destroy">
+    <bean id="sessionFactory_report" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean" destroy-method="destroy">
         <property name="dataSource" ref="mySqlDataSource_report" />
         <property name="hibernateProperties">
             <props>
+            	<prop key="hibernate.current_session_context_class">org.springframework.orm.hibernate4.SpringSessionContext</prop>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
                 <prop key="hibernate.connection.characterEncoding">utf-8</prop>
                 <prop key="hibernate.show_sql">false</prop>
@@ -378,6 +404,14 @@
                 <value>com.pchome.akbadm.db.pojo.PfpAdSpecificWebsite</value>
                 <value>com.pchome.akbadm.db.pojo.PfpAdSysprice</value>
 				<value>com.pchome.akbadm.db.pojo.PfpBoard</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogo</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogoDetail</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCode</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeAdactionMerge</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvert</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvertRule</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeConvertTrans</value>
+                <value>com.pchome.akbadm.db.pojo.PfpCodeTracking</value>
                 <value>com.pchome.akbadm.db.pojo.PfpCustomerInfo</value>
                 <value>com.pchome.akbadm.db.pojo.PfpEnterprise</value>
                 <value>com.pchome.akbadm.db.pojo.PfpIllegalKeyword</value>
@@ -401,16 +435,59 @@
                 <value>com.pchome.akbadm.db.pojo.PfpAdVideoReport</value>
                 <value>com.pchome.akbadm.db.pojo.PfpAdVideoSource</value>
                 <value>com.pchome.akbadm.db.pojo.PfpRefundOrderRelease</value>
-
+                <value>com.pchome.akbadm.db.pojo.PfpCatalog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogGroup</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogGroupItem</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogProdEc</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogProdEcError</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogUploadErrLog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogUploadLog</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogo</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogLogoDetail</value>
+				<value>com.pchome.akbadm.db.pojo.PfpCatalogSetup</value>
+				<value>com.pchome.akbadm.db.pojo.PfpAdPvclkProd</value>
 		    </list>
         </property>
     </bean>
 
     <!-- spring transcation setting -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
     
     <!-- annotationtransation  method add @Transactional -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+    
+     <bean id="transactionManager2" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory_report" />
+    </bean>
+    
+    <!-- annotationtransation  method add @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager2" proxy-target-class="true"/>
+   
+    <aop:config expose-proxy="true">
+        <aop:pointcut id="managerMethod" expression="execution(* com.pchome.akbadm.db.service..*.*(..)) or execution(* com.pchome.akbadm.db.dao..*.*(..))" />
+        <aop:advisor pointcut-ref="managerMethod" advice-ref="baseServiceAdvice2" />
+    </aop:config>
+    
+    <aop:config expose-proxy="true">
+        <aop:pointcut id="managerMethod" expression="execution(* com.pchome.akbadm.db.service..*.*(..)) or execution(* com.pchome.akbadm.db.dao..*.*(..))" />
+        <aop:advisor pointcut-ref="managerMethod" advice-ref="baseServiceAdvice" />
+    </aop:config>
+    
+    <tx:advice id="baseServiceAdvice" transaction-manager="transactionManager">
+	   <tx:attributes>
+	      <tx:method name="*" propagation="REQUIRED"/>
+	      <tx:method name="save*" rollback-for="Exception"/>
+	      <tx:method name="find*" read-only="true"/>
+	   </tx:attributes>
+	</tx:advice>
+    
+    <tx:advice id="baseServiceAdvice2" transaction-manager="transactionManager2">
+	   <tx:attributes>
+	      <tx:method name="*" propagation="REQUIRED"/>
+	      <tx:method name="save*" rollback-for="Exception"/>
+	      <tx:method name="find*" read-only="true"/>
+	   </tx:attributes>
+	</tx:advice>
 </beans>

@@ -73,6 +73,14 @@
 	        <th class="td09">平均互動費用</td>
 	        <th class="td09">千次曝光費用</td>
 	        <th class="td09">廣告費用</td>
+	        
+	        <th class="td09">轉換次數</td>
+	        <th class="td09">轉換率</td>
+	        <th class="td09">總轉換價值</td>
+	        <th class="td09">平均轉換成本</td>
+	        <th class="td09">廣告投資報酬率</td>
+	        
+	        
 	    </tr>
     </thead>
     <tbody>
@@ -89,6 +97,13 @@
 		        <td class="td10">$ ${data.adClkAvgPrice}</td>
 		        <td class="td10">$ ${data.adPvRate}</td>
 		        <td class="td10">$ ${data.adClkPriceSum}</td>
+		        
+		        <td class="td10">${data.convertCountSum!}</td>
+	        	<td class="td10">${data.convertCVR!}</td>
+	        	<td class="td10">${data.convertPriceCountSum!}</td>
+	        	<td class="td10">${data.convertCost!}</td>
+	        	<td class="td10">${data.convertInvestmentCost!}</td>
+		        
 		    </tr>
 	    </#list>
     </tbody>
@@ -100,6 +115,13 @@
         <td class="td10" style="background-color:#99FFFF;" >$ ${totalAdClkAvgPrice?string('#,##0.00')!}</td>
         <td class="td10" style="background-color:#99FFFF;" >$ ${totalAdPvRate?string('#,##0.00')!}</td>
         <td class="td10" style="background-color:#99FFFF;" >$ ${totalAdClkPriceSum?string('#,###')!}</td>
+        
+        
+        <td class="td10" style="background-color:#99FFFF;" >${totalConvertCountSum?string('#,###')!}</td>
+        <td class="td10" style="background-color:#99FFFF;" >${totalConvertCVR?string('0.00')!}%</td>
+        <td class="td10" style="background-color:#99FFFF;" >${totalConvertPriceCountSum?string('#,###')!}</td>
+        <td class="td10" style="background-color:#99FFFF;" >${totalConvertCost?string('0.00')!}</td>
+        <td class="td10" style="background-color:#99FFFF;" >${totalConvertInvestmentCost?string('0.00')!}%</td>
     </tr>
 </table>
 

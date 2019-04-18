@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -21,7 +21,7 @@ import com.pchome.config.TestConfig;
 
 public class AdmClientCountReportJob {
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 
 	private IAdmClientCountReportService admClientCountReportService;
 	private IAdmPortalBonusReportService admPortalBonusReportService;

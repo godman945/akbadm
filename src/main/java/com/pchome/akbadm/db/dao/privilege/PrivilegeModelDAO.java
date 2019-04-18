@@ -12,7 +12,7 @@ public class PrivilegeModelDAO extends BaseDAO<AdmPrivilegeModel, String> implem
 
 	@SuppressWarnings("unchecked")
 	public AdmPrivilegeModel findPrivilegeModelById(String id) throws Exception {
-		List<AdmPrivilegeModel> list = this.getHibernateTemplate().find("from AdmPrivilegeModel where modelId = '" + id + "'");
+		List<AdmPrivilegeModel> list = (List<AdmPrivilegeModel>) this.getHibernateTemplate().find("from AdmPrivilegeModel where modelId = '" + id + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -27,7 +27,7 @@ public class PrivilegeModelDAO extends BaseDAO<AdmPrivilegeModel, String> implem
 
 	public void deletePrivilegeModelById(String id) throws Exception {
 		String sql = "delete from AdmPrivilegeModel where modelId = '" + id + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}

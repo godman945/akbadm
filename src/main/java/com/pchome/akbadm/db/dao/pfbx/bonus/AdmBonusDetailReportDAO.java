@@ -17,7 +17,7 @@ public class AdmBonusDetailReportDAO extends BaseDAO<AdmBonusDetailReport, Integ
 		hql.append(" where reportDate = ? ");
 		hql.append(" order by id desc ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), reportDate);
+		return (List<AdmBonusDetailReport>) super.getHibernateTemplate().find(hql.toString(), reportDate);
 	}
 	
 	public Integer deleteAdmBonusDetailReport(Date deleteDate) {

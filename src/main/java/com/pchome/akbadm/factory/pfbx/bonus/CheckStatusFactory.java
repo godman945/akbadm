@@ -3,8 +3,8 @@ package com.pchome.akbadm.factory.pfbx.bonus;
 import com.pchome.enumerate.pfbx.account.EnumPfbAccountStatus;
 import com.pchome.enumerate.pfbx.bonus.EnumPfbApplyInvoiceCheckStatus;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.enumerate.pfbx.account.EnumPfbxAccountCategory;
 import com.pchome.enumerate.pfbx.account.EnumPfbxCheckStatus;
@@ -15,7 +15,7 @@ import com.pchome.enumerate.pfbx.bonus.EnumPfbApplyStatus;
 //取出各種Enum對應的值
 public class CheckStatusFactory
 {
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	public EnumPfbApplyStatus getOneEnumPfbApplyStatus(String code)
 	{

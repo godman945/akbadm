@@ -6,8 +6,8 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionInvocation;
@@ -26,7 +26,7 @@ public class LoginCheckInterceptor extends AbstractInterceptor {
 
 	private static final long serialVersionUID = 1L;
 
-	private static final Log log = LogFactory.getLog(LoginCheckInterceptor.class);
+	private static final Logger log = LogManager.getRootLogger();
 
     private static final String REDIRECT_LOGIN = "login";
 

@@ -19,7 +19,7 @@ public class PfbxBonusDayReportDAO extends BaseDAO<PfbxBonusDayReport,Integer> i
 		hql.append(" from PfbxBonusDayReport ");
 		hql.append(" where reportDate between ? and ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), startDate, endDate);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(), startDate, endDate);
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -33,7 +33,7 @@ public class PfbxBonusDayReportDAO extends BaseDAO<PfbxBonusDayReport,Integer> i
 		hql.append(" from PfbxBonusDayReport ");
 		hql.append(" where pfbxCustomerInfo.customerInfoId =? and reportDate between ? and ? ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId , startDate, endDate);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(), pfbId , startDate, endDate);
 	}
 	
 	public Integer deletePfbxBonusDayReport(Date deleteDate) {

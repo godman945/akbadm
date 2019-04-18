@@ -22,7 +22,7 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		
 		hql.append(" from PfdContract ");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfdContract>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 //	@SuppressWarnings("unchecked")
@@ -57,7 +57,7 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		
 		list.add(pfdContractId);		
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdContract>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -80,7 +80,7 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query q;
 		if (pageNo==-1) {
 			q = session.createQuery(strHQL);
@@ -113,7 +113,7 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		list.add(EnumContractStatus.USE.getStatusId());
 
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdContract>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -132,7 +132,7 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		list.add(EnumContractStatus.OVERTIME.getStatusId());
 		list.add(EnumContractStatus.CLOSE.getStatusId());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdContract>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -168,6 +168,6 @@ public class PfdContractDAO extends BaseDAO <PfdContract, String> implements IPf
 		list.add(newEndDate);
 		list.add(EnumContractStatus.CLOSE.getStatusId());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdContract>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

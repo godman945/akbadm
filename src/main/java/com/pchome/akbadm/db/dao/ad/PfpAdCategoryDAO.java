@@ -9,6 +9,6 @@ public class PfpAdCategoryDAO extends BaseDAO<PfpAdCategory,String> implements I
 
     @SuppressWarnings("unchecked")
     public List<PfpAdCategory> getAllPfpAdCategory() throws Exception {
-        return super.getHibernateTemplate().find("from PfpAdCategory");
+        return (List<PfpAdCategory>) super.getHibernateTemplate().find("from PfpAdCategory");
     }
 }

@@ -16,6 +16,8 @@ public class AdBean implements Cloneable {
     private String adGroupId;
     private String adId;
     private String adKeywordId = "";
+    private String prodListId = "";
+    private String prodGroupId = "";
     private String adClass;
     private String[] adClasses = new String[0];
     private String adStyle;
@@ -52,6 +54,10 @@ public class AdBean implements Cloneable {
     private int adClk;
     private int count;
     private boolean offlineFlag;
+    private String trackingSeq = "";
+    private int trackingRangeDate = 0;
+    private String adActionCountry = "";
+    private String adActionCity = "";
     private Map<String, AdDetailBean> adDetailMap = new HashMap<String, AdDetailBean>();
 
     @Override
@@ -148,6 +154,22 @@ public class AdBean implements Cloneable {
 
     public void setAdKeywordId(String adKeywordId) {
         this.adKeywordId = adKeywordId;
+    }
+
+    public String getProdListId() {
+        return prodListId;
+    }
+
+    public void setProdListId(String prodListId) {
+        this.prodListId = prodListId;
+    }
+
+    public String getProdGroupId() {
+        return prodGroupId;
+    }
+
+    public void setProdGroupId(String prodGroupId) {
+        this.prodGroupId = prodGroupId;
     }
 
     public String getAdClass() {
@@ -436,6 +458,38 @@ public class AdBean implements Cloneable {
 
     public void setOfflineFlag(boolean offlineFlag) {
         this.offlineFlag = offlineFlag;
+    }
+
+    public String getTrackingSeq() {
+        return trackingSeq;
+    }
+
+    public void setTrackingSeq(String trackingSeq) {
+        this.trackingSeq = trackingSeq;
+    }
+
+    public int getTrackingRangeDate() {
+        return trackingRangeDate;
+    }
+
+    public void setTrackingRangeDate(int trackingRangeDate) {
+        this.trackingRangeDate = trackingRangeDate;
+    }
+
+    public String getAdActionCountry() {
+        return adActionCountry;
+    }
+
+    public void setAdActionCountry(String adActionCountry) {
+        this.adActionCountry = adActionCountry;
+    }
+
+    public String getAdActionCity() {
+        return adActionCity;
+    }
+
+    public void setAdActionCity(String adActionCity) {
+        this.adActionCity = adActionCity;
     }
 
     public Map<String, AdDetailBean> getAdDetailMap() {

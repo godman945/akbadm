@@ -9,8 +9,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.akbadm.db.pojo.PfdBonusRecord;
@@ -25,7 +25,7 @@ import com.pchome.soft.util.DateValueUtil;
 @Transactional
 public class PfdBonusProvider implements IPfdBonusProvider{
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 	DecimalFormat df3 = new DecimalFormat("###,###,###,###.##");
 	private final String checkPerson = "謝元豪";
 	private final String checkPersonTel = "02-27000898#2258";

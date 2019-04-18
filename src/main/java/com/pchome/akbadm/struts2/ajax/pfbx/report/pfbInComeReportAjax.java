@@ -1,4 +1,4 @@
- package com.pchome.akbadm.struts2.ajax.pfbx.report;
+package com.pchome.akbadm.struts2.ajax.pfbx.report;
 
 import com.pchome.akbadm.db.service.ad.IPfpAdPvclkService;
 import com.pchome.akbadm.db.service.pfbx.bonus.IAdmBonusBillReportService;

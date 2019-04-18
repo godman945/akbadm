@@ -28,6 +28,13 @@ public class PfpAdReportVO {
 	
 	private String timeCode;					//播放時段
 	
+	private String convertCountSum;				//總轉換數
+	private String convertPriceCountSum;		//總轉換價值
+	private String convertCVR;					//轉換率
+	private String convertCost;					//平均轉換成本
+	private String convertInvestmentCost;		//廣告投資報酬率
+	
+	
 	public String getPfpCustomerInfoId() {
 		return pfpCustomerInfoId;
 	}
@@ -148,6 +155,35 @@ public class PfpAdReportVO {
 	public void setPfbDefaultWebsiteChineseName(String pfbDefaultWebsiteChineseName) {
 		this.pfbDefaultWebsiteChineseName = pfbDefaultWebsiteChineseName;
 	}
-	
+	public String getConvertCountSum() {
+		return convertCountSum;
+	}
+	public void setConvertCountSum(String convertCountSum) {
+		this.convertCountSum = convertCountSum;
+	}
+	public String getConvertPriceCountSum() {
+		return convertPriceCountSum;
+	}
+	public void setConvertPriceCountSum(String convertPriceCountSum) {
+		this.convertPriceCountSum = convertPriceCountSum;
+	}
+	public String getConvertCVR() {
+		return convertCVR;
+	}
+	public void setConvertCVR(String convertCVR) {
+		this.convertCVR = convertCVR;
+	}
+	public String getConvertCost() {
+		return convertCost;
+	}
+	public void setConvertCost(String convertCost) {
+		this.convertCost = convertCost;
+	}
+	public String getConvertInvestmentCost() {
+		return convertInvestmentCost;
+	}
+	public void setConvertInvestmentCost(String convertInvestmentCost) {
+		this.convertInvestmentCost = convertInvestmentCost;
+	}
 	
 }

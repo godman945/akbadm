@@ -13,8 +13,8 @@ import java.util.Map;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -31,7 +31,7 @@ import com.pchome.service.portalcms.bean.Mail;
 
 public class AdmReportMailJob {
 
-	private Log log = LogFactory.getLog(getClass().getName());
+	private Logger log = LogManager.getRootLogger();
 
 	private IAdmClientCountReportService admClientCountReportService;
 	private IAdSourceReportService adSourceReportService;

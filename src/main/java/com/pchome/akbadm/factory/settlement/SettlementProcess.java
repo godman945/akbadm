@@ -7,8 +7,8 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfdUserAdAccountRef;
 import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
@@ -31,7 +31,7 @@ import com.pchome.soft.util.DateValueUtil;
  */
 public class SettlementProcess {
 
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 
     private IBoardProvider boardProvider;
     private IPfdBoardService pfdBoardService;

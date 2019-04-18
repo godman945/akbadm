@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.pfbx.report.PfbxCustomerReportVo;
@@ -28,7 +28,7 @@ public class PfbxCustomerReportDAO extends BaseDAO<PfbxCustomerReportVo, String>
 	List<PfbxCustomerReportVo> result = (List<PfbxCustomerReportVo>) getHibernateTemplate().execute(
 			new HibernateCallback<List<PfbxCustomerReportVo>>() {
 		@SuppressWarnings("unchecked")
-		public List<PfbxCustomerReportVo> doInHibernate(Session session) throws HibernateException, SQLException {
+		public List<PfbxCustomerReportVo> doInHibernate(Session session) throws HibernateException {
 	    	HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 	        StringBuffer hql = new StringBuffer();
 	        hql.append("select ");

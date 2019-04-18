@@ -8,8 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfbxBoard;
 import com.pchome.akbadm.db.pojo.PfbxBonusApply;
@@ -40,7 +40,7 @@ public class BonusTransDetailProcess {
     private IPfbxBoardService pfbxBoardService;
     private IPfbxInvalidTrafficService pfbxInvalidTrafficService;
 
-    protected Log log = LogFactory.getLog(this.getClass().getName());
+    protected Logger log = LogManager.getRootLogger();
 
     public void insertItemTransDetail(PfbxCustomerInfo pfb, EnumPfbxBonusTrans enumPfbxBonusTrans, String monthValue, PfbxBonusApply pfbxBonusApply) {
 

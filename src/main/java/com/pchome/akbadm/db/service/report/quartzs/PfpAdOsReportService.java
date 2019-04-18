@@ -19,4 +19,8 @@ public class PfpAdOsReportService extends BaseService<PfpAdOsReport, Integer> im
 	public void insertReportData(List<PfpAdOsReport> dataList) throws Exception {
 		((PfpAdOsReportDAO) dao).insertReportData(dataList);
 	}
+
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfpAdOsReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

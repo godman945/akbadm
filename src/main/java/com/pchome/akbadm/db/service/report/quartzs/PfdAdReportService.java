@@ -19,4 +19,8 @@ public class PfdAdReportService extends BaseService<PfdAdReport, Integer> implem
 	public void insertReportData(List<PfdAdReport> dataList) throws Exception {
 		((PfdAdReportDAO) dao).insertReportData(dataList);
 	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

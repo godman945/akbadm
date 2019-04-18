@@ -11,7 +11,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdKeywordPvclk;
@@ -30,7 +30,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
         hql.append("where adKeywordPvclkDate = ? ");
         hql.append("group by pfpAdKeyword.adKeywordSeq");
 
-        return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+        return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
         Object[] results = getHibernateTemplate().execute(
             new HibernateCallback<Object[]>() {
                 @Override
-                public Object[] doInHibernate(Session session) throws HibernateException, SQLException {
+                public Object[] doInHibernate(Session session) throws HibernateException {
                     return (Object[]) session.createSQLQuery(sql.toString())
                         .setString("seq", seq)
                         .setDate("pvclkDate", pvclkDate)
@@ -79,7 +79,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
             hql.append("    and pfpAdKeyword.pfpAdGroup.pfpAdAction.pfpCustomerInfo.customerInfoId = :customerInfoId ");
         }
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setString("pvclkDate", pvclkDate);
         if (StringUtils.isNotBlank(actionId)) {
             query.setString("actionId", actionId);
@@ -101,7 +101,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
         hql.append("where adKeywordPvclkDate = ? ");
         hql.append("group by pfpAdKeyword.pfpAdGroup.pfpAdAction.pfpCustomerInfo.customerInfoId");
 
-        return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+        return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
     }
 
     @Override
@@ -125,7 +125,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
         hql.append("where adKeywordPvclkDate = ? ");
         hql.append("group by pfpAdKeyword.pfpAdGroup.pfpAdAction.adActionSeq");
 
-        return this.getHibernateTemplate().find(hql.toString(), pvclkDate);
+        return (List<Object[]>) this.getHibernateTemplate().find(hql.toString(), pvclkDate);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class PfpAdKeywordPvclkDAO extends BaseDAO<PfpAdKeywordPvclk, String> imp
     @SuppressWarnings("unchecked")
     public List<PfpAdKeywordPvclk> selectPfpAdKeywordPvclk(int firstResult, int maxResults) {
         String hql = "from PfpAdKeywordPvclk order by adKeywordPvclkDate desc, adKeywordPvclkTime desc";
-        return super.getSession()
+        return this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                     .createQuery(hql)
                     .setFirstResult(firstResult)
                     .setMaxResults(maxResults)

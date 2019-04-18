@@ -1,13 +1,13 @@
 package com.pchome.akbadm.factory.pfd.parse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.enumerate.pfd.bonus.EnumPfdXmlParse;
 
 public class PfdParseFactory {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private APfdParseBonusXML pfdParseGroupXML;
 	private APfdParseBonusXML pfdParseMonthBonusXML;

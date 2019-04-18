@@ -1,0 +1,23 @@
+- hosts: stg
+  tasks:
+    - name: test ping
+      ping:
+      register: message
+
+    - name: pring message
+      debug:
+        msg: "{{ message }}"
+        
+    - name: copy file
+      synchronize:
+          src: /builds/akb/akbadm/target/akbadm/
+          dest: /home/webuser/_nico/akbadm/
+          
+    - name: restart tomcat
+      become: yes
+      become_user: webuser
+      become_method: sudo
+      command: sudo systemctl restart tomcat
+
+        
+

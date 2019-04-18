@@ -12,4 +12,6 @@ public interface IPfpAdDetailService extends IBaseService<PfpAdDetail, String> {
 	public float countAdSysprice(String adPoolSeq, float sysprice, String today) throws Exception;
 
 	public List<PfpAdDetail> getPfpAdDetails(String adDetailSeq, String adSeq, String adPoolSeq, String defineAdSeq) throws Exception;
+	
+	public String getProdAdName(String adSeq) throws Exception;
 }

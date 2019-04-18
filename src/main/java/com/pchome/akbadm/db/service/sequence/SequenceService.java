@@ -4,7 +4,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -132,16 +133,13 @@ public class SequenceService extends BaseService<Sequence, String> implements IS
 		return id.toString();
 	}
 
-
 	@Transactional
-	public synchronized  String getId(EnumSequenceTableName enumSequenceTableName) {
-
-		return this.getId(enumSequenceTableName,"");
-
+	public synchronized String getId(EnumSequenceTableName enumSequenceTableName) {
+		return this.getId(enumSequenceTableName, "");
 	}
 
 	@Transactional
-	public synchronized String getId(EnumSequenceTableName enumSequenceTableName,String mid) {
+	public synchronized String getId(EnumSequenceTableName enumSequenceTableName, String mid) {
 		String id = null;
 		id = this.getIDForTable(enumSequenceTableName, mid);
 
@@ -162,34 +160,67 @@ public class SequenceService extends BaseService<Sequence, String> implements IS
 		return id.toString();
 	}
 
-	public static void main(String args[]){
+	/**
+	 * 可輸入欄位總長度，補滿需要的位數
+	 * ex:totalLength=20 結果:PCUL2018080800000001
+	 * @param enumSequenceTableName
+	 * @param mid 中間要輸入甚麼參數
+	 * @param totalLength 總長度
+	 * @return 
+	 * @throws Exception
+	 */
+	@Override
+	synchronized public String getId(EnumSequenceTableName enumSequenceTableName, String mid, int totalLength) throws Exception {
+		Sequence sequence = getSequence(enumSequenceTableName);
+		String tableDate = sequence.getTableDate();
+		int no = sequence.getTableNo();
+		
+		// 輸入總欄位數 - 序號前面的代碼長度 - 底線等等的長度 - 日期長度 - DB內目前序號長度
+		totalLength = totalLength - sequence.getTableChar().length() - mid.length() - tableDate.length() - String.valueOf(no).length();
+
+		StringBuffer tableNo = new StringBuffer();
+		for (int i = 0; i < totalLength; i++) {
+			tableNo.append("0");
+		}
+		tableNo.append(no);
+
+		StringBuffer id = new StringBuffer();
+		id.append(sequence.getTableChar())
+		  .append(mid)
+		  .append(tableDate)
+		  .append(tableNo);
+		
+		return id.toString();
+	}
+	
+	public static void main(String args[]) {
 		ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
 
-		Logger log = Logger.getLogger(AdmTemplateProductDAO.class);
+		Logger log = LogManager.getRootLogger();
 
 		SequenceService sequenceService = (SequenceService) context.getBean("SequenceService");
 		for (int i = 0; i < 5; i++) {
-    		//Product po=productDAO.get("P0010001");
-    		//log.info("po="+po.getProdName());
+			// Product po=productDAO.get("P0010001");
+			// log.info("po="+po.getProdName());
 
-    		log.info(sequenceService.getId(EnumSequenceTableName.ADM_TEMPLATE_AD));
-    		log.info(sequenceService.getId(EnumSequenceTableName.ADM_TEMPLATE_PRODUCT));
-    		log.info(sequenceService.getId(EnumSequenceTableName.PFBX_APPLY_ORDER));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.ORDER_DETAIL));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.INVOICE));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.RECOGNIZE));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.REFUND));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.ATM, String.valueOf(RandomUtils.nextInt(9999))));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.ESANATM, String.valueOf(RandomUtils.nextInt(9999))));
-    		//log.info(sequenceService.getId(EnumSequenceTableName.INVOICENO));
+			log.info(sequenceService.getId(EnumSequenceTableName.ADM_TEMPLATE_AD));
+			log.info(sequenceService.getId(EnumSequenceTableName.ADM_TEMPLATE_PRODUCT));
+			log.info(sequenceService.getId(EnumSequenceTableName.PFBX_APPLY_ORDER));
+			// log.info(sequenceService.getId(EnumSequenceTableName.ORDER_DETAIL));
+			// log.info(sequenceService.getId(EnumSequenceTableName.INVOICE));
+			// log.info(sequenceService.getId(EnumSequenceTableName.RECOGNIZE));
+			// log.info(sequenceService.getId(EnumSequenceTableName.REFUND));
+			// log.info(sequenceService.getId(EnumSequenceTableName.ATM,
+			// String.valueOf(RandomUtils.nextInt(9999))));
+			// log.info(sequenceService.getId(EnumSequenceTableName.ESANATM,
+			// String.valueOf(RandomUtils.nextInt(9999))));
+			// log.info(sequenceService.getId(EnumSequenceTableName.INVOICENO));
 
-    		//log.info(sequenceService.getNo(EnumSequenceTableName.ORDER));
+			// log.info(sequenceService.getNo(EnumSequenceTableName.ORDER));
 
-    		//log.info(sequenceService.getInvoiceCheckCode("PW52639707"));
-    		//log.info(sequenceService.getEatmShaCode("8314030508415205","1000"));
+			// log.info(sequenceService.getInvoiceCheckCode("PW52639707"));
+			// log.info(sequenceService.getEatmShaCode("8314030508415205","1000"));
 		}
 	}
-
-
 
 }

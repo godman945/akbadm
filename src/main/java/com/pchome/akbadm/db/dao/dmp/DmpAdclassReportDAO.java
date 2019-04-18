@@ -13,7 +13,7 @@ public class DmpAdclassReportDAO extends BaseDAO<DmpAdclassReport, String> imple
     public List<DmpAdclassReport> getByRecordDate(String recordDate, int firstResult, int maxResults) {
         String hql = "from DmpAdclassReport where recordDate = ? order by counter desc";
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setParameter(0, recordDate);
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResults);

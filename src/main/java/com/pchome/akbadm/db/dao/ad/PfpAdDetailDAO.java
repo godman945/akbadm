@@ -1,8 +1,11 @@
 package com.pchome.akbadm.db.dao.ad;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.transform.Transformers;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
@@ -17,7 +20,7 @@ public class PfpAdDetailDAO extends BaseDAO<PfpAdDetail, String> implements IPfp
 		hql.append("from PfpAdDetail ");
 		hql.append("where pfpAd.adSeq = '"+adSeq+"' and defineAdSeq = '"+defineAdSeq+"' ");
 		
-		List<PfpAdDetail> list = super.getHibernateTemplate().find(hql.toString());
+		List<PfpAdDetail> list = (List<PfpAdDetail>) super.getHibernateTemplate().find(hql.toString());
 		
 		if(list != null && list.size() > 0){
 			return list.get(0);
@@ -44,7 +47,7 @@ public class PfpAdDetailDAO extends BaseDAO<PfpAdDetail, String> implements IPfp
 		hql.append(" and pfpAd.adChannelPrice < "+sysprice+" ");
 		hql.append(" group by pfpAd.adChannelPrice ");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
@@ -66,6 +69,25 @@ public class PfpAdDetailDAO extends BaseDAO<PfpAdDetail, String> implements IPfp
 			sql.append(" and defineAdSeq = '" + defineAdSeq.trim() + "'");
 		}
 		
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<PfpAdDetail>) super.getHibernateTemplate().find(sql.toString());
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<Map<String,Object>> getProdAdName(String adSeq) throws Exception{
+		StringBuffer hql = new StringBuffer();
+		
+		hql.append(" select ad_detail_content ");
+		hql.append(" from  pfp_ad_detail ");
+		hql.append(" where 1=1 ");
+		hql.append(" and ad_seq ='"+adSeq+"' ");
+		hql.append(" and ad_detail_id ='prod_report_name' ");
+		
+		log.info(hql.toString());
+		
+		Query query = null;
+		query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
+		query.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP); 
+		
+		return query.list();
 	}
 }

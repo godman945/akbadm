@@ -1,29 +1,45 @@
 package com.pchome.akbadm.factory.ad;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+
+import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 
 import com.pchome.akbadm.db.pojo.PfpAdVideoSource;
 import com.pchome.akbadm.db.service.advideo.IPfpAdVideoSourceService;
 import com.pchome.soft.depot.utils.JredisUtil;
 
+
 public class AdModelUtil {
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private static final AdModelUtil adModelUtil = new AdModelUtil();
 	private IPfpAdVideoSourceService pfpAdVideoSourceService;
+	private String akbpfpCatalogGroupApi;
+	private String pfpPhotoPath;
+	private String pfpServer;
+	
+	private String active;
+	
 	public static AdModelUtil getInstance(){
 		return adModelUtil;
 	}
@@ -214,7 +230,7 @@ public class AdModelUtil {
 				
 				if(sCurrentLine.indexOf("<#dad_201303070010>") >= 0){
 					if(System.getProperties().containsKey("akb.pfp.local")){
-						sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070010>", "http://showstg.pchome.com.tw/pfp/"+URLDecoder.decode(adPreviewVideoBgImg, "UTF-8"));
+						sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070010>", URLDecoder.decode(adPreviewVideoBgImg, "UTF-8").toString());
 					}else if(System.getProperties().containsKey("akb.pfp.stg")){
 						sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070010>", URLDecoder.decode(adPreviewVideoBgImg, "UTF-8"));
 					}else{
@@ -235,9 +251,6 @@ public class AdModelUtil {
 				//備用mp4影片
 				if(sCurrentLine.indexOf("<#dad_201303070017>") >= 0){
 					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", mp4Path);
-//					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", "http://showstg.pchome.com.tw/pfp/img/video/2017_11_04/adv_201711040001.mp4");
-//					sCurrentLine = sCurrentLine.replaceAll("<#dad_201303070017>", "http://showstg.pchome.com.tw/pfp/img/video/2018_01_30/adv_201801300001.mp4");
-					
 				}
 				//備用webm影片
 				if(sCurrentLine.indexOf("<#dad_201303070018>") >= 0){
@@ -257,11 +270,11 @@ public class AdModelUtil {
 				
 				//取代js
 				if(sCurrentLine.indexOf("pcadscript") >=0){
-					if(System.getProperties().containsKey("akb.pfp.local")){
+					if(active.equals("local")) {
 						str = str.append("<script language=\"JavaScript\" src=\"http://alex.pchome.com.tw:8080/akbadm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
-					}else if(System.getProperties().containsKey("akb.pfp.stg")){
-						str = str.append("<script language=\"JavaScript\" src=\"http://showstg.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
-					}else{
+					}else if(active.equals("stg")) {
+						str = str.append("<script language=\"JavaScript\" src=\"http://showstg2.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
+					}else {
 						str = str.append("<script language=\"JavaScript\" src=\"http://kdadm.pchome.com.tw/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}
 					continue;
@@ -277,8 +290,384 @@ public class AdModelUtil {
 		
 	}
 
+	/**
+	 * 商品廣告預覽
+	 * */
+	public String adProdModelPreview(String pfpProdAdPreviewJson) {
+		try{
+			JSONObject prodAdPreviewJson = new JSONObject(pfpProdAdPreviewJson);
+			String catalogGroupId = prodAdPreviewJson.getString("catalogGroupId");
+			String disTxtType = prodAdPreviewJson.getString("disTxtType");
+			String disBgColor = prodAdPreviewJson.getString("disBgColor");
+			String disFontColor = prodAdPreviewJson.getString("disFontColor");
+			String btnBgColor = prodAdPreviewJson.getString("btnBgColor");
+			String btnFontColor = prodAdPreviewJson.getString("btnFontColor");
+			String btnTxt = prodAdPreviewJson.getString("btnTxt");
+			String logoText = prodAdPreviewJson.getString("logoText");
+			String logoBgColor = prodAdPreviewJson.getString("logoBgColor");
+			String logoFontColor = prodAdPreviewJson.getString("logoFontColor");
+			String prodLogoType = prodAdPreviewJson.getString("prodLogoType");
+			String imgProportiona = prodAdPreviewJson.getString("imgProportiona");
+			String userLogoPath = prodAdPreviewJson.getString("userLogoPath");
+			String realUrl = prodAdPreviewJson.getString("realUrl");
+			String previewTpro = prodAdPreviewJson.getString("previewTpro");
+			String saleImg = prodAdPreviewJson.getString("saleImg");
+			String saleEndImg = prodAdPreviewJson.getString("saleEndImg");
+			String posterType = prodAdPreviewJson.getString("posterType");
+			
+			log.info("logoBgColor:"+logoBgColor);
+			log.info("logoFontColor:"+logoFontColor);
+			log.info("logoText:"+logoText);
+			log.info("btnBgColor:"+btnBgColor);
+			log.info("btnFontColor:"+btnFontColor);
+			log.info("btnTxt:"+btnTxt);
+			log.info("disBgColor:"+disBgColor);
+			log.info("disFontColor:"+disFontColor);
+			log.info("disTxtType:"+disTxtType);
+			log.info("prodLogoType:"+prodLogoType);
+			log.info("imgProportiona:"+imgProportiona);
+			log.info("userLogoPath:"+userLogoPath);
+			log.info("realUrl:"+realUrl);
+			log.info("previewTpro:"+previewTpro);
+			log.info("saleImg:"+saleImg);
+			log.info("saleEndImg:"+saleEndImg);
+			log.info("posterType:"+posterType);
+			
+			String prodData = com.pchome.soft.depot.utils.HttpUtil.getInstance().getResult(akbpfpCatalogGroupApi+"?groupId="+catalogGroupId+"&prodNum=10", "UTF-8");
+			log.info("PROD API>>>>>>>>"+akbpfpCatalogGroupApi+"?groupId="+catalogGroupId+"&prodNum=10");
+			if(StringUtils.isBlank(prodData)){
+			log.info(">>>>>> PROD DATA API:NO DATA");
+				return "";
+			}
+			JSONObject json = new JSONObject(prodData);
+			JSONArray prodArray = (JSONArray) json.get("prodGroupList");
+			if(prodArray.length() == 0){
+				log.info(">>>>>> PROD DATA API:NO PROD");
+				return "";
+			}
+			int prodIndex = 0;
+			
+			//1.先取得tpro
+			String tpro = previewTpro+".def";
+			File file = new File("/home/webuser/akb/adm/data/tpro/"+tpro);
+			if(!file.exists()){
+				return "";
+			}
+			InputStreamReader inputStreamReaderTpro = new InputStreamReader(new FileInputStream(new File("/home/webuser/akb/adm/data/tpro/"+tpro)), "UTF-8");
+			BufferedReader bufferedReaderTpro = new BufferedReader(inputStreamReaderTpro);
+			String tproStr = "";
+			StringBuffer content = new StringBuffer();
+			boolean tproFlag = false;
+			String tadName = "";
+			String sCurrentLine;
+			String PositionWidth ="";
+			String PositionHeight ="";
+			String LogoWeight ="";
+			String LogoHeight ="";
+			while ((tproStr = bufferedReaderTpro.readLine()) != null) {
+				if(tproStr.indexOf("PositionHeight:") >= 0){
+					PositionHeight = tproStr.split(":")[1];
+					continue;
+				}
+				if(tproStr.indexOf("PositionWidth:") >= 0){
+					PositionWidth = tproStr.split(":")[1];
+					continue;
+				}
+				if(tproStr.indexOf("LogoWeight:") >= 0){
+					LogoWeight = tproStr.split(":")[1];
+					continue;
+				}
+				if(tproStr.indexOf("LogoHeight:") >= 0){
+					LogoHeight = tproStr.split(":")[1];
+					continue;
+				}
+				if(tproStr.contains("html:")){
+					tproFlag = true;
+					continue;
+				}
+				//開始替換tad
+				if(tproFlag){
+					tadName = tproStr.replace("<#", "").replace(">", "");
+					//判斷tad檔案是否存在
+					if(StringUtils.isNotBlank(tadName) && (new File("/home/webuser/akb/adm/data/tad/"+tadName+".def")).exists()){
+						InputStreamReader inputStreamReaderTad = new InputStreamReader(new FileInputStream(new File("/home/webuser/akb/adm/data/tad/"+tadName+".def")), "UTF-8");
+						BufferedReader bufferedReaderTad = new BufferedReader(inputStreamReaderTad);
+						String tadStr = "";
+						boolean tadFlag = false;
+						while ((tadStr = bufferedReaderTad.readLine()) != null) {
+							
+							if(tadStr.contains("html:")){
+								tadFlag = true;
+								continue;
+							}
+							if(tadFlag){
+								//取代logo字顏色
+								if(tadStr.indexOf("<#dad_logo_font_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_font_color>", logoFontColor);
+								}
+								//取代logo背景顏色
+								if(tadStr.indexOf("<#dad_logo_bg_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_bg_color>", logoBgColor);
+								}
+								//取代按鈕字顏色	
+								if(tadStr.indexOf("<#dad_buybtn_font_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_buybtn_font_color>", btnFontColor );
+								}
+								//取代按鈕背景顏色
+								if(tadStr.indexOf("<#dad_buybtn_bg_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_buybtn_bg_color>",btnBgColor);
+								}
+								
+								
+								//結尾行銷開關
+								if(tadStr.indexOf("<#dad_sale_img_show_type>") >= 0){
+									tadStr = tadStr.replace("<#dad_sale_img_show_type>", posterType+" "+imgProportiona);
+								}
+								if(tadStr.indexOf("<#dad_dis_font_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_dis_font_color>", disFontColor);
+								}
+								if(tadStr.indexOf("<#dad_dis_bg_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_dis_bg_color>", disBgColor);
+								}
+								if(tadStr.indexOf("<#dad_buybtn_font_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_buybtn_font_color>", btnFontColor );
+								}
+								if(tadStr.indexOf("<#dad_buybtn_bg_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_buybtn_bg_color>",btnBgColor);
+								}
+								if(tadStr.indexOf("<#dad_logo_font_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_font_color>", logoFontColor);
+								}
+								if(tadStr.indexOf("<#dad_logo_bg_color>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_bg_color>", logoBgColor);
+								}
+								if(tadStr.indexOf("<#dad_logo_type>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_type>", "");
+								}
+								if(tadStr.indexOf("<#dad_logo_txt>") >= 0){
+									tadStr = tadStr.replace("<#dad_logo_txt>", logoText);
+								}
+								if(tadStr.indexOf("<#dad_prod_ad_url>") >= 0){
+									if(realUrl.equals("null")){
+										tadStr = tadStr.replace("<#dad_prod_ad_url>", "#");
+										tadStr = tadStr.replace("target=\"_blank\"", "onclick=\"return false;\" target=\"_blank\"");
+									}else{
+										tadStr = tadStr.replace("<#dad_prod_ad_url>", realUrl);
+									}
+								}
+								
+								if(tadStr.indexOf("<#dad_logo_sale_img_"+LogoWeight+"x"+LogoHeight+">") >= 0){
+									file = new File(pfpPhotoPath+saleImg);
+									if(file.exists() && StringUtils.isNotBlank(saleImg)){
+										String fileExtensionNameArray[] = file.getName().split("\\.");
+										String fileExtensionName = fileExtensionNameArray[fileExtensionNameArray.length-1];
+										BufferedImage bi = ImageIO.read(file);
+										ByteArrayOutputStream baos = new ByteArrayOutputStream();
+										ImageIO.write(bi, fileExtensionName, baos);
+										byte[] bytes = baos.toByteArray();
+										String imgBase64 = "data:image/"+fileExtensionName+";base64,"+ new Base64().encodeToString(bytes);
+										imgBase64 = imgBase64.replaceAll("\\s", "");
+										tadStr = tadStr.replace("<#dad_logo_sale_img_"+LogoWeight+"x"+LogoHeight+">", imgBase64);
+									}
+								}
+								
+								if(tadStr.indexOf("<#dad_sale_img_"+PositionWidth+"x"+PositionHeight+">") >= 0){
+									file = new File(pfpPhotoPath+saleEndImg);
+									if(file.exists() && StringUtils.isNotBlank(saleEndImg)){
+										String fileExtensionNameArray[] = file.getName().split("\\.");
+										String fileExtensionName = fileExtensionNameArray[fileExtensionNameArray.length-1];
+										BufferedImage bi = ImageIO.read(file);
+										ByteArrayOutputStream baos = new ByteArrayOutputStream();
+										ImageIO.write(bi, fileExtensionName, baos);
+										byte[] bytes = baos.toByteArray();
+										String imgBase64 = "data:image/"+fileExtensionName+";base64,"+ new Base64().encodeToString(bytes);
+										imgBase64 = imgBase64.replaceAll("\\s", "");
+										tadStr = tadStr.replace("<#dad_sale_img_"+PositionWidth+"x"+PositionHeight+">", imgBase64);
+									}
+								}
+								
+								if(tadStr.indexOf("<#dad_logo_img_url>") >= 0){
+									file = new File(pfpPhotoPath+userLogoPath);
+									if(file.exists() && StringUtils.isNotBlank(userLogoPath)){
+										String fileExtensionNameArray[] = userLogoPath.split("\\.");
+										String fileExtensionName = fileExtensionNameArray[fileExtensionNameArray.length-1];
+										BufferedImage bi = ImageIO.read(file);
+										ByteArrayOutputStream baos = new ByteArrayOutputStream();
+										ImageIO.write(bi, fileExtensionName, baos);
+										byte[] bytes = baos.toByteArray();
+										String imgBase64 = "data:image/"+fileExtensionName+";base64,"+ new Base64().encodeToString(bytes);
+										imgBase64 = imgBase64.replaceAll("\\s", "");
+										tadStr = tadStr.replace("<#dad_logo_img_url>", imgBase64);
+									}
+								}
+								//第二層tad
+								if(tadStr.contains("pad_tad")){
+									tadName = tadStr.replace("<#", "").replace(">", "");
+									tadName = tadName.replaceAll(" ", "").trim();
+									if(StringUtils.isNotBlank(tadName) && (new File("/home/webuser/akb/adm/data/tad/"+tadName+".def")).exists()){
+										InputStreamReader inputStreamReaderTad2 = new InputStreamReader(new FileInputStream(new File("/home/webuser/akb/adm/data/tad/"+tadName+".def")), "UTF-8");
+										BufferedReader bufferedReaderTad2 = new BufferedReader(inputStreamReaderTad2);
+										String tadStr2 = "";
+										JSONObject prodDataInfo = (JSONObject) prodArray.get(prodIndex);
+										boolean tadStr2Flag = false;
+										while ((tadStr2 = bufferedReaderTad2.readLine()) != null) {
+											if(tadStr2.contains("html:")){
+												tadStr2Flag = true;
+												continue;
+											}
+											
+											if(tadStr2Flag){
+												//滑鼠移入滿版或是直立
+												if(tadStr2.indexOf("<#dad_prod_img_show_type>") >= 0){
+													tadStr2 = tadStr2.replace("<#dad_prod_img_show_type>", prodDataInfo.getString("crop_type"));
+												}
+												
+												if(tadStr2.indexOf("<#dad_dis_show_type>") >= 0){
+													String disShowType = "tag-hide";
+													if(disTxtType.equals("1")){
+														tadStr2 = tadStr2.replace("<#dad_dis_show_type>", disShowType);
+													}else if(disTxtType.equals("2")){
+														double ecProdPriceDis = prodDataInfo.getDouble("ec_discount_price");
+														double ecProdPrice = prodDataInfo.getDouble("ec_price");
+														
+														if(ecProdPriceDis == ecProdPrice){
+															tadStr2 = tadStr2.replace("<#dad_dis_show_type>", disShowType);
+														}else{
+															double dis = (ecProdPriceDis / ecProdPrice * 10); 
+															BigDecimal bigDecimal=new BigDecimal(dis);
+															double doubleValue = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+															if(doubleValue <= 0){
+																tadStr2 = tadStr2.replace("<#dad_dis_show_type>", disShowType);
+															}else{
+																tadStr2 = tadStr2.replace("<#dad_dis_show_type>", "tag-show");
+															}
+														}
+													}else if(disTxtType.equals("3")){
+														double ecProdPriceDis = prodDataInfo.getDouble("ec_discount_price");
+														double ecProdPrice = prodDataInfo.getDouble("ec_price");
+														
+														if(ecProdPriceDis == ecProdPrice){
+															tadStr2 = tadStr2.replace("<#dad_dis_show_type>", disShowType);
+														}else{
+															double dis = Math.round(((ecProdPriceDis/ecProdPrice) - 1) * 100);
+															tadStr2 = tadStr2.replace("<#dad_dis_show_type>", "tag-show");
+														}
+													}
+												}
+												
+												if(tadStr2.indexOf("<#pad_ec_prod_img>") >= 0){
+													String img = prodDataInfo.getString("ec_img");
+													if(System.getProperties().containsKey("akb.adm.prd")){
+														tadStr2 = tadStr2.replace("<#pad_ec_prod_img>", "/"+img);
+													}else{
+														tadStr2 = tadStr2.replace("<#pad_ec_prod_img>", img);
+													}
+												}
+												
+												if(tadStr2.indexOf("<#dad_prod_img_region>") >= 0){
+													tadStr2 = tadStr2.replace("<#dad_prod_img_region>", prodDataInfo.getString("ec_img_region"));
+												}
+												
+												
+												if(tadStr2.indexOf("<#pad_ec_prod_url>") >= 0){
+													String ecUrl = prodDataInfo.getString("ec_url");
+													tadStr2 = tadStr2.replace("<#pad_ec_prod_url>", ecUrl);
+												}
+												
+												if(tadStr2.indexOf("<#pad_ec_prod_price>") >= 0){
+													String ecProdPrice = prodDataInfo.getString("ec_price");
+													tadStr2 = tadStr2.replace("<#pad_ec_prod_price>", ecProdPrice);
+												}
+												if(tadStr2.indexOf("<#pad_ec_prod_price_dis>") >= 0){
+													String ecProdPriceDis = prodDataInfo.getString("ec_discount_price");
+													tadStr2 = tadStr2.replace("<#pad_ec_prod_price_dis>", ecProdPriceDis);
+												}
+												
+												//折扣顯示方是 1:無 2:中文 3:英文
+												if(tadStr2.indexOf("<#dad_dis_txt>") >= 0){
+													if(disTxtType.equals("1")){
+														tadStr2 = tadStr2.replace("<#dad_dis_txt>", "");
+													}else if(disTxtType.equals("2")){
+														double ecProdPriceDis = prodDataInfo.getDouble("ec_discount_price");
+														double ecProdPrice = prodDataInfo.getDouble("ec_price");
+														double dis = (ecProdPriceDis / ecProdPrice * 10); 
+														BigDecimal bigDecimal=new BigDecimal(dis);
+														double doubleValue = bigDecimal.setScale(1, BigDecimal.ROUND_HALF_UP).doubleValue();
+														String disStr = String.valueOf(doubleValue).replace(".","").replace("0", "");
+														tadStr2 = tadStr2.replace("<#dad_dis_txt>", disStr+"折");
+													}else if(disTxtType.equals("3")){
+														double ecProdPriceDis = prodDataInfo.getDouble("ec_discount_price");
+														double ecProdPrice = prodDataInfo.getDouble("ec_price");
+														double dis = Math.round(((ecProdPriceDis/ecProdPrice) - 1) * 100);
+														String disStr = String.valueOf(dis).replace(".0", "");
+														tadStr2 = tadStr2.replace("<#dad_dis_txt>", disStr+"%");
+													}
+												}
+												//按鈕文字
+												if(tadStr2.indexOf("#dad_buybtn_txt") >= 0){
+													tadStr2 = tadStr2.replace("<#dad_buybtn_txt>", btnTxt);
+												}
+												
+												if(tadStr2.indexOf("<#pad_ec_prod_name>") >= 0){
+													String ecProdName = prodDataInfo.getString("ec_name");
+													tadStr2 = tadStr2.replace("<#pad_ec_prod_name>", ecProdName);
+												}
+												
+												content.append(tadStr2).append("\n");
+											}
+											
+										}
+										inputStreamReaderTad2.close();
+										bufferedReaderTad2.close();
+									}
+									prodIndex = prodIndex + 1;
+									if(prodIndex >= prodArray.length()){
+										prodIndex = 0;
+									}
+									continue;
+								}
+								content.append(tadStr).append("\n");
+							}
+						}
+						inputStreamReaderTad.close();
+						bufferedReaderTad.close();
+					}
+				}
+			}
+			
+			bufferedReaderTpro.close();
+			inputStreamReaderTpro.close();
 
-
+			String content2 = content.toString();
+			
+			//判斷是否有行銷圖
+			if(content2.contains("<#dad_logo_sale_img_"+LogoWeight+"x"+LogoHeight)){
+				if(prodLogoType.equals("type3")){
+					prodLogoType = "type2"; //長方形
+				}else if(prodLogoType.equals("type2")){
+					prodLogoType = "type1"; //正方形+文字
+				}else if(prodLogoType.equals("type1")){
+					prodLogoType = "type1"; //正方形無文字
+				}
+				content2 = content2.replace("logo-box pos-absolute pos-top pos-left", prodLogoType+" logo-box pos-absolute pos-top pos-left");
+				content2 = content2.replace("logo-box pos-absolute pos-top pos-right",prodLogoType+" logo-box pos-absolute pos-top pos-right");
+			}else{
+				content2 = content2.replace("logo-box pos-absolute pos-top pos-left", "type3 logo-box pos-absolute pos-top pos-left");
+				content2 = content2.replace("logo-box pos-absolute pos-top pos-right","type3 logo-box pos-absolute pos-top pos-right");
+			}
+			
+			//判斷是否有結尾行銷圖
+			if(content2.contains("<#dad_sale_img_"+PositionWidth+"x"+PositionHeight+">")){
+				content2 = content2.replace("<#dad_sale_img_"+PositionWidth+"x"+PositionHeight+">","");
+			}
+			return content2.toString();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return "";
+		}
+	}
+	
 	public IPfpAdVideoSourceService getPfpAdVideoSourceService() {
 		return pfpAdVideoSourceService;
 	}
@@ -287,5 +676,38 @@ public class AdModelUtil {
 		this.pfpAdVideoSourceService = pfpAdVideoSourceService;
 	}
 
+	public String getAkbpfpCatalogGroupApi() {
+		return akbpfpCatalogGroupApi;
+	}
+
+	public void setAkbpfpCatalogGroupApi(String akbpfpCatalogGroupApi) {
+		this.akbpfpCatalogGroupApi = akbpfpCatalogGroupApi;
+	}
+
+	public String getPfpPhotoPath() {
+		return pfpPhotoPath;
+	}
+
+	public void setPfpPhotoPath(String pfpPhotoPath) {
+		this.pfpPhotoPath = pfpPhotoPath;
+	}
+
+	public String getPfpServer() {
+		return pfpServer;
+	}
+
+	public void setPfpServer(String pfpServer) {
+		this.pfpServer = pfpServer;
+	}
+
+	public String getActive() {
+		return active;
+	}
+
+	public void setActive(String active) {
+		this.active = active;
+	}
+
 	
 }
+

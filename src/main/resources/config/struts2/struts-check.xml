@@ -115,5 +115,53 @@
             <result type="tiles" name="input">.apply.for.business.check.list</result>
         </action>
 
+        <action name="catalogLogo" class="CatalogLogoAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.catalog.logo.list</result>
+        </action>
+
+        <action name="catalogLogoDoApprove" class="CatalogLogoAction" method="doApprove">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">catalogLogo</param>
+                <param name="pfpCustomerInfoId">${pfpCustomerInfoId}</param>
+            </result>
+            <result type="tiles" name="input">.catalog.logo.list</result>
+        </action>
+
+        <action name="catalogLogoDoReject" class="CatalogLogoAction" method="doReject">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">catalogLogo</param>
+                <param name="pfpCustomerInfoId">${pfpCustomerInfoId}</param>
+            </result>
+            <result type="tiles" name="input">.catalog.logo.list</result>
+        </action>
+
+
+        <action name="catalogProdEc" class="CatalogProdEcAction" method="execute">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.catalog.prod.ec.list</result>
+        </action>
+
+        <action name="catalogProdEcDoApprove" class="CatalogProdEcAction" method="doApprove">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">catalogProdEc</param>
+                <param name="pfpCustomerInfoId">${pfpCustomerInfoId}</param>
+                <param name="catalogSeq">${catalogSeq}</param>
+            </result>
+            <result type="tiles" name="input">.catalog.prod.ec.list</result>
+        </action>
+
+        <action name="catalogProdEcDoReject" class="CatalogProdEcAction" method="doReject">
+        	<interceptor-ref name="akbadmCookieStack" />
+        	<result type="redirectAction" name="success">
+            	<param name="actionName">catalogProdEc</param>
+                <param name="pfpCustomerInfoId">${pfpCustomerInfoId}</param>
+                <param name="catalogSeq">${catalogSeq}</param>
+            </result>
+            <result type="tiles" name="input">.catalog.prod.ec.list</result>
+        </action>
     </package>
 </struts>

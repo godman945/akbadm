@@ -37,7 +37,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(month);
 		list.add(payType);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -56,7 +56,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(year);
 		list.add(month);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -75,7 +75,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(closeYear);
 		list.add(closeMonth);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -101,7 +101,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		log.info(" hql: "+hql);
 		
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	public PfdBonusInvoice findPfdBonusInvoice(int id) {
@@ -129,7 +129,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		
 		hql.append(" order by id desc ");		
 		
-		Double result = (Double) this.getSession()
+		Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
                 .createQuery(hql.toString())
                 .setString("pfdId", pfdId)
                 .setString("payType", payType)
@@ -160,7 +160,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(EnumPfdBonusBill.NOT_APPLY.getStatus());
 		list.add(applyDate);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());	
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -179,7 +179,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		hql.append(" (select distinct(pfd_customer_info_id) from pfd_contract where status = '1' ) order by a.id ");
 		
 		String sqlStr = hql.toString();
-		Query query = super.getSession().createSQLQuery(sqlStr);
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sqlStr);
 		List<Object> dataList = query.list();
 		
 		for (Object object : dataList) {
@@ -219,7 +219,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(month);
 		list.add(payType);
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -294,7 +294,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		log.info(" sql: "+sql);
 
 		String sqlStr = sql.toString();
-		Query query = super.getSession().createSQLQuery(sqlStr);
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sqlStr);
 		List<Object> dataList = query.list();
 		
 		List<PfdBonusRecordInvoiceVO> resultData = new ArrayList<PfdBonusRecordInvoiceVO>();
@@ -362,7 +362,7 @@ public class PfdBonusInvoiceDAO extends BaseDAO <PfdBonusInvoice, Integer> imple
 		list.add(closeMonth);
 		list.add(EnumPfdAccountPayType.LATER.getPayType());
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdBonusInvoice>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 }

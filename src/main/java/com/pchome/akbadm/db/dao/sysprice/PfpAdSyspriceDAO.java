@@ -17,7 +17,7 @@ public class PfpAdSyspriceDAO extends BaseDAO<PfpAdSysprice, String> implements 
         hql.append(" from PfpAdSysprice ");
         hql.append(" where adPoolSeq = '"+adPoolSeq+"' ");
 
-        List<PfpAdSysprice> list = super.getHibernateTemplate().find(hql.toString());
+        List<PfpAdSysprice> list = (List<PfpAdSysprice>) super.getHibernateTemplate().find(hql.toString());
 
         if(list != null && list.size() > 0){
             return list.get(0);
@@ -34,14 +34,14 @@ public class PfpAdSyspriceDAO extends BaseDAO<PfpAdSysprice, String> implements 
         StringBuffer hql = new StringBuffer();
         hql.append(" from PfpAdSysprice ");
 
-        return super.getHibernateTemplate().find(hql.toString());
+        return (List<PfpAdSysprice>) super.getHibernateTemplate().find(hql.toString());
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<PfpAdSysprice> selectAdSyspriceByPoolSeq(String adPoolSeq) {
         String hql = "from PfpAdSysprice where adPoolSeq = ?";
-        return this.getHibernateTemplate().find(hql, adPoolSeq);
+        return (List<PfpAdSysprice>) this.getHibernateTemplate().find(hql, adPoolSeq);
     }
 
     @Override
@@ -54,7 +54,7 @@ public class PfpAdSyspriceDAO extends BaseDAO<PfpAdSysprice, String> implements 
         hql.append(" and template_product_seq = 'c_x05_po_tpro_0024' ");
 
         String sql = hql.toString();
-        Query query = this.getSession().createSQLQuery(sql);
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql);
         BigInteger result = (BigInteger) query.uniqueResult();
         return (result != null && result.intValue() > 0) ? result.floatValue() : 0f;
 //		Double result = (Double) query.uniqueResult();

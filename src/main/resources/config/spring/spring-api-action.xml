@@ -37,4 +37,10 @@
     	<property name="channelId" value="${billing.channel.id}" />
     	<property name="password" value="${billing.password}" />
     </bean>
+    
+    <!-- 廣告商品資料手動上傳api -->
+    <bean id="PfpCatalogUploadListAction" class="com.pchome.akbadm.struts2.action.catalog.uploadList.PfpCatalogUploadListAction" scope="prototype" >
+		<property name="pfpCatalogUploadListService" ref="PfpCatalogUploadListService" />
+    </bean>
+    
 </beans>

@@ -35,7 +35,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
 		list.add(EnumPfpRefundOrderStatus.SUCCESS.getStatus());
 		list.add(EnumPfpRefundOrderStatus.NOT_REFUND.getStatus());
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpRefundOrder>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@Override
@@ -50,7 +50,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
     	hql.append(" and refundDate <= :endDate");
     	hql.append(" and refundStatus = :refundStatus ");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("customerInfoId", customerInfoId)
         .setString("payType", payType)
     	.setDate("startDate", startDate)
@@ -74,7 +74,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
     	hql.append(" and refundDate <= :endDate");
     	hql.append(" and refundStatus = :refundStatus ");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setParameterList("pfpIdList", pfpIdList)
         .setString("payType", payType)
     	.setDate("startDate", startDate)
@@ -98,7 +98,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
     	hql.append(" and refundDate <= :endDate");
     	hql.append(" and refundStatus = :refundStatus ");
 
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
     	query.setString("payType", payType)
     	.setDate("startDate", startDate)
     	.setDate("endDate", endDate)
@@ -131,7 +131,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
 		list.add(EnumPfdAccountPayType.ADVANCE.getPayType());
 		list.add(EnumPfpRefundOrderStatus.SUCCESS.getStatus());
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpRefundOrder>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@Override
@@ -150,12 +150,11 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
 		list.add(payType);
 		list.add(refundStatus);
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfpRefundOrder>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	public void saveOrUpdateWithCommit(PfpRefundOrder pfpRefundOrder) throws Exception{
-		super.getSession().saveOrUpdate(pfpRefundOrder);
-		super.getSession().beginTransaction().commit();
+		this.getHibernateTemplate().getSessionFactory().getCurrentSession().saveOrUpdate(pfpRefundOrder);
 	}
 	
 	public List<Object> findPfpRefundPrice(String refundDate) throws Exception {
@@ -175,7 +174,7 @@ public class PfpRefundOrderDAO extends BaseDAO<PfpRefundOrder,String> implements
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 		
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 		
 		return query.list();

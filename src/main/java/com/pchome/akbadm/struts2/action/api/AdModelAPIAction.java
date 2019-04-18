@@ -2,9 +2,12 @@ package com.pchome.akbadm.struts2.action.api;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.net.URLDecoder;
+import java.util.Set;
+
+import org.json.JSONObject;
 
 import com.pchome.akbadm.factory.ad.AdFactory;
-import com.pchome.akbadm.factory.ad.AdModelUtil;
 import com.pchome.akbadm.struts2.BaseCookieAction;
 import com.pchome.rmi.api.IAPIProvider;
 
@@ -24,10 +27,12 @@ public class AdModelAPIAction extends BaseCookieAction{
 	private String adPreviewVideoURL;
 	private String adPreviewVideoBgImg="";
 	private String realUrl = "";
+	private String  pfpProdAdPreviewJson ="";
 	// 回傳廣告Html內容
 	private InputStream inputAdModel;
 
-
+	private InputStream returnAdHtml;
+	
 	public String getHtmlContent() throws Exception{
 		
 		String adModel = adFactory.getAdModel(tproNo, adNo);
@@ -60,6 +65,27 @@ public class AdModelAPIAction extends BaseCookieAction{
 	    inputAdModel = new ByteArrayInputStream(adHtml.getBytes("UTF-8"));
 	    return SUCCESS;
 	}
+	
+	
+	public String adModelProdAction() throws Exception{
+		String adHtml = "";
+		String requestPath = request.getRequestURI();
+		if(requestPath.contains("adm") || requestPath.contains("adq") || requestPath.contains("/")){
+			JSONObject pfpProdAdPreviewJson = new JSONObject();
+			Set set = request.getParameterMap().keySet();
+			for (Object obj : set) {
+				pfpProdAdPreviewJson.put(obj.toString(), URLDecoder.decode(request.getParameter(obj.toString()), "UTF-8"));
+			}
+			adHtml = adFactory.getAdModelUtil().adProdModelPreview(pfpProdAdPreviewJson.toString());
+			inputAdModel = new ByteArrayInputStream(adHtml.getBytes("UTF-8"));
+			return "success";
+		}else{
+			adHtml = adFactory.getAdModelUtil().adProdModelPreview(pfpProdAdPreviewJson);
+		}
+		inputAdModel = new ByteArrayInputStream(adHtml.getBytes("UTF-8"));
+		return SUCCESS;
+	}
+	
 	
 	public void setAdFactory(AdFactory adFactory) {
 		this.adFactory = adFactory;
@@ -101,6 +127,23 @@ public class AdModelAPIAction extends BaseCookieAction{
 		this.realUrl = realUrl;
 	}
 
+	public String getPfpProdAdPreviewJson() {
+		return pfpProdAdPreviewJson;
+	}
+
+	public void setPfpProdAdPreviewJson(String pfpProdAdPreviewJson) {
+		this.pfpProdAdPreviewJson = pfpProdAdPreviewJson;
+	}
+
+	public InputStream getReturnAdHtml() {
+		return returnAdHtml;
+	}
+
+	public void setReturnAdHtml(InputStream returnAdHtml) {
+		this.returnAdHtml = returnAdHtml;
+	}
+
 
 
 }
+

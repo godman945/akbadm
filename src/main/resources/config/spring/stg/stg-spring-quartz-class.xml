@@ -39,6 +39,8 @@
     <bean id="VerifyAdIllegalKeyWordJob" class="com.pchome.akbadm.quartzs.VerifyAdIllegalKeyWordJob">
         <property name="pfpAdService" ref="PfpAdService" />
         <property name="pfpAdDetailService" ref="PfpAdDetailService" />
+        <property name="pfpCatalogLogoService" ref="PfpCatalogLogoService" />
+        <property name="pfpCatalogProdEcService" ref="PfpCatalogProdEcService" />
         <property name="pfpIllegalKeywordService" ref="PfpIllegalKeywordService" />
         <property name="springEmailUtil" ref="SpringEmailUtil" />
     </bean>
@@ -70,9 +72,12 @@
         <property name="admArwValueService" ref="AdmArwValueService" />
         <property name="admPfbxBlockUrlService" ref="AdmPfbxBlockUrlService" />
         <property name="pfbxAllowUrlService" ref="PfbxAllowUrlService" />
+        <property name="pfpCodeAdactionMergeService" ref="PfpCodeAdactionMergeService2" />
+        <property name="pfpCodeTrackingService" ref="PfpCodeTrackingService2" />
         <property name="admAddata" value="${adm.addata}" />
         <property name="kernelAddata" value="${kernel.addata}" />
         <property name="multicorePath" value="${multicore.path}" />
+        <property name="pfpProdGroupListApiUrl" value="${pfp.prodGroupListApi.url}" />
         <property name="adSysprice" value="${ad.sysprice}" />
         <property name="keywordSysprice" value="${keyword.sysprice}" />
         <property name="makeNumber" value="${make.number}" />
@@ -295,6 +300,15 @@
     <bean id="CheckPFPCostAndVerifyTheCostJob" class="com.pchome.akbadm.quartzs.CheckPFPCostAndVerifyTheCostJob">
         <property name="admBonusBillReportService" ref="AdmBonusBillReportService" />
         <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+    
+    <!-- 商品目錄-自動排程 及 賣場網址排程 -->
+    <bean id="PfpCatalogUploadJob" class="com.pchome.akbadm.quartzs.PfpCatalogUploadJob">
+    	<property name="pfpCatalogService" ref="PfpCatalogService" />
+        <property name="pfpCatalogUploadListService" ref="PfpCatalogUploadListService" />
+        <property name="catalogProdCsvFilePath" value="${catalogProd.csv.file.path}" />
+        <property name="catalogProdCsvFileBackupPath" value="${catalogProd.csv.file.backup.path}" />
+        <property name="catalogProdStoreURLlistPath" value="${catalogProd.storeURLlist.path}" />
     </bean>
     
 </beans>

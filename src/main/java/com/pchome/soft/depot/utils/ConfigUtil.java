@@ -3,15 +3,13 @@ package com.pchome.soft.depot.utils;
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
 import org.apache.commons.configuration.PropertiesConfiguration;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class ConfigUtil {
 	private static final ConfigUtil configUtil=new ConfigUtil();
 
-	private static Log log = LogFactory.getLog(ConfigUtil.class);
-	
-
+	private static Logger log = LogManager.getRootLogger();
 	
 	private ConfigUtil(){}
 

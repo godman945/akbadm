@@ -11,4 +11,6 @@ public interface IPfdAdAgeReportService {
 	public void deleteReportDataByReportDate(String reportDate) throws Exception;
 
 	public void insertReportData(List<PfdAdAgeReport> dataList) throws Exception;
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception;
 }

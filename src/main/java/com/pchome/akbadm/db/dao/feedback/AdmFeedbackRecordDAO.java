@@ -44,7 +44,7 @@ public class AdmFeedbackRecordDAO extends BaseDAO<AdmFeedbackRecord, Integer> im
 		list.add(EnumFeedbackStatus.DELECT.getStatus());
 
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmFeedbackRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class AdmFeedbackRecordDAO extends BaseDAO<AdmFeedbackRecord, Integer> im
 		hql.append(" from AdmFeedbackRecord ");
 		hql.append(" where feedbackRecordId = ? ");
 
-		return super.getHibernateTemplate().find(hql.toString(), recordId);
+		return (List<AdmFeedbackRecord>) super.getHibernateTemplate().find(hql.toString(), recordId);
 	}
 
 	@Override
@@ -76,7 +76,7 @@ public class AdmFeedbackRecordDAO extends BaseDAO<AdmFeedbackRecord, Integer> im
         list.add(customerInfoId);
 		//list.add(EnumSelCalculateCategory.QUARTZS.getCategory());
 
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmFeedbackRecord>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 
 	@Override
@@ -103,6 +103,6 @@ public class AdmFeedbackRecordDAO extends BaseDAO<AdmFeedbackRecord, Integer> im
 			hql.append(" desc");
 		}
 
-		return super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
+		return (List<AdmFeedbackRecord>) super.getHibernateTemplate().find(hql.toString(), paramList.toArray());
 	}
 }

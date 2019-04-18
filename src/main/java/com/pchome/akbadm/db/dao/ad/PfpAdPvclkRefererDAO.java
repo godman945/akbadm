@@ -24,7 +24,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclkReferer.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -48,7 +48,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclkReferer.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -76,7 +76,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("order by ad_pvclk_date ");
         sql.append("limit 1 ");
 
-        SQLQuery query = this.getSession().createSQLQuery(sql.toString());
+        SQLQuery query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.addEntity(PfpAdPvclkReferer.class);
         query.setDate("pvclkDate", pvclkDate);
 
@@ -95,7 +95,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("from pfp_ad_pvclk_referer ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         BigInteger result = (BigInteger) query.uniqueResult();
         return result.intValue();
@@ -114,7 +114,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("from pfp_ad_pvclk_referer ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         return query.executeUpdate();
     }
@@ -126,7 +126,7 @@ public class PfpAdPvclkRefererDAO extends BaseDAO<PfpAdPvclkReferer, String> imp
         sql.append("from pfp_ad_pvclk_referer ");
         sql.append("where ad_pvclk_date = :pvclkDate ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setDate("pvclkDate", pvclkDate);
         return query.executeUpdate();
     }

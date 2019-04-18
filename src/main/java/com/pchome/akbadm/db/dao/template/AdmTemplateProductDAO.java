@@ -17,7 +17,7 @@ public class AdmTemplateProductDAO extends BaseDAO<AdmTemplateProduct, String> i
 	public List<AdmTemplateProduct> getTemplateProductBySize(Map<String,String> condition) throws Exception{
 	    StringBuffer sql = new StringBuffer();
 	    sql.append("  from AdmTemplateProduct a where a.templateProductWidth='"+condition.get("width")+"' and a.templateProductHeight = '"+condition.get("height")+"'");
-	    return super.getHibernateTemplate().find(sql.toString());
+	    return (List<AdmTemplateProduct>) super.getHibernateTemplate().find(sql.toString());
 	}
     
     
@@ -44,12 +44,12 @@ public class AdmTemplateProductDAO extends BaseDAO<AdmTemplateProduct, String> i
 			sql.append(" and templateProductHeight = '" + templateProductHeight.trim() + "'");
 		}
 		
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<AdmTemplateProduct>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 	@SuppressWarnings("unchecked")
 	public AdmTemplateProduct getTemplateProductById(String templateProductId) throws Exception {
-		List<AdmTemplateProduct> list = super.getHibernateTemplate().find("from AdmTemplateProduct where templateProductId = '" + templateProductId + "'");
+		List<AdmTemplateProduct> list = (List<AdmTemplateProduct>) super.getHibernateTemplate().find("from AdmTemplateProduct where templateProductId = '" + templateProductId + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -59,7 +59,7 @@ public class AdmTemplateProductDAO extends BaseDAO<AdmTemplateProduct, String> i
 
 	@SuppressWarnings("unchecked")
 	public AdmTemplateProduct getTemplateProductBySeq(String templateProductSeq) throws Exception {
-		List<AdmTemplateProduct> list = super.getHibernateTemplate().find("from AdmTemplateProduct where templateProductSeq = '" + templateProductSeq + "'");
+		List<AdmTemplateProduct> list = (List<AdmTemplateProduct>) super.getHibernateTemplate().find("from AdmTemplateProduct where templateProductSeq = '" + templateProductSeq + "'");
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -77,7 +77,7 @@ public class AdmTemplateProductDAO extends BaseDAO<AdmTemplateProduct, String> i
 
 	public void deleteTemplateProduct(String templateProductSeq) throws Exception {
 		String sql = "delete from AdmTemplateProduct where templateProductSeq = '" + templateProductSeq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}

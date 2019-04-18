@@ -32,4 +32,8 @@ public class PfpAdActionReportService extends BaseService<PfpAdActionReport, Int
 	public float findAdClkAndInvalidClkPrice(String customerInfoId, Date startDate, Date endDate, String payType) {
 		return ((IPfpAdActionReportDAO) dao).findAdClkAndInvalidClkPrice(customerInfoId, startDate, endDate, payType);
 	}
+
+	public int updateConvertCountData(String convertDate,String convertRangeDate) {
+		return ((IPfpAdActionReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

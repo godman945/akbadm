@@ -7,8 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
@@ -27,7 +27,7 @@ import com.pchome.akbadm.struts2.ajax.report.PfpTransDetailVO;
 
 public class PdfUtil {
 
-	private static final Log logger = LogFactory.getLog(PdfUtil.class);
+	private static final Logger logger = LogManager.getRootLogger();
 
 	//字型檔位置
 //	private String fontPath = "C:\\Windows\\Fonts\\kaiu.ttf";

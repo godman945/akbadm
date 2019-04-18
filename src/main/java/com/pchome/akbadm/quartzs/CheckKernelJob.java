@@ -6,8 +6,8 @@ import java.util.Calendar;
 
 import javax.mail.MessagingException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -15,7 +15,7 @@ import com.pchome.config.TestConfig;
 import com.pchome.soft.util.SpringEmailUtil;
 
 public class CheckKernelJob {
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LogManager.getRootLogger();
 
     private String kernelAddata;
     private String mailSubject;

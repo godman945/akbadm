@@ -6,8 +6,8 @@ import java.util.Iterator;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfdContract;
 import com.pchome.akbadm.db.pojo.PfdCustomerInfo;
@@ -29,7 +29,7 @@ import com.pchome.rmi.mailbox.IMailboxProvider;
 public abstract class ANotice {
     protected final static String CHARSET = "UTF-8";
 
-    protected Log log = LogFactory.getLog(getClass().getName());
+    protected Logger log = LogManager.getRootLogger();
 
     protected int boardCount = 0;
     protected int mailboxCount = 0;

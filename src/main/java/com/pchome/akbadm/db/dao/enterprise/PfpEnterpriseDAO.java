@@ -23,7 +23,7 @@ public class PfpEnterpriseDAO extends BaseDAO<PfpEnterprise, String> implements 
 		String strHQL = hql.toString();
 		log.info(">>> strHQL = " + strHQL);
 
-		Query q = super.getSession().createQuery(strHQL);
+		Query q = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(strHQL);
 		if (conditionsMap.containsKey("taxId")) {
 			q.setParameter("taxId", conditionsMap.get("taxId"));
 		}
@@ -32,7 +32,7 @@ public class PfpEnterpriseDAO extends BaseDAO<PfpEnterprise, String> implements 
 	}
 
 	public void deletePfpEnterprise(String taxId) throws Exception {
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		String sql = "delete from PfpEnterprise where taxId = '" + taxId + "'";
 		session.createQuery(sql).executeUpdate();
 	}

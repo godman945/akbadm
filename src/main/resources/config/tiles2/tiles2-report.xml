@@ -36,6 +36,25 @@
     <definition name=".report.ad.detail" template="/ftl/report/adDetailReport.ftl" >
     </definition> 
     
+    
+    <!-- 商品廣告明細 start -->
+    <definition name=".report.prod.ad.detail" extends="default.layout2">
+    <!--	<put-attribute name="title" value=".report.prod.ad.detail.title" /> -->
+        <put-attribute name="body" value=".report.prod.ad.detail.body" />
+    </definition>
+    
+    <definition name=".report.prod.ad.detail.body" extends="default.layout2">
+        <put-attribute name="body" value="/ftl/report/prodAdDetail.ftl" />
+    </definition>
+    <!-- 商品廣告明細 end -->
+    
+    
+    <!-- PFP 商品廣告明細 start -->
+    <definition name="pfp.report.prod.ad.detail" template="/ftl/report/pfpProdAdDetail.ftl">
+    
+    </definition>
+    <!-- PFP 商品廣告明細 end -->
+    
 
     <!-- ad action report -->
 	<definition name=".report.ad.action.title" extends="default.title" >
@@ -349,4 +368,31 @@
     
     <definition name=".ad.website.detal.report" template="/ftl/report/adWebsiteDetalReport.ftl" >
     </definition>
+    
+	<!-- 再行銷追蹤 start-->
+    <definition name=".tracking.report" extends="default.layout">
+    	<put-attribute name="title" value=".tracking.report.title" />
+        <put-attribute name="body" value=".tracking.report.body" />
+    </definition>
+    
+    <definition name=".tracking.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/trackingReport.js"/>       
+    </definition>
+    
+    <definition name=".tracking.report.body" template="/ftl/report/trackingReport.ftl" ></definition>
+    <!-- 再行銷追蹤 end -->
+    
+    <!-- 轉換追蹤 start-->
+    <definition name=".convert.report" extends="default.layout">
+    	<put-attribute name="title" value=".convert.report.title" />
+        <put-attribute name="body" value=".convert.report.body" />
+    </definition>
+    
+    <definition name=".convert.report.title" extends="default.title" >		
+       	<put-attribute name="jsName" value="report/convertReport.js"/>       
+    </definition>
+    
+    <definition name=".convert.report.body" template="/ftl/report/convertReport.ftl" ></definition>
+    <!-- 轉換追蹤 end -->
+    
 </tiles-definitions>

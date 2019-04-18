@@ -11,6 +11,6 @@ public class AdmUniqDataDAO extends BaseDAO<AdmUniqData, String> implements IAdm
     @SuppressWarnings("unchecked")
     public List<AdmUniqData> select(Date recordDate, String adId) {
         String hql = "from AdmUniqData where recordDate = ? and uniqName = ?";
-        return this.getHibernateTemplate().find(hql, recordDate, adId);
+        return (List<AdmUniqData>) this.getHibernateTemplate().find(hql, recordDate, adId);
     }
 }

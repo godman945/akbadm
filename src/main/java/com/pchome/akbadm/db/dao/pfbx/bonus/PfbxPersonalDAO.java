@@ -19,7 +19,7 @@ public class PfbxPersonalDAO extends BaseDAO<PfbxPersonal, Integer> implements I
 		Condition.add(customerId);
 		Condition.add("0");
 		
-		return super.getHibernateTemplate().find(hql.toString() , Condition.toArray());
+		return (List<PfbxPersonal>) super.getHibernateTemplate().find(hql.toString() , Condition.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -38,7 +38,7 @@ public class PfbxPersonalDAO extends BaseDAO<PfbxPersonal, Integer> implements I
 		
 		List<PfbxPersonal> personalList=null;
 		PfbxPersonal pfbxPersonal=null;
-		personalList=super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		personalList=(List<PfbxPersonal>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 		
 		if(personalList.size()>0){
 			pfbxPersonal=personalList.get(0);

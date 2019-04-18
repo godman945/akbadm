@@ -4,8 +4,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import redis.clients.jedis.HostAndPort;
 import redis.clients.jedis.Jedis;
@@ -14,7 +14,7 @@ import redis.clients.jedis.JedisPoolConfig;
 
 
 public class JredisUtil {
-	private final Log log = LogFactory.getLog(JredisUtil.class);
+	private final Logger log = LogManager.getRootLogger();
 	private static JredisUtil jredisUtil = new JredisUtil();
 	private static JedisCluster jedisCluster;
 	private static Jedis jedis;
@@ -94,6 +94,15 @@ public class JredisUtil {
 		return value;
 	}
 
+	public String getKeyNew(String key) throws Exception {
+		if (StringUtils.isBlank(key)) {
+			return null;
+		}
+		String value = null;
+		value = jedisCluster.get(key) == null ? null : jedisCluster.get(key);
+		return value;
+	}
+	
 	public boolean delKey(String key) {
 		log.info(">>>>>> key:" + key);
 		if (StringUtils.isBlank(key)) {

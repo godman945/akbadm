@@ -17,6 +17,6 @@ public class AdmBonusSetDAO extends BaseDAO<AdmBonusSet, Integer> implements IAd
 		hql.append(" where startDate <= ? ");
 		hql.append(" order by id ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), startDate);
+		return (List<AdmBonusSet>) super.getHibernateTemplate().find(hql.toString(), startDate);
 	}
 }

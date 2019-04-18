@@ -3,8 +3,8 @@ package com.pchome.servlet;
 import java.io.Writer;
 
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 //import com.pchome.member.MemberConstants;
 //import com.pchome.member.utils.email.EmailUtil;
@@ -18,7 +18,7 @@ public class MemberFreemarkerTemplateHandler implements TemplateExceptionHandler
     private static final String to = "johnwei johnwei@staff.pchome.com.tw";
     private static final String from = "PCHome廣告管理 member@msx.pchome.com.tw";
 
-    private static final Log log = LogFactory.getLog(MemberFreemarkerTemplateHandler.class);
+    private static final Logger log = LogManager.getRootLogger();
 
     public void handleTemplateException(TemplateException te, Environment env, Writer out) throws TemplateException {
         String temp = ExceptionUtils.getFullStackTrace(te).replaceAll("\n", "<br/>");

@@ -1,7 +1,7 @@
 package com.pchome.akbadm.factory.controlPrice;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pchome.enumerate.factory.EnumControlPriceItem;
@@ -9,7 +9,7 @@ import com.pchome.enumerate.factory.EnumControlPriceItem;
 @Transactional
 public class ControlPriceFactory {
 	
-	protected Log log = LogFactory.getLog(this.getClass());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private AControlPrice controlPriceEveryDay;
 	

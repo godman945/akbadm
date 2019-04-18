@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.pfbx.report.PfbxReportVO;
@@ -29,7 +29,7 @@ public class PfbxUnitReportDAO extends BaseDAO<PfbxReportVO, String> implements 
 			new HibernateCallback<List<PfbxReportVO>>() {
 		@Override
         @SuppressWarnings("unchecked")
-		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException {
 	    	HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 
 	    	String period = conditionMap.get("period");

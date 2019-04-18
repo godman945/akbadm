@@ -30,7 +30,8 @@ import java.util.regex.Pattern;
 import javax.imageio.ImageIO;
 
 import org.apache.commons.fileupload.FileItem;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.dom4j.Document;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
@@ -42,7 +43,7 @@ import org.dom4j.io.XMLWriter;
 public class KTools
 {
 
-	private Logger log = Logger.getLogger(this.getClass());
+	private Logger log = LogManager.getRootLogger();
 
 	private static final KTools instance = new KTools();
 

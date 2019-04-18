@@ -44,7 +44,7 @@ public class AdmARWManagementDAO extends BaseDAO<AdmArwValue, Integer> implement
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 
 		// 塞入where參數值
@@ -61,7 +61,7 @@ public class AdmARWManagementDAO extends BaseDAO<AdmArwValue, Integer> implement
 	@Override
 	public void deleteARWData(AdmARWManagementVO vo) {
 		String hql = "delete from AdmArwValue where customer_info_id = :customer_info_id";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).setString("customer_info_id", vo.getCustomerInfoId()).executeUpdate();
 		session.flush();
 	}
@@ -104,7 +104,7 @@ public class AdmARWManagementDAO extends BaseDAO<AdmArwValue, Integer> implement
 		       
 		Date now = new Date();
 		
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createQuery(hql);
 		query.setInteger("arw_value", vo.getArwValue());
 		query.setInteger("date_flag", vo.getDateFlag());
@@ -147,7 +147,7 @@ public class AdmARWManagementDAO extends BaseDAO<AdmArwValue, Integer> implement
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 		// 塞入where參數值
 		if (StringUtils.isNotBlank(vo.getPfdCustomerInfoId())) {
@@ -171,7 +171,7 @@ public class AdmARWManagementDAO extends BaseDAO<AdmArwValue, Integer> implement
 		String hqlStr = hql.toString();
 		log.info(">>> hqlStr = " + hqlStr);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query = session.createSQLQuery(hqlStr);
 		
 		return query.list();

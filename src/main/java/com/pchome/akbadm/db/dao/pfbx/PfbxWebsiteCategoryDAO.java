@@ -11,28 +11,28 @@ public class PfbxWebsiteCategoryDAO extends BaseDAO<PfbxWebsiteCategory, String>
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PfbxWebsiteCategory> findPfbxWebsiteCategoryAll() {
-		return getHibernateTemplate().find("FROM PfbxWebsiteCategory");
+		return (List<PfbxWebsiteCategory>) getHibernateTemplate().find("FROM PfbxWebsiteCategory");
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PfbxWebsiteCategory> findByCode(String code) {
 		String hql = "from PfbxWebsiteCategory where code = ?";
-        return this.getHibernateTemplate().find(hql, code);
+        return (List<PfbxWebsiteCategory>) this.getHibernateTemplate().find(hql, code);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PfbxWebsiteCategory> findChildByCode(String parentId) {
 		String hql = "from PfbxWebsiteCategory where parentId = ?";
-        return this.getHibernateTemplate().find(hql, parentId);
+        return (List<PfbxWebsiteCategory>) this.getHibernateTemplate().find(hql, parentId);
 	}
 
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<PfbxWebsiteCategory> findById(String id) {
 		String hql = "from PfbxWebsiteCategory where id = " + id + " ";
-        return this.getHibernateTemplate().find(hql);
+        return (List<PfbxWebsiteCategory>) this.getHibernateTemplate().find(hql);
 	}
 
 	@Override
@@ -41,7 +41,7 @@ public class PfbxWebsiteCategoryDAO extends BaseDAO<PfbxWebsiteCategory, String>
 		Integer newId = 1;
     	String hql = "SELECT AUTO_INCREMENT FROM information_schema.tables WHERE table_schema='akb' and table_name='pfbx_website_category'  ";
     	
-    	Query q = this.getSession().createSQLQuery(hql.toString());
+    	Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		
 		List<Object> list = q.list();
 		if(!list.isEmpty()){
@@ -55,6 +55,6 @@ public class PfbxWebsiteCategoryDAO extends BaseDAO<PfbxWebsiteCategory, String>
 	@SuppressWarnings("unchecked")
 	public List<PfbxWebsiteCategory> getFirstLevelPfbxWebsiteCategory() {
 		String hql = "from PfbxWebsiteCategory where level = 1 ";
-    	return super.getHibernateTemplate().find(hql);
+    	return (List<PfbxWebsiteCategory>) super.getHibernateTemplate().find(hql);
 	}
 }

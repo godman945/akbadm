@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +33,7 @@ import com.pchome.service.portalcms.bean.Mail;
 import com.pchome.soft.util.SpringEmailUtil;
 
 public class DmpHitReportJob {
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LogManager.getRootLogger();
 
     private IDmpAdclassReportService dmpAdclassReportService;
     private IDmpHitReportService dmpHitReportService;

@@ -10,12 +10,12 @@ public class MenuDAO extends BaseDAO<AdmMenu, String> implements IMenuDAO {
 
 	@SuppressWarnings("unchecked")
 	public List<AdmMenu> getParentMenu() throws Exception {
-		return super.getHibernateTemplate().find("from AdmMenu where parentMenuId is null order by sort");
+		return (List<AdmMenu>) super.getHibernateTemplate().find("from AdmMenu where parentMenuId is null order by sort");
 	}
 
 	@SuppressWarnings("unchecked")
 	public List<AdmMenu> getChildMenu() throws Exception {
-		return super.getHibernateTemplate().find("from AdmMenu where parentMenuId is not null order by sort");
+		return (List<AdmMenu>) super.getHibernateTemplate().find("from AdmMenu where parentMenuId is not null order by sort");
 	}
 
 }

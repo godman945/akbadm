@@ -59,6 +59,14 @@
                 <param name="inputName">downloadFileStream</param>
             </result>
         </action>
+        
+        <!-- 商品廣告明細 start -->
+        <action name="prodAdDetailReport" class="AdReport2Action" method="prodAdDetailReport">
+        	<interceptor-ref name="akbadmCookieStack" />
+            <result type="tiles" name="success">.report.prod.ad.detail</result>
+        </action>
+        <!-- 商品廣告明細 end -->
+        
 
         <!-- ad action report -->
         <action name="adActionReport" class="AdActionReportAction" method="execute">
@@ -625,6 +633,31 @@
                 <param name="inputName">downloadFileStream</param>
             </result>
 		</action>
+		
+		
+		<!-- 再行銷追蹤 start-->
+		<action name="trackingReport" class="TrackingReportAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.tracking.report</result>
+		</action>
+		
+		<action name="trackingReportDetail" class="TrackingReportAction" method="trackingReportDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.tracking.report</result>
+		</action>
+		<!-- 再行銷追蹤 end-->
+		
+		<!-- 轉換追蹤 start-->
+		<action name="convertReport" class="ConvertReportAction" method="execute">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.convert.report</result>
+		</action>
+		
+		<action name="convertReportDetail" class="ConvertReportAction" method="convertReportDetail">
+			<interceptor-ref name="akbadmCookieStack" />
+			<result type="tiles" name="success">.convert.report</result>
+		</action>
+		<!-- 轉換追蹤 end-->
 		
     </package>
 </struts>

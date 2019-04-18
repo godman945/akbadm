@@ -36,7 +36,7 @@ public class PfdUserDAO extends BaseDAO<PfdUser, String> implements IPfdUserDAO 
 		String hql = sbr.toString();
 		log.info(">>> hql = " + hql);
 
-		return super.getHibernateTemplate().find(hql);
+		return (List<PfdUser>) super.getHibernateTemplate().find(hql);
 	}
 
 	// 2014-04-24 
@@ -50,7 +50,7 @@ public class PfdUserDAO extends BaseDAO<PfdUser, String> implements IPfdUserDAO 
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			if(paramName.equals("userId")) {
 				q.setParameterList("userId", (List<String>)sqlParams.get(paramName));
@@ -82,6 +82,6 @@ public class PfdUserDAO extends BaseDAO<PfdUser, String> implements IPfdUserDAO 
 		list.add(pfdCustomerInfoId);
 		list.add(EnumPrivilegeModel.ROOT_USER.getPrivilegeId());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<PfdUser>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 }

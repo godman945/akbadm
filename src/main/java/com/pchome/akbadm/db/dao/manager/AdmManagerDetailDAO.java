@@ -25,7 +25,7 @@ public class AdmManagerDetailDAO extends BaseDAO<AdmManagerDetail, Integer> impl
 		list.add(channelCategory);
 		list.add(EnumManagerStatus.DELETE.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmManagerDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -42,7 +42,7 @@ public class AdmManagerDetailDAO extends BaseDAO<AdmManagerDetail, Integer> impl
 		list.add(channelCategory);
 		list.add(EnumManagerStatus.DELETE.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmManagerDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -59,7 +59,7 @@ public class AdmManagerDetailDAO extends BaseDAO<AdmManagerDetail, Integer> impl
 		list.add(channelCategory);
 		list.add(EnumManagerStatus.START.getStatus());
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmManagerDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -80,7 +80,7 @@ public class AdmManagerDetailDAO extends BaseDAO<AdmManagerDetail, Integer> impl
 		
 		hql.append(" order by createDate desc ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmManagerDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -96,7 +96,7 @@ public class AdmManagerDetailDAO extends BaseDAO<AdmManagerDetail, Integer> impl
 		list.add(managerId);
 		
 		
-		return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+		return (List<AdmManagerDetail>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
 	}
 	
 	public Integer deleteAdmManagerDetail(String memberId, String channelCategory) {

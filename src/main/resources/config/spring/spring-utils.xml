@@ -53,12 +53,14 @@
         <property name="password" value="${kdcl6.password}" />
     </bean>
     
+    <!--
     <bean id="Kdcl7SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
         <property name="host" value="${kdcl7.host}" />
         <property name="port" value="${kdcl7.port}" />
         <property name="username" value="${kdcl7.username}" />
         <property name="password" value="${kdcl7.password}" />
     </bean>
+    -->
     
     <bean id="SpringECcoderUtil" class="com.pchome.soft.util.SpringECcoderUtil" />
     

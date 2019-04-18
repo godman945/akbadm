@@ -1,5 +1,8 @@
 package com.pchome.akbadm.db.vo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class AdReportVO {
 
 	private String adPvclkDate;		//日期
@@ -18,6 +21,11 @@ public class AdReportVO {
 	private String clkPriceAvg; //平均點選出價
     private String pvPriceAvg; //千次曝光收益
 	private String kwClkRate; //點選率 = Click總和 / PV總和
+	private String convertCountSum;		//總轉換數
+	private String convertPriceCountSum;	//總轉換價值
+	private String convertCVR;	//轉換率
+	private String convertCost;	//平均轉換成本
+	private String convertInvestmentCost;	//廣告投資報酬率
 	private String realUrl; //廣告播放位置
 
 	private String adStyle;	//廣告形態
@@ -41,6 +49,35 @@ public class AdReportVO {
     private String adDetailVideoSeconds;
     private String adDetailVideoUrl;
     private String adDetailRealUrl;
+    
+    // 商品廣告PROD
+    private String prodReportName;
+    private String prodAdUrl;
+    private List<String> adDetailLogoSaleImgList = new ArrayList<>();	//行銷圖
+    private List<String> adDetailSaleImgList = new ArrayList<>();		//結尾行銷圖
+    private String adDetailLogoTxt;	//LOGO標題文字		
+    private String adbgType;
+    private String previewTpro;
+    private String adDetailBuybtnBgColor;
+    private String adDetailBuybtnFontColor;
+    private String adDetailBuybtnTxt;
+    private String adDetailDisBgColor;
+    private String adDetailDisFontColor;
+    private String adDetailDisTxtType;
+    private String adDetailLogoBgColor;
+    private String adDetailLogoFontColor;
+    private String adDetailLogoImgUrl;
+    private String adDetailLogoType;
+    private String adDetailProdAdUrl;
+    private String adDetailProdGroup;
+    private String adDetailProdImgShowType;
+    private String adDetailProdReportName;
+    private String adDetailSaleImgShowType;
+    private String adDetailSaleImg;
+    private String adDetailSaleEndImg;
+    private List<String> adDetailSaleEndImgList = new ArrayList<>();
+    
+    
 
 	public String getAdPvclkDate() {
 		return adPvclkDate;
@@ -313,5 +350,245 @@ public class AdReportVO {
     public void setAdDetailRealUrl(String adDetailRealUrl) {
         this.adDetailRealUrl = adDetailRealUrl;
     }
+
+	public String getProdReportName() {
+		return prodReportName;
+	}
+
+	public void setProdReportName(String prodReportName) {
+		this.prodReportName = prodReportName;
+	}
+
+	public String getProdAdUrl() {
+		return prodAdUrl;
+	}
+
+	public void setProdAdUrl(String prodAdUrl) {
+		this.prodAdUrl = prodAdUrl;
+	}
+
+	public List<String> getAdDetailLogoSaleImgList() {
+		return adDetailLogoSaleImgList;
+	}
+
+	public void setAdDetailLogoSaleImgList(List<String> adDetailLogoSaleImgList) {
+		this.adDetailLogoSaleImgList = adDetailLogoSaleImgList;
+	}
+
+	public List<String> getAdDetailSaleImgList() {
+		return adDetailSaleImgList;
+	}
+
+	public void setAdDetailSaleImgList(List<String> adDetailSaleImgList) {
+		this.adDetailSaleImgList = adDetailSaleImgList;
+	}
+
+	public String getAdDetailLogoTxt() {
+		return adDetailLogoTxt;
+	}
+
+	public void setAdDetailLogoTxt(String adDetailLogoTxt) {
+		this.adDetailLogoTxt = adDetailLogoTxt;
+	}
+
+	public String getConvertCountSum() {
+		return convertCountSum;
+	}
+
+	public void setConvertCountSum(String convertCountSum) {
+		this.convertCountSum = convertCountSum;
+	}
+
+	public String getConvertPriceCountSum() {
+		return convertPriceCountSum;
+	}
+
+	public void setConvertPriceCountSum(String convertPriceCountSum) {
+		this.convertPriceCountSum = convertPriceCountSum;
+	}
+
+	public String getConvertCVR() {
+		return convertCVR;
+	}
+
+	public void setConvertCVR(String convertCVR) {
+		this.convertCVR = convertCVR;
+	}
+
+	public String getConvertCost() {
+		return convertCost;
+	}
+
+	public void setConvertCost(String convertCost) {
+		this.convertCost = convertCost;
+	}
+
+	public String getConvertInvestmentCost() {
+		return convertInvestmentCost;
+	}
+
+	public void setConvertInvestmentCost(String convertInvestmentCost) {
+		this.convertInvestmentCost = convertInvestmentCost;
+	}
+
+	public String getAdbgType() {
+		return adbgType;
+	}
+
+	public void setAdbgType(String adbgType) {
+		this.adbgType = adbgType;
+	}
+
+	public String getPreviewTpro() {
+		return previewTpro;
+	}
+
+	public void setPreviewTpro(String previewTpro) {
+		this.previewTpro = previewTpro;
+	}
+
+	public String getAdDetailBuybtnBgColor() {
+		return adDetailBuybtnBgColor;
+	}
+
+	public void setAdDetailBuybtnBgColor(String adDetailBuybtnBgColor) {
+		this.adDetailBuybtnBgColor = adDetailBuybtnBgColor;
+	}
+
+	public String getAdDetailBuybtnFontColor() {
+		return adDetailBuybtnFontColor;
+	}
+
+	public void setAdDetailBuybtnFontColor(String adDetailBuybtnFontColor) {
+		this.adDetailBuybtnFontColor = adDetailBuybtnFontColor;
+	}
+
+	public String getAdDetailBuybtnTxt() {
+		return adDetailBuybtnTxt;
+	}
+
+	public void setAdDetailBuybtnTxt(String adDetailBuybtnTxt) {
+		this.adDetailBuybtnTxt = adDetailBuybtnTxt;
+	}
+
+	public String getAdDetailDisBgColor() {
+		return adDetailDisBgColor;
+	}
+
+	public void setAdDetailDisBgColor(String adDetailDisBgColor) {
+		this.adDetailDisBgColor = adDetailDisBgColor;
+	}
+
+	public String getAdDetailDisFontColor() {
+		return adDetailDisFontColor;
+	}
+
+	public void setAdDetailDisFontColor(String adDetailDisFontColor) {
+		this.adDetailDisFontColor = adDetailDisFontColor;
+	}
+
+	public String getAdDetailDisTxtType() {
+		return adDetailDisTxtType;
+	}
+
+	public void setAdDetailDisTxtType(String adDetailDisTxtType) {
+		this.adDetailDisTxtType = adDetailDisTxtType;
+	}
+
+	public String getAdDetailLogoBgColor() {
+		return adDetailLogoBgColor;
+	}
+
+	public void setAdDetailLogoBgColor(String adDetailLogoBgColor) {
+		this.adDetailLogoBgColor = adDetailLogoBgColor;
+	}
+
+	public String getAdDetailLogoFontColor() {
+		return adDetailLogoFontColor;
+	}
+
+	public void setAdDetailLogoFontColor(String adDetailLogoFontColor) {
+		this.adDetailLogoFontColor = adDetailLogoFontColor;
+	}
+
+	public String getAdDetailLogoImgUrl() {
+		return adDetailLogoImgUrl;
+	}
+
+	public void setAdDetailLogoImgUrl(String adDetailLogoImgUrl) {
+		this.adDetailLogoImgUrl = adDetailLogoImgUrl;
+	}
+
+	public String getAdDetailLogoType() {
+		return adDetailLogoType;
+	}
+
+	public void setAdDetailLogoType(String adDetailLogoType) {
+		this.adDetailLogoType = adDetailLogoType;
+	}
+
+	public String getAdDetailProdAdUrl() {
+		return adDetailProdAdUrl;
+	}
+
+	public void setAdDetailProdAdUrl(String adDetailProdAdUrl) {
+		this.adDetailProdAdUrl = adDetailProdAdUrl;
+	}
+
+	public String getAdDetailProdGroup() {
+		return adDetailProdGroup;
+	}
+
+	public void setAdDetailProdGroup(String adDetailProdGroup) {
+		this.adDetailProdGroup = adDetailProdGroup;
+	}
+
+	public String getAdDetailProdImgShowType() {
+		return adDetailProdImgShowType;
+	}
+
+	public void setAdDetailProdImgShowType(String adDetailProdImgShowType) {
+		this.adDetailProdImgShowType = adDetailProdImgShowType;
+	}
+
+	public String getAdDetailProdReportName() {
+		return adDetailProdReportName;
+	}
+
+	public void setAdDetailProdReportName(String adDetailProdReportName) {
+		this.adDetailProdReportName = adDetailProdReportName;
+	}
+
+	public String getAdDetailSaleImgShowType() {
+		return adDetailSaleImgShowType;
+	}
+
+	public void setAdDetailSaleImgShowType(String adDetailSaleImgShowType) {
+		this.adDetailSaleImgShowType = adDetailSaleImgShowType;
+	}
+
+	public String getAdDetailSaleImg() {
+		return adDetailSaleImg;
+	}
+
+	public void setAdDetailSaleImg(String adDetailSaleImg) {
+		this.adDetailSaleImg = adDetailSaleImg;
+	}
+
+	public String getAdDetailSaleEndImg() {
+		return adDetailSaleEndImg;
+	}
+
+	public void setAdDetailSaleEndImg(String adDetailSaleEndImg) {
+		this.adDetailSaleEndImg = adDetailSaleEndImg;
+	}
+
+	public List<String> getAdDetailSaleEndImgList() {
+		return adDetailSaleEndImgList;
+	}
+
+	public void setAdDetailSaleEndImgList(List<String> adDetailSaleEndImgList) {
+		this.adDetailSaleEndImgList = adDetailSaleEndImgList;
+	}
 
 }

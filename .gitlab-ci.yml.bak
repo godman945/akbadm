@@ -1,0 +1,62 @@
+#image: maven:latest
+image: nico19732001/mvn-jdk11-ansible-rsync
+
+
+
+
+variables:
+  MAVEN_CLI_OPTS: "-s maven-config/settings.xml --batch-mode"
+  MAVEN_OPTS: "-Dmaven.repo.local=maven-config/repository"
+
+cache:
+  paths:
+    - maven-config/repository/
+    - target/
+    
+ 
+    
+
+build-stg:
+  stage: build
+
+  tags:
+    - maven
+  script:
+    #- sonar-scanner -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_PATH -Dsonar.gitlab.commit_sha=$CI_COMMIT_S
+    #- mvn $MAVEN_CLI_OPTS clean package
+
+    #- ls
+    - mvn $MAVEN_CLI_OPTS clean verify sonar:sonar -Dsonar.analysis.mode=preview -Dsonar.gitlab.project_id=$CI_PROJECT_ID -Dsonar.gitlab.commit_sha=$CI_COMMIT_SHA -Dsonar.gitlab.ref_name=$CI_COMMIT_REF_NAME
+    #- cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
+    #- cp ansible-config/hosts /etc/ansible/hosts
+    
+   
+    #- cd ansible-config
+    #- cat playbook.yml
+    #- ansible-playbook playbook.yml -f 10 
+  
+  
+  only:
+    - stg
+   
+#test:
+#  stage: test
+#  tags:
+#    - maven
+#  script:
+#    - mvn $MAVEN_CLI_OPTS test
+
+deploy-stg:
+   stage: deploy
+   tags:
+     - maven
+   script:
+     - cp ansible-config/ansible.cfg /etc/ansible/ansible.cfg
+     - cp ansible-config/hosts /etc/ansible/hosts
+    
+   
+     - cd ansible-config
+     - cat playbook.yml
+     - ansible-playbook playbook.yml -f 10 
+   only:
+     - stg

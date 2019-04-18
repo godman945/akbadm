@@ -1,13 +1,13 @@
 package com.pchome.akbadm.factory.pfd.bonus;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.enumerate.pfd.bonus.EnumPfdBonusItem;
 
 public class PfdBonusItemFactory {
 
-	protected Log log = LogFactory.getLog(this.getClass().getName());
+	protected Logger log = LogManager.getRootLogger();
 	
 	private APfdBonusItem pfdMonthBonus;
 	private APfdBonusItem pfdQuarterBonus;

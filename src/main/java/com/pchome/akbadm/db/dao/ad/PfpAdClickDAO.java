@@ -21,7 +21,7 @@ public class PfpAdClickDAO extends BaseDAO<PfpAdClick, String> implements IPfpAd
 	@Override
     public List<PfpAdClick> findPfpAdClick(Date recordDate, int recordTime, int maliceType) {
         String hql = "from PfpAdClick where recordDate = ? and recordTime = ? and malice_type = ? order by record_minute";
-        return this.getHibernateTemplate().find(hql, recordDate, recordTime, maliceType);
+        return (List<PfpAdClick>) this.getHibernateTemplate().find(hql, recordDate, recordTime, maliceType);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class PfpAdClickDAO extends BaseDAO<PfpAdClick, String> implements IPfpAd
         sql.append("    and group.ad_action_seq = action.ad_action_seq ");
         sql.append("group by action.ad_action_seq ");
 
-        Query query = this.getSession().createSQLQuery(sql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
         query.setParameter("recordDate", recordDate);
         query.setParameter("recordTime", recordTime);
 
@@ -58,7 +58,7 @@ public class PfpAdClickDAO extends BaseDAO<PfpAdClick, String> implements IPfpAd
     	sql.append("where 1=1 ");
     	sql.append("and adClickId in (:adClickIdList) ");
     	
-    	Query query = this.getSession().createQuery(sql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
     	query.setParameterList("adClickIdList", adClickIdList);
     	
     	return query.list();
@@ -116,7 +116,7 @@ public class PfpAdClickDAO extends BaseDAO<PfpAdClick, String> implements IPfpAd
     	
     	List<Object> ObjectList = new ArrayList<Object>();
 		try {
-		Query query = this.getSession().createQuery(sql.toString());
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
 		ObjectList = query.list();
 		} catch (Exception e) {
 			e.printStackTrace();

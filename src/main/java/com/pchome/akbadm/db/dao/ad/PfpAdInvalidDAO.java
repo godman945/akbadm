@@ -21,7 +21,7 @@ public class PfpAdInvalidDAO extends BaseDAO<PfpAdInvalid, String> implements IP
 
 		Object[] ob = new Object[]{customerInfoId,date};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
 	@Override
@@ -37,7 +37,7 @@ public class PfpAdInvalidDAO extends BaseDAO<PfpAdInvalid, String> implements IP
 
 		Object[] ob = new Object[]{date, adActionSeq};
 
-		return super.getHibernateTemplate().find(hql.toString(),ob);
+		return (List<Object>) super.getHibernateTemplate().find(hql.toString(),ob);
 	}
 
     @Override

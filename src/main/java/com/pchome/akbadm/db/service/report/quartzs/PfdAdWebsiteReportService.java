@@ -22,5 +22,10 @@ public class PfdAdWebsiteReportService extends BaseService<PfdAdWebsiteReport, I
 	public void insertReportData(List<PfdAdWebsiteReport> dataList) throws Exception {
 		((PfdAdWebsiteReportDAO) dao).insertReportData(dataList);
 	}
+	
+	@Override
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdWebsiteReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 
 }

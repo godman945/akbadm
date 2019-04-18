@@ -38,7 +38,7 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		pos.add(todayDate);
 		pos.add(todayDate);
 		
-		return super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		return (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -53,7 +53,7 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		
 		pos.add(pfbId);
 		
-		return super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		return (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -69,12 +69,12 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		
 		pos.add(pfbId);
 		
-		return super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		return (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 	}
 	
 	@SuppressWarnings("unchecked")
 	public Map<String, String> findPfbxBonusSetSpecialCountMap(){
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		StringBuffer sql = new StringBuffer();
 		
 		sql.append(" select pfb_id, count(*) ");
@@ -105,7 +105,7 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		
 		pos.add(id);
 		
-		List<PfbxBonusSetSpecial> list = super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		List<PfbxBonusSetSpecial> list = (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 		
 		return list.get(0);
 	}
@@ -123,7 +123,7 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		
 		pos.add(nowDate);
 		
-		List<PfbxBonusSetSpecial> list = super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		List<PfbxBonusSetSpecial> list = (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 		
 		Map<String, Object> pfbxBonusSetSpecialMap = new HashMap<String, Object>();
 		for(PfbxBonusSetSpecial pfbxBonusSetSpecial:list) {
@@ -152,7 +152,7 @@ public class PfbxBonusSetSpecialDAO extends BaseDAO<PfbxBonusSetSpecial, Integer
 		pos.add(startDate);
 		pos.add(endDate);
 		
-		return super.getHibernateTemplate().find(hql.toString(),pos.toArray());
+		return (List<PfbxBonusSetSpecial>) super.getHibernateTemplate().find(hql.toString(),pos.toArray());
 	}
 	
 	public static void main(String args[]){

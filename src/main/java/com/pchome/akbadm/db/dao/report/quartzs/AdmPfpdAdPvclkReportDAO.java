@@ -6,7 +6,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmPfpdAdPvclkReport;
@@ -18,7 +18,7 @@ public class AdmPfpdAdPvclkReportDAO extends BaseDAO<AdmPfpdAdPvclkReport, Integ
 
 		List<Object> result = (List<Object>) getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
-					public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -68,7 +68,7 @@ public class AdmPfpdAdPvclkReportDAO extends BaseDAO<AdmPfpdAdPvclkReport, Integ
 
 		List<Object> result = (List<Object>) getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
-					public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -123,7 +123,7 @@ public class AdmPfpdAdPvclkReportDAO extends BaseDAO<AdmPfpdAdPvclkReport, Integ
 
 		List<Object> result = (List<Object>) getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
-					public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -178,7 +178,7 @@ public class AdmPfpdAdPvclkReportDAO extends BaseDAO<AdmPfpdAdPvclkReport, Integ
 	
 	public void deleteReportDataByReportDate(String reportDate) throws Exception {
 		String sql = "delete from AdmPfpdAdPvclkReport where adPvclkDate = '" + reportDate + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -188,4 +188,48 @@ public class AdmPfpdAdPvclkReportDAO extends BaseDAO<AdmPfpdAdPvclkReport, Integ
 			this.save(dataList.get(i));
 		}
 	}
+	
+	
+	@Override
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" UPDATE adm_pfpd_ad_pvclk_report r,  ");
+		sql.append(" (SELECT  ");
+		sql.append(" c.customer_info_id,  ");
+		sql.append(" c.pfd_customer_info_id,  ");
+		sql.append(" c.pfbx_customer_info_id,  ");
+		sql.append(" c.convert_belong_date,  ");
+		sql.append(" c.time_code,  ");
+		sql.append(" Sum(convert_count)convert_count, "); 
+		sql.append(" Sum(convert_price)convert_price, "); 
+		sql.append(" c.ad_pvclk_device, "); 
+		sql.append(" c.ad_pvclk_os, "); 
+		sql.append(" c.convert_trigger_type "); 
+		sql.append(" FROM   pfp_code_convert_trans c "); 
+		sql.append(" WHERE  1 = 1 "); 
+		sql.append(" AND c.convert_date >= :convertRangeDate "); 
+		sql.append(" AND c.convert_date <= :convertDate "); 
+		sql.append(" AND c.convert_trigger_type = 'CK' "); 
+		sql.append(" GROUP  BY c.customer_info_id, "); 
+		sql.append(" c.convert_belong_date, "); 
+		sql.append(" c.ad_pvclk_device, "); 
+		sql.append(" c.ad_pvclk_os, "); 
+		sql.append(" c.convert_trigger_type, "); 
+		sql.append(" c.convert_belong_date, c.convert_seq)a "); 
+		sql.append(" SET    r.convert_count = a.convert_count, "); 
+		sql.append(" r.convert_price_count = a.convert_price, "); 
+		sql.append(" r.update_time = Now() "); 
+		sql.append(" WHERE  1 = 1 "); 
+		sql.append(" AND a.customer_info_id = r.customer_info_id "); 
+		sql.append(" AND a.pfbx_customer_info_id = r.pfbx_customer_info_id "); 
+		sql.append(" AND a.pfd_customer_info_id = r.pfd_customer_info_id "); 
+		sql.append(" AND a.convert_belong_date = r.ad_pvclk_date "); 
+		sql.append(" AND a.ad_pvclk_device = r.ad_pvclk_device "); 
+		sql.append(" AND a.time_code = r.time_code "); 
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
+		query.setString("convertDate", convertDate);
+		query.setString("convertRangeDate", convertRangeDate);
+		return query.executeUpdate();
+	}
+	
 }

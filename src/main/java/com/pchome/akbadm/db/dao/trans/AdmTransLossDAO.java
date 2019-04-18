@@ -27,7 +27,7 @@ public class AdmTransLossDAO extends BaseDAO <AdmTransLoss, String> implements I
 	    pos.add(sDate);
 	    pos.add(eDate);
 	    
-	    return super.getHibernateTemplate().find(hql.toString() , pos.toArray());
+	    return (List<Object[]>) super.getHibernateTemplate().find(hql.toString() , pos.toArray());
 	}
 
 	public Integer deleteRecordAfterDate(Date startDate) {
@@ -46,7 +46,7 @@ public class AdmTransLossDAO extends BaseDAO <AdmTransLoss, String> implements I
 	    hql.append("from AdmTransLoss ");
 	    hql.append("where transDate = :transDate ");
 
-	    Double result = (Double) this.getSession()
+	    Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
 	            .createQuery(hql.toString())
 	            .setString("transDate", transDate)
 	            .uniqueResult();
@@ -62,7 +62,7 @@ public class AdmTransLossDAO extends BaseDAO <AdmTransLoss, String> implements I
 	    hql.append("where transDate = :transDate ");
 	    hql.append(" and customerInfoId = :custInfoId");
 
-	    Double result = (Double) this.getSession()
+	    Double result = (Double) this.getHibernateTemplate().getSessionFactory().getCurrentSession()
 	            .createQuery(hql.toString())
 	            .setString("transDate", transDate)
 	            .setString("custInfoId", custInfoId)
@@ -79,7 +79,7 @@ public class AdmTransLossDAO extends BaseDAO <AdmTransLoss, String> implements I
 	    hql.append("where transDate = '" + transDate + "'");
 	    hql.append(" group by customerInfoId");
 
-	    Query query = this.getSession().createQuery(hql.toString());
+	    Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
 
 		List<Object> dataList = query.list();
 
@@ -107,6 +107,6 @@ public class AdmTransLossDAO extends BaseDAO <AdmTransLoss, String> implements I
 	    hql.append(" where transDate = ? ");
 	    hql.append(" group by customerInfoId ");
 	    
-	    return super.getHibernateTemplate().find(hql.toString(), transDate);
+	    return (List<Object[]>) super.getHibernateTemplate().find(hql.toString(), transDate);
 	}
 }

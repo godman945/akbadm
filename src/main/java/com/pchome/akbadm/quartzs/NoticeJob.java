@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +24,7 @@ import com.pchome.service.portalcms.bean.Mail;
 
 @Transactional
 public class NoticeJob {
-    private Log log = LogFactory.getLog(getClass().getName());
+    private Logger log = LogManager.getRootLogger();
 
     private String mailFrom;
     private IPfpBoardService pfpBoardService;

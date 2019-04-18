@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
@@ -39,7 +39,7 @@ public class CheckPvclkJob {
     private static int LIMIT_OF_HOUR = -3;
     private static String nextLine = "<br />\r\n";
 
-    private Log log = LogFactory.getLog(getClass());
+    private Logger log = LogManager.getRootLogger();
 
     private String mailSubject;
     private String mailFrom;

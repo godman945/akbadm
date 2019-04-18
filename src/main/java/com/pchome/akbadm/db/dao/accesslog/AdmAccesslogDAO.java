@@ -46,7 +46,7 @@ public class AdmAccesslogDAO extends BaseDAO <AdmAccesslog, Integer> implements 
 
 		hql.append(" order by createDate desc ");
 		//log.info(">> hql = "+hql.toString());
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<AdmAccesslog>) super.getHibernateTemplate().find(hql.toString());
 	}
 
     public int selectAdmAccesslogCount(String channel, String action, String memberId, String orderId, String customerInfoId, String userId, String clientIp, String message, Date startDate, Date endDate) {
@@ -96,8 +96,8 @@ public class AdmAccesslogDAO extends BaseDAO <AdmAccesslog, Integer> implements 
             hql.append("and createDate <= ? ");
             list.add(endDate);
         }
-
-        Query query = this.getSession().createQuery(hql.toString());
+        
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (int i = 0; i < list.size(); i++) {
             query.setParameter(i, list.get(i));
         }
@@ -153,7 +153,7 @@ public class AdmAccesslogDAO extends BaseDAO <AdmAccesslog, Integer> implements 
         }
         hql.append("order by accesslogId desc ");
 
-        Query query = this.getSession().createQuery(hql.toString());
+        Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         query.setFirstResult(firstResult);
         query.setMaxResults(maxResults);
         for (int i = 0; i < list.size(); i++) {
@@ -171,6 +171,6 @@ public class AdmAccesslogDAO extends BaseDAO <AdmAccesslog, Integer> implements 
 		hql.append(" where mailSend = ? ");
 		hql.append(" order by createDate desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(),EnumAccesslogEmailStatus.YES.getStatus());
+		return (List<AdmAccesslog>) super.getHibernateTemplate().find(hql.toString(),EnumAccesslogEmailStatus.YES.getStatus());
 	}
 }

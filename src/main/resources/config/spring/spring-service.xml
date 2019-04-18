@@ -593,5 +593,70 @@
     <bean id="AdmBrandCorrespondService" class="com.pchome.akbadm.db.service.admBrandCorrespond.AdmBrandCorrespondService">
     	<property name="dao" ref="AdmBrandCorrespondDAO" />
 	</bean>
+
+    <bean id="PfpCodeAdactionMergeService" class="com.pchome.akbadm.db.service.code.PfpCodeAdactionMergeService">
+        <property name="dao" ref="PfpCodeAdactionMergeDAO" />
+    </bean>
+
+    <bean id="PfpCodeAdactionMergeService2" class="com.pchome.akbadm.db.service.code.PfpCodeAdactionMergeService">
+        <property name="dao" ref="PfpCodeAdactionMergeDAO2" />
+    </bean>
+
+    <bean id="PfpCodeTrackingService" class="com.pchome.akbadm.db.service.code.PfpCodeTrackingService">
+        <property name="dao" ref="PfpCodeTrackingDAO" />
+    </bean>
+
+    <bean id="PfpCodeTrackingService2" class="com.pchome.akbadm.db.service.code.PfpCodeTrackingService">
+        <property name="dao" ref="PfpCodeTrackingDAO2" />
+    </bean>
+
+	<!-- 商品廣告-自動排程上傳 -->
+    <bean id="PfpCatalogUploadListService" class="com.pchome.akbadm.db.service.catalog.uploadList.PfpCatalogUploadListService">
+    	<property name="shoppingProd" ref="ShoppingProd" />
+    	<property name="pfpCatalogService" ref="PfpCatalogService" />
+    	<property name="pfpCatalogUploadListDAO" ref="PfpCatalogUploadListDAO" />
+    </bean>
+    <!-- 商品廣告-自動排程上傳 end -->
+    
+    <!-- 商品廣告-目錄 -->
+    <bean id="PfpCatalogService" class="com.pchome.akbadm.db.service.catalog.PfpCatalogService">    	     
+		<property name="dao" ref="PfpCatalogDAO" />
+    </bean>
+
+    <bean id="PfpCatalogLogoService" class="com.pchome.akbadm.db.service.catalog.PfpCatalogLogoService">
+        <property name="dao" ref="PfpCatalogLogoDAO" />
+    </bean>
+
+    <bean id="PfpCatalogLogoService2" class="com.pchome.akbadm.db.service.catalog.PfpCatalogLogoService">
+        <property name="dao" ref="PfpCatalogLogoDAO2" />
+    </bean>
+
+    <bean id="PfpCatalogProdEcService" class="com.pchome.akbadm.db.service.catalog.PfpCatalogProdEcService">
+        <property name="dao" ref="PfpCatalogProdEcDAO" />
+    </bean>
+
+    <bean id="PfpCatalogProdEcService2" class="com.pchome.akbadm.db.service.catalog.PfpCatalogProdEcService">
+        <property name="dao" ref="PfpCatalogProdEcDAO2" />
+    </bean>
+    
+    <!-- 再行銷追蹤 -->
+    <bean id="TrackingReportService" class="com.pchome.akbadm.db.service.report.TrackingReportService">
+        <property name="dao" ref="TrackingReportDAO" />
+        <property name="codeManageRediskey" value="${redis.codeManage.rediskey}" />
+	</bean>
 	
+	<!-- pvclk prod-->
+    <bean id="PfpAdPvclkProdService" class="com.pchome.akbadm.db.service.ad.PfpAdPvclkProdService">
+        <property name="dao" ref="PfpAdPvclkProdDAO" />
+    </bean>
+    
+    <bean id="PfpCodeConvertService" class="com.pchome.akbadm.db.service.report.PfpCodeConvertService">
+    	<property name="pfpCodeConvertRuleService" ref="PfpCodeConvertRuleService" />
+        <property name="dao" ref="PfpCodeConvertDAO" />
+        <property name="codeManageRediskey" value="${redis.codeManage.rediskey}" />
+    </bean>
+    
+    <bean id="PfpCodeConvertRuleService" class="com.pchome.akbadm.db.service.report.PfpCodeConvertRuleService">
+        <property name="dao" ref="PfpCodeConvertRuleDAO" />
+    </bean>
 </beans>

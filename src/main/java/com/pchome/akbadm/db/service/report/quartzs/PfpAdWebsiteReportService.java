@@ -25,4 +25,8 @@ public class PfpAdWebsiteReportService extends BaseService<PfpAdWebsiteReport, I
 	public List<Object> getLastDate() throws Exception {
 		return ((PfpAdWebsiteReportDAO) dao).getLastDate();
 	}
+
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfpAdWebsiteReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

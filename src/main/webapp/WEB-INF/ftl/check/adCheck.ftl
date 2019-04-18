@@ -12,8 +12,68 @@
   .adreportdv b{font-weight:400}
   .adboxdvinf>span>i:first-child+b{font-weight:bold}
   #fancybox-close,.fancybox-close{ background: transparent url(<@s.url value="/" />html/img/pop-close.png) left top no-repeat!important; right:-30px!important; top:0px!important; width:30px!important; height: 30px!important;}
-  
+  .center {text-align: center;}
 </style>
+<script type="text/javascript">
+var currentImageArray = new Array();
+var logoSaleImgArray = new Array();
+var saleImgArray = new Array();
+<#list adDataList as adData>
+	logoSaleImgArray["${adData.adSeq!}"] = new Array();
+	saleImgArray["${adData.adSeq!}"] = new Array();
+
+    <#assign i = 0>
+	<#list adData.adDetailLogoSaleImgList as logoSaleImg>
+		logoSaleImgArray["${adData.adSeq!}"][${i}] = "${logoSaleImg}";
+    	<#assign i = i+1>
+	</#list>
+
+    <#assign i = 0>
+	<#list adData.adDetailSaleImgList as saleImg>
+		saleImgArray["${adData.adSeq!}"][${i}] = "${saleImg}";
+    	<#assign i = i+1>
+	</#list>
+</#list>
+
+function openDialog(imageArray) {
+	currentImageArray = imageArray;
+	showImage(0);
+	$('#dialogDiv').dialog('open');
+}
+
+function showImage(index) {
+	var total = currentImageArray.length;
+	var previousIndex = 0;
+	var nextIndex = 0;
+	var dialogHtml = "";
+	var imageSizeHtml = "";
+
+	if (total == 0) {
+		imageSizeHtml = "0 / 0";
+
+		$('#dialogDiv').html(dialogHtml);
+		$('#dialogDiv').dialog({title:imageSizeHtml});
+
+		return;
+	}
+	
+	previousIndex = index == 0 ? total - 1 : (index - 1)  % total;
+	nextIndex = (index + 1) % total;
+
+	dialogHtml = "<div>";
+	dialogHtml += "<a href='#' onclick='showImage(" + previousIndex + ")'>上一張</a>&nbsp;";
+	dialogHtml += "<a href='#' onclick='showImage(" + nextIndex + ")'>下一張</a>";
+	dialogHtml += "</div>";
+	dialogHtml += "<div>";
+	dialogHtml += "<img src='" + currentImageArray[index] + "' />";
+	dialogHtml += "</div>";
+	imageSizeHtml = (index + 1) + " / " + total;
+
+	$('#dialogDiv').html(dialogHtml);
+	$('#dialogDiv').dialog({title:imageSizeHtml});
+}
+</script>
+
 <h2><img src="<@s.url value="/" />html/img/iconcr.gif" hspace="2" vspace="12" align="absmiddle" />廣告審核</h2>
 
 <form action="adCheck.html" method="post">
@@ -176,6 +236,21 @@
 					     </span>
 				     </span>
 			     </div>
+			<#elseif "PROD" == adData.adStyle>
+				<div class="adreportdv">
+					<div>
+						<span class="adboxdvimg"><iframe width="300" height="250" src="adProdModel.html?posterType=${adData.adbgType!}&previewTpro=${adData.previewTpro!}&btnBgColor=${adData.adDetailBuybtnBgColor?url}&btnFontColor=${adData.adDetailBuybtnFontColor?url}&btnTxt=${adData.adDetailBuybtnTxt?url?url}&disBgColor=${adData.adDetailDisBgColor?url}&disFontColor=${adData.adDetailDisFontColor?url}&disTxtType=${adData.adDetailDisTxtType!}&logoBgColor=${adData.adDetailLogoBgColor?url}&logoFontColor=${adData.adDetailLogoFontColor?url}&userLogoPath=${adData.adDetailLogoImgUrl!}&logoText=${adData.adDetailLogoTxt!}&prodLogoType=${adData.adDetailLogoType!}&realUrl=${adData.adDetailProdAdUrl!}&catalogGroupId=${adData.adDetailProdGroup!}&imgProportiona=${adData.adDetailProdImgShowType!}&imgShowType=${adData.adDetailSaleImgShowType!}&saleImg=${adData.adDetailSaleImg!}&saleEndImg=${adData.adDetailSaleEndImg!}"></iframe></span>
+					    <span class="adboxdvinf">
+						    <div>${adData.adDetailProdReportName!}</div>
+							<div>${adData.adDetailProdAdUrl!}</div>
+					    </span>
+				    </div>
+				    <div>
+				    	<span><a onclick="openDialog(logoSaleImgArray['${adData.adSeq!}'])">行銷圖像</a></span>
+				    	<span><a onclick="openDialog(saleImgArray['${adData.adSeq!}'])">結尾行銷圖像</a></span>
+				    	<span>${adData.adDetailLogoTxt!}</span>
+				    </div>
+			     </div>
         	</#if>
 		</td>
         <td class="td03" rowspan="3">${adData.status!}</td>
@@ -228,6 +303,6 @@ ${message!}
 </#if>
 
 </#if>
-
+<div id="dialogDiv" class="center display:none"></div>
 <input id="pfdCustomerInfoId" name="pfdCustomerInfoId" type="hidden" value=""/>
 </form>

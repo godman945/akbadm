@@ -12,7 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.pfbx.report.PfbxReportVO;
@@ -28,7 +28,7 @@ public class PfbxStyleReportDAO extends BaseDAO<PfbxReportVO, String> implements
 	List<PfbxReportVO> result = (List<PfbxReportVO>) getHibernateTemplate().execute(
 			new HibernateCallback<List<PfbxReportVO>>() {
 		@SuppressWarnings("unchecked")
-		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+		public List<PfbxReportVO> doInHibernate(Session session) throws HibernateException {
 	    	HashMap<String, Object> sqlParams = new HashMap<String, Object>();
 	    	
 	        StringBuffer hql = new StringBuffer();

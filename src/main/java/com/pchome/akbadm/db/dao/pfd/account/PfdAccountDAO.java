@@ -23,7 +23,7 @@ public class PfdAccountDAO extends BaseDAO<PfdCustomerInfo, String> implements I
 			sql.append(" and companyTaxId = '" + conditionMap.get("companyTaxId") + "'");
 		}
 
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<PfdCustomerInfo>) super.getHibernateTemplate().find(sql.toString());
 	}
 
 }

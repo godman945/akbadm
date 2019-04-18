@@ -49,9 +49,10 @@ window.onload = function() {
                     price02Obj.setAttribute("style", 'display:none')
                 }
                 price01 = 'NT$' + parseInt(price01).toLocaleString('en-US');
-                price02 = 'NT$' + parseInt(price02).toLocaleString('en-US');
+                price02 = '<span class="psNum">NT$' + parseInt(price02).toLocaleString('en-US') + "</span>";
                 priceObj.children[0].textContent = price01;
                 priceObj.children[1].textContent = price02;
+                price02Obj.innerHTML = price02;
                 priceObj.style.display = ''
             }
         }
@@ -108,26 +109,6 @@ window.onload = function() {
             setCookie('mpv', mpr)
         }
     }
-    
-    
-    
-    
-    
-//    
-//    var  scriptText = document.getElementById("alex").innerHTML;
-//    console.log(scriptText);
-//    scriptText = scriptText.replace('<!--', '');
-//    scriptText = scriptText.replace('-->', '');
-//    var script = document.createElement('div');
-//    var appendDiv = document.createElement('div');
-//    script.innerHTML = scriptText;
-//    document.write(scriptText);
-//    alert('HHH');
-    
-    
-    
-    
-    
 };
 
 function setCookie(name, value) {
@@ -136,167 +117,22 @@ function setCookie(name, value) {
     exp.setTime(exp.getTime() + Days * 24 * 60 * 60 * 1000);
     document.cookie = name + '=' + value + ';expires=' + exp.toGMTString()
 }
-
-
-
-
 window.addEventListener('message', function(event) {
-	try{
-		var  scriptText ='';
-//		var appendDom = document.getElementById('alex');
-//		
-//		var appendDiv = document.createElement('div');
-//		appendDiv.className = 'ad_backup_pchome';
-//		
-//		scriptText = document.getElementById("alex").innerHTML;
-//		scriptText = scriptText.replace('<!--', '');
-//		scriptText = scriptText.replace('-->', '');
-//		
-//		var script = document.createElement('div');
-//		script.innerHTML = scriptText;
-//		var elements = script.getElementsByTagName("*");
-//		for (var j = 0; j < elements.length; j++) {
-//			var tagName = elements[j].tagName;
-//			var attributes = elements[j].attributes;
-//			var text = elements[j].innerHTML;
-//			var content = document.createElement(tagName);
-//			for (var k = 0; k < attributes.length; k++) {
-//				var attrib = attributes[k];
-//				var name = attrib.name;
-//				var value = attrib.value;
-//				content.setAttribute(attrib.name, attrib.value);
-//			}
-//			content.text = text;
-//			appendDiv.appendChild(content,appendDiv.firstChild);
-//		}
-//		
-//		console.log(appendDiv);
-//		document.write(scriptText);
-		
-//		
-//		console.log(appendDiv.children[0]);
-		
-		
-		
-//		appendDom.append(appendDiv);
-		
-//		console.log(appendDom.parentElement);
-//		console.log(document.body);
-		
-//		 var objecj = (JSON.parse(event.data));
-		
-
-		  var objecj = (JSON.parse(event.data));
-		  objecj.adBackup['htmlContent'] = scriptText;
-		  window.parent.parent.postMessage(objecj, '*')
-		
-		
-	}catch(err){
-		console.log(err);
-	}
-	
-	
-//	
-//	document.write(appendDiv);
-	//document.write(appendDom.parentElement);
-	
-	
-	//    console.log(scriptText.trim());
-   /*
-	var  scriptText = document.getElementById("alex").innerHTML;
-	scriptText = scriptText.replace('<!--', '');
-	scriptText = scriptText.replace('-->', '');
-	console.log(scriptText.trim());
-	document.write(scriptText.trim());
-    var objecj = (JSON.parse(event.data));
-    document.write(scriptText);
-//    document.write('SSSS');
-    
-    */
-  //  window.parent.parent.postMessage(objecj, '*')
-    
-   
-    
-//	var elements = script.getElementsByTagName("*");
-//	for (var j = 0; j < elements.length; j++) {
-//		var tagName = elements[j].tagName;
-//		var attributes = elements[j].attributes;
-//		var text = elements[j].innerHTML;
-//		var content = document.createElement(tagName);
-//		
-//		for (var k = 0; k < attributes.length; k++) {
-//			var attrib = attributes[k];
-//			var name = attrib.name;
-//			var name = attrib.value;
-//			content.setAttribute(attrib.name, attrib.value);
-//		}
-//		content.text = text;
-//		appendDiv.appendChild(content,appendDiv.firstChild);
-//		
-////		console.log(appendDiv);
-////		document.write(appendDiv.innerHTML);
-////		appendDom.appendChildren(appendDiv);
-//	}
-//	
-//	console.log(appendDiv);
-//	appendDom.appendChild(appendDiv);
-//	
-////	document.write(appendDiv.innerHTML);
-////	appendDom.appendChildren(appendDiv);
-//	
-////	if(iframeObj.nextElementSibling == null){
-//	//	appendDom.appendChild(appendDiv.innerHTML,appendDom.parentElement);
-//		console.log(appendDom);
-		
-		
-//		document.write(scriptText.trim());
-//	}else{
-//		appendDom.insertBefore(appendDiv,iframeObj.nextElementSibling);	
-//	}
-//	console.log(document);
-//	console.log(appendDom.parentElement);
-////	appendDom.parentElement.write(scriptText);
-//	appendDom.parentElement.write(appendDiv.innerHTML);
-//	console.log(appendDom.parentElement);
-//    document.write(script);
-	
     try {
-//        var objecj = (JSON.parse(event.data));
-//        if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
-//            var adbackupTypeObj = document.getElementById("adbackup_type");
-//            var objecj = (JSON.parse(event.data));
-//            if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
-//                objecj.adBackup['htmlContent'] = null;
-//                window.parent.parent.postMessage(objecj, '*')
-//            } else {
-//                var httpType = objecj.adBackup['httpType'];
-//                var scriptText = adbackupTypeObj.innerHTML;
-//                if (scriptText == '' || scriptText == undefined) {
-//                    objecj.adBackup['htmlContent'] = 'blank';
-//                    window.parent.parent.postMessage(objecj, '*')
-//                } else {
-//                    scriptText = scriptText.replace('<!--', '');
-//                    scriptText = scriptText.replace('-->', '');
-//                    var url = "";
-//                    if (httpType == true) {
-//                        url = 'https://kwstg1.pchome.com.tw/adbackup.html?' + scriptText
-//                    } else {
-//                        url = 'http://kwstg1.pchome.com.tw/adbackup.html?' + scriptText
-//                    }
-//                    
-//                    console.log(url);
-//                    
-//                    var xmlHttp = new XMLHttpRequest();
-//                    xmlHttp.open("GET", url, false);
-//                    xmlHttp.send(null);
-//                    var result = '';
-//                    result = xmlHttp.responseText;
-//                    console.log(result);
-//                    
-//                    objecj.adBackup['htmlContent'] = result;
-//                    //window.parent.parent.postMessage(objecj, '*')
-//                }
-//            }
-//        }
+        var objecj = (JSON.parse(event.data));
+        if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
+        	var adbackupTypeObj = document.getElementById("adbackup_type");
+            var objecj = (JSON.parse(event.data));
+            if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
+                objecj.adBackup['htmlContent'] = null;
+                window.parent.parent.postMessage(objecj, '*')
+            } else {
+                var scriptText = adbackupTypeObj.innerHTML;
+                if (scriptText == '') {
+                    objecj.adBackup['htmlContent'] = 'blank';
+                    window.parent.parent.postMessage(objecj, '*')
+                }
+            }
+        }
     } catch (err) {}
 });

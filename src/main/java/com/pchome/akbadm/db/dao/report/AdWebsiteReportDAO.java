@@ -10,7 +10,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.vo.report.PfpAdWebsiteReportVO;
@@ -29,7 +29,7 @@ public class AdWebsiteReportDAO extends BaseDAO<PfpAdWebsiteReportVO, String> im
 				new HibernateCallback<List<PfpAdWebsiteReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");
@@ -151,7 +151,7 @@ public class AdWebsiteReportDAO extends BaseDAO<PfpAdWebsiteReportVO, String> im
 				new HibernateCallback<List<PfpAdWebsiteReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");
@@ -270,7 +270,7 @@ public class AdWebsiteReportDAO extends BaseDAO<PfpAdWebsiteReportVO, String> im
 				new HibernateCallback<List<PfpAdWebsiteReportVO>>() {
 					@Override
                     @SuppressWarnings("unchecked")
-					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<PfpAdWebsiteReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 				        hql.append("select ");

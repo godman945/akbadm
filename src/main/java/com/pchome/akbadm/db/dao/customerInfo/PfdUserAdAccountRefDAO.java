@@ -32,7 +32,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
     	list.add(startDate);
     	list.add(endDate);
     	
-    	return super.getHibernateTemplate().find(hql.toString(), list.toArray());
+    	return (List<PfdUserAdAccountRef>) super.getHibernateTemplate().find(hql.toString(), list.toArray());
     }
 	
 	public List<PfdUserAdAccountRef> findPfdUserAdAccountRef(String pfdCustomerInfoId) {
@@ -57,7 +57,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
     		sqlParams.put("status", status);
     	}
     	//log.info("hql = " + hql.toString());
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
         	//System.out.println(paramName + " => " + sqlParams.get(paramName));
 			if(paramName.equals("status")) {
@@ -78,7 +78,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
 		hql.append(" from PfdUserAdAccountRef ");
 		hql.append(" where pfpCustomerInfo.customerInfoId = '" + pfpCustomerInfoId + "'");
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfdUserAdAccountRef>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	public Integer deletePfdUserAdAccountRef(String pfpCustomerInfoId){
@@ -99,7 +99,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
     	hql.append(" from PfdUserAdAccountRef ");
     	
     	
-    	return super.getHibernateTemplate().find(hql.toString());
+    	return (List<PfdUserAdAccountRef>) super.getHibernateTemplate().find(hql.toString());
 	}
 	
 	public HashMap<String, PfdUserAdAccountRef> getPfdUserAdAccountRefBySeqList(List<String> customerInfoIdList) {
@@ -112,7 +112,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
 			if(paramName.equals("customerInfoId")) {
 				q.setParameterList("customerInfoId", customerInfoIdList);
@@ -145,7 +145,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
     	
     	
     	//log.info("hql = " + hql.toString());
-    	Query query = this.getSession().createQuery(hql.toString());
+    	Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(hql.toString());
         for (String paramName:sqlParams.keySet()) {
 		  	query.setParameter(paramName, sqlParams.get(paramName));
         }
@@ -173,7 +173,7 @@ public class PfdUserAdAccountRefDAO extends BaseDAO<PfdUserAdAccountRef, String>
 		}
 
 		// 將條件資料設定給 Query，準備 query
-		Query q = this.getSession().createQuery(sql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createQuery(sql.toString());
         for (String paramName:sqlParams.keySet()) {
         	if(paramName.equals("customerInfoId")) {
 				q.setParameterList("customerInfoId", customerInfoIdList);

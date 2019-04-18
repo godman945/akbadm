@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 import org.apache.commons.lang.StringUtils;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
@@ -41,14 +41,14 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 		}
 		log.info("getPfpAdGifts.SQL = " + sql);
 		
-		return super.getHibernateTemplate().find(sql.toString());
+		return (List<PfpAdGift>) super.getHibernateTemplate().find(sql.toString());
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Object> getPfpAdGifts(final String dateType, final String startDate, final String endDate, final String adGiftName, final String adGiftSno, final String customerInfoId, final String orderId, final String transDetail, final String testSno, final String adGiftStatus, final int page, final int pageSize) throws Exception{
 		List<Object> result = (List<Object> ) getHibernateTemplate().execute(
                 new HibernateCallback<List<Object> >() {
-					public List<Object>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<Object>  doInHibernate(Session session) throws HibernateException {
 						String sql = adGiftSQL(dateType, startDate, endDate, adGiftName, adGiftSno, customerInfoId, orderId, transDetail, testSno, adGiftStatus);
 						//System.out.println(hql);
 						
@@ -134,7 +134,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 	public List<AdmFreeRecord> getPfpAdGiftSubs(final String customerInfoId, final String startDate, final String endDate, final String actionId) throws Exception{
 		List<AdmFreeRecord> result = (List<AdmFreeRecord> ) getHibernateTemplate().execute(
                 new HibernateCallback<List<AdmFreeRecord> >() {
-					public List<AdmFreeRecord>  doInHibernate(Session session) throws HibernateException, SQLException {
+					public List<AdmFreeRecord>  doInHibernate(Session session) throws HibernateException {
 						String sql = adGiftSubSQL(customerInfoId, startDate, endDate, actionId);
 						System.out.println(sql);
 
@@ -188,7 +188,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 			String hql = "from PfpAdGift where adGiftSno = ?";
 			//log.info("chkAdGroupNameByAdActionSeq.hql = " + hql);
 	
-			List<PfpAdGift> list = super.getHibernateTemplate().find(hql, adGiftSno);
+			List<PfpAdGift> list = (List<PfpAdGift>) super.getHibernateTemplate().find(hql, adGiftSno);
 
 			if (list != null && list.size() > 0) {
 				for(PfpAdGift pfpAdGift:list){
@@ -211,7 +211,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 	@SuppressWarnings("unchecked")
 	public PfpAdGift getPfpAdGiftBySno(String adGiftSno) throws Exception {
 		Object[] obj = new Object[]{adGiftSno};
-		List<PfpAdGift> list = super.getHibernateTemplate().find("from PfpAdGift where adGiftSno = ?", obj);
+		List<PfpAdGift> list = (List<PfpAdGift>) super.getHibernateTemplate().find("from PfpAdGift where adGiftSno = ?", obj);
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -222,7 +222,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 	@SuppressWarnings("unchecked")
 	public PfpAdGift getPfpAdGiftByOrderId(String orderId) throws Exception {
 		Object[] obj = new Object[]{orderId};
-		List<PfpAdGift> list = super.getHibernateTemplate().find("from PfpAdGift where orderId = ?", obj);
+		List<PfpAdGift> list = (List<PfpAdGift>) super.getHibernateTemplate().find("from PfpAdGift where orderId = ?", obj);
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -233,7 +233,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 	@SuppressWarnings("unchecked")
 	public PfpAdGift getPfpAdGiftByCustomer(String customerInfoId) throws Exception {
 		Object[] obj = new Object[]{customerInfoId};
-		List<PfpAdGift> list = super.getHibernateTemplate().find("from PfpAdGift where adGiftStatus <> 4 and customerInfoId = ?", obj);
+		List<PfpAdGift> list = (List<PfpAdGift>) super.getHibernateTemplate().find("from PfpAdGift where adGiftStatus <> 4 and customerInfoId = ?", obj);
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -244,7 +244,7 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 	@SuppressWarnings("unchecked")
 	public PfpAdGift getPfpAdGiftOpenByCustomer(String customerInfoId) throws Exception {
 		Object[] obj = new Object[]{customerInfoId};
-		List<PfpAdGift> list = super.getHibernateTemplate().find("from PfpAdGift where adGiftStatus = 4 and customerInfoId = ?", obj);
+		List<PfpAdGift> list = (List<PfpAdGift>) super.getHibernateTemplate().find("from PfpAdGift where adGiftStatus = 4 and customerInfoId = ?", obj);
 		if (list!=null && list.size()>0) {
 			return list.get(0);
 		} else {
@@ -259,14 +259,14 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 		hql.append(" where adGiftStatus not in (8,9,10)");
 		hql.append(" and adGiftEndDate >= CURDATE()");		// 走期的結束日期要大於今天
 		
-		return super.getHibernateTemplate().find(hql.toString());
+		return (List<PfpAdGift>) super.getHibernateTemplate().find(hql.toString());
 	}
 
 	public void updateTransDetail(Integer adGiftId, char transDetail) throws Exception {
 		final StringBuffer sql = new StringBuffer()
 		.append("UPDATE pfp_ad_gift set trans_detail = '" + transDetail + "' where ad_gift_id = '" + adGiftId + "'");
 
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createSQLQuery(sql.toString()).executeUpdate();
         session.flush();
 	}
@@ -294,13 +294,12 @@ public class PfpAdGiftDAO extends BaseDAO<PfpAdGift,String> implements IPfpAdGif
 		.append("UPDATE pfp_ad_gift set ad_gift_status = '" + adGiftStatus + "' where ad_gift_sno = '" + adGroupSno + "'");
 		//log.info("updatePfpAdGiftStatus.sql = " + sql);
 
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createSQLQuery(sql.toString()).executeUpdate();
         session.flush();
 	}
 	
 	public void saveOrUpdateWithCommit(PfpAdGift pfpAdGift) throws Exception{
-		super.getSession().saveOrUpdate(pfpAdGift);
-		super.getSession().beginTransaction().commit();
+		this.getHibernateTemplate().getSessionFactory().getCurrentSession().saveOrUpdate(pfpAdGift);
 	}
 }

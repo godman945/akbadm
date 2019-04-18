@@ -19,4 +19,8 @@ public class PfdAdGroupReportService extends BaseService<PfdAdGroupReport, Integ
 	public void insertReportData(List<PfdAdGroupReport> dataList) throws Exception {
 		((PfdAdGroupReportDAO) dao).insertReportData(dataList);
 	}
+	
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		return ((PfdAdGroupReportDAO) dao).updateConvertCountData(convertDate,convertRangeDate);
+	}
 }

@@ -35,7 +35,7 @@ public class PfpIllegalKeywordDAO extends BaseDAO<PfpIllegalKeyword,String> impl
 		String hql = sb.toString();
 		log.info(">>> hql = " + hql);
 
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Query query;
 		if (pageNo==-1) {
 			query = session.createQuery(hql.toString());
@@ -50,14 +50,14 @@ public class PfpIllegalKeywordDAO extends BaseDAO<PfpIllegalKeyword,String> impl
 
 	public void updateIllegalKeywordBySeq(String seq, String content) throws Exception {
 		String sql = "update PfpIllegalKeyword set content = '" + content + "', update_date = CURRENT_DATE() where seq = '" + seq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
 
 	public void deleteIllegalKeywordBySeq(String seq) throws Exception {
 		String sql = "delete from PfpIllegalKeyword where seq = '" + seq + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}

@@ -5,8 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.pchome.akbadm.db.pojo.PfbxBoard;
 import com.pchome.akbadm.db.pojo.PfdBoard;
@@ -17,7 +17,7 @@ import com.pchome.akbadm.db.service.pfd.board.IPfdBoardService;
 import com.pchome.rmi.mailbox.EnumCategory;
 
 public class BoardProviderImp implements IBoardProvider {
-    private Log log = LogFactory.getLog(getClass().getName());
+    private Logger log = LogManager.getRootLogger();
 
 	private IPfpBoardService pfpBoardService;
 	private IPfdBoardService pfdBoardService;

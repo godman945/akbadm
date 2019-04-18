@@ -9,7 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.springframework.orm.hibernate3.HibernateCallback;
+import org.springframework.orm.hibernate4.HibernateCallback;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfdAdTemplateReport;
@@ -24,7 +24,7 @@ public class PfdAdTemplateReportDAO extends BaseDAO<PfdAdTemplateReport, Integer
 		List<Object> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<Object>>() {
 					@Override
-                    public List<Object> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<Object> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer hql = new StringBuffer();
 
@@ -97,7 +97,7 @@ public class PfdAdTemplateReportDAO extends BaseDAO<PfdAdTemplateReport, Integer
 	@Override
     public void deleteReportDataByReportDate(String reportDate) throws Exception {
 		String sql = "delete from PfdAdTemplateReport where adPvclkDate = '" + reportDate + "'";
-        Session session = getSession();
+        Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
         session.createQuery(sql).executeUpdate();
         session.flush();
 	}
@@ -117,7 +117,7 @@ public class PfdAdTemplateReportDAO extends BaseDAO<PfdAdTemplateReport, Integer
 		List<AdTemplateReportVO> result = getHibernateTemplate().execute(
 				new HibernateCallback<List<AdTemplateReportVO>>() {
 					@Override
-                    public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException, SQLException {
+                    public List<AdTemplateReportVO> doInHibernate(Session session) throws HibernateException {
 
 						StringBuffer sb = new StringBuffer();
 						sb.append("select");
@@ -188,5 +188,42 @@ public class PfdAdTemplateReportDAO extends BaseDAO<PfdAdTemplateReport, Integer
 		);
 
 		return result;
+	}
+	
+	@Override
+	public int updateConvertCountData(String convertDate,String convertRangeDate) throws Exception {
+		StringBuffer sql = new StringBuffer();
+		
+		sql.append(" UPDATE pfd_ad_template_report r,  "); 
+		sql.append(" 	(  ");
+		sql.append("		SELECT  ");
+		sql.append(" 			pfd_customer_info_id,  ");
+		sql.append(" 			template_ad_seq,  ");
+		sql.append(" 			convert_belong_date,   ");
+		sql.append(" 			Sum(convert_count)convert_count,   ");
+		sql.append(" 			Sum(convert_price)convert_price, "); 
+		sql.append(" 			convert_trigger_type ");
+		sql.append(" 		FROM   pfp_code_convert_trans ");
+		sql.append(" 		WHERE  1 = 1 ");
+		sql.append(" 			AND convert_date >= :convertRangeDate  ");
+		sql.append(" 			AND convert_date <= :convertDate ");
+		sql.append(" 			AND convert_trigger_type = 'CK'  ");
+		sql.append(" 		GROUP  BY pfd_customer_info_id,	 ");
+		sql.append(" 			template_ad_seq, ");
+		sql.append(" 			convert_belong_date,  ");
+		sql.append(" 			convert_trigger_type, ");
+		sql.append(" 			convert_seq ");
+		sql.append(" 	)a ");
+		sql.append(" 	SET	r.convert_count = a.convert_count,  ");
+		sql.append(" 		r.convert_price_count = a.convert_price,  ");
+		sql.append(" 		r.update_date = Now() ");
+		sql.append(" 	WHERE  1 = 1   "); 
+		sql.append(" 		AND a.pfd_customer_info_id = r.pfd_customer_info_id   "); 
+		sql.append(" 		AND a.template_ad_seq = r.template_product_seq  "); 
+		sql.append(" 		AND a.convert_belong_date = r.ad_pvclk_date   "); 
+		Query query = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
+		query.setString("convertDate", convertDate);
+		query.setString("convertRangeDate", convertRangeDate);
+		return query.executeUpdate();
 	}
 }

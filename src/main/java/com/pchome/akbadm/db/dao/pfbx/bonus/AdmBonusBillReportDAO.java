@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Hibernate;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.transform.Transformers;
+import org.hibernate.type.StandardBasicTypes;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.AdmBonusBillReport;
@@ -80,16 +80,16 @@ public class AdmBonusBillReportDAO extends BaseDAO<AdmBonusBillReport, Integer> 
 
 		String strHQL = hql.toString();
 
-		Session session = this.getSession();
+		Session session = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
 
 		Query q = session.createSQLQuery(strHQL)
-				.addScalar("id", Hibernate.INTEGER)
-				.addScalar("reportdate", Hibernate.DATE)
-				.addScalar("adclkprice", Hibernate.FLOAT)
-				.addScalar("sysclkprice", Hibernate.FLOAT)
-				.addScalar("income", Hibernate.FLOAT)
-				.addScalar("expense", Hibernate.FLOAT)
-				.addScalar("total", Hibernate.FLOAT)
+				.addScalar("id", StandardBasicTypes.INTEGER)
+				.addScalar("reportdate", StandardBasicTypes.DATE)
+				.addScalar("adclkprice", StandardBasicTypes.FLOAT)
+				.addScalar("sysclkprice", StandardBasicTypes.FLOAT)
+				.addScalar("income", StandardBasicTypes.FLOAT)
+				.addScalar("expense", StandardBasicTypes.FLOAT)
+				.addScalar("total", StandardBasicTypes.FLOAT)
 				.setResultTransformer(Transformers.aliasToBean(PfbxInComeReportVo.class));
 		q.setDate("startdate", sdate);
 		q.setDate("enddate", edate);
@@ -121,7 +121,7 @@ public class AdmBonusBillReportDAO extends BaseDAO<AdmBonusBillReport, Integer> 
 		}
 		hql.append("order by reportDate desc ");
 
-		return super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		return (List<AdmBonusBillReport>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 	}
 
 	@Override
@@ -141,7 +141,7 @@ public class AdmBonusBillReportDAO extends BaseDAO<AdmBonusBillReport, Integer> 
 		}
 		hql.append("order by report_date desc ");
 
-		Query q = super.getSession().createSQLQuery(hql.toString());
+		Query q = this.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(hql.toString());
 		if (StringUtils.isNotBlank(sdate))
 		{
 			q.setString("sdate", sdate);

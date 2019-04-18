@@ -23,7 +23,7 @@ public class PfbxBonusTransDetailDAO extends BaseDAO<PfbxBonusTransDetail, Integ
 		pos.add(pfbId);
 		hql.append("order by id desc");
 
-		return super.getHibernateTemplate().find(hql.toString(), pos.toArray());
+		return (List<PfbxBonusTransDetail>) super.getHibernateTemplate().find(hql.toString(), pos.toArray());
 	}
 
 	public Integer deletePfbxBonusTransDetail(Date deleteDate) {
@@ -42,7 +42,7 @@ public class PfbxBonusTransDetailDAO extends BaseDAO<PfbxBonusTransDetail, Integ
 		hql.append(" where pfbId = ? ");
 		hql.append(" order by id desc");
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId); 
+		return (List<PfbxBonusTransDetail>) super.getHibernateTemplate().find(hql.toString(), pfbId); 
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class PfbxBonusTransDetailDAO extends BaseDAO<PfbxBonusTransDetail, Integ
 		hql.append(" and applyId is null ");
 		hql.append(" and transIn > 0 ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId); 
+		return (List<PfbxBonusTransDetail>) super.getHibernateTemplate().find(hql.toString(), pfbId); 
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class PfbxBonusTransDetailDAO extends BaseDAO<PfbxBonusTransDetail, Integ
 		hql.append(" and applyId is null ");
 		hql.append(" and transOut > 0 ");
 		
-		return super.getHibernateTemplate().find(hql.toString(), pfbId); 
+		return (List<PfbxBonusTransDetail>) super.getHibernateTemplate().find(hql.toString(), pfbId); 
 	}
 
 	/**
@@ -90,7 +90,7 @@ public class PfbxBonusTransDetailDAO extends BaseDAO<PfbxBonusTransDetail, Integ
 		hql += " AND end_date = '" + endDate + "'";
 		hql += " AND trans_item = '" + transItem + "'";
 		hql += " AND fail_apply_id = '" + failApplyId + "'";
-		Session session = getSession();
+		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(hql).executeUpdate();
 		session.flush();
 	}

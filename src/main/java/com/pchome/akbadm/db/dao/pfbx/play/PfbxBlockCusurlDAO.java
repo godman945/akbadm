@@ -31,7 +31,7 @@ public class PfbxBlockCusurlDAO extends BaseDAO<PfbxBlockCusurl,String> implemen
 			con.add("%" + searchurl + "%");
 		}
 		
-		list = this.getHibernateTemplate().find(sb.toString(), con.toArray());
+		list = (List<PfbxBlockCusurl>) this.getHibernateTemplate().find(sb.toString(), con.toArray());
 		
 		return list;
 	}
@@ -45,7 +45,7 @@ public class PfbxBlockCusurlDAO extends BaseDAO<PfbxBlockCusurl,String> implemen
 		
 		String sql1 = "select count(*) from pfbx_block_cusurl where o_id = '"+oid+"' and url = '"+url+"' ";
 		
-		Session sss = this.getSession();
+		Session sss = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		Number rs = (Number)sss.createSQLQuery(sql1).uniqueResult();
 		sss.flush();
 		
@@ -68,7 +68,7 @@ public class PfbxBlockCusurlDAO extends BaseDAO<PfbxBlockCusurl,String> implemen
 		sql2.append("values ");
 		sql2.append("( '"+blockInfo.get("cuid")+"' , '"+blockInfo.get("oid")+"' , '"+blockInfo.get("blockUrl")+"'  , '"+blockInfo.get("blockDesc")+"')");
 		
-		Session sss = this.getSession();
+		Session sss = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		sss.createSQLQuery(sql1.toString()).executeUpdate();
 		sss.createSQLQuery(sql2.toString()).executeUpdate();
 		sss.flush();
@@ -85,7 +85,7 @@ public class PfbxBlockCusurlDAO extends BaseDAO<PfbxBlockCusurl,String> implemen
 		sql.append("( '"+cuid+"' , '"+oid+"' , '"+url+"'  , '"+boardMesg+"')");
 		
 		int rs = 0;
-		Session sss = this.getSession();
+		Session sss = this.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		rs = sss.createSQLQuery(sql.toString()).executeUpdate();
 		sss.flush();
 		
