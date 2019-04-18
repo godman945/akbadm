@@ -6,13 +6,26 @@
 <title>Insert title here</title>
 <link href="favicon.ico?v=1.0" rel="shortcut icon">
 
-<!-- Google Tag Manager -->
+<!-- Google Tag Manager 
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PR7VQ9H');</script>
+-->
 <!-- End Google Tag Manager -->
+
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NL9DNPR');</script>
+<!-- End Google Tag Manager -->
+
+
 </head>
 <%
 String qv="";
@@ -27,31 +40,33 @@ qv1=new String( qv.getBytes("ISO-8859-1"),"UTF-8");
 
 
 <body>
-<!-- Google Tag Manager (noscript)  -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NL9DNPR"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+
+
+
+
+<!-- Google Tag Manager (noscript)  
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PR7VQ9H"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-
+-->
  
- <!-- -->
- <script type="text/javascript">
-  (function(i,s,o,g,ptag,a,m){
-	  i['pchome'] = ptag;
-	  i[ptag]=i[ptag]||function(){
-  	(i[ptag].q=i[ptag].q||[]).push(arguments)
-  },
-  i[ptag].l=1*new Date();
-  a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];
-  a.async=1;
-  a.src=g;
-  m.parentNode.insertBefore(a,m)
-  })(window,document,'script','html/js/ptag/pdtag.js','ptag');
-  ptag({"paid":"2222222222"});
-  ptag("event","convert",{"convert_id":"CAC_TEST2","convert_price":"40","pa_em_value":"WEFWE","user_link_url":"","user_link_blank":true});
-  ptag("event","convert",{"convert_id":"CAC_TEST3","convert_price":"40","pa_em_value":"WEFWE","user_link_url":"","user_link_blank":true});
-  ptag("event","convert",{"convert_id":"CAC_TEST4","convert_price":"900","pa_em_value":"WEFWE","user_link_url":""},'click');
-</script>
-  
+ <!-- pchome tag start 
+  <script type="text/javascript">
+	  (function(i,s,o,g,ptag,a,m){i['pchome'] = ptag;i[ptag]=i[ptag]
+	  ||function(){(i[ptag].q=i[ptag].q||[]).push(arguments)},i[ptag].l=1*new Date();
+	  a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})
+	  (window,document,'script','https://pacl.pchome.com.tw/js/pdtag.js','ptag');
+	  ptag({"paid":"1554864217116"});
+	  ptag("event","convert",{"convert_id":"CAC20190410000000002","convert_price":""});
+	  ptag("event","convert",{"convert_id":"CAC20190410000000003","convert_price":""},"click");
+  </script>
+  -->
+  <!-- pchome tag end -->
  
  
  
