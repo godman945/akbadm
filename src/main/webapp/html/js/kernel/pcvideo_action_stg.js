@@ -360,7 +360,7 @@
 		adlinkbtn2.style.display='block';
 		video.pause();
 	}
-
+ 
 	/*提供父階層呼叫傳遞參數*/
 	window.addEventListener("message", playController, false);
 	function playController(event){
