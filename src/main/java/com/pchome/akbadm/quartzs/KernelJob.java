@@ -243,18 +243,24 @@ public class KernelJob {
 
         // style(Map) -> style(Bean)
         List<PfbStyleInfo> pfbStyleInfoList = pfbStyleInfoService.selectValidPfbStyleInfo();
-        log.info("pfbStyleInfoList size:"+pfbStyleInfoList.size());
+        log.info("DEBUG>>>>>>>pfbStyleInfoList size:"+pfbStyleInfoList.size());
         
         for (PfbStyleInfo pfbStyleInfo: pfbStyleInfoList) {
-        	 log.info("pfbStyleInfo:"+pfbStyleInfo == null);
-        	 log.info("pfbStyleInfo:"+ pfbStyleInfo.getStyle());
-        	
+        	 log.info("DEBUG>>>>>>>pfbStyleInfo:"+pfbStyleInfo == null);
+        	 log.info("DEBUG>>>>>>>pfbStyleInfo.getStyle():"+ pfbStyleInfo.getStyle());
         	try {
                 styleBean = new StyleBean();
+                log.info("DEBUG>>>>>>>pfbStyleInfo.getStyleNo():"+pfbStyleInfo.getStyleNo());
                 styleBean.setStyleId(String.valueOf(pfbStyleInfo.getStyleNo()));
                 for (String tproId: pfbStyleInfo.getStyle().split(",")) {
-                    styleBean.getTproSet().add(tproId);
+                	log.info("DEBUG>>>>>>>tproId:"+tproId);
+                	styleBean.getTproSet().add(tproId);
                 }
+                
+                log.info("DEBUG>>>>>>>pfbStyleInfo.getPfbWebInfo().getUrl():"+pfbStyleInfo.getPfbWebInfo().getUrl());
+                log.info("DEBUG>>>>>>>pfbStyleInfo.getPfbWebInfo().getFlag():"+pfbStyleInfo.getPfbWebInfo().getFlag());
+                
+                
                 styleBean.setUrl(pfbStyleInfo.getPfbWebInfo().getUrl());
                 styleBean.setFlag(pfbStyleInfo.getPfbWebInfo().getFlag());
 
