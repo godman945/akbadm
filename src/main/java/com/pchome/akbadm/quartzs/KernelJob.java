@@ -243,8 +243,13 @@ public class KernelJob {
 
         // style(Map) -> style(Bean)
         List<PfbStyleInfo> pfbStyleInfoList = pfbStyleInfoService.selectValidPfbStyleInfo();
+        log.info("pfbStyleInfoList size:"+pfbStyleInfoList.size());
+        
         for (PfbStyleInfo pfbStyleInfo: pfbStyleInfoList) {
-            try {
+        	 log.info("pfbStyleInfo:"+pfbStyleInfo == null);
+        	 log.info("pfbStyleInfo:"+ pfbStyleInfo.getStyle());
+        	
+        	try {
                 styleBean = new StyleBean();
                 styleBean.setStyleId(String.valueOf(pfbStyleInfo.getStyleNo()));
                 for (String tproId: pfbStyleInfo.getStyle().split(",")) {
