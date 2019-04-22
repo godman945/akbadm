@@ -1,3 +1,4 @@
+
 window.onload=function(){
 	var i = 0;
 	var coor = [0,0,0,0,0];
