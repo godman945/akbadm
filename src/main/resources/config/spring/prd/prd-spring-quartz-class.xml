@@ -51,6 +51,7 @@
     </bean>
 
     <bean id="KernelJob" class="com.pchome.akbadm.quartzs.KernelJob">
+    	<!--  
         <property name="pfbStyleInfoService" ref="PfbStyleInfoService2" />
         <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService2" />
         <property name="pfpAdPvclkService" ref="PfpAdPvclkService2" />
@@ -74,6 +75,34 @@
         <property name="pfbxAllowUrlService" ref="PfbxAllowUrlService2" />
         <property name="pfpCodeAdactionMergeService" ref="PfpCodeAdactionMergeService2" />
         <property name="pfpCodeTrackingService" ref="PfpCodeTrackingService2" />
+       -->
+        <property name="pfbStyleInfoService" ref="PfbStyleInfoService" />
+        <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
+        <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
+        <property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService" />
+        <property name="pfpAdSyspriceService" ref="PfpAdSyspriceService" />
+        <property name="pfpKeywordSyspriceService" ref="PfpKeywordSyspriceService" />
+        <property name="pfpAdExcludeKeywordService" ref="PfpAdExcludeKeywordService" />
+        <property name="pfdUserAdAccountRefService" ref="PfdUserAdAccountRefService" />
+        <property name="pfpAdCategoryMappingService" ref="PfpAdCategoryMappingService" />
+        <property name="pfpAdSpecificWebsiteService" ref="PfpAdSpecificWebsiteService" />
+        <property name="pfbxAreaService" ref="PfbxAreaService" />
+        <property name="pfbxPositionService" ref="PfbxPositionService" />
+        <property name="pfbxSizeService" ref="PfbxSizeService" />
+        <property name="pfbxUrlService" ref="PfbxUrlService" />
+        <property name="pfbxUserGroupService" ref="PfbxUserGroupService" />
+        <property name="pfbxUserOptionService" ref="PfbxUserOptionService" />
+        <property name="pfbxUserSampleService" ref="PfbxUserSampleService" />
+        <property name="admShowRuleService" ref="AdmShowRuleService" />
+        <property name="admArwValueService" ref="AdmArwValueService" />
+        <property name="admPfbxBlockUrlService" ref="AdmPfbxBlockUrlService" />
+        <property name="pfbxAllowUrlService" ref="PfbxAllowUrlService" />
+        <property name="pfpCodeAdactionMergeService" ref="PfpCodeAdactionMergeService2" />
+        <property name="pfpCodeTrackingService" ref="PfpCodeTrackingService2" />
+       
+       
+       
+       
         <property name="admAddata" value="${adm.addata}" />
         <property name="kernelAddata" value="${kernel.addata}" />
         <property name="multicorePath" value="${multicore.path}" />
