@@ -63,7 +63,7 @@ public class PfbStyleInfo implements java.io.Serializable {
 		this.styleNo = styleNo;
 	}
 
-//	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "wid", nullable = false)
 	public PfbWebInfo getPfbWebInfo() {
 		return this.pfbWebInfo;
