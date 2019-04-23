@@ -450,7 +450,7 @@
         </property>
     </bean>
 
-    <!-- spring transcation setting -->
+    <!-- spring transcation setting kddbm -->
     <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
@@ -458,21 +458,9 @@
     <!-- annotationtransation  method add @Transactional -->
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
     
-     <bean id="transactionManager2" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory_report" />
-    </bean>
-    
-    <!-- annotationtransation  method add @Transactional -->
-    <tx:annotation-driven transaction-manager="transactionManager2" proxy-target-class="true"/>
-   
     <aop:config expose-proxy="true">
         <aop:pointcut id="managerMethod" expression="execution(* com.pchome.akbadm.db.service..*.*(..)) or execution(* com.pchome.akbadm.db.dao..*.*(..))" />
         <aop:advisor pointcut-ref="managerMethod" advice-ref="baseServiceAdvice2" />
-    </aop:config>
-    
-    <aop:config expose-proxy="true">
-        <aop:pointcut id="managerMethod" expression="execution(* com.pchome.akbadm.db.service..*.*(..)) or execution(* com.pchome.akbadm.db.dao..*.*(..))" />
-        <aop:advisor pointcut-ref="managerMethod" advice-ref="baseServiceAdvice" />
     </aop:config>
     
     <tx:advice id="baseServiceAdvice" transaction-manager="transactionManager">
@@ -482,6 +470,19 @@
 	      <tx:method name="find*" read-only="true"/>
 	   </tx:attributes>
 	</tx:advice>
+    
+    
+    <!-- spring transcation setting kddbs -->
+    <bean id="transactionManager2" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory_report" ref="sessionFactory_report" />
+    </bean>
+    <!-- annotationtransation  method add @Transactional -->
+    <tx:annotation-driven transaction-manager="transactionManager2" proxy-target-class="true"/>
+   
+    <aop:config expose-proxy="true">
+        <aop:pointcut id="managerMethod2" expression="execution(* com.pchome.akbadm.db.service..*.*(..)) or execution(* com.pchome.akbadm.db.dao..*.*(..))" />
+        <aop:advisor pointcut-ref="managerMethod2" advice-ref="baseServiceAdvice2" />
+    </aop:config>
     
     <tx:advice id="baseServiceAdvice2" transaction-manager="transactionManager2">
 	   <tx:attributes>
