@@ -79,6 +79,8 @@ if (ptype == "S") {
     seway = ""
 }
 
+console.log(document.getElementsByTagName("script"));
+
 
 try{
 	console.log(adbackupTEST);	
