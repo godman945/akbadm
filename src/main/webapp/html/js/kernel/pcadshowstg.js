@@ -1,3 +1,6 @@
+
+
+
 var res = document.URL;
 var docurl = encodeURIComponent(res);
 var keywordValue = "";
@@ -75,6 +78,11 @@ if (ptype == "S") {
     pageValue = "";
     seway = ""
 }
+
+
+
+console.log(adbackupTEST);
+
 var fig = "";
 /*stg adurl與prd有差異*/
 var adurl = "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId;
@@ -199,15 +207,9 @@ window.addEventListener("message", getMessage0, false);
 
 function getMessage0(event) {
 	try {
-
-		
 		if (event.data.adBackup != undefined &&  event.data.adBackup.iframeIndex != null && event.data.adBackup.ALEX =='pcadshow') {
 			var htmlContent = event.data.adBackup.htmlContent;
 			if(htmlContent != null){
-				console.log(htmlContent);
-				
-				
-				
 				var pcadshowList = document.getElementsByClassName("akb_iframe");
 				/*處理收合*/
 				if(htmlContent == 'blank'){
@@ -218,7 +220,6 @@ function getMessage0(event) {
 				/*處理補板*/
 				
 				if (htmlContent != 'blank' && htmlContent != undefined && htmlContent.indexOf('document.write') < 0) {
-					console.log(htmlContent);
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
 					iframeObj.height = 0;
 					iframeObj.width = 0;
@@ -227,7 +228,6 @@ function getMessage0(event) {
 						var script = document.createElement('div');
 						var appendDiv = document.createElement('div');
 						appendDiv.className = 'ad_backup_pchome';
-						
 						script.innerHTML = htmlContent;
 						var elements = script.getElementsByTagName("*");
 						for (var j = 0; j < elements.length; j++) {

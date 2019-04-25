@@ -7,18 +7,9 @@ window.onload = function() {
 	
 	if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
 		var test = document.getElementById('pcadscript').previousElementSibling;
-		console.log(test);
-		
-		console.log(test.innerHTML);
-		
-		test.innerHTML = test.innerHTML + "alex=true"
-		
-		console.log(test.innerHTML);
-		
+		test.innerHTML = test.innerHTML + "adbackupTEST=true"
 		var pachomeAdJsSrc = document.getElementById('pcadscript').src;
 		document.getElementById('pcadscript').src = pachomeAdJsSrc+"?adbackup=true"
-		console.log(document.getElementById('pcadscript'));
-		console.log(document.getElementById('pcadscript').src);
 	}
 	
 	
