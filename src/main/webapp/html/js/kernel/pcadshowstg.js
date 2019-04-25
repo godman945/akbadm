@@ -84,14 +84,14 @@ try{
 		console.log(document.getElementsByTagName("script")[i].src);
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
 			
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
-			
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
+//			
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
 			
 		}
 	}
