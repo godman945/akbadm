@@ -80,21 +80,20 @@ if (ptype == "S") {
 
 
 try{
-	console.log(alex);
-	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
-		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
-			
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
+//	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+//		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
 //			
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
-			
-		}
-	}
+////			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
+////			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
+////			
+////			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
+////			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
+////			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
+//			
+//		}
+//	}
 	console.log(adbackupTEST);	
 }catch(err){
 	console.log(err);	
