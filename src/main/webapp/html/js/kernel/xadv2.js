@@ -1,7 +1,14 @@
 
 //5
 window.onload = function() {
-	console.log(document.getElementsByTagName("adbackup"));
+	console.log(document.getElementsByTagName("adbackup")[0]);
+	if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
+		console.log(document.getElementById('pcadscript'));
+		console.log(document.getElementById('pcadscript').src);
+	}
+	
+	
+	
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
         var cssText = a.innerText;
