@@ -2,6 +2,7 @@
 //5
 window.onload = function() {
 	
+	console.log(document.getElementById('pcadscript').previousElementSibling);
 	console.log(document.getElementById('pcadscript').previousSibling);
 	
 	
