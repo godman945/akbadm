@@ -124,14 +124,15 @@ window.addEventListener('message', function(event) {
         var objecj = (JSON.parse(event.data));
         if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
         	var adbackupTypeObj = document.getElementById("adbackup_type");
+        	
+        	console.log(adbackupTypeObj);
+        	
             var objecj = (JSON.parse(event.data));
             if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
                 objecj.adBackup['htmlContent'] = null;
                 window.parent.parent.postMessage(objecj, '*');
-                cobsole.log(objecj);
             } else {
                 var scriptText = adbackupTypeObj.innerHTML;
-                cobsole.log(scriptText);
                 if (scriptText == '') {
                     objecj.adBackup['htmlContent'] = 'blank';
                     window.parent.parent.postMessage(objecj, '*')
