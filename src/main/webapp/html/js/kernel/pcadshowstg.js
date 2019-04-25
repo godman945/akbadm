@@ -83,7 +83,7 @@ if (ptype == "S") {
 try{
 	console.log(adbackupTEST);	
 }catch(err){
-	
+	console.log(err);	
 }
 
 
