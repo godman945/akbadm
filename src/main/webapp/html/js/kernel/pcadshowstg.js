@@ -240,6 +240,9 @@ function getMessage0(event) {
 				
 				if (htmlContent != 'blank' && htmlContent != undefined && htmlContent.indexOf('document.write') < 0) {
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
+					
+					console.log(iframeObj);
+					
 					iframeObj.height = 0;
 					iframeObj.width = 0;
 					var appendDom = iframeObj.parentElement;
