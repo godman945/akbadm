@@ -77,7 +77,6 @@ if (ptype == "S") {
 }
 
 
-console.log("DDDDD");
 /*stg adurl與prd有差異*/
 var adurl = "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId;
 
@@ -202,7 +201,7 @@ window.addEventListener("message", getMessage0, false);
 function getMessage0(event) {
 	try {
 		console.log("---------");
-		
+		console.log(event.data);
 		if (event.data.adBackup != undefined &&  event.data.adBackup.iframeIndex != null && event.data.adBackup.ALEX =='pcadshow') {
 			var htmlContent = event.data.adBackup.htmlContent;
 			if(htmlContent != null){
