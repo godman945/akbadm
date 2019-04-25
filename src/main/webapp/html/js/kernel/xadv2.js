@@ -1,6 +1,5 @@
 //5
 window.onload = function() {
-	console.log("AAAA");
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
         var cssText = a.innerText;

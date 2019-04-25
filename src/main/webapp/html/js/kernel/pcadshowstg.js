@@ -201,7 +201,7 @@ window.addEventListener("message", getMessage0, false);
 
 function getMessage0(event) {
 	try {
-
+		console.log("---------");
 		
 		if (event.data.adBackup != undefined &&  event.data.adBackup.iframeIndex != null && event.data.adBackup.ALEX =='pcadshow') {
 			var htmlContent = event.data.adBackup.htmlContent;
