@@ -202,6 +202,8 @@ function getMessage0(event) {
 
 		
 		if (event.data.adBackup != undefined &&  event.data.adBackup.iframeIndex != null && event.data.adBackup.ALEX =='pcadshow') {
+			console.log(event.data);
+			
 			var htmlContent = event.data.adBackup.htmlContent;
 			if(htmlContent != null){
 				var pcadshowList = document.getElementsByClassName("akb_iframe");
