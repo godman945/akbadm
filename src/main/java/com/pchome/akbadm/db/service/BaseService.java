@@ -52,7 +52,9 @@ public abstract class BaseService<T, PK extends Serializable> implements IBaseSe
 
     @Override
     public void saveOrUpdateAll(Collection<T> entities) {
-        dao.saveOrUpdateAll(entities);
+    	 for (Object entity : entities) {
+ 		 	dao.saveOrUpdate((T)entity);
+    	 }
     }
 
     @Override
