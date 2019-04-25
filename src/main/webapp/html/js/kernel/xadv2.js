@@ -127,7 +127,8 @@ window.addEventListener('message', function(event) {
             var objecj = (JSON.parse(event.data));
             if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
                 objecj.adBackup['htmlContent'] = null;
-                window.parent.parent.postMessage(objecj, '*')
+                window.parent.parent.postMessage(objecj, '*');
+                cobsole.log(objecj);
             } else {
                 var scriptText = adbackupTypeObj.innerHTML;
                 cobsole.log(scriptText);
