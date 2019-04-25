@@ -121,6 +121,9 @@ function setCookie(name, value) {
 window.addEventListener('message', function(event) {
     try {
         var objecj = (JSON.parse(event.data));
+        console.log(objecj);
+        
+        
         if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
         	var adbackupTypeObj = document.getElementById("adbackup_type");
             var objecj = (JSON.parse(event.data));
