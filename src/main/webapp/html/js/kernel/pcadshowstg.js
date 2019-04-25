@@ -6,6 +6,7 @@ var pid = "";
 var ptype = "";
 var seway = "";
 var padssl = "";
+var adbackupTEST = "";
 if (typeof pad_pchad != 'object') {
     pad_pchad = []
 }
