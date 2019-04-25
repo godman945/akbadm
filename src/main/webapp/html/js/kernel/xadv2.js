@@ -130,6 +130,7 @@ window.addEventListener('message', function(event) {
                 window.parent.parent.postMessage(objecj, '*')
             } else {
                 var scriptText = adbackupTypeObj.innerHTML;
+                cobsole.log(scriptText);
                 if (scriptText == '') {
                     objecj.adBackup['htmlContent'] = 'blank';
                     window.parent.parent.postMessage(objecj, '*')
