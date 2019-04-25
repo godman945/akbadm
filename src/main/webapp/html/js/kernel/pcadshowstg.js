@@ -83,8 +83,9 @@ if (ptype == "S") {
 
 
 try{
-	console.log(document.getElementsByTagName("script")[0]);
-	console.log(document.getElementsByTagName("script")[2]);
+	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+		console.log(document.getElementsByTagName("script")[i]);
+	}
 	console.log(adbackupTEST);	
 }catch(err){
 	console.log(err);	
