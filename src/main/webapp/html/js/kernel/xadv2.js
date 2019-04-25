@@ -1,7 +1,7 @@
 
 //5
 window.onload = function() {
-	console.log(document.getElementById("adbackup_type"));
+	console.log(document.getElementsByTagName("adbackup"));
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
         var cssText = a.innerText;
