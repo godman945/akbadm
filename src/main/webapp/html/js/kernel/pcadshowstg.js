@@ -79,10 +79,12 @@ if (ptype == "S") {
     seway = ""
 }
 
-console.log(document.getElementsByTagName("script"));
+
 
 
 try{
+	console.log(document.getElementsByTagName("script")[0]);
+	console.log(document.getElementsByTagName("script")[3]);
 	console.log(adbackupTEST);	
 }catch(err){
 	console.log(err);	
