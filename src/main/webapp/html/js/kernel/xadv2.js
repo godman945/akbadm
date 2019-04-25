@@ -1,8 +1,8 @@
 
 //5
 window.onload = function() {
-	console.log(document.getElementsByTagName("adbackup")[0]);
-	console.log(document.getElementsByTagName("adbackup")[0].previousSibling);
+	
+	console.log(document.getElementById('pcadscript').previousSibling);
 	
 	
 	if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
