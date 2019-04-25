@@ -1,8 +1,6 @@
 
 //5
-
-window.onload = function() {
-	if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
+if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
 		var test = document.getElementById('pcadscript').previousElementSibling;
 		test.innerHTML = test.innerHTML + 'adbackupTEST="true";'
 		test.setAttribute("alex99", "1111");
@@ -11,6 +9,10 @@ window.onload = function() {
 		adbackupTEST = "true";
 		console.log(adbackupTEST);
 	}
+
+
+window.onload = function() {
+	
 	
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
