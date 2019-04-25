@@ -1,6 +1,9 @@
 
 //5
 window.onload = function() {
+	console.log(document.getElementById("adbackup_type"));
+	
+	
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
         var cssText = a.innerText;
@@ -124,9 +127,6 @@ window.addEventListener('message', function(event) {
         var objecj = (JSON.parse(event.data));
         if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
         	var adbackupTypeObj = document.getElementById("adbackup_type");
-        	
-        	console.log(adbackupTypeObj);
-        	
             var objecj = (JSON.parse(event.data));
             if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
                 objecj.adBackup['htmlContent'] = null;
