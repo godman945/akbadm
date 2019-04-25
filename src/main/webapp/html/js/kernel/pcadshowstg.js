@@ -210,6 +210,9 @@ function getMessage0(event) {
 				/*處理收合*/
 				if(htmlContent == 'blank'){
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
+					
+					console.log(iframeObj);
+					
 					iframeObj.height = 0;
 					iframeObj.width = 0;
 				}
