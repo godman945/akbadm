@@ -1,5 +1,7 @@
 
 //5
+
+var alex ="SSSS";
 window.onload = function() {
 	if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
 		var test = document.getElementById('pcadscript').previousElementSibling;
