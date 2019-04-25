@@ -122,7 +122,7 @@ window.addEventListener('message', function(event) {
     try {
         var objecj = (JSON.parse(event.data));
         if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
-        	console.log(objecj);
+        	console.log(objecj.adBackup);
         	var adbackupTypeObj = document.getElementById("adbackup_type");
             var objecj = (JSON.parse(event.data));
             if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
