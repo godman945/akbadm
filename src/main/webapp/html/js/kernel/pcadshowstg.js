@@ -1,6 +1,3 @@
-
-
-
 var res = document.URL;
 var docurl = encodeURIComponent(res);
 var keywordValue = "";
@@ -85,11 +82,13 @@ if (ptype == "S") {
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		console.log(document.getElementsByTagName("script")[i].src);
-		
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerText);
+			
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST');
+			
 		}
 	}
 	console.log(adbackupTEST);	
