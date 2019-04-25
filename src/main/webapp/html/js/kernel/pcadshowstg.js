@@ -80,8 +80,12 @@ if (ptype == "S") {
 }
 
 
+try{
+	console.log(adbackupTEST);	
+}catch(err){
+	
+}
 
-console.log(adbackupTEST);
 
 var fig = "";
 /*stg adurl與prd有差異*/
