@@ -80,7 +80,9 @@ if (ptype == "S") {
 
 
 try{
-//	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+		
+		console.log(adbackupTEST);	
 //		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 //			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 //			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
@@ -93,8 +95,8 @@ try{
 ////			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
 //			
 //		}
-//	}
-	console.log(adbackupTEST);	
+	}
+	
 }catch(err){
 	console.log(err);	
 }

@@ -10,6 +10,8 @@ window.onload = function() {
 		var pachomeAdJsSrc = document.getElementById('pcadscript').src;
 		document.getElementById('pcadscript').src = pachomeAdJsSrc+"?adbackup=true"
 		adbackupTEST = "true";
+		
+		console.log(adbackupTEST);
 	}
 	
     var a = document.getElementsByTagName("style")[0];
