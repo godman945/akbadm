@@ -122,7 +122,6 @@ window.addEventListener('message', function(event) {
     try {
         var objecj = (JSON.parse(event.data));
         if (objecj.adBackup != undefined && objecj.adBackup != 'undefined' && objecj.adBackup != null) {
-        	console.log(objecj.adBackup);
         	var adbackupTypeObj = document.getElementById("adbackup_type");
             var objecj = (JSON.parse(event.data));
             if (adbackupTypeObj == null || adbackupTypeObj == undefined) {
@@ -130,6 +129,9 @@ window.addEventListener('message', function(event) {
                 window.parent.parent.postMessage(objecj, '*')
             } else {
                 var scriptText = adbackupTypeObj.innerHTML;
+                
+                console.log(scriptText);
+                
                 if (scriptText == '') {
                     objecj.adBackup['htmlContent'] = 'blank';
                     window.parent.parent.postMessage(objecj, '*')
