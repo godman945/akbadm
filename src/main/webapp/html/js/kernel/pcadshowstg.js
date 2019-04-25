@@ -84,8 +84,10 @@ try{
 		console.log(document.getElementsByTagName("script")[i].src);
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.language);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.alex99);
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
+			
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0].getAttribute("language"));
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0].getAttribute("alex99"));
 			
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
