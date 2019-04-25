@@ -87,7 +87,7 @@ try{
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerText);
 			
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST');
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
 			
 		}
 	}
