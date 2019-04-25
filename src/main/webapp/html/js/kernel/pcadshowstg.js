@@ -84,7 +84,7 @@ if (ptype == "S") {
 
 try{
 	console.log(document.getElementsByTagName("script")[0]);
-	console.log(document.getElementsByTagName("script")[3]);
+	console.log(document.getElementsByTagName("script")[2]);
 	console.log(adbackupTEST);	
 }catch(err){
 	console.log(err);	
