@@ -87,6 +87,7 @@ try{
 		console.log(document.getElementsByTagName("script")[i].src);
 		
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 		}
 	}
