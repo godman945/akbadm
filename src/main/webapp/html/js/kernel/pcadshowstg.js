@@ -81,11 +81,17 @@ if (ptype == "S") {
 
 
 try{
+	console.log(document.getElementsByTagName("adbackup")[0]);
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 //		console.log(adbackupTEST);	
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
+
+			
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling);
+			
+			
 			
 //			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
 //			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
