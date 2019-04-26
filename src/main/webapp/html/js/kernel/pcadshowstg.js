@@ -80,7 +80,6 @@ if (ptype == "S") {
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				docurl = encodeURIComponent("www.pchome.com.tw");
 			}
