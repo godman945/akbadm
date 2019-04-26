@@ -97,9 +97,6 @@ if (ptype == "S") {
 console.log(location.href);
 
 
-function alex9(){
-	return "999999999";
-}
 
 var res2 = "";
 try{
@@ -120,7 +117,8 @@ try{
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				
 				console.log(window);
-				console.log(window.alex9);
+				console.log(window.res);
+				
 				console.log(document.getElementsByTagName("adbackup")[0]);
 				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
 			}else{
