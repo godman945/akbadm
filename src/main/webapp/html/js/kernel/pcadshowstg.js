@@ -103,7 +103,8 @@ try{
 //				console.log(location.href);
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}else{
-				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
+//				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
+				document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
 			}
 		}
 	}
