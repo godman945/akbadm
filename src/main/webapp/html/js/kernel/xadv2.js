@@ -5,6 +5,10 @@ var nico = location.href.toString();
 
 
 if(document.getElementsByTagName("adbackup")[0] != undefined && (document.getElementById("adbackup_type") == null || document.getElementById("adbackup_type") == undefined)){
+	
+	console.log(document.getElementById('pcadscript').previousSibling);
+	console.log(document.getElementById('pcadscript').previousElementSibling);
+	
 	var test = document.getElementById('pcadscript').previousElementSibling;
 	test.innerHTML = test.innerHTML + 'adbackupTEST="true";'
 	document.getElementsByTagName("adbackup")[0].setAttribute("alex", document.referrer);
