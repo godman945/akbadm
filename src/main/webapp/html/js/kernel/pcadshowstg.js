@@ -83,20 +83,8 @@ if (ptype == "S") {
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
-//			console.log(document.getElementsByTagName("script")[i]);
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-//				docurl = window.document.URL.split("&")[10].replace("ref=","");
 				docurl = "www.pchome.com.tw";
-				console.log(window.document.URL);
-				console.log(window.document.URL.split("&"));
-				console.log(window.document);
-				console.log(window);
-				
-				console.log(document.location.href);
-				console.log(window.parent.document);
-				console.log(window.parent);
-				
-				
 			}
 		}
 	}
