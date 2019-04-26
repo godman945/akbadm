@@ -82,11 +82,13 @@ if (ptype == "S") {
 
 
 (function() {
-	console.log(nico);
+	console.log(window.location.href);
+	console.log(res);
+	res = window.location.href;
+	console.log(res);
 	
 	
-	
-})(nico)
+})(window)
 
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
