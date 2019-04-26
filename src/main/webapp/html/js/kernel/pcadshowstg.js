@@ -123,7 +123,7 @@ try{
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				
 				console.log(window.document.URL);
-				console.log(window);
+				console.log(window.document.URL.split("&"));
 				
 //				console.log(document.getElementsByTagName("adbackup")[0]);
 //				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
