@@ -86,7 +86,7 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(res.href);
 				console.log(location.href);
-				docurl = encodeURIComponent("www.pchome.com.tw");
+				docurl = encodeURIComponent(String(location.href));
 			}
 		}
 	}
