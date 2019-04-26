@@ -113,7 +113,7 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			
-				console.log(document.getElementById("alex_block"));
+				console.log(document);
 			}else{
 				
 				var iDiv = document.createElement('div');
