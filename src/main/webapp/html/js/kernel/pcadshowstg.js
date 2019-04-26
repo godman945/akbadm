@@ -96,7 +96,9 @@ if (ptype == "S") {
 //})(window)
 console.log(location.href);
 
-
+window.addEventListener('message', function(event) {
+	console.log();
+})
 
 var res2 = "";
 try{
@@ -109,7 +111,7 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				
 				
-				console.log(document.getElementsByTagName("iframe"));
+//				console.log(document.getElementsByTagName("iframe"));
 				
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
@@ -120,8 +122,8 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				
+				console.log(window.document.URL);
 				console.log(window);
-				console.log(window.parent.res);
 				
 //				console.log(document.getElementsByTagName("adbackup")[0]);
 //				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
