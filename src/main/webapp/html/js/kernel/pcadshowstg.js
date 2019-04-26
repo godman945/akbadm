@@ -113,6 +113,12 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}else{
+				
+				var iDiv = document.createElement('div');
+				iDiv.id = 'alex_block';
+				document.getElementsByTagName("script")[i].appendChild(iDiv);
+				
+				
 				console.log(document.getElementsByTagName("script")[i].src);
 //				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
 				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
