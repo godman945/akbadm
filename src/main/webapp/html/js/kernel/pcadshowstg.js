@@ -101,6 +101,9 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src);
 				console.log(nico);
+				
+				console.log(location.href);
+				
 				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}
 		}
