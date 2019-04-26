@@ -100,7 +100,7 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+			console.log(document.getElementsByTagName("script")[i]);
 			
 			
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
