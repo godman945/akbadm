@@ -88,10 +88,11 @@ try{
 //				console.log(location.href);
 //				console.log(String(location.href));
 				docurl = encodeURIComponent("www.pchome.com.tw");
+				console.log(res);
+//				document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling = 
 				
-				
-				console.log(document.getElementById("alexTEST"));
-				document.getElementById("alexTEST").innerHTML = location.href;
+//				console.log(document.getElementById("alexTEST"));
+//				document.getElementById("alexTEST").innerHTML = location.href;
 				
 			}
 		}
