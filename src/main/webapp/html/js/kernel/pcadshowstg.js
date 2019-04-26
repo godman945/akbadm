@@ -120,7 +120,8 @@ try{
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				console.log(window);
 				console.log(window.alex9);
-				console.log(window.parent.parent.alex9());
+				var a = window.parent.parent.alex9();
+				console.log(a);
 				console.log(document.getElementsByTagName("adbackup")[0]);
 				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
 			}else{
