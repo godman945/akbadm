@@ -1,4 +1,8 @@
 var res = document.URL;
+
+console.log(res.href);
+console.log(location.href);
+
 var docurl = encodeURIComponent(res);
 var keywordValue = "";
 var pageValue = "";
@@ -81,13 +85,13 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				docurl = encodeURIComponent("www.pchome.com.tw");
+				docurl = encodeURIComponent(location.href);
 			}
 		}
 	}
 	
 }catch(err){
-	console.log(err);	
+//	console.log(err);	
 }
 
 
@@ -229,9 +233,6 @@ function getMessage0(event) {
 				
 				if (htmlContent != 'blank' && htmlContent != undefined && htmlContent.indexOf('document.write') < 0) {
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
-					
-					console.log(iframeObj);
-					
 					iframeObj.height = 0;
 					iframeObj.width = 0;
 					var appendDom = iframeObj.parentElement;
