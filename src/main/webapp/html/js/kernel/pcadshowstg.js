@@ -83,12 +83,16 @@ if (ptype == "S") {
 
 
 (function() {
+	var a = String(location.href);
+	console.log(a);
+	
+	
 	console.log(location.href);
 	console.log(res);
 	res = location.href;
 	console.log(res);
-	
-	
+	res = a;
+	console.log(res);
 })(window)
 
 try{
