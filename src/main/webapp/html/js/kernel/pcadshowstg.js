@@ -109,7 +109,7 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				
 				
-				console.log(document.getElementsByClassName("akb_iframe")[0]);
+				console.log(document.getElementsByClassName("akb_iframe"));
 				
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
