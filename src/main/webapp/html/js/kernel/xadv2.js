@@ -1,5 +1,6 @@
 
 var res = location.href;
+var nico = "SSSS";
 window.onload = function() {
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {

@@ -84,8 +84,9 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				console.log(res)
-				docurl = encodeURIComponent(res);
+				console.log(res);
+				console.log(nico);
+				docurl = encodeURIComponent(nico);
 			}
 		}
 	}
