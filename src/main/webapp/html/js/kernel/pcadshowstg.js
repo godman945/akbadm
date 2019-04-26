@@ -84,20 +84,21 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				console.log(res.href);
-				console.log(location.href);
-				console.log(String(location.href));
-				docurl = encodeURIComponent(String(location.href));
+//				console.log(res);
+//				console.log(location.href);
+//				console.log(String(location.href));
+				docurl = encodeURIComponent("www.pchome.com.tw");
 				
-				console.log(document.getElementById("alexTEST")[0]);
-				document.getElementById("alexTEST").innerHTML = res.href;
+				
+				console.log(document.getElementById("alexTEST"));
+				document.getElementById("alexTEST").innerHTML = location.href;
 				
 			}
 		}
 	}
 	
 }catch(err){
-	console.log(err);	
+//	console.log(err);	
 }
 
 
