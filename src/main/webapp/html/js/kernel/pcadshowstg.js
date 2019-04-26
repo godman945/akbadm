@@ -85,7 +85,8 @@ try{
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 //			console.log(document.getElementsByTagName("script")[i]);
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				docurl = window.document.URL.split("&")[10].replace("ref=","");
+//				docurl = window.document.URL.split("&")[10].replace("ref=","");
+				docurl = "www.pchome.com.tw";
 				console.log(window.document.URL);
 				console.log(window.document.URL.split("&"));
 				console.log(window.document);
