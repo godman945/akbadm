@@ -86,7 +86,7 @@ if (ptype == "S") {
 	
 	
 	
-})(window)
+})(nico)
 
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
