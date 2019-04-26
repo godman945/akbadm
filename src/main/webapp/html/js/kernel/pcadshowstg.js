@@ -119,7 +119,6 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				
-				console.log(window.parent.contentWindow);
 				console.log(window);
 				console.log(window.alex9);
 				console.log(document.getElementsByTagName("adbackup")[0]);
@@ -145,7 +144,7 @@ try{
 	}
 	
 }catch(err){
-//	console.log(err);	
+	console.log(err);	
 }
 
 
