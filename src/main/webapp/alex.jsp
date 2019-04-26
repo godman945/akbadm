@@ -46,8 +46,15 @@ stg<p>
 <br><br><br><br>
 
 
-<script  id="pcadscript" language="javascript" async src="html/js/ptag/ptag.js"></script>
- ptag("event","convert",{"convert_id":"CAC20181210000000001","convert_price":"40"});
+<script language="javascript">
+			pad_width=300;
+			pad_height=250;
+			pad_customerId="PFBC20150519001";
+			pad_positionId="PFBP201509250003C";
+</script>
+<script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/pcadshowstg.js"></script>		    
+		    
+
  
 
 

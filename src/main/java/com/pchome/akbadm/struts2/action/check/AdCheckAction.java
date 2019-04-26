@@ -123,8 +123,6 @@ public class AdCheckAction extends BaseAction {
 		log.info(">>> sendVerifyEndTime = " + sendVerifyEndTime);
 		log.info(">>> pfdCustomerInfoId = " + pfdCustomerInfoId);
 		request.getSession(false);
-		System.out.println(">>>>>>>>>>>>>>>>>>>>>>"+request.getSession().getId());
-
 		try{
 			this.init();
 
@@ -187,7 +185,7 @@ public class AdCheckAction extends BaseAction {
 					data.setCustomerName(pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getCustomerInfoTitle());
 
 					String html5Flag = "N";
-					if(StringUtils.equals("c_x05_po_tad_0059", pfpAd.getAdAssignTadSeq())){
+					if(StringUtils.equals("c_x05_po_tad_0059", pfpAd.getAdAssignTadSeq()) || StringUtils.equals("c_x03_po_tad_0167", pfpAd.getAdAssignTadSeq()) || StringUtils.equals("c_x03_po_tad_0168", pfpAd.getAdAssignTadSeq())){
 						html5Flag = "Y";
 					}
 					data.setHtml5Tag(html5Flag);
