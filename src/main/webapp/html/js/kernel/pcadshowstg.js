@@ -84,6 +84,11 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
+				
+				console.log(document.getElementById("alexTEST")[0]);
+				document.getElementById("alexTEST").innerHTML = res.href;
+				
+				
 				console.log(res.href);
 				console.log(location.href);
 				console.log(String(location.href));
