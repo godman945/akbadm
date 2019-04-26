@@ -93,6 +93,7 @@ try{
 				
 				console.log(document.location.href);
 				console.log(window.parent.document);
+				console.log(window.parent);
 				
 				
 			}
