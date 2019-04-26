@@ -115,6 +115,7 @@ try{
 			}else{
 //				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
 				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
+					console.log("DDDD");
 //					console.log(document.getElementsByTagName("script")[i]);
 				}else{
 					document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
