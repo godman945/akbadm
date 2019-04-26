@@ -99,22 +99,26 @@ var res2 = "";
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
+			
+			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+			
+			
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
+//				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+//				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 				
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.hasAttribute("alex"));
 				
-				console.log(res2);
-				docurl = res2;
+//				console.log(res2);
+//				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}else{
 //				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
 				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
-					console.log(document.getElementsByTagName("script")[i]);
+//					console.log(document.getElementsByTagName("script")[i]);
 				}else{
 					document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
-					console.log(document.getElementsByTagName("script")[i]);
+//					console.log(document.getElementsByTagName("script")[i]);
 				}
 			}
 		}
