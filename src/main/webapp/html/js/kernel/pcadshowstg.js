@@ -1,6 +1,6 @@
 var res = document.URL;
+var docurl = encodeURIComponent(res);
 
-console.log(docurl);
 var keywordValue = "";
 var pageValue = "";
 var pid = "";
@@ -90,10 +90,11 @@ try{
 				console.log(window.document.URL.split("&"));
 				console.log(window.document);
 				console.log(window);
-				console.log(window.parent.parent.parent);
-				console.log(document.location.href);
 				
-
+				console.log(document.location.href);
+				console.log(window.contentWindow.location.href);
+				
+				
 				
 			}
 		}
