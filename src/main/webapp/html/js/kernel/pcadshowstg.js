@@ -80,6 +80,14 @@ if (ptype == "S") {
     seway = ""
 }
 
+
+(function() {
+	console.log(nico);
+	
+	
+	
+})(window)
+
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
