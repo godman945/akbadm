@@ -95,6 +95,12 @@ if (ptype == "S") {
 //	console.log(res);
 //})(window)
 console.log(location.href);
+
+
+function alex9(){
+	console.log("FFF");
+}
+
 var res2 = "";
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
@@ -113,7 +119,7 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				console.log(window);
-				console.log(window.parent.parent.location.href);
+				console.log(window.parent.parent.alex9);
 				console.log(document.getElementsByTagName("adbackup")[0]);
 				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
 			}else{
