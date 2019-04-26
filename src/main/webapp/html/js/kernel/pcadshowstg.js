@@ -85,9 +85,9 @@ try{
 //		console.log(adbackupTEST);	
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.outerHTML);
-
-			
+			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
+				docurl = encodeURIComponent("www.pchome.com.tw");
+			}
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName);
 			
 			
