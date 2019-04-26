@@ -104,6 +104,7 @@ try{
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}else{
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+				document.getElementsByTagName("script")[i].previousElementSibling[0].setAttribute("alex", location.href)
 			}
 		}
 	}
