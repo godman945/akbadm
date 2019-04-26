@@ -107,6 +107,10 @@ try{
 			
 			
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
+				
+				
+				console.log(document.getElementsByClassName("akb_iframe")[0].src);
+				
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 				
@@ -117,27 +121,26 @@ try{
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 				
 				console.log(window);
-				console.log(window.res);
-				console.log(window.docurl);
+				console.log(window.parent.res);
 				
-				console.log(document.getElementsByTagName("adbackup")[0]);
-				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
+//				console.log(document.getElementsByTagName("adbackup")[0]);
+//				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
 			}else{
 				
-				var iDiv = document.createElement('div');
-				iDiv.id = 'alex_block';
-				document.getElementsByTagName("script")[i].appendChild(iDiv);
-				
-				
-				console.log(document.getElementsByTagName("script")[i].src);
-//				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
-				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
-					
-//					console.log(document.getElementsByTagName("script")[i]);
-				}else{
-					document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
-//					console.log(document.getElementsByTagName("script")[i]);
-				}
+//				var iDiv = document.createElement('div');
+//				iDiv.id = 'alex_block';
+//				document.getElementsByTagName("script")[i].appendChild(iDiv);
+//				
+//				
+//				console.log(document.getElementsByTagName("script")[i].src);
+////				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
+//				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
+//					
+////					console.log(document.getElementsByTagName("script")[i]);
+//				}else{
+//					document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
+////					console.log(document.getElementsByTagName("script")[i]);
+//				}
 			}
 		}
 	}
