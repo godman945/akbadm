@@ -1,7 +1,4 @@
 var res = document.URL;
-
-
-
 var docurl = encodeURIComponent(res);
 var keywordValue = "";
 var pageValue = "";
@@ -82,71 +79,17 @@ if (ptype == "S") {
 
 
 
-//(function(window) {
-//	var a = String(location.href);
-//	console.log(a);
-//	
-//	
-//	console.log(location.href);
-//	console.log(res);
-//	res = location.href;
-//	console.log(res);
-//	res = a;
-//	console.log(res);
-//})(window)
-console.log(location.href);
-
-window.addEventListener('message', function(event) {
-	console.log();
-})
-
-var res2 = "";
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
-			
 //			console.log(document.getElementsByTagName("script")[i]);
-			
-			
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				
-				
-//				console.log(document.getElementsByTagName("iframe"));
-				
-//				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-//				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
-				
-//				console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.hasAttribute("alex"));
-				
-//				console.log(res2);
-//				docurl = res2;
-//				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
-				
+				docurl = window.document.URL.split("&")[10].replace("ref=","");
 				console.log(window.document.URL);
 				console.log(window.document.URL.split("&"));
-				
-//				console.log(document.getElementsByTagName("adbackup")[0]);
-//				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
-			}else{
-				
-//				var iDiv = document.createElement('div');
-//				iDiv.id = 'alex_block';
-//				document.getElementsByTagName("script")[i].appendChild(iDiv);
-//				
-//				
-//				console.log(document.getElementsByTagName("script")[i].src);
-////				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
-//				if(document.getElementsByTagName("script")[i].src.indexOf("alex") >= 0){
-//					
-////					console.log(document.getElementsByTagName("script")[i]);
-//				}else{
-//					document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
-////					console.log(document.getElementsByTagName("script")[i]);
-//				}
 			}
 		}
 	}
-	
 }catch(err){
 	console.log(err);	
 }
