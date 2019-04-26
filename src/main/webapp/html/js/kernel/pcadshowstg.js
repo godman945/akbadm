@@ -112,6 +112,8 @@ try{
 //				console.log(res2);
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
+			
+				console.log(document.getElementById("alex_block"));
 			}else{
 				
 				var iDiv = document.createElement('div');
