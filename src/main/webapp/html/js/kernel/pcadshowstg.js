@@ -92,8 +92,7 @@ try{
 				console.log(window);
 				
 				console.log(document.location.href);
-				console.log(window.contentWindow.location.href);
-				
+				console.log(document.parent);
 				
 				
 			}
