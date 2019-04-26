@@ -94,7 +94,7 @@ if (ptype == "S") {
 //	res = a;
 //	console.log(res);
 //})(window)
-
+console.log(location.href);
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
