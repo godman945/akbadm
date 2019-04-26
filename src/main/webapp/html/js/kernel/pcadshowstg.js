@@ -86,6 +86,7 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(res.href);
 				console.log(location.href);
+				console.log(String(location.href));
 				docurl = encodeURIComponent(String(location.href));
 			}
 		}
