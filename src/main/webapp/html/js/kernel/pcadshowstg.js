@@ -1,5 +1,7 @@
 var res = document.URL;
 var docurl = encodeURIComponent(res);
+
+console.log(docurl);
 var keywordValue = "";
 var pageValue = "";
 var pid = "";
