@@ -1,5 +1,4 @@
 var res = document.URL;
-var docurl = encodeURIComponent(res);
 
 console.log(docurl);
 var keywordValue = "";
@@ -92,6 +91,10 @@ try{
 				console.log(window.document);
 				console.log(window);
 				console.log(window.parent.parent.parent);
+				console.log(window.contentWindow.location.href);
+				
+
+				
 			}
 		}
 	}
