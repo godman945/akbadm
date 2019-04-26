@@ -88,6 +88,8 @@ try{
 				console.log(window.document.URL);
 				console.log(window.document.URL.split("&"));
 				console.log(window.document);
+				console.log(window);
+				console.log(window.parent.parent.parent);
 			}
 		}
 	}
