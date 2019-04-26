@@ -86,7 +86,7 @@ try{
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(res);
 				console.log(nico);
-				docurl = encodeURIComponent(nico);
+				docurl = nico;
 			}
 		}
 	}
