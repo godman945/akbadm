@@ -1,7 +1,6 @@
 var res = document.URL;
 
-console.log(res.href);
-console.log(location.href);
+
 
 var docurl = encodeURIComponent(res);
 var keywordValue = "";
@@ -85,7 +84,9 @@ try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
-				docurl = encodeURIComponent(location.href);
+				console.log(res.href);
+				console.log(location.href);
+				docurl = encodeURIComponent("www.pchome.com.tw");
 			}
 		}
 	}
