@@ -101,7 +101,7 @@ try{
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHYML);
+				console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
 				
 //				console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.hasAttribute("alex"));
 				
