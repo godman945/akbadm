@@ -113,7 +113,9 @@ try{
 //				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			
-				console.log(document);
+				console.log(document.getElementsByTagName("adbackup")[0]);
+				console.log(document.getElementsByTagName("adbackup")[0].alex);
+				console.log(document.getElementsByTagName("adbackup").alex);
 			}else{
 				
 				var iDiv = document.createElement('div');
