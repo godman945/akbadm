@@ -1,6 +1,6 @@
 
 var res = location.href;
-var nico = String(location.href);
+var nico = location.href.toString();
 window.onload = function() {
     var a = document.getElementsByTagName("style")[0];
     if (a != undefined && a != null) {
