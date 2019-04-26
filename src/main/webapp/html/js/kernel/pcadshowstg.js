@@ -107,7 +107,7 @@ try{
 				
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 				
-				document.getElementsByTagName("script")[i].previousElementSibling[0].setAttribute("alex", location.href);
+				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
 				
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			}
