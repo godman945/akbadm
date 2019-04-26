@@ -87,6 +87,7 @@ try{
 				docurl = window.document.URL.split("&")[10].replace("ref=","");
 				console.log(window.document.URL);
 				console.log(window.document.URL.split("&"));
+				console.log(window.document);
 			}
 		}
 	}
