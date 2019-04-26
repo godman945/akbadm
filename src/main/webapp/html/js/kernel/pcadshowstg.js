@@ -77,28 +77,13 @@ if (ptype == "S") {
     seway = ""
 }
 
-
-
-
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
-//		console.log(adbackupTEST);	
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			console.log(document.getElementsByTagName("script")[i].previousElementSibling);
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				docurl = encodeURIComponent("www.pchome.com.tw");
 			}
-			console.log(document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName);
-			
-			
-			
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("language"));
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.getAttribute("alex99"));
-//			
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.innerHTML);
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling[0]);
-//			console.log(document.getElementsByTagName("script")[i].previousElementSibling.includes('adbackupTEST'));
-			
 		}
 	}
 	
