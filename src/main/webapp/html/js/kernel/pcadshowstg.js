@@ -81,6 +81,7 @@ if (ptype == "S") {
 }
 
 
+
 (function() {
 	console.log(window.location.href);
 	console.log(res);
