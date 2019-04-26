@@ -118,6 +118,7 @@ try{
 				
 				console.log(window);
 				console.log(window.res);
+				console.log(window.docurl);
 				
 				console.log(document.getElementsByTagName("adbackup")[0]);
 				console.log(document.getElementsByTagName("adbackup")[0].outerHTML);
