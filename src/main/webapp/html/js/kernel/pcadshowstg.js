@@ -95,16 +95,19 @@ if (ptype == "S") {
 //	console.log(res);
 //})(window)
 console.log(location.href);
+var res2 = "";
 try{
 	for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
 		if(document.getElementsByTagName("script")[i].src.includes('pcadshowstg.js')){
 			if("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName){
 				console.log(document.getElementsByTagName("script")[i].previousElementSibling);
-//				console.log(location.href);
+				console.log(res2);
+				docurl = res2;
 //				docurl = document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.src;
 			}else{
 //				document.getElementsByTagName("script")[i].previousElementSibling.setAttribute("alex", location.href);
 				document.getElementsByTagName("script")[i].src = document.getElementsByTagName("script")[i].src+"?alex="+location.href;
+				res2 = location.href;
 			}
 		}
 	}
