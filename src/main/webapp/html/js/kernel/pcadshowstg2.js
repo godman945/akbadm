@@ -95,7 +95,7 @@ try{
 
 var fig = "";
 /*stg adurl與prd有差異*/
-var adurl = "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId;
+var adurl = "http://kwstg2.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId;
 
 adurl += "&positionId=" + pid;
 adurl += "&padWidth=" + pad_width;
