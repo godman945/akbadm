@@ -87,7 +87,7 @@ stg<p>
 		<td>
 			4: 180x150 <p>
 			
-			<script id="asynpchomeadjs" async src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg2.js"></script> 
+			<script id="asynpchomeadjs" async src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg2.js"></script> 
 			<ins class="asynpchomead" 
 			pad_width=180;
 			pad_height=150;
