@@ -2,9 +2,9 @@ package com.pchome.akbadm.quartzs;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
 import org.apache.logging.log4j.LogManager;
@@ -128,7 +127,6 @@ import com.thoughtworks.xstream.XStream;
 
 @Transactional
 public class KernelJob {
-    private static String CHARSET = "UTF-8";
     private static String[] extensions = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
@@ -259,7 +257,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("style: " + map.size());
     }
@@ -296,7 +294,7 @@ public class KernelJob {
                 htmlFlag = false;
 
                 file = iterator.next();
-                lineList = FileUtils.readLines(file, CHARSET);
+                lineList = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
                 tproBean = new TproBean();
                 tproId = file.getName();
@@ -462,7 +460,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("tpro: " + map.size());
     }
@@ -494,7 +492,7 @@ public class KernelJob {
                 contentFlag = true;
 
                 file = iterator.next();
-                lineList = FileUtils.readLines(file, CHARSET);
+                lineList = FileUtils.readLines(file, StandardCharsets.UTF_8);
                 tadBean = new TadBean();
 
                 for (String line: lineList) {
@@ -543,7 +541,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("tad: " + map.size());
     }
@@ -1002,7 +1000,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pool.xml");
         log.info("write file = " + file.getPath());
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         // for prod
         this.poolMap = poolMap;
@@ -1308,9 +1306,9 @@ public class KernelJob {
         log.info("solr xml = " + xmlFile.getPath());
 
         fileOutputStream = FileUtils.openOutputStream(tempFile);
-        fileOutputStream.write("<update>\n".getBytes(CharEncoding.UTF_8));
-        fileOutputStream.write("<delete><query>*</query></delete>\n".getBytes(CharEncoding.UTF_8));
-        fileOutputStream.write("<add>\n".getBytes(CharEncoding.UTF_8));
+        fileOutputStream.write("<update>\n".getBytes(StandardCharsets.UTF_8));
+        fileOutputStream.write("<delete><query>*</query></delete>\n".getBytes(StandardCharsets.UTF_8));
+        fileOutputStream.write("<add>\n".getBytes(StandardCharsets.UTF_8));
 
         // write index
         try {
@@ -1339,14 +1337,14 @@ public class KernelJob {
                     line.append("\t<field name=\"").append(EnumIndexField.updateDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getUpdateDate())).append("]]></field>\n");
                     line.append("\t<field name=\"").append(EnumIndexField.createDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getCreateDate())).append("]]></field>\n");
                     line.append("</doc>\n");
-                    fileOutputStream.write(line.toString().getBytes(CharEncoding.UTF_8));
+                    fileOutputStream.write(line.toString().getBytes(StandardCharsets.UTF_8));
                 }
 
                 count += validKeywordList.size();
             }
 
-            fileOutputStream.write("</add>\n".getBytes(CharEncoding.UTF_8));
-            fileOutputStream.write("</update>\n".getBytes(CharEncoding.UTF_8));
+            fileOutputStream.write("</add>\n".getBytes(StandardCharsets.UTF_8));
+            fileOutputStream.write("</update>\n".getBytes(StandardCharsets.UTF_8));
 
             // success
             log.info("count: " + count);
@@ -1398,7 +1396,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxArea: " + map.size());
     }
@@ -1433,7 +1431,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxPosition: " + map.size());
     }
@@ -1462,7 +1460,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxSize: " + map.size());
     }
@@ -1491,7 +1489,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxUrl: " + map.size());
     }
@@ -1551,7 +1549,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxGroup: " + pfbxCustomerInfoMap.size());
     }
@@ -1649,7 +1647,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxOption: " + pfbxCustomerInfoMap.size());
     }
@@ -1719,7 +1717,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxSample: " + pfbxCustomerInfoMap.size());
     }
@@ -1750,7 +1748,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("admShowRule: " + admShowRuleList.size());
     }
@@ -1787,7 +1785,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxBlackUrl: " + pfbxBlackUrlMap.size());
     }
@@ -1827,7 +1825,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxWhiteUrl: " + pfbxWhiteUrlMap.size());
     }
@@ -1900,7 +1898,7 @@ public class KernelJob {
 
         log.info("write file = " + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("prodMap: " + prodMap.size());
     }
@@ -1918,10 +1916,10 @@ public class KernelJob {
         log.info("scp ok");
     }
 
-    private String encodeParam(String url) throws UnsupportedEncodingException {
-        String[] urls = URLDecoder.decode(url, CHARSET).split("\\?");
+    private String encodeParam(String url) {
+        String[] urls = URLDecoder.decode(url, StandardCharsets.UTF_8).split("\\?");
         if (urls.length != 2) {
-            return URLEncoder.encode(url, CHARSET);
+            return URLEncoder.encode(url, StandardCharsets.UTF_8);
         }
 
         // url
@@ -1936,7 +1934,7 @@ public class KernelJob {
             if (keys.length == 2) {
                 urlSb.append(keys[0]);
                 urlSb.append("=");
-                urlSb.append(URLEncoder.encode(keys[1], CHARSET));
+                urlSb.append(URLEncoder.encode(keys[1], StandardCharsets.UTF_8));
             }
             else {
                 urlSb.append(params[i]);
@@ -1958,7 +1956,7 @@ public class KernelJob {
                                 .replaceAll("\\%2F", "/")
                                 .replaceAll("\\%23", "#");
 
-        return URLEncoder.encode(realUrl, CHARSET);
+        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
     }
 
     private String getVideoUrl(String srcUrl, int fileType) {
@@ -1966,7 +1964,7 @@ public class KernelJob {
         String descUrl = srcUrl;
         try {
             process = Runtime.getRuntime().exec(new String[] {"bash", "-c", "youtube-dl -f " + fileType + " -g " + srcUrl});
-            descUrl = IOUtils.toString(process.getInputStream(),"UTF-8");
+            descUrl = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
             log.error(srcUrl + " " + fileType, e);
