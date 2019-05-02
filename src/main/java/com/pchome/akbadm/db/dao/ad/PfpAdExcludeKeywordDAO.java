@@ -2,15 +2,15 @@ package com.pchome.akbadm.db.dao.ad;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 
-import org.apache.commons.lang.StringUtils;
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword;
 
-public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> implements IPfpAdExcludeKeywordDAO{
-
-	@SuppressWarnings("unchecked")
+public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> implements IPfpAdExcludeKeywordDAO {
+	@Override
+    @SuppressWarnings("unchecked")
 	public List<PfpAdExcludeKeyword> getPfpAdExcludeKeywords(String adExcludeKeywordSeq, String adGroupSeq, String adExcludeKeyword) throws Exception{
 		StringBuffer sql = new StringBuffer("from PfpAdExcludeKeyword where 1=1");
 		if (StringUtils.isNotEmpty(adExcludeKeywordSeq)) {
@@ -28,7 +28,8 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 		return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(sql.toString());
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public PfpAdExcludeKeyword getPfpAdExcludeKeywordBySeq(String adExcludeKeywordSeq) throws Exception {
 		List<PfpAdExcludeKeyword> list = (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find("from PfpAdExcludeKeyword where adExcludeKeywordSeq = '" + adExcludeKeywordSeq + "'");
 		if (list!=null && list.size()>0) {
@@ -38,26 +39,31 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 		}
 	}
 
-	public void saveOrUpdatePfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception{
+	@Override
+    public void saveOrUpdatePfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception{
 		super.getHibernateTemplate().saveOrUpdate(pfpAdExcludeKeyword);
 	}
 
-	public void insertPfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception {
+	@Override
+    public void insertPfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception {
 		this.saveOrUpdate(pfpAdExcludeKeyword);
 	}
 
-	public void updatePfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception {
+	@Override
+    public void updatePfpAdExcludeKeyword(PfpAdExcludeKeyword pfpAdExcludeKeyword) throws Exception {
 		this.update(pfpAdExcludeKeyword);
 	}
 
-	public void deletePfpAdExcludeKeyword(String adExcludeKeywordSeq) throws Exception{
+	@Override
+    public void deletePfpAdExcludeKeyword(String adExcludeKeywordSeq) throws Exception{
 		String userSql = "delete from PfpAdExcludeKeyword where adExcludeKeywordSeq = '" + adExcludeKeywordSeq + "'";
 		Session session =  super.getHibernateTemplate().getSessionFactory().getCurrentSession();
 		session.createQuery(userSql).executeUpdate();
 		session.flush();
 	}
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public List<PfpAdExcludeKeyword> getPfpAdExcludeKeywords(String adGroupSeq, String customerInfoId) throws Exception{
 		StringBuffer hql = new StringBuffer();
 
@@ -69,10 +75,10 @@ public class PfpAdExcludeKeywordDAO extends BaseDAO<PfpAdExcludeKeyword,String> 
 		return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(hql.toString());
 	}
 
+    @Override
     @SuppressWarnings("unchecked")
-    public List<PfpAdExcludeKeyword> selectPfpAdExcludeKeywords(String adGroupSeq, int status) throws Exception {
+    public List<PfpAdExcludeKeyword> selectPfpAdExcludeKeywords(String adGroupSeq, int status) {
         String hql = "from PfpAdExcludeKeyword where pfpAdGroup.adGroupSeq = ? and adExcludeKeywordStatus = ?";
         return (List<PfpAdExcludeKeyword>) super.getHibernateTemplate().find(hql, adGroupSeq, status);
     }
-
 }
