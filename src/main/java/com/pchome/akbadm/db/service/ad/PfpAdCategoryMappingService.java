@@ -19,25 +19,6 @@ public class PfpAdCategoryMappingService extends BaseService<PfpAdCategoryMappin
         return ((IPfpAdCategoryMappingDAO)dao).selectPfpAdCategoryMappingByCode(code);
     }
 
-//    @Override
-//    public Map<String, List<PfpAdCategoryMapping>> selectPfpAdCategoryMappingMaps() {
-//        Map<String, List<PfpAdCategoryMapping>> map = new HashMap<String, List<PfpAdCategoryMapping>>();
-//        List<PfpAdCategoryMapping> tempList = null;
-//        PfpAdCategoryMapping tempBean = null;
-//
-//        List<PfpAdCategoryMapping> list = ((IPfpAdCategoryMappingDAO)dao).loadAll();
-//        for (PfpAdCategoryMapping bean: list) {
-//            tempList = map.get(bean.getAdSeq());
-//            if (tempList == null) {
-//                tempList = new ArrayList<PfpAdCategoryMapping>();
-//            }
-//            tempList.add(bean);
-//            map.put(bean.getAdSeq(), tempList);
-//        }
-//
-//        return map;
-//    }
-
     @Override
     public Map<String, StringBuilder> selectPfpAdCategoryMappingBufferMaps() {
         Map<String, StringBuilder> map = new HashMap<String, StringBuilder>();
