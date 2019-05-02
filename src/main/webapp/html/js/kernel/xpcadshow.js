@@ -79,9 +79,13 @@ if (ptype == "S") {
 }
 try {
     for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
-//    	console.log(document.getElementsByTagName("script")[i].src);
-//    	console.log(document.getElementsByTagName("script")[i].src.includes('xpcadshow.js'));
-//    	console.log(document.getElementById(""));
+    	console.log(document.getElementsByTagName("script")[i].src);
+    	console.log(document.getElementsByTagName("script")[i].src.includes('xadv2.js'));
+    	console.log(document.getElementsByTagName("script")[i].previousElementSibling);
+    	
+    	
+    	
+    	
     	
         if (document.getElementsByTagName("script")[i].src.includes('xpcadshow.js')) {
             if ("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName) {
