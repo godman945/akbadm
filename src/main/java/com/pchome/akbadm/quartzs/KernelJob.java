@@ -172,7 +172,7 @@ public class KernelJob {
     private boolean solrFlag;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
-    private Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
+    private Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
 
     public void process() throws Exception {
         log.info("====KernelJob.process() start====");
@@ -228,7 +228,7 @@ public class KernelJob {
     }
 
     private void style() throws Exception {
-        Map<String, StyleBean> map = new HashMap<String, StyleBean>();
+        Map<String, StyleBean> map = new HashMap<>();
         StyleBean styleBean = null;
 
         // style(Map) -> style(Bean)
@@ -276,7 +276,7 @@ public class KernelJob {
         }
 
         // tpro(Map) > tpro(Bean)
-        Map<String, TproBean> map = new HashMap<String, TproBean>();
+        Map<String, TproBean> map = new HashMap<>();
         TproBean tproBean = null;
         TadMapBean tadMapBean = null;
         String tproId = null;
@@ -479,7 +479,7 @@ public class KernelJob {
         }
 
         // tad(Map) > tad(Bean)
-        Map<String, TadBean> map = new HashMap<String, TadBean>();
+        Map<String, TadBean> map = new HashMap<>();
         TadBean tadBean = null;
         String poolId = null;
         String tadId = null;
@@ -551,7 +551,7 @@ public class KernelJob {
     private void pool() throws Exception {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
-        Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
+        Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
@@ -610,7 +610,7 @@ public class KernelJob {
         log.info("pfpAdSyspriceService.selectAdSyspriceByPoolSeq " + adSystemPrice);
 
         // adActionTime
-        Map<String, StringBuilder> adActionTimeCache = new HashMap<String, StringBuilder>();
+        Map<String, StringBuilder> adActionTimeCache = new HashMap<>();
         StringBuilder adActionTime = null;
 
         // yesterday
@@ -691,7 +691,7 @@ public class KernelJob {
                 // get ad map
                 adMap = poolMap.get(adPoolId);
                 if (adMap == null) {
-                    adMap = new HashMap<String, AdBean>();
+                    adMap = new HashMap<>();
                 }
 
                 // get ad bean
@@ -1063,9 +1063,9 @@ public class KernelJob {
         }
 
         // cache
-        Map<String, List<PfpAd>> pfpAdGroupCache = new HashMap<String, List<PfpAd>>();
-        Map<String, StringBuilder> excludeKeywordCache = new HashMap<String, StringBuilder>();
-        Map<String, Float> pfpKeywordSyspriceCache = new HashMap<String, Float>();
+        Map<String, List<PfpAd>> pfpAdGroupCache = new HashMap<>();
+        Map<String, StringBuilder> excludeKeywordCache = new HashMap<>();
+        Map<String, Float> pfpKeywordSyspriceCache = new HashMap<>();
 
         // id, [sum(ad_keyword_pv), sum(ad_keyword_clk)]
         Map<String, int[]> pfpAdKeywordPvclkSumsCache = pfpAdKeywordPvclkService.selectPfpAdKeywordPvclkSums(calendar.getTime());
@@ -1077,7 +1077,7 @@ public class KernelJob {
 
             tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
             if (tempAdList == null) {
-                tempAdList = new ArrayList<PfpAd>();
+                tempAdList = new ArrayList<>();
             }
             tempAdList.add(pfpAd);
             pfpAdGroupCache.put(pfpAdGroup.getAdGroupSeq(), tempAdList);
@@ -1376,7 +1376,7 @@ public class KernelJob {
     }
 
     private void area() throws Exception {
-        Map<Integer, PfbxAreaBean> map = new HashMap<Integer, PfbxAreaBean>();
+        Map<Integer, PfbxAreaBean> map = new HashMap<>();
         PfbxAreaBean pfbxAreaBean = null;
 
         List<PfbxArea> list = pfbxAreaService.loadAll();
@@ -1404,7 +1404,7 @@ public class KernelJob {
     }
 
     private void position() throws Exception {
-        Map<String, PfbxPositionBean> map = new HashMap<String, PfbxPositionBean>();
+        Map<String, PfbxPositionBean> map = new HashMap<>();
         PfbxPositionBean pfbxPositionBean = null;
 
         List<PfbxPosition> list = pfbxPositionService.selectPfbxPositionByDeleteFlag(0);
@@ -1439,7 +1439,7 @@ public class KernelJob {
     }
 
     private void size() throws Exception {
-        Map<Integer, PfbxSizeBean> map = new HashMap<Integer, PfbxSizeBean>();
+        Map<Integer, PfbxSizeBean> map = new HashMap<>();
         PfbxSizeBean pfbxSizeBean = null;
 
         List<PfbxSize> list = pfbxSizeService.loadAll();
@@ -1468,7 +1468,7 @@ public class KernelJob {
     }
 
     private void url() throws Exception {
-        Map<Integer, PfbxUrlBean> map = new HashMap<Integer, PfbxUrlBean>();
+        Map<Integer, PfbxUrlBean> map = new HashMap<>();
         PfbxUrlBean pfbxUrlBean = null;
 
         List<PfbxUrl> list = pfbxUrlService.loadAll();
@@ -1498,7 +1498,7 @@ public class KernelJob {
 
     private void group() throws Exception {
         // pfbxCustomerInfoId > PfbxUserGroupBean
-        Map<String, Map<String, PfbxUserGroupBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserGroupBean>>();
+        Map<String, Map<String, PfbxUserGroupBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserGroupBean> pfbxUserGroupMap = null;
         PfbxUserGroupBean pfbxUserGroupBean = null;
 
@@ -1534,7 +1534,7 @@ public class KernelJob {
 
             pfbxUserGroupMap = pfbxCustomerInfoMap.get(pfbxUserGroupBean.getPfbxCustomerInfoId());
             if (pfbxUserGroupMap == null) {
-                pfbxUserGroupMap = new HashMap<String, PfbxUserGroupBean>();
+                pfbxUserGroupMap = new HashMap<>();
             }
             pfbxUserGroupMap.put(pfbxUserGroupBean.getId(), pfbxUserGroupBean);
 
@@ -1558,7 +1558,7 @@ public class KernelJob {
 
     private void option() throws Exception {
         // pfbxCustomerInfoId > PfbxUserOptionBean
-        Map<String, Map<String, PfbxUserOptionBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserOptionBean>>();
+        Map<String, Map<String, PfbxUserOptionBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserOptionBean> pfbxUserOptionMap = null;
         PfbxUserOptionBean pfbxUserOptionBean = null;
         AdCategoryNewBean adCategoryNewBean = null;
@@ -1631,7 +1631,7 @@ public class KernelJob {
 
             pfbxUserOptionMap = pfbxCustomerInfoMap.get(pfbxUserOptionBean.getPfbxCustomerInfoId());
             if (pfbxUserOptionMap == null) {
-                pfbxUserOptionMap = new HashMap<String, PfbxUserOptionBean>();
+                pfbxUserOptionMap = new HashMap<>();
             }
             pfbxUserOptionMap.put(pfbxUserOptionBean.getId(), pfbxUserOptionBean);
 
@@ -1656,7 +1656,7 @@ public class KernelJob {
 
     private void sample() throws Exception {
         // pfbxCustomerInfoId > PfbxUserSampleBean
-        Map<String, Map<String, PfbxUserSampleBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserSampleBean>>();
+        Map<String, Map<String, PfbxUserSampleBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserSampleBean> pfbxUserSampleMap = null;
         PfbxUserSampleBean pfbxUserSampleBean = null;
 
@@ -1702,7 +1702,7 @@ public class KernelJob {
 
             pfbxUserSampleMap = pfbxCustomerInfoMap.get(pfbxUserSampleBean.getPfbxCustomerInfoId());
             if (pfbxUserSampleMap == null) {
-                pfbxUserSampleMap = new LinkedHashMap<String, PfbxUserSampleBean>();
+                pfbxUserSampleMap = new LinkedHashMap<>();
             }
             pfbxUserSampleMap.put(pfbxUserSampleBean.getId(), pfbxUserSampleBean);
 
@@ -1726,7 +1726,7 @@ public class KernelJob {
 
     private void showRule() throws Exception {
         // pfbxCustomerInfoId > PfbxUserSampleBean
-        List<AdmShowRuleBean> admShowRuleList = new ArrayList<AdmShowRuleBean>();
+        List<AdmShowRuleBean> admShowRuleList = new ArrayList<>();
         AdmShowRuleBean admShowRuleBean = null;
 
         List<AdmShowRule> list = admShowRuleService.loadAll();
@@ -1756,7 +1756,7 @@ public class KernelJob {
     }
 
     private void blackUrl() throws Exception {
-        Map<String, List<PfbxBlackUrlBean>> pfbxBlackUrlMap = new HashMap<String, List<PfbxBlackUrlBean>>();
+        Map<String, List<PfbxBlackUrlBean>> pfbxBlackUrlMap = new HashMap<>();
         List<PfbxBlackUrlBean> pfbxBlackUrlList = null;
         PfbxBlackUrlBean pfbxBlackUrlBean = null;
         String pfbxCustomerInfoId = null;
@@ -1766,7 +1766,7 @@ public class KernelJob {
             pfbxCustomerInfoId = admPfbxBlockUrl.getPfbxCustomerInfo().getCustomerInfoId();
             pfbxBlackUrlList = pfbxBlackUrlMap.get(pfbxCustomerInfoId);
             if (pfbxBlackUrlList == null) {
-                pfbxBlackUrlList = new ArrayList<PfbxBlackUrlBean>();
+                pfbxBlackUrlList = new ArrayList<>();
             }
 
             pfbxBlackUrlBean = new PfbxBlackUrlBean();
@@ -1793,7 +1793,7 @@ public class KernelJob {
     }
 
     private void whiteUrl() throws Exception {
-        Map<String, List<PfbxWhiteUrlBean>> pfbxWhiteUrlMap = new HashMap<String, List<PfbxWhiteUrlBean>>();
+        Map<String, List<PfbxWhiteUrlBean>> pfbxWhiteUrlMap = new HashMap<>();
         List<PfbxWhiteUrlBean> pfbxWhiteUrlList = null;
         PfbxWhiteUrlBean pfbxWhiteUrlBean = null;
         String pfbxCustomerInfoId = null;
@@ -1803,7 +1803,7 @@ public class KernelJob {
             pfbxCustomerInfoId = pfbxAllowUrl.getPfbxCustomerInfo().getCustomerInfoId();
             pfbxWhiteUrlList = pfbxWhiteUrlMap.get(pfbxCustomerInfoId);
             if (pfbxWhiteUrlList == null) {
-                pfbxWhiteUrlList = new ArrayList<PfbxWhiteUrlBean>();
+                pfbxWhiteUrlList = new ArrayList<>();
             }
 
             pfbxWhiteUrlBean = new PfbxWhiteUrlBean();

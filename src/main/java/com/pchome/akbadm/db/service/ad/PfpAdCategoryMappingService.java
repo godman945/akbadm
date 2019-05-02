@@ -21,7 +21,7 @@ public class PfpAdCategoryMappingService extends BaseService<PfpAdCategoryMappin
 
     @Override
     public Map<String, StringBuilder> selectPfpAdCategoryMappingBufferMaps() {
-        Map<String, StringBuilder> map = new HashMap<String, StringBuilder>();
+        Map<String, StringBuilder> map = new HashMap<>();
         StringBuilder adClass = null;
 
         List<PfpAdCategoryMapping> list = ((IPfpAdCategoryMappingDAO)dao).loadAll();
