@@ -636,7 +636,7 @@ public class KernelJob {
 	            cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
 	        }
 
-	        if ((allPvclkSums[1] == 0) || (allPvclkSums[1] == 0)) {
+	        if (allPvclkSums[1] == 0) {
 	            cpvWeight = 0.005f;
 	        }
 	        else {
