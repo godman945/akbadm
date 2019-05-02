@@ -566,13 +566,13 @@ public class KernelJob {
         Float adBidPrice = null;
         int[] pvclkSums = null;
         int[] allPvclkSums = null;
-        float cpmWeight = 0f;
-        float cpvWeight = 0f;
-        float ctr = 0f;
+        float cpmWeight = 0;
+        float cpvWeight = 0;
+        float ctr = 0;
         int qualityGrade = 0;
         PfdUserAdAccountRef ref = null;
-        String adPvLimitStyle = "0";
-        String adPvLimitPeriod = "0";
+        String adPvLimitStyle = null;
+        String adPvLimitPeriod = null;
         int adPvLimitAmount = 0;
         Integer admArw = 1;
         String trackingSeq = null;
@@ -752,7 +752,6 @@ public class KernelJob {
                     }
 
                     // quality grade
-                    ctr = 0f;
                     qualityGrade = 6;
                     if (pvclkSums[0] != 0) {
                         if (EnumPriceType.CPC.toString().equals(priceType)) {
@@ -873,7 +872,6 @@ public class KernelJob {
                     trackingSeq = "";
                     trackingRangeDate = 0;
                     pfpCodeAdactionMerge = pfpCodeAdactionMergeMap.get(actionId);
-                    pfpCodeTracking = null;
                     if (pfpCodeAdactionMerge != null) {
                         pfpCodeTracking = pfpCodeTrackingMap.get(pfpCodeAdactionMerge.getCodeId());
                         if (pfpCodeTracking != null) {
