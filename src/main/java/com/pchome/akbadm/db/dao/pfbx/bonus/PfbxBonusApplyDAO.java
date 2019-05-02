@@ -25,7 +25,7 @@ public class PfbxBonusApplyDAO extends BaseDAO<PfbxBonusApply, String> implement
 		sql.append(" case when cus.category = '2' then cus.company_name else cus.contact_name end, cus.category, ");
 		sql.append(" case when cus.category = '2' then cus.tax_id else personal.id_card end, ");
 		sql.append(" cus.member_id, apply.apply_status, apply.apply_note, apply.apply_money, ");
-		sql.append(" bank.bank_name, bank.check_status, personal.name, personal.check_status, ");
+		sql.append(" bank.bank_name, bank.check_status, personal.name, personal.check_status personal_check_status, ");
 		sql.append(" apply.invoice_status, apply.invoice_note, apply.invoice_check_status ");
 		sql.append(" from pfbx_bonus_apply apply ");
 		sql.append(" join pfbx_customer_info cus on apply.pfb_id = cus.customer_info_id ");
