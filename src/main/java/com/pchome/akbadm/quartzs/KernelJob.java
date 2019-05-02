@@ -161,7 +161,7 @@ public class KernelJob {
     private int serverNumber;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
-    private Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
+    private Map<String, Map<String, AdBean>> currentPoolMap = new HashMap<>();
 
     public void process() throws IOException {
         log.info("====KernelJob.process() start====");
@@ -992,7 +992,7 @@ public class KernelJob {
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         // for prod
-        this.poolMap = poolMap;
+        this.currentPoolMap = poolMap;
 
         long endTime = Calendar.getInstance().getTimeInMillis();
         log.info("time: " + (endTime - startTime) / 1000 + "s");
@@ -1533,7 +1533,7 @@ public class KernelJob {
         String key = null;
         String value = null;
 
-        for (Map<String, AdBean> adMap : poolMap.values()) {
+        for (Map<String, AdBean> adMap : this.currentPoolMap.values()) {
             for (AdBean adBean : adMap.values()) {
                 if (StringUtils.isNotBlank(adBean.getProdGroupId())) {
                     prodGroupSet.add(adBean.getProdGroupId());
