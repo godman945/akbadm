@@ -209,53 +209,53 @@ window.document.addEventListener('visibilitychange', function() {
 }, false);
 window.addEventListener("message", getMessage0, false);
 
-function getMessage0(a) {
-    try {
-        if (a.data.adBackup != undefined && a.data.adBackup.iframeIndex != null && a.data.adBackup.ALEX == 'pcadshow') {
-            var b = a.data.adBackup.htmlContent;
-            if (b != null) {
-                var c = document.getElementsByClassName("akb_iframe");
-                if (b == 'blank') {
-                    var d = c[a.data.adBackup.iframeIndex];
-                    d.height = 0;
-                    d.width = 0
-                }
-                if (b != 'blank' && b != undefined) {
-                    var d = c[a.data.adBackup.iframeIndex];
-                    d.height = 0;
-                    d.width = 0;
-                    var e = d.parentElement;
-                    if (d.nextElementSibling == null || d.nextElementSibling.className != 'ad_backup_pchome') {
-                        var f = document.createElement('div');
-                        var g = document.createElement('div');
-                        g.className = 'ad_backup_pchome';
-                        f.innerHTML = b;
-                        var h = f.getElementsByTagName("*");
-                        for (var j = 0; j < h.length; j++) {
-                            var i = h[j].tagName;
-                            var l = h[j].attributes;
-                            var m = h[j].innerHTML;
-                            var n = document.createElement(i);
-                            for (var k = 0; k < l.length; k++) {
-                                var o = l[k];
-                                var p = o.name;
-                                var p = o.value;
-                                n.setAttribute(o.name, o.value)
-                            }
-                            n.text = m;
-                            g.appendChild(n, g.firstChild)
-                        }
-                        if (d.nextElementSibling == null) {
-                            e.appendChild(g, d.parentElement)
-                        } else {
-                            e.insertBefore(g, d.nextElementSibling)
-                        }
-                    }
-                }
-            }
-        }
-    } catch (err) {}
-}
+//function getMessage0(a) {
+//    try {
+//        if (a.data.adBackup != undefined && a.data.adBackup.iframeIndex != null && a.data.adBackup.ALEX == 'pcadshow') {
+//            var b = a.data.adBackup.htmlContent;
+//            if (b != null) {
+//                var c = document.getElementsByClassName("akb_iframe");
+//                if (b == 'blank') {
+//                    var d = c[a.data.adBackup.iframeIndex];
+//                    d.height = 0;
+//                    d.width = 0
+//                }
+//                if (b != 'blank' && b != undefined) {
+//                    var d = c[a.data.adBackup.iframeIndex];
+//                    d.height = 0;
+//                    d.width = 0;
+//                    var e = d.parentElement;
+//                    if (d.nextElementSibling == null || d.nextElementSibling.className != 'ad_backup_pchome') {
+//                        var f = document.createElement('div');
+//                        var g = document.createElement('div');
+//                        g.className = 'ad_backup_pchome';
+//                        f.innerHTML = b;
+//                        var h = f.getElementsByTagName("*");
+//                        for (var j = 0; j < h.length; j++) {
+//                            var i = h[j].tagName;
+//                            var l = h[j].attributes;
+//                            var m = h[j].innerHTML;
+//                            var n = document.createElement(i);
+//                            for (var k = 0; k < l.length; k++) {
+//                                var o = l[k];
+//                                var p = o.name;
+//                                var p = o.value;
+//                                n.setAttribute(o.name, o.value)
+//                            }
+//                            n.text = m;
+//                            g.appendChild(n, g.firstChild)
+//                        }
+//                        if (d.nextElementSibling == null) {
+//                            e.appendChild(g, d.parentElement)
+//                        } else {
+//                            e.insertBefore(g, d.nextElementSibling)
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    } catch (err) {}
+//}
 try {
     var iframeArrayData = document.getElementsByTagName("iframe");
     var iframeArray = [];
