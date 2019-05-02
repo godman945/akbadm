@@ -2,6 +2,7 @@ package com.pchome.akbadm.quartzs;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -225,7 +226,7 @@ public class KernelJob {
         log.info("====KernelJob.process() end====");
     }
 
-    private void style() throws Exception {
+    private void style() throws IOException {
         Map<String, StyleBean> map = new HashMap<>();
         StyleBean styleBean = null;
 
@@ -262,7 +263,7 @@ public class KernelJob {
         log.info("style: " + map.size());
     }
 
-    private void tpro() throws Exception {
+    private void tpro() throws IOException {
         File dir = new File(admAddata + EnumSequenceTableName.ADM_TEMPLATE_PRODUCT.getCharName());
         if (!dir.exists()) {
             log.info(dir.getPath() + " not exists");
@@ -465,7 +466,7 @@ public class KernelJob {
         log.info("tpro: " + map.size());
     }
 
-    private void tad() throws Exception {
+    private void tad() throws IOException {
         File dir = new File(admAddata + EnumSequenceTableName.ADM_TEMPLATE_AD.getCharName());
         if (!dir.exists()) {
             log.info(dir.getPath() + " not exists");
@@ -546,7 +547,7 @@ public class KernelJob {
         log.info("tad: " + map.size());
     }
 
-    private void pool() throws Exception {
+    private void pool() throws IOException {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
@@ -1191,7 +1192,7 @@ public class KernelJob {
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
-    private void keywordLucene2() throws Exception {
+    private void keywordLucene2() throws IOException {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
         // load adGroup
@@ -1203,7 +1204,6 @@ public class KernelJob {
         // lucene
         File keywordDir = new File(kernelAddataDir + "keyword/");
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new IKAnalyzer());
-        IndexWriter writer = null;
         Document doc = null;
 
         // yesterday
@@ -1215,9 +1215,7 @@ public class KernelJob {
         log.info("writer index = " + keywordDir.getPath());
 
         // write index
-        try {
-            writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig);
-
+        try (IndexWriter writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig)) {
             for (String groupId: groupList) {
                 pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(groupId, EnumExcludeKeywordStatus.START.getStatusId());
                 validKeywordList = pfpCustomerInfoService.selectValidAdKeyword(pfpAdExcludeKeywordList, pfpKeywordSyspriceMap, groupId, pvclkDate);
@@ -1248,18 +1246,9 @@ public class KernelJob {
             }
 
             log.info("maxDoc: " + writer.maxDoc());
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error(keywordDir.getPath(), e);
             throw e;
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    log.error(keywordDir.getPath(), e);
-                    throw e;
-                }
-            }
         }
 
         long endTime = Calendar.getInstance().getTimeInMillis();
@@ -1373,7 +1362,7 @@ public class KernelJob {
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
-    private void area() throws Exception {
+    private void area() throws IOException {
         Map<Integer, PfbxAreaBean> map = new HashMap<>();
         PfbxAreaBean pfbxAreaBean = null;
 
@@ -1401,7 +1390,7 @@ public class KernelJob {
         log.info("pfbxArea: " + map.size());
     }
 
-    private void position() throws Exception {
+    private void position() throws IOException {
         Map<String, PfbxPositionBean> map = new HashMap<>();
         PfbxPositionBean pfbxPositionBean = null;
 
@@ -1436,7 +1425,7 @@ public class KernelJob {
         log.info("pfbxPosition: " + map.size());
     }
 
-    private void size() throws Exception {
+    private void size() throws IOException {
         Map<Integer, PfbxSizeBean> map = new HashMap<>();
         PfbxSizeBean pfbxSizeBean = null;
 
@@ -1465,7 +1454,7 @@ public class KernelJob {
         log.info("pfbxSize: " + map.size());
     }
 
-    private void url() throws Exception {
+    private void url() throws IOException {
         Map<Integer, PfbxUrlBean> map = new HashMap<>();
         PfbxUrlBean pfbxUrlBean = null;
 
@@ -1494,7 +1483,7 @@ public class KernelJob {
         log.info("pfbxUrl: " + map.size());
     }
 
-    private void group() throws Exception {
+    private void group() throws IOException {
         // pfbxCustomerInfoId > PfbxUserGroupBean
         Map<String, Map<String, PfbxUserGroupBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserGroupBean> pfbxUserGroupMap = null;
@@ -1554,7 +1543,7 @@ public class KernelJob {
         log.info("pfbxGroup: " + pfbxCustomerInfoMap.size());
     }
 
-    private void option() throws Exception {
+    private void option() throws IOException {
         // pfbxCustomerInfoId > PfbxUserOptionBean
         Map<String, Map<String, PfbxUserOptionBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserOptionBean> pfbxUserOptionMap = null;
@@ -1652,7 +1641,7 @@ public class KernelJob {
         log.info("pfbxOption: " + pfbxCustomerInfoMap.size());
     }
 
-    private void sample() throws Exception {
+    private void sample() throws IOException {
         // pfbxCustomerInfoId > PfbxUserSampleBean
         Map<String, Map<String, PfbxUserSampleBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserSampleBean> pfbxUserSampleMap = null;
@@ -1722,7 +1711,7 @@ public class KernelJob {
         log.info("pfbxSample: " + pfbxCustomerInfoMap.size());
     }
 
-    private void showRule() throws Exception {
+    private void showRule() throws IOException {
         // pfbxCustomerInfoId > PfbxUserSampleBean
         List<AdmShowRuleBean> admShowRuleList = new ArrayList<>();
         AdmShowRuleBean admShowRuleBean = null;
@@ -1753,7 +1742,7 @@ public class KernelJob {
         log.info("admShowRule: " + admShowRuleList.size());
     }
 
-    private void blackUrl() throws Exception {
+    private void blackUrl() throws IOException {
         Map<String, List<PfbxBlackUrlBean>> pfbxBlackUrlMap = new HashMap<>();
         List<PfbxBlackUrlBean> pfbxBlackUrlList = null;
         PfbxBlackUrlBean pfbxBlackUrlBean = null;
@@ -1790,7 +1779,7 @@ public class KernelJob {
         log.info("pfbxBlackUrl: " + pfbxBlackUrlMap.size());
     }
 
-    private void whiteUrl() throws Exception {
+    private void whiteUrl() throws IOException {
         Map<String, List<PfbxWhiteUrlBean>> pfbxWhiteUrlMap = new HashMap<>();
         List<PfbxWhiteUrlBean> pfbxWhiteUrlList = null;
         PfbxWhiteUrlBean pfbxWhiteUrlBean = null;
@@ -1831,7 +1820,7 @@ public class KernelJob {
     }
 
     @SuppressWarnings("unchecked")
-    private void prod() throws Exception {
+    private void prod() throws IOException {
         Map<String, AdBean> adMap = null;
         AdBean adBean = null;
         Set<String> prodGroupSet = new HashSet<>();
@@ -1903,7 +1892,7 @@ public class KernelJob {
         log.info("prodMap: " + prodMap.size());
     }
 
-    private void scp() throws Exception {
+    private void scp() {
         for (SpringSSHProcessUtil2 scpProcess: scpProcessList) {
             scpProcess.sshExec("rm -rf " + kernelAddata);
             scpProcess.sshExec("mkdir -p " + kernelAddataDir);

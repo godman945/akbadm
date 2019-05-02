@@ -23,6 +23,6 @@ public interface IPfpAdExcludeKeywordService extends IBaseService<PfpAdExcludeKe
 
 	public List<PfpAdExcludeKeyword> getPfpAdExcludeKeywords(String adGroupSeq, String customerInfoId) throws Exception;
 
-    public List<PfpAdExcludeKeyword> selectPfpAdExcludeKeywords(String adGroupSeq, int status) throws Exception;
+    public List<PfpAdExcludeKeyword> selectPfpAdExcludeKeywords(String adGroupSeq, int status);
 
 }

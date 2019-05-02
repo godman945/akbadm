@@ -790,7 +790,7 @@ public class PfpCustomerInfoService extends BaseService<PfpCustomerInfo,String> 
     }
 
     @Override
-    public List<ValidKeywordBean> selectValidAdKeyword(List<PfpAdExcludeKeyword> excludeKeywordList, Map<String, Float> syspriceMap, String groupId, String pvclkDate) throws Exception {
+    public List<ValidKeywordBean> selectValidAdKeyword(List<PfpAdExcludeKeyword> excludeKeywordList, Map<String, Float> syspriceMap, String groupId, String pvclkDate) {
         List<Object[]> objList = ((IPfpCustomerInfoDAO) dao).selectValidAdKeyword(groupId, pvclkDate, remain);
 
         // exclude keyword
@@ -1072,13 +1072,13 @@ public class PfpCustomerInfoService extends BaseService<PfpCustomerInfo,String> 
     @Override
     public Map<String,String> findPfpCustomerInfoNameMap() throws Exception{
     	Map<String,String> map = new LinkedHashMap<String,String>();
-    	
+
     	List<PfpCustomerInfo> list = ((IPfpCustomerInfoDAO) dao).getAllCustomerInfo();
-    	
+
     	for(PfpCustomerInfo pfpCustomerInfo:list){
     		map.put(pfpCustomerInfo.getCustomerInfoId(), pfpCustomerInfo.getCustomerInfoTitle());
     	}
-    	
+
     	return map;
     }
 
@@ -1109,7 +1109,8 @@ public class PfpCustomerInfoService extends BaseService<PfpCustomerInfo,String> 
     public void setKeywordSysprice(float keywordSysprice) {
         this.keywordSysprice = keywordSysprice;
     }
-    
+
+    @Override
     public void saveOrUpdateWithCommit(PfpCustomerInfo pfpCustomerInfo) throws Exception{
 		((IPfpCustomerInfoDAO)dao).saveOrUpdateWithCommit(pfpCustomerInfo);
 	}
@@ -1125,12 +1126,12 @@ public class PfpCustomerInfoService extends BaseService<PfpCustomerInfo,String> 
 //		AccountVO vo = service .findRegisterDataById("reantoilpc");
 //
 //	}
-    
+
     @Override
     public List<PfpCustomerInfo> findCustomerInfoIds(List<String> customerInfoList) throws Exception{
     	return ((IPfpCustomerInfoDAO) dao).findCustomerInfoIds(customerInfoList);
     }
-    
+
     @Override
     @Transactional
     public List<String> findTransDetailPfp(String yesterday , String today , String tomorrow) throws Exception {
@@ -1141,7 +1142,7 @@ public class PfpCustomerInfoService extends BaseService<PfpCustomerInfo,String> 
     	List<Object> objects = ((IPfpCustomerInfoDAO) dao).findTransDetailPfp(yesterday , today , tomorrow);
 
 		for(Object object:objects){
-				String pfp = (String) object;		
+				String pfp = (String) object;
 				vos.add(pfp);
 		}
     	return vos;
