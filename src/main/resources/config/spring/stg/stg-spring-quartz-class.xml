@@ -86,6 +86,7 @@
         <property name="scpProcessList">
             <list>
                 <ref bean="Kwstg1SSHProcess" />
+                <ref bean="Kwstg2SSHProcess" />
             </list>
         </property>
     </bean>
