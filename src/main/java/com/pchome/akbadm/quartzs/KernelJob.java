@@ -122,7 +122,8 @@ import com.thoughtworks.xstream.XStream;
 
 @Transactional
 public class KernelJob {
-    private static String[] extensions = new String[]{"def"};
+    private static final String WRITE_FILE = "write file = ";
+    private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
 
@@ -246,7 +247,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "style.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -274,7 +275,7 @@ public class KernelJob {
         String tadId = null;
         String backupTadId = null;
 
-        Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, false);
+        Iterator<File> iterator = FileUtils.iterateFiles(dir, EXTENSIONS, false);
         File file = null;
         List<String> lineList = null;
         boolean htmlFlag = false;
@@ -289,7 +290,7 @@ public class KernelJob {
 
                 tproBean = new TproBean();
                 tproId = file.getName();
-                for (String extension: extensions) {
+                for (String extension: EXTENSIONS) {
                     tproId = tproId.replace("." + extension, "");
                 }
                 tproBean.setTproId(tproId);
@@ -449,7 +450,7 @@ public class KernelJob {
         // write file
         file = new File(kernelAddataDir + "tpro.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -473,7 +474,7 @@ public class KernelJob {
         String poolId = null;
         String tadId = null;
 
-        Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, false);
+        Iterator<File> iterator = FileUtils.iterateFiles(dir, EXTENSIONS, false);
         File file = null;
         List<String> lineList = null;
         boolean contentFlag = false;
@@ -492,7 +493,7 @@ public class KernelJob {
                     }
 
                     tadId = file.getName();
-                    for (String extension: extensions) {
+                    for (String extension: EXTENSIONS) {
                         tadId = tadId.replace("." + extension, "");
                     }
                     tadBean.setTadId(tadId);
@@ -530,7 +531,7 @@ public class KernelJob {
         // write file
         file = new File(kernelAddataDir + "tad.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -988,7 +989,7 @@ public class KernelJob {
 
         // write file
         File file = new File(kernelAddataDir + "pool.xml");
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         // for prod
@@ -1082,7 +1083,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxArea.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1117,7 +1118,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxPosition.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1146,7 +1147,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxSize.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1175,7 +1176,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1235,7 +1236,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxGroup.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1333,7 +1334,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxOption.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1403,7 +1404,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxSample.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1434,7 +1435,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "admShowRule.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1471,7 +1472,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxBlackUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1511,7 +1512,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxWhiteUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
@@ -1579,7 +1580,7 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "prod.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
         FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
