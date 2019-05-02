@@ -55,7 +55,6 @@
         <property name="pfbStyleInfoService" ref="PfbStyleInfoService2" />
         <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService2" />
         <property name="pfpAdPvclkService" ref="PfpAdPvclkService2" />
-        <property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService2" />
         <property name="pfpAdSyspriceService" ref="PfpAdSyspriceService2" />
         <property name="pfpKeywordSyspriceService" ref="PfpKeywordSyspriceService2" />
         <property name="pfpAdExcludeKeywordService" ref="PfpAdExcludeKeywordService2" />
@@ -80,7 +79,6 @@
         <property name="pfbStyleInfoService" ref="PfbStyleInfoService" />
         <property name="pfpCustomerInfoService" ref="PfpCustomerInfoService" />
         <property name="pfpAdPvclkService" ref="PfpAdPvclkService" />
-        <property name="pfpAdKeywordPvclkService" ref="PfpAdKeywordPvclkService" />
         <property name="pfpAdSyspriceService" ref="PfpAdSyspriceService" />
         <property name="pfpKeywordSyspriceService" ref="PfpKeywordSyspriceService" />
         <property name="pfpAdExcludeKeywordService" ref="PfpAdExcludeKeywordService" />
@@ -106,10 +104,8 @@
        
         <property name="admAddata" value="${adm.addata}" />
         <property name="kernelAddata" value="${kernel.addata}" />
-        <property name="multicorePath" value="${multicore.path}" />
         <property name="pfpProdGroupListApiUrl" value="${pfp.prodGroupListApi.url}" />
         <property name="adSysprice" value="${ad.sysprice}" />
-        <property name="keywordSysprice" value="${keyword.sysprice}" />
         <property name="makeNumber" value="${make.number}" />
         <property name="serverNumber" value="${server.number}" />
         <property name="scpProcessList">

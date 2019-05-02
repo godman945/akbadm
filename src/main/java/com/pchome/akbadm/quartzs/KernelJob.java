@@ -94,7 +94,6 @@ import com.pchome.akbadm.db.service.ad.IAdmShowRuleService;
 import com.pchome.akbadm.db.service.ad.IPfbStyleInfoService;
 import com.pchome.akbadm.db.service.ad.IPfpAdCategoryMappingService;
 import com.pchome.akbadm.db.service.ad.IPfpAdExcludeKeywordService;
-import com.pchome.akbadm.db.service.ad.IPfpAdKeywordPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdSpecificWebsiteService;
 import com.pchome.akbadm.db.service.code.IPfpCodeAdactionMergeService;
@@ -129,7 +128,6 @@ public class KernelJob {
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
-    private IPfpAdKeywordPvclkService pfpAdKeywordPvclkService;
     private IPfpAdPvclkService pfpAdPvclkService;
     private IPfpAdSyspriceService pfpAdSyspriceService;
     private IPfpKeywordSyspriceService pfpKeywordSyspriceService;
@@ -157,10 +155,8 @@ public class KernelJob {
     private String admAddata;
     private String kernelAddata;
     private String kernelAddataDir;
-    private String multicorePath;
     private String pfpProdGroupListApiUrl;
     private float adSysprice;
-    private float keywordSysprice;
     private int makeNumber;
     private int serverNumber;
     private List<SpringSSHProcessUtil2> scpProcessList;
@@ -1522,7 +1518,6 @@ public class KernelJob {
         log.info("pfbxWhiteUrl: " + pfbxWhiteUrlMap.size());
     }
 
-    @SuppressWarnings("unchecked")
     private void prod() throws IOException {
         Map<String, AdBean> adMap = null;
         AdBean adBean = null;
@@ -1682,10 +1677,6 @@ public class KernelJob {
         this.pfpCustomerInfoService = pfpCustomerInfoService;
     }
 
-    public void setPfpAdKeywordPvclkService(IPfpAdKeywordPvclkService pfpAdKeywordPvclkService) {
-        this.pfpAdKeywordPvclkService = pfpAdKeywordPvclkService;
-    }
-
     public void setPfpAdPvclkService(IPfpAdPvclkService pfpAdPvclkService) {
         this.pfpAdPvclkService = pfpAdPvclkService;
     }
@@ -1770,20 +1761,12 @@ public class KernelJob {
         this.kernelAddata = kernelAddata;
     }
 
-    public void setMulticorePath(String multicorePath) {
-        this.multicorePath = multicorePath;
-    }
-
     public void setPfpProdGroupListApiUrl(String pfpProdGroupListApiUrl) {
         this.pfpProdGroupListApiUrl = pfpProdGroupListApiUrl;
     }
 
     public void setAdSysprice(float adSysprice) {
         this.adSysprice = adSysprice;
-    }
-
-    public void setKeywordSysprice(float keywordSysprice) {
-        this.keywordSysprice = keywordSysprice;
     }
 
     public void setMakeNumber(int makeNumber) {
