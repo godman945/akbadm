@@ -1091,7 +1091,7 @@ public class KernelJob {
                 pfpAdGroup = pfpAdKeyword.getPfpAdGroup();
 
                 tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
-                if ((tempAdList == null) || (tempAdList.size() <= 0)) {
+                if ((tempAdList == null) || tempAdList.isEmpty()) {
                     continue;
                 }
 
