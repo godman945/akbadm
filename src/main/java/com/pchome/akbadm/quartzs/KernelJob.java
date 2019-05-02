@@ -565,7 +565,7 @@ public class KernelJob {
         String adId = null;
         String actionId = null;
         String pfpCustomerInfoId = null;
-        StringBuffer adClass = null;
+        StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
         Float adSearchPrice = null;
@@ -590,7 +590,7 @@ public class KernelJob {
         log.info("pfpCustomerInfoService.selectValidAdDetail " + pfpAdDetailList.size());
 
         // get category mapping
-        Map<String, StringBuffer> adClassCache = pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps();
+        Map<String, StringBuilder> adClassCache = pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps();
         log.info("pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps " + adClassCache.size());
 
         // get category code
@@ -610,8 +610,8 @@ public class KernelJob {
         log.info("pfpAdSyspriceService.selectAdSyspriceByPoolSeq " + adSystemPrice);
 
         // adActionTime
-        Map<String, StringBuffer> adActionTimeCache = new HashMap<String, StringBuffer>();
-        StringBuffer adActionTime = null;
+        Map<String, StringBuilder> adActionTimeCache = new HashMap<String, StringBuilder>();
+        StringBuilder adActionTime = null;
 
         // yesterday
         Calendar calendar = Calendar.getInstance();
@@ -702,7 +702,7 @@ public class KernelJob {
                     // get adClass
                     adClass = adClassCache.get(pfpAd.getAdSeq());
                     if (adClass == null) {
-                        adClass = new StringBuffer();
+                        adClass = new StringBuilder();
                     }
 
                     // get category code
@@ -713,7 +713,7 @@ public class KernelJob {
 
                     adActionTime = adActionTimeCache.get(actionId);
                     if (adActionTime == null) {
-                        adActionTime = new StringBuffer();
+                        adActionTime = new StringBuilder();
                         adActionTime.append(pfpAdAction.getAdActionSunTime()).append(";");
                         adActionTime.append(pfpAdAction.getAdActionMonTime()).append(";");
                         adActionTime.append(pfpAdAction.getAdActionTueTime()).append(";");
@@ -1036,7 +1036,7 @@ public class KernelJob {
         PfpAdGroup pfpAdGroup = null;
         PfpAdAction pfpAdAction = null;
         PfpCustomerInfo pfpCustomerInfo = null;
-        StringBuffer excludeKeyword = null;
+        StringBuilder excludeKeyword = null;
         int count = 0;
 
         // exclude keyword
@@ -1064,7 +1064,7 @@ public class KernelJob {
 
         // cache
         Map<String, List<PfpAd>> pfpAdGroupCache = new HashMap<String, List<PfpAd>>();
-        Map<String, StringBuffer> excludeKeywordCache = new HashMap<String, StringBuffer>();
+        Map<String, StringBuilder> excludeKeywordCache = new HashMap<String, StringBuilder>();
         Map<String, Float> pfpKeywordSyspriceCache = new HashMap<String, Float>();
 
         // id, [sum(ad_keyword_pv), sum(ad_keyword_clk)]
@@ -1103,7 +1103,7 @@ public class KernelJob {
                 // get exclude keyword
                 excludeKeyword = excludeKeywordCache.get(pfpAdGroup.getAdGroupSeq());
                 if (excludeKeyword == null) {
-                    excludeKeyword = new StringBuffer();
+                    excludeKeyword = new StringBuilder();
 
                     pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(pfpAdGroup.getAdGroupSeq(), EnumExcludeKeywordStatus.START.getStatusId());
                     for (PfpAdExcludeKeyword adExcludeKeyword: pfpAdExcludeKeywordList) {
@@ -1280,7 +1280,7 @@ public class KernelJob {
 
         // solr xml
         FileOutputStream fileOutputStream = null;
-        StringBuffer line = null;
+        StringBuilder line = null;
         int count = 0;
 
         // yesterday
@@ -1291,7 +1291,7 @@ public class KernelJob {
         String pvclkDate = df.format(calendar.getTime());
 
         // output dir
-        StringBuffer outputDir = new StringBuffer();
+        StringBuilder outputDir = new StringBuilder();
         outputDir.append(multicorePath);
         outputDir.append("akb_keyword").append(File.separator);
         outputDir.append("data").append(File.separator);
@@ -1299,7 +1299,7 @@ public class KernelJob {
         new File(outputDir.toString()).mkdirs();
 
         // output file
-        StringBuffer outputPath = new StringBuffer();
+        StringBuilder outputPath = new StringBuilder();
         outputPath.append(outputDir);
         outputPath.append("keyword_").append(sdf.format(Calendar.getInstance().getTime()));
         File xmlFile = new File(outputPath.toString() + ".xml");
@@ -1320,7 +1320,7 @@ public class KernelJob {
 
                 for (ValidKeywordBean bean: validKeywordList) {
                     // write solr xml
-                    line = new StringBuffer();
+                    line = new StringBuilder();
                     line.append("<doc>\n");
                     line.append("\t<field name=\"").append(EnumIndexField.pk.getUnderLine()).append("\"><![CDATA[").append(bean.getPk()).append("]]></field>\n");
                     line.append("\t<field name=\"").append(EnumIndexField.adActionId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdActionId()).append("]]></field>\n");
@@ -1838,7 +1838,7 @@ public class KernelJob {
         AdBean adBean = null;
         Set<String> prodGroupSet = new HashSet<>();
 
-        StringBuffer url = null;
+        StringBuilder url = null;
         Map<String, List<Map<String, String>>> prodMap = new HashMap<>();
         List<Map<String, String>> prodList = null;
         Map<String, String> prodItemMap = null;
@@ -1861,7 +1861,7 @@ public class KernelJob {
         }
 
         for (String prodGroupId: prodGroupSet) {
-            url = new StringBuffer();
+            url = new StringBuilder();
             url.append(pfpProdGroupListApiUrl);
             url.append("?groupId=").append(prodGroupId);
             url.append("&prodNum=50");
@@ -1925,7 +1925,7 @@ public class KernelJob {
         }
 
         // url
-        StringBuffer urlSb = new StringBuffer();
+        StringBuilder urlSb = new StringBuilder();
         urlSb.append(urls[0]).append("?");
 
         // param

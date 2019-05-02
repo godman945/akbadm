@@ -13,5 +13,5 @@ public interface IPfpAdCategoryMappingService extends IBaseService<PfpAdCategory
 
 //    public Map<String, List<PfpAdCategoryMapping>> selectPfpAdCategoryMappingMaps();
 
-    public Map<String, StringBuffer> selectPfpAdCategoryMappingBufferMaps();
+    public Map<String, StringBuilder> selectPfpAdCategoryMappingBufferMaps();
 }

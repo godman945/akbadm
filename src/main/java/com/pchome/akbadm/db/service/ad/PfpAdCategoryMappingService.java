@@ -39,15 +39,15 @@ public class PfpAdCategoryMappingService extends BaseService<PfpAdCategoryMappin
 //    }
 
     @Override
-    public Map<String, StringBuffer> selectPfpAdCategoryMappingBufferMaps() {
-        Map<String, StringBuffer> map = new HashMap<String, StringBuffer>();
-        StringBuffer adClass = null;
+    public Map<String, StringBuilder> selectPfpAdCategoryMappingBufferMaps() {
+        Map<String, StringBuilder> map = new HashMap<String, StringBuilder>();
+        StringBuilder adClass = null;
 
         List<PfpAdCategoryMapping> list = ((IPfpAdCategoryMappingDAO)dao).loadAll();
         for (PfpAdCategoryMapping bean: list) {
             adClass = map.get(bean.getAdSeq());
             if (adClass == null) {
-                adClass = new StringBuffer();
+                adClass = new StringBuilder();
             }
             if (adClass.length() > 0) {
                 adClass.append(";");
