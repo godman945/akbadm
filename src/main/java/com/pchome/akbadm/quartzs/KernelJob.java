@@ -1,12 +1,10 @@
 package com.pchome.akbadm.quartzs;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,7 +19,6 @@ import java.util.Set;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.lucene.document.Document;
@@ -88,12 +85,10 @@ import com.pchome.akbadm.db.pojo.PfpAdAction;
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
 import com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdGroup;
-import com.pchome.akbadm.db.pojo.PfpAdKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdSysprice;
 import com.pchome.akbadm.db.pojo.PfpCodeAdactionMerge;
 import com.pchome.akbadm.db.pojo.PfpCodeTracking;
 import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
-import com.pchome.akbadm.db.pojo.PfpKeywordSysprice;
 import com.pchome.akbadm.db.service.ad.IAdmArwValueService;
 import com.pchome.akbadm.db.service.ad.IAdmShowRuleService;
 import com.pchome.akbadm.db.service.ad.IPfbStyleInfoService;
@@ -168,12 +163,11 @@ public class KernelJob {
     private float keywordSysprice;
     private int makeNumber;
     private int serverNumber;
-    private boolean solrFlag;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
     private Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
 
-    public void process() throws Exception {
+    public void process() throws IOException {
         log.info("====KernelJob.process() start====");
 
         File lockFile = new File(kernelAddata + File.separator + "lock.txt");
@@ -1010,189 +1004,7 @@ public class KernelJob {
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
-    private void keyword() throws Exception {
-        if (solrFlag) {
-            keywordSolr();
-            keywordLucene2();
-        }
-        else {
-            keywordLucene2();
-        }
-    }
-
-    @Deprecated
-    @SuppressWarnings("unused")
-    private void keywordLucene() throws Exception {
-        long startTime = Calendar.getInstance().getTimeInMillis();
-
-        // load ad (because calculate adPvclk) and keyword (because calculate adKeywordPvclk)
-        List<PfpAd> pfpAdList = pfpCustomerInfoService.selectValidAd();
-        List<PfpAdKeyword> pfpAdKeywordList = pfpCustomerInfoService.selectValidAdKeyword();
-        File keywordDir = new File(kernelAddataDir + "keyword/");
-        IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new IKAnalyzer());
-        IndexWriter writer = null;
-        Document doc = null;
-        PfpAdGroup pfpAdGroup = null;
-        PfpAdAction pfpAdAction = null;
-        PfpCustomerInfo pfpCustomerInfo = null;
-        StringBuilder excludeKeyword = null;
-        int count = 0;
-
-        // exclude keyword
-        List<PfpAdExcludeKeyword> pfpAdExcludeKeywordList = null;
-
-        // sysprice
-        PfpKeywordSysprice pfpKeywordSysprice = null;
-        Float keywordSystemPrice = null;
-        Float keywordSearchPrice = null;
-        Float keywordChannelPrice = null;
-        Float keywordTempPrice = null;
-        int[] pvclkSums = null;
-
-        // yesterday
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        try {
-            calendar.setTime(df.parse(df.format(calendar.getTime())));
-        } catch (ParseException pe) {
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-        }
-
-        // cache
-        Map<String, List<PfpAd>> pfpAdGroupCache = new HashMap<>();
-        Map<String, StringBuilder> excludeKeywordCache = new HashMap<>();
-        Map<String, Float> pfpKeywordSyspriceCache = new HashMap<>();
-
-        // id, [sum(ad_keyword_pv), sum(ad_keyword_clk)]
-        Map<String, int[]> pfpAdKeywordPvclkSumsCache = pfpAdKeywordPvclkService.selectPfpAdKeywordPvclkSums(calendar.getTime());
-
-        // set pfpAdGroup
-        List<PfpAd> tempAdList = null;
-        for (PfpAd pfpAd: pfpAdList) {
-            pfpAdGroup = pfpAd.getPfpAdGroup();
-
-            tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
-            if (tempAdList == null) {
-                tempAdList = new ArrayList<>();
-            }
-            tempAdList.add(pfpAd);
-            pfpAdGroupCache.put(pfpAdGroup.getAdGroupSeq(), tempAdList);
-        }
-
-        log.info("writer index = " + keywordDir.getPath());
-
-        // write index
-        try {
-            writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig);
-
-            for (PfpAdKeyword pfpAdKeyword: pfpAdKeywordList) {
-                pfpAdGroup = pfpAdKeyword.getPfpAdGroup();
-
-                tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
-                if ((tempAdList == null) || tempAdList.isEmpty()) {
-                    continue;
-                }
-
-                pfpAdAction = pfpAdGroup.getPfpAdAction();
-                pfpCustomerInfo = pfpAdAction.getPfpCustomerInfo();
-
-                // get exclude keyword
-                excludeKeyword = excludeKeywordCache.get(pfpAdGroup.getAdGroupSeq());
-                if (excludeKeyword == null) {
-                    excludeKeyword = new StringBuilder();
-
-                    pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(pfpAdGroup.getAdGroupSeq(), EnumExcludeKeywordStatus.START.getStatusId());
-                    for (PfpAdExcludeKeyword adExcludeKeyword: pfpAdExcludeKeywordList) {
-                        excludeKeyword.append(adExcludeKeyword.getAdExcludeKeyword()).append(",");
-                    }
-
-                    excludeKeywordCache.put(pfpAdGroup.getAdGroupSeq(), excludeKeyword);
-                }
-
-                // get kernel price
-                keywordSystemPrice = pfpKeywordSyspriceCache.get(pfpAdKeyword.getAdKeyword());
-                if (keywordSystemPrice == null) {
-                    pfpKeywordSysprice = pfpKeywordSyspriceService.selectKeywordSyspriceByKeyword(pfpAdKeyword.getAdKeyword(), 1, 0);
-                    if (pfpKeywordSysprice != null) {
-                        keywordSystemPrice = pfpKeywordSysprice.getSysprice();
-                    }
-                    else {
-                        keywordSystemPrice = keywordSysprice;
-                    }
-
-                    pfpKeywordSyspriceCache.put(pfpAdKeyword.getAdKeyword(), keywordSystemPrice);
-                }
-
-                switch (pfpAdGroup.getAdGroupSearchPriceType()) {
-                case 1:
-                    keywordSearchPrice = keywordSystemPrice;
-                    break;
-                case 2:
-                default:
-                    keywordSearchPrice = pfpAdKeyword.getAdKeywordSearchPrice() > keywordSystemPrice ? keywordSystemPrice : pfpAdKeyword.getAdKeywordSearchPrice();
-                    break;
-                }
-                keywordChannelPrice = pfpAdKeyword.getAdKeywordChannelPrice() > keywordSystemPrice ? keywordSystemPrice : pfpAdKeyword.getAdKeywordChannelPrice();
-
-                if ("N".equals(pfpCustomerInfo.getRecognize())) {
-                    keywordSearchPrice = 0f;
-                    keywordChannelPrice = 0f;
-                }
-
-                // get sums
-                pvclkSums = pfpAdKeywordPvclkSumsCache.get(pfpAdKeyword.getAdKeywordSeq());
-                if (pvclkSums == null) {
-                    pvclkSums = new int[2];
-                }
-
-                // temp price
-                keywordTempPrice = keywordSearchPrice + (pvclkSums[0] > 0 ? (pvclkSums[1] / pvclkSums[0] * 10) : 0) + RandomUtils.nextFloat();
-
-                for (PfpAd pfpAd: tempAdList) {
-                    // write lucene
-                    doc = new Document();
-                    doc.add(new Field(EnumIndexField.adActionId.toString(), pfpAdAction.getAdActionSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adGroupId.toString(), pfpAdGroup.getAdGroupSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adId.toString(), pfpAd.getAdSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordId.toString(), pfpAdKeyword.getAdKeywordSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeyword.toString(), pfpAdKeyword.getAdKeyword(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adExcludeKeyword.toString(), excludeKeyword.toString(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adActionControlPrice.toString(), String.valueOf(pfpAdAction.getAdActionControlPrice() / makeNumber / serverNumber), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordSearchPrice.toString(), String.valueOf(keywordSearchPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordChannelPrice.toString(), String.valueOf(keywordChannelPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordTempPrice.toString(), String.valueOf(keywordTempPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordPv.toString(), String.valueOf(pvclkSums[0]), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordClk.toString(), String.valueOf(pvclkSums[1]), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.recognize.toString(), pfpCustomerInfo.getRecognize(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    writer.addDocument(doc);
-
-                    count++;
-                }
-            }
-        } catch (Exception e) {
-            log.error(keywordDir.getPath(), e);
-            throw e;
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    log.error(keywordDir.getPath(), e);
-                    throw e;
-                }
-            }
-        }
-
-        log.info("index: " + count);
-
-        long endTime = Calendar.getInstance().getTimeInMillis();
-        log.info("time: " + (endTime - startTime) / 1000 + "s");
-    }
-
-    private void keywordLucene2() throws IOException {
+    private void keyword() throws IOException {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
         // load adGroup
@@ -1252,113 +1064,6 @@ public class KernelJob {
         }
 
         long endTime = Calendar.getInstance().getTimeInMillis();
-        log.info("time: " + (endTime - startTime) / 1000 + "s");
-    }
-
-    @Deprecated
-    private void keywordSolr() throws Exception {
-        long startTime = Calendar.getInstance().getTimeInMillis();
-
-        // load adGroup
-        List<String> groupList = pfpCustomerInfoService.selectValidAdGroup("keyword");
-        Map<String, Float> pfpKeywordSyspriceMap = pfpKeywordSyspriceService.getKeywordMap();
-        List<PfpAdExcludeKeyword> pfpAdExcludeKeywordList = null;
-        List<ValidKeywordBean> validKeywordList = null;
-
-        // solr xml
-        FileOutputStream fileOutputStream = null;
-        StringBuilder line = null;
-        int count = 0;
-
-        // yesterday
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        String pvclkDate = df.format(calendar.getTime());
-
-        // output dir
-        StringBuilder outputDir = new StringBuilder();
-        outputDir.append(multicorePath);
-        outputDir.append("akb_keyword").append(File.separator);
-        outputDir.append("data").append(File.separator);
-        outputDir.append("xml").append(File.separator);
-        new File(outputDir.toString()).mkdirs();
-
-        // output file
-        StringBuilder outputPath = new StringBuilder();
-        outputPath.append(outputDir);
-        outputPath.append("keyword_").append(sdf.format(Calendar.getInstance().getTime()));
-        File xmlFile = new File(outputPath.toString() + ".xml");
-        File tempFile = new File(outputPath.toString() + ".tmp");
-
-        log.info("solr xml = " + xmlFile.getPath());
-
-        fileOutputStream = FileUtils.openOutputStream(tempFile);
-        fileOutputStream.write("<update>\n".getBytes(StandardCharsets.UTF_8));
-        fileOutputStream.write("<delete><query>*</query></delete>\n".getBytes(StandardCharsets.UTF_8));
-        fileOutputStream.write("<add>\n".getBytes(StandardCharsets.UTF_8));
-
-        // write index
-        try {
-            for (String groupId: groupList) {
-                pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(groupId, EnumExcludeKeywordStatus.START.getStatusId());
-                validKeywordList = pfpCustomerInfoService.selectValidAdKeyword(pfpAdExcludeKeywordList, pfpKeywordSyspriceMap, groupId, pvclkDate);
-
-                for (ValidKeywordBean bean: validKeywordList) {
-                    // write solr xml
-                    line = new StringBuilder();
-                    line.append("<doc>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.pk.getUnderLine()).append("\"><![CDATA[").append(bean.getPk()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adActionId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdActionId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adGroupId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdGroupId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeyword.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeyword()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adExcludeKeyword.getUnderLine()).append("\"><![CDATA[").append(bean.getAdExcludeKeyword()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adActionControlPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdActionControlPrice() / makeNumber / serverNumber).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordSearchPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordSearchPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordChannelPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordChannelPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordTempPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordTempPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordPv.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordPv()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordClk.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordClk()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.recognize.getUnderLine()).append("\"><![CDATA[").append(bean.getRecognize()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.updateDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getUpdateDate())).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.createDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getCreateDate())).append("]]></field>\n");
-                    line.append("</doc>\n");
-                    fileOutputStream.write(line.toString().getBytes(StandardCharsets.UTF_8));
-                }
-
-                count += validKeywordList.size();
-            }
-
-            fileOutputStream.write("</add>\n".getBytes(StandardCharsets.UTF_8));
-            fileOutputStream.write("</update>\n".getBytes(StandardCharsets.UTF_8));
-
-            // success
-            log.info("count: " + count);
-            log.info("solr xml success");
-            FileUtils.deleteQuietly(xmlFile);
-            FileUtils.moveFile(tempFile, xmlFile);
-        } catch (Exception e) {
-            // fail
-            log.info("solr xml fail");
-            FileUtils.deleteQuietly(xmlFile);
-            FileUtils.deleteQuietly(tempFile);
-
-            throw e;
-        } finally {
-            try {
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (Exception e) {
-                log.error(outputPath, e);
-            }
-        }
-
-        long endTime = Calendar.getInstance().getTimeInMillis();
-
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
@@ -2089,10 +1794,6 @@ public class KernelJob {
 
     public void setServerNumber(int serverNumber) {
         this.serverNumber = serverNumber;
-    }
-
-    public void setSolrFlag(boolean solrFlag) {
-        this.solrFlag = solrFlag;
     }
 
     public void setScpProcessList(List<SpringSSHProcessUtil2> scpProcessList) {
