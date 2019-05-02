@@ -22,8 +22,8 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.RandomUtils;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
@@ -43,14 +43,11 @@ import com.pchome.akbadm.bean.AdDetailBean;
 import com.pchome.akbadm.bean.AdmShowRuleBean;
 import com.pchome.akbadm.bean.PfbxAreaBean;
 import com.pchome.akbadm.bean.PfbxBlackUrlBean;
-//import com.pchome.akbadm.bean.PfbxAssignPriceBean;
 import com.pchome.akbadm.bean.PfbxPositionBean;
-//import com.pchome.akbadm.bean.PfbxPriceBean;
 import com.pchome.akbadm.bean.PfbxSizeBean;
 import com.pchome.akbadm.bean.PfbxUrlBean;
 import com.pchome.akbadm.bean.PfbxUserGroupBean;
 import com.pchome.akbadm.bean.PfbxUserOptionBean;
-//import com.pchome.akbadm.bean.PfbxUserPriceBean;
 import com.pchome.akbadm.bean.PfbxUserSampleBean;
 import com.pchome.akbadm.bean.PfbxWhiteUrlBean;
 import com.pchome.akbadm.bean.StyleBean;
@@ -76,10 +73,6 @@ import com.pchome.akbadm.db.pojo.PfbxOptionCode;
 import com.pchome.akbadm.db.pojo.PfbxOptionSize;
 import com.pchome.akbadm.db.pojo.PfbxOptionUrl;
 import com.pchome.akbadm.db.pojo.PfbxPosition;
-//import com.pchome.akbadm.db.pojo.PfbxPriceArea;
-//import com.pchome.akbadm.db.pojo.PfbxPriceCode;
-//import com.pchome.akbadm.db.pojo.PfbxPriceSize;
-//import com.pchome.akbadm.db.pojo.PfbxPriceUrl;
 import com.pchome.akbadm.db.pojo.PfbxSampleArea;
 import com.pchome.akbadm.db.pojo.PfbxSampleCode;
 import com.pchome.akbadm.db.pojo.PfbxSampleSize;
@@ -88,7 +81,6 @@ import com.pchome.akbadm.db.pojo.PfbxSize;
 import com.pchome.akbadm.db.pojo.PfbxUrl;
 import com.pchome.akbadm.db.pojo.PfbxUserGroup;
 import com.pchome.akbadm.db.pojo.PfbxUserOption;
-//import com.pchome.akbadm.db.pojo.PfbxUserPrice;
 import com.pchome.akbadm.db.pojo.PfbxUserSample;
 import com.pchome.akbadm.db.pojo.PfdUserAdAccountRef;
 import com.pchome.akbadm.db.pojo.PfpAd;
@@ -120,7 +112,6 @@ import com.pchome.akbadm.db.service.pfbx.IPfbxSizeService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUrlService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserGroupService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserOptionService;
-//import com.pchome.akbadm.db.service.pfbx.IPfbxUserPriceService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserSampleService;
 import com.pchome.akbadm.db.service.pfbx.play.IAdmPfbxBlockUrlService;
 import com.pchome.akbadm.db.service.pfbx.play.IPfbxAllowUrlService;
@@ -139,7 +130,7 @@ import com.thoughtworks.xstream.XStream;
 public class KernelJob {
     private static String CHARSET = "UTF-8";
     private static String[] extensions = new String[]{"def"};
-    
+
     private Logger log = LogManager.getRootLogger();
 
     private IPfbStyleInfoService pfbStyleInfoService;
@@ -185,7 +176,7 @@ public class KernelJob {
 
     public void process() throws Exception {
         log.info("====KernelJob.process() start====");
-        
+
         File lockFile = new File(kernelAddata + File.separator + "lock.txt");
         if (!lockFile.exists()) {
             try {
@@ -211,7 +202,6 @@ public class KernelJob {
 
                 group();
                 option();
-//                price();
                 sample();
 
                 showRule();
@@ -263,8 +253,6 @@ public class KernelJob {
         XStream xstream = new XStream();
         xstream.alias("styleBean", StyleBean.class);
         String xml = xstream.toXML(map);
-
-//        log.info(xml);
 
         // write file
         File file = new File(kernelAddataDir + "style.xml");
@@ -469,8 +457,6 @@ public class KernelJob {
         xstream.alias("tadMapBean", TadMapBean.class);
         String xml = xstream.toXML(map);
 
-//        log.info(xml);
-
         // write file
         file = new File(kernelAddataDir + "tpro.xml");
 
@@ -551,8 +537,6 @@ public class KernelJob {
         XStream xstream = new XStream();
         xstream.alias("tadBean", TadBean.class);
         String xml = xstream.toXML(map);
-
-//        log.info(xml);
 
         // write file
         file = new File(kernelAddataDir + "tad.xml");
@@ -741,9 +725,6 @@ public class KernelJob {
                         adActionTimeCache.put(actionId, adActionTime);
                     }
 
-                    // get kernel price
-    //                pfpAdSysprice = pfpAdSyspriceService.selectAdSyspriceByPoolSeq(adPoolId);
-
                     // get sums
                     pvclkSums = pfpAdPvclkSumsCache.get(adId);
                     if (pvclkSums == null) {
@@ -755,7 +736,6 @@ public class KernelJob {
                     adSearchPrice = pfpAd.getPfpAdGroup().getAdGroupSearchPrice() > adSystemPrice ? adSystemPrice : pfpAd.getPfpAdGroup().getAdGroupSearchPrice();
                     //搜尋頻道出價-使用群組的價格
                     //20170330 nico 不再用系統價格了，直接用出價去比
-                    //adChannelPrice = pfpAd.getPfpAdGroup().getAdGroupChannelPrice() > adSystemPrice ? adSystemPrice : pfpAd.getPfpAdGroup().getAdGroupChannelPrice();
                     adChannelPrice = pfpAd.getPfpAdGroup().getAdGroupChannelPrice();
 
                     // bidPrice
@@ -770,8 +750,6 @@ public class KernelJob {
                     else if (EnumPriceType.CPV.toString().equals(priceType)) {
                         adBidPrice = adChannelPrice / cpvWeight;
                     }
-
-//                    log.info("ad price = " + adSearchPrice + " " + adChannelPrice);
 
                     if ("N".equals(pfpCustomerInfo.getRecognize())) {
                         adSearchPrice = 0f;
@@ -891,8 +869,6 @@ public class KernelJob {
                         }
                     }
 
-//                    log.info("qualityGrade=" + qualityGrade + " ctr=" + pvclkSums[1] + "/" + pvclkSums[0] + "=" + ctr);
-
                     // adm arw
                     admArw = admArwCache.get(pfpCustomerInfoId);
                     if (admArw == null) {
@@ -1011,8 +987,6 @@ public class KernelJob {
                 adBean.getAdDetailMap().put(pfpAdDetail.getAdDetailSeq(), adDetailBean);
                 adMap.put(adId, adBean);
                 poolMap.put(adPoolId, adMap);
-
-//                log.info(adPoolSeq + " " + adSeq + " " + adMap.get(adSeq));
             } catch (Exception e) {
                 log.error("adDetailId=" + pfpAdDetail.getAdDetailSeq(), e);
             }
@@ -1024,8 +998,6 @@ public class KernelJob {
         xstream.alias("adBean", AdBean.class);
         xstream.alias("adDetailBean", AdDetailBean.class);
         String xml = xstream.toXML(poolMap);
-
-//        log.info(xml);
 
         // write file
         File file = new File(kernelAddataDir + "pool.xml");
@@ -1058,7 +1030,6 @@ public class KernelJob {
         List<PfpAd> pfpAdList = pfpCustomerInfoService.selectValidAd();
         List<PfpAdKeyword> pfpAdKeywordList = pfpCustomerInfoService.selectValidAdKeyword();
         File keywordDir = new File(kernelAddataDir + "keyword/");
-//        File keywordFile = new File(kernelAddataDir + "keyword/keyword.txt");
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new IKAnalyzer());
         IndexWriter writer = null;
         Document doc = null;
@@ -1066,7 +1037,6 @@ public class KernelJob {
         PfpAdAction pfpAdAction = null;
         PfpCustomerInfo pfpCustomerInfo = null;
         StringBuffer excludeKeyword = null;
-//        Set<String> keywordSet = new HashSet<String>();
         int count = 0;
 
         // exclude keyword
@@ -1087,8 +1057,6 @@ public class KernelJob {
         try {
             calendar.setTime(df.parse(df.format(calendar.getTime())));
         } catch (ParseException pe) {
-            //log.error(calendar.getTime(), pe);
-
             calendar.set(Calendar.HOUR_OF_DAY, 0);
             calendar.set(Calendar.MINUTE, 0);
             calendar.set(Calendar.SECOND, 0);
@@ -1170,8 +1138,6 @@ public class KernelJob {
                 }
                 keywordChannelPrice = pfpAdKeyword.getAdKeywordChannelPrice() > keywordSystemPrice ? keywordSystemPrice : pfpAdKeyword.getAdKeywordChannelPrice();
 
-//                    log.info("keyword price = " + keywordSearchPrice + " " + keywordChannelPrice);
-
                 if ("N".equals(pfpCustomerInfo.getRecognize())) {
                     keywordSearchPrice = 0f;
                     keywordChannelPrice = 0f;
@@ -1204,11 +1170,7 @@ public class KernelJob {
                     doc.add(new Field(EnumIndexField.recognize.toString(), pfpCustomerInfo.getRecognize(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                     writer.addDocument(doc);
 
-//                    keywordSet.add(pfpAdKeyword.getAdKeyword());
-
                     count++;
-
-//                    log.info(doc);
                 }
             }
         } catch (Exception e) {
@@ -1226,11 +1188,6 @@ public class KernelJob {
         }
 
         log.info("index: " + count);
-
-//        // keyword.txt
-//        log.info("writer txt = " + keywordFile.getPath());
-//        FileUtils.writeLines(keywordFile, CHARSET, keywordSet);
-//        log.info("txt: " + keywordSet.size());
 
         long endTime = Calendar.getInstance().getTimeInMillis();
         log.info("time: " + (endTime - startTime) / 1000 + "s");
@@ -1962,8 +1919,6 @@ public class KernelJob {
     }
 
     private String encodeParam(String url) throws UnsupportedEncodingException {
-//        log.info("src url: " + url);
-
         String[] urls = URLDecoder.decode(url, CHARSET).split("\\?");
         if (urls.length != 2) {
             return URLEncoder.encode(url, CHARSET);
