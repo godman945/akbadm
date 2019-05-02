@@ -82,12 +82,6 @@ try {
     	if(document.getElementsByTagName("script")[i].previousElementSibling.tagName.indexOf("ADBACKUP") >= 0){
     		docurl = "www.pchome.com.tw";
     	}
-    	
-        if (document.getElementsByTagName("script")[i].src.includes('xpcadshow.js')) {
-            if ("ADBACKUP" == document.getElementsByTagName("script")[i].previousElementSibling.previousElementSibling.previousElementSibling.tagName) {
-                docurl = "www.pchome.com.tw"
-            }
-        }
     }
 } catch (err) {};
 var fig = "";
