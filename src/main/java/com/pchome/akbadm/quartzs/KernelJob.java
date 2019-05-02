@@ -1519,8 +1519,6 @@ public class KernelJob {
     }
 
     private void prod() throws IOException {
-        Map<String, AdBean> adMap = null;
-        AdBean adBean = null;
         Set<String> prodGroupSet = new HashSet<>();
 
         StringBuilder url = null;
@@ -1535,10 +1533,8 @@ public class KernelJob {
         String key = null;
         String value = null;
 
-        for (String poolId: poolMap.keySet()) {
-            adMap = poolMap.get(poolId);
-            for (String adId: adMap.keySet()) {
-                adBean = adMap.get(adId);
+        for (Map<String, AdBean> adMap : poolMap.values()) {
+            for (AdBean adBean : adMap.values()) {
                 if (StringUtils.isNotBlank(adBean.getProdGroupId())) {
                     prodGroupSet.add(adBean.getProdGroupId());
                 }
