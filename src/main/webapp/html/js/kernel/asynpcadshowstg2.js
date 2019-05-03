@@ -217,6 +217,9 @@ function showad(asynpchomeadObject) {
         adurl += "&fig=" + fig.replace(',','');
         adurl += "&t=" + Math.floor(Math.random() * 1000 + 1);
 
+        console.log(asynpchomeadObject.pad_width.replace(',',''));
+        console.log(adurl);
+        
         if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
                 adurl += "&docurl=";
         } else {
