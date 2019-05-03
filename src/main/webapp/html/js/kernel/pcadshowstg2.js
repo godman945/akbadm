@@ -116,7 +116,6 @@ if (pad_pchad.length <= 10) {
         document.write(showadscript)
     } else {
         var head = document.getElementsByTagName("head");
-        console.log(pad_width);
         document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' + pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>');
     }
 } else {
