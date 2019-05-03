@@ -204,9 +204,9 @@ function showad(asynpchomeadObject) {
         var fig = "";
         var adurl = "";
         if (padssl) {
-                adurl += "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+                adurl += "http://kwstg2.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
         } else {
-                adurl += "https://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+                adurl += "https://kwstg2.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
         }
         adurl += "&positionId=" + pid;
         adurl += "&padWidth=" + asynpchomeadObject.pad_width;
