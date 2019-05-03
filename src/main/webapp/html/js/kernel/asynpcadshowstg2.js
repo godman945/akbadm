@@ -209,12 +209,12 @@ function showad(asynpchomeadObject) {
                 adurl += "https://kwstg2.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
         }
         adurl += "&positionId=" + pid;
-        adurl += "&padWidth=" + asynpchomeadObject.pad_width;
-        adurl += "&padHeight=" + asynpchomeadObject.pad_height;
-        adurl += "&keyword=" + keywordValue;
-        adurl += "&page=" + pageValue;
-        adurl += "&precise=" + seway;
-        adurl += "&fig=" + fig;
+        adurl += "&padWidth=" + asynpchomeadObject.pad_width.replace(',','');
+        adurl += "&padHeight=" + asynpchomeadObject.pad_height.replace(',','');
+        adurl += "&keyword=" + keywordValue.replace(',','');
+        adurl += "&page=" + pageValue.replace(',','');
+        adurl += "&precise=" + seway.replace(',','');
+        adurl += "&fig=" + fig.replace(',','');
         adurl += "&t=" + Math.floor(Math.random() * 1000 + 1);
 
         if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
