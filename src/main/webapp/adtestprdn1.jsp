@@ -56,7 +56,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201507200002C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 						
 		</td>
 		<td>
@@ -68,7 +68,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201602180002C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 		
 		</td>
 		<td>
@@ -80,7 +80,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201507200005C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 		    
 		</td>
 	</tr>
@@ -106,7 +106,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201510280004C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 			
 		</td>
 		<td>
@@ -118,7 +118,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201505200003C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>		    
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>		    
 		    
 		</td>
 	</tr>
@@ -132,7 +132,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201801170006C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 			
 		</td>
 		<td>
@@ -144,7 +144,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201605050002C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 						
 		</td>
 		<td>
@@ -156,7 +156,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201705080003C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 		    
 		</td>
 	</tr>
@@ -170,7 +170,7 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201507200001C";
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
+			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/pcadshowstg3.js"></script>
 		    	
 		</td>
 	</tr>
