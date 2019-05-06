@@ -126,6 +126,7 @@ public class KernelJob {
     private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
+    private int reduceDivisor = 2;
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
@@ -556,7 +557,7 @@ public class KernelJob {
         String actionId = null;
         String pfpCustomerInfoId = null;
         int pfpCustomerInfoIdOddNumber = 0;
-        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % 2;
+        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % reduceDivisor;
         StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
@@ -681,7 +682,7 @@ public class KernelJob {
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
                 // special rule: reduce by odd number
-                pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % 2;
+                pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
                 if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
                     continue;
                 }
