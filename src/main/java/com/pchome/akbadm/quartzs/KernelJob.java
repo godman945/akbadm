@@ -126,6 +126,7 @@ public class KernelJob {
     private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
+    private int reduceHour = 0;
     private int reduceDivisor = 2;
 
     private IPfbStyleInfoService pfbStyleInfoService;
@@ -540,7 +541,11 @@ public class KernelJob {
     }
 
     private void pool() throws IOException {
+        Calendar calendar = Calendar.getInstance();
+
         long startTime = Calendar.getInstance().getTimeInMillis();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % reduceDivisor;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
@@ -557,7 +562,6 @@ public class KernelJob {
         String actionId = null;
         String pfpCustomerInfoId = null;
         int pfpCustomerInfoIdOddNumber = 0;
-        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % reduceDivisor;
         StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
@@ -607,15 +611,15 @@ public class KernelJob {
         StringBuilder adActionTime = null;
 
         // yesterday
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        Calendar yesterdayCalendar = Calendar.getInstance();
+        yesterdayCalendar.add(Calendar.DAY_OF_YEAR, -1);
+        yesterdayCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        yesterdayCalendar.set(Calendar.MINUTE, 0);
+        yesterdayCalendar.set(Calendar.SECOND, 0);
+        yesterdayCalendar.set(Calendar.MILLISECOND, 0);
 
         // adId, [sum(ad_pv), sum(ad_clk)]
-        Map<String, int[]> pfpAdPvclkSumsCache = pfpAdPvclkService.selectPfpAdPvclkSums(calendar.getTime());
+        Map<String, int[]> pfpAdPvclkSumsCache = pfpAdPvclkService.selectPfpAdPvclkSums(yesterdayCalendar.getTime());
         log.info("pfpAdPvclkService.selectPfpAdPvclkSums " + pfpAdPvclkSumsCache.size());
 
         // weight
@@ -682,9 +686,11 @@ public class KernelJob {
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
                 // special rule: reduce by odd number
-                pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
-                if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
-                    continue;
+                if (hour == reduceHour) {
+                    pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
+                    if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
+                        continue;
+                    }
                 }
 
                 // get ad map
