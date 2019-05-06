@@ -1,11 +1,10 @@
 package com.pchome.akbadm.quartzs;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.text.ParseException;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -19,11 +18,9 @@ import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.IOUtils;
-import org.apache.commons.lang.CharEncoding;
 import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.RandomUtils;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.index.IndexWriter;
@@ -43,14 +40,11 @@ import com.pchome.akbadm.bean.AdDetailBean;
 import com.pchome.akbadm.bean.AdmShowRuleBean;
 import com.pchome.akbadm.bean.PfbxAreaBean;
 import com.pchome.akbadm.bean.PfbxBlackUrlBean;
-//import com.pchome.akbadm.bean.PfbxAssignPriceBean;
 import com.pchome.akbadm.bean.PfbxPositionBean;
-//import com.pchome.akbadm.bean.PfbxPriceBean;
 import com.pchome.akbadm.bean.PfbxSizeBean;
 import com.pchome.akbadm.bean.PfbxUrlBean;
 import com.pchome.akbadm.bean.PfbxUserGroupBean;
 import com.pchome.akbadm.bean.PfbxUserOptionBean;
-//import com.pchome.akbadm.bean.PfbxUserPriceBean;
 import com.pchome.akbadm.bean.PfbxUserSampleBean;
 import com.pchome.akbadm.bean.PfbxWhiteUrlBean;
 import com.pchome.akbadm.bean.StyleBean;
@@ -76,10 +70,6 @@ import com.pchome.akbadm.db.pojo.PfbxOptionCode;
 import com.pchome.akbadm.db.pojo.PfbxOptionSize;
 import com.pchome.akbadm.db.pojo.PfbxOptionUrl;
 import com.pchome.akbadm.db.pojo.PfbxPosition;
-//import com.pchome.akbadm.db.pojo.PfbxPriceArea;
-//import com.pchome.akbadm.db.pojo.PfbxPriceCode;
-//import com.pchome.akbadm.db.pojo.PfbxPriceSize;
-//import com.pchome.akbadm.db.pojo.PfbxPriceUrl;
 import com.pchome.akbadm.db.pojo.PfbxSampleArea;
 import com.pchome.akbadm.db.pojo.PfbxSampleCode;
 import com.pchome.akbadm.db.pojo.PfbxSampleSize;
@@ -88,7 +78,6 @@ import com.pchome.akbadm.db.pojo.PfbxSize;
 import com.pchome.akbadm.db.pojo.PfbxUrl;
 import com.pchome.akbadm.db.pojo.PfbxUserGroup;
 import com.pchome.akbadm.db.pojo.PfbxUserOption;
-//import com.pchome.akbadm.db.pojo.PfbxUserPrice;
 import com.pchome.akbadm.db.pojo.PfbxUserSample;
 import com.pchome.akbadm.db.pojo.PfdUserAdAccountRef;
 import com.pchome.akbadm.db.pojo.PfpAd;
@@ -96,18 +85,15 @@ import com.pchome.akbadm.db.pojo.PfpAdAction;
 import com.pchome.akbadm.db.pojo.PfpAdDetail;
 import com.pchome.akbadm.db.pojo.PfpAdExcludeKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdGroup;
-import com.pchome.akbadm.db.pojo.PfpAdKeyword;
 import com.pchome.akbadm.db.pojo.PfpAdSysprice;
 import com.pchome.akbadm.db.pojo.PfpCodeAdactionMerge;
 import com.pchome.akbadm.db.pojo.PfpCodeTracking;
 import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
-import com.pchome.akbadm.db.pojo.PfpKeywordSysprice;
 import com.pchome.akbadm.db.service.ad.IAdmArwValueService;
 import com.pchome.akbadm.db.service.ad.IAdmShowRuleService;
 import com.pchome.akbadm.db.service.ad.IPfbStyleInfoService;
 import com.pchome.akbadm.db.service.ad.IPfpAdCategoryMappingService;
 import com.pchome.akbadm.db.service.ad.IPfpAdExcludeKeywordService;
-import com.pchome.akbadm.db.service.ad.IPfpAdKeywordPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdPvclkService;
 import com.pchome.akbadm.db.service.ad.IPfpAdSpecificWebsiteService;
 import com.pchome.akbadm.db.service.code.IPfpCodeAdactionMergeService;
@@ -120,7 +106,6 @@ import com.pchome.akbadm.db.service.pfbx.IPfbxSizeService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUrlService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserGroupService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserOptionService;
-//import com.pchome.akbadm.db.service.pfbx.IPfbxUserPriceService;
 import com.pchome.akbadm.db.service.pfbx.IPfbxUserSampleService;
 import com.pchome.akbadm.db.service.pfbx.play.IAdmPfbxBlockUrlService;
 import com.pchome.akbadm.db.service.pfbx.play.IPfbxAllowUrlService;
@@ -137,14 +122,15 @@ import com.thoughtworks.xstream.XStream;
 
 @Transactional
 public class KernelJob {
-    private static String CHARSET = "UTF-8";
-    private static String[] extensions = new String[]{"def"};
-    
+    private static final String WRITE_FILE = "write file = ";
+    private static final String[] EXTENSIONS = new String[]{"def"};
+
     private Logger log = LogManager.getRootLogger();
+    private int reduceHour = 0;
+    private int reduceDivisor = 2;
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
-    private IPfpAdKeywordPvclkService pfpAdKeywordPvclkService;
     private IPfpAdPvclkService pfpAdPvclkService;
     private IPfpAdSyspriceService pfpAdSyspriceService;
     private IPfpKeywordSyspriceService pfpKeywordSyspriceService;
@@ -172,20 +158,17 @@ public class KernelJob {
     private String admAddata;
     private String kernelAddata;
     private String kernelAddataDir;
-    private String multicorePath;
     private String pfpProdGroupListApiUrl;
     private float adSysprice;
-    private float keywordSysprice;
     private int makeNumber;
     private int serverNumber;
-    private boolean solrFlag;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
-    private Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
+    private Map<String, Map<String, AdBean>> currentPoolMap = new HashMap<>();
 
-    public void process() throws Exception {
+    public void process() throws IOException {
         log.info("====KernelJob.process() start====");
-        
+
         File lockFile = new File(kernelAddata + File.separator + "lock.txt");
         if (!lockFile.exists()) {
             try {
@@ -211,7 +194,6 @@ public class KernelJob {
 
                 group();
                 option();
-//                price();
                 sample();
 
                 showRule();
@@ -237,8 +219,8 @@ public class KernelJob {
         log.info("====KernelJob.process() end====");
     }
 
-    private void style() throws Exception {
-        Map<String, StyleBean> map = new HashMap<String, StyleBean>();
+    private void style() throws IOException {
+        Map<String, StyleBean> map = new HashMap<>();
         StyleBean styleBean = null;
 
         // style(Map) -> style(Bean)
@@ -264,19 +246,17 @@ public class KernelJob {
         xstream.alias("styleBean", StyleBean.class);
         String xml = xstream.toXML(map);
 
-//        log.info(xml);
-
         // write file
         File file = new File(kernelAddataDir + "style.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("style: " + map.size());
     }
 
-    private void tpro() throws Exception {
+    private void tpro() throws IOException {
         File dir = new File(admAddata + EnumSequenceTableName.ADM_TEMPLATE_PRODUCT.getCharName());
         if (!dir.exists()) {
             log.info(dir.getPath() + " not exists");
@@ -288,7 +268,7 @@ public class KernelJob {
         }
 
         // tpro(Map) > tpro(Bean)
-        Map<String, TproBean> map = new HashMap<String, TproBean>();
+        Map<String, TproBean> map = new HashMap<>();
         TproBean tproBean = null;
         TadMapBean tadMapBean = null;
         String tproId = null;
@@ -297,7 +277,7 @@ public class KernelJob {
         String tadId = null;
         String backupTadId = null;
 
-        Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, false);
+        Iterator<File> iterator = FileUtils.iterateFiles(dir, EXTENSIONS, false);
         File file = null;
         List<String> lineList = null;
         boolean htmlFlag = false;
@@ -308,11 +288,11 @@ public class KernelJob {
                 htmlFlag = false;
 
                 file = iterator.next();
-                lineList = FileUtils.readLines(file, CHARSET);
+                lineList = FileUtils.readLines(file, StandardCharsets.UTF_8);
 
                 tproBean = new TproBean();
                 tproId = file.getName();
-                for (String extension: extensions) {
+                for (String extension: EXTENSIONS) {
                     tproId = tproId.replace("." + extension, "");
                 }
                 tproBean.setTproId(tproId);
@@ -469,19 +449,17 @@ public class KernelJob {
         xstream.alias("tadMapBean", TadMapBean.class);
         String xml = xstream.toXML(map);
 
-//        log.info(xml);
-
         // write file
         file = new File(kernelAddataDir + "tpro.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("tpro: " + map.size());
     }
 
-    private void tad() throws Exception {
+    private void tad() throws IOException {
         File dir = new File(admAddata + EnumSequenceTableName.ADM_TEMPLATE_AD.getCharName());
         if (!dir.exists()) {
             log.info(dir.getPath() + " not exists");
@@ -493,12 +471,12 @@ public class KernelJob {
         }
 
         // tad(Map) > tad(Bean)
-        Map<String, TadBean> map = new HashMap<String, TadBean>();
+        Map<String, TadBean> map = new HashMap<>();
         TadBean tadBean = null;
         String poolId = null;
         String tadId = null;
 
-        Iterator<File> iterator = FileUtils.iterateFiles(dir, extensions, false);
+        Iterator<File> iterator = FileUtils.iterateFiles(dir, EXTENSIONS, false);
         File file = null;
         List<String> lineList = null;
         boolean contentFlag = false;
@@ -508,7 +486,7 @@ public class KernelJob {
                 contentFlag = true;
 
                 file = iterator.next();
-                lineList = FileUtils.readLines(file, CHARSET);
+                lineList = FileUtils.readLines(file, StandardCharsets.UTF_8);
                 tadBean = new TadBean();
 
                 for (String line: lineList) {
@@ -517,7 +495,7 @@ public class KernelJob {
                     }
 
                     tadId = file.getName();
-                    for (String extension: extensions) {
+                    for (String extension: EXTENSIONS) {
                         tadId = tadId.replace("." + extension, "");
                     }
                     tadBean.setTadId(tadId);
@@ -552,22 +530,24 @@ public class KernelJob {
         xstream.alias("tadBean", TadBean.class);
         String xml = xstream.toXML(map);
 
-//        log.info(xml);
-
         // write file
         file = new File(kernelAddataDir + "tad.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("tad: " + map.size());
     }
 
-    private void pool() throws Exception {
-        long startTime = Calendar.getInstance().getTimeInMillis();
+    private void pool() throws IOException {
+        Calendar calendar = Calendar.getInstance();
 
-        Map<String, Map<String, AdBean>> poolMap = new HashMap<String, Map<String, AdBean>>();
+        long startTime = Calendar.getInstance().getTimeInMillis();
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % reduceDivisor;
+
+        Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
@@ -581,7 +561,8 @@ public class KernelJob {
         String adId = null;
         String actionId = null;
         String pfpCustomerInfoId = null;
-        StringBuffer adClass = null;
+        int pfpCustomerInfoIdOddNumber = 0;
+        StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
         Float adSearchPrice = null;
@@ -589,13 +570,13 @@ public class KernelJob {
         Float adBidPrice = null;
         int[] pvclkSums = null;
         int[] allPvclkSums = null;
-        float cpmWeight = 0f;
-        float cpvWeight = 0f;
-        float ctr = 0f;
+        float cpmWeight = 0;
+        float cpvWeight = 0;
+        float ctr = 0;
         int qualityGrade = 0;
         PfdUserAdAccountRef ref = null;
-        String adPvLimitStyle = "0";
-        String adPvLimitPeriod = "0";
+        String adPvLimitStyle = null;
+        String adPvLimitPeriod = null;
         int adPvLimitAmount = 0;
         Integer admArw = 1;
         String trackingSeq = null;
@@ -606,7 +587,7 @@ public class KernelJob {
         log.info("pfpCustomerInfoService.selectValidAdDetail " + pfpAdDetailList.size());
 
         // get category mapping
-        Map<String, StringBuffer> adClassCache = pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps();
+        Map<String, StringBuilder> adClassCache = pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps();
         log.info("pfpAdCategoryMappingService.selectPfpAdCategoryMappingBufferMaps " + adClassCache.size());
 
         // get category code
@@ -626,19 +607,19 @@ public class KernelJob {
         log.info("pfpAdSyspriceService.selectAdSyspriceByPoolSeq " + adSystemPrice);
 
         // adActionTime
-        Map<String, StringBuffer> adActionTimeCache = new HashMap<String, StringBuffer>();
-        StringBuffer adActionTime = null;
+        Map<String, StringBuilder> adActionTimeCache = new HashMap<>();
+        StringBuilder adActionTime = null;
 
         // yesterday
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        Calendar yesterdayCalendar = Calendar.getInstance();
+        yesterdayCalendar.add(Calendar.DAY_OF_YEAR, -1);
+        yesterdayCalendar.set(Calendar.HOUR_OF_DAY, 0);
+        yesterdayCalendar.set(Calendar.MINUTE, 0);
+        yesterdayCalendar.set(Calendar.SECOND, 0);
+        yesterdayCalendar.set(Calendar.MILLISECOND, 0);
 
         // adId, [sum(ad_pv), sum(ad_clk)]
-        Map<String, int[]> pfpAdPvclkSumsCache = pfpAdPvclkService.selectPfpAdPvclkSums(calendar.getTime());
+        Map<String, int[]> pfpAdPvclkSumsCache = pfpAdPvclkService.selectPfpAdPvclkSums(yesterdayCalendar.getTime());
         log.info("pfpAdPvclkService.selectPfpAdPvclkSums " + pfpAdPvclkSumsCache.size());
 
         // weight
@@ -663,7 +644,7 @@ public class KernelJob {
 	            cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
 	        }
 
-	        if ((allPvclkSums[1] == 0) || (allPvclkSums[1] == 0)) {
+	        if (allPvclkSums[1] == 0) {
 	            cpvWeight = 0.005f;
 	        }
 	        else {
@@ -691,6 +672,7 @@ public class KernelJob {
         Map<String, PfpCodeTracking> pfpCodeTrackingMap = pfpCodeTrackingService.selectPfpCodeTrackingMap();
         log.info("pfpCodeTrackingService.selectPfpCodeTrackingMap " + pfpCodeTrackingMap.size());
 
+        log.info("hour="+hour+",reduceHour="+reduceHour+",minuteOddNumber="+minuteOddNumber);
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             try {
@@ -704,10 +686,20 @@ public class KernelJob {
                 actionId = pfpAdAction.getAdActionSeq();
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
+                // special rule: reduce by odd number
+                if (hour == reduceHour) {
+                	log.info("hour="+hour+",reduceHour="+reduceHour);
+                    pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
+                    if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
+                    	log.info("pfpCustomerInfoIdOddNumber="+pfpCustomerInfoIdOddNumber+","+pfpCustomerInfoId+","+reduceDivisor);
+                        continue;
+                    }
+                }
+
                 // get ad map
                 adMap = poolMap.get(adPoolId);
                 if (adMap == null) {
-                    adMap = new HashMap<String, AdBean>();
+                    adMap = new HashMap<>();
                 }
 
                 // get ad bean
@@ -718,7 +710,7 @@ public class KernelJob {
                     // get adClass
                     adClass = adClassCache.get(pfpAd.getAdSeq());
                     if (adClass == null) {
-                        adClass = new StringBuffer();
+                        adClass = new StringBuilder();
                     }
 
                     // get category code
@@ -729,7 +721,7 @@ public class KernelJob {
 
                     adActionTime = adActionTimeCache.get(actionId);
                     if (adActionTime == null) {
-                        adActionTime = new StringBuffer();
+                        adActionTime = new StringBuilder();
                         adActionTime.append(pfpAdAction.getAdActionSunTime()).append(";");
                         adActionTime.append(pfpAdAction.getAdActionMonTime()).append(";");
                         adActionTime.append(pfpAdAction.getAdActionTueTime()).append(";");
@@ -740,9 +732,6 @@ public class KernelJob {
 
                         adActionTimeCache.put(actionId, adActionTime);
                     }
-
-                    // get kernel price
-    //                pfpAdSysprice = pfpAdSyspriceService.selectAdSyspriceByPoolSeq(adPoolId);
 
                     // get sums
                     pvclkSums = pfpAdPvclkSumsCache.get(adId);
@@ -755,7 +744,6 @@ public class KernelJob {
                     adSearchPrice = pfpAd.getPfpAdGroup().getAdGroupSearchPrice() > adSystemPrice ? adSystemPrice : pfpAd.getPfpAdGroup().getAdGroupSearchPrice();
                     //搜尋頻道出價-使用群組的價格
                     //20170330 nico 不再用系統價格了，直接用出價去比
-                    //adChannelPrice = pfpAd.getPfpAdGroup().getAdGroupChannelPrice() > adSystemPrice ? adSystemPrice : pfpAd.getPfpAdGroup().getAdGroupChannelPrice();
                     adChannelPrice = pfpAd.getPfpAdGroup().getAdGroupChannelPrice();
 
                     // bidPrice
@@ -771,8 +759,6 @@ public class KernelJob {
                         adBidPrice = adChannelPrice / cpvWeight;
                     }
 
-//                    log.info("ad price = " + adSearchPrice + " " + adChannelPrice);
-
                     if ("N".equals(pfpCustomerInfo.getRecognize())) {
                         adSearchPrice = 0f;
                         adChannelPrice = 0f;
@@ -781,7 +767,6 @@ public class KernelJob {
                     }
 
                     // quality grade
-                    ctr = 0f;
                     qualityGrade = 6;
                     if (pvclkSums[0] != 0) {
                         if (EnumPriceType.CPC.toString().equals(priceType)) {
@@ -891,8 +876,6 @@ public class KernelJob {
                         }
                     }
 
-//                    log.info("qualityGrade=" + qualityGrade + " ctr=" + pvclkSums[1] + "/" + pvclkSums[0] + "=" + ctr);
-
                     // adm arw
                     admArw = admArwCache.get(pfpCustomerInfoId);
                     if (admArw == null) {
@@ -904,7 +887,6 @@ public class KernelJob {
                     trackingSeq = "";
                     trackingRangeDate = 0;
                     pfpCodeAdactionMerge = pfpCodeAdactionMergeMap.get(actionId);
-                    pfpCodeTracking = null;
                     if (pfpCodeAdactionMerge != null) {
                         pfpCodeTracking = pfpCodeTrackingMap.get(pfpCodeAdactionMerge.getCodeId());
                         if (pfpCodeTracking != null) {
@@ -1011,8 +993,6 @@ public class KernelJob {
                 adBean.getAdDetailMap().put(pfpAdDetail.getAdDetailSeq(), adDetailBean);
                 adMap.put(adId, adBean);
                 poolMap.put(adPoolId, adMap);
-
-//                log.info(adPoolSeq + " " + adSeq + " " + adMap.get(adSeq));
             } catch (Exception e) {
                 log.error("adDetailId=" + pfpAdDetail.getAdDetailSeq(), e);
             }
@@ -1025,218 +1005,19 @@ public class KernelJob {
         xstream.alias("adDetailBean", AdDetailBean.class);
         String xml = xstream.toXML(poolMap);
 
-//        log.info(xml);
-
         // write file
         File file = new File(kernelAddataDir + "pool.xml");
-        log.info("write file = " + file.getPath());
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        log.info(WRITE_FILE + file.getPath());
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         // for prod
-        this.poolMap = poolMap;
+        this.currentPoolMap = poolMap;
 
         long endTime = Calendar.getInstance().getTimeInMillis();
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
-    private void keyword() throws Exception {
-        if (solrFlag) {
-            keywordSolr();
-            keywordLucene2();
-        }
-        else {
-            keywordLucene2();
-        }
-    }
-
-    @Deprecated
-    @SuppressWarnings("unused")
-    private void keywordLucene() throws Exception {
-        long startTime = Calendar.getInstance().getTimeInMillis();
-
-        // load ad (because calculate adPvclk) and keyword (because calculate adKeywordPvclk)
-        List<PfpAd> pfpAdList = pfpCustomerInfoService.selectValidAd();
-        List<PfpAdKeyword> pfpAdKeywordList = pfpCustomerInfoService.selectValidAdKeyword();
-        File keywordDir = new File(kernelAddataDir + "keyword/");
-//        File keywordFile = new File(kernelAddataDir + "keyword/keyword.txt");
-        IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new IKAnalyzer());
-        IndexWriter writer = null;
-        Document doc = null;
-        PfpAdGroup pfpAdGroup = null;
-        PfpAdAction pfpAdAction = null;
-        PfpCustomerInfo pfpCustomerInfo = null;
-        StringBuffer excludeKeyword = null;
-//        Set<String> keywordSet = new HashSet<String>();
-        int count = 0;
-
-        // exclude keyword
-        List<PfpAdExcludeKeyword> pfpAdExcludeKeywordList = null;
-
-        // sysprice
-        PfpKeywordSysprice pfpKeywordSysprice = null;
-        Float keywordSystemPrice = null;
-        Float keywordSearchPrice = null;
-        Float keywordChannelPrice = null;
-        Float keywordTempPrice = null;
-        int[] pvclkSums = null;
-
-        // yesterday
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        try {
-            calendar.setTime(df.parse(df.format(calendar.getTime())));
-        } catch (ParseException pe) {
-            //log.error(calendar.getTime(), pe);
-
-            calendar.set(Calendar.HOUR_OF_DAY, 0);
-            calendar.set(Calendar.MINUTE, 0);
-            calendar.set(Calendar.SECOND, 0);
-        }
-
-        // cache
-        Map<String, List<PfpAd>> pfpAdGroupCache = new HashMap<String, List<PfpAd>>();
-        Map<String, StringBuffer> excludeKeywordCache = new HashMap<String, StringBuffer>();
-        Map<String, Float> pfpKeywordSyspriceCache = new HashMap<String, Float>();
-
-        // id, [sum(ad_keyword_pv), sum(ad_keyword_clk)]
-        Map<String, int[]> pfpAdKeywordPvclkSumsCache = pfpAdKeywordPvclkService.selectPfpAdKeywordPvclkSums(calendar.getTime());
-
-        // set pfpAdGroup
-        List<PfpAd> tempAdList = null;
-        for (PfpAd pfpAd: pfpAdList) {
-            pfpAdGroup = pfpAd.getPfpAdGroup();
-
-            tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
-            if (tempAdList == null) {
-                tempAdList = new ArrayList<PfpAd>();
-            }
-            tempAdList.add(pfpAd);
-            pfpAdGroupCache.put(pfpAdGroup.getAdGroupSeq(), tempAdList);
-        }
-
-        log.info("writer index = " + keywordDir.getPath());
-
-        // write index
-        try {
-            writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig);
-
-            for (PfpAdKeyword pfpAdKeyword: pfpAdKeywordList) {
-                pfpAdGroup = pfpAdKeyword.getPfpAdGroup();
-
-                tempAdList = pfpAdGroupCache.get(pfpAdGroup.getAdGroupSeq());
-                if ((tempAdList == null) || (tempAdList.size() <= 0)) {
-                    continue;
-                }
-
-                pfpAdAction = pfpAdGroup.getPfpAdAction();
-                pfpCustomerInfo = pfpAdAction.getPfpCustomerInfo();
-
-                // get exclude keyword
-                excludeKeyword = excludeKeywordCache.get(pfpAdGroup.getAdGroupSeq());
-                if (excludeKeyword == null) {
-                    excludeKeyword = new StringBuffer();
-
-                    pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(pfpAdGroup.getAdGroupSeq(), EnumExcludeKeywordStatus.START.getStatusId());
-                    for (PfpAdExcludeKeyword adExcludeKeyword: pfpAdExcludeKeywordList) {
-                        excludeKeyword.append(adExcludeKeyword.getAdExcludeKeyword()).append(",");
-                    }
-
-                    excludeKeywordCache.put(pfpAdGroup.getAdGroupSeq(), excludeKeyword);
-                }
-
-                // get kernel price
-                keywordSystemPrice = pfpKeywordSyspriceCache.get(pfpAdKeyword.getAdKeyword());
-                if (keywordSystemPrice == null) {
-                    pfpKeywordSysprice = pfpKeywordSyspriceService.selectKeywordSyspriceByKeyword(pfpAdKeyword.getAdKeyword(), 1, 0);
-                    if (pfpKeywordSysprice != null) {
-                        keywordSystemPrice = pfpKeywordSysprice.getSysprice();
-                    }
-                    else {
-                        keywordSystemPrice = keywordSysprice;
-                    }
-
-                    pfpKeywordSyspriceCache.put(pfpAdKeyword.getAdKeyword(), keywordSystemPrice);
-                }
-
-                switch (pfpAdGroup.getAdGroupSearchPriceType()) {
-                case 1:
-                    keywordSearchPrice = keywordSystemPrice;
-                    break;
-                case 2:
-                default:
-                    keywordSearchPrice = pfpAdKeyword.getAdKeywordSearchPrice() > keywordSystemPrice ? keywordSystemPrice : pfpAdKeyword.getAdKeywordSearchPrice();
-                    break;
-                }
-                keywordChannelPrice = pfpAdKeyword.getAdKeywordChannelPrice() > keywordSystemPrice ? keywordSystemPrice : pfpAdKeyword.getAdKeywordChannelPrice();
-
-//                    log.info("keyword price = " + keywordSearchPrice + " " + keywordChannelPrice);
-
-                if ("N".equals(pfpCustomerInfo.getRecognize())) {
-                    keywordSearchPrice = 0f;
-                    keywordChannelPrice = 0f;
-                }
-
-                // get sums
-                pvclkSums = pfpAdKeywordPvclkSumsCache.get(pfpAdKeyword.getAdKeywordSeq());
-                if (pvclkSums == null) {
-                    pvclkSums = new int[2];
-                }
-
-                // temp price
-                keywordTempPrice = keywordSearchPrice + (pvclkSums[0] > 0 ? (pvclkSums[1] / pvclkSums[0] * 10) : 0) + RandomUtils.nextFloat();
-
-                for (PfpAd pfpAd: tempAdList) {
-                    // write lucene
-                    doc = new Document();
-                    doc.add(new Field(EnumIndexField.adActionId.toString(), pfpAdAction.getAdActionSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adGroupId.toString(), pfpAdGroup.getAdGroupSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adId.toString(), pfpAd.getAdSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordId.toString(), pfpAdKeyword.getAdKeywordSeq(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeyword.toString(), pfpAdKeyword.getAdKeyword(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adExcludeKeyword.toString(), excludeKeyword.toString(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adActionControlPrice.toString(), String.valueOf(pfpAdAction.getAdActionControlPrice() / makeNumber / serverNumber), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordSearchPrice.toString(), String.valueOf(keywordSearchPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordChannelPrice.toString(), String.valueOf(keywordChannelPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordTempPrice.toString(), String.valueOf(keywordTempPrice), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordPv.toString(), String.valueOf(pvclkSums[0]), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordClk.toString(), String.valueOf(pvclkSums[1]), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.recognize.toString(), pfpCustomerInfo.getRecognize(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    writer.addDocument(doc);
-
-//                    keywordSet.add(pfpAdKeyword.getAdKeyword());
-
-                    count++;
-
-//                    log.info(doc);
-                }
-            }
-        } catch (Exception e) {
-            log.error(keywordDir.getPath(), e);
-            throw e;
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    log.error(keywordDir.getPath(), e);
-                    throw e;
-                }
-            }
-        }
-
-        log.info("index: " + count);
-
-//        // keyword.txt
-//        log.info("writer txt = " + keywordFile.getPath());
-//        FileUtils.writeLines(keywordFile, CHARSET, keywordSet);
-//        log.info("txt: " + keywordSet.size());
-
-        long endTime = Calendar.getInstance().getTimeInMillis();
-        log.info("time: " + (endTime - startTime) / 1000 + "s");
-    }
-
-    private void keywordLucene2() throws Exception {
+    private void keyword() throws IOException {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
         // load adGroup
@@ -1248,7 +1029,6 @@ public class KernelJob {
         // lucene
         File keywordDir = new File(kernelAddataDir + "keyword/");
         IndexWriterConfig indexWriterConfig = new IndexWriterConfig(Version.LUCENE_36, new IKAnalyzer());
-        IndexWriter writer = null;
         Document doc = null;
 
         // yesterday
@@ -1260,9 +1040,7 @@ public class KernelJob {
         log.info("writer index = " + keywordDir.getPath());
 
         // write index
-        try {
-            writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig);
-
+        try (IndexWriter writer = new IndexWriter(FSDirectory.open(keywordDir), indexWriterConfig)) {
             for (String groupId: groupList) {
                 pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(groupId, EnumExcludeKeywordStatus.START.getStatusId());
                 validKeywordList = pfpCustomerInfoService.selectValidAdKeyword(pfpAdExcludeKeywordList, pfpKeywordSyspriceMap, groupId, pvclkDate);
@@ -1293,133 +1071,17 @@ public class KernelJob {
             }
 
             log.info("maxDoc: " + writer.maxDoc());
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error(keywordDir.getPath(), e);
             throw e;
-        } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (Exception e) {
-                    log.error(keywordDir.getPath(), e);
-                    throw e;
-                }
-            }
         }
 
         long endTime = Calendar.getInstance().getTimeInMillis();
         log.info("time: " + (endTime - startTime) / 1000 + "s");
     }
 
-    @Deprecated
-    private void keywordSolr() throws Exception {
-        long startTime = Calendar.getInstance().getTimeInMillis();
-
-        // load adGroup
-        List<String> groupList = pfpCustomerInfoService.selectValidAdGroup("keyword");
-        Map<String, Float> pfpKeywordSyspriceMap = pfpKeywordSyspriceService.getKeywordMap();
-        List<PfpAdExcludeKeyword> pfpAdExcludeKeywordList = null;
-        List<ValidKeywordBean> validKeywordList = null;
-
-        // solr xml
-        FileOutputStream fileOutputStream = null;
-        StringBuffer line = null;
-        int count = 0;
-
-        // yesterday
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm");
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        String pvclkDate = df.format(calendar.getTime());
-
-        // output dir
-        StringBuffer outputDir = new StringBuffer();
-        outputDir.append(multicorePath);
-        outputDir.append("akb_keyword").append(File.separator);
-        outputDir.append("data").append(File.separator);
-        outputDir.append("xml").append(File.separator);
-        new File(outputDir.toString()).mkdirs();
-
-        // output file
-        StringBuffer outputPath = new StringBuffer();
-        outputPath.append(outputDir);
-        outputPath.append("keyword_").append(sdf.format(Calendar.getInstance().getTime()));
-        File xmlFile = new File(outputPath.toString() + ".xml");
-        File tempFile = new File(outputPath.toString() + ".tmp");
-
-        log.info("solr xml = " + xmlFile.getPath());
-
-        fileOutputStream = FileUtils.openOutputStream(tempFile);
-        fileOutputStream.write("<update>\n".getBytes(CharEncoding.UTF_8));
-        fileOutputStream.write("<delete><query>*</query></delete>\n".getBytes(CharEncoding.UTF_8));
-        fileOutputStream.write("<add>\n".getBytes(CharEncoding.UTF_8));
-
-        // write index
-        try {
-            for (String groupId: groupList) {
-                pfpAdExcludeKeywordList = pfpAdExcludeKeywordService.selectPfpAdExcludeKeywords(groupId, EnumExcludeKeywordStatus.START.getStatusId());
-                validKeywordList = pfpCustomerInfoService.selectValidAdKeyword(pfpAdExcludeKeywordList, pfpKeywordSyspriceMap, groupId, pvclkDate);
-
-                for (ValidKeywordBean bean: validKeywordList) {
-                    // write solr xml
-                    line = new StringBuffer();
-                    line.append("<doc>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.pk.getUnderLine()).append("\"><![CDATA[").append(bean.getPk()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adActionId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdActionId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adGroupId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdGroupId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordId.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordId()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeyword.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeyword()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adExcludeKeyword.getUnderLine()).append("\"><![CDATA[").append(bean.getAdExcludeKeyword()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adActionControlPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdActionControlPrice() / makeNumber / serverNumber).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordSearchPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordSearchPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordChannelPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordChannelPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordTempPrice.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordTempPrice()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordPv.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordPv()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.adKeywordClk.getUnderLine()).append("\"><![CDATA[").append(bean.getAdKeywordClk()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.recognize.getUnderLine()).append("\"><![CDATA[").append(bean.getRecognize()).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.updateDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getUpdateDate())).append("]]></field>\n");
-                    line.append("\t<field name=\"").append(EnumIndexField.createDate.getUnderLine()).append("\"><![CDATA[").append(df.format(bean.getCreateDate())).append("]]></field>\n");
-                    line.append("</doc>\n");
-                    fileOutputStream.write(line.toString().getBytes(CharEncoding.UTF_8));
-                }
-
-                count += validKeywordList.size();
-            }
-
-            fileOutputStream.write("</add>\n".getBytes(CharEncoding.UTF_8));
-            fileOutputStream.write("</update>\n".getBytes(CharEncoding.UTF_8));
-
-            // success
-            log.info("count: " + count);
-            log.info("solr xml success");
-            FileUtils.deleteQuietly(xmlFile);
-            FileUtils.moveFile(tempFile, xmlFile);
-        } catch (Exception e) {
-            // fail
-            log.info("solr xml fail");
-            FileUtils.deleteQuietly(xmlFile);
-            FileUtils.deleteQuietly(tempFile);
-
-            throw e;
-        } finally {
-            try {
-                if (fileOutputStream != null) {
-                    fileOutputStream.close();
-                }
-            } catch (Exception e) {
-                log.error(outputPath, e);
-            }
-        }
-
-        long endTime = Calendar.getInstance().getTimeInMillis();
-
-        log.info("time: " + (endTime - startTime) / 1000 + "s");
-    }
-
-    private void area() throws Exception {
-        Map<Integer, PfbxAreaBean> map = new HashMap<Integer, PfbxAreaBean>();
+    private void area() throws IOException {
+        Map<Integer, PfbxAreaBean> map = new HashMap<>();
         PfbxAreaBean pfbxAreaBean = null;
 
         List<PfbxArea> list = pfbxAreaService.loadAll();
@@ -1439,15 +1101,15 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxArea.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxArea: " + map.size());
     }
 
-    private void position() throws Exception {
-        Map<String, PfbxPositionBean> map = new HashMap<String, PfbxPositionBean>();
+    private void position() throws IOException {
+        Map<String, PfbxPositionBean> map = new HashMap<>();
         PfbxPositionBean pfbxPositionBean = null;
 
         List<PfbxPosition> list = pfbxPositionService.selectPfbxPositionByDeleteFlag(0);
@@ -1474,15 +1136,15 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxPosition.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxPosition: " + map.size());
     }
 
-    private void size() throws Exception {
-        Map<Integer, PfbxSizeBean> map = new HashMap<Integer, PfbxSizeBean>();
+    private void size() throws IOException {
+        Map<Integer, PfbxSizeBean> map = new HashMap<>();
         PfbxSizeBean pfbxSizeBean = null;
 
         List<PfbxSize> list = pfbxSizeService.loadAll();
@@ -1503,15 +1165,15 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxSize.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxSize: " + map.size());
     }
 
-    private void url() throws Exception {
-        Map<Integer, PfbxUrlBean> map = new HashMap<Integer, PfbxUrlBean>();
+    private void url() throws IOException {
+        Map<Integer, PfbxUrlBean> map = new HashMap<>();
         PfbxUrlBean pfbxUrlBean = null;
 
         List<PfbxUrl> list = pfbxUrlService.loadAll();
@@ -1532,16 +1194,16 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxUrl: " + map.size());
     }
 
-    private void group() throws Exception {
+    private void group() throws IOException {
         // pfbxCustomerInfoId > PfbxUserGroupBean
-        Map<String, Map<String, PfbxUserGroupBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserGroupBean>>();
+        Map<String, Map<String, PfbxUserGroupBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserGroupBean> pfbxUserGroupMap = null;
         PfbxUserGroupBean pfbxUserGroupBean = null;
 
@@ -1577,7 +1239,7 @@ public class KernelJob {
 
             pfbxUserGroupMap = pfbxCustomerInfoMap.get(pfbxUserGroupBean.getPfbxCustomerInfoId());
             if (pfbxUserGroupMap == null) {
-                pfbxUserGroupMap = new HashMap<String, PfbxUserGroupBean>();
+                pfbxUserGroupMap = new HashMap<>();
             }
             pfbxUserGroupMap.put(pfbxUserGroupBean.getId(), pfbxUserGroupBean);
 
@@ -1592,16 +1254,16 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxGroup.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxGroup: " + pfbxCustomerInfoMap.size());
     }
 
-    private void option() throws Exception {
+    private void option() throws IOException {
         // pfbxCustomerInfoId > PfbxUserOptionBean
-        Map<String, Map<String, PfbxUserOptionBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserOptionBean>>();
+        Map<String, Map<String, PfbxUserOptionBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserOptionBean> pfbxUserOptionMap = null;
         PfbxUserOptionBean pfbxUserOptionBean = null;
         AdCategoryNewBean adCategoryNewBean = null;
@@ -1674,7 +1336,7 @@ public class KernelJob {
 
             pfbxUserOptionMap = pfbxCustomerInfoMap.get(pfbxUserOptionBean.getPfbxCustomerInfoId());
             if (pfbxUserOptionMap == null) {
-                pfbxUserOptionMap = new HashMap<String, PfbxUserOptionBean>();
+                pfbxUserOptionMap = new HashMap<>();
             }
             pfbxUserOptionMap.put(pfbxUserOptionBean.getId(), pfbxUserOptionBean);
 
@@ -1690,16 +1352,16 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxOption.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxOption: " + pfbxCustomerInfoMap.size());
     }
 
-    private void sample() throws Exception {
+    private void sample() throws IOException {
         // pfbxCustomerInfoId > PfbxUserSampleBean
-        Map<String, Map<String, PfbxUserSampleBean>> pfbxCustomerInfoMap = new HashMap<String, Map<String, PfbxUserSampleBean>>();
+        Map<String, Map<String, PfbxUserSampleBean>> pfbxCustomerInfoMap = new HashMap<>();
         Map<String, PfbxUserSampleBean> pfbxUserSampleMap = null;
         PfbxUserSampleBean pfbxUserSampleBean = null;
 
@@ -1745,7 +1407,7 @@ public class KernelJob {
 
             pfbxUserSampleMap = pfbxCustomerInfoMap.get(pfbxUserSampleBean.getPfbxCustomerInfoId());
             if (pfbxUserSampleMap == null) {
-                pfbxUserSampleMap = new LinkedHashMap<String, PfbxUserSampleBean>();
+                pfbxUserSampleMap = new LinkedHashMap<>();
             }
             pfbxUserSampleMap.put(pfbxUserSampleBean.getId(), pfbxUserSampleBean);
 
@@ -1760,16 +1422,16 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxSample.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxSample: " + pfbxCustomerInfoMap.size());
     }
 
-    private void showRule() throws Exception {
+    private void showRule() throws IOException {
         // pfbxCustomerInfoId > PfbxUserSampleBean
-        List<AdmShowRuleBean> admShowRuleList = new ArrayList<AdmShowRuleBean>();
+        List<AdmShowRuleBean> admShowRuleList = new ArrayList<>();
         AdmShowRuleBean admShowRuleBean = null;
 
         List<AdmShowRule> list = admShowRuleService.loadAll();
@@ -1791,15 +1453,15 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "admShowRule.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("admShowRule: " + admShowRuleList.size());
     }
 
-    private void blackUrl() throws Exception {
-        Map<String, List<PfbxBlackUrlBean>> pfbxBlackUrlMap = new HashMap<String, List<PfbxBlackUrlBean>>();
+    private void blackUrl() throws IOException {
+        Map<String, List<PfbxBlackUrlBean>> pfbxBlackUrlMap = new HashMap<>();
         List<PfbxBlackUrlBean> pfbxBlackUrlList = null;
         PfbxBlackUrlBean pfbxBlackUrlBean = null;
         String pfbxCustomerInfoId = null;
@@ -1809,7 +1471,7 @@ public class KernelJob {
             pfbxCustomerInfoId = admPfbxBlockUrl.getPfbxCustomerInfo().getCustomerInfoId();
             pfbxBlackUrlList = pfbxBlackUrlMap.get(pfbxCustomerInfoId);
             if (pfbxBlackUrlList == null) {
-                pfbxBlackUrlList = new ArrayList<PfbxBlackUrlBean>();
+                pfbxBlackUrlList = new ArrayList<>();
             }
 
             pfbxBlackUrlBean = new PfbxBlackUrlBean();
@@ -1828,15 +1490,15 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxBlackUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxBlackUrl: " + pfbxBlackUrlMap.size());
     }
 
-    private void whiteUrl() throws Exception {
-        Map<String, List<PfbxWhiteUrlBean>> pfbxWhiteUrlMap = new HashMap<String, List<PfbxWhiteUrlBean>>();
+    private void whiteUrl() throws IOException {
+        Map<String, List<PfbxWhiteUrlBean>> pfbxWhiteUrlMap = new HashMap<>();
         List<PfbxWhiteUrlBean> pfbxWhiteUrlList = null;
         PfbxWhiteUrlBean pfbxWhiteUrlBean = null;
         String pfbxCustomerInfoId = null;
@@ -1846,7 +1508,7 @@ public class KernelJob {
             pfbxCustomerInfoId = pfbxAllowUrl.getPfbxCustomerInfo().getCustomerInfoId();
             pfbxWhiteUrlList = pfbxWhiteUrlMap.get(pfbxCustomerInfoId);
             if (pfbxWhiteUrlList == null) {
-                pfbxWhiteUrlList = new ArrayList<PfbxWhiteUrlBean>();
+                pfbxWhiteUrlList = new ArrayList<>();
             }
 
             pfbxWhiteUrlBean = new PfbxWhiteUrlBean();
@@ -1868,20 +1530,17 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "pfbxWhiteUrl.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("pfbxWhiteUrl: " + pfbxWhiteUrlMap.size());
     }
 
-    @SuppressWarnings("unchecked")
-    private void prod() throws Exception {
-        Map<String, AdBean> adMap = null;
-        AdBean adBean = null;
+    private void prod() throws IOException {
         Set<String> prodGroupSet = new HashSet<>();
 
-        StringBuffer url = null;
+        StringBuilder url = null;
         Map<String, List<Map<String, String>>> prodMap = new HashMap<>();
         List<Map<String, String>> prodList = null;
         Map<String, String> prodItemMap = null;
@@ -1893,10 +1552,8 @@ public class KernelJob {
         String key = null;
         String value = null;
 
-        for (String poolId: poolMap.keySet()) {
-            adMap = poolMap.get(poolId);
-            for (String adId: adMap.keySet()) {
-                adBean = adMap.get(adId);
+        for (Map<String, AdBean> adMap : this.currentPoolMap.values()) {
+            for (AdBean adBean : adMap.values()) {
                 if (StringUtils.isNotBlank(adBean.getProdGroupId())) {
                     prodGroupSet.add(adBean.getProdGroupId());
                 }
@@ -1904,7 +1561,7 @@ public class KernelJob {
         }
 
         for (String prodGroupId: prodGroupSet) {
-            url = new StringBuffer();
+            url = new StringBuilder();
             url.append(pfpProdGroupListApiUrl);
             url.append("?groupId=").append(prodGroupId);
             url.append("&prodNum=50");
@@ -1941,14 +1598,14 @@ public class KernelJob {
         // write file
         File file = new File(kernelAddataDir + "prod.xml");
 
-        log.info("write file = " + file.getPath());
+        log.info(WRITE_FILE + file.getPath());
 
-        FileUtils.writeStringToFile(file, xml, CHARSET);
+        FileUtils.writeStringToFile(file, xml, StandardCharsets.UTF_8);
 
         log.info("prodMap: " + prodMap.size());
     }
 
-    private void scp() throws Exception {
+    private void scp() {
         for (SpringSSHProcessUtil2 scpProcess: scpProcessList) {
             scpProcess.sshExec("rm -rf " + kernelAddata);
             scpProcess.sshExec("mkdir -p " + kernelAddataDir);
@@ -1961,16 +1618,14 @@ public class KernelJob {
         log.info("scp ok");
     }
 
-    private String encodeParam(String url) throws UnsupportedEncodingException {
-//        log.info("src url: " + url);
-
-        String[] urls = URLDecoder.decode(url, CHARSET).split("\\?");
+    private String encodeParam(String url) {
+        String[] urls = URLDecoder.decode(url, StandardCharsets.UTF_8).split("\\?");
         if (urls.length != 2) {
-            return URLEncoder.encode(url, CHARSET);
+            return URLEncoder.encode(url, StandardCharsets.UTF_8);
         }
 
         // url
-        StringBuffer urlSb = new StringBuffer();
+        StringBuilder urlSb = new StringBuilder();
         urlSb.append(urls[0]).append("?");
 
         // param
@@ -1981,7 +1636,7 @@ public class KernelJob {
             if (keys.length == 2) {
                 urlSb.append(keys[0]);
                 urlSb.append("=");
-                urlSb.append(URLEncoder.encode(keys[1], CHARSET));
+                urlSb.append(URLEncoder.encode(keys[1], StandardCharsets.UTF_8));
             }
             else {
                 urlSb.append(params[i]);
@@ -2003,7 +1658,7 @@ public class KernelJob {
                                 .replaceAll("\\%2F", "/")
                                 .replaceAll("\\%23", "#");
 
-        return URLEncoder.encode(realUrl, CHARSET);
+        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
     }
 
     private String getVideoUrl(String srcUrl, int fileType) {
@@ -2011,7 +1666,7 @@ public class KernelJob {
         String descUrl = srcUrl;
         try {
             process = Runtime.getRuntime().exec(new String[] {"bash", "-c", "youtube-dl -f " + fileType + " -g " + srcUrl});
-            descUrl = IOUtils.toString(process.getInputStream(),"UTF-8");
+            descUrl = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
             log.error(srcUrl + " " + fileType, e);
@@ -2035,10 +1690,6 @@ public class KernelJob {
 
     public void setPfpCustomerInfoService(IPfpCustomerInfoService pfpCustomerInfoService) {
         this.pfpCustomerInfoService = pfpCustomerInfoService;
-    }
-
-    public void setPfpAdKeywordPvclkService(IPfpAdKeywordPvclkService pfpAdKeywordPvclkService) {
-        this.pfpAdKeywordPvclkService = pfpAdKeywordPvclkService;
     }
 
     public void setPfpAdPvclkService(IPfpAdPvclkService pfpAdPvclkService) {
@@ -2125,10 +1776,6 @@ public class KernelJob {
         this.kernelAddata = kernelAddata;
     }
 
-    public void setMulticorePath(String multicorePath) {
-        this.multicorePath = multicorePath;
-    }
-
     public void setPfpProdGroupListApiUrl(String pfpProdGroupListApiUrl) {
         this.pfpProdGroupListApiUrl = pfpProdGroupListApiUrl;
     }
@@ -2137,20 +1784,12 @@ public class KernelJob {
         this.adSysprice = adSysprice;
     }
 
-    public void setKeywordSysprice(float keywordSysprice) {
-        this.keywordSysprice = keywordSysprice;
-    }
-
     public void setMakeNumber(int makeNumber) {
         this.makeNumber = makeNumber;
     }
 
     public void setServerNumber(int serverNumber) {
         this.serverNumber = serverNumber;
-    }
-
-    public void setSolrFlag(boolean solrFlag) {
-        this.solrFlag = solrFlag;
     }
 
     public void setScpProcessList(List<SpringSSHProcessUtil2> scpProcessList) {

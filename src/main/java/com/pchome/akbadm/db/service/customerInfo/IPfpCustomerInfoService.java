@@ -48,7 +48,7 @@ public interface IPfpCustomerInfoService extends IBaseService<PfpCustomerInfo,St
 
     public List<PfpAdKeyword> selectValidAdKeyword();
 
-    public List<ValidKeywordBean> selectValidAdKeyword(List<PfpAdExcludeKeyword> excludeKeywordList, Map<String, Float> syspriceMap, String groupId, String pvclkDate) throws Exception;
+    public List<ValidKeywordBean> selectValidAdKeyword(List<PfpAdExcludeKeyword> excludeKeywordList, Map<String, Float> syspriceMap, String groupId, String pvclkDate);
 
     public List<PfpCustomerInfo> selectCustomerInfo(EnumAccountStatus enumAccountStatus);
 
@@ -65,12 +65,12 @@ public interface IPfpCustomerInfoService extends IBaseService<PfpCustomerInfo,St
     public Integer deletePfpCustomerInfo(String pfpCustomerInfoId);
 
     public List<PfpAccountVO> findManagerPfpAccount(String memberId, Date startDate, Date endDate);
-    
+
     public Map<String,String> findPfpCustomerInfoNameMap() throws Exception;
-    
+
     public void saveOrUpdateWithCommit(PfpCustomerInfo pfpCustomerInfo) throws Exception;
-    
+
     public List<PfpCustomerInfo> findCustomerInfoIds(List<String> customerInfoList) throws Exception;
-    
+
     public List<String> findTransDetailPfp(String yesterday , String today , String tomorrow) throws Exception;
 }

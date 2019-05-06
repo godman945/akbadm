@@ -12,7 +12,6 @@
             	<value>classpath:config/prop/akbadmSystem.properties</value>
             	<value>classpath:config/prop/hdfs.properties</value>
             	<value>classpath:config/prop/path.properties</value>
-            	<value>classpath:config/prop/solr.properties</value>
             	<value>classpath:config/prop/ssh.process.util.properties</value>
             	<value>classpath:config/prop/prd/prd.bonus.properties</value>
             	<value>classpath:config/prop/prd/prd.pfb.bonus.properties</value>
