@@ -687,8 +687,10 @@ public class KernelJob {
 
                 // special rule: reduce by odd number
                 if (hour == reduceHour) {
+                	log.info("hour="+hour+",reduceHour="+reduceHour);
                     pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
                     if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
+                    	log.info("pfpCustomerInfoIdOddNumber="+pfpCustomerInfoIdOddNumber+","+pfpCustomerInfoId+","+reduceDivisor);
                         continue;
                     }
                 }
