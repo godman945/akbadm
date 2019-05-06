@@ -555,6 +555,8 @@ public class KernelJob {
         String adId = null;
         String actionId = null;
         String pfpCustomerInfoId = null;
+        int pfpCustomerInfoIdOddNumber = 0;
+        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % 2;
         StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
@@ -677,6 +679,12 @@ public class KernelJob {
                 adId = pfpAd.getAdSeq();
                 actionId = pfpAdAction.getAdActionSeq();
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
+
+                // special rule: reduce by odd number
+                pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % 2;
+                if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
+                    continue;
+                }
 
                 // get ad map
                 adMap = poolMap.get(adPoolId);
