@@ -452,9 +452,9 @@ function showad(asynpchomeadObject) {
         var fig = new PCHOMEFingerprint().x64hash128(canvasCpde, 1024);
         var adurl = "";
         if (padssl) {
-                adurl += "http://kdcl1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+                adurl += "http://kdcl7.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
         } else {
-                adurl += "https://kdcl1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+                adurl += "https://kdcl7.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
         }
         adurl += "&positionId=" + pid;
         adurl += "&padWidth=" + asynpchomeadObject.pad_width;
