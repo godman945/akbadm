@@ -94,7 +94,7 @@ try{
 
 
 var fig = "";
-/*stg adurl與prd有差異*/
+/*stg adurl��㘥rd��匧榆�㺭*/
 var adurl = "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId;
 
 adurl += "&positionId=" + pid;
@@ -119,7 +119,7 @@ if (pad_pchad.length <= 10) {
         document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' + pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>');
     }
 } else {
-    alert("超過廣告上限，最多只能貼10則廣告!");
+    alert("頞��𤾸誨��𠹺�𢠃�琜�峕�憭𡁜蘨�質票10���誨���!");
 }
 
 
@@ -221,13 +221,13 @@ function getMessage0(event) {
 			var htmlContent = event.data.adBackup.htmlContent;
 			if(htmlContent != null){
 				var pcadshowList = document.getElementsByClassName("akb_iframe");
-				/*處理收合*/
+				/*��閧��𤣰���*/
 				if(htmlContent == 'blank'){
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
 					iframeObj.height = 0;
 					iframeObj.width = 0;
 				}
-				/*處理補板*/
+				/*��閧�鋆𨀣踎*/
 				
 				if (htmlContent != 'blank' && htmlContent != undefined && htmlContent.indexOf('document.write') < 0) {
 					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
