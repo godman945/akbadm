@@ -480,10 +480,10 @@
                             <div class="ad-box">
                                 <!--300x250-->
                                 <script language="javascript">
-                                    pad_width = 300;
-                                    pad_height = 250;
-                                    pad_customerId="PFBC20190424002";
-                                    pad_positionId="PFBP201904240004C";
+                                pad_width = 300;
+                                pad_height = 250;
+                                pad_customerId = "PFBC20160804001";
+                                pad_positionId = "PFBP201611160002C";
                                 </script>
                                 <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                             </div>
@@ -653,8 +653,8 @@
                         <script language="javascript">
                         pad_width=970;
                         pad_height=250;
-                        pad_customerId="PFBC20190424002";
-                        pad_positionId="PFBP201904240003C";
+                        pad_customerId="PFBC20160804001";
+                        pad_positionId="PFBP201706060002C";
                         </script>
                         <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                     </div>
@@ -663,8 +663,8 @@
                         <script language="javascript">
                             pad_width = 300;
                             pad_height = 250;
-                            pad_customerId="PFBC20160804001";
-                            pad_positionId="PFBP201904250001C";
+                            pad_customerId = "PFBC20160804001";
+                            pad_positionId = "PFBP201611160002C";
                         </script>
                         <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                     </div>
@@ -866,10 +866,10 @@
                                         <div class="ad-box">
                                             <!--300x250-->
                                             <script language="javascript">
-                                                pad_width = 300;
-                                                pad_height = 250;
-                                                pad_customerId="PFBC20160804001";
-                                                pad_positionId="PFBP201904250001C";
+                                            pad_width = 300;
+                                            pad_height = 250;
+                                            pad_customerId = "PFBC20160804001";
+                                            pad_positionId = "PFBP201611160002C";
                                             </script>
                                             <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                         </div>
@@ -992,8 +992,8 @@
                                     <script language="javascript">
                                         pad_width = 300;
                                         pad_height = 250;
-                                        pad_customerId="PFBC20160804001";
-                                        pad_positionId="PFBP201904250001C";
+                                        pad_customerId = "PFBC20160804001";
+                                        pad_positionId = "PFBP201611160002C";
                                     </script>
                                     <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 </div>
@@ -1002,8 +1002,8 @@
                                     <script language="javascript">
                                         pad_width = 300;
                                         pad_height = 100;
-                                        pad_customerId="PFBC20160804001";
-                                        pad_positionId="PFBP201904250002C";
+                                        pad_customerId = "PFBC20160804001";
+                                        pad_positionId = "PFBP201610260005C";
                                     </script>
                                     <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 </div>
@@ -1091,10 +1091,10 @@
                             <div class="txt-cell ad-box">
                                 <!-- 聯播網廣告code 開始 -->
                                 <script language="javascript">
-                                    pad_width=300;
-                                    pad_height=600;
-                                    pad_customerId="PFBC20160804001";
-                                    pad_positionId="PFBP201802210001C";
+                                pad_width=300;
+                                pad_height=600;
+                                pad_customerId="PFBC20160804001";
+                                pad_positionId="PFBP201802210001C";
                                 </script>
                                 <script id="pcadscript" language="javascript" src="img/https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 <!-- 聯播網廣告code 開始 -->
