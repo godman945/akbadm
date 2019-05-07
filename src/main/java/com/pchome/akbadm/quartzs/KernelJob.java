@@ -541,11 +541,12 @@ public class KernelJob {
     }
 
     private void pool() throws IOException {
-        Calendar calendar = Calendar.getInstance();
-
         long startTime = Calendar.getInstance().getTimeInMillis();
+
+        Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuteOddNumber = Calendar.getInstance().get(Calendar.MINUTE) % reduceDivisor;
+        int minuteOddNumber = calendar.get(Calendar.MINUTE) % reduceDivisor;
+        int reduceCount = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
@@ -561,7 +562,6 @@ public class KernelJob {
         String adId = null;
         String actionId = null;
         String pfpCustomerInfoId = null;
-        int pfpCustomerInfoIdOddNumber = 0;
         StringBuilder adClass = null;
         String priceType = null;
         String[] categoryCode = null;
@@ -686,12 +686,12 @@ public class KernelJob {
                 actionId = pfpAdAction.getAdActionSeq();
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
+                // TODO business bug: reduce adDetail
                 // special rule: reduce by odd number
                 if (hour == reduceHour) {
-                	log.info("hour="+hour+",reduceHour="+reduceHour);
-                    pfpCustomerInfoIdOddNumber = Integer.parseInt(pfpCustomerInfoId.substring(pfpCustomerInfoId.length()-1)) % reduceDivisor;
-                    if (pfpCustomerInfoIdOddNumber != minuteOddNumber) {
-                    	log.info("pfpCustomerInfoIdOddNumber="+pfpCustomerInfoIdOddNumber+","+pfpCustomerInfoId+","+reduceDivisor);
+                	reduceCount = ++reduceCount % reduceDivisor;
+                    if (reduceCount != minuteOddNumber) {
+                    	log.info("reduceCount="+reduceCount+","+pfpCustomerInfoId+","+adId);    // by nico
                         continue;
                     }
                 }

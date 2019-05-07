@@ -88,13 +88,16 @@ stg<p>
 		<td>
 			4: 180x150<p>
 			
-			<script language="javascript">
+			<script id="asynpchomeadjs" async src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script> 
+			<ins class="asynpchomead" 
 			pad_width=180;
 			pad_height=150;
 			pad_customerId="PFBC20150519001";
-			pad_positionId="PFBP201605050001C";
+			pad_positionId="PFBP201605040001C";
+			></ins>
+			<script>
+			(asynpchomead = window.asynpchomead || []).push({});
 			</script>
-			<script id="pcadscript" language="javascript" src="http://showstg.pchome.com.tw/adm/html/js/kernel/asynpcadshowstg3.js"></script>
 			
 		</td>
 		<td>

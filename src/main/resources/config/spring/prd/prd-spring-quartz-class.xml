@@ -116,7 +116,11 @@
                 <ref bean="Kdcl4SSHProcess" />
                 <ref bean="Kdcl5SSHProcess" />
                 <ref bean="Kdcl6SSHProcess" />
-                <!-- <ref bean="Kdcl7SSHProcess" /> -->
+                <ref bean="Kdcl7SSHProcess" />
+                <ref bean="Kdcl8SSHProcess" />
+                <ref bean="Kdcl9SSHProcess" />
+                <ref bean="Kdcl10SSHProcess" />
+                <ref bean="Kdcl11SSHProcess" />
             </list>
         </property>
     </bean>
