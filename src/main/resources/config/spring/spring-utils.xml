@@ -59,15 +59,41 @@
         <property name="username" value="${kdcl6.username}" />
         <property name="password" value="${kdcl6.password}" />
     </bean>
-    
-    <!--
+
     <bean id="Kdcl7SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
         <property name="host" value="${kdcl7.host}" />
         <property name="port" value="${kdcl7.port}" />
         <property name="username" value="${kdcl7.username}" />
         <property name="password" value="${kdcl7.password}" />
     </bean>
-    -->
+
+    <bean id="Kdcl8SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl8.host}" />
+        <property name="port" value="${kdcl8.port}" />
+        <property name="username" value="${kdcl8.username}" />
+        <property name="password" value="${kdcl8.password}" />
+    </bean>
+
+    <bean id="Kdcl9SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl9.host}" />
+        <property name="port" value="${kdcl9.port}" />
+        <property name="username" value="${kdcl9.username}" />
+        <property name="password" value="${kdcl9.password}" />
+    </bean>
+
+    <bean id="Kdcl10SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl10.host}" />
+        <property name="port" value="${kdcl10.port}" />
+        <property name="username" value="${kdcl10.username}" />
+        <property name="password" value="${kdcl10.password}" />
+    </bean>
+
+    <bean id="Kdcl11SSHProcess" class="com.pchome.soft.util.SpringSSHProcessUtil2">
+        <property name="host" value="${kdcl11.host}" />
+        <property name="port" value="${kdcl11.port}" />
+        <property name="username" value="${kdcl11.username}" />
+        <property name="password" value="${kdcl11.password}" />
+    </bean>
     
     <bean id="SpringECcoderUtil" class="com.pchome.soft.util.SpringECcoderUtil" />
     
