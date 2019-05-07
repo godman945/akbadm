@@ -1096,7 +1096,7 @@
                                 pad_customerId="PFBC20160804001";
                                 pad_positionId="PFBP201802210001C";
                                 </script>
-                                <script id="pcadscript" language="javascript" src="img/https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
+                                <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 <!-- 聯播網廣告code 開始 -->
                             </div>
                         </div>
