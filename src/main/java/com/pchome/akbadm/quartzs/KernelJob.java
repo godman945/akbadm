@@ -686,6 +686,7 @@ public class KernelJob {
                 actionId = pfpAdAction.getAdActionSeq();
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
+                // TODO business bug: reduce adDetail
                 // special rule: reduce by odd number
                 if (hour == reduceHour) {
                 	log.info("hour="+hour+",reduceHour="+reduceHour);  // by nico
