@@ -672,6 +672,7 @@ public class KernelJob {
         Map<String, PfpCodeTracking> pfpCodeTrackingMap = pfpCodeTrackingService.selectPfpCodeTrackingMap();
         log.info("pfpCodeTrackingService.selectPfpCodeTrackingMap " + pfpCodeTrackingMap.size());
 
+        log.info("hour="+hour+",reduceHour="+reduceHour+",minuteOddNumber="+minuteOddNumber);
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             try {
