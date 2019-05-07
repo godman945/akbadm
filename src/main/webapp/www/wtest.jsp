@@ -1,3 +1,5 @@
+<%@page contentType="text/html; charset=UTF-8"%>  
+<%response.setHeader("Access-Control-Allow-Origin", "*"); %>
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" class="ie6 ieo"> <![endif]-->
 <!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" class="ie7 ieo"> <![endif]-->
