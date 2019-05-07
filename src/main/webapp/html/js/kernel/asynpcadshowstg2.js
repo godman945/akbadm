@@ -19,7 +19,7 @@ if (asynpchomeadflag == null) {
 
         if (asynpchomead.length > 10) {
 
-                alert("頞��𤾸誨��𠹺�𢠃�琜�峕�憭𡁜蘨�質票10���誨���!");
+                alert("超過廣告上限，最多只能貼10則廣告!");
 
         } else {
 
