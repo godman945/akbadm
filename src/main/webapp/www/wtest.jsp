@@ -1,6 +1,3 @@
-<%@page contentType="text/html; charset=UTF-8"%>  
-<%response.setHeader("Access-Control-Allow-Origin", "*"); %>
-
 <!DOCTYPE html>
 <!--[if lt IE 7 ]> <html xmlns="http://www.w3.org/1999/xhtml" class="ie6 ieo"> <![endif]-->
 <!--[if IE 7 ]>    <html xmlns="http://www.w3.org/1999/xhtml" class="ie7 ieo"> <![endif]-->
@@ -17,7 +14,6 @@
     <meta http-equiv="cache-control" content="no-cache">
     <meta http-equiv="expires" content="0" />
 
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,minimal-ui" />
     <meta name="title" content="" />
     <meta name="keyword" content="部落格, blog, 新聞台, 相簿, photo, 免費信箱, 信箱, 線上購物, 24h購物, 女性購物, 網路購物, 商店街, 露天拍賣, 分紅網, 金流代收, ATM, Skype, 一元簡訊, IPEVO, 影城, movie, 星座命理, 娛樂, 寵物派, 股市, 下載, toget, 找房子, house, 電子報, epaper, 交友, 家族, 貼圖, 新聞, 網路開店, 電影, 居家生活, 通訊, 娛樂, 政治財經, 休閒, 體育, 影視, 攝影寫真, 觀光, 旅遊, 網路家庭, 貼圖, 露天拍賣, 理財投資, 24小時購物, 影評文章, 達人部落格, 買房子, 居家佈置, 新成屋, 預售屋, 室內設計, 美食, 相片有話說, 相片加註, 外拍, 達人文章, 預告片, 新片預告, 電影時刻表, 紫微運勢, 地圖, map, 健康樂活, 免費軟體, 虛擬主機, 買網址, 學習進修, 彩妝保養, 討論區, 政經, 藝文, 人文抒情, 流行時尚, 廣告刊登, 免費撥接, 遊戲" />
     <meta name="description" content="PChome網路家庭(8044-tw)是台灣最大的電子商務集團，2015年公司合併營收金額達新台幣228.8億元，2005年1月PChome在台灣掛牌上櫃，旗下擁有台灣最大B2C網站PChome24h購物和C2C第一名網站露天拍賣等網路公司。" />
@@ -31,7 +27,6 @@
     <!-- <meta name="apple-mobile-web-app-capable" content="yes"> -->
     <!-- <meta name="csrf-param" content="_csrf"> -->
     <!-- <meta name="csrf-token" content="bEgHvN-lJFoC5bVam3-SHF8_baZwICTGzHJBlA26irFWOGLjAXqa4XvKNtyRNSmkHKq2xElVnnF-kW93VCORVQ=="> -->
-
     <meta property="og:title" content="PChome Online網路家庭首頁" />
     <meta property="og:url" content=" http://www.pchome.com.tw/" />
     <meta property="og:description" content="PChome網路家庭 (8044-tw )是台灣最大的電子商務集團，2014年公司自結合併營收金額達198億元，2005年1月PChome在台灣掛牌上櫃,，旗下擁有台灣最大B2C網站PChome24h購物和C2C第一名網站露天拍賣等網路公司。" />
@@ -43,8 +38,8 @@
     <!-- <meta property="fb:admins" content="1678657922" /> -->
 
 
-    <link rel="icon" href="http://www.pchome.com.tw/favicon.ico?v=1.0" type="image/x-icon" />
-    <link rel="shortcut icon" href="http://www.pchome.com.tw/favicon.ico?v=1.0" />
+    <link rel="icon" href="https://www.pchome.com.tw/favicon.ico?v=1.0" type="image/x-icon" />
+    <link rel="shortcut icon" href="https://www.pchome.com.tw/favicon.ico?v=1.0" />
 
     <link rel="apple-touch-icon" href="touch-icon-iphone.png">
     <link rel="apple-touch-icon" sizes="60x60" href="apple-touch-icon-60.png" />
@@ -62,26 +57,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Prompt:500">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick-theme.min.css" />
-    <!-- <link rel="stylesheet" href="http://travel.pchome.com.tw/js/slick/slick.css"> -->
-    <!-- <link rel="stylesheet" href="http://travel.pchome.com.tw/js/slick/slick-theme.css"> -->
-    <!-- <link rel="stylesheet" href="http://show.pchome.com.tw/html/css/style.css"> -->
-    <!-- <link rel="stylesheet" href="http://show.pchome.com.tw/html/css/fancybox/jquery.fancybox-1.3.4.css" /> -->
 	<link rel="stylesheet" href="css/style.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.js"></script>
 	<script src="https://s0.2mdn.net/ads/studio/cached_libs/tweenmax_1.20.4_3dc5474a75410cb768741e402b80d908_min.js"></script>
-	<!-- <script src="http://travel.pchome.com.tw/js/slick/slick.js"></script> -->
-	<!-- <script src="http://show.pchome.com.tw/html/js/jquery/jquery-1.8.3.min.js"></script> -->
-	<!-- <script src="http://show.pchome.com.tw/html/js/jquery/jquery-ui-1.9.2.custom.min.js"></script> -->
-	<!-- <script src="http://show.pchome.com.tw/html/js/jquery/jquery.fancybox-1.3.4.js"></script> -->
-
 	<!-- head:js -->
 	<!-- endinject -->
-	<script>
-        window.onload = function () {
-          document.domain="pchome.com.tw";    	
-        };
-    </script>
 </head>
 
 <body>
@@ -108,7 +89,7 @@
                                             <a class="txt-inlineblock w-full h-full" href="#" target="blank">
                                                 <!--logoad start here -->
                                                 <!-- <div class="logoAD"><img src="img/ad/350x90.gif"></div> -->
-                                                <div class="logoAD"><img src="img/ad/pic_1218829_702399.gif"></div>
+                                                <!-- <div class="logoAD"><img src="img/ad/pic_1218829_702399.gif"></div> -->
                                                 <!-- <div class="logoAD"><iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" width="290" height="90" allowtransparency="true" allowfullscreen="true" src="img/ad/logoad/logo.html"></iframe></div> -->
                                                 <!--logoad end here -->
                                             </a>
@@ -134,7 +115,7 @@
                                         <!-- 舊版連結按鈕 -->
                                         <a href="#">
                                             <div class="oldver-btn pos-absolute pos-right pos-middle ali-middle">
-                                                <em class="txt-arrow right"></em><span>舊版本</span>
+                                                <em class="txt-arrow right"></em><span>舊版首頁</span>
                                             </div>
                                         </a>
 
@@ -146,7 +127,7 @@
                                             <!-- 股市資訊 -->
                                             <a href="#">
                                                 <div class="tripple-box flt-left stock">
-                                                    加權<br>11039.89<span data-ratio="down">▼48.23  (0.45)</span>
+                                                    加權<br>11039.89<span data-ratio="down">▼-1148.23  (-55.45)</span>
                                                 </div>
                                             </a>
                                             <!-- 緊急警示 -->
@@ -173,7 +154,10 @@
 
                                             <!-- 窄版 登入畫面 -->
                                             <!-- 隱藏menu -->
-                                            <div class="member_box">
+                                            <div class="member_box" id="whoareyou_n">
+                                                <a href="counter.php?sid=4296339" class="btn-open ali-middle">登入</a>
+                                            </div>
+                                            <!-- <div class="member_box">
                                                 <a class="btn-open ali-middle" onclick="$('.member_menu').fadeIn(100)"><i class="txt-arrow down"></i>Joanliu</a>
                                                 <div class="member_menu">
                                                     <a class="btn_close ali-middle" onclick="$('.member_menu').fadeOut(100)"><i class="txt-arrow up"></i>Joanliu</a>
@@ -182,7 +166,7 @@
                                                         <li class="mail"><a href="#">信箱<span data-type="" data-counter="8"></span></a></li>
                                                     </ul>
                                                 </div>
-                                            </div>
+                                            </div> -->
 
                                         </div>
                                     </div>
@@ -192,7 +176,7 @@
                                 <!-- 下層 -->
                                 <div class="topbar-bottomrow txt-table w-full">
                                     <div class="txt-cell lt">
-                                        <div class="topbar-menubtn txt-noselect" onclick="$('.menu-link').fadeToggle(100)"><em data-icon="moreC"></em>更多</div>
+                                        <div class="topbar-menubtn txt-noselect" onclick="$('.menu-link').fadeToggle(100).css('marginTop',$('.container').css('paddingTop'))"><em data-icon="moreC"></em>更多</div>
                                         <script>
                                         /*參考*/
                                         $(document).mouseup(function(e){
@@ -205,45 +189,59 @@
                                     </div>
                                     <div class="txt-cell cm txt-left txt-top">
                                         <div class="topbar-menulist transition-all txt-noselect">
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">線上購物</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">24h購物</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">購物中心</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">商店街</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">露天拍賣</a></span>
-                                            <span data-type="img" data-counter=""><a target="_blank" href="#"><img src="img/icon-tooth.gif"></a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">新聞</a> &#8226 <a target="_blank" href="#">氣象</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">買賣租屋</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">股市</a> &#8226 <a target="_blank" href="#">港股</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">Pi拍錢包</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">買車</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">旅遊</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">Skype</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('572','1')">線上購物</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('25906','1')">24h購物</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('1908069','1')">購物中心</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('575','1')">露天拍賣</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('574','1')">商店街</a></span>
+                                            <span data-type="" data-counter=""><a style="cursor:pointer" onclick="left_base_menu('956','1')">個人賣場</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/3211903*https://www.pchomeec.tw/activity/AC27839340">日本代購</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/10440946*http://www.rakuya.com.tw/">買賣租屋</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/1874691*https://www.pchomepay.com.tw/">支付連</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/677*https://www.interpay.com.tw/">國際連</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6676462*https://www.piapp.com.tw">Pi 拍錢包</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/16904339*https://pchometravel.com/">旅遊</a> • <a target="_blank" href="/counter/17218024*https://pchometravel.com/">機x酒</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/292057*http://4c.pchome.com.tw/campaign/mj/">線上麻將</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/292057*http://4c.pchome.com.tw/campaign/mj/">線上麻將</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/292057*http://4c.pchome.com.tw/campaign/mj/">線上麻將</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/292057*http://4c.pchome.com.tw/campaign/mj/">線上麻將</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/292057*http://4c.pchome.com.tw/campaign/mj/">線上麻將</a></span>
                                         </div>
                                         <div class="topbar-menulist transition-all txt-noselect">
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">支付連</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">Lingvist</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">國際連</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">日本代購</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">隨拍</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">ATM</a> &#8226 <a target="_blank" href="#">繳費</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">PChome IM</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">查行情</a></span>
-                                            <span data-type="" data-counter="99"><a target="_blank" href="#">個人新聞台</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">旅行團</a></span>
-                                            <span data-type="" data-counter=""><a target="_blank" href="#">找東西</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/647*http://mail.pchome.com.tw">信箱</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/579*http://news.pchome.com.tw/">新聞</a> • <a target="_blank" href="/counter/3738*http://news.pchome.com.tw/weather/">氣象</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/580*http://pchome.megatime.com.tw/">股市</a> • <a target="_blank" href="/counter/1144796*http://pchome.megatime.com.tw/hks/">港股</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/648*http://mypaper.pchome.com.tw/">個人新聞台</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/1174091*http://search.pchome.com.tw/">找東西</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/8710673*http://mypaper.pchome.com.tw/index/try_event-list">愛分享</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/920844*http://4c.pchome.com.tw/campaign/2016/emba/">EMBA課程</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/1404360*http://kaza.pchome.com.tw/?ref=pchome_ad">kaza隨拍</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/657*https://www.pchomeskype.com.tw/">Skype</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/922*https://www.lingvist.com.tw/">Lingvist</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/1000429*http://car.pchome.com.tw/">買車</a> • <a target="_blank" href="/counter/782*http://car.pchome.com.tw/dealer.html?id=13">查里程</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/794392*http://travel.pchome.com.tw/">旅行團</a> • <a target="_blank" href="/counter/1905641*http://travel.pchome.com.tw/expert">專欄</a></span>
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6190356*http://4c.pchome.com.tw/campaign/2018/pcstore/">電商保證班</a></span> 
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6190356*http://4c.pchome.com.tw/campaign/2018/pcstore/">電商保證班</a></span> 
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6190356*http://4c.pchome.com.tw/campaign/2018/pcstore/">電商保證班</a></span> 
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6190356*http://4c.pchome.com.tw/campaign/2018/pcstore/">電商保證班</a></span> 
+                                            <span data-type="" data-counter=""><a target="_blank" href="/counter/6190356*http://4c.pchome.com.tw/campaign/2018/pcstore/">電商保證班</a></span>  
                                         </div>
                                     </div>
                                     <div class="txt-cell rt">
 
                                         <!-- 寬版 登入畫面 -->
-                                        <ul class="topbar-sitenav txt-right ali-middle">
+                                        <ul class="topbar-sitenav txt-right" id="whoareyou_w">
+                                            <li class="mail"><a href="#"><em data-icon="mail"></em></a></li>
+                                            <li class="login" data-type="登入" data-name=""><a href="#"></a></li>
+                                        </ul>
+                                        <!-- <ul class="topbar-sitenav txt-right ali-middle haslogin">
                                             <li class="mail">
                                                 <a href="#">信箱<em data-icon="mail"></em>
                                                 <span data-type="" data-counter="8">0</span>
                                                 </a>
                                             </li>                                            
-                                            <li class="login" data-type="登出" data-name="Joanliu"><a href="#"></a></li>
-                                        </ul>
+                                            <li class="login" data-type="登出" data-name="Joanliuliuliuliu"><a href="#"></a></li>
+                                        </ul> -->
                                         <script>
                                             /*參考*/
                                             var _login = document.querySelector('.login');
@@ -259,134 +257,67 @@
                         </div>
                 <!-- 置頂輪播 -->
                 <div class="topslide-wrap">
-                    <div class="topslide-box pos-relative pos-center p-tb15 ">
+                    <div class="topslide-box pos-relative p-tb15 ">
                         <div class="topslide-div pos-relative pos-center">
                             <div class="topslide" data-autoplay="true">
+
+                                <!-- 第零則 -->
+                                <div class="topslide-page">
+
+                                    <!-- 24h購物 開始-->
+                                    <div class="ec24hShop slideinner-box p-16">
+                                        <div class="content-titlebox">
+                                            <a href="https://24h.pchome.com.tw/" class="topic-tag" data-cat="24h" data-name="24h購物"></a>
+                                            <a href="https://24h.pchome.com.tw/store/DAAG25" class="a-link topic-tit">唯潔雅 超柔適抽取式衛生紙 150抽X12包X6串/箱<span class="price"></span></a>
+                                        </div>
+                                        <div class="txt-table transition-all">
+                                            <div class="txt-cell">
+                                                <a href="https://24h.pchome.com.tw/store/DAAG25">
+                                                    <div class="photo-box p66">
+                                                        <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1A_0_0.jpg?t=1556093221">
+                                                    </div>                                                               
+                                                </a>
+                                            </div>
+                                            <div class="txt-cell txt-left p-l16">
+                                                <h5 class="p-tb8"><a href="https://24h.pchome.com.tw/onsale/v3/20190423/#!3c.htm" class="a-link">瘋殺特賣▼羅技R500簡報筆下殺$1290<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://24h.pchome.com.tw/onsale/v3/20190423/#!ce.htm" class="a-link">瘋殺特賣▼康生眼部按摩器下殺$2280<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://24h.pchome.com.tw/onsale/v3/20190423/#!food.htm" class="a-link">瘋殺特賣▼娘家存元堂雞精3盒$2850<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://shopping.pchome.com.tw/activity/campaign/C974060247?utm_source=pchome&utm_medium=text&utm_campaign=201904partyfood" class="a-link">世界美饌Party：零食新品2件88折<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://www.pchomeec.tw/activity/AC00051533?utm_campaign=bank&utm_medium=160*140&utm_source=shopping" class="a-link">4月25家銀行最高回饋7100<span class="price"></span></a></h5>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    <!-- 24h購物 結束-->
+
+                                </div>
 
                                 <!-- 第一則 -->
                                 <div class="topslide-page">
 
-                                    <!-- 24h購物主打區 開始-->
+                                    <!-- 旅行團 開始-->
                                     <div class="ec24hShop slideinner-box p-16">
                                         <div class="content-titlebox">
-                                            <a href="#" class="topic-tag" data-cat="24h" data-name="24h購物"></a>
-                                                <span> 開學特映 / 生活家電</span>
-                                            <a class="btn-more pos-absolute pos-middle" href="#">更多<i class="txt-arrow right"></i></a>
+                                            <a href="http://travel.pchome.com.tw/" class="topic-tag" data-cat="24h" data-name="夏季旅展"></a>
+                                            <a href="https://www.eztravel.com.tw/event/princesscruises/index.html?utm_source=pchome&utm_medium=ad_display" class="a-link topic-tit">行李不限重基隆港出發超讚<span class="price"></span></a>
                                         </div>
                                         <div class="txt-table transition-all">
-                                            <div class="txt-cell flt-left">
-                                                <a href="#">
-                                                    <div class="photo-box p66">                                      
-                                                        <img data-region="horizontal" src="https://b.ecimg.tw/img/ecshop/v1/layout/index/1/20190305094509_b113-3-500x330.jpg">         
+                                            <div class="txt-cell">
+                                                <a href="https://www.eztravel.com.tw/event/princesscruises/index.html?utm_source=pchome&utm_medium=ad_display">
+                                                    <div class="photo-box p66">
+                                                        <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1A_1_0.jpg?t=1556093221">
                                                     </div>                                                               
                                                 </a>
                                             </div>
-                                            <div class="txt-cell flt-left txt-left p-l16">
-                                                <h5 class="p-tb8"><a href="#" class="a-link">瘋殺特賣▼毛寶洗衣槽去污劑3入<span class="price">299</span></a></h5>
-                                                <h5 class="p-tb8"><a href="#" class="a-link">健康愛助益：日本衛采全館6折起<span class="price">1188</span></a></h5>
-                                                <h5 class="p-tb8"><a href="#" class="a-link">Panasonic國際牌65吋4KUHD 連網液晶電視<span class="price">46888</span></a></h5>
-                                                <h5 class="p-tb8"><a href="#" class="a-link">瘋殺特賣▼LE CREUSET鑄鐵鍋<span class="price">4638</span></a></h5>
-                                                <h5 class="p-tb8"><a href="#" class="a-link">大同10人全不鏽鋼電鍋貼心全配★煮蒸滷燉多用途<span class="price">3288</span></a></h5>                                                    
+                                            <div class="txt-cell txt-left p-l16">
+                                                <h5 class="p-tb8"><a href="https://vacation.eztravel.com.tw/pkgfrn/introduction/FRN0000016200/20190501?utm_source=pchome&utm_medium=ad_display" class="a-link">盛世公主-沖繩 4/28,5/1,5/4,6/1搶購<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://vacation.eztravel.com.tw/pkgfrn/introduction/FRN0000016202/20190507?utm_source=pchome&utm_medium=ad_display" class="a-link">盛世公主-沖繩 石垣島-5/7,5/28,6/4<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://vacation.eztravel.com.tw/pkgfrn/introduction/FRN0000016204?utm_source=pchome&utm_medium=ad_display" class="a-link">盛世公主-鹿兒島 長崎內艙第2人半價<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://vacation.eztravel.com.tw/pkgfrn/introduction/FRN0000016205?utm_source=pchome&utm_medium=ad_display" class="a-link">盛世公主-鹿兒島 釜山 7/11特別團搶<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://www.eztravel.com.tw/event/princesscruises/index.html?utm_source=pchome&utm_medium=ad_display" class="a-link">第二人半價，暑假航次部分適用<span class="price"></span></a></h5>
                                             </div>
                                         </div>
                                     </div>                                  
-                                    <!-- 24h購物主打區 結束-->
-
-                                </div>
-
-                                <!-- 第二則 -->
-                                <div class="topslide-page">
-
-                                    <!-- 個股行情 開始-->
-                                     <div class="hotStock slideinner-box p-16">
-                                        <table>                        
-                                            <tr>
-                                                <th>股票</th>
-                                                <th>成交張</th>
-                                                <th>成交</th>
-                                                <th>漲跌</th>
-                                                <th>漲跌幅</th>
-                                                <th>最高</th>
-                                                <th>最低</th>
-                                                <th>賣量</th>
-                                            </tr>
-                                            <tr data-code="2849" data-name="華邦電">
-                                                <td><a href="#" target="_blank" title="華邦電">華邦電<span>2849</span></a></td>
-                                                <td>10,608</td>
-                                                <td data-ratio="down">▼19.80</td>
-                                                <td data-ratio="up">+ 2.75</td>
-                                                <td data-ratio="down">- 4.56%</td>
-                                                <td>30.45</td>
-                                                <td data-ratio="down">26.50</td>
-                                                <td>625</td>
-                                            </tr>
-                                            <tr data-code="u聯發科富邦7C購02" data-name="聯發科富邦7C購02">
-                                                <td><a href="#" target="_blank" title="聯發科富邦7C購02">聯發科富邦7C購02<span>076625</span></a></td>
-                                                <td>87</td>
-                                                <td data-ratio="up">▲452.00</td>
-                                                <td data-ratio="up">+ 2.25</td>
-                                                <td data-ratio="up">+ 3.24%</td>
-                                                <td data-ratio="up">33.75</td>
-                                                <td data-ratio="up">21.50</td>
-                                                <td>14</td>
-                                            </tr>
-                                            <tr data-code="8044" data-name="網　家">
-                                                <td><a href="#" target="_blank" title="網　家">網　家<span>8044</span></a></td>
-                                                <td>10,608</td>
-                                                <td data-ratio="down">▼19.80</td>
-                                                <td data-ratio="up">+ 2.75</td>
-                                                <td data-ratio="down-lm">- 4.56%</td>
-                                                <td data-ratio="stop">30.45</td>
-                                                <td data-ratio="down-lm">26.50</td>
-                                                <td>625</td>
-                                            </tr>
-                                            <tr data-code="1101" data-name="台　泥">
-                                                <td><a href="#" target="_blank" title="台　泥">台　泥<span>1101</span></a></td>
-                                                <td>436</td>
-                                                <td data-ratio="down">▼ 2.50</td>
-                                                <td data-ratio="down">- 0.040</td>
-                                                <td data-ratio="down">- 1.62%</td>
-                                                <td data-ratio="stop">--</td>
-                                                <td data-ratio="up-lm">459.00</td>
-                                                <td>71</td>
-                                            </tr>
-                                            <tr data-code="2317" data-name="鴻　海">
-                                                <td><a href="#" target="_blank" title="鴻　海">鴻　海<span>2317</span></a></td>
-                                                <td>386</td>
-                                                <td data-ratio="up">▲25.10</td>
-                                                <td data-ratio="up">+ 1.23</td>
-                                                <td data-ratio="up">+ 0.11%</td>
-                                                <td>8459.50</td>
-                                                <td>8215.00</td>
-                                                <td>31,278</td>
-                                            </tr>
-                                            
-                                        </table>
-                                    </div>                                  
-                                    <!-- 個股行情 結束-->
-
-                                </div>
-
-                                <!-- 第三則 -->
-                                <div class="topslide-page">
-
-                                    <!-- 輪播新聞 開始-->
-                                    <a href="#">
-                                        <div class="hotNews slideinner-box">
-                                            <div class="photo-box img-top image-mask">                                             
-                                                <span class="image-gradient"></span>
-                                                 <!-- 橫向照片 開始-->
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/sport/nownews/20190113/54733705034085207007.jpg">
-                                                <!-- 直式照片 開始-->
-                                                <!-- <img data-region="vertical" src="http://news.pchome.com.tw/newsdata/entertainment/wownews/20190114/15474342129996233006.jpg"> -->
-                                                <div class="image-txt-wrap">
-                                                    <h3 class="image-txt">NBA／可能掛免戰牌美媒驚爆 林書豪二頭肌瘀傷</h3>
-                                                    <h6 class="image-txt p-t8">老鷹隊華裔球星林書豪最近表現突出，讓他再度受到關注，不過有美國媒體爆料，林書豪前一場跟76人比賽完後，右二頭肌有瘀傷狀況，老應隊官網也有此消息。</h6>
-                                                </div>                                                    
-                                            </div>
-                                        </div>                                    
-                                    </a>
-                                    <!-- 輪播新聞 結束-->
+                                    <!-- 旅行團 結束-->
 
                                 </div>
 
@@ -394,16 +325,13 @@
                                 <div class="topslide-page">
 
                                     <!-- 輪播個人新聞台 開始-->
-                                    <a href="#">
+                                    <a href="http://travel.pchome.com.tw/expert/34/monograph/12181">
                                         <div class="hotBlog slideinner-box">
                                             <div class="photo-box image-mask">
-                                                <!-- 橫向照片 開始-->
-                                                <img data-region="horizontal" src="https://d1q86il7rhbayu.cloudfront.net/file/article_all/A1543558084.jpg">
-                                                <!-- 直式照片 開始-->
-                                                <!-- <img data-region="vertical" src="http://link.photo.pchome.com.tw/imgdata/czo0NDoiU1JyRlpwY1hvZm92SCs0R2Z6QldXcE5FVnlGZVhnTkcxeG93YU1jWVNWZz0iOw==.jpg">-->
+                                                <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1D_0_0.jpg?t=1556093221">
                                                 <div class="image-txt-wrap info">                                
-                                                    <h3 class="image-txt">花蓮壽豐農村行程體驗 D2 (立川漁場+小雨蛙有機生態農場+日本移民村+五味屋+星巴克迴瀾門市店)</h3>
-                                                    <h6 class="image-txt">「微風南山」樓層全攻略，atre、藍瓶Blue Bottle、餐廳、品牌、超市、洗頭機搶先看! 即將在2019年1月10日盛大開幕，位在台北101對面，總面積16200坪， 建築外觀是雙手合掌的造型，象徵傳遞幸福的概念，微風南山樓層規劃為B2至7樓，有精品、流行服飾、雜貨、異國美食佳餚，高樓層46至48樓更打造天際餐廳與酒吧，好吃又好逛呢! <span class="more-link"></span></h6>
+                                                    <h3 class="image-txt">【南非】自駕在克魯格國家公園的幸運之旅</h3>
+                                                    <h6 class="image-txt">有幸運之神眷顧，當我們到達克魯格國家公園KrugerNational Park的第24小時，我們已經看到全部的五霸了。克魯格國家公園真是一個非常棒的地方，我們一致的認為，自駕在克魯格內是這幾年旅程中非常棒的<br></h6>
                                                 </div>                       
                                             </div>
                                         </div>                                    
@@ -412,23 +340,66 @@
 
                                 </div>
 
-                                <!-- 第五則 -->
+                                <!-- 第三則 -->
                                 <div class="topslide-page">
 
-                                    <!-- 單圖廣告 開始 -->
-                                    <a href="#">
-                                        <img src="img/slide_700x290.png">
+                                    <!-- 輪播新聞 開始-->
+                                    <a href="http://news.pchome.com.tw/politics/nownews/20190423/photo-55600510606764207001.html">
+                                        <div class="hotNews slideinner-box">
+                                            <div class="photo-box img-top image-mask">                                             
+                                                <span class="image-gradient"></span>
+                                                <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1C_0_0.jpg?t=1556093221">
+                                                <div class="image-txt-wrap">
+                                                    <h3 class="image-txt">暗酸韓國瑜？柯P臉書：國家不會因為一個人改變</h3>
+                                                    <h6 class="image-txt p-t8">柯文哲臉書貼文表示，自己當市長之後，慢慢參悟要從政治上的領導者，變成文化的傳道者，「我們要說服大眾接受我們的的理念，而不是強迫大家服從我們的規則。」後面又說「這個國家，絕對不會因為一個人而改變，國家之力，在於國民全體，唯有大家願意多付出一些，多努力一些，合起來，這個國家才有機會進步。」</h6>
+                                                </div>                                                    
+                                            </div>
+                                        </div>                                    
                                     </a>
-                                    <!-- 單圖廣告 結束 -->
+                                    <!-- 輪播新聞 結束-->
 
                                 </div>
 
-                                <!-- 第六則 開始-->
+                                <!-- 第二則 -->
                                 <div class="topslide-page">
 
-                                    <!-- 影音 開始 -->
-                                        <span class="ali-middle txt-center">影音廣告</span>
-                                    <!-- 影音 結束 -->
+                                    <!-- 新安東京海上產險 開始-->
+                                    <div class="ec24hShop slideinner-box p-16">
+                                        <div class="content-titlebox">
+                                            <a href="https://www.tmnewa.com.tw/b2c_v2/insurancecarweb/frontstage/calculate.aspx?InsCategory=Car&Project=Default&fk=&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-carcalculate" class="topic-tag" data-cat="24h" data-name="網路投保"></a>
+                                            <a href="https://www.tmnewa.com.tw/b2c_v2/insurancecarweb/frontstage/calculate.aspx?InsCategory=Car&Project=Default&fk=&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-carcalculate" class="a-link topic-tit">汽車強制險最高省350元!<span class="price"></span></a>
+                                        </div>
+                                        <div class="txt-table transition-all">
+                                            <div class="txt-cell">
+                                                <a href="https://www.tmnewa.com.tw/b2c_v2/insurancecarweb/frontstage/calculate.aspx?InsCategory=Car&Project=Default&fk=&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-carcalculate">
+                                                    <div class="photo-box p66">
+                                                        <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1A_2_0.jpg?t=1556093221">
+                                                    </div>                                                               
+                                                </a>
+                                            </div>
+                                            <div class="txt-cell txt-left p-l16">
+                                                <h5 class="p-tb8"><a href="https://ebo.tmnewa.com.tw/tmnewa/portal/blog_con?uid=145&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-content" class="a-link">車子借別人開有多危險？<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://www.tmnewa.com.tw/b2c_v2/insurancecarweb/frontstage/calculate.aspx?InsCategory=Car&Project=Default&fk=&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-carcalculate" class="a-link">網路投保汽車任意險保費優惠82折<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://ebo.tmnewa.com.tw/tmnewa/portal/blog_con?uid=141&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-content" class="a-link">颱風天、大豪雨，愛車泡水有賠嗎？<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://b2c.tmnewa.com.tw/insurance/travel/index?utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-travelcalculate" class="a-link">網路投保旅遊險方便又省錢，立即試算<span class="price"></span></a></h5>
+                                                <h5 class="p-tb8"><a href="https://ebo.tmnewa.com.tw/tmnewa/portal/blog_con?uid=151&utm_source=PC_home&utm_medium=PC_home-refferral&utm_campaign=PC_home-refferral-index-content" class="a-link">護照掉了！4步1秘訣免緊張<span class="price"></span></a></h5>
+                                            </div>
+                                        </div>
+                                    </div>                                  
+                                    <!-- 新安東京海上產險 結束-->
+
+                                </div>
+
+                                <!-- 第五則 開始-->
+                                <div class="topslide-page">
+
+                                    <!-- 單圖廣告 開始 -->
+                                    <a href="http://show.pchome.com.tw/pfb/">
+                                        <div class="photo-box">
+                                        <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row1E_0_0.jpg?t=1556093221">
+                                        </div>
+                                    </a>
+                                    <!-- 單圖廣告 結束 -->
 
                                 </div>
                              
@@ -457,14 +428,15 @@
                         centerPadding   (各頁間距)
                         slidesToScroll  (捲動頁數)
                     *****************************/
-                    $(document).on('ready', function(){
+                    //$(document).on('ready', function(){
+                    $(document).ready(function(){
                         var topslide            =$(".topslide");
                         var topslide_prev       =$('.topslide-btn.prev');
                         var topslide_next       =$('.topslide-btn.next');
                         var topslide_auto       =$(".topslide").attr('data-autoplay').toLowerCase()=='true'?true:false;
                         var topslide_timeout    =5000;
                         topslide.slick({
-                           // autoplay        :topslide_auto,
+                            autoplay        :topslide_auto,
                             autoplaySpeed   :topslide_timeout,
                             dots            :false,
                             speed           :1500,
@@ -508,8 +480,8 @@
                                 <script language="javascript">
                                     pad_width = 300;
                                     pad_height = 250;
-                                    pad_customerId = "PFBC20160804001";
-                                    pad_positionId = "PFBP201611160002C";
+                                    pad_customerId="PFBC20190424002";
+                                    pad_positionId="PFBP201904240004C";
                                 </script>
                                 <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                             </div>
@@ -527,299 +499,103 @@
 
                             <!-- 輪播卡片 開始 -->
                             <div class="primeslide" data-autoplay="false">
+                                <!-- 第零頁 -->
+                                <div class="txt-table w-full push-box txt-left m-t16">
+                                    <div class="txt-cell txt-top">
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_0_0.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">MIDO Ocean Star 200m潛水機械腕錶-藍x銀</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>
+                                    <div class="txt-cell txt-top">
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_0_1.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">《台塑生醫》Dr’s Formula丰潤肌玻尿酸超導恆潤飽水面膜</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>
+                                    <div class="txt-cell txt-top">
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_0_2.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">《FIN》SPARKLING WATER 纖氣泡水510ml(24入/箱)</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>
+                                    <div class="txt-cell txt-top">
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_0_3.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">渣打銀行與中華航空獨家合作，推出定存利息兌換華航</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>
+                                    <div class="txt-cell txt-top">
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_0_4.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">SEIKO 精工 LUKIA 太陽能清新時尚 三眼計時女錶</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>
+                                </div>
+                                
                                 <!-- 第一頁 -->
                                 <div class="txt-table w-full push-box txt-left m-t16">
                                     <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_1_0.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">Coway奈米高效淨水器 P-250N DIY組</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
                                     </div>
                                     <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_1_1.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">傳統熟悉的肉燥香味，在颱風夜裡、異鄉求學時，一碗</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
                                     </div>
                                     <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_1_2.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">全球首創Air Cream為肌膚帶來前所未有的空氣感修護</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
                                     </div>
                                     <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
-                                </div>  
-                                
-                                <!-- 第二頁 -->
-                                <div class="txt-table w-full push-box txt-left m-t16">
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_1_3.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">二代升級款newrunS新平板跑步機(二代升級款)</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
                                     </div>
                                     <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
+                                        <a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">                            
+                                            <div class="photo-box p100">
+                                                <img src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row2A_1_4.jpg?t=1556093221" data-region="horizontal">
+                                            </div>
+                                            <h6 class="p-tb16">德國Alpecin CTX運動型洗髮精250ml</h6>
+                                            <p class="price"><br class="br-break"></p>
+                                        </a>                                 
+                                    </div>                                  
                                 </div>                        
-
-                                <!-- 第三頁 -->
-                                <div class="txt-table w-full push-box txt-left m-t16">
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
-                                </div>
-
-                                <!-- 第四頁 -->
-                                <div class="txt-table w-full push-box txt-left m-t16">
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
-                                </div>
-
-                                <!-- 第五頁 -->
-                                <div class="txt-table w-full push-box txt-left m-t16">
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
-                                </div>
-
-                                <!-- 第六頁 -->
-                                <div class="txt-table w-full push-box txt-left m-t16">
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DECP1M19009O6GZ/000001_1546827094.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">德國WMF 歐廚湯炒雙鍋組 高身湯鍋3.5L</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break"><i data-cost="discount">23,900</i></p>
-                                    </a>                                 
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                         
-                                        <div class="photo-box p100">
-                                            <img src="https://f.ecimg.tw/items/DHAFGTA9008Y9F9/000002_1533808530.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">ASUS VivoBook S410UN 冰柱金</h6>
-                                        <p class="price"><i data-cost="original">27,900</i><br class="br-break">網路價<i data-cost="discount">23,900</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top"> 
-                                    <a href="#" class="a-link">                             
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DYAO52A9009LMK3/000001_1542964692.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">GARMMA 宇宙明星BT21 方塊行動電源 10000series</h6>
-                                        <p class="price"><i data-cost="original">1,480</i><br class="br-break">限時價<i data-cost="discount">1,280</i></p>
-                                    </a>                                   
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                              
-                                        <div class="photo-box p100">
-                                            <img src="https://d.ecimg.tw/items/DXAX2WA9009OBIK/000001_1545893552.jpg">
-                                        </div>
-                                        <h6 class="p-tb16">REEBOK INSTAPUMP FURY 男女 休閒鞋 黑-DV4590</h6>
-                                        <p class="price"><br class="br-break"><i data-cost="discount">4,850</i></p>
-                                    </a>
-                                    </div>
-                                    <div class="txt-cell txt-top">
-                                    <a href="#" class="a-link">                            
-                                        <div class="photo-box p100">
-                                            <img src="https://b.ecimg.tw/items/DMAC1MA9008GGS6/000001_1546394461.jpg">                                                   
-                                        </div>
-                                        <h6 class="p-tb16">【飛利浦 PHILIPS】Café Gourmet萃取大師咖啡機(HD5407)</h6>
-                                        <p class="price"><i data-cost="original">8,990</i><br class="br-break"><i data-cost="discount">3,990</i></p>
-                                    </a>
-                                    </div>                                    
-                                </div>
                             </div>
                             <!-- 輪播卡片 結束 -->
 
@@ -840,7 +616,7 @@
                                     centerPadding   (各頁間距)
                                     slidesToScroll  (捲動頁數)
                                 *****************************/
-                                $(document).on('ready', function(){
+                                $(document).ready( function(){
                                     var primeslide            =$(".primeslide");
                                     var primeslide_auto       =$(".primeslide").attr('data-autoplay').toLowerCase()=='true'?true:false;
                                     var primeslide_timeout    =5000;
@@ -875,8 +651,8 @@
                         <script language="javascript">
                         pad_width=970;
                         pad_height=250;
-                        pad_customerId="PFBC20160804001";
-                        pad_positionId="PFBP201706060002C";
+                        pad_customerId="PFBC20190424002";
+                        pad_positionId="PFBP201904240003C";
                         </script>
                         <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                     </div>
@@ -885,8 +661,8 @@
                         <script language="javascript">
                             pad_width = 300;
                             pad_height = 250;
-                            pad_customerId = "PFBC20160804001";
-                            pad_positionId = "PFBP201611160002C";
+                            pad_customerId="PFBC20160804001";
+                            pad_positionId="PFBP201904250001C";
                         </script>
                         <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                     </div>
@@ -1003,60 +779,62 @@
 
                             
                                 <div class="txt-table cast-box p-16">
-                                    <div class="txt-cell txt-left txt-top">
-                                        <h6><a href="#" class="a-link">BigHit娛樂於31日零時(韓國時間)通過官方SNS公開了朴智旻首支自作曲「約定」的音源。</a></h6>
-                                    </div>
-                                    <div class="txt-cell txt-top p-l16 rt">
-                                      <a href="#">
-                                        <div class="photo-box p66 image-mask">
-                                            <div class="image-icon-container icon-play-vd"></div>
-                                            <img data-region="vertical" src="http://news.pchome.com.tw/newsdata/entertainment/wownews/20181231/15462498159163033006.jpg">
-                                        </div>
-                                      </a>
-                                    </div>
+                                  <div class="txt-cell txt-left txt-top">
+                                      <h6><a href="http://news.pchome.com.tw/fashion/bella/20190422/index-55590192048188237021.html" class="a-link">時隔6年再來台！男神玄彬「劉鎮宇」台灣見面會時間、地點大公開</a></h6>
+                                  </div>
+                                  <div class="txt-cell txt-top p-l16 rt">
+                                    <a href="http://news.pchome.com.tw/fashion/bella/20190422/index-55590192048188237021.html">
+                                      <div class="photo-box p66 image-mask">
+                                          <div class="image-icon-container icon-play-vd"></div>           
+                                          <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row3B_0_0.jpg?t=1556093221">
+                                      </div>
+                                    </a>
+                                  </div>
                                 </div>
                             
                             
                                 <div class="txt-table cast-box p-16">
-                                    <div class="txt-cell txt-left txt-top">
-                                         <h6><a href="#" class="a-link">「BTS防彈少年團」擔任Hyundai Palisade全球品牌形象大使</a></h6>
-                                    </div>
-                                    <div class="txt-cell txt-top p-l16 rt">
-                                      <a href="#">
-                                        <div class="photo-box p66 image-mask">
-                                            <div class="image-icon-container icon-play-vd"></div>           
-                                            <img data-region="horizontal" src="https://s3-ap-northeast-1.amazonaws.com/tw.com.carture/images/800/154460989605.jpg">
-                                        </div>
-                                      </a>
-                                    </div>
+                                  <div class="txt-cell txt-left txt-top">
+                                      <h6><a href="http://news.pchome.com.tw/fashion/talk/20190422/index-55589840764598240021.html" class="a-link">為什麼我學習追女生，還是被女生打槍？</a></h6>
+                                  </div>
+                                  <div class="txt-cell txt-top p-l16 rt">
+                                    <a href="http://news.pchome.com.tw/fashion/talk/20190422/index-55589840764598240021.html">
+                                      <div class="photo-box p66 image-mask">
+                                          <div class="image-icon-container icon-play-vd"></div>           
+                                          <img data-region="vertical" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row3B_0_1.jpg?t=1556093221">
+                                      </div>
+                                    </a>
+                                  </div>
                                 </div>
                             
                             
                                 <div class="txt-table cast-box p-16">
-                                    <div class="txt-cell txt-left txt-top">
-                                        <h6><a href="#" class="a-link">網友激推的「不脫妝組合」是這5組！乾肌、油肌都適合的開架底妝組合</a></h6>
-                                    </div>
-                                    <div class="txt-cell txt-top p-l16 rt">
-                                      <a href="#">
-                                        <div class="photo-box p66">           
-                                            <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/fashion/beauty/20181230/54616760042314248021.jpg">
-                                        </div>
-                                      </a>
-                                    </div>
+                                  <div class="txt-cell txt-left txt-top">
+                                      <h6><a href="http://news.pchome.com.tw/fashion/bella/20190422/index-55590243547780237021.html" class="a-link">哈利王子和梅根要替寶寶取什麼名？這「6個名字」呼聲最高！</a></h6>
+                                  </div>
+                                  <div class="txt-cell txt-top p-l16 rt">
+                                    <a href="http://news.pchome.com.tw/fashion/bella/20190422/index-55590243547780237021.html">
+                                      <div class="photo-box p66">
+                                                    
+                                          <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row3B_0_2.jpg?t=1556093221">
+                                      </div>
+                                    </a>
+                                  </div>
                                 </div>
                             
                             
                                 <div class="txt-table cast-box p-16">
-                                    <div class="txt-cell txt-left txt-top">
-                                        <h6><a href="#" class="a-link">2019年韓星來台行程公開！除了蘇志燮、朴寶劍、崔振赫外，還有這些韓星都要來台灣！</a></h6>
-                                    </div>
-                                    <div class="txt-cell txt-top p-l16 rt">
-                                      <a href="#">
-                                        <div class="photo-box p66">           
-                                            <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/fashion/beauty/20181224/54564920093932248021.jpg">
-                                        </div>
-                                      </a>
-                                    </div>
+                                  <div class="txt-cell txt-left txt-top">
+                                      <h6><a href="http://news.pchome.com.tw/fashion/beauty/20190420/index-55575800051831248021.html" class="a-link">歇腳亭「芋泥牛奶」不只芋泥量加倍，還喝的到芋頭粒，芋頭控們快衝啊～<br></a></h6>
+                                  </div>
+                                  <div class="txt-cell txt-top p-l16 rt">
+                                    <a href="http://news.pchome.com.tw/fashion/beauty/20190420/index-55575800051831248021.html">
+                                      <div class="photo-box p66">
+                                                    
+                                          <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row3B_0_3.jpg?t=1556093221">
+                                      </div>
+                                    </a>
+                                  </div>
                                 </div>
                                                       
                             <!-- 右欄影音專區結束 -->
@@ -1088,8 +866,8 @@
                                             <script language="javascript">
                                                 pad_width = 300;
                                                 pad_height = 250;
-                                                pad_customerId = "PFBC20160804001";
-                                                pad_positionId = "PFBP201611160002C";
+                                                pad_customerId="PFBC20160804001";
+                                                pad_positionId="PFBP201904250001C";
                                             </script>
                                             <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                         </div>
@@ -1129,16 +907,16 @@
                             <div class="txt-cell txt-left txt-top rt">
                                 
                                 <div class="category-box p-tb16 p-lr32">
-                                    <b class="category-tit">旅行團</b>
-                                    <h3 class="txt-black p-tb8"><a href="#" class="a-link">【匈牙利】好咖啡在ESPRESSO in EMBASSY</a></h3>
+                                    <b class="category-tit">旅行團專欄</b>
+                                    <h3 class="txt-black p-tb8"><a href="http://travel.pchome.com.tw/expert/34/monograph/12182" class="a-link">[釜山 / 美食店] 釜山旅遊必吃的10家韓國SNS推介美食店</a></h3>
                                     <div class="txt-table">
                                         <div class="txt-cell txt-left txt-top">
-                                            <p class="p-r8">在Budapest講到咖啡店，大家第一個想到的都是金碧輝煌、一堆觀光客圍繞的New York Café，然而若想在Budapest尋找好咖啡</p>
+                                            <p class="p-r8">到底雪姬在釜山會吃什麼呢？！粉絲們應該都會很好奇吧！本篇將會為大家推薦10間遊釜山必試的美食店，釜山雖然資訊繁多而且跟著旅遊書去的都是遊客店，&nbsp;</p>
                                         </div>
                                         <div class="txt-cell txt-left txt-top p-l8">
-                                            <a href="#">
+                                            <a href="http://travel.pchome.com.tw/expert/34/monograph/12182">
                                             <div class="photo-box p75">           
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/travel/travelrich/20181119/15426162001983658015.jpg">
+                                                <img data-region="vertical" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row4C_0_0.jpg?t=1556093221">
                                             </div>
                                             </a>
                                         </div>
@@ -1146,26 +924,25 @@
                                 </div>
 
                                 <div class="category-box p-tb16 p-lr32">
-                                        <b class="category-tit">車勢文化</b>
-                                        <h3 class="txt-black p-tb8"><a href="#" class="a-link">「BTS防彈少年團」擔任Hyundai Palisade全球品牌形象大使</a></h3>
-                                        <div class="txt-table">
-                                            <div class="txt-cell txt-left txt-top">
-                                                <p class="p-r8">甫閉幕的2018年洛杉磯車展中，Hyundai發表了旗下全新旗艦SUV車款Palisade，同時邀請了紅遍全球的南韓天團「BTS防彈少年團」擔任全新車款的品牌形象大使，展現事業版圖獨霸全球的雄心。</p>
-                                            </div>
-                                            <div class="txt-cell txt-left txt-top p-l8">
-                                                <a href="#">
-                                                <div class="photo-box p75">
-                                                    <img data-region="vertical" src="http://news.pchome.com.tw/newsdata/fashion/marie/20181225/54573098128640239021.jpg">
-                                                    <!-- <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/travel/travelrich/20181119/15426162001983658015.jpg"> -->
-                                                </div>
-                                                </a>
-                                            </div>
+                                    <b class="category-tit">哈燒文章</b>
+                                    <h3 class="txt-black p-tb8"><a href="http://mypaper.pchome.com.tw/shanshoeiwu/post/1370684453" class="a-link">吉野櫻的春天 何事惱心愁</a></h3>
+                                    <div class="txt-table">
+                                        <div class="txt-cell txt-left txt-top">
+                                            <p class="p-r8">正當春花四處漫開時刻&nbsp; 誰注意到"我"吉野櫻還睡得溫醇哪,這天&nbsp; 哪個不長眼睛的瘋子 鬼鬼祟祟來了&nbsp; 也不道聲"春來早"喔,就獨自在我身上竊取心事來了&nbsp; 東偷偷</p>
                                         </div>
+                                        <div class="txt-cell txt-left txt-top p-l8">
+                                            <a href="http://mypaper.pchome.com.tw/shanshoeiwu/post/1370684453">
+                                            <div class="photo-box p75">           
+                                                <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row4C_0_1.jpg?t=1556093221">
+                                            </div>
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="category-box p-tb16 p-lr32">
                                     <b class="category-tit">活動訊息</b>
-                                    <h3 class="txt-black p-tb8"><a href="#" class="a-link">MIT品牌外銷30國 年收近5億商機！台灣開始以綠色保養聞名國際</a></h3>
+                                    <h3 class="txt-black p-tb8"><a href="https://hotel.eztravel.com.tw/domestic/introduction/HTLI000001436?utm_source=pchome&utm_medium=affiliate&utm_campaign=htl" class="a-link">南投清境農場國民賓館下殺</a></h3>
                                 </div>
                             </div>
                             <!-- 右欄內容結束 -->    
@@ -1190,17 +967,16 @@
                             <!-- 人氣話題 內容開始 -->
                             <div class="bottopic-box">
                                 <div style="width:54.5186%">
-                                    <a href="#">
-                                        <div class="photo-box img-top p66 flt-left">                                 
-                                            <img data-region="vertical" src="http://news.pchome.com.tw/newsdata/entertainment/wownews/20181224/15456468204361133006.jpg">
-                                            <!-- <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/politics/nownews/20181227/54587979509143207001.jpg"> -->
+                                    <a href="http://news.pchome.com.tw/living/ftv/20190423/index-15560042944911219009.html">
+                                        <div class="photo-box img-top p66 flt-left">
+                                            <img data-region="horizontal" src="http://nwwwstg.pchome.com.tw/img/index_2019/img_row5A_0_0.jpg?t=1556093221">
                                         </div>
                                     </a>
                                 </div>
                                 <div class="txt-cell txt-left p-l16">                                   
-                                    <h1 class="txt-black p-b16"><a href="#" class="a-link">柯P神算預留「錦囊妙計」 徐欣瑩推影片攻守兼備</a></h1>
-                                    <p class="p-b16">選戰倒數四天，新竹縣長候選人徐欣瑩競選團隊今（20）日打開台北市長柯文哲預留的「錦囊妙計」，在粉絲團分享柯P市長的推薦影片「11/24出來投票，一起參與新竹縣改變的歷史」，期望新竹縣也能改變成真。！</p>
-                                    <span class="txt-thin">民眾網  |  12月24日 08:00</span>
+                                    <h1 class="txt-black p-b16"><a href="http://news.pchome.com.tw/living/ftv/20190423/index-15560042944911219009.html" class="a-link">超萌！路易王子1歲生日 露牙模樣超級Q</a></h1>
+                                    <p class="p-b16">英國威廉王子和凱特王子妃的小兒子路易王子1歲了！皇室新公布了小王子的生活照，胖嘟嘟的臉頰十分可愛。另一方面，去年新婚的哈利王子與太太梅根，也即將在本月底迎來新生命，有消息傳出，梅根產子後，可能會一家人搬到非洲去。<br style="color: rgb(76, 76, 76); font-family: Arial, &quot;Noto Sans TC&quot;, 微軟正黑體, sans-serif; font-size: 16px;"><br style="color: rgb(76, 76, 76); font-family: Arial, &quot;Noto Sans TC&quot;, 微軟正黑體, sans-serif; font-size: 16px;">天真的笑臉、粉嫩的雙頰，英國路易小王子在23日滿周歲了！威廉王子與太太凱特公布了路易的3張新照片，拍攝地點是他們位於諾福克郡的家。</p>
+                                    <span class="txt-thin"></span>
                                 </div> 
                             </div>
                             <!-- 人氣話題 內容結束 -->
@@ -1214,8 +990,8 @@
                                     <script language="javascript">
                                         pad_width = 300;
                                         pad_height = 250;
-                                        pad_customerId = "PFBC20160804001";
-                                        pad_positionId = "PFBP201611160002C";
+                                        pad_customerId="PFBC20160804001";
+                                        pad_positionId="PFBP201904250001C";
                                     </script>
                                     <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 </div>
@@ -1224,8 +1000,8 @@
                                     <script language="javascript">
                                         pad_width = 300;
                                         pad_height = 100;
-                                        pad_customerId = "PFBC20160804001";
-                                        pad_positionId = "PFBP201610260005C";
+                                        pad_customerId="PFBC20160804001";
+                                        pad_positionId="PFBP201904250002C";
                                     </script>
                                     <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 </div>
@@ -1234,419 +1010,80 @@
                         </div>
                     </div>
                 </div>
-                <!-- 內容 tpoicslider -->
-                <div class="content-box has-border topicslider">
-                    <div class="topicslide" data-autoplay="false">
-                            <!-- 第一組 -->
-                            <div class="txt-table transition-all">
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/politics/nownews/20181226/54581792796772207001.jpg">
-                                                <b class="topic-tag" data-cat="politics" data-name="政治1"></b>
-                                            </div>                                
-                                            <h4 class="txt-black p-tb16">柯P神算預留「錦囊妙計」 徐欣瑩推影片攻守兼備</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">深耕俄羅斯市場 Nissan 聖彼得堡研發中心正式啟用</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">百里侯激戰！空氣盒子持續佈點全台灣</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">跑馬拉松也要愛中國 主辦單位堅持衝刺披五星旗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">                                      
-                                                <img data-region="horizontal" src="https://e.ecimg.tw/img/h24/v3/layout/index/1/20190108100011_b2-e1-250x165.jpg">
-                                                <b class="topic-tag" data-cat="24h" data-name="線購"></b>              
-                                            </div>
-                                            <h4 class="txt-black p-tb16">
-                                                【美國Herman Miller】SAYL 全功能人體工學電腦椅(時尚旗艦款)
-                                            </h4>                                                                  
-                                        </a> 
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》 Windows 10 家用中文版</p>
-                                                <p>更安全個人化設計★送趨勢防毒</p>
-                                                <p class="price">4490</p>
-                                                </a>
-                                            </h5>
-                                        
-                                        
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>強》MSI微星 聖誕季歡慶</p>
-                                                <p>登錄好禮雙重送★最後倒數</p>
-                                                <p class="price">1559up</p>
-                                                </a>
-                                            </h5>
-                                    
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》FujiXerox 無線雷射傳真事務機</p>
-                                                <p>超值下殺$1000★加購碳匣85折</p>
-                                                <p class="price">5490</p>
-                                                </a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="vertical" src="https://d.ecimg.tw/items/DEAX4MA9009NBF8/000001_1544585960.jpg">
-                                                <b class="topic-tag" data-cat="healthcare" data-name="健康"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">強力吸水雙腳不再溼答答～提升專注力  卡通地毯地墊吸水腳踏墊防滑墊</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">老爺大酒店 冬季國人住房專案</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">歐德集團「手護星願」耶誕禮物募集活動開跑</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">高粱首度入菜 老品牌金門酒廠和大三元異業合作端饗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/fashion/beauty/20181213/54469880079950248021.jpg">
-                                                <b class="topic-tag" data-cat="entertainment" data-name="娛樂"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">鹿晗認愛關曉彤1年首曝心聲！</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">SEVENTEE出席品牌活動 現場大放少年</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">WANNA ONE新曲「春風」 繼續佔據各大榜一位活力</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">XID回歸倒數D-1 主打曲MV預告正式公開</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                            </div>
-                            
-                            <!-- 第二組 -->
-                            <div class="txt-table transition-all">
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/politics/nownews/20181226/54581792796772207001.jpg">
-                                                <b class="topic-tag" data-cat="politics" data-name="政治2"></b>
-                                            </div>                                
-                                            <h4 class="txt-black p-tb16">柯P神算預留「錦囊妙計」 徐欣瑩推影片攻守兼備</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">深耕俄羅斯市場 Nissan 聖彼得堡研發中心正式啟用</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">百里侯激戰！空氣盒子持續佈點全台灣</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">跑馬拉松也要愛中國 主辦單位堅持衝刺披五星旗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">                                      
-                                                <img data-region="horizontal" src="https://e.ecimg.tw/img/h24/v3/layout/index/1/20190108100011_b2-e1-250x165.jpg">
-                                                <b class="topic-tag" data-cat="24h" data-name="線購"></b>              
-                                            </div>
-                                            <h4 class="txt-black p-tb16">
-                                                【美國Herman Miller】SAYL 全功能人體工學電腦椅(時尚旗艦款)
-                                            </h4>                                                                  
-                                        </a> 
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》 Windows 10 家用中文版</p>
-                                                <p>更安全個人化設計★送趨勢防毒</p>
-                                                <p class="price">4490</p>
-                                                </a>
-                                            </h5>
-                                        
-                                        
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>強》MSI微星 聖誕季歡慶</p>
-                                                <p>登錄好禮雙重送★最後倒數</p>
-                                                <p class="price">1559up</p>
-                                                </a>
-                                            </h5>
-                                    
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》FujiXerox 無線雷射傳真事務機</p>
-                                                <p>超值下殺$1000★加購碳匣85折</p>
-                                                <p class="price">5490</p>
-                                                </a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="vertical" src="https://d.ecimg.tw/items/DEAX4MA9009NBF8/000001_1544585960.jpg">
-                                                <b class="topic-tag" data-cat="healthcare" data-name="健康"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">強力吸水雙腳不再溼答答～提升專注力  卡通地毯地墊吸水腳踏墊防滑墊</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">老爺大酒店 冬季國人住房專案</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">歐德集團「手護星願」耶誕禮物募集活動開跑</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">高粱首度入菜 老品牌金門酒廠和大三元異業合作端饗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/fashion/beauty/20181213/54469880079950248021.jpg">
-                                                <b class="topic-tag" data-cat="entertainment" data-name="娛樂"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">鹿晗認愛關曉彤1年首曝心聲！</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">SEVENTEE出席品牌活動 現場大放少年</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">WANNA ONE新曲「春風」 繼續佔據各大榜一位活力</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">XID回歸倒數D-1 主打曲MV預告正式公開</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                            </div>
-                            
-                            <!-- 第三組 -->
-                            <div class="txt-table transition-all">
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/politics/nownews/20181226/54581792796772207001.jpg">
-                                                <b class="topic-tag" data-cat="politics" data-name="政治3"></b>
-                                            </div>                                
-                                            <h4 class="txt-black p-tb16">柯P神算預留「錦囊妙計」 徐欣瑩推影片攻守兼備</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">深耕俄羅斯市場 Nissan 聖彼得堡研發中心正式啟用</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">百里侯激戰！空氣盒子持續佈點全台灣</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">跑馬拉松也要愛中國 主辦單位堅持衝刺披五星旗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">                                      
-                                                <img data-region="horizontal" src="https://e.ecimg.tw/img/h24/v3/layout/index/1/20190108100011_b2-e1-250x165.jpg">
-                                                <b class="topic-tag" data-cat="24h" data-name="線購"></b>              
-                                            </div>
-                                            <h4 class="txt-black p-tb16">
-                                                【美國Herman Miller】SAYL 全功能人體工學電腦椅(時尚旗艦款)
-                                            </h4>                                                                  
-                                        </a> 
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》 Windows 10 家用中文版</p>
-                                                <p>更安全個人化設計★送趨勢防毒</p>
-                                                <p class="price">4490</p>
-                                                </a>
-                                            </h5>
-                                        
-                                        
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>強》MSI微星 聖誕季歡慶</p>
-                                                <p>登錄好禮雙重送★最後倒數</p>
-                                                <p class="price">1559up</p>
-                                                </a>
-                                            </h5>
-                                    
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">
-                                                <p>降》FujiXerox 無線雷射傳真事務機</p>
-                                                <p>超值下殺$1000★加購碳匣85折</p>
-                                                <p class="price">5490</p>
-                                                </a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="vertical" src="https://d.ecimg.tw/items/DEAX4MA9009NBF8/000001_1544585960.jpg">
-                                                <b class="topic-tag" data-cat="healthcare" data-name="健康"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">強力吸水雙腳不再溼答答～提升專注力  卡通地毯地墊吸水腳踏墊防滑墊</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">老爺大酒店 冬季國人住房專案</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">歐德集團「手護星願」耶誕禮物募集活動開跑</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">高粱首度入菜 老品牌金門酒廠和大三元異業合作端饗</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                                <div class="txt-cell txt-top p-16">
-                                    <!-- 四欄輪播 內容開始 -->
-                                    <div class="topicslider-box txt-left">
-                                        <a href="#" class="a-link">
-                                            <div class="photo-box p66">
-                                                <img data-region="horizontal" src="http://news.pchome.com.tw/newsdata/fashion/beauty/20181213/54469880079950248021.jpg">
-                                                <b class="topic-tag" data-cat="entertainment" data-name="娛樂"></b>
-                                            </div>
-                                            <h4 class="txt-black p-tb16">鹿晗認愛關曉彤1年首曝心聲！</h4>
-                                        </a>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">SEVENTEE出席品牌活動 現場大放少年</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">WANNA ONE新曲「春風」 繼續佔據各大榜一位活力</a>
-                                            </h5>
-                                            <h5 class="p-tb16">
-                                                <a href="#" class="a-link">XID回歸倒數D-1 主打曲MV預告正式公開</a>
-                                            </h5>
-                                    </div>
-                                    <!-- 四欄輪播 內容結束 -->
-                                </div>
-                            </div>
-                    </div>
-                    <!-- 左右按鈕 -->
-                    <div class="topicslide-btn prev transition icon-prev"></div>
-                    <div class="topicslide-btn next transition icon-next"></div>
-                </div>
-
-                <script type="text/javascript">
-                    /* 參考 */
-                    /* 頁尾 4 x 4 輪播 */
-                    /****************************
-                        autoplay        (自動播)
-                        autoplaySpeed   (間隔時間)
-                        dots            (導覽圓點)
-                        speed           (換頁速度)
-                        prevArrow       (往前一頁)
-                        nextArrow       (往後一頁)
-                        draggable       (拖曳)
-                        infinite        (無限循環)
-                        centerMode      (畫面置中)
-                        slidesToShow    (顯示頁數)
-                        centerPadding   (各頁間距)
-                        slidesToScroll  (捲動頁數)
-                    *****************************/
-                    $(document).on('ready', function(){
-                        var topicslide         =$(".topicslide");
-                        var topicslide_prev    =$('.topicslide-btn.prev');
-                        var topicslide_next    =$('.topicslide-btn.next');
-                        var topicslide_auto    =$(".topicslide").attr('data-autoplay').toLowerCase()=='true'?true:false;
-                        var topicslide_timeout =5000;
-                        topicslide.on('init', function(event, slick){
-                            $(".topicslide .txt-table").css('display:inherit');
-                        });
-                        topicslide.slick({
-                            autoplay        :topicslide_auto,
-                            autoplaySpeed   :topicslide_timeout,
-                            dots            :false,
-                            speed           :1500,
-                            prevArrow       :topicslide_prev,
-                            nextArrow       :topicslide_next,
-                            draggable       :true,
-                            infinite        :true,
-                            centerMode      :false,
-                            slidesToShow    :1,
-                            centerPadding   :'0',
-                            slidesToScroll  :1
-                        });
-                    });
-                </script>
-
-                <!-- 內容 本日最低 -->
-                <div class="content-box has-border hotpick">
+                <!-- 內容 本日嚴選 -->
+                <div class="content-box has-border hotpick newsFocus">
                     <div class="txt-table">
                         <div class="txt-row">
                             <div class="txt-cell txt-top">
                                 
-                                <!-- 本日最低 header -->
+                                <!-- 本日嚴選 header -->
                                 <div class="content-titlebox ali-middle">
-                                    <em></em><span>本日最低<small>HOT PICK</small></span>
+                                    <em></em><span>本日嚴選<small>HOT PICK</small></span>
                                 </div>
 
-                                <div class="p-16">
-                                    <!-- 24h封殺特賣 開始 -->
-                                    <style>
-                                    .slidead-24h {width:100%;max-height:500px;overflow:hidden}
-                                    .slidead-24h>span{display:none}
-                                    .slidead-24h .swiper-slide:before {display:none}
-                                    .slidead-24h .swiper-slide a{float:left;box-sizing:content-box;width:226px;height:226px;padding-bottom:30px;padding-left:30px;overflow:hidden}
-                                    .slidead-24h .swiper-slide a:nth-child(6n){display:none}
-                                    .slidead-24h .swiper-slide a:nth-child(6n-1){display:none}
-                                    .slidead-24h .swiper-slide a:nth-child(6n-5){padding-left:0px}
-                                    .slidead-24h .swiper-slide a img {width:226px;height:226px}
-                                    </style>
-
-                                    <div id="24h_area">
+                                <div class="txt-table">
+                                <!-- 焦點快報 中右欄內容開始 -->
+                                <!-- 中欄內容開始 -->
+                                <div class="txt-cell txt-left txt-top cm">
+                                    <div class="category-box p-tb16 p-lr32">
+                                        <b class="category-tit">小老婆俱樂部</b>
+                                            <h2 class="txt-black p-tb8"><a href="http://car.pchome.com.tw/active/2019/springtour/" class="a-link">親子出遊懶人包！把拔馬麻的行前檢視清單</a></h2>
+                                            <p class="p-tb8">出遊人多更好玩！座位挑高上下車更方便，行李廂1905公升出遊道具裝更多，雙手很忙就靠免鑰匙感應啟閉後車門，APP智能遙控預估抵達時間即時通知親友！</p>
+                                        
+                                            <a href="http://car.pchome.com.tw/active/2019/springtour/">
+                                            <div class="photo-box p66">
+                                                <img data-region="horizontal" src="img/480360.JPG">
+                                            </div>
+                                            </a>
+                                    </div>
+                                </div>
+                                    <!-- 中欄內容結束 --> 
+                                    <!-- 右欄內容開始 -->               
+                                <div class="txt-cell txt-left txt-top rt">
+                                    
+                                    <div class="category-box p-tb16 p-lr32">
+                                        <b class="category-tit">周末散策</b>
+                                        <h3 class="txt-black p-tb8"><a href="http://travel.pchome.com.tw/knowledge/walkingholiday" class="a-link">台灣人一生必去朝聖的雲霧仙境</a></h3>
+                                        <div class="txt-table">
+                                            <div class="txt-cell txt-left txt-top">
+                                                <p class="p-r8">【雪霸八景】迷霧、雲海、晚霞、日出、森林、巨木、星空、聖稜線。春有百花秋有月、夏有涼風冬有雪～如同仙境般的世外桃源。</p>
+                                            </div>
+                                            <div class="txt-cell txt-left txt-top p-l8">
+                                                <a href="http://travel.pchome.com.tw/knowledge/walkingholiday">
+                                                <div class="photo-box p75">           
+                                                    <img data-region="horizontal" src="img/180135-1.JPG">
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </div>
 
-                                    <script>
-                                        $("#24h_area").load('//wwwapi.pchome.com.tw/ShowPChomeApi.php?type=30');
-                                        //setInterval(
-                                        //function() { $("#24h_area").load('//wwwapi.pchome.com.tw/ShowPChomeApi.php?type=30'); }
-                                        //, 8000);
-                                    </script>
-                                    <!-- 24h封殺特賣 結束 -->
+                                    <div class="category-box p-tb16 p-lr32">
+                                        <b class="category-tit">連假攻略</b>
+                                        <h3 class="txt-black p-tb8"><a href="http://travel.pchome.com.tw/knowledge/walkingholiday" class="a-link">網友最推薦的不踩雷母親節大餐</a></h3>
+                                        <div class="txt-table">
+                                            <div class="txt-cell txt-left txt-top">
+                                                <p class="p-r8">每日嚴選現撈漁獲、由師傅現場握製炙燒握壽司、還有新鮮現切生魚片及繽紛海鮮散壽司，頂級肋眼部位現點現煎的安格斯黑牛排。</p>
+                                            </div>
+                                            <div class="txt-cell txt-left txt-top p-l8">
+                                                <a href="http://travel.pchome.com.tw/knowledge/walkingholiday">
+                                                <div class="photo-box p75">           
+                                                    <img data-region="horizontal" src="img/180135-2.JPG">
+                                                </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="category-box p-tb16 p-lr32">
+                                        <b class="category-tit">時間專賣店</b>
+                                        <h3 class="txt-black p-tb8"><a href="http://4c.pchome.com.tw/campaign/2019/timeismoney/" class="a-link">台灣最大電商第一季消費趨勢新聞專輯：買對東西等於買到時間，你會更快樂！</a></h3>
+                                    </div>
                                 </div>
+                                <!-- 右欄內容結束 -->    
+                                <!-- 焦點快報 中右欄內容結束 -->
+                                </div>
+
                             </div>
                             
                             <div class="txt-cell ad-box">
@@ -1657,7 +1094,7 @@
                                     pad_customerId="PFBC20160804001";
                                     pad_positionId="PFBP201802210001C";
                                 </script>
-                                <script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
+                                <script id="pcadscript" language="javascript" src="img/https://kdpic.pchome.com.tw/img/js/xpcadshow.js"></script>
                                 <!-- 聯播網廣告code 開始 -->
                             </div>
                         </div>
@@ -1837,7 +1274,6 @@
 
         </div>
     </div>
-    
  <script language="javascript">
 pad_width=1400;
 pad_height=160;
