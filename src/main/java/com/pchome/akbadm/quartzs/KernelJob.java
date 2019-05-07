@@ -689,10 +689,9 @@ public class KernelJob {
                 // TODO business bug: reduce adDetail
                 // special rule: reduce by odd number
                 if (hour == reduceHour) {
-                	log.info("hour="+hour+",reduceHour="+reduceHour);  // by nico
                 	reduceCount = ++reduceCount % reduceDivisor;
                     if (reduceCount != minuteOddNumber) {
-                    	log.info("pfpCustomerInfoIdOddNumber="+reduceCount+","+pfpCustomerInfoId+","+reduceDivisor);    // by nico
+                    	log.info("reduceCount="+reduceCount+","+pfpCustomerInfoId+","+adId);    // by nico
                         continue;
                     }
                 }
