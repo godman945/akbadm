@@ -545,11 +545,13 @@ public class KernelJob {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuteOddNumber = calendar.get(Calendar.MINUTE) % reduceDivisor;
+        int minuteReduceNumber = calendar.get(Calendar.MINUTE) % reduceDivisor;
         int reduceCount = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
+        Set<String> allAdSet = new HashSet<>();
+        Set<String> allowAdSet = new HashSet<>();
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
         PfpAd pfpAd = null;
@@ -672,7 +674,17 @@ public class KernelJob {
         Map<String, PfpCodeTracking> pfpCodeTrackingMap = pfpCodeTrackingService.selectPfpCodeTrackingMap();
         log.info("pfpCodeTrackingService.selectPfpCodeTrackingMap " + pfpCodeTrackingMap.size());
 
-        log.info("hour="+hour+",reduceHour="+reduceHour+",minuteOddNumber="+minuteOddNumber);
+        // special rule: reduce
+        for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
+            allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
+        }
+
+        for (String adSeq: allAdSet) {
+            if (reduceCount++ % reduceDivisor == minuteReduceNumber) {
+                allowAdSet.add(adSeq);
+            }
+        }
+
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             try {
@@ -686,14 +698,9 @@ public class KernelJob {
                 actionId = pfpAdAction.getAdActionSeq();
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
-                // TODO business bug: reduce adDetail
-                // special rule: reduce by odd number
-                if (hour == reduceHour) {
-                	reduceCount = ++reduceCount % reduceDivisor;
-                    if (reduceCount != minuteOddNumber) {
-                    	log.info("reduceCount="+reduceCount+","+pfpCustomerInfoId+","+adId);    // by nico
-                        continue;
-                    }
+                // special rule: reduce
+                if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
+                    continue;
                 }
 
                 // get ad map
