@@ -126,7 +126,7 @@ public class KernelJob {
     private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
-    private int reduceHour = 0;
+    private int reduceHour = 16;
     private int reduceDivisor = 2;
 
     private IPfbStyleInfoService pfbStyleInfoService;
@@ -684,6 +684,9 @@ public class KernelJob {
                 allowAdSet.add(adSeq);
             }
         }
+        
+        //add by nico
+        log.info("allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
 
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
@@ -700,7 +703,8 @@ public class KernelJob {
 
                 // special rule: reduce
                 if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
-                    continue;
+                	log.info("===>reduceHour adId="+adId); //add by nico
+                	continue;
                 }
 
                 // get ad map
