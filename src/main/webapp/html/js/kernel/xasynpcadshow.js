@@ -1,1 +1,309 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 Q=6.2D;3 11=2E(Q);3 B=6.1z("d");3 1R=6.1S("1R");3 1d=6.1S("2c");4(1d==R&&8.d!=1A){1d=6.1e(\'1T\');1d.12="2c";1R.1U(1d);4(d.f>10){2F("超過廣告上限，最多只能貼10則廣告!")}G{x(i=0;i<d.f;i++){4(i>=B.f){2G}d[i].2d=B[i];d[i].1B=B[i].T("1B");d[i].1C=B[i].T("1C");d[i].1D=B[i].T("1D");d[i].1f=B[i].T("1f");d[i].1E=B[i].T("1E");d[i].1F=B[i].T("1F");d[i].1G=B[i].T("1G");d[i].1H=B[i].T("1H");2e(d[i])}}}13 2e(e){3 U="";3 V="";3 1V="";3 1g="";3 1h="";3 1I="";4(e.1E!=R){1h=e.1E}G{1h=K}4(e.1H!=R){1I=e.1H}G{1I=1J}4(e.1f!=R){1V=e.1f.14(0,16);1g=e.1f.14(16,17);4(1g==""){1g="C"}}4(1g=="S"){4(e.1F!=R){U=e.1F}4(e.1G!=R){V=e.1G}4(U.f==0){4(Q.y("2H.1K.1i.1j")>1){3 g=Q;3 W=g.y("q=");4(W>1){3 L=g.y("2f=");3 1W=g.y("2g=");U=g.14(W+2,L-1);4(L<1){V=1}G{V=g.14(L+5,1W-1)}}}4(Q.y("2h.1K.1i.1j")>1){3 g=Q;3 W=g.y("q=");4(W>1){3 L=g.y("2I=");U=g.14(W+2,L-1)}}4(Q.y("2h.2J.1i.1j")>1){3 g=Q;3 W=g.y("k=");4(W>1){3 1W=g.y("t=");3 L=g.y("p=");U=6.1S("2K").1X;4(L<1){V=1}G{V=g.14(L+2,g.f)}}}}}G{U="";V="";1h=""}3 H=[];3 1Y=1Z().1Y();3 20=1Z().20();3 2i=8.X.2L;3 21=8.21;3 22=1k.22;3 23=1k.23;3 2j=1k.2j||-1;3 2k=(8.X.l>8.X.15)?[8.X.l,8.X.15]:[8.X.15,8.X.l];3 1L;4(1k.2l){1L=1k.2l}G{1L=\'2M\'}H.A(1Y);H.A(20);H.A(2i);H.A(21);H.A(22);H.A(23);H.A(2k);H.A(1L);3 24=1Z().2N(H.2O(\'~~~\'),32);3 w="";4(1I){w+="2P://25.1K.1i.1j/2m.2n?2o="+e.1D}G{w+="2Q://25.1K.1i.1j/2m.2n?2o="+e.1D}w+="&2R="+1V;w+="&2S="+e.1B;w+="&2T="+e.1C;w+="&2U="+U;w+="&2f="+V;w+="&2g="+1h;w+="&24="+24;w+="&t="+2p.2V(2p.2W()*2X+1);4(11.y("25")>1||11.y("2Y")>1){w+="&11="}G{w+="&11="+11}3 2q="<1l 2Z=1M/2r 2s="+w+"></1l>";3 m=6.1e("D");m.n("30","2t");m.n("31","33");m.n("34","0");m.n("35","0");m.n("36","0");m.n("37","0");m.n("38","0");m.n("12","1m");m.n("15",e.1B+"E");m.n("l",e.1C+"E");m.n("39","1J");m.n("3a","1J");m.n("2s","2r:\\\'"+2q+"\\\'");d[i].2d.1U(m)}8.3b=13(M){3 h=6.1n("D");3 a=[];x(3 i=0;i<h.f;i++){4(h[i].12=="1m"){a.A(h[i])}}x(3 i=0;i<a.f;i++){3 D=a[i].18.F.1o[0];3 I=D.1p;3 7=a[i];3 9=8.6.F.9||8.6.1q.9;3 b=8.1r;3 o=7.1s;3 r=7.J().1t;3 s=7.J().1u;3 c=7.l.N(\';E\',\'\')/2;3 u=(b+c)-7.l.N(\';E\',\'\');v=\'{"v":{"9":\'+9+\',"b":\'+b+\',"o":\'+o+\',"r":\'+r+\',"s":\'+s+\',"c":\'+c+\',"u":\'+u+\',"O":\'+K+\'}}\';I.1v(v,"*")}};8.6.26(\'3c\',13(){3 h=6.1n("D");3 a=[];x(3 i=0;i<h.f;i++){4(h[i].12=="1m"){a.A(h[i])}}x(3 i=0;i<a.f;i++){3 3d=a[i].18.F;3 D=a[i].18.F.1o[0];3 I=D.1p;3 7=a[i];3 9=8.6.F.9||8.6.1q.9;3 b=8.1r;3 o=7.1s;3 r=7.J().1t;3 s=7.J().1u;3 c=7.l.N(\';E\',\'\')/2;3 u=(b+c)-7.l.N(\';E\',\'\');v=\'{"v":{"9":\'+9+\',"b":\'+b+\',"o":\'+o+\',"r":\'+r+\',"s":\'+s+\',"c":\'+c+\',"u":\'+u+\',"O":\'+K+\'}}\';I.1v(v,"*")}},K);8.6.26(\'O\',13(){3 h=6.1n("D");3 a=[];x(3 i=0;i<h.f;i++){4(h[i].12=="1m"){a.A(h[i])}}x(3 i=0;i<a.f;i++){3 D=a[i].18.F.1o[0];3 I=D.1p;3 7=a[i];3 9=8.6.F.9||8.6.1q.9;3 b=8.1r;3 o=7.1s;3 r=7.J().1t;3 s=7.J().1u;3 27=7.l.N(\';E\',\'\');3 c=27/2;3 u=(b+c)-27;3 O=K;4(6.3e){O=1J}v=\'{"v":{"9":\'+9+\',"b":\'+b+\',"o":\'+o+\',"r":\'+r+\',"s":\'+s+\',"c":\'+c+\',"u":\'+u+\',"O":\'+O+\'}}\';I.1v(v,"*")}},K);8.26("3f",2u,K);13 2u(M){2v{4(M.Y.P!=1A&&M.Y.P.19!=R&&M.Y.P.28==\'2w\'){3 1a=M.Y.P.1a;3 1b=6.1z("d");4(1a==\'2x\'){3 z=1b[M.Y.P.19];z.l=0;z.15=0}4(1a!=\'2x\'&&1a!=1A){3 z=1b[M.Y.P.19];4(z==1A){1b=6.1z("2t");z=1b[M.Y.P.19].29}z.l=0;z.15=0;z.n("3g","3h:3i");4(z.1c.1c==R||z.1c.1c.2a!=\'2y\'){3 2z=z.29;3 1l=6.1e(\'1T\');3 1w=6.1e(\'1T\');1w.2a=\'2y\';1l.2A=1a;3 1x=1l.1n("*");x(3 j=0;j<1x.f;j++){3 2b=1x[j].2b;3 1N=1x[j].1N;3 1M=1x[j].2A;3 1O=6.1e(2b);x(3 k=0;k<1N.f;k++){3 1y=1N[k];3 1P=1y.1P;3 1P=1y.1X;1O.n(1y.1P,1y.1X)}1O.1M=1M;1w.1U(1O,1w.3j)}2z.3k(1w,z.1c.1c)}}}}2B(2C){}}2v{3 h=6.1n("D");3 a=[];x(3 i=0;i<h.f;i++){4(h[i].12=="1m"){a.A(h[i])}}3 1b=6.1z("d");x(3 i=0;i<a.f;i++){a[i].3l=13(){4(Z.29.2a==\'d\'){x(3 k=0;k<a.f;k++){4(Z==a[k]){3 1Q=Z.18.F.1o[0];3 I=1Q.1p;3 7=Z;3 9=8.6.F.9||8.6.1q.9;3 b=8.1r;3 o=7.1s;3 r=7.J().1t;3 s=7.J().1u;3 c=7.l.N(\';E\',\'\')/2;3 u=(b+c)-7.l.N(\';E\',\'\');3 v=\'{"P":{"19":\'+k+\',"28":"2w"},"v":{"9":\'+9+\',"b":\'+b+\',"o":\'+o+\',"r":\'+r+\',"s":\'+s+\',"c":\'+c+\',"u":\'+u+\',"O":\'+K+\'}}\';I.1v(v,"*")}}}G{x(3 k=0;k<a.f;k++){4(Z==a[k]){3 1Q=Z.18.F.1o[0];3 I=1Q.1p;3 7=Z;3 9=8.6.F.9||8.6.1q.9;3 b=8.1r;3 o=7.1s;3 r=7.J().1t;3 s=7.J().1u;3 c=7.l.N(\';E\',\'\')/2;3 u=(b+c)-7.l.N(\';E\',\'\');3 v=\'{"P":{"19":\'+k+\',"28":"3m"},"v":{"9":\'+9+\',"b":\'+b+\',"o":\'+o+\',"r":\'+r+\',"s":\'+s+\',"c":\'+c+\',"u":\'+u+\',"O":\'+K+\'}}\';I.1v(v,"*")}}}}}}2B(2C){}',62,209,'|||var|if||document|iframeOriginal|window|scrollTop|iframeArray|viewHeight|iframeHalf|asynpchomead|asynpchomeadObject|length|testurl|iframeArrayData||||height|ifrm|setAttribute|iframeOffSetTop|||iframeBottom|iframeTop||controllerHeight|adInfo|adurl|for|indexOf|iframeObj|push|asynpchomeadclass||iframe|px|body|else|keys|iframeWin|getBoundingClientRect|false|pis|event|replace|visibilitychange|adBackup|res|null||getAttribute|keywordValue|pageValue|kis|screen|data|this||docurl|id|function|substring|width|||contentDocument|iframeIndex|htmlContent|pcadshowList|nextElementSibling|asynpchomeadflag|createElement|pad_positionId|ptype|seway|com|tw|navigator|script|pchome8044_ad_frame1|getElementsByTagName|children|contentWindow|documentElement|innerHeight|offsetTop|bottom|top|postMessage|appendDiv|elements|attrib|getElementsByClassName|undefined|pad_width|pad_height|pad_customerId|pad_precise|pad_keyword|pad_page|pad_ssl|padssl|true|pchome|cpu|text|attributes|content|name|frame|asynpchomeadjs|getElementById|div|appendChild|pid|tis|value|getCanvasFp|PCHOMEFingerprint|getWebglFp|devicePixelRatio|userAgent|language|fig|kdcl|addEventListener|iframeOriginalHeight|ALEX|parentElement|className|tagName|pchomead8044|classObject|showad|page|precise|search|windowScreenColorDepth|deviceMemory|resolution|cpuClass|adshow2|html|pfbxCustomerInfoId|Math|showadscript|javascript|src|akb_iframe|getMessage0|try|asynpcadshow|blank|ad_backup_pchome|appendDom|innerHTML|catch|err|URL|encodeURIComponent|alert|break|nicolee|ch|ruten|kwd|colorDepth|unknown|x64hash128|join|https|http|positionId|padWidth|padHeight|keyword|floor|random|1000|kwstg|type|class|scrolling||no|frameborder|marginwidth|marginheight|vspace|hspace|allowtransparency|allowfullscreen|onresize|scroll|iframeBody|hidden|message|style|display|none|firstChild|insertBefore|onload|pcadshow'.split('|'),0,{}))
+var res = document.URL;
+var docurl = encodeURIComponent(res);
+var keywordValue = "";
+var pageValue = "";
+var pid = "";
+var ptype = "";
+var seway = "";
+var padssl = "";
+if (typeof pad_pchad != 'object') {
+    pad_pchad = []
+}
+if (typeof pad_precise != 'undefined') {
+    seway = pad_precise
+} else {
+    seway = false
+}
+if (typeof pad_ssl != 'undefined') {
+    padssl = pad_ssl
+} else {
+    padssl = true
+}
+if (typeof pad_positionId != 'undefined') {
+    pid = pad_positionId.substring(0, 16);
+    ptype = pad_positionId.substring(16, 17);
+    pad_pchad.push(pid);
+    if (ptype == "") {
+        ptype = "C"
+    }
+}
+if (ptype == "S") {
+    if (typeof pad_keyword != 'undefined') {
+        keywordValue = pad_keyword
+    }
+    if (typeof pad_page != 'undefined') {
+        pageValue = pad_page
+    }
+    if (keywordValue.length == 0) {
+        if (res.indexOf("nicolee.pchome.com.tw") > 1) {
+            var testurl = res;
+            var kis = testurl.indexOf("q=");
+            if (kis > 1) {
+                var pis = testurl.indexOf("page=");
+                var tis = testurl.indexOf("precise=");
+                keywordValue = testurl.substring(kis + 2, pis - 1);
+                if (pis < 1) {
+                    pageValue = 1
+                } else {
+                    pageValue = testurl.substring(pis + 5, tis - 1)
+                }
+            }
+        }
+        if (res.indexOf("search.pchome.com.tw") > 1) {
+            var testurl = res;
+            var kis = testurl.indexOf("q=");
+            if (kis > 1) {
+                var pis = testurl.indexOf("ch=");
+                keywordValue = testurl.substring(kis + 2, pis - 1)
+            }
+        }
+        if (res.indexOf("search.ruten.com.tw") > 1) {
+            var testurl = res;
+            var kis = testurl.indexOf("k=");
+            if (kis > 1) {
+                var tis = testurl.indexOf("t=");
+                var pis = testurl.indexOf("p=");
+                keywordValue = testurl.substring(kis + 2, tis - 1);
+                if (pis < 1) {
+                    pageValue = 1
+                } else {
+                    pageValue = testurl.substring(pis + 2, testurl.length)
+                }
+            }
+        }
+    }
+} else {
+    keywordValue = "";
+    pageValue = "";
+    seway = ""
+}
+try {
+    for (var i = 0; i < document.getElementsByTagName("script").length; i++) {
+        if (document.getElementsByTagName("script")[i].previousElementSibling.tagName.indexOf("ADBACKUP") >= 0) {
+            docurl = "www.pchome.com.tw"
+        }
+    }
+} catch (err) {};
+var fig = "";
+var adurl = "";
+if (padssl == "false") {
+    adurl += "http://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
+} else {
+    adurl += "https://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
+}
+adurl += "&positionId=" + pid;
+adurl += "&padWidth=" + pad_width;
+adurl += "&padHeight=" + pad_height;
+adurl += "&keyword=" + keywordValue;
+adurl += "&page=" + pageValue;
+adurl += "&precise=" + seway;
+adurl += "&fig=" + fig;
+adurl += "&t=" + Math.floor(Math.random() * 1000 + 1);
+if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
+    adurl += "&docurl="
+} else {
+    adurl += "&docurl=" + docurl
+}
+var showadscript = "<script type=text/javascript src=" + adurl + "></script>";
+if (pad_pchad.length <= 10) {
+    if (ptype == "S") {
+        document.write(showadscript)
+    } else {
+        var head = document.getElementsByTagName("head");
+        document.write(
+            '<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' +
+            pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>'
+        )
+    }
+} else {
+    alert("è¶…éŽå»£å‘Šä¸Šé™ï¼Œæœ€å¤šåªèƒ½è²¼10å‰‡å»£å‘Š!")
+}
+window.onresize = function(a) {
+    try {
+        var b = document.getElementsByTagName("iframe");
+        var c = [];
+        for (var i = 0; i < b.length; i++) {
+            if (b[i].id == "pchome8044_ad_frame1") {
+                c.push(b[i])
+            }
+        }
+        for (var i = 0; i < c.length; i++) {
+            var d = c[i].contentDocument.body.children[0];
+            var e = d.contentWindow;
+            var f = c[i];
+            var g = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+            var h = window.innerHeight;
+            var j = f.offsetTop;
+            var k = f.getBoundingClientRect().bottom;
+            var l = f.getBoundingClientRect().top;
+            var m = f.height.replace(';px', '');
+            var n = m / 2;
+            var o = (h + n) - m;
+            adInfo = '{"adInfo":{"scrollTop":' + g + ',"viewHeight":' + h + ',"iframeOffSetTop":' + j + ',"iframeBottom":' + k + ',"iframeTop":' + l +
+                ',"iframeHalf":' + n + ',"controllerHeight":' + o + ',"visibilitychange":' + false + '}}';
+            e.postMessage(adInfo, "*")
+        }
+    } catch (err) {}
+};
+window.document.addEventListener('scroll', function() {
+    try {
+        var a = document.getElementsByTagName("iframe");
+        var b = [];
+        for (var i = 0; i < a.length; i++) {
+            if (a[i].id == "pchome8044_ad_frame1") {
+                b.push(a[i])
+            }
+        }
+        for (var i = 0; i < b.length; i++) {
+            var c = b[i].contentDocument.body.children[0];
+            var d = c.contentWindow;
+            var e = b[i];
+            var f = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+            var g = window.innerHeight;
+            var h = e.offsetTop;
+            var j = e.getBoundingClientRect().bottom;
+            var k = e.getBoundingClientRect().top;
+            var l = e.height.replace(';px', '');
+            var m = l / 2;
+            var n = (g + m) - l;
+            adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k +
+                ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + false + '}}';
+            d.postMessage(adInfo, "*")
+        }
+    } catch (err) {}
+}, false);
+window.document.addEventListener('visibilitychange', function() {
+    var a = document.getElementsByTagName("iframe");
+    var b = [];
+    for (var i = 0; i < a.length; i++) {
+        if (a[i].id == "pchome8044_ad_frame1") {
+            b.push(a[i])
+        }
+    }
+    for (var i = 0; i < b.length; i++) {
+        var c = b[i].contentDocument.body.children[0];
+        var d = c.contentWindow;
+        var e = b[i];
+        var f = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+        var g = window.innerHeight;
+        var h = e.offsetTop;
+        var j = e.getBoundingClientRect().bottom;
+        var k = e.getBoundingClientRect().top;
+        var l = e.height.replace(';px', '');
+        var m = l / 2;
+        var n = (g + m) - l;
+        var o = false;
+        if (document.hidden) {
+            o = true
+        }
+        adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k +
+            ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + o + '}}';
+        d.postMessage(adInfo, "*")
+    }
+}, false);
+window.addEventListener("message", getMessage0, false);
+
+function getMessage0(a) {
+    try {
+        if (a.data.adBackup != undefined && a.data.adBackup.iframeIndex != null && a.data.adBackup.ALEX == 'pcadshow') {
+            var b = a.data.adBackup.htmlContent;
+            if (b != null) {
+                var c = document.getElementsByClassName("akb_iframe");
+                if (b == 'blank') {
+                    var d = c[a.data.adBackup.iframeIndex];
+                    d.height = 0;
+                    d.width = 0
+                }
+                if (b != 'blank' && b != undefined) {
+                    var d = c[a.data.adBackup.iframeIndex];
+                    d.height = 0;
+                    d.width = 0;
+                    var e = d.parentElement;
+                    if (d.nextElementSibling == null || d.nextElementSibling.className != 'ad_backup_pchome') {
+                        var f = document.createElement('div');
+                        var g = document.createElement('div');
+                        g.className = 'ad_backup_pchome';
+                        f.innerHTML = b;
+                        var h = f.getElementsByTagName("*");
+                        for (var j = 0; j < h.length; j++) {
+                            var i = h[j].tagName;
+                            var l = h[j].attributes;
+                            var m = h[j].innerHTML;
+                            var n = document.createElement(i);
+                            for (var k = 0; k < l.length; k++) {
+                                var o = l[k];
+                                var p = o.name;
+                                var p = o.value;
+                                n.setAttribute(o.name, o.value)
+                            }
+                            n.text = m;
+                            g.appendChild(n, g.firstChild)
+                        }
+                        if (d.nextElementSibling == null) {
+                            e.appendChild(g, d.parentElement)
+                        } else {
+                            e.insertBefore(g, d.nextElementSibling)
+                        }
+                    }
+                }
+            }
+        }
+    } catch (err) {}
+}
+try {
+    var iframeArrayData = document.getElementsByTagName("iframe");
+    var iframeArray = [];
+    for (var i = 0; i < iframeArrayData.length; i++) {
+        if (iframeArrayData[i].id == "pchome8044_ad_frame1") {
+            iframeArray.push(iframeArrayData[i])
+        }
+    }
+    var pcadshowList = document.getElementsByClassName("asynpchomead");
+    for (var i = 0; i < iframeArray.length; i++) {
+        iframeArray[i].onload = function() {
+            if (this.parentElement.className == 'asynpchomead') {
+                for (var k = 0; k < iframeArray.length; k++) {
+                    if (this == iframeArray[k]) {
+                        var a = this.contentDocument.body.children[0];
+                        var b = a.contentWindow;
+                        var c = this;
+                        var d = null;
+                        var e = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+                        var f = window.innerHeight;
+                        var g = c.offsetTop;
+                        var h = c.getBoundingClientRect().bottom;
+                        var i = c.getBoundingClientRect().top;
+                        var j = c.height.replace(';px', '');
+                        var l = j / 2;
+                        var m = (f + l) - j;
+                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' +
+                            i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k +
+                            ',"ALEX":"asynpcadshow","httpType":' + padssl + '}}';
+                        b.postMessage(d, "*")
+                    }
+                }
+            } else {
+                for (var k = 0; k < iframeArray.length; k++) {
+                    if (this == iframeArray[k]) {
+                        var a = this.contentDocument.body.children[0];
+                        var b = a.contentWindow;
+                        var c = this;
+                        var d = null;
+                        var e = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+                        var f = window.innerHeight;
+                        var g = c.offsetTop;
+                        var h = c.getBoundingClientRect().bottom;
+                        var i = c.getBoundingClientRect().top;
+                        var j = c.height.replace(';px', '');
+                        var l = j / 2;
+                        var m = (f + l) - j;
+                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' +
+                            i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k +
+                            ',"ALEX":"pcadshow","httpType":' + padssl + '}}';
+                        b.postMessage(d, "*")
+                    }
+                }
+            }
+        }
+    }
+} catch (err) {}
