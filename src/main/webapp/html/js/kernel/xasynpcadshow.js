@@ -1,1 +1,422 @@
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 I=6.2q;3 W=2r(I);3 z=6.1h("b");3 1I=6.1J("1I");3 13=6.1J("20");4(13==J){13=6.14(\'1K\');13.15="20";1I.1L(13);4(b.f>10){2s("超過廣告上限，最多只能貼10則廣告!")}D{A(i=0;i<b.f;i++){4(i>=z.f){2t}b[i].21=z[i];b[i].1i=z[i].K("1i");b[i].1j=z[i].K("1j");b[i].1k=z[i].K("1k");b[i].18=z[i].K("18");b[i].1l=z[i].K("1l");b[i].1m=z[i].K("1m");b[i].1n=z[i].K("1n");b[i].1o=z[i].K("1o");22(b[i])}}}D{}19 22(9){3 L="";3 M="";3 1M="";3 1a="";3 1b="";3 1p="";4(9.1l!=J){1b=9.1l}D{1b=T}4(9.1o!=J){1p=9.1o}D{1p=1N}4(9.18!=J){1M=9.18.X(0,16);1a=9.18.X(16,17);4(1a==""){1a="C"}}4(1a=="S"){4(9.1m!=J){L=9.1m}4(9.1n!=J){M=9.1n}4(L.f==0){4(I.o("2u.1q.1c.1d")>1){3 c=I;3 N=c.o("q=");4(N>1){3 F=c.o("23=");3 1O=c.o("24=");L=c.X(N+2,F-1);4(F<1){M=1}D{M=c.X(F+5,1O-1)}}}4(I.o("25.1q.1c.1d")>1){3 c=I;3 N=c.o("q=");4(N>1){3 F=c.o("2v=");L=c.X(N+2,F-1)}}4(I.o("25.2w.1c.1d")>1){3 c=I;3 N=c.o("k=");4(N>1){3 1O=c.o("t=");3 F=c.o("p=");L=6.1J("2x").1P;4(F<1){M=1}D{M=c.X(F+2,c.f)}}}}}D{L="";M="";1b=""}3 1Q="";3 m="";4(1p){m+="2y://1R.1q.1c.1d/26.27?28="+9.1k}D{m+="2z://1R.1q.1c.1d/26.27?28="+9.1k}m+="&2A="+1M;m+="&2B="+9.1i.n(\';\',\'\');m+="&2C="+9.1j.n(\';\',\'\');m+="&2D="+L.n(\';\',\'\');m+="&23="+M.n(\';\',\'\');m+="&24="+1b.n(\';\',\'\');m+="&1Q="+1Q.n(\';\',\'\');m+="&t="+29.2E(29.2F()*2G+1);4(W.o("1R")>1||W.o("2H")>1){m+="&W="}D{m+="&W="+W}3 2a="<2b"+"2c 2I=1r/2d 2e="+m+"></2b"+"2c>";3 g=6.14("O");g.h("2J","2f");g.h("2K","2L");g.h("2M","0");g.h("2N","0");g.h("2O","0");g.h("2P","0");g.h("2Q","0");g.h("15","1s");g.h("1S",9.1i+"E");g.h("B",9.1j+"E");g.h("2R","1N");g.h("2S","1N");g.h("2e","2d:\\\'"+2a+"\\\'");b[i].21.1L(g)}l.2T=19(G){3 s=6.1t("O");3 a=[];A(3 i=0;i<s.f;i++){4(s[i].15=="1s"){a.1T(s[i])}}A(3 i=0;i<a.f;i++){3 O=a[i].1u.P.1v[0];3 Q=O.1w;3 7=a[i];3 8=l.6.P.8||l.6.1x.8;3 d=l.1y;3 u=7.1z;3 v=7.R().1A;3 w=7.R().1B;3 e=7.B.n(\';E\',\'\')/2;3 x=(d+e)-7.B.n(\';E\',\'\');y=\'{"y":{"8":\'+8+\',"d":\'+d+\',"u":\'+u+\',"v":\'+v+\',"w":\'+w+\',"e":\'+e+\',"x":\'+x+\',"1C":\'+T+\'}}\';Q.1D(y,"*")}};l.6.2g(\'2U\',19(){3 s=6.1t("O");3 a=[];A(3 i=0;i<s.f;i++){4(s[i].15=="1s"){a.1T(s[i])}}A(3 i=0;i<a.f;i++){3 O=a[i].1u.P.1v[0];3 Q=O.1w;3 7=a[i];3 8=l.6.P.8||l.6.1x.8;3 d=l.1y;3 u=7.1z;3 v=7.R().1A;3 w=7.R().1B;3 e=7.B.n(\';E\',\'\')/2;3 x=(d+e)-7.B.n(\';E\',\'\');y=\'{"y":{"8":\'+8+\',"d":\'+d+\',"u":\'+u+\',"v":\'+v+\',"w":\'+w+\',"e":\'+e+\',"x":\'+x+\',"1C":\'+T+\'}}\';Q.1D(y,"*")}},T);l.2g("2V",2h,T);19 2h(G){2i{4(G.U.H!=1U&&G.U.H.Y!=J&&G.U.H.1V==\'2j\'){3 Z=G.U.H.Z;3 11=6.1h("b");4(Z==\'2k\'){3 r=11[G.U.H.Y];r.B=0;r.1S=0}4(Z!=\'2k\'&&Z!=1U){3 r=11[G.U.H.Y];4(r==1U){11=6.1h("2f");r=11[G.U.H.Y].1W}r.B=0;r.1S=0;r.h("2W","2X:2Y");4(r.12.12==J||r.12.12.1X!=\'2l\'){3 2m=r.1W;3 1Y=6.14(\'1K\');3 1e=6.14(\'1K\');1e.1X=\'2l\';1Y.2n=Z;3 1f=1Y.1t("*");A(3 j=0;j<1f.f;j++){3 1Z=1f[j].1Z;3 1E=1f[j].1E;3 1r=1f[j].2n;3 1F=6.14(1Z);A(3 k=0;k<1E.f;k++){3 1g=1E[k];3 1G=1g.1G;3 1G=1g.1P;1F.h(1g.1G,1g.1P)}1F.1r=1r;1e.1L(1F,1e.2Z)}2m.30(1e,r.12.12)}}}}2o(2p){}}2i{3 s=6.1t("O");3 a=[];A(3 i=0;i<s.f;i++){4(s[i].15=="1s"){a.1T(s[i])}}3 11=6.1h("b");A(3 i=0;i<a.f;i++){a[i].31=19(){4(V.1W.1X==\'b\'){A(3 k=0;k<a.f;k++){4(V==a[k]){3 1H=V.1u.P.1v[0];3 Q=1H.1w;3 7=V;3 8=l.6.P.8||l.6.1x.8;3 d=l.1y;3 u=7.1z;3 v=7.R().1A;3 w=7.R().1B;3 e=7.B.n(\';E\',\'\')/2;3 x=(d+e)-7.B.n(\';E\',\'\');3 y=\'{"H":{"Y":\'+k+\',"1V":"2j"},"y":{"8":\'+8+\',"d":\'+d+\',"u":\'+u+\',"v":\'+v+\',"w":\'+w+\',"e":\'+e+\',"x":\'+x+\',"1C":\'+T+\'}}\';Q.1D(y,"*")}}}D{A(3 k=0;k<a.f;k++){4(V==a[k]){3 1H=V.1u.P.1v[0];3 Q=1H.1w;3 7=V;3 8=l.6.P.8||l.6.1x.8;3 d=l.1y;3 u=7.1z;3 v=7.R().1A;3 w=7.R().1B;3 e=7.B.n(\';E\',\'\')/2;3 x=(d+e)-7.B.n(\';E\',\'\');3 y=\'{"H":{"Y":\'+k+\',"1V":"32"},"y":{"8":\'+8+\',"d":\'+d+\',"u":\'+u+\',"v":\'+v+\',"w":\'+w+\',"e":\'+e+\',"x":\'+x+\',"1C":\'+T+\'}}\';Q.1D(y,"*")}}}}}}2o(2p){}',62,189,'|||var|if||document|iframeOriginal|scrollTop|asynpchomeadObject|iframeArray|asynpchomead|testurl|viewHeight|iframeHalf|length|ifrm|setAttribute||||window|adurl|replace|indexOf|||iframeObj|iframeArrayData||iframeOffSetTop|iframeBottom|iframeTop|controllerHeight|adInfo|asynpchomeadclass|for|height||else|px|pis|event|adBackup|res|null|getAttribute|keywordValue|pageValue|kis|iframe|body|iframeWin|getBoundingClientRect||false|data|this|docurl|substring|iframeIndex|htmlContent||pcadshowList|nextElementSibling|asynpchomeadflag|createElement|id|||pad_positionId|function|ptype|seway|com|tw|appendDiv|elements|attrib|getElementsByClassName|pad_width|pad_height|pad_customerId|pad_precise|pad_keyword|pad_page|pad_ssl|padssl|pchome|text|pchome8044_ad_frame1|getElementsByTagName|contentDocument|children|contentWindow|documentElement|innerHeight|offsetTop|bottom|top|visibilitychange|postMessage|attributes|content|name|frame|asynpchomeadjs|getElementById|div|appendChild|pid|true|tis|value|fig|kdcl|width|push|undefined|ALEX|parentElement|className|script|tagName|pchomead8044|classObject|showad|page|precise|search|adshow2|html|pfbxCustomerInfoId|Math|showadscript|scr|ipt|javascript|src|akb_iframe|addEventListener|getMessage0|try|asynpcadshow|blank|ad_backup_pchome|appendDom|innerHTML|catch|err|URL|encodeURIComponent|alert|break|nicolee|ch|ruten|kwd|http|https|positionId|padWidth|padHeight|keyword|floor|random|1000|kwstg|type|class|scrolling|no|frameborder|marginwidth|marginheight|vspace|hspace|allowtransparency|allowfullscreen|onresize|scroll|message|style|display|none|firstChild|insertBefore|onload|pcadshow'.split('|'),0,{}))
+var res = document.URL;
+var docurl = encodeURIComponent(res);
+
+var asynpchomeadclass = document.getElementsByClassName("asynpchomead");
+var asynpchomeadjs = document.getElementById("asynpchomeadjs");
+var asynpchomeadflag = document.getElementById("pchomead8044");
+
+// js run one time
+// if flag is null then run script else stop
+if (asynpchomeadflag == null) {
+        // set js one time flag
+        asynpchomeadflag = document.createElement('div');
+        asynpchomeadflag.id = "pchomead8044";
+        asynpchomeadjs.appendChild(asynpchomeadflag);
+
+        // console.log("jsflag create");
+        // console.log(asynpchomeadclass.length);
+        // console.log(asynpchomead.length);
+
+        if (asynpchomead.length > 10) {
+
+                alert("超過廣告上限，最多只能貼10則廣告!");
+
+        } else {
+
+                for (i = 0; i < asynpchomead.length; i++) {
+
+                        if (i >= asynpchomeadclass.length) {
+                                break;
+                        }
+
+                        asynpchomead[i].classObject = asynpchomeadclass[i];
+                        asynpchomead[i].pad_width = asynpchomeadclass[i]
+                                        .getAttribute("pad_width");
+                        asynpchomead[i].pad_height = asynpchomeadclass[i]
+                                        .getAttribute("pad_height");
+                        asynpchomead[i].pad_customerId = asynpchomeadclass[i]
+                                        .getAttribute("pad_customerId");
+                        asynpchomead[i].pad_positionId = asynpchomeadclass[i]
+                                        .getAttribute("pad_positionId");
+                        asynpchomead[i].pad_precise = asynpchomeadclass[i]
+                                        .getAttribute("pad_precise");
+                        asynpchomead[i].pad_keyword = asynpchomeadclass[i]
+                                        .getAttribute("pad_keyword");
+                        asynpchomead[i].pad_page = asynpchomeadclass[i]
+                                        .getAttribute("pad_page");
+                        asynpchomead[i].pad_ssl = asynpchomeadclass[i]
+                                        .getAttribute("pad_ssl");
+
+                        //console.log(asynpchomead[i].pad_width);
+                        //console.log(asynpchomead[i].pad_height);
+                        //console.log(asynpchomead[i].pad_customerId);
+                        //console.log(asynpchomead[i].pad_positionId);
+                        //console.log(asynpchomead[i].pad_precise);
+                        //console.log(asynpchomead[i].pad_keyword);
+                        //console.log(asynpchomead[i].pad_page);
+                        //console.log(asynpchomead[i].pad_ssl);
+
+                        showad(asynpchomead[i]);
+                        
+                        
+                        
+
+                }// end of for
+                //�鐤�㙈敶梢𨺗�綉��
+                //adVideoController();
+        }// end if ad num 5
+
+} else {
+        // debug
+        // console.log('js run');
+}
+
+function showad(asynpchomeadObject) {
+
+        // console.log(asynpchomeadObject.pad_width);
+        // console.log(asynpchomeadObject.pad_height);
+
+        var keywordValue = "";
+        var pageValue = "";
+        var pid = "";
+        var ptype = "";
+        var seway = "";
+        var padssl = "";
+
+        if (asynpchomeadObject.pad_precise != null) {
+                seway = asynpchomeadObject.pad_precise;
+        } else {
+
+                seway = false;
+        }
+
+        if (asynpchomeadObject.pad_ssl != null) {
+                padssl = asynpchomeadObject.pad_ssl;
+        } else {
+
+                padssl = true;
+        }
+
+        if (asynpchomeadObject.pad_positionId != null) {
+                pid = asynpchomeadObject.pad_positionId.substring(0, 16);
+                ptype = asynpchomeadObject.pad_positionId.substring(16, 17);
+
+                if (ptype == "") {
+                        ptype = "C";
+                }
+
+        }
+
+        if (ptype == "S") {
+
+                if (asynpchomeadObject.pad_keyword != null) {
+                        keywordValue = asynpchomeadObject.pad_keyword;
+                }
+
+                if (asynpchomeadObject.pad_page != null) {
+                        pageValue = asynpchomeadObject.pad_page;
+                }
+
+                if (keywordValue.length == 0) {
+
+                        // test
+                        // res="http://search.pchome.com.tw/search/?q=%E6%89%8B%E6%A9%9F%E6%AE%BC&ch=&ac="
+
+                        if (res.indexOf("nicolee.pchome.com.tw") > 1) {
+
+                                // http://nicolee.pchome.com.tw:8080/akbadm_git/adteststg.jsp?q=usb&page=1&precise=false;
+
+                                var testurl = res;
+
+                                var kis = testurl.indexOf("q=");
+
+                                if (kis > 1) {
+
+                                        var pis = testurl.indexOf("page=");
+                                        var tis = testurl.indexOf("precise=");
+                                        keywordValue = testurl.substring(kis + 2, pis - 1);
+
+                                        if (pis < 1) {
+                                                pageValue = 1;
+                                        } else {
+                                                pageValue = testurl.substring(pis + 5, tis - 1);
+                                        }
+
+                                        // alert(kis+","+tis+","+pis+","+keywordValue+","+pageValue);
+                                }
+                        }
+
+                        if (res.indexOf("search.pchome.com.tw") > 1) {
+
+                                // alert("search");
+
+                                // http://search.pchome.com.tw/search/?q=%E4%B8%AD%E6%96%87&ch=&ac=
+
+                                var testurl = res;
+
+                                var kis = testurl.indexOf("q=");
+
+                                if (kis > 1) {
+
+                                        var pis = testurl.indexOf("ch=");
+                                        // var tis=testurl.indexOf("precise=");
+                                        keywordValue = testurl.substring(kis + 2, pis - 1);
+
+                                        // alert(kis+","+pis+","+keywordValue);
+                                }
+                        }
+
+                        if (res.indexOf("search.ruten.com.tw") > 1) {
+
+                                // http://search.ruten.com.tw/search/s000.php?searchfrom=indexbar&k=ipad&t=0&p=4
+
+                                var testurl = res;
+
+                                var kis = testurl.indexOf("k=");
+
+                                if (kis > 1) {
+
+                                        var tis = testurl.indexOf("t=");
+                                        var pis = testurl.indexOf("p=");
+
+                                        // keywordValue=testurl.substring(kis+2,tis-1);
+                                        keywordValue = document.getElementById("kwd").value;
+
+                                        if (pis < 1) {
+                                                pageValue = 1;
+                                        } else {
+                                                pageValue = testurl.substring(pis + 2, testurl.length);
+                                        }
+
+                                        // alert(kis+","+tis+","+pis+","+keywordValue+","+pageValue);
+                                }
+                        }
+
+                }
+
+        } else {
+
+                keywordValue = "";
+                pageValue = "";
+                seway = "";
+
+        }
+        var fig = "";
+        var adurl = "";
+        if (padssl) {
+                adurl += "http://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+        } else {
+                adurl += "https://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId;
+        }
+        adurl += "&positionId=" + pid;
+        adurl += "&padWidth=" + asynpchomeadObject.pad_width.replace(';','');
+        adurl += "&padHeight=" + asynpchomeadObject.pad_height.replace(';','');
+        adurl += "&keyword=" + keywordValue.replace(';','');
+        adurl += "&page=" + pageValue.replace(';','');
+        adurl += "&precise=" + seway.replace(';','');
+        adurl += "&fig=" + fig.replace(';','');
+        adurl += "&t=" + Math.floor(Math.random() * 1000 + 1);
+
+        
+        if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
+                adurl += "&docurl=";
+        } else {
+                adurl += "&docurl=" + docurl;
+        }
+
+        var showadscript = "<scr" + "ipt type=text/javascript src=" + adurl
+                        + "></scr" + "ipt>";
+
+        // if(ptype=="S"){
+        // search no iframe
+        // document.write(showadscript);
+        // }else{
+        // document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0"
+        // marginwidth="0" marginheight="0" vspace="0" hspace="0"
+        // id="pchome8044_ad_frame1" width="'+pad_width+'" height="'+pad_height+'"
+        // allowtransparency="true" allowfullscreen="true"
+        // src="javascript:\''+showadscript+'\'"></iframe>');
+
+        // }
+        var ifrm = document.createElement("iframe");
+        ifrm.setAttribute("class", "akb_iframe");
+        ifrm.setAttribute("scrolling", "no");
+        ifrm.setAttribute("frameborder", "0");
+        ifrm.setAttribute("marginwidth", "0");
+        ifrm.setAttribute("marginheight", "0");
+        ifrm.setAttribute("vspace", "0");
+        ifrm.setAttribute("hspace", "0");
+        ifrm.setAttribute("id", "pchome8044_ad_frame1");
+        ifrm.setAttribute("width", asynpchomeadObject.pad_width + "px");
+        ifrm.setAttribute("height", asynpchomeadObject.pad_height + "px");
+        ifrm.setAttribute("allowtransparency", "true");
+        ifrm.setAttribute("allowfullscreen", "true");
+        ifrm.setAttribute("src", "javascript:\'" + showadscript + "\'");
+        asynpchomead[i].classObject.appendChild(ifrm);
+        
+}
+
+window.onresize = function(event) {
+    var iframeArrayData = document.getElementsByTagName("iframe");
+    var iframeArray = [];
+    for (var i = 0; i < iframeArrayData.length; i++) {
+        if (iframeArrayData[i].id == "pchome8044_ad_frame1") {
+            iframeArray.push(iframeArrayData[i]);
+        }
+    }
+
+    for (var i = 0; i < iframeArray.length; i++) {
+        var iframe = iframeArray[i].contentDocument.body.children[0];
+        var iframeWin = iframe.contentWindow;
+        var iframeOriginal = iframeArray[i];
+        var scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+        var viewHeight = window.innerHeight;
+        var iframeOffSetTop = iframeOriginal.offsetTop;
+        var iframeBottom = iframeOriginal.getBoundingClientRect().bottom;
+        var iframeTop = iframeOriginal.getBoundingClientRect().top;
+        var iframeHalf = iframeOriginal.height.replace(';px','') / 2;
+        var controllerHeight = (viewHeight + iframeHalf) - iframeOriginal.height.replace(';px','');
+        adInfo = '{"adInfo":{"scrollTop":' + scrollTop + ',"viewHeight":' + viewHeight + ',"iframeOffSetTop":' + iframeOffSetTop + ',"iframeBottom":' + iframeBottom + ',"iframeTop":' + iframeTop + ',"iframeHalf":' + iframeHalf + ',"controllerHeight":' + controllerHeight + ',"visibilitychange":' + false + '}}';
+        iframeWin.postMessage(adInfo, "*");
+    }
+};
+
+
+window.document.addEventListener('scroll', function() {
+	 var iframeArrayData = document.getElementsByTagName("iframe");
+	    var iframeArray = [];
+	    for (var i = 0; i < iframeArrayData.length; i++) {
+	        if (iframeArrayData[i].id == "pchome8044_ad_frame1") {
+	            iframeArray.push(iframeArrayData[i]);
+	        }
+	    }
+
+	    for (var i = 0; i < iframeArray.length; i++) {
+	        var iframe = iframeArray[i].contentDocument.body.children[0];
+	        var iframeWin = iframe.contentWindow;
+	        var iframeOriginal = iframeArray[i];
+	        var scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+	        var viewHeight = window.innerHeight;
+	        var iframeOffSetTop = iframeOriginal.offsetTop;
+	        var iframeBottom = iframeOriginal.getBoundingClientRect().bottom;
+	        var iframeTop = iframeOriginal.getBoundingClientRect().top;
+	        var iframeHalf = iframeOriginal.height.replace(';px','') / 2;
+	        var controllerHeight = (viewHeight + iframeHalf) - iframeOriginal.height.replace(';px','');
+	        adInfo = '{"adInfo":{"scrollTop":' + scrollTop + ',"viewHeight":' + viewHeight + ',"iframeOffSetTop":' + iframeOffSetTop + ',"iframeBottom":' + iframeBottom + ',"iframeTop":' + iframeTop + ',"iframeHalf":' + iframeHalf + ',"controllerHeight":' + controllerHeight + ',"visibilitychange":' + false + '}}';
+	        iframeWin.postMessage(adInfo, "*");
+	    }
+}, false);
+
+
+
+
+//�𧙗�賢�𨜓frame�喲����閮𦠜��
+window.addEventListener("message", getMessage0, false);
+
+function getMessage0(event) {
+	try {
+		if (event.data.adBackup != undefined && event.data.adBackup.iframeIndex != null	&& event.data.adBackup.ALEX == 'asynpcadshow') {
+			var htmlContent = event.data.adBackup.htmlContent;
+			var pcadshowList = document.getElementsByClassName("asynpchomead");
+				/* ��閧��𤣰��� */
+				if (htmlContent == 'blank') {
+					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
+					iframeObj.height = 0;
+					iframeObj.width = 0;
+				}
+				/* ��閧�鋆𨀣踎 */
+				if (htmlContent != 'blank' && htmlContent != undefined) {
+					var iframeObj = pcadshowList[event.data.adBackup.iframeIndex];
+					if(iframeObj == undefined){
+						pcadshowList = document.getElementsByClassName("akb_iframe");
+						iframeObj = pcadshowList[event.data.adBackup.iframeIndex].parentElement;
+					}
+					iframeObj.height = 0;
+					iframeObj.width = 0;
+					iframeObj.setAttribute("style","display:none");
+					
+					if(iframeObj.nextElementSibling.nextElementSibling == null || iframeObj.nextElementSibling.nextElementSibling.className != 'ad_backup_pchome'){
+						var appendDom = iframeObj.parentElement;
+						var script = document.createElement('div');
+						var appendDiv = document.createElement('div');
+						appendDiv.className = 'ad_backup_pchome';
+						script.innerHTML = htmlContent;
+						var elements = script.getElementsByTagName("*");
+						for (var j = 0; j < elements.length; j++) {
+							var tagName = elements[j].tagName;
+							var attributes = elements[j].attributes;
+							var text = elements[j].innerHTML;
+							var content = document.createElement(tagName);
+							
+							for (var k = 0; k < attributes.length; k++) {
+								var attrib = attributes[k];
+								var name = attrib.name;
+								var name = attrib.value;
+								content.setAttribute(attrib.name, attrib.value);
+							}
+							content.text = text;
+							appendDiv.appendChild(content,appendDiv.firstChild);
+						}
+						appendDom.insertBefore(appendDiv,iframeObj.nextElementSibling.nextElementSibling);	
+					}
+				}
+		}
+	} catch (err) {
+//		console.log(err);
+	}
+}
+
+/**/
+try{
+	var iframeArrayData = document.getElementsByTagName("iframe");
+	var iframeArray = [];
+    for (var i = 0; i < iframeArrayData.length; i++) {
+        if (iframeArrayData[i].id == "pchome8044_ad_frame1") {
+            iframeArray.push(iframeArrayData[i]);
+        }
+    }
+	
+	var pcadshowList = document.getElementsByClassName("asynpchomead");
+	for (var i = 0; i < iframeArray.length; i++) {
+		iframeArray[i].onload = function() {
+			if(this.parentElement.className == 'asynpchomead'){
+				for (var k = 0; k < iframeArray.length; k++) {
+					if(this == iframeArray[k]){
+						var frame = this.contentDocument.body.children[0];
+						var iframeWin = frame.contentWindow;
+						var iframeOriginal = this;
+						var scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+						var viewHeight = window.innerHeight;
+						var iframeOffSetTop = iframeOriginal.offsetTop;
+						var iframeBottom = iframeOriginal.getBoundingClientRect().bottom;
+						var iframeTop = iframeOriginal.getBoundingClientRect().top;
+						var iframeHalf = iframeOriginal.height.replace(';px','') / 2;
+						var controllerHeight = (viewHeight + iframeHalf) - iframeOriginal.height.replace(';px','');
+						var adInfo = '{"adBackup":{"iframeIndex":' + k +',"ALEX":"asynpcadshow"},"adInfo":{"scrollTop":' + scrollTop+',"viewHeight":' + viewHeight + ',"iframeOffSetTop":' + iframeOffSetTop + ',"iframeBottom":' + iframeBottom + ',"iframeTop":' + iframeTop + ',"iframeHalf":' + iframeHalf + ',"controllerHeight":' + controllerHeight + ',"visibilitychange":' + false +'}}';
+						iframeWin.postMessage(adInfo, "*");
+					}
+				}
+			}
+			else{
+				for (var k = 0; k < iframeArray.length; k++) {
+					if(this == iframeArray[k]){
+						var frame = this.contentDocument.body.children[0];
+						var iframeWin = frame.contentWindow;
+						var iframeOriginal = this;
+						var scrollTop = window.document.body.scrollTop || window.document.documentElement.scrollTop;
+						var viewHeight = window.innerHeight;
+						var iframeOffSetTop = iframeOriginal.offsetTop;
+						var iframeBottom = iframeOriginal.getBoundingClientRect().bottom;
+						var iframeTop = iframeOriginal.getBoundingClientRect().top;
+						var iframeHalf = iframeOriginal.height.replace(';px','') / 2;
+						var controllerHeight = (viewHeight + iframeHalf) - iframeOriginal.height.replace(';px','');
+						var adInfo = '{"adBackup":{"iframeIndex":' + k +',"ALEX":"pcadshow"},"adInfo":{"scrollTop":' + scrollTop+',"viewHeight":' + viewHeight + ',"iframeOffSetTop":' + iframeOffSetTop + ',"iframeBottom":' + iframeBottom + ',"iframeTop":' + iframeTop + ',"iframeHalf":' + iframeHalf + ',"controllerHeight":' + controllerHeight + ',"visibilitychange":' + false +'}}';
+						iframeWin.postMessage(adInfo, "*");
+					}
+				}
+			}
+		}
+	}
+}catch(err){
+//	console.log(err);
+}
