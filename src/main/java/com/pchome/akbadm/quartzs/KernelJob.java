@@ -679,9 +679,12 @@ public class KernelJob {
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
         }
-
+        
         for (String adSeq: allAdSet) {
-            if (reduceCount++ % reduceDivisor <= minuteReduceNumber) {
+        	int x=0;
+        	x= reduceCount++ % reduceDivisor;
+        	log.info("reduceCount="+reduceCount+",x="+x);
+        	if (reduceCount++ % reduceDivisor <= minuteReduceNumber) {
                 allowAdSet.add(adSeq);
             }
         }
