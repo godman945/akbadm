@@ -127,7 +127,8 @@ public class KernelJob {
 
     private Logger log = LogManager.getRootLogger();
     private int reduceHour = 0;
-    private int reduceDivisor = 2;
+    private int reduceMinuteDivisor = 15;
+    private int reduceDivisor = 4;
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
@@ -545,7 +546,7 @@ public class KernelJob {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuteReduceNumber = calendar.get(Calendar.MINUTE) % reduceDivisor;
+        int minuteReduceNumber = calendar.get(Calendar.MINUTE) % reduceMinuteDivisor;
         int reduceCount = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
@@ -680,7 +681,7 @@ public class KernelJob {
         }
 
         for (String adSeq: allAdSet) {
-            if (reduceCount++ % reduceDivisor == minuteReduceNumber) {
+            if (reduceCount++ % reduceDivisor <= minuteReduceNumber) {
                 allowAdSet.add(adSeq);
             }
         }
