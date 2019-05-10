@@ -687,7 +687,7 @@ public class KernelJob {
         }
 
         //add by nico
-        log.info("reduceHour="+reduceHour+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
+        log.info("reduceHour="+reduceHour+",minuteReduceNumber="+minuteReduceNumber+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
 
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
