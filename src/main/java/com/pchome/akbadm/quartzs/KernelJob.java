@@ -546,7 +546,7 @@ public class KernelJob {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuteReduceNumber = calendar.get(Calendar.MINUTE) % reduceMinuteDivisor;
+        int minuteReduceNumber = calendar.get(Calendar.MINUTE) / reduceMinuteDivisor;
         int reduceCount = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
@@ -685,7 +685,7 @@ public class KernelJob {
                 allowAdSet.add(adSeq);
             }
         }
-        
+
         //add by nico
         log.info("reduceHour="+reduceHour+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
 
