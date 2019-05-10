@@ -82,7 +82,11 @@
 				<#if (selectType =='5' && index == 3 && groupPositionId =='') || (selectType =='5' && index == 2 && groupPositionId =='N')>
 					<a href='${tdin}' target='_blank' >${tdin}</a>
 				<#else>
-					${tdin}
+					<#if tdin?length == 0 >
+					  null
+					<#else>
+					  ${tdin}
+					</#if>
 				</#if>
 				</td>
 			<#assign index = index + 1>
