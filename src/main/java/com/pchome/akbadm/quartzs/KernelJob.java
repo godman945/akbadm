@@ -685,6 +685,9 @@ public class KernelJob {
                 allowAdSet.add(adSeq);
             }
         }
+        
+        //add by nico
+        log.info("reduceHour="+reduceHour+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
 
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
@@ -701,7 +704,7 @@ public class KernelJob {
 
                 // special rule: reduce
                 if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
-                    continue;
+                	continue;
                 }
 
                 // get ad map
