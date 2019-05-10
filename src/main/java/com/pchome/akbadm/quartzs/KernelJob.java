@@ -126,9 +126,9 @@ public class KernelJob {
     private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
-    private int reduceHour = 0;
+    private int reduceHour = 15;
     private int reduceMinuteDivisor = 15;
-    private int reduceDivisor = 4;
+    private int reduceDivisor = 60 / reduceMinuteDivisor;
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
