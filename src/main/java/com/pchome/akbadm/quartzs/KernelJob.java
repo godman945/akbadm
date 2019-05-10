@@ -126,7 +126,7 @@ public class KernelJob {
     private static final String[] EXTENSIONS = new String[]{"def"};
 
     private Logger log = LogManager.getRootLogger();
-    private int reduceHour = 15;
+    private int reduceHour = 0;
     private int reduceMinuteDivisor = 15;
     private int reduceDivisor = 4;
 
@@ -546,8 +546,9 @@ public class KernelJob {
 
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
-        int minuteReduceNumber = calendar.get(Calendar.MINUTE) / reduceMinuteDivisor;
+        int minuteReduceNumber = (calendar.get(Calendar.MINUTE) / reduceMinuteDivisor)+1;
         int reduceCount = 0;
+        int splitAdSize = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
@@ -679,15 +680,19 @@ public class KernelJob {
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
         }
-
+        
+        
+        splitAdSize=(allAdSet.size() / reduceDivisor) * minuteReduceNumber;
+        log.info("splitAdSize="+splitAdSize);
+        
         for (String adSeq: allAdSet) {
-            if (reduceCount++ % reduceDivisor <= minuteReduceNumber) {
+        	if (reduceCount++ <= splitAdSize) {
                 allowAdSet.add(adSeq);
             }
         }
 
         //add by nico
-        log.info("reduceHour="+reduceHour+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
+        log.info("reduceHour="+reduceHour+",minuteReduceNumber="+minuteReduceNumber+",allAdSetSize="+allAdSet.size()+",allowAdSetSize="+allowAdSet.size());
 
         // pool(Map) > ad(Map) > ad(Bean)
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
