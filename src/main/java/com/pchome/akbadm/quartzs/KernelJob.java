@@ -128,7 +128,7 @@ public class KernelJob {
     private Logger log = LogManager.getRootLogger();
     private int reduceHour = 15;
     private int reduceMinuteDivisor = 15;
-    private int reduceDivisor = 4;
+    private int reduceDivisor = 60 / reduceMinuteDivisor;
 
     private IPfbStyleInfoService pfbStyleInfoService;
     private IPfpCustomerInfoService pfpCustomerInfoService;
