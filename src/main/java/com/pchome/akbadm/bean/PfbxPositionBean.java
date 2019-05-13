@@ -5,8 +5,8 @@ public class PfbxPositionBean {
     private String pfbxCustomerInfoId;
     private String pfdCustomerInfoId;
     private String pfpCustomerInfoId;
-    private String PName;
-    private Integer SId;
+    private String pName;
+    private Integer sId;
     private String xType;
     private String pType;
     private int pPrice;
@@ -35,17 +35,17 @@ public class PfbxPositionBean {
     public void setPfpCustomerInfoId(String pfpCustomerInfoId) {
         this.pfpCustomerInfoId = pfpCustomerInfoId;
     }
-    public String getPName() {
-        return PName;
+    public String getpName() {
+        return pName;
     }
-    public void setPName(String pName) {
-        PName = pName;
+    public void setpName(String pName) {
+        this.pName = pName;
     }
-    public Integer getSId() {
-        return SId;
+    public Integer getsId() {
+        return sId;
     }
-    public void setSId(Integer sId) {
-        SId = sId;
+    public void setsId(Integer sId) {
+        this.sId = sId;
     }
     public String getxType() {
         return xType;

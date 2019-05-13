@@ -680,11 +680,11 @@ public class KernelJob {
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
             allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
         }
-        
-        
+
+        // by nico
         splitAdSize=(allAdSet.size() / reduceDivisor) * minuteReduceNumber;
         log.info("splitAdSize="+splitAdSize);
-        
+
         for (String adSeq: allAdSet) {
         	if (reduceCount++ <= splitAdSize) {
                 allowAdSet.add(adSeq);
@@ -1064,24 +1064,24 @@ public class KernelJob {
                 for (ValidKeywordBean bean: validKeywordList) {
                     // write lucene
                     doc = new Document();
-                    doc.add(new Field(EnumIndexField.adActionId.toString(), bean.getAdActionId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adGroupId.toString(), bean.getAdGroupId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adId.toString(), bean.getAdId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordId.toString(), bean.getAdKeywordId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeyword.toString(), bean.getAdKeyword(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adExcludeKeyword.toString(), bean.getAdExcludeKeyword(), Field.Store.YES, Field.Index.ANALYZED));
-                    doc.add(new Field(EnumIndexField.adActionControlPrice.toString(), String.valueOf(bean.getAdActionControlPrice() / makeNumber / serverNumber), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordSearchPrice.toString(), String.valueOf(bean.getAdKeywordSearchPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordSearchPhrasePrice.toString(), String.valueOf(bean.getAdKeywordSearchPhrasePrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordSearchPrecisionPrice.toString(), String.valueOf(bean.getAdKeywordSearchPrecisionPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordChannelPrice.toString(), String.valueOf(bean.getAdKeywordChannelPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordTempPrice.toString(), String.valueOf(bean.getAdKeywordTempPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordOpen.toString(), String.valueOf(bean.getAdKeywordOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordPhraseOpen.toString(), String.valueOf(bean.getAdKeywordPhraseOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordPrecisionOpen.toString(), String.valueOf(bean.getAdKeywordPrecisionOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordPv.toString(), String.valueOf(bean.getAdKeywordPv()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.adKeywordClk.toString(), String.valueOf(bean.getAdKeywordClk()), Field.Store.YES, Field.Index.NOT_ANALYZED));
-                    doc.add(new Field(EnumIndexField.recognize.toString(), bean.getRecognize(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_ACTION_ID.toString(), bean.getAdActionId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_GROUP_ID.toString(), bean.getAdGroupId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_ID.toString(), bean.getAdId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_ID.toString(), bean.getAdKeywordId(), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD.toString(), bean.getAdKeyword(), Field.Store.YES, Field.Index.ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_EXCLUDE_KEYWORD.toString(), bean.getAdExcludeKeyword(), Field.Store.YES, Field.Index.ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_ACTION_CONTROL_PRICE.toString(), String.valueOf(bean.getAdActionControlPrice() / makeNumber / serverNumber), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_SEARCH_PRICE.toString(), String.valueOf(bean.getAdKeywordSearchPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_SEARCH_PHRASE_PRICE.toString(), String.valueOf(bean.getAdKeywordSearchPhrasePrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_SEARCH_PRECISION_PRICE.toString(), String.valueOf(bean.getAdKeywordSearchPrecisionPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_CHANNEL_PRICE.toString(), String.valueOf(bean.getAdKeywordChannelPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_TEMP_PRICE.toString(), String.valueOf(bean.getAdKeywordTempPrice()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_OPEN.toString(), String.valueOf(bean.getAdKeywordOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_PHRASE_OPEN.toString(), String.valueOf(bean.getAdKeywordPhraseOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_PRECISION_OPEN.toString(), String.valueOf(bean.getAdKeywordPrecisionOpen()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_PV.toString(), String.valueOf(bean.getAdKeywordPv()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.AD_KEYWORD_CLK.toString(), String.valueOf(bean.getAdKeywordClk()), Field.Store.YES, Field.Index.NOT_ANALYZED));
+                    doc.add(new Field(EnumIndexField.RECOGNIZE.toString(), bean.getRecognize(), Field.Store.YES, Field.Index.NOT_ANALYZED));
                     writer.addDocument(doc);
                 }
             }
@@ -1135,8 +1135,8 @@ public class KernelJob {
             pfbxPositionBean.setPfbxCustomerInfoId(pfbxPosition.getPfbxCustomerInfo().getCustomerInfoId());
             pfbxPositionBean.setPfdCustomerInfoId(pfbxPosition.getPfdCustInfoId());
             pfbxPositionBean.setPfpCustomerInfoId(pfbxPosition.getPfpCustInfoId());
-            pfbxPositionBean.setPName(pfbxPosition.getPName());
-            pfbxPositionBean.setSId(pfbxPosition.getSId());
+            pfbxPositionBean.setpName(pfbxPosition.getPName());
+            pfbxPositionBean.setsId(pfbxPosition.getSId());
             pfbxPositionBean.setxType(pfbxPosition.getTemplateProductXType());
             pfbxPositionBean.setpType(pfbxPosition.getPType());
             pfbxPositionBean.setpPrice(pfbxPosition.getPPrice());

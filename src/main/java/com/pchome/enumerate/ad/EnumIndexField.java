@@ -1,104 +1,25 @@
 package com.pchome.enumerate.ad;
 
 public enum EnumIndexField {
-    pk (
-        1.0f,
-        "pk"
-    ),
-    adActionId (
-        1.0f,
-        "ad_action_id"
-    ),
-    adGroupId (
-        1.0f,
-        "ad_group_id"
-    ),
-    adId (
-        1.0f,
-        "ad_id"
-    ),
-    adKeywordId (
-        1.0f,
-        "ad_keyword_id"
-    ),
-    adKeyword (
-        1.0f,
-        "ad_keyword"
-    ),
-    adExcludeKeyword (
-        1.0f,
-        "ad_exclude_keyword"
-    ),
-    adActionControlPrice (
-        1.0f,
-        "ad_action_control_price"
-    ),
-    adKeywordSearchPrice (
-        1.0f,
-        "ad_keyword_search_price"
-    ),
-    adKeywordSearchPhrasePrice (
-        1.0f,
-        "ad_keyword_search_phrase_price"
-    ),
-    adKeywordSearchPrecisionPrice (
-        1.0f,
-        "ad_keyword_search_precision_price"
-    ),
-    adKeywordChannelPrice (
-        1.0f,
-        "ad_keyword_channel_price"
-    ),
-    adKeywordTempPrice (
-        1.0f,
-        "ad_keyword_temp_price"
-    ),
-    adKeywordOpen (
-        1.0f,
-        "ad_keyword_open"
-    ),
-    adKeywordPhraseOpen (
-        1.0f,
-        "ad_keyword_phrase_open"
-    ),
-    adKeywordPrecisionOpen (
-        1.0f,
-        "ad_keyword_precision_open"
-    ),
-    adKeywordPv (
-        1.0f,
-        "ad_keyword_pv"
-    ),
-    adKeywordClk (
-        1.0f,
-        "ad_keyword_clk"
-    ),
-    recognize (
-        1.0f,
-        "recognize"
-    ),
-    updateDate (
-        1.0f,
-        "update_date"
-    ),
-    createDate (
-        1.0f,
-        "create_date"
-    );
-
-    private float boost;
-    private String underLine;
-
-    EnumIndexField(float boost, String underLine) {
-        this.boost = boost;
-        this.underLine = underLine;
-    }
-
-    public float getBoost() {
-        return boost;
-    }
-
-    public String getUnderLine() {
-        return underLine;
-    }
+    PK,
+    AD_ACTION_ID,
+    AD_GROUP_ID,
+    AD_ID,
+    AD_KEYWORD_ID,
+    AD_KEYWORD,
+    AD_EXCLUDE_KEYWORD,
+    AD_ACTION_CONTROL_PRICE,
+    AD_KEYWORD_SEARCH_PRICE,
+    AD_KEYWORD_SEARCH_PHRASE_PRICE,
+    AD_KEYWORD_SEARCH_PRECISION_PRICE,
+    AD_KEYWORD_CHANNEL_PRICE,
+    AD_KEYWORD_TEMP_PRICE,
+    AD_KEYWORD_OPEN,
+    AD_KEYWORD_PHRASE_OPEN,
+    AD_KEYWORD_PRECISION_OPEN,
+    AD_KEYWORD_PV,
+    AD_KEYWORD_CLK,
+    RECOGNIZE,
+    UPDATE_DATE,
+    CREATE_DATE;
 }
