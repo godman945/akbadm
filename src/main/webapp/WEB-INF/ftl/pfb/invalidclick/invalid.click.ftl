@@ -6,7 +6,7 @@
 
 <h2><img src="<@s.url value="/" />html/img/iconcr.gif" hspace="2" vspace="12" align="absmiddle" />PFB 流量檢測查詢</h2>
 
-<form action="pfbxInvalidClickQuery.html" method="post">
+<form action="pfbxInvalidClickQuery.html" method="post">AAA
 
 <table width="750">
     <tr>
@@ -82,7 +82,7 @@
 				<#if (selectType =='5' && index == 3 && groupPositionId =='') || (selectType =='5' && index == 2 && groupPositionId =='N')>
 					<a href='${tdin}' target='_blank' >${tdin}</a>
 				<#else>
-					<#if tdin?length == 0 >
+					<#if tdin?length == 1 >
 					  null
 					<#else>
 					  ${tdin}
