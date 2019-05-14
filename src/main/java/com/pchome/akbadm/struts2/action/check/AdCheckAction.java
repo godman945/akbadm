@@ -168,7 +168,6 @@ public class AdCheckAction extends BaseAction {
 				for (int i=0; i<pfpAdList.size(); i++) {
 					//違規項目
 					String illegalString = "";
-
 					PfpAd pfpAd = pfpAdList.get(i);
 					Set<PfdUserAdAccountRef> set =  pfpAd.getPfpAdGroup().getPfpAdAction().getPfpCustomerInfo().getPfdUserAdAccountRefs();
 					for (PfdUserAdAccountRef pfdUserAdAccountRef : set) {
@@ -194,6 +193,10 @@ public class AdCheckAction extends BaseAction {
 						data.setAdPreview(adFactory.getAdModel(pfpAd.getTemplateProductSeq(), pfpAd.getAdSeq()));
 					} else if("IMG".equals(adStyle)){
 						for(PfpAdDetail pfpAdDetail : pfpAd.getPfpAdDetails()){
+							//取得第三方監控代碼
+							if(pfpAdDetail.getAdDetailId().equals("tracking_code")){
+								data.setThirdCode(pfpAdDetail.getAdDetailContent());
+							}
 							if("img".equals(pfpAdDetail.getAdDetailId())){
 								//取得圖片路徑
 								String imgUrl = "";
@@ -240,6 +243,10 @@ public class AdCheckAction extends BaseAction {
 					else if ("VIDEO".equals(adStyle)) {
 						String videoUrl = "";
 	                    for(PfpAdDetail pfpAdDetail : pfpAd.getPfpAdDetails()){
+	                    	//取得第三方監控代碼
+							if(pfpAdDetail.getAdDetailId().equals("tracking_code")){
+								data.setThirdCode(pfpAdDetail.getAdDetailContent());
+							}
 	                        if ("title".equals(pfpAdDetail.getAdDetailId())) {
 	                            data.setAdDetailTitle(pfpAdDetail.getAdDetailContent());
 	                        }
@@ -373,7 +380,12 @@ public class AdCheckAction extends BaseAction {
 						if (adDetail.getVerifyFlag().equals("y") && adDetail.getVerifyStatus().equals("n")) {
 							String title = adDetail.getAdDetailId();
 							String keyword = adDetail.getAdDetailContent();
-
+							
+							if(adDetail.getAdDetailId().equals("tracking_code")){
+								data.setThirdCode(adDetail.getAdDetailContent());
+							}
+							
+							
 							// sales_price商品原價(銷售價)、商品促銷價(促銷價)非必填欄位，其他欄位為必填，則其他欄位需判斷是否為空
 							if ("sales_price".equals(title) || "promotional_price".equals(title)) {
 								if (!StringUtils.isNumeric(keyword)) { // 輸入非空值、數字，記錄違規項目。

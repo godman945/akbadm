@@ -204,6 +204,7 @@ function showImage(index) {
 						     <i>尺寸</i><b>${adData.imgWidth!} x ${adData.imgHeight!}</b><br>
 						     <span>${adData.showUrl!}</span><br>
 						     <a class="fancy" style="cursor:pointer" onclick="preview('${adData.originalImg!}')" alt="預覽">預覽</a>
+						     <br><#if adData.thirdCode!=''>第三方偵測:<textarea  style="width:150px;height:80px;">${adData.thirdCode!}</textarea></#if>
 					     </span>
 				     </span>
 			     </div>
@@ -218,12 +219,16 @@ function showImage(index) {
 						     <a href="${adData.originalImg!}" target="_blank">查看完整廣告內容</a>
 						     <#if adData.zipFile?exists>
 						     <br><a href="${adData.zipFile!}" target="_blank">ZIP檔下載</a>
+						     	<br><#if adData.thirdCode!=''>第三方偵測:<textarea  style="width:150px;height:80px;">${adData.thirdCode!}</textarea></#if>
 						     </#if>
 					     </span>
 				     </span>
 			     </div>
 			<#elseif "TMG" == adData.adStyle>
-				<span><iframe height="120" width="350" src="adModel.html?adNo=${adData.adSeq!}&amp;tproNo=tpro_201306280001" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" align="ceneter" class="akb_iframe"></iframe></span>
+				<span>
+					<iframe height="120" width="350" src="adModel.html?adNo=${adData.adSeq!}&amp;tproNo=tpro_201306280001" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" align="ceneter" class="akb_iframe"></iframe> 
+					<br><#if adData.thirdCode!=''>第三方偵測:<textarea  style="width:150px;height:80px;">${adData.thirdCode!}</textarea></#if>
+				</span>
 			<#elseif "VIDEO" == adData.adStyle>
 				<div class="adreportdv">
 					<span class="adboxdvimg">${adData.adDetailContent!} (影音廣告)</span>
@@ -233,6 +238,7 @@ function showImage(index) {
 						     <i>尺寸</i><b>${adData.adDetailVideoWidth!}x${adData.adDetailVideoHeight!}</b><br>
 						     <span>${adData.adDetailRealUrl!}</span><br>
 						     <a class="fancy" style="cursor:pointer" onclick="previewVideo('${akbPfpServer!}', '${adData.adDetailVideoWidth!}', '${adData.adDetailVideoHeight!}', '${adData.adDetailVideoUrl!}', '${adData.adDetailImg?url}', '${adData.adDetailRealUrl!}')" alt="預覽">預覽</a>
+						      <br><#if adData.thirdCode!=''>第三方偵測:<textarea  style="width:150px;height:80px;">${adData.thirdCode!}</textarea></#if>
 					     </span>
 				     </span>
 			     </div>
