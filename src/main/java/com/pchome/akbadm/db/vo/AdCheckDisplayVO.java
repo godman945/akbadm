@@ -19,7 +19,7 @@ public class AdCheckDisplayVO {
 	private String adActionName; //廣告活動名稱
 	private int status; //狀態
 	private String adCategory; //廣告類別
-
+	private String thirdCode; //第三方監測
 	private String adVerifyRejectReason; //拒絕理由
 
 	private String adStyle;		//廣告類別
@@ -493,4 +493,13 @@ public class AdCheckDisplayVO {
     public void setAdDetailSaleEndImgList(List<String> adDetailSaleEndImgList) {
         this.adDetailSaleEndImgList = adDetailSaleEndImgList;
     }
+
+	public String getThirdCode() {
+		return thirdCode;
+	}
+
+	public void setThirdCode(String thirdCode) {
+		this.thirdCode = thirdCode;
+	}
+    
 }
