@@ -22,13 +22,22 @@ import com.pchome.akbadm.db.pojo.PfpCatalogProdEc;
 import com.pchome.akbadm.db.pojo.PfpCatalogProdEcError;
 import com.pchome.akbadm.db.pojo.PfpCatalogUploadErrLog;
 import com.pchome.akbadm.db.pojo.PfpCatalogUploadLog;
+import com.pchome.akbadm.db.pojo.PfpCustomerInfo;
+import com.pchome.akbadm.db.service.accesslog.IAdmAccesslogService;
 import com.pchome.akbadm.db.service.catalog.IPfpCatalogService;
+import com.pchome.akbadm.db.service.customerInfo.IPfpCustomerInfoService;
+import com.pchome.akbadm.db.service.recognize.AdmRecognizeRecordService;
+import com.pchome.akbadm.db.service.recognize.IAdmRecognizeRecordService;
 import com.pchome.akbadm.db.service.sequence.ISequenceService;
 import com.pchome.akbadm.db.vo.catalog.PfpCatalogVO;
 import com.pchome.akbadm.db.vo.catalog.uploadList.ShoppingProdVO;
 import com.pchome.enumerate.ad.EnumPfpCatalog;
 import com.pchome.enumerate.catalogprod.EnumEcStockStatusType;
 import com.pchome.enumerate.catalogprod.EnumEcUseStatusType;
+import com.pchome.enumerate.pfp.EnumPfpCatalogUploadType;
+import com.pchome.rmi.accesslog.EnumAccesslogAction;
+import com.pchome.rmi.accesslog.EnumAccesslogChannel;
+import com.pchome.rmi.accesslog.EnumAccesslogEmailStatus;
 import com.pchome.rmi.sequence.EnumSequenceTableName;
 import com.pchome.soft.depot.utils.ImgUtil;
 
@@ -37,7 +46,8 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 	private IPfpCatalogService pfpCatalogService;
 	private ISequenceService sequenceService;
 	private IPfpCatalogUploadListDAO pfpCatalogUploadListDAO;
-	
+	private IAdmAccesslogService accesslogService;
+	private IPfpCustomerInfoService pfpCustomerInfoService;
 	private String photoDbPathNew;
 	
 	/**
@@ -375,6 +385,20 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 			pfpCatalogService.updatePfpCatalogProdNumAndUploadStatus(pfpCatalogVO);
 		}
 		
+		//accesslog
+		for (EnumPfpCatalogUploadType enumPfpCatalogUploadType : EnumPfpCatalogUploadType.values()) {
+			if (enumPfpCatalogUploadType.getType().equals(pfpCatalogUploadLog.getUpdateWay())) {
+				log.info("success:"+successNum + " fail:"+successNum);
+				PfpCustomerInfo pfp = pfpCustomerInfoService.get(pfpCustomerInfoId);
+				String pcId = pfp.getCustomerInfoTitle();
+				String message = pfpCatalog.getCatalogName() + "=>檔案更新：成功 "+successNum+",失敗 "+errorNum;
+				accesslogService.addAdmAccesslog(EnumAccesslogChannel.PFP, EnumAccesslogAction.PLAY_MODIFY, message, pcId, null, pfpCustomerInfoId, null, "127.0.0.1", EnumAccesslogEmailStatus.NO);
+				break;
+			}
+		}
+		
+		
+		
 		dataMap.put("status", "SUCCESS");
 		dataMap.put("msg", "一般購物類資料處理完成!");
 		dataMap.put("successDataCount", successNum); // 正確總筆數
@@ -398,5 +422,23 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 	public void setPfpCatalogUploadListDAO(IPfpCatalogUploadListDAO pfpCatalogUploadListDAO) {
 		this.pfpCatalogUploadListDAO = pfpCatalogUploadListDAO;
 	}
+
+
+	public IAdmAccesslogService getAccesslogService() {
+		return accesslogService;
+	}
+
+	public void setAccesslogService(IAdmAccesslogService accesslogService) {
+		this.accesslogService = accesslogService;
+	}
+
+	public IPfpCustomerInfoService getPfpCustomerInfoService() {
+		return pfpCustomerInfoService;
+	}
+
+	public void setPfpCustomerInfoService(IPfpCustomerInfoService pfpCustomerInfoService) {
+		this.pfpCustomerInfoService = pfpCustomerInfoService;
+	}
+
 
 }
