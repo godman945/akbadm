@@ -15,7 +15,8 @@ public enum EnumAccesslogAction {
 	PLAY_MODIFY("11","播放管理異動"),					// 播放管理異動
 	PFB_INVALID_TRAFFIC("12","PFB無效流量扣款"),		// PFB無效流量扣款
 	WARNING("10","警告訊息"),							// 警告訊息
-	PFB_CLICK("13","點擊");						    //點擊行為
+	PFB_CLICK("13","點擊"),						    //點擊行為
+	PFP_CODE_MODIFY("14","代碼管理異動");
 	
 	private final String action;
 	private final String message;
