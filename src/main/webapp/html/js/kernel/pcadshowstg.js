@@ -1,6 +1,7 @@
 var res = document.URL;
 var docurl = encodeURIComponent(res);
-
+var screen_x = screen.availWidth;
+var screen_y = screen.availHeight;
 var keywordValue = "";
 var pageValue = "";
 var pid = "";
@@ -104,6 +105,8 @@ adurl += "&keyword=" + keywordValue;
 adurl += "&page=" + pageValue;
 adurl += "&precise=" + seway;
 adurl += "&fig=" + fig;
+adurl += "&screenX=" + screen_x;
+adurl += "&screenY=" + screen_y;
 adurl += "&t=" + Math.floor(Math.random() * 1000 + 1);
 if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
     adurl += "&docurl="
@@ -119,7 +122,7 @@ if (pad_pchad.length <= 10) {
         document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' + pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>');
     }
 } else {
-    alert("頞��𤾸誨��𠹺�𢠃�琜�峕�憭𡁜蘨�質票10���誨���!");
+    alert("超過廣告上限，最多只能貼10則廣告!");
 }
 
 
