@@ -231,7 +231,7 @@ public class HttpUtil {
 					statusCode = getURLConnectionStatus(url);
 				}
 			} catch (Exception e) {
-				log.error(e.getMessage(), e);
+//				log.error(e.getMessage(), e);
 				statusCode = getURLConnectionStatus(url);
 			} finally {
 				httpget.abort();
