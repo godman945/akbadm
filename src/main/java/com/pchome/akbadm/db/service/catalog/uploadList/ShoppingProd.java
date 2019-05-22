@@ -387,7 +387,8 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 		
 		//accesslog
 		try {
-			log.info(">>>>>>>>>>>>>>>>>>>>>success:"+successNum + " fail:"+successNum +" "+pfpCatalogUploadLog.getUpdateWay());
+			log.info(">>>>>>>>>>>>>>>>>>>>>success:"+successNum + " fail:"+successNum +" "+catalogUploadType);
+			log.info(">>>>>>>>>>>>>>>>>>>>>pfpCatalog:"+pfpCatalog.getCatalogProdNum());
 			for (EnumPfpCatalogUploadType enumPfpCatalogUploadType : EnumPfpCatalogUploadType.values()) {
 				if (enumPfpCatalogUploadType.getType().equals(pfpCatalogUploadLog.getUpdateWay())) {
 					PfpCustomerInfo pfp = pfpCustomerInfoService.get(pfpCustomerInfoId);
