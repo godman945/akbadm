@@ -386,10 +386,9 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 		}
 		
 		//accesslog
-		log.info("success:"+successNum + " fail:"+successNum);
+		log.info(">>>>>>>>>>>>>>>>>>>>>success:"+successNum + " fail:"+successNum);
 		for (EnumPfpCatalogUploadType enumPfpCatalogUploadType : EnumPfpCatalogUploadType.values()) {
 			if (enumPfpCatalogUploadType.getType().equals(pfpCatalogUploadLog.getUpdateWay())) {
-				
 				PfpCustomerInfo pfp = pfpCustomerInfoService.get(pfpCustomerInfoId);
 				String pcId = pfp.getCustomerInfoTitle();
 				String message = pfpCatalog.getCatalogName() + "=>檔案更新：成功 "+successNum+",失敗 "+errorNum;
