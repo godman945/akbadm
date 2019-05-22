@@ -387,13 +387,14 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 		
 		//accesslog
 		try {
-			log.info(">>>>>>>>>>>>>>>>>>>>>success:"+successNum + " fail:"+successNum);
+			log.info(">>>>>>>>>>>>>>>>>>>>>success:"+successNum + " fail:"+successNum +" "+pfpCatalogUploadLog.getUpdateWay());
 			for (EnumPfpCatalogUploadType enumPfpCatalogUploadType : EnumPfpCatalogUploadType.values()) {
 				if (enumPfpCatalogUploadType.getType().equals(pfpCatalogUploadLog.getUpdateWay())) {
 					PfpCustomerInfo pfp = pfpCustomerInfoService.get(pfpCustomerInfoId);
 					String pcId = pfp.getCustomerInfoTitle();
 					String message = pfpCatalog.getCatalogName() + "=>檔案更新：成功 "+successNum+",失敗 "+errorNum;
-					accesslogService.addAdmAccesslog(EnumAccesslogChannel.PFP, EnumAccesslogAction.PLAY_MODIFY, message, pcId, null, pfpCustomerInfoId, null, "127.0.0.1", EnumAccesslogEmailStatus.NO);
+					int id = accesslogService.addAdmAccesslog(EnumAccesslogChannel.PFP, EnumAccesslogAction.PLAY_MODIFY, message, pcId, null, pfpCustomerInfoId, null, "127.0.0.1", EnumAccesslogEmailStatus.NO);
+					log.info("add id:"+id);
 					break;
 				}
 			}
