@@ -17,7 +17,6 @@ public enum EnumAccesslogAction {
 	WARNING("10","警告訊息"),							// 警告訊息
 	PFB_CLICK("13","點擊"),						    //點擊行為
 	PFP_CODE_MODIFY("14","代碼管理異動");
-	
 	private final String action;
 	private final String message;
 	
