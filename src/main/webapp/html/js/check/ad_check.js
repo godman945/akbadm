@@ -1,4 +1,4 @@
-﻿$(document).ready(function(){
+﻿﻿$(document).ready(function(){
     //開始日期 
     $("#startDate").datepicker({
 	    showOn: "button",
@@ -97,63 +97,6 @@
 			}
 			
 			$("[id*=adCategory_ad_]").attr("disabled", true);
-			/*for(var keys in obj){
-				for(var j=0;j<obj[keys].length;j++){
-					if(this.value == obj[keys][j].code){
-						var level = obj[keys][j].level;
-						//1.創建一階
-						selectId = $(this).parent().children()[0].id;
-						appendAdCategorySelectUI2($(this).parent().children()[0].id);
-						for(var j=0;j<obj[keys].length;j++){
-							if(obj[keys][j].level==1){
-								$("#"+$(this).parent().children()[0].id).val(obj[keys][j].name);
-								var categoryLevel = getCategoryLevel($(this).parent().children()[0].id,keys,obj[keys][j].name);
-								var level =  categoryLevel.level;
-								var groupId = categoryLevel.groupId;
-								var childrenFlag = categoryLevel.childrenFlag;
-								appendCategoryItems($(this).parent().children()[0].id,keys,level,groupId,childrenFlag);
-							}
-							//判斷二階Code
-							if(obj[keys][j].level == 2){
-								if((obj[keys][j].code).slice(0,8) == (this.value).slice(0,8)){
-									var select = $("#"+selectId).parent().children()[1].id;
-									$("#"+select).val(obj[keys][j].name);
-									var categoryLevel = getCategoryLevel(select,keys,obj[keys][j].name);
-									var level =  categoryLevel.level;
-									var groupId = categoryLevel.groupId;
-									var childrenFlag = categoryLevel.childrenFlag;
-									appendCategoryItems(select,keys,level,groupId,childrenFlag);
-								}
-							}
-							//判斷三階Code
-							if(obj[keys][j].level == 3){
-								if((obj[keys][j].code).slice(0,12) == (this.value).slice(0,12)){
-									var select = $("#"+selectId).parent().children()[2].id;
-									$("#"+select).val(obj[keys][j].name);
-									var categoryLevel = getCategoryLevel(select,keys,obj[keys][j].name);
-									var level =  categoryLevel.level;
-									var groupId = categoryLevel.groupId;
-									var childrenFlag = categoryLevel.childrenFlag;
-									appendCategoryItems(select,keys,level,groupId,childrenFlag);
-								}
-							}
-							//判斷四階Code
-							if(obj[keys][j].level == 4){
-								if( obj[keys][j].code == this.value){
-									var select = $("#"+selectId).parent().children()[3].id;
-									$("#"+select).val(obj[keys][j].name);
-									var categoryLevel = getCategoryLevel(select,keys,obj[keys][j].name);
-									var level =  categoryLevel.level;
-									var groupId = categoryLevel.groupId;
-									var childrenFlag = categoryLevel.childrenFlag;
-									appendCategoryItems(select,keys,level,groupId,childrenFlag);
-								}
-							}
-						}
-						selectAll_new($("#"+selectId).parent().parent().children()[2], "adSeqs", "adCategory", "rejectReason");
-					}
-				}
-			}*/
 		});
 	},
 	error : function() {
@@ -278,7 +221,7 @@ function check (checkType) {
 	 checkRejectFlag = true;
 		 $("input[name=adSeqs]").each(function() {
 			 if($(this).attr("checked")){
-				 if($(this).parent().parent().children().children()[0].value == "" ||$(this).parent().parent().children().children()[0].value == null){
+				 if(($(this).parent().parent().children().children()[0].value == "" || $(this).parent().parent().children().children()[0].value == null) || $(this).parent().parent().children()[7].children.length < 1){
 					 checkCategoryFlag = false;
 					 if($("#allAdCategoryCheck").attr("checked")){
 						 alert("請選擇廣告類別！");
@@ -374,9 +317,7 @@ function categoryCode(){
 		
 		for(var s=0;s<allCheckObjArray.length;s++){
 			var allCheckObj = allCheckObjArray[s];
-			
-			
-			if($($(allCheckObj)).children().length > 1){
+			if($($(allCheckObj)).children().length > 0){
 				var key = $($(allCheckObj)).children()[0].value;
 				var length = $($(allCheckObj)).children().length;
 
@@ -425,25 +366,23 @@ function categoryCode(){
 		if(this.checked){
 			var trObjArray = [$(this).parent().parent(),$(this).parent().parent().next(),$(this).parent().parent().next().next()];
 			
+			
+			
 			if(!$("#allAdCategoryCheck").attr("checked")){
 				totalObjId = "";
 				totalcode = "";
-				
-				
 				for(var k=0;k<trObjArray.length;k++){
 					var trObj = trObjArray[k];
+					
 					
 					var childrenNumber = 7;
 					if( k != 0){
 						childrenNumber = 0;
 					}
 					
-					console.log($($(trObj).children()[childrenNumber]).children());
-					
-					if($($(trObj).children()[childrenNumber]).children().length > 1){
+					if($($(trObj).children()[childrenNumber]).children().length > 0){
 						var key = $($(trObj).children()[childrenNumber]).children()[0].value;
 						var length = $($(trObj).children()[childrenNumber]).children().length;
-						
 						if($("#"+$($(trObj).children()[childrenNumber]).children()[length-1].id).text() == ""){
 							length = length - 1;
 						} else {
@@ -491,38 +430,6 @@ function categoryCode(){
 			//alert(totalcode);
 			$("#"+$($(trObjArray[0]).children()[0]).children()[0].id).attr("value",totalcode);
 			$("#"+$($(trObjArray[0]).children()[1]).children()[0].id).attr("value",totalObjId);
-			
-			/*var trObj = $(this).parent().parent();
-			if($($(trObj).children()[6]).children().length > 1){
-				var key = $($(trObj).children()[6]).children()[0].value;
-				var length = $($(trObj).children()[6]).children().length;
-				alert($($(trObj.parent())).html());
-				if($("#"+$($(trObj).children()[6]).children()[length-1].id+" option:selected").text() == "-請選擇-"){
-					length = length - 1;
-				}
-				var objId = null;
-				var code = null;
-				for(var i = 0; i < length ; i++){
-					var id = $($(trObj).children()[6]).children()[i].id;
-					for(var j = 0; j < obj[key].length; j++){
-						if( obj[key][j].name == $("#"+id+" option:selected").text()){
-							if(obj[key][j].level == "1"){
-								objId = obj[key][j].id;
-								code = obj[key][j].code;
-							}else{
-								if(obj[key][j].parentId == objId){
-									objId = obj[key][j].id;
-									code = obj[key][j].code;
-								}
-							}
-						}
-					}
-				}
-				alert(objId);
-				alert(code);
-				$("#"+$($(trObj).children()[0]).children()[0].id).attr("value",code);
-				$("#"+$($(trObj).children()[1]).children()[0].id).attr("value",objId);
-			}*/
 		}
 	});
 }
@@ -588,7 +495,6 @@ var categoryLevel = null;
 
 
 function changeCategoryItems(adCategorySelectId){
-	
 	var groupId =  $("#"+adCategorySelectId).parent().children()[0].id;
 	var adCategoryGroup = $("#"+groupId+" option:selected").text();
 	var adCategorySelect = $("#"+adCategorySelectId+" option:selected").text();
@@ -613,11 +519,12 @@ function changeCategoryPartnerItems(adCategorySelectId,partnerName){
 	var groupId = categoryLevel.groupId;
 	var childrenFlag = categoryLevel.childrenFlag;
 	appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,childrenFlag);
-	
 }
 
 
 function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,childrenFlag){
+	
+	
 	var partnerId = null;
 	if(level == 0 ){
 		deleteSelectUI(adCategorySelectId,level);
@@ -625,11 +532,12 @@ function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,ch
 	}
 	select = true;
 	for(var i = 0; i< obj[adCategoryGroup].length; i++){
+		//有下一階層
 		if(childrenFlag && select){
 			deleteSelectUI(adCategorySelectId,level);
 			$("#" + adCategorySelectId).parent().append('<select id=\''+adCategorySelectId+'_'+level+ '\' onchange="changeCategoryItems(\''+adCategorySelectId+'_'+level+'\');" ><option value="">-請選擇-</option></select>');
 			select=false;
-			}
+		}
 		if(groupId == obj[adCategoryGroup][i].parentId && childrenFlag){
 			$("#"+adCategorySelectId+'_'+level).append('<option value='+obj[adCategoryGroup][i].name+' >'+obj[adCategoryGroup][i].name+'</option>');
 		}
@@ -640,6 +548,7 @@ function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,ch
 	}
 	
 	var partnerName = null;
+	//無下一階層且有上一階層
 	if (!childrenFlag && partnerId!=null) {
 		for ( var keys in obj) {
 			for (var i = 0; i < obj[keys].length; i++) {
@@ -660,6 +569,8 @@ function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,ch
 	if (!childrenFlag && partnerId==null) {
 		deleteSelectUI(adCategorySelectId,level);
 	}
+	
+	
 }
 
 //選項規零
