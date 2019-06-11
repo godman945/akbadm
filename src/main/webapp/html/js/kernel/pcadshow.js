@@ -15,11 +15,13 @@ if (typeof pad_precise != 'undefined') {
     seway = pad_precise
 } else {
     seway = false
-} if (typeof pad_ssl != 'undefined') {
+}
+if (typeof pad_ssl != 'undefined') {
     padssl = pad_ssl
 } else {
     padssl = true
-} if (typeof pad_positionId != 'undefined') {
+}
+if (typeof pad_positionId != 'undefined') {
     pid = pad_positionId.substring(0, 16);
     ptype = pad_positionId.substring(16, 17);
     pad_pchad.push(pid);
@@ -107,15 +109,18 @@ if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
     adurl += "&docurl=" + docurl
 }
 var showadscript = "<script type=text/javascript src=" + adurl + "></script>";
-if (pad_pchad.length <= 10) {
+if (pad_pchad.length <= 12) {
     if (ptype == "S") {
         document.write(showadscript)
     } else {
         var head = document.getElementsByTagName("head");
-        document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' + pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>')
+        document.write(
+            '<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' +
+            pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>'
+        )
     }
 } else {
-    alert("超過廣告上限，最多只能貼10則廣告!")
+    alert("超過廣告上限，最多只能貼12則廣告!")
 }
 window.onresize = function(a) {
     try {
@@ -138,7 +143,8 @@ window.onresize = function(a) {
             var m = f.height.replace(';px', '');
             var n = m / 2;
             var o = (h + n) - m;
-            adInfo = '{"adInfo":{"scrollTop":' + g + ',"viewHeight":' + h + ',"iframeOffSetTop":' + j + ',"iframeBottom":' + k + ',"iframeTop":' + l + ',"iframeHalf":' + n + ',"controllerHeight":' + o + ',"visibilitychange":' + false + '}}';
+            adInfo = '{"adInfo":{"scrollTop":' + g + ',"viewHeight":' + h + ',"iframeOffSetTop":' + j + ',"iframeBottom":' + k + ',"iframeTop":' + l +
+                ',"iframeHalf":' + n + ',"controllerHeight":' + o + ',"visibilitychange":' + false + '}}';
             e.postMessage(adInfo, "*")
         }
     } catch (err) {}
@@ -164,7 +170,8 @@ window.document.addEventListener('scroll', function() {
             var l = e.height.replace(';px', '');
             var m = l / 2;
             var n = (g + m) - l;
-            adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k + ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + false + '}}';
+            adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k +
+                ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + false + '}}';
             d.postMessage(adInfo, "*")
         }
     } catch (err) {}
@@ -193,7 +200,8 @@ window.document.addEventListener('visibilitychange', function() {
         if (document.hidden) {
             o = true
         }
-        adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k + ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + o + '}}';
+        adInfo = '{"adInfo":{"scrollTop":' + f + ',"viewHeight":' + g + ',"iframeOffSetTop":' + h + ',"iframeBottom":' + j + ',"iframeTop":' + k +
+            ',"iframeHalf":' + m + ',"controllerHeight":' + n + ',"visibilitychange":' + o + '}}';
         d.postMessage(adInfo, "*")
     }
 }, false);
@@ -272,7 +280,9 @@ try {
                         var j = c.height.replace(';px', '');
                         var l = j / 2;
                         var m = (f + l) - j;
-                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' + i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k + ',"ALEX":"asynpcadshow","httpType":' + padssl + '}}';
+                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' +
+                            i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k +
+                            ',"ALEX":"asynpcadshow","httpType":' + padssl + '}}';
                         b.postMessage(d, "*")
                     }
                 }
@@ -291,7 +301,9 @@ try {
                         var j = c.height.replace(';px', '');
                         var l = j / 2;
                         var m = (f + l) - j;
-                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' + i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k + ',"ALEX":"pcadshow","httpType":' + padssl + '}}';
+                        var d = '{"adInfo":{"scrollTop":' + e + ',"viewHeight":' + f + ',"iframeOffSetTop":' + g + ',"iframeBottom":' + h + ',"iframeTop":' +
+                            i + ',"iframeHalf":' + l + ',"controllerHeight":' + m + ',"visibilitychange":' + false + '},"adBackup":{"iframeIndex":' + k +
+                            ',"ALEX":"pcadshow","httpType":' + padssl + '}}';
                         b.postMessage(d, "*")
                     }
                 }
