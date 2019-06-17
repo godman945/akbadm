@@ -9,26 +9,45 @@ if (asynpchomeadflag == null) {
     asynpchomeadflag = document.createElement('div');
     asynpchomeadflag.id = "pchomead8044";
     asynpchomeadjs.appendChild(asynpchomeadflag);
-    if (asynpchomead.length > 12) {
-        alert("超過廣告上限，最多只能貼12則廣告!")
-    } else {
-        for (i = 0; i < asynpchomead.length; i++) {
-            if (i >= asynpchomeadclass.length) {
-                break
-            }
-            asynpchomead[i].classObject = asynpchomeadclass[i];
-            asynpchomead[i].pad_width = asynpchomeadclass[i].getAttribute("pad_width");
-            asynpchomead[i].pad_height = asynpchomeadclass[i].getAttribute("pad_height");
-            asynpchomead[i].pad_customerId = asynpchomeadclass[i].getAttribute("pad_customerId");
-            asynpchomead[i].pad_positionId = asynpchomeadclass[i].getAttribute("pad_positionId");
-            asynpchomead[i].pad_precise = asynpchomeadclass[i].getAttribute("pad_precise");
-            asynpchomead[i].pad_keyword = asynpchomeadclass[i].getAttribute("pad_keyword");
-            asynpchomead[i].pad_page = asynpchomeadclass[i].getAttribute("pad_page");
-            asynpchomead[i].pad_ssl = asynpchomeadclass[i].getAttribute("pad_ssl");
-            showad(asynpchomead[i])
-        }
+    var hostname = window.location.hostname;
+    if(hostname.includes('pchome.com.tw') || hostname.includes('megatime.com.tw')){
+      for (i = 0; i < asynpchomead.length; i++) {
+	      if (i >= asynpchomeadclass.length) {
+	          break
+	      }
+	      asynpchomead[i].classObject = asynpchomeadclass[i];
+	      asynpchomead[i].pad_width = asynpchomeadclass[i].getAttribute("pad_width");
+	      asynpchomead[i].pad_height = asynpchomeadclass[i].getAttribute("pad_height");
+	      asynpchomead[i].pad_customerId = asynpchomeadclass[i].getAttribute("pad_customerId");
+	      asynpchomead[i].pad_positionId = asynpchomeadclass[i].getAttribute("pad_positionId");
+	      asynpchomead[i].pad_precise = asynpchomeadclass[i].getAttribute("pad_precise");
+	      asynpchomead[i].pad_keyword = asynpchomeadclass[i].getAttribute("pad_keyword");
+	      asynpchomead[i].pad_page = asynpchomeadclass[i].getAttribute("pad_page");
+	      asynpchomead[i].pad_ssl = asynpchomeadclass[i].getAttribute("pad_ssl");
+	      showad(asynpchomead[i])
+      }
+    }else{
+    	if (asynpchomead.length > 12) {
+    		alert("超過廣告上限，最多只能貼12則廣告!")
+    	}else{
+    		for (i = 0; i < asynpchomead.length; i++) {
+    		      if (i >= asynpchomeadclass.length) {
+    		          break
+    		      }
+    		      asynpchomead[i].classObject = asynpchomeadclass[i];
+    		      asynpchomead[i].pad_width = asynpchomeadclass[i].getAttribute("pad_width");
+    		      asynpchomead[i].pad_height = asynpchomeadclass[i].getAttribute("pad_height");
+    		      asynpchomead[i].pad_customerId = asynpchomeadclass[i].getAttribute("pad_customerId");
+    		      asynpchomead[i].pad_positionId = asynpchomeadclass[i].getAttribute("pad_positionId");
+    		      asynpchomead[i].pad_precise = asynpchomeadclass[i].getAttribute("pad_precise");
+    		      asynpchomead[i].pad_keyword = asynpchomeadclass[i].getAttribute("pad_keyword");
+    		      asynpchomead[i].pad_page = asynpchomeadclass[i].getAttribute("pad_page");
+    		      asynpchomead[i].pad_ssl = asynpchomeadclass[i].getAttribute("pad_ssl");
+    		      showad(asynpchomead[i])
+    	      }
+    	}
     }
-} else {}
+}
 
 function showad(asynpchomeadObject) {
     var keywordValue = "";

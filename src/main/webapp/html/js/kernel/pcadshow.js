@@ -109,19 +109,30 @@ if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
     adurl += "&docurl=" + docurl
 }
 var showadscript = "<script type=text/javascript src=" + adurl + "></script>";
-if (pad_pchad.length <= 12) {
-    if (ptype == "S") {
+var hostname = window.location.hostname;
+if(hostname.includes('pchome.com.tw') || hostname.includes('megatime.com.tw')){
+	if (ptype == "S") {
         document.write(showadscript)
     } else {
         var head = document.getElementsByTagName("head");
-        document.write(
-            '<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' +
-            pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>'
-        )
+        document.write('<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' + pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>');
     }
-} else {
-    alert("超過廣告上限，最多只能貼12則廣告!")
+}else{
+	if (pad_pchad.length <= 12) {
+	    if (ptype == "S") {
+	        document.write(showadscript)
+	    } else {
+	        var head = document.getElementsByTagName("head");
+	        document.write(
+	            '<iframe class="akb_iframe" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" vspace="0" hspace="0" id="pchome8044_ad_frame1" width="' +
+	            pad_width + '" height="' + pad_height + '" allowtransparency="true" allowfullscreen="true" src="javascript:\'' + showadscript + '\'"></iframe>'
+	        )
+	    }
+	} else {
+	    alert("超過廣告上限，最多只能貼12則廣告!")
+	}
 }
+
 window.onresize = function(a) {
     try {
         var b = document.getElementsByTagName("iframe");
