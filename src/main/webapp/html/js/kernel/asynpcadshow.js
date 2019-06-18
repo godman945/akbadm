@@ -10,7 +10,7 @@ if (asynpchomeadflag == null) {
     asynpchomeadflag.id = "pchomead8044";
     asynpchomeadjs.appendChild(asynpchomeadflag);
     var hostname = window.location.hostname;
-    if(hostname.includes('pchome.com.tw') || hostname.includes('megatime.com.tw')){
+    if(hostname.indexOf('pchome.com.tw') > -1 || hostname.indexOf('megatime.com.tw') > -1){
       for (i = 0; i < asynpchomead.length; i++) {
 	      if (i >= asynpchomeadclass.length) {
 	          break

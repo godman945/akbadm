@@ -110,7 +110,7 @@ if (docurl.indexOf("kdcl") > 1 || docurl.indexOf("kwstg") > 1) {
 }
 var showadscript = "<script type=text/javascript src=" + adurl + "></script>";
 var hostname = window.location.hostname;
-if(hostname.includes('pchome.com.tw') || hostname.includes('megatime.com.tw')){
+if(hostname.indexOf('pchome.com.tw') > - 1 || hostname.indexOf('megatime.com.tw') > -1){
 	if (ptype == "S") {
         document.write(showadscript)
     } else {
