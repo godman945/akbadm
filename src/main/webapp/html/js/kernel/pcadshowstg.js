@@ -89,9 +89,9 @@ try {
 var fig = "";
 var adurl = "";
 if (padssl == "false") {
-    adurl += "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
+    adurl += "https://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
 } else {
-    adurl += "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
+    adurl += "https://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
 }
 adurl += "&positionId=" + pid;
 adurl += "&padWidth=" + pad_width;
