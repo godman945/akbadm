@@ -27,7 +27,7 @@
     
     <bean id="AdjustAccountJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="AdjustAccountJobDetail" />
-        <property name="cronExpression" value="0 0 04 * * ?" />
+        <property name="cronExpression" value="0 10 04 * * ?" />
     </bean>
          
    	<!-- 更新系統價格  / 每日 AM 04:05 執行  -->
@@ -403,7 +403,7 @@
 				<!-- accesslog 每10分 -->                             
 				<ref bean="AccesslogJobTrigger" />      
 				         
-				<!-- 結算帳戶餘額攤提  / 每日 AM 04:00 執行  -->          
+				<!-- 結算帳戶餘額攤提  / 每日 AM 04:10 執行  -->          
 				<ref bean="AdjustAccountJobTrigger" />		
 				
 				<!-- 廣告禁用字審核  / 每隔 10 分鐘執行 -->
