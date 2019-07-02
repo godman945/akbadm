@@ -19,7 +19,7 @@
         <property name="cronExpression" value="0 0/10 * * * ?" />
     </bean>
     
-   	<!-- 結算帳戶餘額  / 每日 AM 04:00 執行  -->
+   	<!-- 結算帳戶餘額  / 每日 AM 04:10 執行  -->
     <bean id="AdjustAccountJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="AdjustAccountJob" />
         <property name="targetMethod" value="process" />
