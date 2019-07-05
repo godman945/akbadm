@@ -1580,7 +1580,7 @@ public class KernelJob {
             url = new StringBuilder();
             url.append(pfpProdGroupListApiUrl);
             url.append("?groupId=").append(prodGroupId);
-            url.append("&prodNum=50");
+            url.append("&prodNum=11");
 
             result = HttpConnectionClient.getInstance().doGet(url.toString());
             jsonObject = new JSONObject(result);
