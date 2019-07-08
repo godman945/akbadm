@@ -273,7 +273,7 @@ public class AdModelUtil {
 					if(active.equals("local")) {
 						str = str.append("<script language=\"JavaScript\" src=\"http://alex.pchome.com.tw:8080/akbadm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}else if(active.equals("stg")) {
-						str = str.append("<script language=\"JavaScript\" src=\"http://showstg2.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
+						str = str.append("<script language=\"JavaScript\" src=\"http://showstg.pchome.com.tw/adm/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}else {
 						str = str.append("<script language=\"JavaScript\" src=\"http://kdadm.pchome.com.tw/html/js/ad/pcvideoshowpreview.js?t="+System.currentTimeMillis()+"\"></script>");
 					}
@@ -447,6 +447,11 @@ public class AdModelUtil {
 								if(tadStr.indexOf("<#dad_logo_txt>") >= 0){
 									tadStr = tadStr.replace("<#dad_logo_txt>", logoText);
 								}
+								if(tadStr.indexOf("<#dad_tracking_code>") >= 0){
+									tadStr = tadStr.replace("<#dad_tracking_code>", "");
+								}
+								
+								
 								if(tadStr.indexOf("<#dad_prod_ad_url>") >= 0){
 									if(realUrl.equals("null")){
 										tadStr = tadStr.replace("<#dad_prod_ad_url>", "#");
