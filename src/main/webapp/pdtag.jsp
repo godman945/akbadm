@@ -10,13 +10,40 @@ new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-PR7VQ9H');</script>
+
 <!-- End Google Tag Manager -->
 </head>
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PR7VQ9H"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
 <!-- End Google Tag Manager (noscript) -->
+
+
+
+
+<!-- 需全站埋code 
+<script>
+(function(window, document, script, js, ptag, a, m) {
+	window['pchome'] = ptag;
+	window[ptag] = window[ptag] || function() {
+	(window[ptag].q = window[ptag].q || []).push(arguments)
+	}, window[ptag].l = 1 * new Date();
+	a = document.createElement(script); 
+	m = document.getElementsByTagName(script)[0];
+	a.async = 1;
+	a.src = js;
+	m.parentNode.insertBefore(a, m);
+})(window, document, 'script', 'http://showstg.pchome.com.tw/adm/html/js/ptag/pdtag.js', 'ptag');
+	ptag({"paid":"alex_1234567"});
+</script>
+-->
+
+
+
+
+
 
 
 <!-- 事件(轉換) -->
