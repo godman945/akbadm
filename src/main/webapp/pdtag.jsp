@@ -4,24 +4,19 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PR7VQ9H');</script>
+<!-- End Google Tag Manager -->
 </head>
 <body>
-<!-- 需全站埋code -->
-<script>
-(function(window, document, script, js, ptag, a, m) {
-	window['pchome'] = ptag;
-	window[ptag] = window[ptag] || function() {
-	(window[ptag].q = window[ptag].q || []).push(arguments)
-	}, window[ptag].l = 1 * new Date();
-	a = document.createElement(script); 
-	m = document.getElementsByTagName(script)[0];
-	a.async = 1;
-	a.src = js;
-	m.parentNode.insertBefore(a, m);
-})(window, document, 'script', 'html/js/ptag/pdtag.js', 'ptag');
-	ptag({"paid":"alex_1234567"});
-	//ptag("paid":"55555555555","event","convert",{"convert_id":"CAC_TEST3","convert_price":"40","pa_em_value":"WEFWE","user_link_url":"","user_link_blank":true},"clck");
-</script>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PR7VQ9H"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 
 <!-- 事件(轉換) -->
