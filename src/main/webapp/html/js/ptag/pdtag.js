@@ -1,9 +1,4 @@
-
-
-console.log("-----------------------1");
-
-
-
+console.log("init pdtag js");
 
 var page_view_opt1 = "";
 var page_view_opt2 = "";
@@ -22,43 +17,55 @@ var pa_em_value = "";
 var pa_id = "";
 var mark_id = "";
 var mark_layer1 = "";
-
-var paclUrl = location.protocol + "//pacl.pchome.com.tw/api/collect";
-(function() {
-    var click = null;
-    referer = encodeURIComponent(document.referrer);
-    screen_x = screen.availWidth;
-    screen_y = screen.availHeight;
-    webUrl = encodeURIComponent(location.href);
-    convert_click_flag = false;
-    do_a(function() {
-        doInitData();
-        doSendPaclData()
-    })
-})();
 var referer = "";
 var screen_x = "";
 var screen_y = "";
 var webUrl = "";
 var fig = "";
 var convert_click_flag = null;
-var paclCodeObject = new Object();
-var ptagParamater = null;
-var paclCodeObject = null;
+var mark_click_flag = null;
 
-function do_a(callback) {
+var paclUrl = null;
+(function() {
+	ptagParamater = window.ptag.q;
+	paclUrl = location.protocol + "//pacl.pchome.com.tw/api/collect";
+	referer = encodeURIComponent(document.referrer);
+    screen_x = screen.availWidth;
+    screen_y = screen.availHeight;
+    webUrl = encodeURIComponent(location.href);
     paclCodeObject = new Object();
     paclCodeObject["data"] = {};
-    ptagParamater = window.ptag.q;
-    if (typeof callback === 'function') {
-        callback()
-    }
-}
+    doInitData();
+    doSendPaclData();
+    
+    
+    console.log(ptagParamater);
+    
+    
+//	var click = null;
+//    referer = encodeURIComponent(document.referrer);
+//    screen_x = screen.availWidth;
+//    screen_y = screen.availHeight;
+//    webUrl = encodeURIComponent(location.href);
+//    convert_click_flag = false;
+//    do_a(function() {
+//        doInitData();
+//        doSendPaclData()
+//    })
+})();
+
+//function do_a(callback) {
+//    paclCodeObject = new Object();
+//    paclCodeObject["data"] = {};
+//    ptagParamater = window.ptag.q;
+//    if (typeof callback === 'function') {
+//        callback()
+//    }
+//}
 
 function doInitData() {
 	screen_x = screen.availWidth;
     screen_y = screen.availHeight;
-	
 	var pa_id = "";
 	for ( var obj in ptagParamater) {
 		var element = ptagParamater[obj];
@@ -117,30 +124,29 @@ function doInitData() {
 			}else if(eventType == 'mark'){
 				mark_id = eventObj.hasOwnProperty('mark_id') ? eventObj.mark_id : '';
 				mark_layer1 = eventObj.hasOwnProperty('mark_layer1') ? eventObj.mark_layer1 : '';
+				mark_click_flag = eventObj.hasOwnProperty('click') ? eventObj.click : '';
 				paclCodeObject.data['mark'] = {
 		                  'mark_id': mark_id,
-		                  'mark_layer1': mark_layer1,
-		                  'pa_id': pa_id
+		                  'mark_layer1': '',
+		                  'pa_id': pa_id,
+		                  'mark_click_flag':mark_click_flag
 				}
 			}
 		}
 	}
-	console.log(paclCodeObject);
+	
 };
 
 function doSendPaclData() {
     for (var key in paclCodeObject.data) {
-        if (key.indexOf('convert') >= 0) {
-            convert_id = paclCodeObject.data[key].convert_id;
-            convert_price = paclCodeObject.data[key].convert_price;
-            convert_opt1 = paclCodeObject.data[key].convert_opt1;
-            convert_opt2 = paclCodeObject.data[key].convert_opt2;
+    	if (key.indexOf('page_view') >=0) {
+            page_view_opt1 = paclCodeObject.data[key].page_view_opt1;
+            page_view_opt2 = paclCodeObject.data[key].page_view_opt2;
             pa_em_value = paclCodeObject.data[key].pa_em_value;
             pa_id = paclCodeObject.data[key].pa_id;
-            if (!paclCodeObject.data[key].convert_click_flag) {
-                doConvert()
-            }
+            doPageView();
         }
+    	
         if (key.indexOf('tracking') >=0) {
             tracking_id = paclCodeObject.data[key].tracking_id;
             prod_id = paclCodeObject.data[key].prod_id;
@@ -151,15 +157,22 @@ function doSendPaclData() {
             ec_stock_status = paclCodeObject.data[key].ec_stock_status;
             pa_em_value = paclCodeObject.data[key].pa_em_value;
             pa_id = paclCodeObject.data[key].pa_id;
-            doTracking()
+            doTracking();
         }
-        if (key.indexOf('page_view') >=0) {
-            page_view_opt1 = paclCodeObject.data[key].page_view_opt1;
-            page_view_opt2 = paclCodeObject.data[key].page_view_opt2;
-            pa_em_value = paclCodeObject.data[key].pa_em_value;
-            pa_id = paclCodeObject.data[key].pa_id;
-            doPageView()
+        
+        
+        if (key.indexOf('convert') >= 0) {
+            if (!paclCodeObject.data[key].convert_click_flag) {
+            	convert_id = paclCodeObject.data[key].convert_id;
+                convert_price = paclCodeObject.data[key].convert_price;
+                convert_opt1 = paclCodeObject.data[key].convert_opt1;
+                convert_opt2 = paclCodeObject.data[key].convert_opt2;
+                pa_em_value = paclCodeObject.data[key].pa_em_value;
+                pa_id = paclCodeObject.data[key].pa_id;
+                doConvert();
+            }
         }
+        
     }
 };
 
@@ -187,7 +200,108 @@ function doTracking() {
         encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
 };
 
+
+function doMark() {
+    var img = new Image();
+    img.src = paclUrl + "?" + "markId=" + mark_id + "&paId=" + encodeURIComponent(pa_id)+"&markLayer1="+ encodeURIComponent(mark_layer1);
+};
+
+
+//點擊觸發轉換事件
+function pchome_click(link_url, blank_flag,op1_value) {
+	  for (var key in paclCodeObject.data) {
+		  if (key.indexOf('convert') >=0) {
+		      convert_id = paclCodeObject.data[key].convert_id;
+		      convert_price = paclCodeObject.data[key].convert_price;
+		      convert_opt1 = (op1_value != null && op1_value !='') ? op1_value : paclCodeObject.data[key].convert_opt1;
+		      convert_opt2 = paclCodeObject.data[key].convert_opt2;
+		      pa_em_value = paclCodeObject.data[key].pa_em_value;
+		      pa_id = paclCodeObject.data[key].pa_id;
+		      if (paclCodeObject.data[key].convert_click_flag) {
+		      	doConvert();
+		      }
+		  }
+	  }
+	
+	  if (link_url != null || link_url.length >= 0 || link_url != '') {
+	    var blank = false;
+	    if (typeof blank_flag === "boolean") {
+	        blank = blank_flag
+	    }
+		if (blank) {
+		    window.open(link_url, '_0');
+		} else {
+			location.href = link_url;
+		}
+	  }
+	
+	
+//	
+//	if (link_url == null || link_url.length == 0 || link_url == '') {
+//        alert('link_url 是空值，link_url is null');
+//        return false
+//    }
+//    var blank = false;
+//    if (typeof blank_flag === "boolean") {
+//        blank = blank_flag
+//    }
+//    
+//    
+//    for (var key in paclCodeObject.data) {
+//        if (key.indexOf('convert') >=0) {
+//            convert_id = paclCodeObject.data[key].convert_id;
+//            convert_price = paclCodeObject.data[key].convert_price;
+//            convert_opt1 = (op1_value != null && op1_value !='') ? op1_value : paclCodeObject.data[key].convert_opt1;
+//            convert_opt2 = paclCodeObject.data[key].convert_opt2;
+//            pa_em_value = paclCodeObject.data[key].pa_em_value;
+//            pa_id = paclCodeObject.data[key].pa_id;
+//            if (paclCodeObject.data[key].convert_click_flag) {
+//            	doConvert();
+//            }
+//        }
+//    }
+//    if (blank) {
+//        window.open(link_url, '_0');
+//    } else {
+//        location.href = link_url;
+//    }
+}
+
+//點擊觸發mark事件
+function mark_click(link_url, blank_flag,op1_value) {
+	for (var key in paclCodeObject.data) {
+		if (key.indexOf('mark') >=0) {
+			mark_id = paclCodeObject.data[key].mark_id;
+			mark_layer1 = op1_value;
+			pa_id = paclCodeObject.data[key].pa_id;
+			if (paclCodeObject.data[key].mark_click_flag) {
+				doMark();
+			}
+		}
+	}
+	
+	if (link_url != null || link_url.length >= 0 || link_url != '') {
+	    var blank = false;
+	    if (typeof blank_flag === "boolean") {
+	        blank = blank_flag
+	    }
+		if (blank) {
+		    window.open(link_url, '_0');
+		} else {
+			location.href = link_url;
+		}
+	}
+}
+
+
+
+
+
+
+
+/*
 function pchome_click(link_url, blank_flag) {
+	console.log('click pchome_click');
     if (link_url == null || link_url.length == 0 || link_url == '') {
         alert('link_url 是空值，link_url is null');
         return false
@@ -215,8 +329,10 @@ function pchome_click(link_url, blank_flag) {
         location.href = link_url
     }
 }
-
+*/
+/*
 function pchome_click() {
+	console.log('>>>>>>>>>>>AAA');
     do_a(function() {
         doInitData()
     });
@@ -234,3 +350,44 @@ function pchome_click() {
         }
     }
 }
+*/
+
+
+
+
+//function pchome_click(url,open_flag){
+//	console.log("SSSSS9999");
+//    var callback = function(){
+//    	console.log("SSSSS");
+//    }
+//}
+
+
+/*
+function alex() {
+	  console.log('>>>>>>>>>>>Hello');
+}
+function pchome_click(a,b,c,d) {
+	console.log('>>>>>>>>>>>'+a);
+	console.log('>>>>>>>>>>>'+b);
+	console.log('>>>>>>>>>>>'+c);
+	console.log('>>>>>>>>>>>'+d);
+}
+
+
+
+//第三方提供的追蹤程式
+function track(data, callback) {
+	console.log('>>>>>>>>>>>AAA');
+	console.log('>>>>>>>>>>>data:'+data);
+	callback(); 
+}
+
+track('aaaa',function() {
+	alex();
+});
+*/
+//
+//document.addEventListener("click", function(){ 
+//	console.log("Hello 22222!"); 
+//});
