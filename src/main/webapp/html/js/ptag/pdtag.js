@@ -155,23 +155,23 @@ function doSendPaclData() {
 
 function doConvert() {
     var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" +
+    img.src = paclUrl + "?" + "paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
+        encodeURIComponent(screen_y) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" +
         encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" +
         encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer)
 };
 
 function doPageView() {
     var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" +
+    img.src = paclUrl + "?" + "paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
+        encodeURIComponent(screen_y)  + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" +
         encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer)
 };
 
 function doTracking() {
     var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" +
+    img.src = paclUrl + "?" + "paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
+        encodeURIComponent(screen_y)  + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" +
         encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" +
         encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" +
         encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
