@@ -35,52 +35,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	a.async = 1;
 	a.src = js;
 	m.parentNode.insertBefore(a, m);
-	console.log(document.scripts);
-})(window, document, 'script', 'http://showstg.pchome.com.tw/adm/html/js/ptag/pdtag.js', 'ptag');
+})(window, document, 'script', 'http://alex.pchome.com.tw:8080/akbadm/html/js/ptag/pdtag.js', 'ptag');
 	ptag({"paid":"alex_1234567"});
+	ptag({"event":{"type":"tracking","tracking_id":"TAC_TEST001"}});
 </script>
 <!-- 
 	pchome廣告事件代碼需緊貼在全域代碼下
 -->
-<!-- 事件(轉換) -->
+<!-- 事件(轉換) 載入觸發 -->
 <script type="text/javascript">
-	ptag({"event":{"type":"convert","convert_id":"CAC_TEST001","convert_price":"40","pa_em_value":"123@yahoo.com.tw","user_link_url":"24h.pchome.com.tw","click":false,"op1":"alex_op1"}});
+	ptag({"event":{"type":"convert","convert_id":"CAC_TEST001","convert_price":"40"}});
 </script>
-
-<!-- 事件(轉換) 點擊才可觸發-->
-<script>
-	ptag({"event":{"type":"convert","convert_id":"CAC_TEST002","convert_price":"40","pa_em_value":"123@yahoo.com.tw","user_link_url":"24h.pchome.com.tw","click":true,"op1":"alex_op1"}});	
-</script>
-
-<script>
-	ptag({"event":{"type":"convert","convert_id":"CAC_TEST003","convert_price":"40","pa_em_value":"123@yahoo.com.tw","user_link_url":"24h.pchome.com.tw","click":true,"op1":"alex_op1"}});	
-</script>
-
 
 <!-- 事件(page_view)-->
 <script>
 	ptag({"event":{"type":"page_view","op1":"page_view_op1","op2":"page_view_op2","pa_em_value":"page_view_123@yahoo.com.tw"}});	
 </script>
 
-<!-- 事件(追蹤) -->
-<script>
-	ptag({"event":{"type":"tracking","tracking_id":"TAC_TEST001","prod_id":"prod_12345","prod_price":"199","prod_dis":"99","op1":"tracking_op1","op2":"tracking_op2","ec_stock_status":"y","pa_em_value":"tracking_123@yahoo.com.tw"}});	
-</script>
-
 <!-- 事件(MARK) -->
 <script>
-ptag({"event":{"type":"mark","mark_id":"MARK_TEST001","click":true}});
+	ptag({"event":{"type":"mark","mark_id":"MARK_TEST001","prod_id":"prod_12345","prod_price":"199","prod_dis":"99","op1":"mark_op1","op2":"mark_op2","ec_stock_status":"y","pa_em_value":"mark_123@yahoo.com.tw"}});
 </script>
+
+<!-- 事件(轉換) 點擊才可觸發 START-->
+<script>
+  function pchome_click(url,open_flag){
+	  var callback = function(){
+		if (url == null || url.length == 0 || url == '') {
+		        alert('url 是空值，url is null');
+		        return false
+		}
+		var blank = false;
+		if (typeof open_flag === "boolean") {
+			blank = open_flag
+		}
+		
+		if (blank) {
+		    window.open(url, '_0')
+		} else {
+		    location.href = url
+		}
+      }
+	  ptag({"event":{"type":"convert","convert_id":"CAC_TEST002","convert_price":"50"}},callback());
+   }
+</script>
+<!-- 事件(轉換) 點擊才可觸發 END-->
+
+
 
 </head>
 <body>
 <!-- 參數1:連結網址 參數2:是否開啟新頁 參數3:轉換op1 value -->
-<input type="button" value="點擊觸發事件" onclick="test();pchome_click('http://yahoo.com.tw',true,'convert_op1_line');"/>
+<input type="button" value="點擊觸發轉換事件" onclick="test();pchome_click('http://yahoo.com.tw',true);"/>
 
 <input type="button" value="MARK_ID觸發事件" onclick="test();mark_click('http://google.com.tw',true,'i_am_mark_layer1');"/>
 
 
-
+<input type="button" value="MARK_ID觸發事件(不同mark_value)" onclick="test();mark_click('http://google.com.tw',true,'i_am_mark_layer2');"/>
 
 <script>
 function test(){
