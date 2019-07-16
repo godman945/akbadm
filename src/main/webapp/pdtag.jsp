@@ -35,7 +35,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 	a.async = 1;
 	a.src = js;
 	m.parentNode.insertBefore(a, m);
-})(window, document, 'script', 'http://alex.pchome.com.tw:8080/akbadm/html/js/ptag/pdtag.js', 'ptag');
+})(window, document, 'script', 'http://showstg.pchome.com.tw/adm/html/js/ptag/pdtag.js', 'ptag');
 	ptag({"paid":"alex_1234567"});
 	ptag({"event":{"type":"tracking","tracking_id":"TAC_TEST001"}});
 </script>
