@@ -131,6 +131,7 @@ function showad(asynpchomeadObject) {
         adurl += "https://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId
     }
     
+    console.log(asynpchomeadObject);
     console.log(asynpchomeadObject.pad_width);
     
     adurl += "&positionId=" + pid;
