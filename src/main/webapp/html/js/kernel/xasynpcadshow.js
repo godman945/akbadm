@@ -7,6 +7,7 @@ var asynpchomeadjs = document.getElementById("asynpchomeadjs");
 var asynpchomeadflag = document.getElementById("pchomead8044");
 
 
+console.log(window.location);
 console.log(asynpchomeadclass);
 
 
