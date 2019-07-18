@@ -130,6 +130,9 @@ function showad(asynpchomeadObject) {
     } else {
         adurl += "https://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId
     }
+    
+    console.log(asynpchomeadObject.pad_width);
+    
     adurl += "&positionId=" + pid;
     adurl += "&padWidth=" + asynpchomeadObject.pad_width.replace(';', '');
     adurl += "&padHeight=" + asynpchomeadObject.pad_height.replace(';', '');
