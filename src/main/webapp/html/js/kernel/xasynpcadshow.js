@@ -5,6 +5,11 @@ var screen_y = screen.availHeight;
 var asynpchomeadclass = document.getElementsByClassName("asynpchomead");
 var asynpchomeadjs = document.getElementById("asynpchomeadjs");
 var asynpchomeadflag = document.getElementById("pchomead8044");
+
+
+console.log(asynpchomeadclass);
+
+
 if (asynpchomeadflag == null) {
     asynpchomeadflag = document.createElement('div');
     asynpchomeadflag.id = "pchomead8044";
