@@ -12,7 +12,7 @@ console.log(asynpchomeadclass);
 
 if('https://greatlife.idv.tw/' == window.location.href){
 	
-	document.getElementsByClassName("textwidget").appendChild('<script id="asynpchomeadjs" async src="https://kdpic.pchome.com.tw/img/js/xasynpcadshow.js"></script><ins class="asynpchomead"	 pad_width=180;	pad_height=150;	pad_customerId="PFBC20150519001";pad_positionId="PFBP201605050001C";></ins><script>	(asynpchomead = window.asynpchomead || []).push({});</script>');
+	document.getElementsByClassName("textwidget").appendChild('<script class="alex" id="asynpchomeadjs" async src="https://kdpic.pchome.com.tw/img/js/xasynpcadshow.js"></script><ins class="asynpchomead"	 pad_width=180;	pad_height=150;	pad_customerId="PFBC20150519001";pad_positionId="PFBP201605050001C";></ins><script>	(asynpchomead = window.asynpchomead || []).push({});</script>');
 	
 }
 
