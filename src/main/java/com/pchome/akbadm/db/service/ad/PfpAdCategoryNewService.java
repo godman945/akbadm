@@ -25,7 +25,7 @@ public class PfpAdCategoryNewService extends BaseService<PfpAdCategoryNewAjaxAct
 
     	// 取父類別
     	for (int i = 0; i <= PfpAdCategoryNewList.size() - 1; i++) {
-		    if (PfpAdCategoryNewList.get(i).getParentId().isEmpty()) {
+		    if (PfpAdCategoryNewList.get(i).getParentId() == null || PfpAdCategoryNewList.get(i).getParentId().isEmpty()) {
 		    	List<PfpAdCategoryNew> a = new ArrayList<PfpAdCategoryNew>();
 		    	a.add(PfpAdCategoryNewList.get(i));
 		    	pfpAdCategoryNewMap.put(PfpAdCategoryNewList.get(i).getName(),a);
