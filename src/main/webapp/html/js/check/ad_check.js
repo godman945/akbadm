@@ -443,17 +443,17 @@ function findAdCategorySelect(componentId) {
 function appendAdCategorySelectUI(componentId) {
 	if ($("#" + componentId + "_1").children().length == 1) {
 		for(var keys in obj){
-			$("#" + componentId + "_1").append('<option value='+ keys+'>' + keys + '</option>');
+			$("#" + componentId + "_1").append('<option value="'+ keys+'">' + keys + '</option>');
 		}
 	}
 	if ($("#" + componentId + "_2").children().length == 1) {
 		for(var keys in obj){
-			$("#" + componentId + "_2").append('<option value='+ keys+'>' + keys + '</option>');
+			$("#" + componentId + "_2").append('<option value="'+ keys+'">' + keys + '</option>');
 		}
 	}
 	if ($("#" + componentId + "_3").children().length == 1) {
 		for(var keys in obj){
-			$("#" + componentId + "_3").append('<option value='+ keys+'>' + keys + '</option>');
+			$("#" + componentId + "_3").append('<option value="'+ keys+'">' + keys + '</option>');
 		}
 	}
 }
@@ -523,8 +523,6 @@ function changeCategoryPartnerItems(adCategorySelectId,partnerName){
 
 
 function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,childrenFlag){
-	
-	
 	var partnerId = null;
 	if(level == 0 ){
 		deleteSelectUI(adCategorySelectId,level);
@@ -565,12 +563,9 @@ function appendCategoryItems(adCategorySelectId,adCategoryGroup,level,groupId,ch
 			}
 		}
 	}
-	
 	if (!childrenFlag && partnerId==null) {
 		deleteSelectUI(adCategorySelectId,level);
 	}
-	
-	
 }
 
 //選項規零
