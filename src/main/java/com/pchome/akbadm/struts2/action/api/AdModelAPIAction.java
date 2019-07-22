@@ -50,7 +50,7 @@ public class AdModelAPIAction extends BaseCookieAction{
 		String adHtml = adFactory.getAdModel(tproNo, adNo);
 		//String adHtml = admAPI.getAdContent(tproNo, adNo);
 
-		log.info(" adHtml = "+adHtml);
+//		log.info(" adHtml = "+adHtml);
 		
 		inputAdModel = new ByteArrayInputStream(adHtml.getBytes("UTF-8"));	 
 		
