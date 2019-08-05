@@ -117,7 +117,7 @@ public class AdmPortalBonusReportDAO extends BaseDAO<AdmPortalBonusReport, Integ
 
 		hql.append(" select sum(totalBonus) ");
 		hql.append(" from PfbxBonusDayReport ");
-		hql.append(" where pfbxCustomerInfo.customerInfoId in ('PFBC20150519001','PFBC20160804001') ");
+		hql.append(" where pfbxCustomerInfo.customerInfoId in ('PFBC20190424002','PFBC20160804001') ");
     	hql.append(" and reportDate = :reportDate ");
 
 
