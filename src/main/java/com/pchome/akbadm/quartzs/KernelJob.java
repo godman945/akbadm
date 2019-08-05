@@ -638,27 +638,27 @@ public class KernelJob {
 
         // log by nico
         if (allPvclkSums != null) {
-        	log.info("======>allPvclkSums[CK]="+(float) allPvclkSums[1]+",[PV]="+allPvclkSums[0]+",[view]="+allPvclkSums[2]);
+            log.info("======>allPvclkSums[CK]="+(float) allPvclkSums[1]+",[PV]="+allPvclkSums[0]+",[view]="+allPvclkSums[2]);
 
 
-	        if ((allPvclkSums[0] == 0) || (allPvclkSums[1] == 0)) {
-	            cpmWeight = 0.005f;
-	        }
-	        else {
-	            cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
-	        }
+            if ((allPvclkSums[0] == 0) || (allPvclkSums[1] == 0)) {
+                cpmWeight = 0.005f;
+            }
+            else {
+                cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
+            }
 
-	        if (allPvclkSums[1] == 0) {
-	            cpvWeight = 0.005f;
-	        }
-	        else {
-	            cpvWeight = Math.min((float) allPvclkSums[1] / allPvclkSums[0], 0.02f);
-	        }
+            if (allPvclkSums[1] == 0) {
+                cpvWeight = 0.005f;
+            }
+            else {
+                cpvWeight = Math.min((float) allPvclkSums[1] / allPvclkSums[0], 0.02f);
+            }
 
         }else{
 
-        	 cpmWeight = 0.005f;
-        	 cpvWeight = 0.005f;
+             cpmWeight = 0.005f;
+             cpvWeight = 0.005f;
         }
 
         // log by nico
@@ -686,7 +686,7 @@ public class KernelJob {
         log.info("splitAdSize="+splitAdSize);
 
         for (String adSeq: allAdSet) {
-        	if (reduceCount++ <= splitAdSize) {
+            if (reduceCount++ <= splitAdSize) {
                 allowAdSet.add(adSeq);
             }
         }
@@ -709,7 +709,7 @@ public class KernelJob {
 
                 // special rule: reduce
                 if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
-                	continue;
+                    continue;
                 }
 
                 // get ad map
@@ -913,14 +913,14 @@ public class KernelJob {
 
                     adBean.setCustomerInfoId(pfpCustomerInfoId);
                     if (pfpToPfdMap.containsKey(pfpCustomerInfoId)) {
-                    	ref = pfpToPfdMap.get(pfpCustomerInfoId);
-                    	adBean.setPfdCustomerInfoId(ref.getPfdCustomerInfo().getCustomerInfoId());
-                    	adBean.setPfdUserId(ref.getPfdUser().getUserId());
-                    	adBean.setPayType(Integer.parseInt(ref.getPfpPayType()));
+                        ref = pfpToPfdMap.get(pfpCustomerInfoId);
+                        adBean.setPfdCustomerInfoId(ref.getPfdCustomerInfo().getCustomerInfoId());
+                        adBean.setPfdUserId(ref.getPfdUser().getUserId());
+                        adBean.setPayType(Integer.parseInt(ref.getPfpPayType()));
                     } else {
-                    	adBean.setPfdCustomerInfoId("");
-                    	adBean.setPfdUserId("");
-                    	adBean.setPayType(1); //預付
+                        adBean.setPfdCustomerInfoId("");
+                        adBean.setPfdUserId("");
+                        adBean.setPayType(1); //預付
                     }
                     adBean.setAdActionId(actionId);
                     adBean.setAdGroupId(pfpAdGroup.getAdGroupSeq());
@@ -971,22 +971,22 @@ public class KernelJob {
                 adDetailBean.setAdDetailId(pfpAdDetail.getAdDetailSeq());
                 adDetailBean.setAdDetailType(pfpAdDetail.getAdDetailId());
                 if ("real_url".equals(pfpAdDetail.getAdDetailId())) {
-                    adDetailBean.setAdDetailContent(this.encodeParam(pfpAdDetail.getAdDetailContent()).trim());
+                    adDetailBean.setAdDetailContent(this.encodeUrl(pfpAdDetail.getAdDetailContent()).trim());
                 }
                 // special rule
                 else if ("mp4_url".equals(pfpAdDetail.getAdDetailId())) {
-                	String youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 22);
-                	if(StringUtils.isBlank(youtubeMp4Url)){
-                		youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
-                	}
+                    String youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 22);
+                    if(StringUtils.isBlank(youtubeMp4Url)){
+                        youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
+                    }
                     adDetailBean.setAdDetailContent(youtubeMp4Url.trim());
                 }
                 // special rule
                 else if ("webm_url".equals(pfpAdDetail.getAdDetailId())) {
-                	String youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 247);
-                	if(StringUtils.isBlank(youtubeWebmUrl)){
-                		youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
-                	}
+                    String youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 247);
+                    if(StringUtils.isBlank(youtubeWebmUrl)){
+                        youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
+                    }
                     adDetailBean.setAdDetailContent(youtubeWebmUrl.trim());
                 }
                 // refactor data structure
@@ -1309,7 +1309,7 @@ public class KernelJob {
 
             // allowCusurl
             for (PfbxAllowCusurl pfbxAllowCusurl: pfbxUserOption.getPfbxAllowCusurls()) {
-                pfbxUserOptionBean.getAllowCusurls().put(pfbxAllowCusurl.getCuId(), this.encodeParam(pfbxAllowCusurl.getUrl()));
+                pfbxUserOptionBean.getAllowCusurls().put(pfbxAllowCusurl.getCuId(), this.encodeUrl(pfbxAllowCusurl.getUrl()));
             }
 
             // blockIndustry
@@ -1327,7 +1327,7 @@ public class KernelJob {
 
             // blockCusurl
             for (PfbxBlockCusurl pfbxBlockCusurl: pfbxUserOption.getPfbxBlockCusurls()) {
-                pfbxUserOptionBean.getBlockCusurls().put(pfbxBlockCusurl.getCuId(), this.encodeParam(pfbxBlockCusurl.getUrl()));
+                pfbxUserOptionBean.getBlockCusurls().put(pfbxBlockCusurl.getCuId(), this.encodeUrl(pfbxBlockCusurl.getUrl()));
             }
 
             // area
@@ -1580,7 +1580,7 @@ public class KernelJob {
             url = new StringBuilder();
             url.append(pfpProdGroupListApiUrl);
             url.append("?groupId=").append(prodGroupId);
-            url.append("&prodNum=50");
+            url.append("&prodNum=11");
 
             result = HttpConnectionClient.getInstance().doGet(url.toString());
             jsonObject = new JSONObject(result);
@@ -1634,18 +1634,67 @@ public class KernelJob {
         log.info("scp ok");
     }
 
-    private String encodeParam(String url) {
+    private String encodeUrl(String url) {
         String[] urls = URLDecoder.decode(url, StandardCharsets.UTF_8).split("\\?");
-        if (urls.length != 2) {
-            return URLEncoder.encode(url, StandardCharsets.UTF_8);
+
+        StringBuilder urlSb = new StringBuilder();
+        if (urls.length == 1) {
+            urlSb.append(encodePath(urls[0]));
+        }
+        else {
+            urlSb.append(encodePath(urls[0]));
+            urlSb.append("?").append(encodeParam(urls[1]));
         }
 
-        // url
-        StringBuilder urlSb = new StringBuilder();
-        urlSb.append(urls[0]).append("?");
+        // special rule
+        String realUrl = urlSb.toString()
+                                .replaceAll("\\+", "%20")
+                                .replaceAll("\\%21", "!")
+                                .replaceAll("\\%27", "'")
+                                .replaceAll("\\%28", "(")
+                                .replaceAll("\\%29", ")")
+                                .replaceAll("\\%7E", "~")
+                                .replaceAll("\\%2F", "/")
+                                .replaceAll("\\%23", "#");
 
-        // param
-        String[] params = urls[1].split("&");
+        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
+    }
+
+    private String encodePath(String uri) {
+        if (StringUtils.isBlank(uri)) {
+            return uri;
+        }
+
+        String[] uris = uri.split("/");
+        if (uris.length <= 2) {
+            return uri;
+        }
+
+        StringBuilder uriSb = new StringBuilder();
+        for (int i = 0; i < uris.length; i++) {
+            if (i <= 2) {
+                uriSb.append(uris[i]);
+            }
+            else {
+                uriSb.append(URLEncoder.encode(uris[i], StandardCharsets.UTF_8));
+            }
+
+            if (i != uris.length - 1) {
+                uriSb.append("/");
+            }
+        }
+
+        return uriSb.toString();
+    }
+
+    private String encodeParam(String param) {
+        if (StringUtils.isBlank(param)) {
+            return param;
+        }
+
+        StringBuilder urlSb = new StringBuilder();
+
+        String[] params = param.split("&");
         String[] keys = null;
         for (int i = 0; i < params.length; i++) {
             keys = params[i].split("=");
@@ -1663,18 +1712,7 @@ public class KernelJob {
             }
         }
 
-        // special rule
-        String realUrl = urlSb.toString()
-                                .replaceAll("\\+", "%20")
-                                .replaceAll("\\%21", "!")
-                                .replaceAll("\\%27", "'")
-                                .replaceAll("\\%28", "(")
-                                .replaceAll("\\%29", ")")
-                                .replaceAll("\\%7E", "~")
-                                .replaceAll("\\%2F", "/")
-                                .replaceAll("\\%23", "#");
-
-        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
+        return urlSb.toString();
     }
 
     private String getVideoUrl(String srcUrl, int fileType) {
@@ -1697,10 +1735,10 @@ public class KernelJob {
     }
 
     public void setPfpAdExcludeKeywordService(IPfpAdExcludeKeywordService pfpAdExcludeKeywordService) {
-		this.pfpAdExcludeKeywordService = pfpAdExcludeKeywordService;
-	}
+        this.pfpAdExcludeKeywordService = pfpAdExcludeKeywordService;
+    }
 
-	public void setPfbStyleInfoService(IPfbStyleInfoService pfbStyleInfoService) {
+    public void setPfbStyleInfoService(IPfbStyleInfoService pfbStyleInfoService) {
         this.pfbStyleInfoService = pfbStyleInfoService;
     }
 
