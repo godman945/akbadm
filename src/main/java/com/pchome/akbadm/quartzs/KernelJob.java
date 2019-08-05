@@ -638,27 +638,27 @@ public class KernelJob {
 
         // log by nico
         if (allPvclkSums != null) {
-        	log.info("======>allPvclkSums[CK]="+(float) allPvclkSums[1]+",[PV]="+allPvclkSums[0]+",[view]="+allPvclkSums[2]);
+            log.info("======>allPvclkSums[CK]="+(float) allPvclkSums[1]+",[PV]="+allPvclkSums[0]+",[view]="+allPvclkSums[2]);
 
 
-	        if ((allPvclkSums[0] == 0) || (allPvclkSums[1] == 0)) {
-	            cpmWeight = 0.005f;
-	        }
-	        else {
-	            cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
-	        }
+            if ((allPvclkSums[0] == 0) || (allPvclkSums[1] == 0)) {
+                cpmWeight = 0.005f;
+            }
+            else {
+                cpmWeight = (float) (Math.min((float) allPvclkSums[1] / allPvclkSums[0] , 0.02) * 1000);
+            }
 
-	        if (allPvclkSums[1] == 0) {
-	            cpvWeight = 0.005f;
-	        }
-	        else {
-	            cpvWeight = Math.min((float) allPvclkSums[1] / allPvclkSums[0], 0.02f);
-	        }
+            if (allPvclkSums[1] == 0) {
+                cpvWeight = 0.005f;
+            }
+            else {
+                cpvWeight = Math.min((float) allPvclkSums[1] / allPvclkSums[0], 0.02f);
+            }
 
         }else{
 
-        	 cpmWeight = 0.005f;
-        	 cpvWeight = 0.005f;
+             cpmWeight = 0.005f;
+             cpvWeight = 0.005f;
         }
 
         // log by nico
@@ -686,7 +686,7 @@ public class KernelJob {
         log.info("splitAdSize="+splitAdSize);
 
         for (String adSeq: allAdSet) {
-        	if (reduceCount++ <= splitAdSize) {
+            if (reduceCount++ <= splitAdSize) {
                 allowAdSet.add(adSeq);
             }
         }
@@ -709,7 +709,7 @@ public class KernelJob {
 
                 // special rule: reduce
                 if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
-                	continue;
+                    continue;
                 }
 
                 // get ad map
@@ -913,14 +913,14 @@ public class KernelJob {
 
                     adBean.setCustomerInfoId(pfpCustomerInfoId);
                     if (pfpToPfdMap.containsKey(pfpCustomerInfoId)) {
-                    	ref = pfpToPfdMap.get(pfpCustomerInfoId);
-                    	adBean.setPfdCustomerInfoId(ref.getPfdCustomerInfo().getCustomerInfoId());
-                    	adBean.setPfdUserId(ref.getPfdUser().getUserId());
-                    	adBean.setPayType(Integer.parseInt(ref.getPfpPayType()));
+                        ref = pfpToPfdMap.get(pfpCustomerInfoId);
+                        adBean.setPfdCustomerInfoId(ref.getPfdCustomerInfo().getCustomerInfoId());
+                        adBean.setPfdUserId(ref.getPfdUser().getUserId());
+                        adBean.setPayType(Integer.parseInt(ref.getPfpPayType()));
                     } else {
-                    	adBean.setPfdCustomerInfoId("");
-                    	adBean.setPfdUserId("");
-                    	adBean.setPayType(1); //預付
+                        adBean.setPfdCustomerInfoId("");
+                        adBean.setPfdUserId("");
+                        adBean.setPayType(1); //預付
                     }
                     adBean.setAdActionId(actionId);
                     adBean.setAdGroupId(pfpAdGroup.getAdGroupSeq());
@@ -975,18 +975,18 @@ public class KernelJob {
                 }
                 // special rule
                 else if ("mp4_url".equals(pfpAdDetail.getAdDetailId())) {
-                	String youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 22);
-                	if(StringUtils.isBlank(youtubeMp4Url)){
-                		youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
-                	}
+                    String youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 22);
+                    if(StringUtils.isBlank(youtubeMp4Url)){
+                        youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
+                    }
                     adDetailBean.setAdDetailContent(youtubeMp4Url.trim());
                 }
                 // special rule
                 else if ("webm_url".equals(pfpAdDetail.getAdDetailId())) {
-                	String youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 247);
-                	if(StringUtils.isBlank(youtubeWebmUrl)){
-                		youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
-                	}
+                    String youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 247);
+                    if(StringUtils.isBlank(youtubeWebmUrl)){
+                        youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
+                    }
                     adDetailBean.setAdDetailContent(youtubeWebmUrl.trim());
                 }
                 // refactor data structure
@@ -1735,10 +1735,10 @@ public class KernelJob {
     }
 
     public void setPfpAdExcludeKeywordService(IPfpAdExcludeKeywordService pfpAdExcludeKeywordService) {
-		this.pfpAdExcludeKeywordService = pfpAdExcludeKeywordService;
-	}
+        this.pfpAdExcludeKeywordService = pfpAdExcludeKeywordService;
+    }
 
-	public void setPfbStyleInfoService(IPfbStyleInfoService pfbStyleInfoService) {
+    public void setPfbStyleInfoService(IPfbStyleInfoService pfbStyleInfoService) {
         this.pfbStyleInfoService = pfbStyleInfoService;
     }
 
