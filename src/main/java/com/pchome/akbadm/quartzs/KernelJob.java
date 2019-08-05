@@ -971,7 +971,7 @@ public class KernelJob {
                 adDetailBean.setAdDetailId(pfpAdDetail.getAdDetailSeq());
                 adDetailBean.setAdDetailType(pfpAdDetail.getAdDetailId());
                 if ("real_url".equals(pfpAdDetail.getAdDetailId())) {
-                    adDetailBean.setAdDetailContent(this.encodeParam(pfpAdDetail.getAdDetailContent()).trim());
+                    adDetailBean.setAdDetailContent(this.encodeUrl(pfpAdDetail.getAdDetailContent()).trim());
                 }
                 // special rule
                 else if ("mp4_url".equals(pfpAdDetail.getAdDetailId())) {
@@ -1309,7 +1309,7 @@ public class KernelJob {
 
             // allowCusurl
             for (PfbxAllowCusurl pfbxAllowCusurl: pfbxUserOption.getPfbxAllowCusurls()) {
-                pfbxUserOptionBean.getAllowCusurls().put(pfbxAllowCusurl.getCuId(), this.encodeParam(pfbxAllowCusurl.getUrl()));
+                pfbxUserOptionBean.getAllowCusurls().put(pfbxAllowCusurl.getCuId(), this.encodeUrl(pfbxAllowCusurl.getUrl()));
             }
 
             // blockIndustry
@@ -1327,7 +1327,7 @@ public class KernelJob {
 
             // blockCusurl
             for (PfbxBlockCusurl pfbxBlockCusurl: pfbxUserOption.getPfbxBlockCusurls()) {
-                pfbxUserOptionBean.getBlockCusurls().put(pfbxBlockCusurl.getCuId(), this.encodeParam(pfbxBlockCusurl.getUrl()));
+                pfbxUserOptionBean.getBlockCusurls().put(pfbxBlockCusurl.getCuId(), this.encodeUrl(pfbxBlockCusurl.getUrl()));
             }
 
             // area
@@ -1634,18 +1634,67 @@ public class KernelJob {
         log.info("scp ok");
     }
 
-    private String encodeParam(String url) {
+    private String encodeUrl(String url) {
         String[] urls = URLDecoder.decode(url, StandardCharsets.UTF_8).split("\\?");
-        if (urls.length != 2) {
-            return URLEncoder.encode(url, StandardCharsets.UTF_8);
+
+        StringBuilder urlSb = new StringBuilder();
+        if (urls.length == 1) {
+            urlSb.append(encodePath(urls[0]));
+        }
+        else {
+            urlSb.append(encodePath(urls[0]));
+            urlSb.append("?").append(encodeParam(urls[1]));
         }
 
-        // url
-        StringBuilder urlSb = new StringBuilder();
-        urlSb.append(urls[0]).append("?");
+        // special rule
+        String realUrl = urlSb.toString()
+                                .replaceAll("\\+", "%20")
+                                .replaceAll("\\%21", "!")
+                                .replaceAll("\\%27", "'")
+                                .replaceAll("\\%28", "(")
+                                .replaceAll("\\%29", ")")
+                                .replaceAll("\\%7E", "~")
+                                .replaceAll("\\%2F", "/")
+                                .replaceAll("\\%23", "#");
 
-        // param
-        String[] params = urls[1].split("&");
+        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
+    }
+
+    private String encodePath(String uri) {
+        if (StringUtils.isBlank(uri)) {
+            return uri;
+        }
+
+        String[] uris = uri.split("/");
+        if (uris.length <= 2) {
+            return uri;
+        }
+
+        StringBuilder uriSb = new StringBuilder();
+        for (int i = 0; i < uris.length; i++) {
+            if (i <= 2) {
+                uriSb.append(uris[i]);
+            }
+            else {
+                uriSb.append(URLEncoder.encode(uris[i], StandardCharsets.UTF_8));
+            }
+
+            if (i != uris.length - 1) {
+                uriSb.append("/");
+            }
+        }
+
+        return uriSb.toString();
+    }
+
+    private String encodeParam(String param) {
+        if (StringUtils.isBlank(param)) {
+            return param;
+        }
+
+        StringBuilder urlSb = new StringBuilder();
+
+        String[] params = param.split("&");
         String[] keys = null;
         for (int i = 0; i < params.length; i++) {
             keys = params[i].split("=");
@@ -1663,18 +1712,7 @@ public class KernelJob {
             }
         }
 
-        // special rule
-        String realUrl = urlSb.toString()
-                                .replaceAll("\\+", "%20")
-                                .replaceAll("\\%21", "!")
-                                .replaceAll("\\%27", "'")
-                                .replaceAll("\\%28", "(")
-                                .replaceAll("\\%29", ")")
-                                .replaceAll("\\%7E", "~")
-                                .replaceAll("\\%2F", "/")
-                                .replaceAll("\\%23", "#");
-
-        return URLEncoder.encode(realUrl, StandardCharsets.UTF_8);
+        return urlSb.toString();
     }
 
     private String getVideoUrl(String srcUrl, int fileType) {
