@@ -552,7 +552,7 @@ public class KernelJob {
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
-        Set<PfpAd> allAdSet = new HashSet<>();
+        Set<String> allAdSet = new HashSet<>();
         Set<String> allowAdSet = new HashSet<>();
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
@@ -678,16 +678,16 @@ public class KernelJob {
 
         // special rule: reduce
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
-            allAdSet.add(pfpAdDetail.getPfpAd());
+            allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
         }
 
         // by nico
         splitAdSize=(allAdSet.size() / reduceDivisor) * minuteReduceNumber;
         log.info("splitAdSize="+splitAdSize);
 
-        for (PfpAd tempPfpAd: allAdSet) {
-            if ((tempPfpAd.getAdAssignTadSeq() != null) || (reduceCount++ <= splitAdSize)) {
-                allowAdSet.add(tempPfpAd.getAdSeq());
+        for (String adSeq: allAdSet) {
+            if (reduceCount++ <= splitAdSize) {
+                allowAdSet.add(adSeq);
             }
         }
 
@@ -708,7 +708,10 @@ public class KernelJob {
                 pfpCustomerInfoId = pfpCustomerInfo.getCustomerInfoId();
 
                 // special rule: reduce
-                if ((hour == reduceHour) && !allowAdSet.contains(adId)) {
+                if ((hour == reduceHour) &&
+                        !allowAdSet.contains(adId) &&
+                        !"adp_201904090001".equals(adPoolId)) {
+
                     continue;
                 }
 
