@@ -552,7 +552,7 @@ public class KernelJob {
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
         Map<String, AdBean> adMap = null;
-        Set<String> allAdSet = new HashSet<>();
+        Set<PfpAd> allAdSet = new HashSet<>();
         Set<String> allowAdSet = new HashSet<>();
         AdBean adBean = null;
         AdDetailBean adDetailBean = null;
@@ -678,16 +678,16 @@ public class KernelJob {
 
         // special rule: reduce
         for (PfpAdDetail pfpAdDetail: pfpAdDetailList) {
-            allAdSet.add(pfpAdDetail.getPfpAd().getAdSeq());
+            allAdSet.add(pfpAdDetail.getPfpAd());
         }
 
         // by nico
         splitAdSize=(allAdSet.size() / reduceDivisor) * minuteReduceNumber;
         log.info("splitAdSize="+splitAdSize);
 
-        for (String adSeq: allAdSet) {
-            if (reduceCount++ <= splitAdSize) {
-                allowAdSet.add(adSeq);
+        for (PfpAd tempPfpAd: allAdSet) {
+            if ((tempPfpAd.getAdAssignTadSeq() != null) || (reduceCount++ <= splitAdSize)) {
+                allowAdSet.add(tempPfpAd.getAdSeq());
             }
         }
 
