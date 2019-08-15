@@ -1040,7 +1040,8 @@ public class KernelJob {
         long startTime = Calendar.getInstance().getTimeInMillis();
 
         // load adGroup
-        List<String> groupList = pfpCustomerInfoService.selectValidAdGroup("keyword");
+//        List<String> groupList = pfpCustomerInfoService.selectValidAdGroup("keyword");
+        List<String> groupList = new ArrayList<>();
         Map<String, Float> pfpKeywordSyspriceMap = pfpKeywordSyspriceService.getKeywordMap();
         List<PfpAdExcludeKeyword> pfpAdExcludeKeywordList = null;
         List<ValidKeywordBean> validKeywordList = null;
