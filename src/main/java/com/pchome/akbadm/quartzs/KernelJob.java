@@ -1688,7 +1688,10 @@ public class KernelJob {
             }
         }
 
-        return uriSb.toString();
+        // special rule: doubleclick
+        return uriSb.toString()
+                    .replaceAll("\\%3B", ";")
+                    .replaceAll("\\%3D", "=");
     }
 
     private String encodeParam(String param) {
