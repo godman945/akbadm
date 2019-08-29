@@ -79,7 +79,7 @@ public class EveryDayPfbBonus {
 				log.info(" totalPfbClkPrice: "+totalPfbClkPrice);
 						if(totalPfbClkPrice > 0){
 							//撈出所有 PFB LIST
-							this.statrDate = sdf.format(new Date());
+							this.statrDate = sdf.format(countDate);
 							List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
 							
 							
