@@ -9,6 +9,7 @@ import org.apache.commons.lang.StringUtils;
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxAdUrlReport;
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;
+import com.pchome.akbadm.factory.pfbx.bonus.EveryDayPfbBonus;
 import com.pchome.enumerate.pfbx.account.EnumPfbAccountStatus;
 
 public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> implements IPfbxCustomerInfoDAO {
@@ -118,16 +119,27 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 	@SuppressWarnings("unchecked")
 	public List<PfbxCustomerInfo> findQuartzsPfbxCustomerInfo() {
 		
+		
+		System.out.println(EveryDayPfbBonus.countDate);
+		
 		StringBuffer hql = new StringBuffer();
 		List<Object> list = new ArrayList<Object>();
 		
-		hql.append(" from PfbxCustomerInfo where 1 = 1 ");
-		hql.append(" and (status != ? or status != ? ) ");
-		hql.append(" order by customerInfoId ");
+//		hql.append(" from PfbxCustomerInfo where 1 = 1 ");
+//		hql.append(" and (status != ? or status != ? ) ");
+//		hql.append(" order by customerInfoId ");
+//		
+//		list.add(EnumPfbAccountStatus.APPLY.getStatus());
+//		list.add(EnumPfbAccountStatus.DELETE.getStatus());
 		
+		
+		hql.append(" select pfbxCustomerInfo.customerInfoId from PfbxCustomerInfo pfbxCustomerInfo, PfpAdPvclk pfpAdPvclk   where 1 = 1 ");
+		hql.append("  and (pfbxCustomerInfo.status != ? or pfbxCustomerInfo.status != ? ) ");
+		hql.append("  and (pfpAdPvclk.adPvclkDate = '").append(EveryDayPfbBonus.countDate).append("'").append(") ) ");
+		hql.append(" and pfbxCustomerInfo.customerInfoId = pfpAdPvclk.pfbxCustomerInfoId ");
+		hql.append(" order by pfbxCustomerInfo.customerInfoId ");
 		list.add(EnumPfbAccountStatus.APPLY.getStatus());
 		list.add(EnumPfbAccountStatus.DELETE.getStatus());
-		
 		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 	}
 	
