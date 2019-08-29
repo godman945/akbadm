@@ -171,6 +171,8 @@ public class EveryDayPfbBonus {
 	
 	//前日分潤計算
 	public void bonusConutProcess(Date countDate){
+		this.statrDate = sdf.format(countDate);
+		log.info(">>>>>>>>>>>>>>>>>>real report statrDate:"+statrDate);
 		
 		// 系統分潤比例
 		AdmBonusSet admBonusSet =  admBonusSetService.findLastAdmBonusSet(countDate);
