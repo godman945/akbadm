@@ -1,12 +1,11 @@
 package com.pchome.akbadm.factory.pfbx.bonus;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pchome.akbadm.db.pojo.AdmBonusBillReport;
 import com.pchome.akbadm.db.pojo.AdmBonusSet;
@@ -56,12 +55,13 @@ public class EveryDayPfbBonus {
 	private IAdmAccesslogService admAccesslogService;
 	
 	private IPfpRefundOrderService pfpRefundOrderService;
-	
-	public static String countDate;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public static String statrDate;
 	
 	//當日每小時預估分潤金額,只是預估讓前台的報表當日每小更新時有數據
 	public void bonusEstimatedProcess(String today){
-		Date countDate=DateValueUtil.getInstance().stringToDate(today);
+		Date countDate = DateValueUtil.getInstance().stringToDate(today);
+		
 		// 系統分潤比例
 		AdmBonusSet admBonusSet =  admBonusSetService.findLastAdmBonusSet(countDate);
 				
@@ -79,6 +79,7 @@ public class EveryDayPfbBonus {
 				log.info(" totalPfbClkPrice: "+totalPfbClkPrice);
 						if(totalPfbClkPrice > 0){
 							//撈出所有 PFB LIST
+							this.statrDate = sdf.format(new Date());
 							List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
 							
 							

@@ -15,7 +15,7 @@ import com.pchome.config.TestConfig;
 import com.pchome.soft.util.DateValueUtil;
 
 
-//@Transactional
+@Transactional
 public class PfbBonusJob {
 
 	protected Logger log = LogManager.getRootLogger();

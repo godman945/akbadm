@@ -120,8 +120,8 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 	public List<PfbxCustomerInfo> findQuartzsPfbxCustomerInfo() {
 		
 		
-		System.out.println(EveryDayPfbBonus.countDate);
-		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>EveryDayPfbBonus.countDate:"+EveryDayPfbBonus.countDate);
+		System.out.println(EveryDayPfbBonus.statrDate);
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>EveryDayPfbBonus.countDate:"+EveryDayPfbBonus.statrDate);
 		StringBuffer hql = new StringBuffer();
 		List<Object> list = new ArrayList<Object>();
 		
@@ -135,7 +135,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		
 		hql.append(" select pfbxCustomerInfo.customerInfoId from PfbxCustomerInfo pfbxCustomerInfo, PfpAdPvclk pfpAdPvclk   where 1 = 1 ");
 		hql.append("  and (pfbxCustomerInfo.status != ? or pfbxCustomerInfo.status != ? ) ");
-		hql.append("  and (pfpAdPvclk.adPvclkDate = '").append(EveryDayPfbBonus.countDate).append("'").append(") ) ");
+		hql.append("  and (pfpAdPvclk.adPvclkDate = '").append(EveryDayPfbBonus.statrDate).append("'").append(") ) ");
 		hql.append(" and pfbxCustomerInfo.customerInfoId = pfpAdPvclk.pfbxCustomerInfoId ");
 		hql.append(" order by pfbxCustomerInfo.customerInfoId ");
 		list.add(EnumPfbAccountStatus.APPLY.getStatus());
