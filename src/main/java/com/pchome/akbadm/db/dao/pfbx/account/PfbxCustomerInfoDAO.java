@@ -121,7 +121,7 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		
 		
 		System.out.println(EveryDayPfbBonus.countDate);
-		
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>EveryDayPfbBonus.countDate:"+EveryDayPfbBonus.countDate);
 		StringBuffer hql = new StringBuffer();
 		List<Object> list = new ArrayList<Object>();
 		
