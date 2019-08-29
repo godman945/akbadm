@@ -39,6 +39,7 @@ public class PfbBonusJob {
 		//String today="2015-06-09";
 		// 刪除日期之後的資料
 		deletePfbBonus.deleteProcess(today);
+		log.info("deleteProcess success");
 		everyDayPfbBonus.bonusEstimatedProcess(today);
 
         log.info("====PfbBonusJob.bonusEstimatedProcess() end====");
