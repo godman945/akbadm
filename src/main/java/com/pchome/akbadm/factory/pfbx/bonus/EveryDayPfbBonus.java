@@ -1,7 +1,9 @@
 package com.pchome.akbadm.factory.pfbx.bonus;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -55,7 +57,7 @@ public class EveryDayPfbBonus {
 	
 	private IPfpRefundOrderService pfpRefundOrderService;
 	
-	
+	private static Map<String,PfbxBonusSet> pfbxBonusSetMap = new HashMap<String,PfbxBonusSet>();
 	
 	//當日每小時預估分潤金額,只是預估讓前台的報表當日每小更新時有數據
 	public void bonusEstimatedProcess(String today){
@@ -81,13 +83,22 @@ public class EveryDayPfbBonus {
 								//可分潤總金額減掉40%(預估的)
 								float totalBonusMoney=totalPfbClkPrice-(float)(totalPfbClkPrice*0.4);				
 								
-								
+								PfbxBonusSet pfbxBonusSet = null;
 								for(PfbxCustomerInfo pfb:pfbxs){		
-									
-									
 									//取出每一家的分潤 % 數,送入的日期會取出同一家PFB多筆%數的最後一筆
 									log.info(" pfbId: "+pfb.getCustomerInfoId());
-									PfbxBonusSet pfbxBonusSet = pfbxBonusSetService.findPfbxBonusSet(pfb.getCustomerInfoId(), countDate);
+									
+									if(pfbxBonusSetMap.containsKey(pfb.getCustomerInfoId())) {
+										pfbxBonusSet = pfbxBonusSetMap.get(pfb.getCustomerInfoId());
+										log.info("exist pfbxBonusSet:"+pfbxBonusSet.getPfbPercent()+" pfbId>>>>"+pfb.getCustomerInfoId());
+									}else {
+										PfbxBonusSet pfbxBonusSetObj = pfbxBonusSetService.findPfbxBonusSet(pfb.getCustomerInfoId(), countDate);
+										pfbxBonusSetMap.put(pfb.getCustomerInfoId(), pfbxBonusSetObj);
+										pfbxBonusSet = pfbxBonusSetObj;
+									}
+									
+									
+									
 									
 									if(pfbxBonusSet == null){
 										log.info(" pfbId bonus set is null "+pfb.getCustomerInfoId());
