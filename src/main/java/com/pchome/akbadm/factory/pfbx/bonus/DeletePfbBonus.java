@@ -26,10 +26,13 @@ public class DeletePfbBonus {
 		
 		// 刪除 adm_bonus_bill_report
 		this.deleteAdmBonusBillReport(dDate);
+		log.info(">>>> deleteAdmBonusBillReport ok");
 		// 刪除 adm_bonus_detail_report
-		this.deleteAdmBonusDetailReport(dDate);		
+		this.deleteAdmBonusDetailReport(dDate);
+		log.info(">>>> deleteAdmBonusDetailReport ok");
 		// 刪除 pfbx_bonus_day_report
 		this.deletePfbxBonusDayReport(dDate);
+		log.info(">>>> deletePfbxBonusDayReport ok");
 		// 刪除 pfd_bonus_day_report
 		//this.deletePfdBonusDayReport(dDate);
 		
