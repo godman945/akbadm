@@ -80,6 +80,10 @@ public class EveryDayPfbBonus {
 						if(totalPfbClkPrice > 0){
 							//撈出所有 PFB LIST
 							List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
+							
+							
+							log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>pfbxs size:"+pfbxs.size());
+							
 							if(!pfbxs.isEmpty()){
 								//可分潤總金額減掉40%(預估的)
 								float totalBonusMoney=totalPfbClkPrice-(float)(totalPfbClkPrice*0.4);				
