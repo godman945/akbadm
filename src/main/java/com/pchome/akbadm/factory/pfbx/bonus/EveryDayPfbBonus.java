@@ -57,7 +57,7 @@ public class EveryDayPfbBonus {
 	
 	private IPfpRefundOrderService pfpRefundOrderService;
 	
-	private static Map<String,PfbxBonusSet> pfbxBonusSetMap = new HashMap<String,PfbxBonusSet>();
+	public static String countDate;
 	
 	//當日每小時預估分潤金額,只是預估讓前台的報表當日每小更新時有數據
 	public void bonusEstimatedProcess(String today){
@@ -75,6 +75,7 @@ public class EveryDayPfbBonus {
 				//篩選 pfbxCustomerInfoId <> '' 的資料 ,有貼 code 的才算(這裡先拿掉了，理論上不應該有沒有被版位管理的播放)
 			    //撈 pfp_ad_pvclk table
 				float totalPfbClkPrice = pfpAdPvclkService.totalPfbAdPvclk(null, countDate, countDate);
+				
 				log.info(" totalPfbClkPrice: "+totalPfbClkPrice);
 						if(totalPfbClkPrice > 0){
 							//撈出所有 PFB LIST
@@ -83,23 +84,11 @@ public class EveryDayPfbBonus {
 								//可分潤總金額減掉40%(預估的)
 								float totalBonusMoney=totalPfbClkPrice-(float)(totalPfbClkPrice*0.4);				
 								
-								PfbxBonusSet pfbxBonusSet = null;
 								for(PfbxCustomerInfo pfb:pfbxs){		
 									//取出每一家的分潤 % 數,送入的日期會取出同一家PFB多筆%數的最後一筆
 									log.info(" pfbId: "+pfb.getCustomerInfoId());
-									
-									if(pfbxBonusSetMap.containsKey(pfb.getCustomerInfoId())) {
-										pfbxBonusSet = pfbxBonusSetMap.get(pfb.getCustomerInfoId());
-										log.info("exist pfbxBonusSet:"+pfbxBonusSet.getPfbPercent()+" pfbId>>>>"+pfb.getCustomerInfoId());
-									}else {
-										PfbxBonusSet pfbxBonusSetObj = pfbxBonusSetService.findPfbxBonusSet(pfb.getCustomerInfoId(), countDate);
-										pfbxBonusSetMap.put(pfb.getCustomerInfoId(), pfbxBonusSetObj);
-										pfbxBonusSet = pfbxBonusSetObj;
-									}
-									
-									
-									
-									
+									PfbxBonusSet pfbxBonusSet = pfbxBonusSetService.findPfbxBonusSet(pfb.getCustomerInfoId(), countDate);
+
 									if(pfbxBonusSet == null){
 										log.info(" pfbId bonus set is null "+pfb.getCustomerInfoId());
 										continue;
