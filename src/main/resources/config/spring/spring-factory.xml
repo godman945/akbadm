@@ -448,6 +448,7 @@
     	<property name="admRecognizeDetailService" ref="AdmRecognizeDetailService" />
     	<property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
     	<property name="pfpRefundOrderService" ref="PfpRefundOrderService" />
+    	<property name="accesslogService" ref="AdmAccesslogService" />
     	<property name="pfdParseFactory" ref="PfdParseFactory" />
     	<property name="parsePath" value="${pfd.parse.path}" />
     </bean>

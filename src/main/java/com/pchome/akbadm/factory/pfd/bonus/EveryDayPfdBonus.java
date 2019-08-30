@@ -41,7 +41,7 @@ public class EveryDayPfdBonus {
 	private IAdmRecognizeDetailService admRecognizeDetailService;
 	private IPfdBonusDayReportService pfdBonusDayReportService;
 	private IPfpRefundOrderService pfpRefundOrderService;
-	private IAdmAccesslogService admAccesslogService;
+	private IAdmAccesslogService accesslogService;
 	private PfdParseFactory pfdParseFactory;	
 	private String parsePath;
 	private float publicPfdSaveBonusMoney=0.0f;
@@ -285,7 +285,7 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 			
 			pfdBonusDayReportService.saveOrUpdate(report);
 		}else {
-			admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.ACCOUNT_MODIFY, "updatePfdBonusDayReport is zero ", 
+			accesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.ACCOUNT_MODIFY, "updatePfdBonusDayReport is zero ", 
 				    null, null, null, 
 				    null, null, EnumAccesslogEmailStatus.YES);
 		}
@@ -338,6 +338,18 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 	public void setPfpRefundOrderService(IPfpRefundOrderService pfpRefundOrderService) {
 		this.pfpRefundOrderService = pfpRefundOrderService;
 	}
+
+
+	public IAdmAccesslogService getAccesslogService() {
+		return accesslogService;
+	}
+
+
+	public void setAccesslogService(IAdmAccesslogService accesslogService) {
+		this.accesslogService = accesslogService;
+	}
+
+
 	
 	
 }
