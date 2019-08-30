@@ -241,7 +241,6 @@
         <property name="pfdBonusItemFactory" ref="PfdBonusItemFactory" />
         <property name="everyDayPfdBonus" ref="EveryDayPfdBonus" />
         <property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
-        <property name="accesslogService" ref="AdmAccesslogService" />
     </bean> 
 	 
 	<!-- Pfb bonus Job -->

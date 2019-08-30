@@ -201,7 +201,6 @@
         <property name="pfdBonusItemFactory" ref="PfdBonusItemFactory" />
         <property name="everyDayPfdBonus" ref="EveryDayPfdBonus" />
         <property name="pfdBonusDayReportService" ref="PfdBonusDayReportService" />
-        <property name="accesslogService" ref="AdmAccesslogService" />
     </bean>
     
     <bean id="RetrieveJob" class="com.pchome.akbadm.quartzs.RetrieveJob">
