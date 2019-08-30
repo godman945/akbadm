@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pchome.akbadm.bean.bonus.BonusBean;
 import com.pchome.akbadm.db.pojo.PfdBonusDayReport;
@@ -13,6 +13,7 @@ import com.pchome.akbadm.db.pojo.PfdBonusItemSet;
 import com.pchome.akbadm.db.pojo.PfdContract;
 import com.pchome.akbadm.db.pojo.PfdCustomerInfo;
 import com.pchome.akbadm.db.pojo.PfdUserAdAccountRef;
+import com.pchome.akbadm.db.service.accesslog.IAdmAccesslogService;
 import com.pchome.akbadm.db.service.contract.IPfdContractService;
 import com.pchome.akbadm.db.service.order.IPfpRefundOrderService;
 import com.pchome.akbadm.db.service.pfd.bonus.IPfdBonusDayReportService;
@@ -25,6 +26,9 @@ import com.pchome.enumerate.order.EnumPfpRefundOrderStatus;
 import com.pchome.enumerate.pfd.EnumPfdAccountStatus;
 import com.pchome.enumerate.pfd.bonus.EnumPfdBonusItem;
 import com.pchome.enumerate.recognize.EnumOrderType;
+import com.pchome.rmi.accesslog.EnumAccesslogAction;
+import com.pchome.rmi.accesslog.EnumAccesslogChannel;
+import com.pchome.rmi.accesslog.EnumAccesslogEmailStatus;
 import com.pchome.rmi.bonus.EnumPfdAccountPayType;
 import com.pchome.soft.util.DateValueUtil;
 
@@ -37,6 +41,7 @@ public class EveryDayPfdBonus {
 	private IAdmRecognizeDetailService admRecognizeDetailService;
 	private IPfdBonusDayReportService pfdBonusDayReportService;
 	private IPfpRefundOrderService pfpRefundOrderService;
+	private IAdmAccesslogService admAccesslogService;
 	private PfdParseFactory pfdParseFactory;	
 	private String parsePath;
 	private float publicPfdSaveBonusMoney=0.0f;
@@ -254,6 +259,7 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 		log.info(" padFreePrice: "+padFreePrice);
 		log.info(" padPaidPrice: "+padPaidPrice);
 		
+		
 		if(percent > 0 && (padSavePrice > 0 || padPaidPrice >0)){
 			
 			Date today = new Date();
@@ -278,6 +284,10 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 			report.setCreateDate(today);
 			
 			pfdBonusDayReportService.saveOrUpdate(report);
+		}else {
+			admAccesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.ACCOUNT_MODIFY, "updatePfdBonusDayReport is zero ", 
+				    null, null, null, 
+				    null, null, EnumAccesslogEmailStatus.YES);
 		}
 		
 	}
