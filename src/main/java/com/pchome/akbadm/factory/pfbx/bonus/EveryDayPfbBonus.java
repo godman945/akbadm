@@ -82,7 +82,6 @@ public class EveryDayPfbBonus {
 							this.statrDate = sdf.format(countDate);
 							List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
 							
-							
 							log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>pfbxs size:"+pfbxs.size());
 							
 							if(!pfbxs.isEmpty()){
@@ -113,12 +112,8 @@ public class EveryDayPfbBonus {
 										continue;
 									}
 									
-									
-									
-									
 								
 									PfbxBonusDayReport dayReport = new PfbxBonusDayReport();
-									
 									dayReport.setReportDate(countDate);
 									dayReport.setPfbxCustomerInfo(pfb);
 									dayReport.setPfbClkPrice(pfbClkPrice);
@@ -172,8 +167,6 @@ public class EveryDayPfbBonus {
 	//前日分潤計算
 	public void bonusConutProcess(Date countDate){
 		this.statrDate = sdf.format(countDate);
-		log.info(">>>>>>>>>>>>>>>>>>real report statrDate:"+statrDate);
-		
 		// 系統分潤比例
 		AdmBonusSet admBonusSet =  admBonusSetService.findLastAdmBonusSet(countDate);
 		
@@ -384,7 +377,7 @@ public class EveryDayPfbBonus {
 				
 				// Pfb 播出廣告占總廣告比
 				//float pfbClkPercent = pfbClkPrice / totalPfbClkPrice;	
-				
+				log.info("----------START-----------:"+pfb.getCustomerInfoId());
 				float saveClkPrice = (pfbClkPrice * pfbTotalSaveBonus) / totalPfbClkPrice;
 				log.info(" saveClkPrice: "+saveClkPrice);
 				
@@ -421,6 +414,7 @@ public class EveryDayPfbBonus {
 				float totalCharge = saveCharge + freeCharge + postpaidCharge;
 				log.info(" totalCharge: "+totalCharge);
 				
+				log.info("----------END-----------:"+pfb.getCustomerInfoId());
 				PfbxBonusDayReport dayReport = new PfbxBonusDayReport();
 				
 				dayReport.setReportDate(startDate);
