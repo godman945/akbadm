@@ -270,6 +270,14 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 			float pfdPaidBonusMoney = percent * padPaidPrice;
 			
 			float pfdBonusMoney = pfdSaveBonusMoney +  pfdPaidBonusMoney;
+			
+			
+			if(pfdBonusMoney == 0) {
+				accesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.ACCOUNT_MODIFY, "updatePfdBonusDayReport is zero ", 
+					    null, null, null, 
+					    null, null, EnumAccesslogEmailStatus.YES);
+			}
+			
 			report.setReportDate(reportDate);
 			report.setPfdCustomerInfo(pfdCustomerInfo);
 			report.setPfdMonthPercent(percent);
@@ -282,12 +290,7 @@ private float getPfdFreeClkPrice(String pfdId, Date costDate){
 			report.setPostpaidBonus(pfdPaidBonusMoney);
 			report.setPfdBonusMoney(pfdBonusMoney);
 			report.setCreateDate(today);
-			
 			pfdBonusDayReportService.saveOrUpdate(report);
-		}else {
-			accesslogService.addAdmAccesslog(EnumAccesslogChannel.ADM, EnumAccesslogAction.ACCOUNT_MODIFY, "updatePfdBonusDayReport is zero ", 
-				    null, null, null, 
-				    null, null, EnumAccesslogEmailStatus.YES);
 		}
 		
 	}
