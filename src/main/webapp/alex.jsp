@@ -52,11 +52,17 @@ stg<p>
 			pad_customerId="PFBC20150519001";
 			pad_positionId="PFBP201509250003C";
 </script>
-<script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/pcadshowstg.js"></script>		    
+<script id="pcadscript" language="javascript" src="html/js/kernel/pcadshowstg.js"></script>		    
 		    
 
- 
-
+<br> 
+<script language="javascript">
+pad_width=300;
+pad_height=250;
+pad_customerId="PFBC20150519001";
+pad_positionId="PFBP201801230005C";
+</script>
+<script id="pcadscript" language="javascript" src="https://kdpic.pchome.com.tw/img/js/pcadshowstg.js"></script>
 
 </body>
 </html>
