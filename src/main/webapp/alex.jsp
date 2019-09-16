@@ -19,8 +19,6 @@ qv1=new String( qv.getBytes("ISO-8859-1"),"UTF-8");
 }
 %>
 <body>
-
-
 <script  id="pcadscript" language="javascript" async src="https://pacl.pchome.com.tw/js/ptag.js"></script>
 <script>
    window.dataLayer = window.dataLayer || [];
@@ -34,30 +32,12 @@ qv1=new String( qv.getBytes("ISO-8859-1"),"UTF-8");
 
 
 
-	<form id="searchForm" method="GET" action="adtestprd.jsp" >
-                關鍵字:<input  type="text"  name="q"  value="<%=qv1%>"/><br>
-               頁數: <input  type="text"  name="page" value="1" /><br> 
-                比對:   
-               <select name="precise">
-  					<option value="true">精準</option>
-  					<option value="false" selected >模糊</option>
-				</select>
-               
-               <input type="submit"   value="send" />
-                
-    		</form>
 
 
 <table border=1 >
 <tr>
 <td>
 stg<p>
-
-
-關鍵字=<%=qv1%><br>
-頁數=<%= request.getParameter("page") %><br>
-比對:= <%=request.getParameter("precise") %>
-<br><br><br><br>
 <!-- 
 <script language="javascript">
 			pad_width=300;
@@ -68,8 +48,9 @@ stg<p>
 <script id="pcadscript" language="javascript" src="html/js/kernel/pcadshowstg.js"></script>		    
 	 -->	    
 
-<br> 
 
+請點擊廣告啟用信箱
+<br> <br> <br> 
 <script language="javascript">
 pad_width=300;
 pad_height=250;
@@ -80,7 +61,7 @@ pad_positionId="PFBP201801230005C";
 
 <a href="http://yahoo.com.tw" target="_blank">非點擊廣告連結</a>
 
-<div id="Layer"  style="opacity:0.8;pointer-events:none; position:absolute;top:239px; width:300px; height:250px;background-color: #CCCCCC; z-index:2;layer-background-color: #CCCCCC; border: 1px none #000000;" >
+<div id="Layer"  style="opacity:0;pointer-events:none; position:absolute;top:102px; width:300px; height:250px;background-color: #CCCCCC; z-index:2;layer-background-color: #CCCCCC; border: 1px none #000000;" >
 </div>
 
 
