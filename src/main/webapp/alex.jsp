@@ -79,17 +79,8 @@ pad_positionId="PFBP201801230005C";
 <script id="pcadscript" language="javascript" src="html/js/kernel/pcadshowstg.js"></script>
 
 <a href="http://yahoo.com.tw" target="_blank">非點擊廣告連結</a>
-<br><br><br><br><br><br><br><br><br><br><br><br>
-<script language="javascript">
-pad_width=300;
-pad_height=250;
-pad_customerId="PFBC20150519001";
-pad_positionId="PFBP201801230005C";
-</script>
-<script id="pcadscript" language="javascript" src="html/js/kernel/pcadshowstg.js"></script>
 
-<div id="Layer"  style="pointer-events:none; position:absolute; left:115px; top:239px; width:269px; height:200px; z-index:2; background-color: #CCCCCC; layer-background-color: #CCCCCC; border: 1px none #000000;" >
-蓋住廣告
+<div id="Layer"  style="opacity:0.8;pointer-events:none; position:absolute;top:239px; width:300px; height:250px;background-color: #CCCCCC; z-index:2;layer-background-color: #CCCCCC; border: 1px none #000000;" >
 </div>
 
 
