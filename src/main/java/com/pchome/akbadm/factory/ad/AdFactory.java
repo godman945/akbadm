@@ -88,7 +88,16 @@ public class AdFactory{
 					String tag = EnumAdTag.START_TAG.getAdTag()+tagNo+EnumAdTag.END_TAG.getAdTag();					
 					htmlContent = htmlContent.replace(tag, pfpAdDetail.getAdDetailContent());
 				}else{
-					log.info(" doesn't find PfpAdDetail -->  adNo = "+adNo+" tagNo  = "+tagNo);
+					if(tagNo.equals("dad_tracking_code")) {
+						String tag = EnumAdTag.START_TAG.getAdTag()+tagNo+EnumAdTag.END_TAG.getAdTag();	
+						log.info("tag:"+tag);
+						htmlContent = htmlContent.replace(tag, "");
+					}else {
+						log.info(" doesn't find PfpAdDetail -->  adNo = "+adNo+" tagNo  = "+tagNo);	
+					}
+					
+					
+					
 				}
 				
 						
