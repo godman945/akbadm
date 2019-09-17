@@ -16,10 +16,18 @@ if (typeof pad_precise != 'undefined') {
 } else {
     seway = false
 }
+
+
+console.log(document.location.protocol);
 if (typeof pad_ssl != 'undefined') {
     padssl = pad_ssl
 } else {
-    padssl = true
+	if(document.location.protocol == 'http:'){
+		padssl = false;
+	}else{
+		padssl = true;	
+	}
+    
 }
 if (typeof pad_positionId != 'undefined') {
     pid = pad_positionId.substring(0, 16);
@@ -88,10 +96,11 @@ try {
 } catch (err) {};
 var fig = "";
 var adurl = "";
-if (padssl == "false") {
+console.log(padssl);
+if (padssl == false) {
     adurl += "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
 } else {
-    adurl += "http://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
+    adurl += "https://kwstg1.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + pad_customerId
 }
 adurl += "&positionId=" + pid;
 adurl += "&padWidth=" + pad_width;
