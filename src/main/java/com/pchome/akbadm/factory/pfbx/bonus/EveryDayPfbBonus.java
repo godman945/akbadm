@@ -1,10 +1,11 @@
 package com.pchome.akbadm.factory.pfbx.bonus;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pchome.akbadm.db.pojo.AdmBonusBillReport;
 import com.pchome.akbadm.db.pojo.AdmBonusSet;
@@ -54,12 +55,13 @@ public class EveryDayPfbBonus {
 	private IAdmAccesslogService admAccesslogService;
 	
 	private IPfpRefundOrderService pfpRefundOrderService;
-	
-	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	public static String statrDate;
 	
 	//當日每小時預估分潤金額,只是預估讓前台的報表當日每小更新時有數據
 	public void bonusEstimatedProcess(String today){
-		Date countDate=DateValueUtil.getInstance().stringToDate(today);
+		Date countDate = DateValueUtil.getInstance().stringToDate(today);
+		
 		// 系統分潤比例
 		AdmBonusSet admBonusSet =  admBonusSetService.findLastAdmBonusSet(countDate);
 				
@@ -73,22 +75,24 @@ public class EveryDayPfbBonus {
 				//篩選 pfbxCustomerInfoId <> '' 的資料 ,有貼 code 的才算(這裡先拿掉了，理論上不應該有沒有被版位管理的播放)
 			    //撈 pfp_ad_pvclk table
 				float totalPfbClkPrice = pfpAdPvclkService.totalPfbAdPvclk(null, countDate, countDate);
+				
 				log.info(" totalPfbClkPrice: "+totalPfbClkPrice);
 						if(totalPfbClkPrice > 0){
 							//撈出所有 PFB LIST
+							this.statrDate = sdf.format(countDate);
 							List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
+							
+							log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>pfbxs size:"+pfbxs.size());
+							
 							if(!pfbxs.isEmpty()){
 								//可分潤總金額減掉40%(預估的)
 								float totalBonusMoney=totalPfbClkPrice-(float)(totalPfbClkPrice*0.4);				
 								
-								
 								for(PfbxCustomerInfo pfb:pfbxs){		
-									
-									
 									//取出每一家的分潤 % 數,送入的日期會取出同一家PFB多筆%數的最後一筆
 									log.info(" pfbId: "+pfb.getCustomerInfoId());
 									PfbxBonusSet pfbxBonusSet = pfbxBonusSetService.findPfbxBonusSet(pfb.getCustomerInfoId(), countDate);
-									
+
 									if(pfbxBonusSet == null){
 										log.info(" pfbId bonus set is null "+pfb.getCustomerInfoId());
 										continue;
@@ -108,12 +112,8 @@ public class EveryDayPfbBonus {
 										continue;
 									}
 									
-									
-									
-									
 								
 									PfbxBonusDayReport dayReport = new PfbxBonusDayReport();
-									
 									dayReport.setReportDate(countDate);
 									dayReport.setPfbxCustomerInfo(pfb);
 									dayReport.setPfbClkPrice(pfbClkPrice);
@@ -166,7 +166,7 @@ public class EveryDayPfbBonus {
 	
 	//前日分潤計算
 	public void bonusConutProcess(Date countDate){
-		
+		this.statrDate = sdf.format(countDate);
 		// 系統分潤比例
 		AdmBonusSet admBonusSet =  admBonusSetService.findLastAdmBonusSet(countDate);
 		
@@ -377,7 +377,7 @@ public class EveryDayPfbBonus {
 				
 				// Pfb 播出廣告占總廣告比
 				//float pfbClkPercent = pfbClkPrice / totalPfbClkPrice;	
-				
+				log.info("----------START-----------:"+pfb.getCustomerInfoId());
 				float saveClkPrice = (pfbClkPrice * pfbTotalSaveBonus) / totalPfbClkPrice;
 				log.info(" saveClkPrice: "+saveClkPrice);
 				
@@ -414,6 +414,7 @@ public class EveryDayPfbBonus {
 				float totalCharge = saveCharge + freeCharge + postpaidCharge;
 				log.info(" totalCharge: "+totalCharge);
 				
+				log.info("----------END-----------:"+pfb.getCustomerInfoId());
 				PfbxBonusDayReport dayReport = new PfbxBonusDayReport();
 				
 				dayReport.setReportDate(startDate);

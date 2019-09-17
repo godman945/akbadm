@@ -7,8 +7,9 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
-import com.pchome.akbadm.db.pojo.PfbxAdUrlReport;
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;
+import com.pchome.akbadm.db.pojo.PfpAdPvclk;
+import com.pchome.akbadm.factory.pfbx.bonus.EveryDayPfbBonus;
 import com.pchome.enumerate.pfbx.account.EnumPfbAccountStatus;
 
 public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> implements IPfbxCustomerInfoDAO {
@@ -116,19 +117,55 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 	}
 
 	@SuppressWarnings("unchecked")
+	
+	public static List<String> pfdIdList = new ArrayList<String>();
 	public List<PfbxCustomerInfo> findQuartzsPfbxCustomerInfo() {
 		
+		
+		System.out.println(EveryDayPfbBonus.statrDate);
+		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>EveryDayPfbBonus.countDate:"+EveryDayPfbBonus.statrDate);
 		StringBuffer hql = new StringBuffer();
 		List<Object> list = new ArrayList<Object>();
 		
-		hql.append(" from PfbxCustomerInfo where 1 = 1 ");
-		hql.append(" and (status != ? or status != ? ) ");
-		hql.append(" order by customerInfoId ");
+//		hql.append(" from PfbxCustomerInfo where 1 = 1 ");
+//		hql.append(" and (status != ? or status != ? ) ");
+//		hql.append(" order by customerInfoId ");
+//		
+//		list.add(EnumPfbAccountStatus.APPLY.getStatus());
+//		list.add(EnumPfbAccountStatus.DELETE.getStatus());
 		
-		list.add(EnumPfbAccountStatus.APPLY.getStatus());
-		list.add(EnumPfbAccountStatus.DELETE.getStatus());
 		
-		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
+//		hql.append(" select pfbxCustomerInfo.customerInfoId from PfbxCustomerInfo pfbxCustomerInfo, PfpAdPvclk pfpAdPvclk   where 1 = 1 ");
+//		hql.append("  and (pfbxCustomerInfo.status != ? or pfbxCustomerInfo.status != ? ) ");
+//		hql.append("  and (pfpAdPvclk.adPvclkDate = '").append(EveryDayPfbBonus.statrDate).append("'").append(") ) ");
+//		hql.append("  and pfbxCustomerInfo.customerInfoId = pfpAdPvclk.pfbxCustomerInfoId ");
+//		hql.append(" order by pfbxCustomerInfo.customerInfoId ");
+//		list.add(EnumPfbAccountStatus.APPLY.getStatus());
+//		list.add(EnumPfbAccountStatus.DELETE.getStatus());
+		
+		List<PfbxCustomerInfo> pfbxCustomerInfoList = new ArrayList<PfbxCustomerInfo>();
+		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.adPvclkDate = '"+EveryDayPfbBonus.statrDate+"' group by pfpAdPvclk.pfbxCustomerInfoId ");
+		List<String> pfpAdPvclkList = (List<String>) super.getHibernateTemplate().find(hql.toString());
+		for (String string : pfpAdPvclkList) {
+			pfbxCustomerInfoList.add(findPfbxCustomerInfo(string).get(0));
+		}
+		
+//		for (PfpAdPvclk pfpAdPvclk : pfpAdPvclkList) {
+//			
+//			System.out.println(pfpAdPvclk);
+//			
+//			
+////			pfbxCustomerInfoList.add(findPfbxCustomerInfo(pfpAdPvclk.getPfbxCustomerInfoId()).get(0));
+//		}
+		
+		
+		
+//		
+//		for (PfpAdPvclk pfpAdPvclk : PfpAdPvclkList) {
+//			pfdIdList.add(pfpAdPvclk.getPfbxCustomerInfoId());
+//		}
+//		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
+		return pfbxCustomerInfoList;
 	}
 	
 	@SuppressWarnings("unchecked")

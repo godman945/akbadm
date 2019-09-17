@@ -185,14 +185,14 @@
         <property name="cronExpression" value="0 10 00 * * ?" />
     </bean>
 
-   	<!-- Pfd 計算佣金 / 每天 AM 04:30 執行  -->
+   	<!-- Pfd 計算佣金 / 每天 AM 04:50 執行  -->
     <bean id="PfdBonusJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
         <property name="targetObject" ref="PfdBonusJob" />
         <property name="targetMethod" value="auto" />
     </bean>
 	<bean id="PfdBonusJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="PfdBonusJobDetail" />
-        <property name="cronExpression" value="0 30 04 * * ?" />
+        <property name="cronExpression" value="0 50 04 * * ?" />
     </bean>
 
    	<!-- 經銷商每月 1 日開放請款公告通知 / 每月1日上午10點執行  -->
