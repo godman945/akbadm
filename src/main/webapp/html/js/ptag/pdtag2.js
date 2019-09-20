@@ -84,10 +84,22 @@ function doInitData() {
 				}
 			}
 			if (eventType == "activeprod") {
-
+				prod_id = ptagParamater[i][2].hasOwnProperty('prod_id') ? ptagParamater[i][2].prod_id : '';
+				prod_price = ptagParamater[i][2].hasOwnProperty('prod_price') ? ptagParamater[i][2].prod_price : '';
+				prod_dis = ptagParamater[i][2].hasOwnProperty('prod_dis') ? ptagParamater[i][2].prod_dis : '';
+				paclCodeObject.data['activeprod_' + prod_id] = {
+	                    'prod_id': prod_id,
+	                    'prod_price': prod_price,
+	                    'prod_dis': prod_dis,
+				}
 			}
 			if (eventType == "mark") {
-				
+				mark_id = ptagParamater[i][2].hasOwnProperty('mark_id') ? ptagParamater[i][2].mark_id : '';
+				mark_value = ptagParamater[i][2].hasOwnProperty('mark_value') ? ptagParamater[i][2].mark_value : '';
+				paclCodeObject.data['mark_id_' + mark_id] = {
+	                    'mark_id': mark_id,
+	                    'mark_value': mark_value
+				}
 			}
 		}
 	}
@@ -175,9 +187,15 @@ function doTracking() {
         encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" +
         encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" +
         encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status);
-    
     console.log(img.src);
 };
+
+
+
+
+
+
+
 
 
 function pchome_click() {
