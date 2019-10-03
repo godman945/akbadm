@@ -55,9 +55,11 @@ public class CheckPFPCostAndVerifyTheCostJob {
 
 		try {
 			PfbxInComeReportVo = admBonusBillReportService.getPfbxInComeReportVoList5(yesterday, yesterday);
-			if (PfbxInComeReportVo.size() != 0) {
-				BigDecimal adclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getAdclkprice());   // PFP花費
-				BigDecimal sysclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getSysclkprice()); // 驗證花費
+//			if (PfbxInComeReportVo.size() != 0) {
+//				BigDecimal adclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getAdclkprice());   // PFP花費
+//				BigDecimal sysclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getSysclkprice()); // 驗證花費
+				BigDecimal adclkprice = BigDecimal.valueOf(147598);   // PFP花費
+				BigDecimal sysclkprice = BigDecimal.valueOf(146889); // 驗證花費
 				log.info("PFP花費:" + adclkprice);
 				log.info("驗證花費:" + sysclkprice);
 
@@ -69,13 +71,14 @@ public class CheckPFPCostAndVerifyTheCostJob {
 						throw new Exception("Mail Object is null.");
 					}
 					
-					String subject = "付費刊登 盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime());
+					String subject = "[STG測試] 付費刊登 盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime());
+//					String subject = "付費刊登 盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime());
 					mail.setMsg("<html><body>盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime()) + "<br>誤差金額 " + adclkprice.subtract(sysclkprice).abs() + " 元" + "</body></html>");
 					springEmailUtil.sendHtmlEmail(subject, mail.getMailFrom(), mail.getMailTo(), mail.getMailBcc(), mail.getMsg());
 				}
-			} else {
-				log.info(yesterday + " PFP花費、驗證花費，查無資料。");
-			}
+//			} else {
+//				log.info(yesterday + " PFP花費、驗證花費，查無資料。");
+//			}
 		} catch (Exception e) {
 			log.info(e.getMessage());
 		}
