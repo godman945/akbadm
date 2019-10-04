@@ -141,7 +141,7 @@ function showad(asynpchomeadObject) {
     if (padssl) {
         adurl += document.location.protocol+"//kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId
     } else {
-        adurl += document.location.protocol+"https://kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId
+        adurl += document.location.protocol+"//kdcl.pchome.com.tw/adshow2.html?pfbxCustomerInfoId=" + asynpchomeadObject.pad_customerId
     }
     
     console.log(asynpchomeadObject);
