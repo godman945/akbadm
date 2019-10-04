@@ -1,12 +1,13 @@
 package com.pchome.akbadm.quartzs;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
@@ -45,8 +46,8 @@ public class CheckPFPCostAndVerifyTheCostJob {
      */
 	public void process() {
 		log.info("====CheckPFPCostAndVerifyTheCostJob.process() start====");
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");          //撈DB資料使用格式
-		SimpleDateFormat subjectSdf = new SimpleDateFormat("yyyy年MM月dd日"); //信件主旨使用格式
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");          // 撈DB資料使用格式
+		SimpleDateFormat subjectSdf = new SimpleDateFormat("yyyy年MM月dd日"); // 信件主旨使用格式
 		Calendar c = Calendar.getInstance();
 		c.setTime(new Date());
 		c.add(Calendar.DATE, -1);
@@ -54,24 +55,25 @@ public class CheckPFPCostAndVerifyTheCostJob {
 
 		try {
 			PfbxInComeReportVo = admBonusBillReportService.getPfbxInComeReportVoList5(yesterday, yesterday);
-			if(PfbxInComeReportVo.size() != 0){
-				Float adclkprice = new Float(PfbxInComeReportVo.get(0).getAdclkprice());   //PFP花費
-				Float sysclkprice = new Float(PfbxInComeReportVo.get(0).getSysclkprice()); //驗證花費
+			if (PfbxInComeReportVo.size() != 0) {
+				BigDecimal adclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getAdclkprice());   // PFP花費
+				BigDecimal sysclkprice = BigDecimal.valueOf(PfbxInComeReportVo.get(0).getSysclkprice()); // 驗證花費
 				log.info("PFP花費:" + adclkprice);
 				log.info("驗證花費:" + sysclkprice);
-	
-				//PFP花費與驗證花費不相等時寄通知信
-				if(!adclkprice.equals(sysclkprice)){
+
+				// PFP花費與驗證花費不相等時寄通知信
+				if (adclkprice.compareTo(sysclkprice) != 0) {
 					Mail mail = null;
 					mail = PortalcmsUtil.getInstance().getMail(MAIL_API_NO);
 					if (mail == null) {
 						throw new Exception("Mail Object is null.");
 					}
+					
 					String subject = "付費刊登 盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime());
-					mail.setMsg("<html><body>盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime()) + "</body></html>");
+					mail.setMsg("<html><body>盈虧查詢報表資料異常 " + subjectSdf.format(c.getTime()) + "<br>誤差金額 " + adclkprice.subtract(sysclkprice).abs() + " 元" + "</body></html>");
 					springEmailUtil.sendHtmlEmail(subject, mail.getMailFrom(), mail.getMailTo(), mail.getMailBcc(), mail.getMsg());
 				}
-			}else{
+			} else {
 				log.info(yesterday + " PFP花費、驗證花費，查無資料。");
 			}
 		} catch (Exception e) {
