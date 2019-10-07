@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
@@ -23,7 +23,6 @@ import com.pchome.akbadm.db.pojo.AdmPfpdAdPvclkReport;
 import com.pchome.akbadm.db.pojo.PfpAdActionReport;
 import com.pchome.akbadm.db.pojo.PfpAdAgeReport;
 import com.pchome.akbadm.db.pojo.PfpAdGroupReport;
-import com.pchome.akbadm.db.pojo.PfpAdKeywordReport;
 import com.pchome.akbadm.db.pojo.PfpAdOsReport;
 import com.pchome.akbadm.db.pojo.PfpAdReport;
 import com.pchome.akbadm.db.pojo.PfpAdTimeReport;
@@ -67,7 +66,7 @@ public class PfpAdActionReportJob {
 		processPfpAdGroupReport(reportDate);
 		/*廣告明細成效*/
         processPfpAdReport(reportDate);
-		processPfpAdKeywordReport(reportDate);
+//		processPfpAdKeywordReport(reportDate);
 		processPfpAdOsReport(reportDate);
 		processAdmPfpdAdPvclkReport(reportDate);
         /*廣告播放時段成效*/
@@ -82,7 +81,7 @@ public class PfpAdActionReportJob {
 	
 	
 	/**
-	 * 每天 AM 4:15 執行 執行，更新前一天資料
+	 * 每天 AM 3:15 執行 執行，更新前一天資料
 	 */
 	public void processPerDay() throws Exception {
         log.info("====PfpAdActionReportJob.processPerDay() start====");
@@ -100,7 +99,7 @@ public class PfpAdActionReportJob {
 		this.processPfpAdActionReport(reportDate);
 		this.processPfpAdGroupReport(reportDate);
 		this.processPfpAdReport(reportDate);
-		this.processPfpAdKeywordReport(reportDate);
+//		this.processPfpAdKeywordReport(reportDate);
 		this.processPfpAdOsReport(reportDate);
 		this.processAdmPfpdAdPvclkReport(reportDate);
 		this.processPfpAdTimeReport(reportDate);
@@ -115,6 +114,9 @@ public class PfpAdActionReportJob {
 	 */
 	public void processPerHour() throws Exception {
 		try{
+			if(Integer.parseInt(new SimpleDateFormat("hh").format(new Date())) == 3 || Integer.parseInt(new SimpleDateFormat("hh").format(new Date())) == 4) {
+				return;
+			}
 			log.info("====PfpAdActionReportJob.processPerHour() start====");
 			SimpleDateFormat dateFormate = new SimpleDateFormat("yyyy-MM-dd");
 			Date now = new Date();
@@ -122,7 +124,7 @@ public class PfpAdActionReportJob {
 			this.processPfpAdActionReport(reportDate);
 			this.processPfpAdGroupReport(reportDate);
 			this.processPfpAdReport(reportDate);
-			this.processPfpAdKeywordReport(reportDate);
+//			this.processPfpAdKeywordReport(reportDate);
 			this.processPfpAdOsReport(reportDate);
 			this.processAdmPfpdAdPvclkReport(reportDate);
 			this.processPfpAdTimeReport(reportDate);
@@ -154,7 +156,7 @@ public class PfpAdActionReportJob {
 			this.processPfpAdActionReport(dateFormate.format(reportDate));
 			this.processPfpAdGroupReport(dateFormate.format(reportDate));
 			this.processPfpAdReport(dateFormate.format(reportDate));
-			this.processPfpAdKeywordReport(dateFormate.format(reportDate));
+//			this.processPfpAdKeywordReport(dateFormate.format(reportDate));
 			this.processPfpAdOsReport(dateFormate.format(reportDate));
 			this.processAdmPfpdAdPvclkReport(dateFormate.format(reportDate));
 			this.processPfpAdTimeReport(dateFormate.format(reportDate));
@@ -421,6 +423,8 @@ public class PfpAdActionReportJob {
 		pfpAdReportService.insertReportData(pojoList);
 	}
 
+	
+	/* 2019-10-08 前台已不關鍵字報表移除方法
 	private void processPfpAdKeywordReport(String reportDate) throws Exception {
 		log.info(" processPfpAdKeywordReport: "+reportDate);
 
@@ -528,7 +532,7 @@ public class PfpAdActionReportJob {
 		//step3. 重寫當日資料
 		pfpAdKeywordReportService.insertReportData(pojoList);
 	}
-
+	*/
 	/**
 	 * 整理當日 pfp_ad_pvclk 資料至 pfp_ad_os_report
 	 * */
@@ -1133,9 +1137,9 @@ public class PfpAdActionReportJob {
 		processPfpAdReport(reportDate);
 	}
 
-	public void processAdKeywordReport(String reportDate) throws Exception {
-		processPfpAdKeywordReport(reportDate);
-	}
+//	public void processAdKeywordReport(String reportDate) throws Exception {
+//		processPfpAdKeywordReport(reportDate);
+//	}
 
 	public void processPfpdAdPvclkReport(String reportDate) throws Exception {
 		processAdmPfpdAdPvclkReport(reportDate);
