@@ -168,7 +168,11 @@ public abstract class APfpCatalogUploadListData {
 					prodItemErrorMsg = "檔案格式錯誤";
 				} else {
 					// 紀錄檔案副檔名
-					shoppingProdItemVO.setEcImgFilenameExtension(filenameExtension);
+					if ("png".equalsIgnoreCase(filenameExtension)) { // png則改為jpg
+						shoppingProdItemVO.setEcImgFilenameExtension("jpg");
+					} else {
+						shoppingProdItemVO.setEcImgFilenameExtension(filenameExtension);
+					}
 				}
 			}
 			
