@@ -104,6 +104,7 @@ public class ImgUtil {
 			// Header內容取得副檔名，避免輸入的網址沒有副檔名無法判斷的問題
 			String contentType = urlConnection.getHeaderField("Content-Type");
 			log.info(">>>>contentType:" + contentType);
+			// jpeg及png都改為jpg
 			String filenameExtension = contentType.replace("jpeg", "jpg").substring(contentType.indexOf("/") + 1);
 			log.info(">>>>filenameExtension:" + filenameExtension);
 			if (shoppingProdItemVO != null) { // 購物商品用來紀錄圖片副檔名用
@@ -118,7 +119,15 @@ public class ImgUtil {
 	        	Files.copy(in, new File(imgPathAndName).toPath(), StandardCopyOption.REPLACE_EXISTING);
 			} else if("jpg".equalsIgnoreCase(filenameExtension) || "png".equalsIgnoreCase(filenameExtension)) { // jpg、png圖片下載方式
 				BufferedImage img = ImageIO.read(in);
-				ImageIO.write(img, filenameExtension, new File(imgPathAndName));
+				if ("png".equalsIgnoreCase(filenameExtension)) {
+					filenameExtension = "jpg"; // 將png轉成jpg
+					shoppingProdItemVO.setEcImgFilenameExtension(filenameExtension);
+					BufferedImage result = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+		            result.createGraphics().drawImage(img, 0, 0, img.getGraphics().getColor(), null);
+		            ImageIO.write(result, filenameExtension, new File(StringUtils.replace(imgPathAndName, "png", filenameExtension, imgPathAndName.length() - 3)));
+				} else {
+					ImageIO.write(img, filenameExtension, new File(imgPathAndName));
+				}
 			} else {
 				in.close();
 				return "檔案格式錯誤";
@@ -157,9 +166,15 @@ public class ImgUtil {
 		if ("gif".equalsIgnoreCase(filenameExtension)) {// gif圖片產生方式，此方式圖片才有動畫
 			Files.copy(byteArrayInputStream, new File(imgPathAndName).toPath(), StandardCopyOption.REPLACE_EXISTING);
 		} else { // jpg、png圖片產生方式
-			BufferedImage bufferedImage = ImageIO.read(byteArrayInputStream);
-			File file = new File(imgPathAndName);
-			ImageIO.write(bufferedImage, filenameExtension, file);
+			BufferedImage img = ImageIO.read(byteArrayInputStream);
+			if ("png".equalsIgnoreCase(filenameExtension)) {
+				filenameExtension = "jpg"; // 將png轉成jpg
+				BufferedImage result = new BufferedImage(img.getWidth(), img.getHeight(), BufferedImage.TYPE_INT_RGB);
+				result.createGraphics().drawImage(img, 0, 0, img.getGraphics().getColor(), null);
+				ImageIO.write(result, filenameExtension, new File(StringUtils.replace(imgPathAndName, "png", filenameExtension, imgPathAndName.length() - 3)));
+			} else {
+				ImageIO.write(img, filenameExtension, new File(imgPathAndName));
+			}
 		}
 		byteArrayInputStream.close();
 		
