@@ -36,10 +36,7 @@ public class EveryMonthPfbBonus {
 		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
 		
 		for(PfbxCustomerInfo pfb:pfbxs){						
-			if(!pfb.getCustomerInfoId().equals("PFBC20180110003")) {
-				continue;
-			}
-			log.info(">>>>>>>>>>>DEBUG PFBC20180110003 START");
+			log.info(">>>>>>>>>>>DEBUG pfb START pfb"+pfb.getCustomerInfoId());
 			
 					
 			
