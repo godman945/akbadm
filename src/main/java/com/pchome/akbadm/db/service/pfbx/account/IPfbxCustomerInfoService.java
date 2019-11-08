@@ -18,4 +18,6 @@ public interface IPfbxCustomerInfoService extends IBaseService<PfbxCustomerInfo,
 	public List<PfbxCustomerInfo> findValidPfbxCustomerInfo();
 	
 	public List<PfbxCustomerInfo> getDemoPfbxCustomerInfo();
+	
+	public List<PfbxCustomerInfo> getPfbxCustomerInfoListByReport(String monthValue);
 }

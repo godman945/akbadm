@@ -183,5 +183,17 @@ public class PfbxCustomerInfoService extends BaseService<PfbxCustomerInfo, Strin
 	public List<PfbxCustomerInfo> getDemoPfbxCustomerInfo(){
 		return ((IPfbxCustomerInfoDAO) dao).getDemoPfbxCustomerInfo();
 	}
+
+	public List<PfbxCustomerInfo> getPfbxCustomerInfoListByReport(String monthValue) {
+		List<String> pfbIdStrList = ((IPfbxCustomerInfoDAO) dao).getPfbxCustomerInfoListByReport(monthValue);
+		List<PfbxCustomerInfo> pfbxCustomerInfoList = new ArrayList<PfbxCustomerInfo>();
+		for (String pfbId : pfbIdStrList) {
+			PfbxCustomerInfo pfbxCustomerInfo = findPfbxCustomerInfo(pfbId);
+			if(pfbxCustomerInfo != null) {
+				pfbxCustomerInfoList.add(pfbxCustomerInfo);
+			}
+		}
+		return pfbxCustomerInfoList;
+	}
 	
 }

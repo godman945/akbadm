@@ -5,10 +5,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.Query;
+import org.hibernate.Session;
 
 import com.pchome.akbadm.db.dao.BaseDAO;
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;
-import com.pchome.akbadm.db.pojo.PfpAdPvclk;
 import com.pchome.akbadm.factory.pfbx.bonus.EveryDayPfbBonus;
 import com.pchome.enumerate.pfbx.account.EnumPfbAccountStatus;
 
@@ -117,63 +118,15 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 	}
 
 	@SuppressWarnings("unchecked")
-	
 	public static List<String> pfdIdList = new ArrayList<String>();
 	public List<PfbxCustomerInfo> findQuartzsPfbxCustomerInfo() {
-		
-		
-		System.out.println(EveryDayPfbBonus.statrDate);
-		log.info(">>>>>>>>>>>>>>>>>>>>>>>>>>>EveryDayPfbBonus.countDate:"+EveryDayPfbBonus.statrDate);
 		StringBuffer hql = new StringBuffer();
-		List<Object> list = new ArrayList<Object>();
-		
-		String a = "PFBC20160308001,PFBC20160706001,PFBC20160717001,PFBC20161107002,PFBC20161229001,PFBC20161231001,PFBC20170113001,PFBC20170130001,PFBC20170219001,PFBC20170303003,PFBC20170313001,PFBC20170330001,PFBC20170425001,PFBC20170504003,PFBC20170707002,PFBC20170708001,PFBC20170804001,PFBC20171210001,PFBC20171211002,PFBC20180110003,PFBC20180119001,PFBC20180808001,PFBC20181209001,PFBC20190325001,PFBC20190901001";
-		String[] pfbArray =a.split(",");
 		List<PfbxCustomerInfo> pfbxCustomerInfoList = new ArrayList<PfbxCustomerInfo>();
-		for (String pfbId : pfbArray) {
-			pfbxCustomerInfoList.add(findPfbxCustomerInfo(pfbId).get(0));
+		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.adPvclkDate = '"+EveryDayPfbBonus.statrDate+"' group by pfpAdPvclk.pfbxCustomerInfoId ");
+		List<String> pfpAdPvclkList = (List<String>) super.getHibernateTemplate().find(hql.toString());
+		for (String string : pfpAdPvclkList) {
+			pfbxCustomerInfoList.add(findPfbxCustomerInfo(string).get(0));
 		}
-		
-		
-//		hql.append(" from PfbxCustomerInfo where 1 = 1 ");
-//		hql.append(" and (status != ? or status != ? ) ");
-//		hql.append(" order by customerInfoId ");
-//		
-//		list.add(EnumPfbAccountStatus.APPLY.getStatus());
-//		list.add(EnumPfbAccountStatus.DELETE.getStatus());
-		
-		
-//		hql.append(" select pfbxCustomerInfo.customerInfoId from PfbxCustomerInfo pfbxCustomerInfo, PfpAdPvclk pfpAdPvclk   where 1 = 1 ");
-//		hql.append("  and (pfbxCustomerInfo.status != ? or pfbxCustomerInfo.status != ? ) ");
-//		hql.append("  and (pfpAdPvclk.adPvclkDate = '").append(EveryDayPfbBonus.statrDate).append("'").append(") ) ");
-//		hql.append("  and pfbxCustomerInfo.customerInfoId = pfpAdPvclk.pfbxCustomerInfoId ");
-//		hql.append(" order by pfbxCustomerInfo.customerInfoId ");
-//		list.add(EnumPfbAccountStatus.APPLY.getStatus());
-//		list.add(EnumPfbAccountStatus.DELETE.getStatus());
-		
-//		List<PfbxCustomerInfo> pfbxCustomerInfoList = new ArrayList<PfbxCustomerInfo>();
-////		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.adPvclkDate = '"+EveryDayPfbBonus.statrDate+"' group by pfpAdPvclk.pfbxCustomerInfoId ");
-////		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.pfbxCustomerInfoId = 'PFBC20180110003'  ");
-////		List<String> pfpAdPvclkList = (List<String>) super.getHibernateTemplate().find(hql.toString());
-////		for (String string : pfpAdPvclkList) {
-////			pfbxCustomerInfoList.add(findPfbxCustomerInfo(string).get(0));
-////		}
-//		pfbxCustomerInfoList.add(findPfbxCustomerInfo("PFBC20180110003").get(0));
-////		for (PfpAdPvclk pfpAdPvclk : pfpAdPvclkList) {
-////			
-////			System.out.println(pfpAdPvclk);
-////			
-////			
-//////			pfbxCustomerInfoList.add(findPfbxCustomerInfo(pfpAdPvclk.getPfbxCustomerInfoId()).get(0));
-////		}
-		
-		
-		
-//		
-//		for (PfpAdPvclk pfpAdPvclk : PfpAdPvclkList) {
-//			pfdIdList.add(pfpAdPvclk.getPfbxCustomerInfoId());
-//		}
-//		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
 		return pfbxCustomerInfoList;
 	}
 	
@@ -190,5 +143,19 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 		list.add(EnumPfbAccountStatus.START.getStatus());
 		
 		return (List<PfbxCustomerInfo>) super.getHibernateTemplate().find(hql.toString(),list.toArray());
+	}
+	
+	public List<String> getPfbxCustomerInfoListByReport(String monthValue) {
+		StringBuffer sql = new StringBuffer();
+		sql.append(" SELECT ");
+		sql.append("  r.customer_info_id ");
+		sql.append(" FROM pfbx_ad_time_report r ");
+		sql.append(" where 1=1    ");
+		sql.append(" and  r.customer_info_id != ''   ");
+		sql.append(" and DATE_FORMAT(r.ad_pvclk_date,'%Y-%m') = :month  ");
+		sql.append(" group by r.customer_info_id ");
+		Query query = super.getHibernateTemplate().getSessionFactory().getCurrentSession().createSQLQuery(sql.toString());
+		query.setString("month", monthValue);
+		return query.list();
 	}
 }

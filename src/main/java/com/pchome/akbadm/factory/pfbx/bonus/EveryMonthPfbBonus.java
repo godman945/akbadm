@@ -1,16 +1,15 @@
 package com.pchome.akbadm.factory.pfbx.bonus;
 
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.FileSystemXmlApplicationContext;
+import org.apache.logging.log4j.Logger;
 
 import com.pchome.akbadm.db.pojo.PfbxCustomerInfo;
 import com.pchome.akbadm.db.service.pfbx.account.IPfbxCustomerInfoService;
-import com.pchome.config.TestConfig;
 import com.pchome.enumerate.pfbx.bonus.EnumPfbxBonusTrans;
 
 
@@ -33,14 +32,11 @@ public class EveryMonthPfbBonus {
 		log.info("PFB Month Bonus quartz Process....");
 		
 		//開始處理每一家 PFB 的分潤請款
-		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
-		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		//撈取fbx_ad_time_report中年度月份[monthValue]所有pfb user
+		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.getPfbxCustomerInfoListByReport(String.valueOf(cal.get(Calendar.YEAR))+"-"+monthValue);
 		for(PfbxCustomerInfo pfb:pfbxs){						
-			log.info(">>>>>>>>>>>DEBUG pfb START pfb"+pfb.getCustomerInfoId());
-			
-					
-			
-			
 			
 			//每月 1 更新
 			//更新 pfbx_bonus_trans_detail 分潤紀錄表	

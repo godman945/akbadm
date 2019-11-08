@@ -17,4 +17,6 @@ public interface IPfbxCustomerInfoDAO extends IBaseDAO<PfbxCustomerInfo, String>
 	public List<PfbxCustomerInfo> findQuartzsPfbxCustomerInfo();
 	
 	public List<PfbxCustomerInfo> getDemoPfbxCustomerInfo();
+	
+	public List<String> getPfbxCustomerInfoListByReport(String monthValue);
 }
