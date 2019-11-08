@@ -144,7 +144,8 @@ public class PfbxCustomerInfoDAO extends BaseDAO<PfbxCustomerInfo, String> imple
 //		list.add(EnumPfbAccountStatus.DELETE.getStatus());
 		
 		List<PfbxCustomerInfo> pfbxCustomerInfoList = new ArrayList<PfbxCustomerInfo>();
-		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.adPvclkDate = '"+EveryDayPfbBonus.statrDate+"' group by pfpAdPvclk.pfbxCustomerInfoId ");
+//		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.adPvclkDate = '"+EveryDayPfbBonus.statrDate+"' group by pfpAdPvclk.pfbxCustomerInfoId ");
+		hql.append(" select pfpAdPvclk.pfbxCustomerInfoId from PfpAdPvclk pfpAdPvclk where 1= 1 and pfpAdPvclk.pfbxCustomerInfoId = 'PFBC20180110003' group by pfpAdPvclk.pfbxCustomerInfoId ");
 		List<String> pfpAdPvclkList = (List<String>) super.getHibernateTemplate().find(hql.toString());
 		for (String string : pfpAdPvclkList) {
 			pfbxCustomerInfoList.add(findPfbxCustomerInfo(string).get(0));
