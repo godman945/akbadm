@@ -39,8 +39,10 @@ public class EveryMonthPfbBonus {
 			if(!pfb.getCustomerInfoId().equals("PFBC20180110003")) {
 				continue;
 			}
-			
 			log.info(">>>>>>>>>>>DEBUG PFBC20180110003 START");
+			
+					
+			
 			
 			
 			//每月 1 更新
