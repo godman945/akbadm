@@ -36,6 +36,12 @@ public class EveryMonthPfbBonus {
 		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.findValidPfbxCustomerInfo();
 		
 		for(PfbxCustomerInfo pfb:pfbxs){						
+			if(!pfb.getCustomerInfoId().equals("PFBC20180110003")) {
+				continue;
+			}
+			
+			log.info(">>>>>>>>>>>DEBUG PFBC20180110003 START");
+			
 			
 			//每月 1 更新
 			//更新 pfbx_bonus_trans_detail 分潤紀錄表	
