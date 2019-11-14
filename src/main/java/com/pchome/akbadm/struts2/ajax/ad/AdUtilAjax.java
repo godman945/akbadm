@@ -99,7 +99,6 @@ public class AdUtilAjax extends BaseCookieAction{
 		}
 		buf.close();
 		urlContent.close();
-		log.info(">>>>>>>>>>>>>>" + sb);
 		JSONObject jsonObj = new JSONObject(sb.toString());
 		JSONObject jsonObjMsg = new JSONObject(jsonObj.get("success").toString());
 		if (jsonObjMsg.get("msg").toString().equals("malware")) {
