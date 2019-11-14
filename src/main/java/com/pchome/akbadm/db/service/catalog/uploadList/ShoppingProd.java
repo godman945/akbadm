@@ -238,6 +238,10 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 				Files.copy(imgTempFile.toPath(), imgCompleteFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
 				imgTempFile.delete();
 				
+				 //呼叫mozjpeg進行壓縮
+				ImgUtil.processMozjoeg(imgCompletePath.replace(shoppingProdItemVO.getCatalogProdSeq()+".jpg", ""),shoppingProdItemVO.getCatalogProdSeq());
+				
+				
 				Date nowDate = new Date();
 				pfpCatalogProdEc.setEcImg(addDbImgPath);
 				pfpCatalogProdEc.setEcImgRegion(ImgUtil.getImgLongWidthCode(imgCompletePath)); // 商品影像長寬(V/H)

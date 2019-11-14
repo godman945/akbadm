@@ -22,20 +22,75 @@ import javax.imageio.ImageIO;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import com.pchome.akbadm.db.vo.catalog.uploadList.ShoppingProdVO;
 import com.pchome.akbadm.utils.HttpUtil;
 
 public class ImgUtil {
-	private static final Log log = LogFactory.getLog(ImgUtil.class);
+	private static final Logger log = LogManager.getRootLogger();
+	
+	private static Process process = null;
+	
+	private static String result = "";
 	
 	private static ImgUtil instance = new ImgUtil();
 	
+	private static StringBuffer imgPathBuffer = new StringBuffer();
+	
 	public static synchronized ImgUtil getInstance() {
 		return instance;
+	}
+	
+	
+	/**
+	 * 使用mozjpeg進行壓縮
+	 * */
+	public synchronized static void processMozjoeg(String photoPath,String imgFileName)  {
+		try {
+			log.info("***** MOZJPEG　PROCESS START *****");
+			File file = new File(photoPath+imgFileName+".jpg");
+			log.info(">>>>[file path]:"+photoPath+imgFileName+".jpg");
+			log.info(">>>>Before size:"+(file.length()/1024)+"kb");
+			result = "";
+			imgPathBuffer.setLength(0);
+			imgPathBuffer.append(" /opt/mozjpeg/bin/cjpeg  -quality 75 -tune-ms-ssim   -quant-table 0      -progressive      ").append(photoPath+imgFileName+".jpg").append(" >").append(photoPath+imgFileName+"[RESIZE].jpg");
+			process = Runtime.getRuntime().exec(new String[] { "bash", "-c", imgPathBuffer.toString()  });
+			result = IOUtils.toString(process.getInputStream(), "UTF-8");
+			log.info(">>>>>>>>>>command:"+imgPathBuffer.toString());
+			
+			imgPathBuffer.setLength(0);
+			imgPathBuffer.append(" mv ").append(photoPath+imgFileName+"[RESIZE].jpg").append(" ").append(photoPath+imgFileName+".jpg");
+			process = Runtime.getRuntime().exec(new String[] { "bash", "-c", imgPathBuffer.toString()  });
+			result = IOUtils.toString(process.getInputStream(), "UTF-8");
+			log.info(">>>>>>>>>>command:"+imgPathBuffer.toString());
+			File fileNew = new File(photoPath+imgFileName+".jpg");
+			log.info(">>>>After Size:"+fileNew.length()/1024+"kb");
+			log.info("***** MOZJPEG　PROCESS END *****");
+		}catch(Exception e) {
+			log.error(e.getMessage());
+			log.error("*****MOZJPEG　PROCESS END*****");
+		}
+		
+		
+		
+//		stringBuffer.setLength(0);
+//		stringBuffer.append(" /opt/mozjpeg/bin/cjpeg  -quality 75 -tune-ms-ssim   -quant-table 0      -progressive      ").append(filePath+fileName+".jpg").append(" >").append(filePath+fileName+"[RESIZE].jpg");
+//		process = Runtime.getRuntime().exec(new String[] { "bash", "-c", stringBuffer.toString()  });
+//		result = IOUtils.toString(process.getInputStream(), "UTF-8");
+//		System.out.println(">>>>>>>>>>command:"+stringBuffer.toString());
+//		
+//		stringBuffer.setLength(0);
+//		stringBuffer.append(" mv ").append(filePath+fileName+"[RESIZE].jpg").append(" ").append(filePath+fileName+".jpg");
+//		process = Runtime.getRuntime().exec(new String[] { "bash", "-c", stringBuffer.toString()  });
+//		result = IOUtils.toString(process.getInputStream(), "UTF-8");
+//		System.out.println(">>>>>>>>>>command:"+stringBuffer.toString());
+//		File fileNew = new File(filePath+fileName+".jpg");
+//		System.out.println("After Size:"+fileNew.length()/1024+"kb");
+//		System.out.println("*****END　PROCESS*****");
 	}
 	
 	/**
@@ -134,7 +189,7 @@ public class ImgUtil {
 			}
 	        in.close();
 	        
-			imgPath = photoPath.substring(photoPath.indexOf("img/")) + "/" + imgFileName + "." + filenameExtension;
+	        imgPath = photoPath.substring(photoPath.indexOf("img/")) + "/" + imgFileName + "." + filenameExtension;
 			log.info(">>>>Download image ends, imgPath:" + imgPath);
 			return imgPath;
         } catch (Exception e) {
