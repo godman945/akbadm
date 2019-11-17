@@ -31,7 +31,7 @@ public class LifeCheckAction extends BaseCookieAction {
                     inputStream = new ByteArrayInputStream("ok".getBytes());
                 }
 
-                calendar.add(Calendar.HOUR_OF_DAY, -2);
+                calendar.add(Calendar.HOUR_OF_DAY, -3);
                 if (pfbxAdCustomerReport.getUpdateDate().getTime() > calendar.getTimeInMillis()) {
                     inputStream = new ByteArrayInputStream("ok".getBytes());
                 }
