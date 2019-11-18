@@ -67,21 +67,16 @@ public class HttpUtil {
 	public synchronized String getResult(String url, String charSet) {
 	    int statusCode = 0;
         String result = null;
-
         HttpResponse response = new BasicHttpResponse(HttpVersion.HTTP_1_1, HttpStatus.SC_OK, "OK");
         HttpGet httpget = null;
-
         log.debug(url);
         try {
             httpget = new HttpGet(url);
             response = client.execute(httpget);
             statusCode = response.getStatusLine().getStatusCode();
-
             if (statusCode == HttpStatus.SC_OK) {
                 HttpEntity entity = response.getEntity();
                 result = EntityUtils.toString(entity,charSet);
-            } else {
-                log.info("statusCode=" + statusCode);
             }
         } catch (Exception e) {
             log.error(e.toString() + " " + url);
@@ -282,36 +277,25 @@ public class HttpUtil {
 	// Add URL RealUrl code 2014/10/15 alex
 	public synchronized String getRealUrl(String urlPath) throws Exception {
 		log.info("getRealUrl start>>>" + urlPath);
-
-		String returnUrl = "";
-
 		if (StringUtils.isEmpty(urlPath) || urlPath.length() < 1) {
-			// return null;
+			return null;
 		}
-		// urlPath ="http://收購老酒.tw/";
 		URL url = new URL(urlPath);
-		String urlDomain = getASCII(url.getHost());
-		String path = "";
-		if (url.getQuery() != null) {
-			path = enCode(url.getPath() + "?" + url.getQuery());
-		} else if (url.getRef() != null) { // 2016-12-02 增加
-			path = enCode(url.getPath() + "#" + url.getRef());
-		} else {
-			path = enCode(url.getPath());
+		String query = "";
+		String ref = "";
+		String host = getASCII(url.getHost());
+		if(url.getQuery() != null) {
+			query = query + "?" + url.getQuery();	
 		}
-
-		if (urlPath.indexOf("https://") == 0) {
-			returnUrl = "https://";
-		} else {
-			returnUrl = "http://";
+		if(url.getRef() != null) {
+			ref = ref + "#" + url.getRef();	
 		}
-
-		return returnUrl + urlDomain + path;
+		String urlStr = url.getProtocol()+"://"+host+url.getPath()+query+ref;
+		return urlStr;
 	}
 	
 	// Add URL RealUrl code 2014/10/15 編譯 alex
 	public synchronized String getASCII(String domain) throws Exception {
-		log.info("getUrlASCII start");
 		if (StringUtils.isEmpty(domain) || domain.length() < 1) {
 			return null;
 		}
@@ -320,7 +304,6 @@ public class HttpUtil {
 
 	// Add URL Encode 2014/10/15 alex
 	public synchronized String enCode(String url) throws Exception {
-		log.info("enCode start");
 		String enCodeUrl = "";
 		for (int i = 0; i <= url.trim().length() - 1; i++) {
 			if (UnicodeBlock.of(url.charAt(i)).toString().equals("CJK_UNIFIED_IDEOGRAPHS")) {
@@ -329,7 +312,6 @@ public class HttpUtil {
 				enCodeUrl = enCodeUrl + url.charAt(i);
 			}
 		}
-		log.info("enCode end" + enCodeUrl);
 		return enCodeUrl;
 	}
 	
@@ -357,10 +339,6 @@ public class HttpUtil {
 
 		// Increase default max connection per route to 20
 		cm.setDefaultMaxPerRoute(100);
-
-		// Increase max connections for localhost:80 to 50
-//		HttpHost localhost = new HttpHost("localhost", 8080);
-//		cm.setMaxForRoute(new HttpRoute(localhost), 100);
 
 		client = new DefaultHttpClient(cm);
 		client.setParams(params);
