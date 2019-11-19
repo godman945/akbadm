@@ -74,23 +74,6 @@ public class ImgUtil {
 			log.error(e.getMessage());
 			log.error("*****MOZJPEG　PROCESS END*****");
 		}
-		
-		
-		
-//		stringBuffer.setLength(0);
-//		stringBuffer.append(" /opt/mozjpeg/bin/cjpeg  -quality 75 -tune-ms-ssim   -quant-table 0      -progressive      ").append(filePath+fileName+".jpg").append(" >").append(filePath+fileName+"[RESIZE].jpg");
-//		process = Runtime.getRuntime().exec(new String[] { "bash", "-c", stringBuffer.toString()  });
-//		result = IOUtils.toString(process.getInputStream(), "UTF-8");
-//		System.out.println(">>>>>>>>>>command:"+stringBuffer.toString());
-//		
-//		stringBuffer.setLength(0);
-//		stringBuffer.append(" mv ").append(filePath+fileName+"[RESIZE].jpg").append(" ").append(filePath+fileName+".jpg");
-//		process = Runtime.getRuntime().exec(new String[] { "bash", "-c", stringBuffer.toString()  });
-//		result = IOUtils.toString(process.getInputStream(), "UTF-8");
-//		System.out.println(">>>>>>>>>>command:"+stringBuffer.toString());
-//		File fileNew = new File(filePath+fileName+".jpg");
-//		System.out.println("After Size:"+fileNew.length()/1024+"kb");
-//		System.out.println("*****END　PROCESS*****");
 	}
 	
 	/**
