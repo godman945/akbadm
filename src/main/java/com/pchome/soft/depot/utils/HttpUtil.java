@@ -201,7 +201,6 @@ public class HttpUtil {
      * @throws Exception 
      */
 	public synchronized int getStatusCode(String url) throws Exception {
-		log.info(">>>>>>>>>>>>>>url=" + url);
 		int statusCode = HttpStatus.SC_NOT_FOUND;
 		url = getRealUrl(url);
 		if (StringUtils.isNotEmpty(url)) {
@@ -276,7 +275,6 @@ public class HttpUtil {
 	
 	// Add URL RealUrl code 2014/10/15 alex
 	public synchronized String getRealUrl(String urlPath) throws Exception {
-		log.info("getRealUrl start>>>" + urlPath);
 		if (StringUtils.isEmpty(urlPath) || urlPath.length() < 1) {
 			return null;
 		}

@@ -268,7 +268,7 @@ public class ImgUtil {
 	 * @throws IOException 
 	 */
 	public static String getImgMD5Code(String imgPath) throws NoSuchAlgorithmException, IOException {
-		log.info("開始取得圖片MD5值，圖片路徑:" + imgPath);
+		log.info("***** START PROCESS MD5 ,imgPath:" + imgPath);
 		File file = new File(imgPath);
 		FileInputStream fis = new FileInputStream(file);
 		MessageDigest md = MessageDigest.getInstance("MD5");
@@ -278,7 +278,7 @@ public class ImgUtil {
 			md.update(buffer, 0, length);
 		}
 		BigInteger bigInt = new BigInteger(1, md.digest());
-		log.info("圖片MD5值處理完成，MD5值:" + bigInt.toString(16));
+		log.info("***** END PROCESS MD5");
 		fis.close();
 		return bigInt.toString(16);
 	}

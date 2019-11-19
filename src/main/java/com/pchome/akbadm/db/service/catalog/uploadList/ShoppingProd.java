@@ -399,7 +399,6 @@ public class ShoppingProd extends APfpCatalogUploadListData {
 					String pcId = pfp.getCustomerInfoTitle();
 					String message = pfpCatalog.getCatalogName() + "=>"+enumPfpCatalogUploadType.getTypeName()+"：成功 "+successNum+",失敗 "+errorNum;
 					int id = accesslogService.addAdmAccesslog(EnumAccesslogChannel.PFP, EnumAccesslogAction.PLAY_MODIFY, message, pcId, null, pfpCustomerInfoId, null, "127.0.0.1", EnumAccesslogEmailStatus.NO);
-					log.info("add id:"+id);
 					break;
 				}
 			}

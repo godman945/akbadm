@@ -266,7 +266,6 @@ public class PfpCatalogUploadJob {
 					File backupFile = new File(catalogProdCsvFileBackupPath + pfpCustomerInfoId + "/" + catalogSeq + "/" + fileNameAndFileExtension);
 					FileUtils.moveFile(file, backupFile);
 					
-					log.info("import end");
 				} else {
 					log.info("table is null");
 				}
@@ -366,32 +365,6 @@ public class PfpCatalogUploadJob {
 			}
         });
 	}
-	
-	/**
-	 * 由網址判斷是否為csv檔
-	 * @param url
-	 * @return 正確回傳檔名fileName及副檔名filenameExtension  錯誤則檔名副檔名皆為空
-	 */
-//	public static Map<String, String> getDataFromUrl(String url) {
-//		Map<String, String> map = new HashMap<String, String>();
-//		map.put("fileName", "");
-//		map.put("filenameExtension", "");
-//
-//		// 由網址判斷取得檔名副檔名
-//		int startLength = url.lastIndexOf("/") + 1;
-//		int endLength = (url.indexOf("?") > -1 ? url.indexOf("?") : url.length());
-//		String fileName = url.substring(startLength, endLength);
-//		String filenameExtension = "";
-//		if (fileName.length() >= 4) {
-//			filenameExtension = fileName.substring(fileName.length() - 4);
-//		}
-//		
-//		if (".csv".equalsIgnoreCase(filenameExtension)) {
-//			map.put("fileName", fileName);
-//			map.put("filenameExtension", "csv");
-//		}
-//		return map;
-//	}
 	
 	public void setPfpCatalogService(IPfpCatalogService pfpCatalogService) {
 		this.pfpCatalogService = pfpCatalogService;
