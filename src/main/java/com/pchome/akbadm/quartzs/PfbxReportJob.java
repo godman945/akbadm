@@ -250,10 +250,7 @@ public class PfbxReportJob {
 			}
 			log.info("pfbxCustomerInfoId: "+pfbxCustomerInfoId);
 //			pfdUserId = (String) objArray[6];
-
 			PfbxCustomerInfo pfbxCustomerInfo = pfbxCustomerInfoService.get(pfbxCustomerInfoId);
-
-			log.info(">>>pfbxCustomerInfo.getCategory(): "+pfbxCustomerInfo.getCategory());
 			//category: 1:個人戶 2:公司戶
 			if(pfbxCustomerInfo.getCategory().equals("1")){
 				custName = pfbxCustomerInfo.getContactName();

@@ -23,28 +23,21 @@ public class LifeCheckAction extends BaseCookieAction {
             if (list == null) {
                 return SUCCESS;
             }
-
             Calendar calendar = Calendar.getInstance();
-
             for (PfbxAdCustomerReport pfbxAdCustomerReport: list) {
                 if (calendar.get(Calendar.HOUR_OF_DAY) <= 2) {
                     inputStream = new ByteArrayInputStream("ok".getBytes());
                 }
                 calendar.add(Calendar.HOUR_OF_DAY, -3);
-                log.info(">>>>>>ADM CHECK LIFE TIME  pfbxAdCustomerReport.getUpdateDate():"+pfbxAdCustomerReport.getUpdateDate());
-                log.info(">>>>>>ADM CHECK LIFE TIME  calendar:"+calendar.getTime());
-                log.info(">>>>>>ADM CHECK LIFE TIME "+pfbxAdCustomerReport.getUpdateDate().getTime()+":"+calendar.getTimeInMillis());
                 if (pfbxAdCustomerReport.getUpdateDate().getTime() > calendar.getTimeInMillis()) {
                     inputStream = new ByteArrayInputStream("ok".getBytes());
                 }
-
                 break;
             }
         }
         catch (Exception e) {
             log.error(e.getMessage(), e);
         }
-
         return SUCCESS;
     }
 
