@@ -57,7 +57,7 @@ public class ImgUtil {
 			log.info(">>>>Before size:"+(file.length()/1024)+"kb");
 			result = "";
 			imgPathBuffer.setLength(0);
-			imgPathBuffer.append(" /opt/mozjpeg/bin/cjpeg  -quality 75 -tune-ms-ssim   -quant-table 0      -progressive      ").append(photoPath+imgFileName+".jpg").append(" >").append(photoPath+imgFileName+"[RESIZE].jpg");
+			imgPathBuffer.append(" /opt/mozjpeg/bin/cjpeg  -quality 80 -tune-ms-ssim  -sample 1x1 -quant-table 0      ").append(photoPath+imgFileName+".jpg").append(" >").append(photoPath+imgFileName+"[RESIZE].jpg");
 			process = Runtime.getRuntime().exec(new String[] { "bash", "-c", imgPathBuffer.toString()  });
 			result = IOUtils.toString(process.getInputStream(), "UTF-8");
 			log.info(">>>>>>>>>>command:"+imgPathBuffer.toString());
