@@ -37,7 +37,7 @@ public class AdModelUtil {
 	private String akbpfpCatalogGroupApi;
 	private String pfpPhotoPath;
 	private String pfpServer;
-	
+	private JredisUtil jredisUtil = new JredisUtil();
 	private String active;
 	
 	public static AdModelUtil getInstance(){
@@ -152,15 +152,13 @@ public class AdModelUtil {
 			String mp4Key = "";
 			String webmKey = "";
 			if(System.getProperties().containsKey("akb.adm.prd")){
-				jredisUtil = JredisUtil.getInstance("prd");
 				mp4Key = "prd:akb:"+adPreviewVideoURL+"_"+"mp4";
 				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
 			}else{
-				jredisUtil = JredisUtil.getInstance("stg");
 				mp4Key = "stg:akb:"+adPreviewVideoURL+"_"+"mp4";
 				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
 			}
-
+			log.info("VIDEO>>>>>>>>>>>>>>>>>>>>>>>>>>>"+System.getProperties());
 			try{
 				Process process = null;
 				//先從redis取出youtube -dl播放網址，若不存在則重新取得
