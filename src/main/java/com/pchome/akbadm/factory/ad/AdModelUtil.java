@@ -150,14 +150,15 @@ public class AdModelUtil {
 			jredisUtil = new JredisUtil();
 			String mp4Key = "";
 			String webmKey = "";
-			if(System.getProperties().containsKey("akb.adm.prd")){
+			if(active.equals("prd")) {
 				mp4Key = "prd:akb:"+adPreviewVideoURL+"_"+"mp4";
 				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
-			}else{
+			}else {
 				mp4Key = "stg:akb:"+adPreviewVideoURL+"_"+"mp4";
 				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
 			}
-			log.info("VIDEO>>>>>>>>>>>>>>>>>>>>>>>>>>>"+System.getProperties());
+			log.info(">>>>>>REDIS MP4 KEY:"+mp4Key);
+			log.info(">>>>>>REDIS webmKey KEY:"+webmKey);
 			try{
 				Process process = null;
 				//先從redis取出youtube -dl播放網址，若不存在則重新取得
