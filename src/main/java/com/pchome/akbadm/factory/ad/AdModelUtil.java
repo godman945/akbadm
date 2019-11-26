@@ -155,10 +155,10 @@ public class AdModelUtil {
 				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
 			}else {
 				mp4Key = "stg:akb:"+adPreviewVideoURL+"_"+"mp4";
-				webmKey = "prd:akb:"+adPreviewVideoURL+"_"+"webm";
+				webmKey = "stg:akb:"+adPreviewVideoURL+"_"+"webm";
 			}
 			log.info(">>>>>>REDIS MP4 KEY:"+mp4Key);
-			log.info(">>>>>>REDIS webmKey KEY:"+webmKey);
+			log.info(">>>>>>REDIS WEBM KEY:"+webmKey);
 			try{
 				Process process = null;
 				//先從redis取出youtube -dl播放網址，若不存在則重新取得
