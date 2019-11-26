@@ -37,7 +37,6 @@ public class AdModelUtil {
 	private String akbpfpCatalogGroupApi;
 	private String pfpPhotoPath;
 	private String pfpServer;
-	private JredisUtil jredisUtil = new JredisUtil();
 	private String active;
 	
 	public static AdModelUtil getInstance(){
@@ -148,7 +147,7 @@ public class AdModelUtil {
 			}
 		}else{
 			JredisUtil jredisUtil = null;
-			
+			jredisUtil = new JredisUtil();
 			String mp4Key = "";
 			String webmKey = "";
 			if(System.getProperties().containsKey("akb.adm.prd")){
