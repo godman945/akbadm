@@ -516,6 +516,10 @@ public class BonusTransDetailProcess {
 
         }
         Calendar rightNow = Calendar.getInstance();
+        //跨年份問題1月計算的12月為上一個年度
+        if(monthValue.equals("12")) {
+        	rightNow.add(Calendar.YEAR,-1);
+        }
         rightNow.setTime(dt);
 
         //rightNow.add(Calendar.YEAR,-1);
@@ -545,7 +549,12 @@ public class BonusTransDetailProcess {
         } catch (Exception e) {
 
         }
+        
         Calendar rightNow = Calendar.getInstance();
+        //跨年份問題1月計算的12月為上一個年度
+        if(monthValue.equals("12")) {
+        	rightNow.add(Calendar.YEAR,-1);
+        }
         rightNow.setTime(dt);
 
         //rightNow.add(Calendar.YEAR,-1);
@@ -578,6 +587,10 @@ public class BonusTransDetailProcess {
 
         }
         Calendar rightNow = Calendar.getInstance();
+        //跨年份問題1月計算的12月為上一個年度
+        if(monthValue.equals("12")) {
+        	rightNow.add(Calendar.YEAR,-1);
+        }
         rightNow.setTime(dt);
 
         //rightNow.add(Calendar.YEAR,-1);
@@ -611,11 +624,12 @@ public class BonusTransDetailProcess {
 
         }
         Calendar rightNow = Calendar.getInstance();
+        
+        //跨年份問題1月計算的12月為上一個年度
+        if(monthValue.equals("12")) {
+        	rightNow.add(Calendar.YEAR,-1);
+        }
         rightNow.setTime(dt);
-
-        //rightNow.add(Calendar.YEAR,-1);//日期减1年
-        // rightNow.add(Calendar.MONTH,-2);//日期加3个月
-        //rightNow.add(Calendar.DAY_OF_YEAR,-1);//日期加10天
 
         Date dt1 = rightNow.getTime();
 
