@@ -645,8 +645,15 @@ public class BonusTransDetailProcess {
         if (monthValue.length() == 1) {
             monthValue = "0" + monthValue;
         }
-
-        String sd = DateValueUtil.getInstance().getDateYear() + monthValue + "01";
+        
+        String sd = "";
+        //跨年份問題1月計算的12月為上一個年度
+        if(monthValue.equals("12")) {
+        	String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR)-1);
+        	sd = year + monthValue + "01";
+        }else {
+        	sd = DateValueUtil.getInstance().getDateYear() + monthValue + "01";
+        }
 
         return sd;
     }
