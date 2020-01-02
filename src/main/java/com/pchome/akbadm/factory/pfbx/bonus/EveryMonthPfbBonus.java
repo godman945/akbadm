@@ -35,7 +35,15 @@ public class EveryMonthPfbBonus {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(new Date());
 		//撈取fbx_ad_time_report中年度月份[monthValue]所有pfb user
-		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.getPfbxCustomerInfoListByReport(String.valueOf(cal.get(Calendar.YEAR))+"-"+monthValue);
+		//注意跨年問題
+		int jobYear = cal.get(Calendar.YEAR);
+		if(monthValue.equals("12")) {
+			jobYear = jobYear - 1;
+		}
+		
+		log.info("PFB Month Bonus Process for "+jobYear+"-"+monthValue);
+		
+		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.getPfbxCustomerInfoListByReport(String.valueOf(jobYear)+"-"+monthValue);
 		for(PfbxCustomerInfo pfb:pfbxs){						
 			
 			//每月 1 更新

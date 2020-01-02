@@ -29,9 +29,13 @@ public class PfbBonusMonthJob {
         log.info("====PfbBonusMonthJob.monthAuto() start====");
 
     	String monthValue=DateValueUtil.getInstance().getDateMonth();
+    	//每月1日跑，所以取得的月份要再減1,1月份計算為12月份
+    	if(monthValue.equals("1")) {
+    		monthValue = "12";
+    	}else {
+    		monthValue = String.valueOf((Integer.parseInt(monthValue) -1));
+    	}
     	
-    	//每月1日跑，所以取得的月份要再減1
-    	monthValue = String.valueOf((Integer.parseInt(monthValue) -1));
     	//送入月份
 		this.monthBonusProcess(monthValue);
 
