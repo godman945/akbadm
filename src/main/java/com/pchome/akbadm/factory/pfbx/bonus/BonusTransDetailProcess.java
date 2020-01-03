@@ -226,7 +226,7 @@ public class BonusTransDetailProcess {
         	
         	pfbxInvalidTrafficService.saveOrUpdateAll(dataList);
         }	
-    	
+    	log.info("JOB>>>>[pfb user]:"+pfb.getCustomerInfoId()+"  [invalidRemain]:"+invalidRemain);
         if (invalidRemain > 0) {
             //餘額扣除無效流量分潤
         	
