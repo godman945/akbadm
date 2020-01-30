@@ -383,11 +383,8 @@ public class AdCheckAction extends BaseAction {
 							
 							if(adDetail.getAdDetailId().equals("tracking_code")){
 								data.setThirdCode(adDetail.getAdDetailContent());
-							}
-							
-							
-							// sales_price商品原價(銷售價)、商品促銷價(促銷價)非必填欄位，其他欄位為必填，則其他欄位需判斷是否為空
-							if ("sales_price".equals(title) || "promotional_price".equals(title)) {
+							}else if ("sales_price".equals(title) || "promotional_price".equals(title)) {
+								// sales_price商品原價(銷售價)、商品促銷價(促銷價)非必填欄位，其他欄位為必填，則其他欄位需判斷是否為空
 								if (!StringUtils.isNumeric(keyword)) { // 輸入非空值、數字，記錄違規項目。
 									illegalString += (title + ": " + keyword + "<br>");
 								}

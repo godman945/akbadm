@@ -260,7 +260,10 @@ function showImage(index) {
         	</#if>
 		</td>
         <td class="td03" rowspan="3">${adData.status!}</td>
-        <td class="td02" rowspan="3">${adData.illegalKeyWord!}</td>
+        <td class="td02" rowspan="3">
+        	${adData.illegalKeyWord!}
+        	<br><#if adData.thirdCode!=''>第三方偵測:<textarea  style="width:150px;height:80px;">${adData.thirdCode!}</textarea></#if>
+        </td>
         <td class="td03" style="height:50px;">
          	<select   class="adCategory" id="adCategory_${adData.adSeq!}_1" disabled onchange ="changeCategoryItems('adCategory_${adData.adSeq!}_1');">
         		 <option value="">--廣告類別--</option>
