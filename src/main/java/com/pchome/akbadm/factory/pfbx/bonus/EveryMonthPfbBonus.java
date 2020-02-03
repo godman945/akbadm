@@ -42,8 +42,11 @@ public class EveryMonthPfbBonus {
 		}
 		
 		log.info("PFB Month Bonus Process for "+jobYear+"-"+monthValue);
-		
-		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.getPfbxCustomerInfoListByReport(String.valueOf(jobYear)+"-"+monthValue);
+		String pfbxCustomerInfoListMonth ="";
+		if(monthValue.length() == 1) {
+			pfbxCustomerInfoListMonth = "0"+monthValue;
+		}
+		List<PfbxCustomerInfo> pfbxs = pfbxCustomerInfoService.getPfbxCustomerInfoListByReport(String.valueOf(jobYear)+"-"+pfbxCustomerInfoListMonth);
 		for(PfbxCustomerInfo pfb:pfbxs){						
 			
 			//每月 1 更新

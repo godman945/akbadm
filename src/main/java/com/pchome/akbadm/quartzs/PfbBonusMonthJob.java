@@ -57,9 +57,7 @@ public class PfbBonusMonthJob {
 		//月份不能刪除重建，資料寫入要驗證多一點
 
 		if(StringUtils.isNotEmpty(monthValue)){
-			if(monthValue.length() == 1 ) {
-				monthValue = "0"+monthValue;
-			}
+
 			everyMonthPfbBonus.bonusConutProcess(monthValue);
 
 		}
