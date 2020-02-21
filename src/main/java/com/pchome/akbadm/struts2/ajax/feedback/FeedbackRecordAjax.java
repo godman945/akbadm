@@ -86,5 +86,21 @@ public class FeedbackRecordAjax extends BaseCookieAction{
 	public EnumSelCalculateCategory[] getEnumSelCalculateCategory() {
 		return enumSelCalculateCategory;
 	}
+
+	public String getsDate() {
+		return sDate;
+	}
+
+	public void setsDate(String sDate) {
+		this.sDate = sDate;
+	}
+
+	public String geteDate() {
+		return eDate;
+	}
+
+	public void seteDate(String eDate) {
+		this.eDate = eDate;
+	}
 	
 }
