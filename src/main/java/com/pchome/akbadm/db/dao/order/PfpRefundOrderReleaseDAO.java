@@ -19,7 +19,7 @@ public class PfpRefundOrderReleaseDAO extends BaseDAO<PfpRefundOrderRelease, Str
 		StringBuffer hql = new StringBuffer();
 		
 		hql.append(" select a.customer_info_id, a.billing_id, a.notify_date, ");
-		hql.append(" a.order_price, a.tax, a.status as billing_status, b.order_remain, b.tax_remain, ");
+		hql.append(" a.order_price, a.tax, a.status as billing_status, b.order_remain, b.tax_remain,");
 		hql.append(" c.refund_status, d.apply_time, d.status, e.customer_info_title, d.seq ,d.reject_reason ,d.refund_price_tax ");
 		hql.append(" from pfp_order a ");
 		hql.append(" join adm_recognize_record b ");
