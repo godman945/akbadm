@@ -11,7 +11,7 @@
 //})(window, document, 'script', paclUrl, 'ptag');
 
 console.log("init ptag js");
-var paclUrl = location.protocol+"//alex.pchome.com.tw:8080/akbadm/html/js/ptag/pdtag.js";
+var paclUrl = location.protocol+"//showstg.pchome.com.tw/adm/html/js/ptag/ptag2.js";
 (function(i, s, o, g, r, a, m) {
 	i['pchome'] = r;
 	i[r] = i[r] || function() {
@@ -22,25 +22,9 @@ var paclUrl = location.protocol+"//alex.pchome.com.tw:8080/akbadm/html/js/ptag/p
 	a.async = false;
 	a.src = g;
 	m.parentNode.insertBefore(a, m);
-	
-	
-	
 })(window, document, 'script', paclUrl, 'ptag');
 
 
-//(function(window, document, script, js, ptag, a, m) {
-//	window['pchome'] = ptag;
-//	window[ptag] = window[ptag] || function() {
-//	(window[ptag].q = window[ptag].q || []).push(arguments)
-//	}, window[ptag].l = 1 * new Date();
-//	a = document.createElement(script); 
-//	m = document.getElementsByTagName(script)[0];
-//	a.async = false;
-//	a.src = js;
-//	m.parentNode.insertBefore(a, m);
-//	console.log("BBBBBBBBB");
-//})(window, document, 'script', 'http://alex.pchome.com.tw:8080/akbadm/html/js/ptag/pdtag.js', 'ptag');
-//	ptag({"paid":"alex_1234568"});
 
 
 

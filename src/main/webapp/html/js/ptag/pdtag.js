@@ -1,3 +1,4 @@
+var ptagParamater = window.dataLayer;
 var page_view_opt1 = "";
 var page_view_opt2 = "";
 var convert_opt1 = "";
@@ -13,14 +14,20 @@ var prod_dis = "";
 var ec_stock_status = "";
 var pa_em_value = "";
 var pa_id = "";
-var paclUrl = location.protocol + "//paclstg2.pchome.com.tw/api/collect.html";
+var mark_id=""
+var mark_value="";
+var mark_layer=""
+	
+
+var paclUrl = location.protocol + "//paclstg.pchome.com.tw/api/collect";
 (function() {
     var click = null;
-    referer = encodeURIComponent(document.referrer);
+    referer = document.referrer;
     screen_x = screen.availWidth;
     screen_y = screen.availHeight;
-    webUrl = encodeURIComponent(location.href);
+    webUrl = location.href;
     convert_click_flag = false;
+    mark_click_flag = false;
     do_a(function() {
         doInitData();
         doSendPaclData()
@@ -31,15 +38,26 @@ var screen_x = "";
 var screen_y = "";
 var webUrl = "";
 var fig = "";
+var mark_click_flag = null;
 var convert_click_flag = null;
 var paclCodeObject = new Object();
-var ptagParamater = null;
+var paclCodeJson = null;
 var paclCodeObject = null;
+var ptagParamater = null;
 
 function do_a(callback) {
     paclCodeObject = new Object();
     paclCodeObject["data"] = {};
-    ptagParamater = window.ptag.q;
+    ptagParamater = (window.ptag.queue === undefined) ?  window.dataLayer : window.ptag.queue;
+    
+    document.getElementsByName("pchome_ptag").forEach(function(element) {
+    	var data = element.innerHTML.trim();
+    	data = data.replace("ptag(","[");
+    	data = data.replace(");","]");
+    	data = JSON.parse(data);
+    	ptagParamater.push(data);
+    })
+//    console.log(window.ptag.queue);
     if (typeof callback === 'function') {
         callback()
     }
@@ -48,6 +66,7 @@ function do_a(callback) {
 function doInitData() {
     var pa_id = "";
     ptagParamater.forEach(function(element) {
+    	
         var ptagType = element[0];
         if ((element.length == 1 && element[0].paid == undefined) || (element.length == undefined)) {
             return
@@ -58,8 +77,15 @@ function doInitData() {
         if (element[0] == undefined) {
             return
         }
-        if (element[1] == 'convert' || element[1] == 'page_view' || element[1] == 'tracking') {
-            var eventType = element[1];
+        
+        if (element[1] == 'convert' 
+        	|| element[1] == 'activeprod' 
+        	|| element[1] == 'page_view' 
+        	|| element[1] == 'tracking' 
+        	|| element[1] == 'mark' 
+        	|| element[1] == 'activeprod') {
+            
+        	var eventType = element[1];
             if (eventType == "page_view") {
                 page_view_opt1 = element[2].hasOwnProperty('op1') ? element[2].op1 : '';
                 page_view_opt2 = element[2].hasOwnProperty('op2') ? element[2].op2 : '';
@@ -110,12 +136,43 @@ function doInitData() {
                 }
             }
         }
+        
+        if (eventType == "mark") {
+        	mark_id = element[2].hasOwnProperty('mark_id') ? element[2].mark_id : '';
+        	mark_value = element[2].hasOwnProperty('mark_value') ? element[2].mark_value : '';
+        	mark_layer = element[2].hasOwnProperty('mark_layer') ? element[2].mark_layer : '';
+        	mark_click_flag = element[3] === 'click' ? true : false;
+        	paclCodeObject.data['mark_id_'+ mark_id] = {
+        			'mark_id': mark_id,
+        			'mark_layer': mark_layer,
+        			'mark_value': mark_value,
+        			'pa_id': pa_id,
+        			'mark_click_flag': mark_click_flag
+        	}
+        }
+        
+        if (eventType == "activeprod") {
+        	tracking_id = element[2].hasOwnProperty('tracking_id') ? element[2].tracking_id : '';
+        	prod_id = element[2].hasOwnProperty('prod_id') ? element[2].prod_id : '';
+        	prod_price = element[2].hasOwnProperty('prod_price') ? element[2].prod_price : '';
+        	prod_dis = element[2].hasOwnProperty('prod_dis') ? element[2].prod_dis : '';
+        	paclCodeObject.data['activeprod_' + tracking_id] = {
+                    'tracking_id': tracking_id,
+                    'prod_id': prod_id,
+                    'prod_price': prod_price,
+                    'prod_dis': prod_dis,
+                    'pa_id': pa_id
+        	}
+        }
     })
+    
+    console.log(ptagParamater);
 };
 
 function doSendPaclData() {
     for (var key in paclCodeObject.data) {
-        if (key.includes('convert')) {
+    	
+        if (key.indexOf('convert') >=0) {
             convert_id = paclCodeObject.data[key].convert_id;
             convert_price = paclCodeObject.data[key].convert_price;
             convert_opt1 = paclCodeObject.data[key].convert_opt1;
@@ -126,7 +183,7 @@ function doSendPaclData() {
                 doConvert()
             }
         }
-        if (key.includes('tracking')) {
+        if (key.indexOf('tracking') >=0) {
             tracking_id = paclCodeObject.data[key].tracking_id;
             prod_id = paclCodeObject.data[key].prod_id;
             prod_price = paclCodeObject.data[key].prod_price;
@@ -138,41 +195,71 @@ function doSendPaclData() {
             pa_id = paclCodeObject.data[key].pa_id;
             doTracking()
         }
-        if (key.includes('page_view')) {
+        if (key.indexOf('page_view') >=0) {
             page_view_opt1 = paclCodeObject.data[key].page_view_opt1;
             page_view_opt2 = paclCodeObject.data[key].page_view_opt2;
             pa_em_value = paclCodeObject.data[key].pa_em_value;
             pa_id = paclCodeObject.data[key].pa_id;
             doPageView()
         }
+        
+        if (key.indexOf('activeprod') >=0) {
+        	prod_id = paclCodeObject.data[key].prod_id;
+        	prod_price = paclCodeObject.data[key].prod_price;
+        	prod_dis = paclCodeObject.data[key].prod_dis;
+            pa_id = paclCodeObject.data[key].pa_id;
+            doActiveprod()
+        }
+        if (key.indexOf('mark') >=0) {
+        	mark_id = paclCodeObject.data[key].mark_id;
+            mark_value = paclCodeObject.data[key].mark_value;
+            mark_layer = paclCodeObject.data[key].mark_layer;
+            pa_id = paclCodeObject.data[key].pa_id;
+            if (!paclCodeObject.data[key].mark_click_flag) {
+            	doMark()
+            }
+        }
+        
     }
 };
 
 function doConvert() {
-    var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" +
-        encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" +
-        encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer)
+//    var img = new Image();
+//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" + encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" + encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer)
+//    console.log('doConvert');
+	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" + encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" + encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer));
 };
 
 function doPageView() {
-    var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" +
-        encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer)
+//    var img = new Image();
+//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" + encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer)
+	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" + encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer));
 };
 
 function doTracking() {
-    var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" +
-        encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" +
-        encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" +
-        encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" +
-        encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
+//    var img = new Image();
+//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
+	 console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status));
 };
 
+function doMark() {
+//  var img = new Image();
+//  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
+	 console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&referer=" + encodeURIComponent(referer) );
+};
+
+function doActiveprod() {
+//  var img = new Image();
+//  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
+	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis));
+};
+
+
 function pchome_click(link_url, blank_flag) {
+	referer = document.referrer;
+    screen_x = screen.availWidth;
+    screen_y = screen.availHeight;
+    webUrl = location.href;
     if (link_url == null || link_url.length == 0 || link_url == '') {
         alert('link_url 是空值，link_url is null');
         return false
@@ -182,7 +269,7 @@ function pchome_click(link_url, blank_flag) {
         blank = blank_flag
     }
     for (var key in paclCodeObject.data) {
-        if (key.includes('convert')) {
+        if (key.indexOf('convert') >=0) {
             convert_id = paclCodeObject.data[key].convert_id;
             convert_price = paclCodeObject.data[key].convert_price;
             convert_opt1 = paclCodeObject.data[key].convert_opt1;
@@ -191,6 +278,15 @@ function pchome_click(link_url, blank_flag) {
             pa_id = paclCodeObject.data[key].pa_id;
             if (paclCodeObject.data[key].convert_click_flag) {
                 doConvert()
+            }
+        }
+        if (key.indexOf('mark') >=0) {
+            mark_id = paclCodeObject.data[key].mark_id;
+            mark_value = paclCodeObject.data[key].mark_value;
+            mark_layer = paclCodeObject.data[key].mark_layer;
+            pa_id = paclCodeObject.data[key].pa_id;
+            if (paclCodeObject.data[key].mark_click_flag) {
+            	doMark()
             }
         }
     }
@@ -202,11 +298,15 @@ function pchome_click(link_url, blank_flag) {
 }
 
 function pchome_click() {
+	referer = document.referrer;
+    screen_x = screen.availWidth;
+    screen_y = screen.availHeight;
+    webUrl = location.href;
     do_a(function() {
         doInitData()
     });
     for (var key in paclCodeObject.data) {
-        if (key.includes('convert')) {
+        if (key.indexOf('convert') >=0) {
             convert_id = paclCodeObject.data[key].convert_id;
             convert_price = paclCodeObject.data[key].convert_price;
             convert_opt1 = paclCodeObject.data[key].convert_opt1;
@@ -215,6 +315,16 @@ function pchome_click() {
             pa_id = paclCodeObject.data[key].pa_id;
             if (paclCodeObject.data[key].convert_click_flag) {
                 doConvert()
+            }
+        }
+        
+        if (key.indexOf('mark') >=0) {
+            mark_id = paclCodeObject.data[key].mark_id;
+            mark_value = paclCodeObject.data[key].mark_value;
+            mark_layer = paclCodeObject.data[key].mark_layer;
+            pa_id = paclCodeObject.data[key].pa_id;
+            if (paclCodeObject.data[key].mark_click_flag) {
+            	doMark()
             }
         }
     }
