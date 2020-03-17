@@ -7,6 +7,8 @@ var tracking_opt1 = "";
 var tracking_opt2 = "";
 var mark_opt1 = "";
 var mark_opt2 = "";
+var activeprod_opt1 = "";
+var activeprod_opt2 = "";
 var convert_id = "";
 var convert_price = "";
 var tracking_id = "";
@@ -188,12 +190,16 @@ function doInitData() {
         	prod_id = element[2].hasOwnProperty('prod_id') ? element[2].prod_id : '';
         	prod_price = element[2].hasOwnProperty('prod_price') ? element[2].prod_price : '';
         	prod_dis = element[2].hasOwnProperty('prod_dis') ? element[2].prod_dis : '';
+        	activeprod_opt1 = element[2].hasOwnProperty('op1') ? element[2].op1 : '';
+        	activeprod_opt1 = element[2].hasOwnProperty('op2') ? element[2].op2 : '';
         	paclCodeObject.data['activeprod_' + tracking_id] = {
                     'tracking_id': tracking_id,
                     'prod_id': prod_id,
                     'prod_price': prod_price,
                     'prod_dis': prod_dis,
-                    'pa_id': pa_id
+                    'pa_id': pa_id,
+                    'activeprod_opt1': mark_opt1,
+                    'activeprod_opt1': mark_opt2,
         	}
         }
     })
@@ -203,7 +209,6 @@ function doInitData() {
 
 function doSendPaclData() {
     for (var key in paclCodeObject.data) {
-    	console.log(key);
         if (key.indexOf('convert') >=0) {
             convert_id = paclCodeObject.data[key].convert_id;
             convert_price = paclCodeObject.data[key].convert_price;
@@ -252,12 +257,16 @@ function doSendPaclData() {
         	prod_price = paclCodeObject.data[key].prod_price;
         	prod_dis = paclCodeObject.data[key].prod_dis;
             pa_id = paclCodeObject.data[key].pa_id;
+            activeprod_opt1 = paclCodeObject.data[key].activeprod_opt1;
+            activeprod_opt2 = paclCodeObject.data[key].activeprod_opt2;
             doActiveprod()
         }
         if (key.indexOf('mark') >=0) {
         	mark_id = paclCodeObject.data[key].mark_id;
             mark_value = paclCodeObject.data[key].mark_value;
             mark_layer = paclCodeObject.data[key].mark_layer;
+            mark_opt1 = paclCodeObject.data[key].mark_opt1;
+            mark_opt2 = paclCodeObject.data[key].mark_opt2;
             pa_id = paclCodeObject.data[key].pa_id;
             doMark()
         }
@@ -288,7 +297,7 @@ function doMark() {
 
 function doActiveprod() {
   var img = new Image();
-  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(paId) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis);
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(paId) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) +  "&op1=" + encodeURIComponent(activeprod_opt1) + "&op2=" + encodeURIComponent(activeprod_opt2);
 };
 
 function doRecord() {
