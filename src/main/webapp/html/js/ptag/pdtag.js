@@ -1,4 +1,4 @@
-var ptagParamater = window.dataLayer;
+var ptagParamater = (window.ptag.queue === undefined) ?  window.dataLayer : window.ptag.queue;
 var page_view_opt1 = "";
 var page_view_opt2 = "";
 var convert_opt1 = "";
@@ -33,6 +33,7 @@ var paclUrl = location.protocol + "//paclstg.pchome.com.tw/api/collect";
         doSendPaclData()
     })
 })();
+
 var referer = "";
 var screen_x = "";
 var screen_y = "";
@@ -44,6 +45,8 @@ var paclCodeObject = new Object();
 var paclCodeJson = null;
 var paclCodeObject = null;
 var ptagParamater = null;
+
+
 
 function do_a(callback) {
     paclCodeObject = new Object();
@@ -171,7 +174,7 @@ function doInitData() {
 
 function doSendPaclData() {
     for (var key in paclCodeObject.data) {
-    	
+    	console.log(key);
         if (key.indexOf('convert') >=0) {
             convert_id = paclCodeObject.data[key].convert_id;
             convert_price = paclCodeObject.data[key].convert_price;
@@ -215,46 +218,106 @@ function doSendPaclData() {
             mark_value = paclCodeObject.data[key].mark_value;
             mark_layer = paclCodeObject.data[key].mark_layer;
             pa_id = paclCodeObject.data[key].pa_id;
-            if (!paclCodeObject.data[key].mark_click_flag) {
-            	doMark()
-            }
+            doMark()
         }
         
     }
 };
 
 function doConvert() {
-//    var img = new Image();
-//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" + encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" + encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer)
-//    console.log('doConvert');
-	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" + encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" + encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer));
+    var img = new Image();
+    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=convert&convertId=" + encodeURIComponent(convert_id) + "&convertPrice=" + encodeURIComponent(convert_price) + "&op1=" + encodeURIComponent(convert_opt1) + "&op2=" + encodeURIComponent(convert_opt2) + "&referer=" + encodeURIComponent(referer)
 };
 
 function doPageView() {
-//    var img = new Image();
-//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" + encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer)
-	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" + encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer));
+    var img = new Image();
+    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=page_view&op1=" + encodeURIComponent(page_view_opt1) + "&op2=" + encodeURIComponent(page_view_opt2) + "&referer=" + encodeURIComponent(referer)
 };
 
 function doTracking() {
-//    var img = new Image();
-//    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
-	 console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status));
+    var img = new Image();
+    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
 };
 
 function doMark() {
-//  var img = new Image();
-//  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
-	 console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&referer=" + encodeURIComponent(referer) );
+  var img = new Image();
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&referer=" + encodeURIComponent(referer) ;
 };
 
 function doActiveprod() {
-//  var img = new Image();
-//  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=tracking&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis) + "&op1=" + encodeURIComponent(tracking_opt1) + "&op2=" + encodeURIComponent(tracking_opt2) + "&referer=" + encodeURIComponent(referer) + "&ecStockStatus=" + encodeURIComponent(ec_stock_status)
-	console.log(paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis));
+  var img = new Image();
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis);
 };
 
 
+
+
+/*新版點擊*/
+function ptag_click(){
+	screen_x = screen.availWidth;
+    screen_y = screen.availHeight;
+    webUrl = location.href;
+	var callFunction = arguments[2].event_callback;
+	var eventId = arguments[1];
+	var eventContent = arguments[2];
+	if(eventId == 'convert' 
+     	|| eventId == 'activeprod' 
+     	|| eventId == 'page_view' 
+        || eventId == 'tracking' 
+        || eventId == 'mark' 
+        || eventId == 'activeprod'){
+		 
+		 if (eventId == 'page_view') {
+			 page_view_opt1 = eventContent.hasOwnProperty('op1') ? eventContent.op1 : '';
+             page_view_opt2 = eventContent.hasOwnProperty('op2') ? eventContent.op2 : '';
+             pa_em_value = eventContent.hasOwnProperty('pa_em_value') ? eventContent.pa_em_value : '';
+             doPageView();
+		 }
+		
+         if (eventId == "tracking") {
+        	 tracking_id = eventContent.hasOwnProperty('tracking_id') ? eventContent.tracking_id : '';
+        	 prod_id = eventContent.hasOwnProperty('prod_id') ? eventContent.prod_id : '';
+        	 prod_price = eventContent.hasOwnProperty('prod_price') ? eventContent.prod_price : '';
+        	 prod_dis = eventContent.hasOwnProperty('prod_dis') ? eventContent.prod_dis : '';
+        	 tracking_opt1 = eventContent.hasOwnProperty('op1') ? eventContent.op1 : '';
+        	 tracking_opt2 = eventContent.hasOwnProperty('op2') ? eventContent.op2 : '';
+        	 ec_stock_status = eventContent.hasOwnProperty('ec_stock_status') ? eventContent.ec_stock_status : '';
+        	 pa_em_value = eventContent.hasOwnProperty('pa_em_value') ? eventContent.pa_em_value : '';
+        	 doTracking();
+         }
+	     if (eventId == "mark") {
+		 	mark_id = eventContent.hasOwnProperty('mark_id') ? eventContent.mark_id : '';
+		 	mark_value = eventContent.hasOwnProperty('mark_value') ? eventContent.mark_value : '';
+		 	mark_layer = eventContent.hasOwnProperty('mark_layer') ? eventContent.mark_layer : '';
+		 	doMark();
+		 }
+	     
+	     if (eventId == "convert") {
+		     convert_id = eventContent.hasOwnProperty('convert_id') ? eventContent.convert_id : '';
+		     convert_price = eventContent.hasOwnProperty('convert_price') ? eventContent.convert_price : '';
+		     convert_opt1 = eventContent.hasOwnProperty('op1') ? eventContent.op1 : '';
+		     convert_opt2 = eventContent.hasOwnProperty('op2') ? eventContent.op2 : '';
+		     pa_em_value = eventContent.hasOwnProperty('pa_em_value') ? eventContent.pa_em_value : '';
+		     doConvert();
+		 }
+	     if (eventId == "activeprod") {
+		 	tracking_id = eventContent.hasOwnProperty('tracking_id') ? eventContent.tracking_id : '';
+		 	prod_id = eventContent.hasOwnProperty('prod_id') ? eventContent.prod_id : '';
+		 	prod_price = eventContent.hasOwnProperty('prod_price') ? eventContent.prod_price : '';
+		 	prod_dis = eventContent.hasOwnProperty('prod_dis') ? eventContent.prod_dis : '';
+		 	doActiveprod()
+		 }
+	     
+	}
+	
+	if(typeof(callFunction) != 'undefined'){
+		callFunction.call();
+	}
+	
+}
+
+
+/*舊版點擊寫法新版以貼code為主*/
 function pchome_click(link_url, blank_flag) {
 	referer = document.referrer;
     screen_x = screen.availWidth;
@@ -323,7 +386,11 @@ function pchome_click() {
             mark_value = paclCodeObject.data[key].mark_value;
             mark_layer = paclCodeObject.data[key].mark_layer;
             pa_id = paclCodeObject.data[key].pa_id;
-            if (paclCodeObject.data[key].mark_click_flag) {
+            
+            
+            if(arguments.length == 1 && arguments[0] == mark_id && paclCodeObject.data[key].mark_click_flag){
+            	doMark()
+            }else if(arguments.length == 0 && paclCodeObject.data[key].mark_click_flag){
             	doMark()
             }
         }
