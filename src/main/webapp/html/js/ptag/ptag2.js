@@ -19,7 +19,7 @@ var pa_id = "";
 var mark_id=""
 var mark_value="";
 var mark_layer=""
-	
+var paId="";	
 
 var paclUrl = location.protocol + "//paclstg.pchome.com.tw/api/collect";
 (function() {
@@ -77,7 +77,8 @@ function doInitData() {
             return
         }
         if (element.length == 1 && element[0].paid != undefined) {
-            pa_id = ptagType.paid
+            pa_id = ptagType.paid;
+            paId = ptagType.paid;
         }
         if (element[0] == undefined) {
             return
@@ -280,18 +281,19 @@ function doTracking() {
 };
 
 function doMark() {
+
   var img = new Image();
-  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&op1=" + encodeURIComponent(mark_opt1) + "&op2=" + encodeURIComponent(mark_opt2)+ "&referer=" + encodeURIComponent(referer) ;
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(paId) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&op1=" + encodeURIComponent(mark_opt1) + "&op2=" + encodeURIComponent(mark_opt2)+ "&referer=" + encodeURIComponent(referer) ;
 };
 
 function doActiveprod() {
   var img = new Image();
-  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis);
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(paId) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis);
 };
 
 function doRecord() {
 	var img = new Image();
-    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=record&trackingId=" + encodeURIComponent(tracking_id) + "&referer=" + encodeURIComponent(referer)
+    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(paId) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=record&trackingId=" + encodeURIComponent(tracking_id) + "&referer=" + encodeURIComponent(referer)
 };
 
 
