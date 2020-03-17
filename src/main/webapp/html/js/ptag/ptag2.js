@@ -362,6 +362,8 @@ function ptag_click(){
 		 	prod_id = eventContent.hasOwnProperty('prod_id') ? eventContent.prod_id : '';
 		 	prod_price = eventContent.hasOwnProperty('prod_price') ? eventContent.prod_price : '';
 		 	prod_dis = eventContent.hasOwnProperty('prod_dis') ? eventContent.prod_dis : '';
+		 	activeprod_opt1 = eventContent.activeprod_opt1;
+            activeprod_opt2 = eventContent.activeprod_opt2;
 		 	doActiveprod()
 		 }
 	     
