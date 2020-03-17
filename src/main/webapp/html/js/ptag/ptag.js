@@ -11,7 +11,7 @@
 //})(window, document, 'script', paclUrl, 'ptag');
 
 console.log("init ptag js");
-var paclUrl = location.protocol+"//showstg.pchome.com.tw/adm/html/js/ptag/ptag2.js";
+var paclUrl = location.protocol+"//alex.pchome.com.tw:8080/akbadm/html/js/ptag/ptag2.js";
 (function(i, s, o, g, r, a, m) {
 	i['pchome'] = r;
 	i[r] = i[r] || function() {

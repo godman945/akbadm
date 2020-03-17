@@ -5,6 +5,8 @@ var convert_opt1 = "";
 var convert_opt2 = "";
 var tracking_opt1 = "";
 var tracking_opt2 = "";
+var mark_opt1 = "";
+var mark_opt2 = "";
 var convert_id = "";
 var convert_price = "";
 var tracking_id = "";
@@ -86,6 +88,7 @@ function doInitData() {
         	|| element[1] == 'page_view' 
         	|| element[1] == 'tracking' 
         	|| element[1] == 'mark' 
+        	|| element[1] == 'record'
         	|| element[1] == 'activeprod') {
             
         	var eventType = element[1];
@@ -138,19 +141,44 @@ function doInitData() {
                     'pa_id': pa_id
                 }
             }
+            if (eventType == "record") {
+                tracking_id = element[2].hasOwnProperty('tracking_id') ? element[2].tracking_id : '';
+                prod_id = element[2].hasOwnProperty('prod_id') ? element[2].prod_id : '';
+                prod_price = element[2].hasOwnProperty('prod_price') ? element[2].prod_price : '';
+                prod_dis = element[2].hasOwnProperty('prod_dis') ? element[2].prod_dis : '';
+                tracking_opt1 = element[2].hasOwnProperty('op1') ? element[2].op1 : '';
+                tracking_opt2 = element[2].hasOwnProperty('op2') ? element[2].op2 : '';
+                ec_stock_status = element[2].hasOwnProperty('ec_stock_status') ? element[2].ec_stock_status : '';
+                pa_em_value = element[2].hasOwnProperty('pa_em_value') ? element[2].pa_em_value : '';
+                paclCodeObject.data['record_' + tracking_id] = {
+                    'tracking_id': tracking_id,
+                    'prod_id': prod_id,
+                    'prod_price': prod_price,
+                    'prod_dis': prod_dis,
+                    'tracking_opt1': tracking_opt1,
+                    'tracking_opt2': tracking_opt2,
+                    'ec_stock_status': ec_stock_status,
+                    'pa_em_value': pa_em_value,
+                    'pa_id': pa_id
+                }
+            }
         }
         
         if (eventType == "mark") {
         	mark_id = element[2].hasOwnProperty('mark_id') ? element[2].mark_id : '';
         	mark_value = element[2].hasOwnProperty('mark_value') ? element[2].mark_value : '';
         	mark_layer = element[2].hasOwnProperty('mark_layer') ? element[2].mark_layer : '';
+        	mark_opt1 = element[2].hasOwnProperty('op1') ? element[2].op1 : '';
+        	mark_opt2 = element[2].hasOwnProperty('op2') ? element[2].op2 : '';
         	mark_click_flag = element[3] === 'click' ? true : false;
         	paclCodeObject.data['mark_id_'+ mark_id] = {
         			'mark_id': mark_id,
         			'mark_layer': mark_layer,
         			'mark_value': mark_value,
         			'pa_id': pa_id,
-        			'mark_click_flag': mark_click_flag
+        			'mark_click_flag': mark_click_flag,
+        			'mark_opt1': mark_opt1,
+                    'mark_opt2': mark_opt2,
         	}
         }
         
@@ -198,6 +226,18 @@ function doSendPaclData() {
             pa_id = paclCodeObject.data[key].pa_id;
             doTracking()
         }
+        if (key.indexOf('record') >=0) {
+            tracking_id = paclCodeObject.data[key].tracking_id;
+            prod_id = paclCodeObject.data[key].prod_id;
+            prod_price = paclCodeObject.data[key].prod_price;
+            prod_dis = paclCodeObject.data[key].prod_dis;
+            tracking_opt1 = paclCodeObject.data[key].tracking_opt1;
+            tracking_opt2 = paclCodeObject.data[key].tracking_opt2;
+            ec_stock_status = paclCodeObject.data[key].ec_stock_status;
+            pa_em_value = paclCodeObject.data[key].pa_em_value;
+            pa_id = paclCodeObject.data[key].pa_id;
+            doRecord()
+        }
         if (key.indexOf('page_view') >=0) {
             page_view_opt1 = paclCodeObject.data[key].page_view_opt1;
             page_view_opt2 = paclCodeObject.data[key].page_view_opt2;
@@ -241,7 +281,7 @@ function doTracking() {
 
 function doMark() {
   var img = new Image();
-  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&referer=" + encodeURIComponent(referer) ;
+  img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=mark&markId=" + encodeURIComponent(mark_id) + "&markValue=" + encodeURIComponent(mark_value) + "&markLayer=" + encodeURIComponent(mark_layer) + "&op1=" + encodeURIComponent(mark_opt1) + "&op2=" + encodeURIComponent(mark_opt2)+ "&referer=" + encodeURIComponent(referer) ;
 };
 
 function doActiveprod() {
@@ -249,6 +289,10 @@ function doActiveprod() {
   img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=activeprod&trackingId=" + encodeURIComponent(tracking_id) + "&prodId=" + encodeURIComponent(prod_id) + "&prodPrice=" + encodeURIComponent(prod_price) + "&prodDis=" + encodeURIComponent(prod_dis);
 };
 
+function doRecord() {
+	var img = new Image();
+    img.src = paclUrl + "?" + "fingerId=" + "" + "&paId=" + encodeURIComponent(pa_id) + "&screenX=" + encodeURIComponent(screen_x) + "&screenY=" + encodeURIComponent(screen_y) + "&paEmValue=" + encodeURIComponent(pa_em_value) + "&url=" + encodeURIComponent(webUrl) + "&paEvent=record&trackingId=" + encodeURIComponent(tracking_id) + "&referer=" + encodeURIComponent(referer)
+};
 
 
 
@@ -289,6 +333,8 @@ function ptag_click(){
 		 	mark_id = eventContent.hasOwnProperty('mark_id') ? eventContent.mark_id : '';
 		 	mark_value = eventContent.hasOwnProperty('mark_value') ? eventContent.mark_value : '';
 		 	mark_layer = eventContent.hasOwnProperty('mark_layer') ? eventContent.mark_layer : '';
+		 	mark_opt1 = eventContent.hasOwnProperty('op1') ? eventContent.op1 : '';
+        	mark_opt2 = eventContent.hasOwnProperty('op2') ? eventContent.op2 : '';
 		 	doMark();
 		 }
 	     
