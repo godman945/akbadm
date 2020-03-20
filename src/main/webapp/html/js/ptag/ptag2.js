@@ -1,3 +1,85 @@
+function check_cookie() {
+	uuid = getCookie("uuid");
+	puuid = getCookie("puuid");
+	console.log(uuid);
+	console.log(puuid);
+
+	if (!uuid && typeof uuid != "undefined" && uuid != 0) {
+		doCookieSetup("uuid", "xxx-" + _uuid());
+	}
+
+	if (!puuid && typeof puuid != "undefined" && puuid != 0) {
+		doCookieSetup("puuid", _puuid());
+	}
+
+}
+
+
+function getCookie(name) {
+	console.log("cookie read");
+	var arg = escape(name) + "=";
+	var nameLen = arg.length;
+	var cookieLen = document.cookie.length;
+	var i = 0;
+	while (i < cookieLen) {
+		var j = i + nameLen;
+		if (document.cookie.substring(i, j) == arg)
+			return getCookieValueByIndex(j);
+		i = document.cookie.indexOf(" ", i) + 1;
+		if (i == 0)
+			break;
+	}
+	return null;
+}
+function getCookieValueByIndex(startIndex) {
+	var endIndex = document.cookie.indexOf(";", startIndex);
+	if (endIndex == -1)
+		endIndex = document.cookie.length;
+	return unescape(document.cookie.substring(startIndex, endIndex));
+}
+
+function doCookieSetup(name, value) {
+	console.log("cookie write");
+	expire_days = 1; // 過期日期(天)
+	var d = new Date();
+	d.setTime(d.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+	var expires = "expires=" + d.toGMTString();
+	document.cookie = name + "=" + value + "; " + expires
+			+ "; domain=.pchome.com.tw; path=/;";
+}
+
+function _uuid() {
+	var d = Date.now();
+	if (typeof performance !== 'undefined'
+			&& typeof performance.now === 'function') {
+		d += performance.now(); // use high-precision timer if available
+	}
+	return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		var r = (d + Math.random() * 16) % 16 | 0;
+		d = Math.floor(d / 16);
+		return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+	});
+}
+
+function _puuid() {
+	var d = Date.now();
+	var puuid = "P." + d + ".0";
+	return puuid;
+
+}
+
+
+check_cookie();
+
+
+
+
+
+
+
+
+
+
 var ptagParamater = (window.ptag.queue === undefined) ?  window.dataLayer : window.ptag.queue;
 var page_view_opt1 = "";
 var page_view_opt2 = "";
