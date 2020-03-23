@@ -103,8 +103,8 @@
         <property name="targetMethod" value="process" />
     </bean>
     
-    <bean id="CheckKernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="CheckKernelJobDetail" />
+    <bean id="CheckKernelVideoJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="CheckKernelVideoJobDetail" />
         <property name="cronExpression" value="0 59 * * * ?" />
     </bean>
 
