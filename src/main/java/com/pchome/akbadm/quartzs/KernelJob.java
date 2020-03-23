@@ -1038,11 +1038,9 @@ public class KernelJob {
         else {
             Map.Entry<String, AdBean> adEntry = null;
             for (Entry<String, Map<String, AdBean>> poolEntry: poolMap.entrySet()) {
-                log.info("pool " + poolEntry.getKey());
                 Iterator<Map.Entry<String, AdBean>> adIterator = poolEntry.getValue().entrySet().iterator();
                 while (adIterator.hasNext()) {
                     adEntry = adIterator.next();
-                    log.info("ad " + adEntry.getKey());
                     if (escapeAdSet.contains(adEntry.getKey())) {
                         log.info("remove " + adEntry.getKey());
                         adIterator.remove();
