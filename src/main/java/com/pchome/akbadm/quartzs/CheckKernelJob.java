@@ -32,7 +32,7 @@ public class CheckKernelJob {
                 Calendar calendar = Calendar.getInstance();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-                StringBuffer content = new StringBuffer();
+                StringBuilder content = new StringBuilder();
                 content.append(sdf.format(calendar.getTime())).append("<br />\r\n");
 
                 File dir = new File(kernelAddata);
