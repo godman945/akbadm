@@ -1,11 +1,12 @@
 package com.pchome.akbadm.quartzs;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 
 import javax.mail.MessagingException;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
@@ -15,35 +16,26 @@ import org.springframework.context.support.FileSystemXmlApplicationContext;
 import com.pchome.config.TestConfig;
 import com.pchome.soft.util.SpringEmailUtil;
 
-public class CheckKernelJob {
+public class CheckKernelVideoJob {
     private Logger log = LogManager.getRootLogger();
 
-    private String kernelAddata;
+    private String nagiosPathKernelVideo;
     private String mailSubject;
     private String mailFrom;
     private String[] mailTo;
     private SpringEmailUtil springEmailUtil;
 
     public void process() {
-        log.info("====CheckKernelJob.process() start====");
+        log.info("====CheckKernelVideoJob.process() start====");
 
-        File lockFile = new File(kernelAddata + File.separator + "lock.txt");
-        if (lockFile.exists()) {
+        File file = new File(nagiosPathKernelVideo);
+        if (file.exists()) {
             try {
-                Calendar calendar = Calendar.getInstance();
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                String content = FileUtils.readFileToString(file, StandardCharsets.UTF_8);
 
-                StringBuffer content = new StringBuffer();
-                content.append(sdf.format(calendar.getTime())).append("<br />\r\n");
-
-                File dir = new File(kernelAddata);
-                if (dir.isDirectory()) {
-                    for (File file: dir.listFiles()) {
-                        content.append(file.getPath()).append("<br />\r\n");
-                    }
+                if (!"ok".equals(content)) {
+                    springEmailUtil.sendHtmlEmail(mailSubject, mailFrom, mailTo, null, content);
                 }
-
-                springEmailUtil.sendHtmlEmail(mailSubject, mailFrom, mailTo, null, content.toString());
 
                 log.info("subject = " + mailSubject);
                 if (mailTo != null) {
@@ -51,23 +43,25 @@ public class CheckKernelJob {
                         log.info("mail to = " + to);
                     }
                 }
+            } catch (IOException e) {
+                log.error(file);
             } catch (MessagingException me) {
                 log.error(mailSubject, me);
             }
         }
 
-        log.info("====CheckKernelJob.process() end====");
+        log.info("====CheckKernelVideoJob.process() end====");
     }
 
     public static void main(String[] args) {
         ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
-        CheckKernelJob job = context.getBean(CheckKernelJob.class);
+        CheckKernelVideoJob job = context.getBean(CheckKernelVideoJob.class);
         job.process();
         ((AnnotationConfigApplicationContext) context).close();
     }
 
-    public void setKernelAddata(String kernelAddata) {
-        this.kernelAddata = kernelAddata;
+    public void setNagiosPathKernelVideo(String nagiosPathKernelVideo) {
+        this.nagiosPathKernelVideo = nagiosPathKernelVideo;
     }
 
     public void setMailSubject(String mailSubject) {

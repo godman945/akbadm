@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -163,6 +164,7 @@ public class KernelJob {
     private float adSysprice;
     private int makeNumber;
     private int serverNumber;
+    private String nagiosPathKernelVideo;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
     private Map<String, Map<String, AdBean>> currentPoolMap = new HashMap<>();
@@ -551,6 +553,7 @@ public class KernelJob {
         int splitAdSize = 0;
 
         Map<String, Map<String, AdBean>> poolMap = new HashMap<>();
+        Set<String> escapeAdSet = new HashSet<>();
         Map<String, AdBean> adMap = null;
         Set<String> allAdSet = new HashSet<>();
         Set<String> allowAdSet = new HashSet<>();
@@ -983,6 +986,11 @@ public class KernelJob {
                         youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
                     }
                     adDetailBean.setAdDetailContent(youtubeMp4Url.trim());
+
+                    // escape
+                    if(StringUtils.isBlank(youtubeMp4Url)){
+                        escapeAdSet.add(adId);
+                    }
                 }
                 // special rule
                 else if ("webm_url".equals(pfpAdDetail.getAdDetailId())) {
@@ -991,6 +999,11 @@ public class KernelJob {
                         youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
                     }
                     adDetailBean.setAdDetailContent(youtubeWebmUrl.trim());
+
+                    // escape
+                    if(StringUtils.isBlank(youtubeWebmUrl)){
+                        escapeAdSet.add(adId);
+                    }
                 }
                 // refactor data structure
                 else if ("prod_list".equals(pfpAdDetail.getAdDetailId())) {
@@ -1017,6 +1030,26 @@ public class KernelJob {
             }
         }
         log.info("pool: " + poolMap.size());
+
+        // escape
+        if (escapeAdSet.isEmpty()) {
+            FileUtils.writeStringToFile(new File(this.nagiosPathKernelVideo), "ok", StandardCharsets.UTF_8);
+        }
+        else {
+            Map.Entry<String, AdBean> adEntry = null;
+            for (Entry<String, Map<String, AdBean>> poolEntry: poolMap.entrySet()) {
+                Iterator<Map.Entry<String, AdBean>> adIterator = poolEntry.getValue().entrySet().iterator();
+                while (adIterator.hasNext()) {
+                    adEntry = adIterator.next();
+                    if (escapeAdSet.contains(adEntry.getKey())) {
+                        log.info("remove " + adEntry.getKey());
+                        adIterator.remove();
+                    }
+                }
+            }
+
+            FileUtils.writeStringToFile(new File(this.nagiosPathKernelVideo), "err", StandardCharsets.UTF_8);
+        }
 
         // to xml
         XStream xstream = new XStream();
@@ -1730,6 +1763,7 @@ public class KernelJob {
             descUrl = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
+            descUrl = "";
             log.error(srcUrl + " " + fileType, e);
         }
         finally {
@@ -1851,6 +1885,10 @@ public class KernelJob {
 
     public void setServerNumber(int serverNumber) {
         this.serverNumber = serverNumber;
+    }
+
+    public void setNagiosPathKernelVideo(String nagiosPathKernelVideo) {
+        this.nagiosPathKernelVideo = nagiosPathKernelVideo;
     }
 
     public void setScpProcessList(List<SpringSSHProcessUtil2> scpProcessList) {

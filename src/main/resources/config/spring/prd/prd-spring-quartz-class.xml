@@ -98,16 +98,15 @@
         <property name="pfbxAllowUrlService" ref="PfbxAllowUrlService" />
         <property name="pfpCodeAdactionMergeService" ref="PfpCodeAdactionMergeService2" />
         <property name="pfpCodeTrackingService" ref="PfpCodeTrackingService2" />
-       
-       
-       
-       
+
         <property name="admAddata" value="${adm.addata}" />
         <property name="kernelAddata" value="${kernel.addata}" />
         <property name="pfpProdGroupListApiUrl" value="${pfp.prodGroupListApi.url}" />
         <property name="adSysprice" value="${ad.sysprice}" />
         <property name="makeNumber" value="${make.number}" />
         <property name="serverNumber" value="${server.number}" />
+        <property name="nagiosPathKernelVideo" value="${nagios.path.kernel.video}" />
+
         <property name="scpProcessList">
             <list>
                 <ref bean="Kdcl1SSHProcess" />
@@ -168,12 +167,21 @@
         <property name="adReportService" ref="AdReportService" />
     </bean>
 
-    <!-- check pvclk -->
+    <!-- check kernel -->
     <bean id="CheckKernelJob" class="com.pchome.akbadm.quartzs.CheckKernelJob" >
         <property name="kernelAddata" value="${kernel.addata}" />
         <property name="mailSubject" value="${check.kernel.mail.subject}" />
         <property name="mailFrom" value="${check.kernel.mail.from}" />
         <property name="mailTo" value="${check.kernel.mail.to}" />
+        <property name="springEmailUtil" ref="SpringEmailUtil" />
+    </bean>
+
+    <!-- check kernel video -->
+    <bean id="CheckKernelVideoJob" class="com.pchome.akbadm.quartzs.CheckKernelVideoJob" >
+        <property name="nagiosPathKernelVideo" value="${nagios.path.kernel.video}" />
+        <property name="mailSubject" value="${check.kernel.video.mail.subject}" />
+        <property name="mailFrom" value="${check.kernel.video.mail.from}" />
+        <property name="mailTo" value="${check.kernel.video.mail.to}" />
         <property name="springEmailUtil" ref="SpringEmailUtil" />
     </bean>
 

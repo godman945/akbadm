@@ -96,6 +96,17 @@
         <property name="jobDetail" ref="CheckKernelJobDetail" />
         <property name="cronExpression" value="0 14/15 * * * ?" />
     </bean>
+    
+    <!-- check kernel video -->
+    <bean id="CheckKernelVideoJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="CheckKernelVideoJob" />
+        <property name="targetMethod" value="process" />
+    </bean>
+    
+    <bean id="CheckKernelJobTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="CheckKernelJobDetail" />
+        <property name="cronExpression" value="0 59 * * * ?" />
+    </bean>
 
    	<!-- 整理 PFP 前台報表資料  / 每小時35分執行 / 更新當天資料  -->
     <bean id="PfpAdActionReportJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
