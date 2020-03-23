@@ -9,7 +9,6 @@ import javax.mail.MessagingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.pchome.config.TestConfig;
@@ -63,7 +62,7 @@ public class CheckKernelJob {
         ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
         CheckKernelJob job = context.getBean(CheckKernelJob.class);
         job.process();
-        ((AnnotationConfigApplicationContext) context).close();
+        ((FileSystemXmlApplicationContext) context).close();
     }
 
     public void setKernelAddata(String kernelAddata) {

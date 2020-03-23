@@ -10,7 +10,6 @@ import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.pchome.config.TestConfig;
@@ -57,7 +56,7 @@ public class CheckKernelVideoJob {
         ApplicationContext context = new FileSystemXmlApplicationContext(TestConfig.getPath(args));
         CheckKernelVideoJob job = context.getBean(CheckKernelVideoJob.class);
         job.process();
-        ((AnnotationConfigApplicationContext) context).close();
+        ((FileSystemXmlApplicationContext) context).close();
     }
 
     public void setNagiosPathKernelVideo(String nagiosPathKernelVideo) {
