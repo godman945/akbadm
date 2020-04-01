@@ -117,6 +117,7 @@ import com.pchome.enumerate.ad.EnumExcludeKeywordStatus;
 import com.pchome.enumerate.ad.EnumIndexField;
 import com.pchome.enumerate.ad.EnumPriceType;
 import com.pchome.rmi.sequence.EnumSequenceTableName;
+import com.pchome.soft.depot.utils.HttpUtil;
 import com.pchome.soft.util.HttpConnectionClient;
 import com.pchome.soft.util.SpringSSHProcessUtil2;
 import com.thoughtworks.xstream.XStream;
@@ -165,6 +166,7 @@ public class KernelJob {
     private int makeNumber;
     private int serverNumber;
     private String nagiosPathKernelVideo;
+    private String tubeinfoServer;
     private List<SpringSSHProcessUtil2> scpProcessList;
 
     private Map<String, Map<String, AdBean>> currentPoolMap = new HashMap<>();
@@ -588,6 +590,11 @@ public class KernelJob {
         Integer admArw = 1;
         String trackingSeq = null;
         int trackingRangeDate = 0;
+        JSONObject videoJson = null;
+        String youtubeMp4Url = "";
+        String youtubeWebmUrl = "";
+        String prodListId = "";
+        String prodGroupId = "";
 
         // get ad detail
         List<PfpAdDetail> pfpAdDetailList = pfpCustomerInfoService.selectValidAdDetail();
@@ -981,9 +988,10 @@ public class KernelJob {
                 }
                 // special rule
                 else if ("mp4_url".equals(pfpAdDetail.getAdDetailId())) {
-                    String youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 22);
-                    if(StringUtils.isBlank(youtubeMp4Url)){
-                        youtubeMp4Url = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 18);
+                    videoJson = this.getVideoJson(pfpAdDetail.getAdDetailContent());
+                    youtubeMp4Url = this.getJsonString(videoJson, "22_mp4_url");
+                    if (StringUtils.isBlank(youtubeMp4Url)) {
+                        youtubeMp4Url = this.getJsonString(videoJson, "18_mp4_url");
                     }
                     adDetailBean.setAdDetailContent(youtubeMp4Url.trim());
 
@@ -994,9 +1002,10 @@ public class KernelJob {
                 }
                 // special rule
                 else if ("webm_url".equals(pfpAdDetail.getAdDetailId())) {
-                    String youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 247);
-                    if(StringUtils.isBlank(youtubeWebmUrl)){
-                        youtubeWebmUrl = this.getVideoUrl(pfpAdDetail.getAdDetailContent(), 43);
+                    videoJson = this.getVideoJson(pfpAdDetail.getAdDetailContent());
+                    youtubeWebmUrl = this.getJsonString(videoJson, "247_webm_url");
+                    if (StringUtils.isBlank(youtubeWebmUrl)) {
+                        youtubeWebmUrl = this.getJsonString(videoJson, "43_webm_url");
                     }
                     adDetailBean.setAdDetailContent(youtubeWebmUrl.trim());
 
@@ -1007,13 +1016,13 @@ public class KernelJob {
                 }
                 // refactor data structure
                 else if ("prod_list".equals(pfpAdDetail.getAdDetailId())) {
-                    String prodListId = pfpAdDetail.getAdDetailContent().trim();
+                    prodListId = pfpAdDetail.getAdDetailContent().trim();
                     adBean.setProdListId(prodListId);
                     adDetailBean.setAdDetailContent(prodListId);
                 }
                 // refactor data structure
                 else if ("prod_group".equals(pfpAdDetail.getAdDetailId())) {
-                    String prodGroupId = pfpAdDetail.getAdDetailContent().trim();
+                    prodGroupId = pfpAdDetail.getAdDetailContent().trim();
                     adBean.setProdGroupId(prodGroupId);
                     adDetailBean.setAdDetailContent(prodGroupId);
                 }
@@ -1755,6 +1764,8 @@ public class KernelJob {
         return urlSb.toString();
     }
 
+    @Deprecated
+    @SuppressWarnings("unused")
     private String getVideoUrl(String srcUrl, int fileType) {
         Process process = null;
         String descUrl = srcUrl;
@@ -1773,6 +1784,32 @@ public class KernelJob {
         }
 
         return descUrl;
+    }
+
+    public JSONObject getVideoJson(String adVideoUrl) {
+        JSONObject json = new JSONObject();
+
+        try {
+            log.info("video url:" + adVideoUrl);
+
+            String apiResult = HttpUtil.getInstance().getResult(tubeinfoServer + "tubeinfo/?tube_url=" + adVideoUrl, StandardCharsets.UTF_8.name());
+            json = new JSONObject(apiResult);
+        }
+        catch (Exception e) {
+            log.error(adVideoUrl, e);
+        }
+
+        return json;
+    }
+
+    public String getJsonString(JSONObject json, String key) {
+        String value = "";
+
+        if (!json.isNull(key)) {
+            value = json.getString(key);
+        }
+
+        return value;
     }
 
     public void setPfpAdExcludeKeywordService(IPfpAdExcludeKeywordService pfpAdExcludeKeywordService) {
@@ -1889,6 +1926,10 @@ public class KernelJob {
 
     public void setNagiosPathKernelVideo(String nagiosPathKernelVideo) {
         this.nagiosPathKernelVideo = nagiosPathKernelVideo;
+    }
+
+    public void setTubeinfoServer(String tubeinfoServer) {
+        this.tubeinfoServer = tubeinfoServer;
     }
 
     public void setScpProcessList(List<SpringSSHProcessUtil2> scpProcessList) {

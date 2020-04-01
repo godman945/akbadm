@@ -106,6 +106,7 @@
         <property name="makeNumber" value="${make.number}" />
         <property name="serverNumber" value="${server.number}" />
         <property name="nagiosPathKernelVideo" value="${nagios.path.kernel.video}" />
+        <property name="tubeinfoServer" value="${tubeinfo.server}" />
 
         <property name="scpProcessList">
             <list>
