@@ -1787,19 +1787,24 @@ public class KernelJob {
     }
 
     public JSONObject getVideoJson(String adVideoUrl) {
-        JSONObject json = new JSONObject();
+        JSONObject jsonObject = new JSONObject();
 
         try {
-            log.info("video url:" + adVideoUrl);
+//            log.info("video url:" + adVideoUrl);
 
-            String apiResult = HttpUtil.getInstance().getResult(tubeinfoServer + "tubeinfo/?tube_url=" + adVideoUrl, StandardCharsets.UTF_8.name());
-            json = new JSONObject(apiResult);
+            StringBuilder url = new StringBuilder();
+            url.append(tubeinfoServer).append("tubeinfo/");
+            url.append("?tube_url=").append(adVideoUrl);
+
+            String apiResult = HttpUtil.getInstance().getResult(url.toString(), StandardCharsets.UTF_8.name());
+
+            jsonObject = new JSONObject(apiResult);
         }
         catch (Exception e) {
             log.error(adVideoUrl, e);
         }
 
-        return json;
+        return jsonObject;
     }
 
     public String getJsonString(JSONObject json, String key) {
