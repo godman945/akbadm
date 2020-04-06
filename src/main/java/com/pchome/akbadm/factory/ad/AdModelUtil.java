@@ -163,7 +163,7 @@ public class AdModelUtil {
 				Process process = null;
 				//先從redis取出youtube -dl播放網址，若不存在則重新取得
 				if(StringUtils.isBlank(jredisUtil.getKey(mp4Key))){
-					process = Runtime.getRuntime().exec(new String[] { "bash", "-c", "youtube-dl -f 18 -g --get-format " + adPreviewVideoURL });
+					process = Runtime.getRuntime().exec(new String[] { "bash", "-c", "youtube-dl -f 18 -g --get-format " + adPreviewVideoURL +" --proxy http://192.168.3.249:3128/"});
 					mp4Url = IOUtils.toString(process.getInputStream(),"UTF-8").trim();
 					String videoSize = mp4Url.substring(mp4Url.indexOf("18 - "),mp4Url.length());
 					videoSize = videoSize.replace("18 - ", "");
@@ -181,7 +181,7 @@ public class AdModelUtil {
 				}
 					
 				if(StringUtils.isBlank(jredisUtil.getKey(webmKey))){
-					process = Runtime.getRuntime().exec(new String[] { "bash", "-c", "youtube-dl -f 43 -g --get-format " + adPreviewVideoURL });
+					process = Runtime.getRuntime().exec(new String[] { "bash", "-c", "youtube-dl -f 43 -g --get-format " + adPreviewVideoURL + " --proxy http://192.168.3.249:3128/"});
 					webmUrl = IOUtils.toString(process.getInputStream(),"UTF-8").trim();
 					webmUrl = webmUrl.substring(0, webmUrl.indexOf("43 -"));
 					jredisUtil.setKeyAndExpire(webmKey, webmUrl.trim(), 3600);
