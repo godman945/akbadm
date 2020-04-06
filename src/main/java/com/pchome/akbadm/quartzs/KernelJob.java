@@ -1759,7 +1759,7 @@ public class KernelJob {
         Process process = null;
         String descUrl = srcUrl;
         try {
-            process = Runtime.getRuntime().exec(new String[] {"bash", "-c", "youtube-dl -f " + fileType + " -g " + srcUrl});
+            process = Runtime.getRuntime().exec(new String[] {"bash", "-c", "youtube-dl -f " + fileType + " -g " + srcUrl + " --proxy http://192.168.3.249:3128/ "});
             descUrl = IOUtils.toString(process.getInputStream(), StandardCharsets.UTF_8);
         }
         catch (Exception e) {
