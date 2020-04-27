@@ -29,7 +29,7 @@ import com.pchome.akbadm.factory.pfd.bonus.PfdBonusItemFactory;
 import com.pchome.config.TestConfig;
 import com.pchome.rmi.bonus.EnumPfdAccountPayType;
 import com.pchome.soft.util.DateValueUtil;
-
+//test0427
 public class ktest
 {
 	protected Logger log = LogManager.getRootLogger();
