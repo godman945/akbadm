@@ -31,7 +31,7 @@ import com.pchome.rmi.bonus.EnumPfdAccountPayType;
 import com.pchome.soft.util.DateValueUtil;
 //test0427
 public class ktest
-{
+{ 
 	protected Logger log = LogManager.getRootLogger();
 
 	private IPfdContractService pfdContractService;
